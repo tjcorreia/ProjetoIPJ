@@ -7,10 +7,7 @@
 public class Principal {
 
 	public static void main(String[] args) {
-		//begin_inputsasDasdSDAv 
-		
-		
-		zvxcbbzcvbzcvbzcvbz
+		//begin_inputs
 		//end_inputs
 
 	}
