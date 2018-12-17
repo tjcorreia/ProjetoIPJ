@@ -8,6 +8,7 @@ public class Principal {
 
 	public static void main(String[] args) {
 		//begin_inputs
+//		Teste 2
 		//end_inputs
 
 	}
