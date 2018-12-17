@@ -54,7 +54,7 @@ public class J0_Teste {
 		shell.setLayout(null);
 		
 		Button btnLogin = new Button(shell, SWT.NONE);
-		btnLogin.setBounds(157, 64, 75, 25);
+		btnLogin.setBounds(215, 65, 75, 25);
 		btnLogin.setText("Login");
 		
 		text = new Text(shell, SWT.BORDER);
