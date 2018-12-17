@@ -1,3 +1,5 @@
+package org.eclipse.wb.swt;
+
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Button;
@@ -13,7 +15,7 @@ import org.eclipse.swt.widgets.Label;
 */
 public class J0_Teste {
 
-	protected Shell shell;
+	protected Shell shlJavaBankApp;
 	private Text text;
 
 	/**
@@ -35,9 +37,9 @@ public class J0_Teste {
 	public void open() {
 		Display display = Display.getDefault();
 		createContents();
-		shell.open();
-		shell.layout();
-		while (!shell.isDisposed()) {
+		shlJavaBankApp.open();
+		shlJavaBankApp.layout();
+		while (!shlJavaBankApp.isDisposed()) {
 			if (!display.readAndDispatch()) {
 				display.sleep();
 			}
@@ -48,19 +50,19 @@ public class J0_Teste {
 	 * Create contents of the window.
 	 */
 	protected void createContents() {
-		shell = new Shell();
-		shell.setSize(450, 300);
-		shell.setText("SWT Application");
-		shell.setLayout(null);
+		shlJavaBankApp = new Shell();
+		shlJavaBankApp.setSize(450, 300);
+		shlJavaBankApp.setText("JAVA BANK App");
+		shlJavaBankApp.setLayout(null);
 		
-		Button btnLogin = new Button(shell, SWT.NONE);
+		Button btnLogin = new Button(shlJavaBankApp, SWT.NONE);
 		btnLogin.setBounds(157, 64, 75, 25);
 		btnLogin.setText("Login");
 		
-		text = new Text(shell, SWT.BORDER);
+		text = new Text(shlJavaBankApp, SWT.BORDER);
 		text.setBounds(46, 64, 82, 21);
 		
-		Label lblLogin = new Label(shell, SWT.NONE);
+		Label lblLogin = new Label(shlJavaBankApp, SWT.NONE);
 		lblLogin.setBounds(46, 43, 55, 15);
 		lblLogin.setText("Login ");
 
