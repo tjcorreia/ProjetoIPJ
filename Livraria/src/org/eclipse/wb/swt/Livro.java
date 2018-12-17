@@ -1,8 +1,11 @@
+package org.eclipse.wb.swt;
 
 
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
+
+import com.ibm.icu.util.Calendar;
 
 
 
@@ -56,6 +59,13 @@ public class Livro {
 		this.preco = preco;
 		this.stock = stock;
 		this.precosAnteriores = new HashMap <>();
+	}
+	
+	public String toString() {
+		String s = "Livro:" + nome + ", Autor:" + autor + ", Editora:" + editora + 
+				"\n\t ISNB:" + isbn + ", Data:" + data.get(Calendar.YEAR) + "/"  + data.get(Calendar.MONTH) +
+				"/"  + data.get(Calendar.DAY_OF_MONTH) + "\n\t Descrição:" + descricao;
+		return s;
 	}
 	
 }

@@ -1,13 +1,22 @@
 package org.eclipse.wb.swt;
 import org.eclipse.swt.widgets.Display;
+
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Label;
+
+import java.util.List;
+import java.util.ArrayList;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.Text;
+
+
 import org.eclipse.swt.widgets.Spinner;
+import org.eclipse.swt.events.MouseAdapter;
+import org.eclipse.swt.events.MouseEvent;
 
 
 
@@ -15,6 +24,8 @@ public class J_00Inicial {
 
 	protected Shell shlViewComicsInc;
 	private Text text;
+	private Livraria livraria;
+	private Livro livro;
 
 	/**
 	 * Launch the application.
@@ -22,11 +33,17 @@ public class J_00Inicial {
 	 */
 	public static void main(String[] args) {
 		try {
-			J_00Inicial window = new J_00Inicial();
+			J_00Inicial window = new J_00Inicial(new Livraria(), new Livro());
 			window.open();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public J_00Inicial(Livraria livraria, Livro livro) {
+		super();
+		this.livro = livro;
+		this.livraria = livraria;
 	}
 
 	/**
@@ -67,7 +84,24 @@ public class J_00Inicial {
 		btnNewButton.setBounds(366, 247, 72, 23);
 		btnNewButton.setText("Admin");
 		
+		
+		// ação ao clicar no botão pesquisar livro
 		Button btnPesquisarLivro = new Button(shlViewComicsInc, SWT.NONE);
+		btnPesquisarLivro.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				String s = text.getText();
+				
+				System.out.println(s);
+				
+				List <Livro> lvProcurados = livraria.procurarLivro(s);
+				J_01ListaLivros janelaListaLivros = new J_01ListaLivros();
+				janelaListaLivros.open();
+				for ( Livro lv : lvProcurados) {
+					System.out.println(lv);
+				}
+			}
+		});
 		btnPesquisarLivro.setBounds(271, 89, 167, 25);
 		btnPesquisarLivro.setText("Pesquisar/Comprar Livro");
 		

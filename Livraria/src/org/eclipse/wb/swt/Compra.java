@@ -1,3 +1,4 @@
+package org.eclipse.wb.swt;
 import java.util.GregorianCalendar;
 
 
@@ -19,12 +20,12 @@ public class Compra {
 		estadoCompra = Estado.FINALIZADA;
 	}
 	
-	Compra( int numCompra, Carrinho carrinho, int nif, GregorianCalendar data, double total, Estado estadoCompra){
+	Compra( int numCompra, Carrinho carrinho, int nif, GregorianCalendar data, Estado estadoCompra){
 		this.numCompra = numCompra;
 		this.carrinho = carrinho;
 		this.nif = nif;
 		this.data = data;
-		this.total = total;
+		this.total = carrinho.totalCarrinho();
 		this.estadoCompra = estadoCompra;
 	}
 	
