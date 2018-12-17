@@ -1,12 +1,12 @@
 package org.eclipse.wb.swt;
 
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Text;
-import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Text;
+
 
 /**  
  * Breve descrição do código   
@@ -77,23 +77,19 @@ public class J_10Login {
 		lblRedeInternaPara.setFont(SWTResourceManager.getFont("Segoe UI", 12, SWT.NORMAL));
 		lblRedeInternaPara.setAlignment(SWT.CENTER);
 		lblRedeInternaPara.setBounds(31, 10, 358, 49);
-		lblRedeInternaPara.setText("Rede Interna para funcion\u00E1rios - LOGIN");
+		lblRedeInternaPara.setText("BEM VINDO AO JAVA BANK.");
 		
 		Label lblMensagemDeErro = new Label(shlLogin, SWT.NONE);
 		lblMensagemDeErro.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
 		lblMensagemDeErro.setFont(SWTResourceManager.getFont("Segoe UI", 6, SWT.NORMAL));
 		lblMensagemDeErro.setBounds(92, 175, 150, 20);
-		lblMensagemDeErro.setText("Mensagem de erro");
+		lblMensagemDeErro.setText("Eventual mensagem de erro");
 		
-		Label label = new Label(shlLogin, SWT.NONE);
-		label.setText("Mensagem de erro");
-		label.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
-		label.setFont(SWTResourceManager.getFont("Segoe UI", 6, SWT.NORMAL));
-		label.setBounds(92, 112, 150, 20);
-		
-		Button btnVoltar = new Button(shlLogin, SWT.NONE);
-		btnVoltar.setBounds(342, 217, 80, 26);
-		btnVoltar.setText("Voltar");
+		Label lblEventualMensagemDe = new Label(shlLogin, SWT.NONE);
+		lblEventualMensagemDe.setText("Eventual mensagem de erro");
+		lblEventualMensagemDe.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
+		lblEventualMensagemDe.setFont(SWTResourceManager.getFont("Segoe UI", 6, SWT.NORMAL));
+		lblEventualMensagemDe.setBounds(92, 112, 150, 20);
 		
 		Button btnEntrar = new Button(shlLogin, SWT.NONE);
 		btnEntrar.setText("Entrar");
