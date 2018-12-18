@@ -17,7 +17,7 @@ public class Compra {
 		nif = -1;
 		data = new GregorianCalendar(0,0,0);
 		total = -1;
-		estadoCompra = Estado.FINALIZADA;
+		estadoCompra = null;
 	}
 	
 	Compra( int numCompra, Carrinho carrinho, int nif, GregorianCalendar data, Estado estadoCompra){

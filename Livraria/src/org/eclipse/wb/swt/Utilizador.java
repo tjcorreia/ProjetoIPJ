@@ -3,6 +3,7 @@ package org.eclipse.wb.swt;
 
 
 public class Utilizador {
+	protected int uID;
 	protected String nome;
 	protected String email;
 	protected String senha;
@@ -11,6 +12,7 @@ public class Utilizador {
 	
 
 	Utilizador(){
+		uID = -1;
 		nome = "";
 		email = "";
 		senha = "";
