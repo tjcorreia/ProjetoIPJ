@@ -14,17 +14,13 @@ public class Utilizador {
 	protected String  nome;   // 
 	protected String  morada; //
 	public TipoID escolhaID;
+	protected int valorID;     //numero do Passporte ou CC
 	protected String  email;  //
 	protected int mobile;     //
 	
 	protected enum TipoID {CARTAOCIDADAO,PASSAPORTE}
 
-	public Utilizador() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public Utilizador(int uID, String login, String password, String nome, String morada, TipoID escolhaID,
+	public Utilizador(int uID, String login, String password, String nome, String morada, TipoID escolhaID, int valorID,
 			String email, int mobile) {
 		super();
 		this.uID = uID;
@@ -33,8 +29,14 @@ public class Utilizador {
 		this.nome = nome;
 		this.morada = morada;
 		this.escolhaID = escolhaID;
+		this.valorID = valorID;
 		this.email = email;
 		this.mobile = mobile;
+	}
+
+	public Utilizador() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	public int getuID() {
@@ -85,6 +87,14 @@ public class Utilizador {
 		this.escolhaID = escolhaID;
 	}
 
+	public int getValorID() {
+		return valorID;
+	}
+
+	public void setValorID(int valorID) {
+		this.valorID = valorID;
+	}
+
 	public String getEmail() {
 		return email;
 	}
@@ -104,8 +114,13 @@ public class Utilizador {
 	@Override
 	public String toString() {
 		return "Utilizador [uID=" + uID + ", login=" + login + ", password=" + password + ", nome=" + nome + ", morada="
-				+ morada + ", escolhaID=" + escolhaID + ", email=" + email + ", mobile=" + mobile + "]";
-	};
+				+ morada + ", escolhaID=" + escolhaID + ", valorID=" + valorID + ", email=" + email + ", mobile="
+				+ mobile + "]";
+	}
+
+
+
+	
 	
 	
 

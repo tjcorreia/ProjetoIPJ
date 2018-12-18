@@ -13,9 +13,11 @@ public class Administrador extends Utilizador {
 	}
 
 	public Administrador(int uID, String login, String password, String nome, String morada, TipoID escolhaID,
-			String email, int mobile) {
-		super(uID, login, password, nome, morada, escolhaID, email, mobile);
+			int valorID, String email, int mobile) {
+		super(uID, login, password, nome, morada, escolhaID, valorID, email, mobile);
 		// TODO Auto-generated constructor stub
 	}
+
+	
 
 }

@@ -1,5 +1,8 @@
 package org.eclipse.wb.swt;
 
+import java.util.ArrayList;
+import java.util.Map;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Display;
@@ -20,6 +23,22 @@ public class J_10Login {
 	protected Shell shlLogin;
 	private Text text;
 	private Text text_1;
+	private ArrayList<Utilizador> lutilizadores;
+	
+
+	public J_10Login(Shell shlLogin, Text text, Text text_1, ArrayList<Utilizador> lutilizadores) {
+		super();
+		this.shlLogin = shlLogin;
+		this.text = text;
+		this.text_1 = text_1;
+		this.lutilizadores = lutilizadores;
+	}
+
+	public J_10Login(ArrayList<Utilizador> minhalista ) {
+		super();
+		this.lutilizadores=minhalista; 
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * Launch the application.
@@ -27,7 +46,7 @@ public class J_10Login {
 	 */
 	public static void main(String[] args) {
 		try {
-			J_10Login window = new J_10Login();
+			J_10Login window = new J_10Login(new ArrayList<Utilizador>());
 			window.open();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -96,4 +115,9 @@ public class J_10Login {
 		btnEntrar.setBounds(273, 112, 90, 30);
 
 	}
+	
+//	protected void verificaUtil() {
+//		Gest
+//	}
+//	
 }
