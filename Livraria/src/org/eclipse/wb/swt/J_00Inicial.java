@@ -94,12 +94,9 @@ public class J_00Inicial {
 				
 				System.out.println(s);
 				
-				List <Livro> lvProcurados = livraria.procurarLivro(s);
-				J_01ListaLivros janelaListaLivros = new J_01ListaLivros();
+				ArrayList <Livro> lvProcurados = livraria.procurarLivro(s);
+				J_01ListaLivros janelaListaLivros = new J_01ListaLivros(lvProcurados);
 				janelaListaLivros.open();
-				for ( Livro lv : lvProcurados) {
-					System.out.println(lv);
-				}
 			}
 		});
 		btnPesquisarLivro.setBounds(271, 89, 167, 25);

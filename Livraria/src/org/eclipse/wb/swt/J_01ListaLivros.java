@@ -4,6 +4,9 @@ import org.eclipse.swt.widgets.Display;
 
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.List;
+
+import java.util.ArrayList;
+
 import org.eclipse.swt.SWT;
 
 import org.eclipse.swt.widgets.Spinner;
@@ -14,6 +17,12 @@ import org.eclipse.swt.widgets.Spinner;
 public class J_01ListaLivros {
 
 	protected Shell shlViewComicsInc;
+	private ArrayList<Livro> listaLivros;
+	
+	public J_01ListaLivros(ArrayList<Livro> listaLivros) {
+		super();
+		this.listaLivros = listaLivros;
+	}
 
 
 	
@@ -23,7 +32,7 @@ public class J_01ListaLivros {
 	 */
 	public static void main(String[] args) {
 		try {
-			J_01ListaLivros window = new J_01ListaLivros();
+			J_01ListaLivros window = new J_01ListaLivros(new ArrayList<Livro>());
 			window.open();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -35,7 +44,7 @@ public class J_01ListaLivros {
 	 */
 	public void open() {
 		Display display = Display.getDefault();
-
+		createContents();
 		shlViewComicsInc.open();
 		shlViewComicsInc.layout();
 		while (!shlViewComicsInc.isDisposed()) {
@@ -59,6 +68,12 @@ public class J_01ListaLivros {
 		
 		List list = new List(shlViewComicsInc, SWT.BORDER);
 		list.setBounds(208, 10, 179, 421);
+		
+		for (Livro livro : listaLivros) {
+			list.add(livro.toString());
+			
+		}
+		list.add("wkjw\ndd");
 
 	}
 }

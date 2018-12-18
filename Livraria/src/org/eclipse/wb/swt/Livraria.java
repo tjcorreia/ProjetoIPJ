@@ -85,8 +85,8 @@ public class Livraria {
 	
 	//método que recebe uma string e procura na lista de livros, todos os livros que têm essa String 
 	// quer seja no nome, autor, editora ou ISBN
-	public List <Livro> procurarLivro( String s){
-		List <Livro> livrosProcurados = new ArrayList<>();
+	public ArrayList <Livro> procurarLivro( String s){
+		ArrayList <Livro> livrosProcurados = new ArrayList<>();
 		
 		System.out.println(s);
 		
