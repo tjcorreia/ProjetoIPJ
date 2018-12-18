@@ -1,21 +1,22 @@
 package org.eclipse.wb.swt;
 
 import org.eclipse.swt.widgets.Display;
+
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.SWT;
 
-/**  
- * Breve descrição do código   
- *    
- * @sid 2017
- * @aid 1.1  
- */
+import org.eclipse.swt.widgets.Spinner;
+
+
+
 
 public class J_01ListaLivros {
 
 	protected Shell shlViewComicsInc;
 
+
+	
 	/**
 	 * Launch the application.
 	 * @param args
@@ -34,7 +35,7 @@ public class J_01ListaLivros {
 	 */
 	public void open() {
 		Display display = Display.getDefault();
-		createContents();
+
 		shlViewComicsInc.open();
 		shlViewComicsInc.layout();
 		while (!shlViewComicsInc.isDisposed()) {
@@ -52,8 +53,12 @@ public class J_01ListaLivros {
 		shlViewComicsInc.setSize(450, 488);
 		shlViewComicsInc.setText("View Comics Inc.");
 		
+		Spinner spinner = new Spinner(shlViewComicsInc, SWT.BORDER);
+		spinner.setBounds(10, 10, 192, 421);
+		
+		
 		List list = new List(shlViewComicsInc, SWT.BORDER);
-		list.setBounds(0, 0, 432, 441);
+		list.setBounds(208, 10, 179, 421);
 
 	}
 }
