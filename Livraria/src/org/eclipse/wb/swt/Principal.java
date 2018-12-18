@@ -7,8 +7,10 @@ public class Principal {
 	public static void main(String[] args) {
 		
 		Livraria viewComics = new Livraria();
-		viewComics.testar();
+		//viewComics.testar();
 
+		J_00Inicial teste = new J_00Inicial(viewComics);
+		teste.open();
 	}
 
 }

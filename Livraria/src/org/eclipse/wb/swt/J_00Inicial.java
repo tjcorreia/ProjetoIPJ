@@ -25,7 +25,7 @@ public class J_00Inicial {
 	protected Shell shlViewComicsInc;
 	private Text text;
 	private Livraria livraria;
-	private Livro livro;
+
 
 	/**
 	 * Launch the application.
@@ -33,16 +33,15 @@ public class J_00Inicial {
 	 */
 	public static void main(String[] args) {
 		try {
-			J_00Inicial window = new J_00Inicial(new Livraria(), new Livro());
+			J_00Inicial window = new J_00Inicial(new Livraria());
 			window.open();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public J_00Inicial(Livraria livraria, Livro livro) {
+	public J_00Inicial(Livraria livraria) {
 		super();
-		this.livro = livro;
 		this.livraria = livraria;
 	}
 

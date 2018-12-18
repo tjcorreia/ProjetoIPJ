@@ -36,11 +36,15 @@ public class Livraria {
 		Livro lv3 = new Livro ("Nove Amanhãs", "1549657432745", "Isak Asimov", "Nébula", 
 				"Ficção Científica. Nove pequenos contos futurísticos", 
 				new GregorianCalendar (2018,11,12) , 15.5, 20, precos3);
+		Livro lv4 = new Livro ("Um homem estranho numa terra estranha", "9635874432745", "Ursula K Leguin", "Nébula", 
+				"Ficção Científica. Um extra-terrestre chega à terra", 
+				new GregorianCalendar (2017,11,12) , 11, 0, precos1);
 		// adicionar livros à lista de livros
 		livros = new ArrayList<>();
 		livros.add(lv1);
 		livros.add(lv2);
 		livros.add(lv3);
+		livros.add(lv4);
 		//Criar alguns utilizadores
 		Utilizador u1 = new Utilizador( "António Cunha", "tocunha@gmail.com", "tocunha2000", Utilizador.Tipo.ADMIN);
 		Utilizador u2 = new Utilizador( "Tiago Correia", "admin", "admin", Utilizador.Tipo.ADMIN);
@@ -73,6 +77,7 @@ public class Livraria {
 	}
 	
 	public void testar() {
+		
 		Scanner sc = new Scanner(System.in);
 		System.out.println("introduza livro a pesquisar");
 		String s = sc.nextLine();
