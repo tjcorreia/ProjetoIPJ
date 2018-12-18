@@ -8,13 +8,9 @@ import java.util.ArrayList;
 * @sid 2019
 * @aid 1.1
 */
-public class Cliente extends Utilizador {
+public class Gestao {
 	
-	private ArrayList<Conta> lcontaS;
-
-
-
-	
-	
+	private ArrayList<Utilizador> lclientes;
+	private ArrayList<Conta> lfaturas;
 
 }
