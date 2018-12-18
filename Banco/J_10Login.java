@@ -9,7 +9,7 @@ import org.eclipse.swt.widgets.Text;
 
 
 /**  
- * Breve descrição do código   
+ * Breve descriï¿½ï¿½o do cï¿½digo   
  *    
  * @sid 2017
  * @aid 1.1  

@@ -47,7 +47,7 @@ public class Livro {
 		this.precosAnteriores = precosAnteriores;
 	}
 	
-	//construtor com todas as instâncias menos os preços anteriores
+	//construtor com todas as instï¿½ncias menos os preï¿½os anteriores
 	Livro(String nome, String isbn, String autor, String editora, String descricao, GregorianCalendar data, 
 			double preco, int stock){
 		this.nome = nome;
@@ -62,10 +62,10 @@ public class Livro {
 	}
 	
 	public String toString() {
-		String s = "Livro:" + nome + ", Autor:" + autor + ", Editora:" + editora + 
+		String s = "Livro:" + nome + ", Autor:" + autor + ", Editora:" + editora +
 				"\n\t ISNB:" + isbn + ", Data:" + data.get(Calendar.YEAR) + "/"  + data.get(Calendar.MONTH) +
-				"/"  + data.get(Calendar.DAY_OF_MONTH) + "\n\t Descrição:" + descricao;
+				"/"  + data.get(Calendar.DAY_OF_MONTH) + "\n\t Descriï¿½ï¿½o:" + descricao;
 		return s;
 	}
-	
+
 }

@@ -6,7 +6,7 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Label;
 
 /**
-* Breve descrição do código
+* Breve descriï¿½ï¿½o do cï¿½digo
 *
 * @sid 2019
 * @aid 1.1

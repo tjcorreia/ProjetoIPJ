@@ -12,9 +12,9 @@ public class Livraria {
 	protected List <Utilizador> utilizadores;
 	protected List <Compra> compras;
 	
-	//Construtor que cria alguns livros, utilizadores e compras pré definidos
+	//Construtor que cria alguns livros, utilizadores e compras prï¿½ definidos
 	Livraria(){
-		//criar 3 pequenos historicos de preços
+		//criar 3 pequenos historicos de preï¿½os
 		Map <GregorianCalendar, Double > precos1 = new HashMap<>();
 		precos1.put(new GregorianCalendar(2017,2,5), 15.0);
 		precos1.put(new GregorianCalendar(2016,6,14), 13.0);
@@ -28,25 +28,25 @@ public class Livraria {
 		precos3.put(new GregorianCalendar(2017,5,14), 25.0);
 		precos3.put(new GregorianCalendar(2018,10,2), 25.8);
 		//criar 3 livros
-		Livro lv1 = new Livro ("O último voo do Flamingo", "1548967532745", "Mia Couto", "Plátano", 
+		Livro lv1 = new Livro ("O ï¿½ltimo voo do Flamingo", "1548967532745", "Mia Couto", "Plï¿½tano", 
 				"Romance. Um estranho encontro", new GregorianCalendar (2018,11,12) , 15.5, 20, precos1);
 		Livro lv2 = new Livro ("Hitchhicker's Guide to the Galaxy", "8695477532745", "Douglas Adams", "Leya", 
-				"Ficção Científica. Viagens espaciais de um inadaptado", 
+				"Ficï¿½ï¿½o Cientï¿½fica. Viagens espaciais de um inadaptado", 
 				new GregorianCalendar (2017,11,18) , 16.5, 3, precos2);
-		Livro lv3 = new Livro ("Nove Amanhãs", "1549657432745", "Isak Asimov", "Nébula", 
-				"Ficção Científica. Nove pequenos contos futurísticos", 
+		Livro lv3 = new Livro ("Nove Amanhï¿½s", "1549657432745", "Isak Asimov", "Nï¿½bula", 
+				"Ficï¿½ï¿½o Cientï¿½fica. Nove pequenos contos futurï¿½sticos", 
 				new GregorianCalendar (2018,11,12) , 15.5, 20, precos3);
-		// adicionar livros à lista de livros
+		// adicionar livros ï¿½ lista de livros
 		livros = new ArrayList<>();
 		livros.add(lv1);
 		livros.add(lv2);
 		livros.add(lv3);
 		//Criar alguns utilizadores
-		Utilizador u1 = new Utilizador( "António Cunha", "tocunha@gmail.com", "tocunha2000", Utilizador.Tipo.ADMIN);
+		Utilizador u1 = new Utilizador( "Antï¿½nio Cunha", "tocunha@gmail.com", "tocunha2000", Utilizador.Tipo.ADMIN);
 		Utilizador u2 = new Utilizador( "Tiago Correia", "admin", "admin", Utilizador.Tipo.ADMIN);
-		Utilizador u3 = new Utilizador( "Márcia Campos", "mcampos.a@gmail.com", "heyd6wx", Utilizador.Tipo.VENDEDOR);
+		Utilizador u3 = new Utilizador( "Mï¿½rcia Campos", "mcampos.a@gmail.com", "heyd6wx", Utilizador.Tipo.VENDEDOR);
 		Utilizador u4 = new Utilizador( "Beatriz Costa", "vende", "vende", Utilizador.Tipo.VENDEDOR);
-		//adicionar utilizadores à lista de utilizadores
+		//adicionar utilizadores ï¿½ lista de utilizadores
 		utilizadores = new ArrayList<>();
 		utilizadores.add( u1 );
 		utilizadores.add( u2 );
@@ -65,7 +65,7 @@ public class Livraria {
 		Carrinho c1 = new Carrinho(livros1);
 		Carrinho c2 = new Carrinho(livros2);
 		Carrinho c3 = new Carrinho(livros3);
-		//Criar algumas compras finalizadas e adicionar à lista de compras
+		//Criar algumas compras finalizadas e adicionar ï¿½ lista de compras
 		compras = new ArrayList<>();
 		compras.add( new Compra( 1, c1, 156987569, new GregorianCalendar (2018,11,14), Compra.Estado.FINALIZADA));
 		compras.add( new Compra( 1, c2, 235648978, new GregorianCalendar (2018,11,15), Compra.Estado.FINALIZADA));
@@ -83,7 +83,7 @@ public class Livraria {
 		sc.close();
 	}
 	
-	//método que recebe uma string e procura na lista de livros, todos os livros que têm essa String 
+	//mï¿½todo que recebe uma string e procura na lista de livros, todos os livros que tï¿½m essa String 
 	// quer seja no nome, autor, editora ou ISBN
 	public List <Livro> procurarLivro( String s){
 		List <Livro> livrosProcurados = new ArrayList<>();
