@@ -21,6 +21,7 @@ public class J03_MenuCliente {
 	private Text txtBemVindoAo;
 	private Button btnTransferenciaBancria;
 	private Button btnAlterarLoginE;
+	private Button button;
 
 	/**
 	 * Launch the application.
@@ -91,6 +92,10 @@ public class J03_MenuCliente {
 		});
 		btnAlterarLoginE.setText("Alterar Login e Password");
 		btnAlterarLoginE.setBounds(10, 177, 154, 25);
+		
+		button = new Button(shell, SWT.NONE);
+		button.setText("Log Out");
+		button.setBounds(325, 21, 75, 25);
 
 	}
 

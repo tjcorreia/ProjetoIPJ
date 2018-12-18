@@ -131,6 +131,10 @@ public class J_02Menu_F {
 		text = new Text(shell, SWT.BORDER);
 		text.setText("*** ALBERTO MACHADO***");
 		text.setBounds(210, 0, 161, 21);
+		
+		Button button = new Button(shell, SWT.NONE);
+		button.setText("Log Out");
+		button.setBounds(385, 0, 75, 25);
 
 	}
 }

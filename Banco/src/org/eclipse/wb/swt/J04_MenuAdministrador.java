@@ -20,6 +20,7 @@ public class J04_MenuAdministrador {
 	private Text txtAlbertoMachadobem;
 	private Button btnTransferenciaBancria;
 	private Button btnAlterarLoginE;
+	private Button btnNewButton;
 
 	/**
 	 * Launch the application.
@@ -54,12 +55,12 @@ public class J04_MenuAdministrador {
 	 */
 	protected void createContents() {
 		shell = new Shell();
-		shell.setSize(450, 430);
+		shell.setSize(468, 430);
 		shell.setText("SWT Application");
 		
 		txtAlbertoMachadobem = new Text(shell, SWT.BORDER);
-		txtAlbertoMachadobem.setText("*** ALBERTO MACHADO***");
-		txtAlbertoMachadobem.setBounds(138, 10, 161, 21);
+		txtAlbertoMachadobem.setText("     *** NOME UTILIZADOR ***");
+		txtAlbertoMachadobem.setBounds(140, 12, 207, 25);
 		
 		Button btnAlterarDadosPessoais = new Button(shell, SWT.NONE);
 		btnAlterarDadosPessoais.addSelectionListener(new SelectionAdapter() {
@@ -91,6 +92,10 @@ public class J04_MenuAdministrador {
 		});
 		btnAlterarLoginE.setText("Alterar Login e Password");
 		btnAlterarLoginE.setBounds(10, 177, 154, 25);
+		
+		btnNewButton = new Button(shell, SWT.NONE);
+		btnNewButton.setBounds(356, 12, 75, 25);
+		btnNewButton.setText("Log Out");
 
 	}
 
