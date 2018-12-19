@@ -129,7 +129,6 @@ public class J_01ListaLivros {
 			public void mouseUp(MouseEvent e) {
 				//comando para fechar a janela
 				shlViewComicsInc.close();
-				
 			}
 		});
 		buttonVoltar.setText("Voltar");
