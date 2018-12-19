@@ -8,11 +8,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
+import org.eclipse.wb.swt.Utilizador.Tipo;
+
 
 public class Livraria {
 	protected List <Livro> livros;
 	protected List <Utilizador> utilizadores;
 	protected List <Compra> compras;
+	
 	
 	//Construtor que cria alguns livros, utilizadores e compras pré definidos
 	Livraria(){
@@ -111,7 +114,29 @@ public class Livraria {
 				livrosProcurados.add(lv);
 			}
 		}
-		
 		return livrosProcurados;
 	}
+	
+	
+	
+	
+	//método que recebe password e email de login e devolve string com ok ou eventual erro
+	public String verificarLogin( String email, String password){
+		for ( Utilizador u : utilizadores ) {
+			if ( u.email.equals(email) && u.senha.equals(password) && u.tipo==Tipo.ADMIN) {
+				return "okAdmin";
+			}
+			else if ( u.email.equals(email) && u.senha.equals(password) && u.tipo==Tipo.VENDEDOR) {
+				return "okVendedor";
+			}
+			else if ( u.email.equals(email) && !u.senha.equals(password)) {
+				return "passwordErrada";
+			}
+		}
+		//caso não se verifique nenhuma das anteriores é porque o email é errado
+		return "emailErrado";
+	}			
+	
+	
+	
 }
