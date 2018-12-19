@@ -15,6 +15,7 @@ import org.eclipse.swt.widgets.Text;
 
 
 import org.eclipse.swt.widgets.Spinner;
+import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
 
@@ -24,7 +25,7 @@ public class J_00Inicial {
 
 	protected Shell shlViewComicsInc;
 	private Text text;
-	private Livraria livraria;
+	private Livraria livraria;//atributo adicionado para poder ir buscar o método 'procurarLivro' desta classe
 
 
 	/**
@@ -40,6 +41,7 @@ public class J_00Inicial {
 		}
 	}
 	
+	//Construtor para poder trazer a Livraria para esta classe
 	public J_00Inicial(Livraria livraria) {
 		super();
 		this.livraria = livraria;
@@ -74,6 +76,14 @@ public class J_00Inicial {
 		lblViewComicsInc.setBounds(91, 28, 267, 46);
 		lblViewComicsInc.setText("View Comics Inc.");
 		
+		//Label com mensagem de livro não encontrado que aparece quando procura retorna uma lista vazia de livros
+		Label label = new Label(shlViewComicsInc, SWT.NONE);
+		label.setText("Não existem correspondências. Tente novamente");
+		label.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
+		label.setFont(SWTResourceManager.getFont("Segoe UI", 6, SWT.NORMAL));
+		label.setBounds(32, 121, 236, 20);
+		label.setVisible(false);
+		
 		Button btnNewButton = new Button(shlViewComicsInc, SWT.NONE);
 		btnNewButton.addSelectionListener(new SelectionAdapter() {
 			@Override
@@ -84,18 +94,26 @@ public class J_00Inicial {
 		btnNewButton.setText("Admin");
 		
 		
-		// ação ao clicar no botão pesquisar livro
+		//Listner para botão 'pesquisar livro'
 		Button btnPesquisarLivro = new Button(shlViewComicsInc, SWT.NONE);
 		btnPesquisarLivro.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
+				//Passar para string o texto introduzido na caixa de texto
 				String s = text.getText();
-				
-				System.out.println(s);
-				
+				//Chamar método 'procurarLivro' para a string introduzida
 				ArrayList <Livro> lvProcurados = livraria.procurarLivro(s);
-				J_01ListaLivros janelaListaLivros = new J_01ListaLivros(lvProcurados);
-				janelaListaLivros.open();
+				//Caso lista de livros não tenha resultados apresentar mensagem de procura vazia
+				if ( lvProcurados.isEmpty() ) {
+					label.setVisible(true);  
+				}
+				//caso lista tenha livros
+				else {
+					//Abrir nova janela de ListaLivros, passando-lhe a lista de livros que correspondem à procura
+					J_01ListaLivros janelaListaLivros = new J_01ListaLivros(lvProcurados);
+					janelaListaLivros.open();
+				}
+				
 			}
 		});
 		btnPesquisarLivro.setBounds(271, 89, 167, 25);
@@ -104,11 +122,7 @@ public class J_00Inicial {
 		text = new Text(shlViewComicsInc, SWT.BORDER);
 		text.setBounds(32, 89, 227, 26);
 		
-		Label label = new Label(shlViewComicsInc, SWT.NONE);
-		label.setText("Mensagem de erro");
-		label.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
-		label.setFont(SWTResourceManager.getFont("Segoe UI", 6, SWT.NORMAL));
-		label.setBounds(32, 121, 150, 20);
+		
 
 	}
 }

@@ -95,10 +95,8 @@ public class J_01ListaLivros {
 		
 		//listner para ação ao selecionar um dos items da table e devolve o index do item na lista de livros
 		table.addSelectionListener(new SelectionAdapter() {
-			
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				
 				System.out.println(e.toString());
 				indexLivroSelecionado = ((Table)e.widget).indexOf((TableItem)e.item);
 				System.out.println( indexLivroSelecionado );
@@ -110,7 +108,6 @@ public class J_01ListaLivros {
 				}
 				//caso em que há stock
 				else {
-					listaLivrosCarrinho.add(livroSelecionado);
 					lblMensagemDeErro.setVisible(false);
 				}
 			}
@@ -119,32 +116,38 @@ public class J_01ListaLivros {
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
 		
-		
+		//adicionar um a um os livros da lista de livros da busca à table
+		for (Livro lv : listaLivrosDaBusca) {
+		      TableItem item = new TableItem(table, SWT.NONE);
+		      item.setText(lv.toString());
+		}
 		
 		//Listner para o botão de 'voltar'
-		Button button = new Button(shlViewComicsInc, SWT.NONE);
-		button.addMouseListener(new MouseAdapter() {
+		Button buttonVoltar = new Button(shlViewComicsInc, SWT.NONE);
+		buttonVoltar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
+				//comando para fechar a janela
+				shlViewComicsInc.close();
+				
 			}
 		});
-		button.setText("Voltar");
-		button.setBounds(555, 412, 80, 26);
+		buttonVoltar.setText("Voltar");
+		buttonVoltar.setBounds(555, 412, 80, 26);
 		
 		//Listner para botão de 'adicionar ao carrinho'
 		Button btnAdicionarAoCarrinho = new Button(shlViewComicsInc, SWT.CENTER);
 		btnAdicionarAoCarrinho.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
-				Livro lvSelecionado = listaLivrosDaBusca.get(indexLivroSelecionado);
-				if (lvSelecionado.stock <= 0) {
-					//escrever uma mensagem de falta de stock na janela
-					lblMensagemDeErro.setVisible(true);
+				//se stock <= 0 não faz nada
+				if (livroSelecionado.stock <= 0) {	
 				}
+				//se stock > 0 adiciona livro a lista de livros para o carrinho e reduz stock
 				else {
-					System.out.println("mensagem off");
-					listaLivrosCarrinho.add(lvSelecionado);
-					lblMensagemDeErro.setVisible(false);
+					listaLivrosCarrinho.add(livroSelecionado);
+					livroSelecionado.stock--;
+					System.out.println("STock=" + livroSelecionado.stock);
 				}
 				
 			}
@@ -156,25 +159,6 @@ public class J_01ListaLivros {
 		lblCarrinho.setBounds(482, 83, 70, 20);
 		lblCarrinho.setText("Carrinho");
 		
-		
-		
-		
-		
-		
-		
-		//Caso lista de livros não tenha resultados listar mensagem de procura vazia
-		if ( listaLivrosDaBusca.isEmpty() ) {
-			TableItem item = new TableItem(table, SWT.NONE);
-		      item.setText("Não foram encontradas correspondências com a sua procura");
-		}
-		//caso lista tenha livros
-		else {
-			//adicionar aqui um a um os livros da lista de livros procurados à table
-			for (Livro lv : listaLivrosDaBusca) {
-			      TableItem item = new TableItem(table, SWT.NONE);
-			      item.setText(lv.toString());
-			}
-		}
 		
 		
 		// Listner que deixa definir a altura de cada linha da table
