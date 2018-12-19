@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 package org.eclipse.wb.swt;
 import java.util.GregorianCalendar;
 
@@ -64,4 +64,3 @@ public class Compra {
 	}
 	
 }
->>>>>>> branch 'master' of https://github.com/tjcorreia/ProjetoIPJ.git
