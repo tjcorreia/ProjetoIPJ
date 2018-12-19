@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package org.eclipse.wb.swt;
 
 
@@ -14,3 +15,19 @@ public class Principal {
 	}
 
 }
+=======
+package org.eclipse.wb.swt;
+
+
+public class Principal {
+
+
+	public static void main(String[] args) {
+		
+		Livraria viewComics = new Livraria();
+		viewComics.testar();
+
+	}
+
+}
+>>>>>>> branch 'master' of https://github.com/tjcorreia/ProjetoIPJ.git
