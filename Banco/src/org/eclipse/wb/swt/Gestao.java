@@ -101,7 +101,7 @@ public void verLog (J_10Login janela) {
 	System.out.print(janela.getUserLog());
 	System.out.print(janela.getPassword());
 	System.out.print(janela.getUserLog());
-	System.out.print(janela.shlLogin.);
+	
 	
 	
 //	if (!verfLogin(teste.getUserLog(),teste.getPassword()).equals(null)) {
