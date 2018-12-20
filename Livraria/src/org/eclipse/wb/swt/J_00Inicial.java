@@ -1,6 +1,7 @@
 package org.eclipse.wb.swt;
 import org.eclipse.swt.widgets.Display;
 
+
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Label;
 
@@ -93,6 +94,9 @@ public class J_00Inicial {
 		btnNewButton.setBounds(366, 247, 72, 23);
 		btnNewButton.setText("Admin");
 		
+		//Caixa para introdução de texto a pesquisar
+		text = new Text(shlViewComicsInc, SWT.BORDER);
+		text.setBounds(32, 89, 227, 26);
 		
 		//Listner para botão 'pesquisar livro'
 		Button btnPesquisarLivro = new Button(shlViewComicsInc, SWT.NONE);
@@ -119,8 +123,7 @@ public class J_00Inicial {
 		btnPesquisarLivro.setBounds(271, 89, 167, 25);
 		btnPesquisarLivro.setText("Pesquisar/Comprar Livro");
 		
-		text = new Text(shlViewComicsInc, SWT.BORDER);
-		text.setBounds(32, 89, 227, 26);
+		
 		
 		
 
