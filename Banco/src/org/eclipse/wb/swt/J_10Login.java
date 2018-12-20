@@ -74,7 +74,7 @@ public class J_10Login {
 	protected void createContents() {
 		shlLogin = new Shell();
 		shlLogin.setSize(450, 300);
-		shlLogin.setText("Java Bank. - Login");
+		shlLogin.setText("Java Bank - Login");
 		
 		text = new Text(shlLogin, SWT.BORDER);
 		text.setBounds(92, 143, 144, 26);

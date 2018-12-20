@@ -7,6 +7,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.widgets.Label;
 
 /**
 * Breve descrição do código
@@ -16,8 +17,7 @@ import org.eclipse.swt.widgets.Text;
 */
 public class J_02Menu_F {
 
-	protected Shell shell;
-	private Text txtNumeroDeCliente;
+	protected Shell shlMenuFuncionrio;
 	private Text text;
 
 	/**
@@ -39,9 +39,9 @@ public class J_02Menu_F {
 	public void open() {
 		Display display = Display.getDefault();
 		createContents();
-		shell.open();
-		shell.layout();
-		while (!shell.isDisposed()) {
+		shlMenuFuncionrio.open();
+		shlMenuFuncionrio.layout();
+		while (!shlMenuFuncionrio.isDisposed()) {
 			if (!display.readAndDispatch()) {
 				display.sleep();
 			}
@@ -52,56 +52,56 @@ public class J_02Menu_F {
 	 * Create contents of the window.
 	 */
 	protected void createContents() {
-		shell = new Shell();
-		shell.setBackground(SWTResourceManager.getColor(SWT.COLOR_DARK_GRAY));
-		shell.setSize(581, 445);
-		shell.setText("SWT Application");
+		shlMenuFuncionrio = new Shell();
+		shlMenuFuncionrio.setBackground(SWTResourceManager.getColor(SWT.COLOR_DARK_GRAY));
+		shlMenuFuncionrio.setSize(581, 445);
+		shlMenuFuncionrio.setText("Menu Funcion\u00E1rio");
 		
-		Button btnNewButton = new Button(shell, SWT.NONE);
+		Button btnNewButton = new Button(shlMenuFuncionrio, SWT.NONE);
 		btnNewButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 			}
 		});
-		btnNewButton.setBounds(10, 32, 154, 25);
+		btnNewButton.setBounds(10, 32, 192, 25);
 		btnNewButton.setText("Criar novo Cliente");
 		
-		Button btnExibirContasDo = new Button(shell, SWT.NONE);
+		Button btnExibirContasDo = new Button(shlMenuFuncionrio, SWT.NONE);
 		btnExibirContasDo.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 			}
 		});
 		btnExibirContasDo.setText("Exibir Conta do Cliente");
-		btnExibirContasDo.setBounds(10, 143, 154, 25);
+		btnExibirContasDo.setBounds(10, 143, 192, 25);
 		
-		Button btnDadosDoCliente = new Button(shell, SWT.NONE);
+		Button btnDadosDoCliente = new Button(shlMenuFuncionrio, SWT.NONE);
 		btnDadosDoCliente.setText("Dados do Cliente");
-		btnDadosDoCliente.setBounds(10, 112, 154, 25);
+		btnDadosDoCliente.setBounds(10, 112, 192, 25);
 		
-		Button btnFazerDepsitoEm = new Button(shell, SWT.NONE);
+		Button btnFazerDepsitoEm = new Button(shlMenuFuncionrio, SWT.NONE);
 		btnFazerDepsitoEm.setText("Dep\u00F3sito em Dinheiro");
 		btnFazerDepsitoEm.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 			}
 		});
-		btnFazerDepsitoEm.setBounds(10, 205, 154, 25);
+		btnFazerDepsitoEm.setBounds(10, 205, 192, 25);
 		
-		Button btnListarClientes = new Button(shell, SWT.NONE);
+		Button btnListarClientes = new Button(shlMenuFuncionrio, SWT.NONE);
 		btnListarClientes.setText("Listar Clientes");
-		btnListarClientes.setBounds(10, 327, 154, 25);
+		btnListarClientes.setBounds(10, 327, 192, 25);
 		
-		Button btnAlterarLoginE = new Button(shell, SWT.NONE);
+		Button btnAlterarLoginE = new Button(shlMenuFuncionrio, SWT.NONE);
 		btnAlterarLoginE.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 			}
 		});
 		btnAlterarLoginE.setText("Alterar Login e Password");
-		btnAlterarLoginE.setBounds(10, 358, 154, 25);
+		btnAlterarLoginE.setBounds(10, 358, 192, 25);
 		
-		Button btnPedirCartaoDe = new Button(shell, SWT.NONE);
+		Button btnPedirCartaoDe = new Button(shlMenuFuncionrio, SWT.NONE);
 		btnPedirCartaoDe.setSelection(true);
 		btnPedirCartaoDe.addSelectionListener(new SelectionAdapter() {
 			@Override
@@ -109,32 +109,33 @@ public class J_02Menu_F {
 			}
 		});
 		btnPedirCartaoDe.setText("Pedir Cartao de Debito");
-		btnPedirCartaoDe.setBounds(10, 174, 154, 25);
+		btnPedirCartaoDe.setBounds(10, 174, 192, 25);
 		
-		Button btnLevantamentoEmDinheiro = new Button(shell, SWT.NONE);
+		Button btnLevantamentoEmDinheiro = new Button(shlMenuFuncionrio, SWT.NONE);
 		btnLevantamentoEmDinheiro.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 			}
 		});
 		btnLevantamentoEmDinheiro.setText("Levantamento em Dinheiro");
-		btnLevantamentoEmDinheiro.setBounds(10, 236, 154, 25);
+		btnLevantamentoEmDinheiro.setBounds(10, 236, 192, 25);
 		
-		Button btnTransferncia = new Button(shell, SWT.NONE);
+		Button btnTransferncia = new Button(shlMenuFuncionrio, SWT.NONE);
 		btnTransferncia.setText("Transfer\u00EAncia");
-		btnTransferncia.setBounds(10, 270, 154, 25);
+		btnTransferncia.setBounds(10, 270, 192, 25);
 		
-		txtNumeroDeCliente = new Text(shell, SWT.BORDER | SWT.WRAP);
-		txtNumeroDeCliente.setText("Numero de Cliente?");
-		txtNumeroDeCliente.setBounds(10, 85, 154, 21);
-		
-		text = new Text(shell, SWT.BORDER);
-		text.setText("*** ALBERTO MACHADO***");
-		text.setBounds(210, 0, 161, 21);
-		
-		Button button = new Button(shell, SWT.NONE);
+		Button button = new Button(shlMenuFuncionrio, SWT.NONE);
 		button.setText("Log Out");
-		button.setBounds(385, 0, 75, 25);
+		button.setBounds(478, 10, 75, 25);
+		
+		Label label = new Label(shlMenuFuncionrio, SWT.NONE);
+		label.setBackground(SWTResourceManager.getColor(SWT.COLOR_DARK_GRAY));
+		label.setText("Nome de utilizador");
+		label.setAlignment(SWT.RIGHT);
+		label.setBounds(202, 10, 266, 20);
+		
+		text = new Text(shlMenuFuncionrio, SWT.BORDER);
+		text.setBounds(10, 80, 192, 26);
 
 	}
 }

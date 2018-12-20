@@ -7,6 +7,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.widgets.Label;
 
 /**
 * Breve descrição do código
@@ -16,9 +17,7 @@ import org.eclipse.swt.events.SelectionEvent;
 */
 public class J03_MenuCliente {
 
-	protected Shell shell;
-	private Text txtAlbertoMachadobem;
-	private Text txtBemVindoAo;
+	protected Shell shlMenuCliente;
 	private Button btnTransferenciaBancria;
 	private Button btnAlterarLoginE;
 	private Button button;
@@ -42,9 +41,9 @@ public class J03_MenuCliente {
 	public void open() {
 		Display display = Display.getDefault();
 		createContents();
-		shell.open();
-		shell.layout();
-		while (!shell.isDisposed()) {
+		shlMenuCliente.open();
+		shlMenuCliente.layout();
+		while (!shlMenuCliente.isDisposed()) {
 			if (!display.readAndDispatch()) {
 				display.sleep();
 			}
@@ -55,48 +54,44 @@ public class J03_MenuCliente {
 	 * Create contents of the window.
 	 */
 	protected void createContents() {
-		shell = new Shell();
-		shell.setSize(450, 430);
-		shell.setText("SWT Application");
+		shlMenuCliente = new Shell();
+		shlMenuCliente.setSize(450, 430);
+		shlMenuCliente.setText("Menu Cliente");
 		
-		txtAlbertoMachadobem = new Text(shell, SWT.BORDER);
-		txtAlbertoMachadobem.setText("*** ALBERTO MACHADO***");
-		txtAlbertoMachadobem.setBounds(138, 10, 161, 21);
-		
-		txtBemVindoAo = new Text(shell, SWT.BORDER);
-		txtBemVindoAo.setText("Bem Vindo ao JAVA BANCK");
-		txtBemVindoAo.setBounds(138, 40, 161, 21);
-		
-		Button btnAlterarDadosPessoais = new Button(shell, SWT.NONE);
+		Button btnAlterarDadosPessoais = new Button(shlMenuCliente, SWT.NONE);
 		btnAlterarDadosPessoais.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 			}
 		});
 		btnAlterarDadosPessoais.setText("Alterar dados Pessoais");
-		btnAlterarDadosPessoais.setBounds(10, 84, 154, 25);
+		btnAlterarDadosPessoais.setBounds(10, 84, 169, 25);
 		
-		Button btnExibirContas = new Button(shell, SWT.NONE);
+		Button btnExibirContas = new Button(shlMenuCliente, SWT.NONE);
 		btnExibirContas.setText("Exibir Conta(s)");
-		btnExibirContas.setBounds(10, 115, 154, 25);
+		btnExibirContas.setBounds(10, 115, 169, 25);
 		
-		btnTransferenciaBancria = new Button(shell, SWT.NONE);
+		btnTransferenciaBancria = new Button(shlMenuCliente, SWT.NONE);
 		btnTransferenciaBancria.setText("Transferencia Banc\u00E1ria");
-		btnTransferenciaBancria.setBounds(10, 146, 154, 25);
+		btnTransferenciaBancria.setBounds(10, 146, 169, 25);
 		
-		btnAlterarLoginE = new Button(shell, SWT.NONE);
+		btnAlterarLoginE = new Button(shlMenuCliente, SWT.NONE);
 		btnAlterarLoginE.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 			}
 		});
 		btnAlterarLoginE.setText("Alterar Login e Password");
-		btnAlterarLoginE.setBounds(10, 177, 154, 25);
+		btnAlterarLoginE.setBounds(10, 177, 169, 25);
 		
-		button = new Button(shell, SWT.NONE);
+		button = new Button(shlMenuCliente, SWT.NONE);
 		button.setText("Log Out");
-		button.setBounds(325, 21, 75, 25);
+		button.setBounds(347, 19, 75, 25);
+		
+		Label lblNomeDeUtilizador = new Label(shlMenuCliente, SWT.NONE);
+		lblNomeDeUtilizador.setAlignment(SWT.RIGHT);
+		lblNomeDeUtilizador.setBounds(141, 19, 200, 20);
+		lblNomeDeUtilizador.setText("Nome de utilizador");
 
 	}
-
 }

@@ -21,6 +21,7 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.widgets.Text;
 
 
 
@@ -33,7 +34,8 @@ public class J_01ListaLivros {
 	protected Livro livroSelecionado;//atributo que nos dá o livro que está selecionado na table
 	private Table table;
 	private int indexLivroSelecionado;//adicionou-se este atributo para poder passá-lo entre métodos
-	private Carrinho carrinho = new Carrinho();;//adicionou-se carrinho para cria-lo e passar para outras classes
+	private Carrinho carrinho = new Carrinho();
+	private Text text;;//adicionou-se carrinho para cria-lo e passar para outras classes
 	
 	
 	//Criou-se construtor para poder receber a lista de livros procurados de outra classe
@@ -81,7 +83,7 @@ public class J_01ListaLivros {
 	 */
 	protected void createContents() {
 		shlViewComicsInc = new Shell();
-		shlViewComicsInc.setSize(663, 498);
+		shlViewComicsInc.setSize(740, 560);
 		shlViewComicsInc.setText("View Comics Inc.");
 		
 		
@@ -90,7 +92,7 @@ public class J_01ListaLivros {
 		//Label que dá mensagem de erro caso o livro não esteja dizponível
 		Label lblMensagemDeErro = new Label(shlViewComicsInc, SWT.NONE);
 		lblMensagemDeErro.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
-		lblMensagemDeErro.setBounds(482, 168, 153, 20);
+		lblMensagemDeErro.setBounds(511, 76, 153, 20);
 		lblMensagemDeErro.setText("Livro Indispon\u00EDvel");
 		lblMensagemDeErro.setVisible(false);		
 		
@@ -113,7 +115,7 @@ public class J_01ListaLivros {
 				}
 			}
 		});
-		table.setBounds(10, 10, 456, 428);
+		table.setBounds(10, 75, 481, 428);
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
 		
@@ -133,7 +135,7 @@ public class J_01ListaLivros {
 			}
 		});
 		buttonVoltar.setText("Voltar");
-		buttonVoltar.setBounds(555, 412, 80, 26);
+		buttonVoltar.setBounds(632, 477, 80, 26);
 		
 		//Listner para botão de 'adicionar ao carrinho'
 		Button btnAdicionarAoCarrinho = new Button(shlViewComicsInc, SWT.CENTER);
@@ -152,12 +154,31 @@ public class J_01ListaLivros {
 				
 			}
 		});
-		btnAdicionarAoCarrinho.setText("Adicionar ao Carrinho");
-		btnAdicionarAoCarrinho.setBounds(472, 28, 163, 49);
+		btnAdicionarAoCarrinho.setText("Adicionar");
+		btnAdicionarAoCarrinho.setBounds(514, 179, 90, 30);
 		
 		Label lblCarrinho = new Label(shlViewComicsInc, SWT.NONE);
-		lblCarrinho.setBounds(482, 83, 70, 20);
+		lblCarrinho.setBounds(511, 114, 70, 20);
 		lblCarrinho.setText("Carrinho");
+		
+		text = new Text(shlViewComicsInc, SWT.BORDER);
+		text.setBounds(81, 23, 196, 30);
+		
+		Button btnPesquisar = new Button(shlViewComicsInc, SWT.NONE);
+		btnPesquisar.setBounds(310, 23, 90, 30);
+		btnPesquisar.setText("Pesquisar");
+		
+		Label lblItmes = new Label(shlViewComicsInc, SWT.NONE);
+		lblItmes.setText("0 itmes");
+		lblItmes.setBounds(511, 144, 70, 20);
+		
+		Button btnRemover = new Button(shlViewComicsInc, SWT.CENTER);
+		btnRemover.setText("Remover");
+		btnRemover.setBounds(610, 179, 90, 30);
+		
+		Button btnVerfinalizarCarrinho = new Button(shlViewComicsInc, SWT.CENTER);
+		btnVerfinalizarCarrinho.setText("Ver/Finalizar Carrinho");
+		btnVerfinalizarCarrinho.setBounds(514, 225, 186, 30);
 		
 		
 		

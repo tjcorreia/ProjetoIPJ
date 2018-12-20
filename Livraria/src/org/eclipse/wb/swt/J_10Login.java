@@ -74,15 +74,6 @@ public class J_10Login {
 	 */
 	protected void createContents() {
 		shlLogin = new Shell();
-		shlLogin.addKeyListener(new KeyAdapter() {
-			@Override
-			//Listner para enter pressionado na janela (com o rato em qqr lado
-			public void keyPressed(KeyEvent e) {
-				if (e.keyCode == SWT.TRAVERSE_RETURN) {
-				   // mouseUp(e);
-				}
-			}
-		});
 		shlLogin.setSize(450, 300);
 		shlLogin.setText("View Comics Inc. - Login");
 		
@@ -130,7 +121,15 @@ public class J_10Login {
 		
 		//Listner para ação ao carregar em 'entrar'
 		Button btnEntrar = new Button(shlLogin, SWT.NONE);
-		btnEntrar.addKeyListener(listener);
+		/*btnEntrar.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.character == SWT.CR || e.character == SWT.LF) {
+					   System.out.println("chegou");
+					}
+				//System.out.println("chegou");
+			}
+		});*/
 		btnEntrar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
@@ -162,7 +161,6 @@ public class J_10Login {
 				
 			}
 		});
-		
 		btnEntrar.setText("Entrar");
 		btnEntrar.setBounds(273, 112, 90, 30);
 		
@@ -171,4 +169,33 @@ public class J_10Login {
 		btnVoltar.setText("Voltar");
 
 	}
+	/*
+	public void carregarEntrar() {
+		//Passar para strings os textos introduzidos na caixa de email e password
+		String email = text_email.getText();
+		String password = text_password.getText();
+		//Chamar método 'verificarLogin' para as strings introduzidas
+		String resultadoVerificacao = livraria.verificarLogin ( email, password );
+		//Caso pass e mail corretos e utilizador do tipo Admin, abre janela de Admin
+		if ( resultadoVerificacao.equals("okAdmin") ) {
+			J_11Menu_Admin j = new J_11Menu_Admin();
+			j.open();
+		}
+		//Caso pass e mail corretos e utilizador do tipo Vendedor, abre janela de Vendedor
+		else if ( resultadoVerificacao.equals("okVendedor") ) {
+			J_12Menu_Vendedor j = new J_12Menu_Vendedor();
+			j.open();
+		}
+		//caso mail correto e password não
+		else if ( resultadoVerificacao.equals("passwordErrada") ) {
+			lblMensagemDeErroUtilizador.setVisible(false);
+			lblMensagemDeErroPassword.setVisible(true);
+		}
+		//
+		else  {
+			lblMensagemDeErroUtilizador.setVisible(true);
+			lblMensagemDeErroPassword.setVisible(false);
+		}
+	}
+	*/
 }
