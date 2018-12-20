@@ -3,12 +3,15 @@ package org.eclipse.wb.swt;
 import java.util.ArrayList;
 import java.util.Map;
 
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.events.MouseAdapter;
+import org.eclipse.swt.events.MouseEvent;
 
 
 /**  
@@ -23,22 +26,21 @@ public class J_10Login {
 	protected Shell shlLogin;
 	private Text text;
 	private Text text_1;
-	private ArrayList<Utilizador> lutilizadores;
+	private Gestao gestao;
 	
 
-	public J_10Login(Shell shlLogin, Text text, Text text_1, ArrayList<Utilizador> lutilizadores) {
-		super();
-		this.shlLogin = shlLogin;
-		this.text = text;
-		this.text_1 = text_1;
-		this.lutilizadores = lutilizadores;
-	}
 
-	public J_10Login(ArrayList<Utilizador> minhalista ) {
+
+	
+
+
+
+	public J_10Login(Gestao gestao) {
 		super();
-		this.lutilizadores=minhalista; 
 		// TODO Auto-generated constructor stub
 	}
+
+	
 
 	/**
 	 * Launch the application.
@@ -46,7 +48,7 @@ public class J_10Login {
 	 */
 	public static void main(String[] args) {
 		try {
-			J_10Login window = new J_10Login(new ArrayList<Utilizador>());
+			J_10Login window = new J_10Login(new Gestao());
 			window.open();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -85,7 +87,7 @@ public class J_10Login {
 		Label lblEmail = new Label(shlLogin, SWT.NONE);
 		lblEmail.setAlignment(SWT.RIGHT);
 		lblEmail.setBounds(10, 83, 70, 20);
-		lblEmail.setText("E-mail:");
+		lblEmail.setText("Login:");
 		
 		Label lblPassword = new Label(shlLogin, SWT.NONE);
 		lblPassword.setAlignment(SWT.RIGHT);
@@ -102,22 +104,45 @@ public class J_10Login {
 		lblMensagemDeErro.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
 		lblMensagemDeErro.setFont(SWTResourceManager.getFont("Segoe UI", 6, SWT.NORMAL));
 		lblMensagemDeErro.setBounds(92, 175, 150, 20);
-		lblMensagemDeErro.setText("Eventual mensagem de erro");
+		lblMensagemDeErro.setText("Erro! Login Inv\u00E1lido (eventual mensagem de erro)");
 		
-		Label lblEventualMensagemDe = new Label(shlLogin, SWT.NONE);
-		lblEventualMensagemDe.setText("Eventual mensagem de erro");
-		lblEventualMensagemDe.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
-		lblEventualMensagemDe.setFont(SWTResourceManager.getFont("Segoe UI", 6, SWT.NORMAL));
-		lblEventualMensagemDe.setBounds(92, 112, 150, 20);
+//		String Log=text.toString();
+//		String pass=text.toString();
+//		getUserLog()
+		//// listner Entar
 		
 		Button btnEntrar = new Button(shlLogin, SWT.NONE);
+		btnEntrar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				String Log=text.getText();
+				String pass=text_1.getText();
+			
+				
+				
+				
+			}
+		});
+		
 		btnEntrar.setText("Entrar");
 		btnEntrar.setBounds(273, 112, 90, 30);
 
 	}
 	
-//	protected void verificaUtil() {
-//		Gest
-//	}
-//	
+	public String getUserLog() {
+        return text.getText();
+    }
+ 
+    public String getPassword() {
+    	return text_1.getText();
+    }
+ 
+    public Utilizador utilizadorAprovado(Utilizador Aprova) {
+        return Aprova;
+    }
+	
+    
+    public boolean fecha() {
+    	return true;
+    }
 }
