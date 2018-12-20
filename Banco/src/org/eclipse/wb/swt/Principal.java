@@ -13,8 +13,15 @@ public class Principal {
 		//begin_inputs
 		Gestao Machado=new Gestao();
 		Machado.Gerir();
+		
 		//end_inputs
 
+		
+			
+			
+			
+			
+	
 	}
 
 }
