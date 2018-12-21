@@ -9,6 +9,12 @@ import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.widgets.List;
+import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.TableColumn;
+import org.eclipse.swt.widgets.TableItem;
+import org.eclipse.swt.custom.StyledText;
+import org.eclipse.swt.custom.ScrolledComposite;
 
 /**
 * Breve descrição do código
@@ -24,6 +30,8 @@ public class J04_MenuAdministrador {
 	private Button btnAlterarLoginE;
 	private Button btnNewButton;
 	private Utilizador uAdministrador;
+	private Table table;
+	private ScrolledComposite scrolledComposite;
 
 	public Utilizador getuAdministrador() {
 		return uAdministrador;
@@ -81,6 +89,7 @@ public class J04_MenuAdministrador {
 	 * Create contents of the window.
 	 */
 	protected void createContents() {
+		Gestao g=new Gestao();
 		shell = new Shell();
 		shell.setSize(603, 430);
 		shell.setText("SWT Application");
@@ -100,14 +109,54 @@ public class J04_MenuAdministrador {
 		
 		Button btnExibirContas = new Button(shell, SWT.NONE);
 		
+		// *********************Tabela de Clientes *************************
+		scrolledComposite = new ScrolledComposite(shell, SWT.BORDER | SWT.V_SCROLL);
+		scrolledComposite.setBounds(172, 62, 388, 305);
+		scrolledComposite.setExpandHorizontal(true);
+		scrolledComposite.setExpandVertical(true);
+		scrolledComposite.setVisible(false);
+		
+		table = new Table(scrolledComposite, SWT.BORDER | SWT.FULL_SELECTION);
+		table.setHeaderVisible(true);
+		table.setLinesVisible(false);
+		table.setVisible(false);
+		scrolledComposite.setContent(table);
+		scrolledComposite.setMinSize(table.computeSize(SWT.DEFAULT, SWT.DEFAULT));
+		// *********************Tabela de Clientes *************************
+		
+		
+		
+		
+		
 		
 		// carregar para exibir contas do banco
 		btnExibirContas.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
-				for (Conta C:Gestao.class.) {
-					
-				}
+//				scrolledComposite.setVisible(true);
+//				table.setVisible(true);
+//				
+//			    table.setHeaderVisible(true);
+//			    String[] titles = { "Cliente ID", "Nome", "Col 3", "Col 4" };
+//
+//			    for (int loopIndex = 0; loopIndex < titles.length; loopIndex++) {
+//			      TableColumn column = new TableColumn(table, SWT.NULL);
+//			      column.setText(titles[loopIndex]);
+//			    }
+//
+//			    for (int loopIndex = 0; loopIndex < 24; loopIndex++) {
+//			      TableItem item = new TableItem(table, SWT.NULL);
+//			      item.setText("Item " + loopIndex);
+//			      item.setText(0, "Item " + loopIndex);
+//			      item.setText(1, "Yes");
+//			      item.setText(2, "No");
+//			      item.setText(3, "A table item");
+//			    }
+//				for (Conta C:g.getlContas()) {
+//					
+//					
+//					
+//				}
 				
 				
 				
@@ -123,6 +172,45 @@ public class J04_MenuAdministrador {
 		btnExibirContas.setBounds(10, 115, 154, 25);
 		
 		btnTransferenciaBancria = new Button(shell, SWT.NONE);
+		btnTransferenciaBancria.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+			}
+		});
+		
+		// carregar para exibir clientes do banco
+		btnTransferenciaBancria.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				scrolledComposite.setVisible(true);
+				table.setVisible(true);
+				System.out.println("  - > "+g.getMapUtilizadores().size());
+				Utilizador u = new Utilizador();
+
+			    String[] titles = { "Cliente ID", "Nome", "Morada", "Telefone" };
+				for ( String key : g.getMapUtilizadores().keySet() ) {
+					u=g.getMapUtilizadores().get(key);
+					
+					if (u instanceof Cliente) {
+						System.out.println("-->"+((Cliente)u).toString());
+						  
+						      TableItem item = new TableItem(table, SWT.NULL);
+						     
+						      item.setText(0, ((Cliente)u).toString());
+						      
+						    
+		
+					}
+					
+				 
+				}
+				
+				
+				
+			}
+		});
+		//*************************
+		
 		btnTransferenciaBancria.setText("Lista de Clientes");
 		btnTransferenciaBancria.setBounds(10, 146, 154, 25);
 		
@@ -138,7 +226,8 @@ public class J04_MenuAdministrador {
 		btnNewButton = new Button(shell, SWT.NONE);
 		btnNewButton.setBounds(485, 10, 75, 25);
 		btnNewButton.setText("Log Out");
+		
+		
 
 	}
-
 }
