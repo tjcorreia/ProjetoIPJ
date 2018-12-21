@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.eclipse.wb.swt.Conta.TipoC;
 import org.eclipse.wb.swt.Utilizador.TipoID;
 
 /**
@@ -21,6 +22,8 @@ public class Gestao {
 	private Map<String, Utilizador> mapUtilizadores; 
 	private ArrayList<Conta> lfaturas;
 	private Map<Integer, Integer> mapCartaoConta;
+	public MenuG menuGestao;
+	private enum MenuG {INICIO, ADMIN,FUNCIONARIO,CLIENTE}
 	
 	
 public Gestao(Map<String, Utilizador> mapUtilizadores, ArrayList<Conta> lfaturas,
@@ -38,14 +41,14 @@ public Gestao() {
 	this.lfaturas = new ArrayList<Conta>();
 	this.mapCartaoConta = new HashMap<Integer, Integer>();
 	
-	Administrador MachadoU= new  Administrador(1, "Machado", "Admin", "Machado0",
+	Administrador MachadoU= new  Administrador(1, "Alberto Jorge V.C. Machado", "Admin", "Machado0",
 			"Cb",Administrador.TipoID.CARTAOCIDADAO,78456123,"mail",965420730);
 	
 	Administrador CorreiaU= new  Administrador(2, "Correia", "Admin", "Coreia",
 			"Cb",Administrador.TipoID.CARTAOCIDADAO,12345678,"mail",965420730);
 	
 	mapUtilizadores.put("Machado",MachadoU);
-	mapUtilizadores.put("Machado",CorreiaU);
+	mapUtilizadores.put("Correia",CorreiaU);
 	
 }
 
@@ -86,44 +89,35 @@ public void setMapCartaoConta(Map<Integer, Integer> mapCartaoConta) {
 }
 
 public void Gerir() {
-	J_10Login teste = new J_10Login (new Gestao());
-	verLog (teste);
-	teste.shlLogin.dispose();
+	J_10Login novoLogin = new J_10Login ();
+
+	Utilizador aprovado=new Utilizador();
+	do {
+		
+		novoLogin.open();
+		aprovado=novoLogin.utilizadorAprovado();
+	} while (aprovado==null);
+	
+	System.out.print("passou ->>"+novoLogin.utilizadorAprovado().nome);
+	if (aprovado instanceof Administrador) {
+	
+		J04_MenuAdministrador novaJAdmin = new J04_MenuAdministrador (aprovado);
+		
+		novaJAdmin.open();
+	}
+
+	
+
 	
 }
 
-
-public void verLog (J_10Login janela) {
-	
-	janela.open();
-	
-	janela.getPassword();
-	System.out.print(janela.getUserLog());
-	System.out.print(janela.getPassword());
-	System.out.print(janela.getUserLog());
-	
-	
-	
-//	if (!verfLogin(teste.getUserLog(),teste.getPassword()).equals(null)) {
-//		System.out.print(teste.getUserLog());
-//	}
-	
-}
-
-		
-	
-	
-		
-	
-	
-	
 
 	
  //// faz a verificação das entradas do login
- public Utilizador  verfLogin(String username, String password) {
+ public Utilizador  verfLogin(String username, String passwordV) {
      
      if (mapUtilizadores.containsKey(username)) {
-    	 if (mapUtilizadores.get(username).password.equals(password)) {       	 
+    	 if (mapUtilizadores.get(username).password.equals(passwordV)) {       	 
              return mapUtilizadores.get(username);
          }
      }

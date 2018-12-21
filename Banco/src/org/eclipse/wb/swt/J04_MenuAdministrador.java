@@ -21,12 +21,37 @@ public class J04_MenuAdministrador {
 	private Button btnTransferenciaBancria;
 	private Button btnAlterarLoginE;
 	private Button btnNewButton;
+	private Utilizador uAdministrador;
+
+	public Utilizador getuAdministrador() {
+		return uAdministrador;
+	}
+
+	public void setuAdministrador(Utilizador uAdministrador) {
+		this.uAdministrador = uAdministrador;
+	}
+
+	
+	
+	public J04_MenuAdministrador(Utilizador uAdministrador) {
+		super();
+		this.uAdministrador = uAdministrador;
+	}
+
+	
+	
+	
+	public J04_MenuAdministrador() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * Launch the application.
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		
 		try {
 			J04_MenuAdministrador window = new J04_MenuAdministrador();
 			window.open();
@@ -55,12 +80,12 @@ public class J04_MenuAdministrador {
 	 */
 	protected void createContents() {
 		shell = new Shell();
-		shell.setSize(468, 430);
+		shell.setSize(603, 430);
 		shell.setText("SWT Application");
 		
 		txtAlbertoMachadobem = new Text(shell, SWT.BORDER);
-		txtAlbertoMachadobem.setText("     *** NOME UTILIZADOR ***");
-		txtAlbertoMachadobem.setBounds(140, 12, 207, 25);
+		txtAlbertoMachadobem.setText("Bem Vindo "+uAdministrador.nome);
+		txtAlbertoMachadobem.setBounds(10, 12, 458, 25);
 		
 		Button btnAlterarDadosPessoais = new Button(shell, SWT.NONE);
 		btnAlterarDadosPessoais.addSelectionListener(new SelectionAdapter() {
@@ -94,7 +119,7 @@ public class J04_MenuAdministrador {
 		btnAlterarLoginE.setBounds(10, 177, 154, 25);
 		
 		btnNewButton = new Button(shell, SWT.NONE);
-		btnNewButton.setBounds(356, 12, 75, 25);
+		btnNewButton.setBounds(485, 10, 75, 25);
 		btnNewButton.setText("Log Out");
 
 	}
