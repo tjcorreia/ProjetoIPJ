@@ -20,17 +20,16 @@ public class Gestao {
 	
 	// String com login 
 	private Map<String, Utilizador> mapUtilizadores; 
-	private ArrayList<Conta> lfaturas;
+	private ArrayList<Conta> lContas;
 	private Map<Integer, Integer> mapCartaoConta;
-	public MenuG menuGestao;
-	private enum MenuG {INICIO, ADMIN,FUNCIONARIO,CLIENTE}
+	
 	
 	
 public Gestao(Map<String, Utilizador> mapUtilizadores, ArrayList<Conta> lfaturas,
 			Map<Integer, Integer> mapCartaoConta) {
 		super();
 		this.mapUtilizadores = mapUtilizadores;
-		this.lfaturas = lfaturas;
+		this.lContas = lfaturas;
 		this.mapCartaoConta = mapCartaoConta;
 	}
 
@@ -38,7 +37,7 @@ public Gestao(Map<String, Utilizador> mapUtilizadores, ArrayList<Conta> lfaturas
 public Gestao() {
 	super();
 	this.mapUtilizadores = new HashMap<String, Utilizador>();
-	this.lfaturas = new ArrayList<Conta>();
+	this.lContas = new ArrayList<Conta>();
 	this.mapCartaoConta = new HashMap<Integer, Integer>();
 	
 	Administrador MachadoU= new  Administrador(1, "Alberto Jorge V.C. Machado", "Admin", "Machado0",
@@ -49,6 +48,16 @@ public Gestao() {
 	
 	mapUtilizadores.put("Machado",MachadoU);
 	mapUtilizadores.put("Correia",CorreiaU);
+	
+	// Contas 
+	
+	ContaNormal cn1= new ContaNormal(1,500);
+	ContaNormal cn2= new ContaNormal(1,500);
+	ContaNormal cn3= new ContaNormal(1,500);
+	
+	ContaNormal(int contaID, double saldo, ArrayList<Transacao> transacoesC, ArrayList<String> clientesDaC,
+			TipoC escolhaID, Cartao cartaodaConta)
+	
 	
 }
 
@@ -69,13 +78,16 @@ public void setMapUtilizadores(Map<String, Utilizador> mapUtilizadores) {
 }
 
 
-public ArrayList<Conta> getLfaturas() {
-	return lfaturas;
+
+
+
+public ArrayList<Conta> getlContas() {
+	return lContas;
 }
 
 
-public void setLfaturas(ArrayList<Conta> lfaturas) {
-	this.lfaturas = lfaturas;
+public void setlContas(ArrayList<Conta> lContas) {
+	this.lContas = lContas;
 }
 
 

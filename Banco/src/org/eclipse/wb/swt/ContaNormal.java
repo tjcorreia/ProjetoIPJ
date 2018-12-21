@@ -2,6 +2,8 @@ package org.eclipse.wb.swt;
 
 import java.util.ArrayList;
 
+import org.eclipse.wb.swt.Conta.TipoC;
+
 /**
 * Breve descrição do código
 *
@@ -10,31 +12,28 @@ import java.util.ArrayList;
 */
 public class ContaNormal extends Conta {
 	
-	private int numcartao;
+	private Cartao cartaodaConta;
+
+	public ContaNormal(int contaID, double saldo, ArrayList<Transacao> transacoesC, ArrayList<String> clientesDaC,
+			TipoC escolhaID, Cartao cartaodaConta) {
+		super(contaID, saldo, transacoesC, clientesDaC, escolhaID);
+		this.cartaodaConta = cartaodaConta;
+	}
 
 	public ContaNormal() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public ContaNormal(int contaID, double saldo, ArrayList<Transacao> transacoesC, ArrayList<String> clientesDaC,
-			TipoC escolhaID, int numcartao) {
-		super(contaID, saldo, transacoesC, clientesDaC, escolhaID);
-		this.numcartao = numcartao;
+	public ContaNormal(int contaID, double saldo) {
+		super(contaID, saldo);
+		this.cartaodaConta = null;
+		this.transacoesC = new ArrayList<Transacao>();
+		this.clientesDaC = new ArrayList<String>();
+		this.escolhaID = TipoC.ABERTA;;
+		// TODO Auto-generated constructor stub
 	}
 
-	public int getNumcartao() {
-		return numcartao;
-	}
-
-	public void setNumcartao(int numcartao) {
-		this.numcartao = numcartao;
-	}
-
-	@Override
-	public String toString() {
-		return "ContaNormal [numcartao=" + numcartao + "]";
-	}
 	
 	
 

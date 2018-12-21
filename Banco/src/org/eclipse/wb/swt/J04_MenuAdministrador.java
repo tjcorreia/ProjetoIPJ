@@ -7,6 +7,8 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.MouseAdapter;
+import org.eclipse.swt.events.MouseEvent;
 
 /**
 * Breve descrição do código
@@ -97,6 +99,21 @@ public class J04_MenuAdministrador {
 		btnAlterarDadosPessoais.setBounds(10, 208, 154, 25);
 		
 		Button btnExibirContas = new Button(shell, SWT.NONE);
+		
+		
+		// carregar para exibir contas do banco
+		btnExibirContas.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				for (Conta C:Gestao.class.) {
+					
+				}
+				
+				
+				
+				
+			}
+		});
 		btnExibirContas.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {

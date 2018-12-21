@@ -36,7 +36,15 @@ public class Conta {
 		super();
 		this.transacoesC = new ArrayList<Transacao>();
 		this.clientesDaC = new ArrayList<String>();
-		this.escolhaID = null;
+		this.escolhaID = TipoC.ABERTA;
+		// TODO Auto-generated constructor stub
+	}
+	
+	public Conta(int contaID, double saldo) {
+		super();
+		this.transacoesC = new ArrayList<Transacao>();
+		this.clientesDaC = new ArrayList<String>();
+		this.escolhaID = TipoC.ABERTA;
 		// TODO Auto-generated constructor stub
 	}
 
