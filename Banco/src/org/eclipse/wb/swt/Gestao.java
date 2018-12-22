@@ -25,12 +25,6 @@ public class Gestao {
 	private Map<String, Utilizador> mapUtilizadores; // String Username
 	private ArrayList<Conta> lContas;
 	private Map<Integer, Integer> mapCartaoConta; // numcartaonumconta
-	private int usametodos;
-
-
-
-
-
 
 public Gestao() {
 	super();
@@ -40,10 +34,10 @@ public Gestao() {
 	
 	// Administradores
 	Administrador MachadoU= new  Administrador(1000, "Machado", "Admin", "Machado0",
-			"Cb",Administrador.TipoID.CARTAOCIDADAO,78456123,"mail",965420730);
+			"Rua Maria Vitoria",Administrador.TipoID.CARTAOCIDADAO,78456123,"mail",965420730);
 	
 	Administrador CorreiaU= new  Administrador(1001, "Correia", "Admin", "Coreia",
-			"Cb",Administrador.TipoID.CARTAOCIDADAO,12345678,"mail",965420730);
+			"Rua Maria Vitoria ",Administrador.TipoID.CARTAOCIDADAO,12345678,"mail",965420730);
 	
 	mapUtilizadores.put("Machado",MachadoU);
 	mapUtilizadores.put("Correia",CorreiaU);
@@ -54,10 +48,10 @@ public Gestao() {
 //	Utilizador(uID,login,password,nome,morada,escolhaID,valorID,email,mobile)
 	
 		Cliente cl1= new  Cliente(1002, "MCliente", "Cliente", "Machado0",
-				"Cb",Administrador.TipoID.CARTAOCIDADAO,78456123,"mail",965420730);
+				"Rua Maria Vitoria",Administrador.TipoID.CARTAOCIDADAO,78456123,"mail",965420730);
 		
 		Cliente cl2= new  Cliente(1003, "CCliente", "Cliente", "Coreia",
-				"Cb",Administrador.TipoID.CARTAOCIDADAO,12345678,"mail",965420730);
+				"Rua Maria Vitoriazfgadfgadfgsdfgsdfg",Administrador.TipoID.CARTAOCIDADAO,12345678,"mail",965420730);
 		mapUtilizadores.put("MCliente",cl1);
 		mapUtilizadores.put("CCliente",cl2);
 		
@@ -82,15 +76,6 @@ public Gestao() {
 }
 
 
-
-
-
-
-
-
-
-
-
 public Map<String, Utilizador> getMapUtilizadores() {
 	return mapUtilizadores;
 }
@@ -99,9 +84,6 @@ public Map<String, Utilizador> getMapUtilizadores() {
 public void setMapUtilizadores(Map<String, Utilizador> mapUtilizadores) {
 	this.mapUtilizadores = mapUtilizadores;
 }
-
-
-
 
 
 public ArrayList<Conta> getlContas() {
@@ -137,13 +119,9 @@ public void Gerir() {
 	if (aprovado instanceof Administrador) {
 	
 		J04_MenuAdministrador novaJAdmin = new J04_MenuAdministrador (aprovado);
-		
 		novaJAdmin.open();
+		
 	}
-
-	
-
-	
 }
 
 

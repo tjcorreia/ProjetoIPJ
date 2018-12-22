@@ -91,6 +91,14 @@ public class J_10Login {
 		text_Password = new Text(shlLogin, SWT.BORDER);
 		text_Password.setBounds(92, 143, 144, 26);
 		
+		/// -- So para nao ter de repetir o Login----
+		text_NUtilizador.setText("Machado");;
+		text_Password.setText("Admin");
+		// -----------------------------------------
+		
+		
+		
+		
 		Label lblEmail = new Label(shlLogin, SWT.NONE);
 		lblEmail.setAlignment(SWT.RIGHT);
 		lblEmail.setBounds(10, 83, 70, 20);

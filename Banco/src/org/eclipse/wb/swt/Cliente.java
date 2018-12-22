@@ -40,7 +40,22 @@ public class Cliente extends Utilizador {
 	"lcontaS=" + lcontaS.toString() ;
 	}
 	
-
+	public String [] toTable() {
+		String [] ClienteL= new String [6] ;
+		ClienteL[0]=""+uID;
+		ClienteL[1]=""+nome;
+		ClienteL[2]=""+morada;
+		ClienteL[3]=""+email;
+		ClienteL[4]=""+mobile;
+		
+		if (lcontaS==null) {
+			ClienteL[5]="0";
+			return ClienteL;
+					}
+		
+		ClienteL[5]=""+lcontaS.size();
+		return ClienteL;
+	}
 
 
 	
