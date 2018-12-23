@@ -137,6 +137,7 @@ public class J_01ListaLivros {
 		buttonVoltar.setText("Voltar");
 		buttonVoltar.setBounds(632, 477, 80, 26);
 		
+		
 		//Listner para botão de 'adicionar ao carrinho'
 		Button btnAdicionarAoCarrinho = new Button(shlViewComicsInc, SWT.CENTER);
 		btnAdicionarAoCarrinho.addSelectionListener(new SelectionAdapter() {
@@ -162,9 +163,39 @@ public class J_01ListaLivros {
 		btnAdicionarAoCarrinho.setText("Adicionar");
 		btnAdicionarAoCarrinho.setBounds(514, 179, 90, 30);
 		
+		//Butão remover do carrinho. Remove o item que está selecionado (caso ele faça parte do carrinho) ou 
+		//remove o último livro adicionado, caso o livro selecionado não faça parte do carrinho
+		Button btnRemover = new Button(shlViewComicsInc, SWT.CENTER);
+		btnRemover.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				//remover o item selecionado
+				if ( listaLivrosCarrinho.contains(livroSelecionado)) {
+					listaLivrosCarrinho.remove(livroSelecionado);
+					//repor stock
+					livroSelecionado.stock++;
+				}
+				//remover o último da lista
+				else {
+					Livro ultimoDaLista = listaLivrosCarrinho.get(listaLivrosCarrinho.size());
+					listaLivrosCarrinho.remove(ultimoDaLista);
+					//repor stock
+					ultimoDaLista.stock++;
+				}
+			}
+		});
+		btnRemover.setText("Remover");
+		btnRemover.setBounds(610, 179, 90, 30);
+		
+		//texto a indicar quantos items tem o carrinho
+		Label lblItmes = new Label(shlViewComicsInc, SWT.NONE);
+		lblItmes.setText( listaLivrosCarrinho.size() + " itmes");
+		lblItmes.setBounds(511, 144, 70, 20);
+		
 		Label lblCarrinho = new Label(shlViewComicsInc, SWT.NONE);
 		lblCarrinho.setBounds(511, 114, 70, 20);
 		lblCarrinho.setText("Carrinho");
+		
 		
 		text = new Text(shlViewComicsInc, SWT.BORDER);
 		text.setBounds(81, 23, 196, 30);
@@ -173,13 +204,7 @@ public class J_01ListaLivros {
 		btnPesquisar.setBounds(310, 23, 90, 30);
 		btnPesquisar.setText("Pesquisar");
 		
-		Label lblItmes = new Label(shlViewComicsInc, SWT.NONE);
-		lblItmes.setText("0 itmes");
-		lblItmes.setBounds(511, 144, 70, 20);
 		
-		Button btnRemover = new Button(shlViewComicsInc, SWT.CENTER);
-		btnRemover.setText("Remover");
-		btnRemover.setBounds(610, 179, 90, 30);
 		
 		Button btnVerfinalizarCarrinho = new Button(shlViewComicsInc, SWT.CENTER);
 		btnVerfinalizarCarrinho.setText("Ver/Finalizar Carrinho");
