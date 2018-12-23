@@ -115,7 +115,7 @@ public void Gerir() {
 		aprovado=novoLogin.utilizadorAprovado();
 	} while (aprovado==null);
 	
-	System.out.print("passou ->>"+novoLogin.utilizadorAprovado().nome);
+	System.out.println("passou ->>"+novoLogin.utilizadorAprovado().nome);
 	if (aprovado instanceof Administrador) {
 	
 		J04_MenuAdministrador novaJAdmin = new J04_MenuAdministrador (aprovado);

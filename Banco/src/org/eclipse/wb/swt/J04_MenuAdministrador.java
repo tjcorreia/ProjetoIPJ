@@ -20,8 +20,8 @@ import org.eclipse.swt.custom.ScrolledComposite;
 public class J04_MenuAdministrador {
 
 
-	protected Shell shlMenuAdministrador;
-	protected Shell shell;
+
+	protected Shell shellMenuAdmin;
 	private Text txtBoasVindas;
 	private Button btnListaClientes;
 	private Button btnLogout;
@@ -29,6 +29,7 @@ public class J04_MenuAdministrador {
 	private Table table;
 	private ScrolledComposite scrolledComposite;
 	private Button btnNovoFuncionario;
+	private Button Nosadvs;
 
 	public Utilizador getuAdministrador() {
 		return uAdministrador;
@@ -70,9 +71,9 @@ public class J04_MenuAdministrador {
 	public void open() {
 		Display display = Display.getDefault();
 		createContents();
-		shlMenuAdministrador.open();
-		shlMenuAdministrador.layout();
-		while (!shlMenuAdministrador.isDisposed()) {
+		shellMenuAdmin.open();
+		shellMenuAdmin.layout();
+		while (!shellMenuAdmin.isDisposed()) {
 			if (!display.readAndDispatch()) {
 				display.sleep();
 			}
@@ -85,29 +86,31 @@ public class J04_MenuAdministrador {
 	protected void createContents() {
 
 		Gestao g = new Gestao();
-		shell = new Shell();
-		shell.setSize(604, 429);
-		shell.setText("SWT Application");
+		shellMenuAdmin = new Shell();
+		shellMenuAdmin.setSize(604, 429);
+		shellMenuAdmin.setText("SWT Application");
 
-		txtBoasVindas = new Text(shell, SWT.BORDER);
+		txtBoasVindas = new Text(shellMenuAdmin, SWT.BORDER);
 		txtBoasVindas.setText("Bem Vindo " + uAdministrador.nome);
 		txtBoasVindas.setBounds(10, 12, 458, 25);
 
 		// *********************Tabela de Clientes *************************
-		scrolledComposite = new ScrolledComposite(shell, SWT.BORDER | SWT.V_SCROLL);
+		scrolledComposite = new ScrolledComposite(shellMenuAdmin, SWT.BORDER | SWT.V_SCROLL);
 		scrolledComposite.setBounds(172, 62, 388, 305);
 		scrolledComposite.setExpandHorizontal(true);
 		scrolledComposite.setExpandVertical(true);
-		scrolledComposite.setVisible(true);
+		scrolledComposite.setVisible(true);// apaga tabela
 
 		table = new Table(scrolledComposite, SWT.BORDER | SWT.FULL_SELECTION);
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
-		table.setVisible(true);
+		
+		table.setVisible(true); // apaga tabela
+		
 		scrolledComposite.setContent(table);
 		scrolledComposite.setMinSize(table.computeSize(SWT.DEFAULT, SWT.DEFAULT));
 		// ********************* *************************
-		btnListaClientes = new Button(shell, SWT.NONE);
+		btnListaClientes = new Button(shellMenuAdmin, SWT.NONE);
 		btnListaClientes.addSelectionListener(new SelectionAdapter() {
 
 			@Override
@@ -120,6 +123,7 @@ public class J04_MenuAdministrador {
 		btnListaClientes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
+				apagaJanelaDedicada();
 				scrolledComposite.setVisible(true);
 				table.setVisible(true);
 				table.setHeaderVisible(true);
@@ -164,7 +168,7 @@ public class J04_MenuAdministrador {
 		btnListaClientes.setText("Lista de Clientes");
 		btnListaClientes.setBounds(10, 146, 154, 25);
 
-		btnLogout = new Button(shell, SWT.NONE);
+		btnLogout = new Button(shellMenuAdmin, SWT.NONE);
 		btnLogout.addSelectionListener(new SelectionAdapter() {
 
 			@Override
@@ -178,8 +182,20 @@ public class J04_MenuAdministrador {
 		btnLogout.setText("Log Out");
 
 
-
-		btnNovoFuncionario = new Button(shell, SWT.NONE);
+//*************************CRIAR NOVO FUN
+		btnNovoFuncionario = new Button(shellMenuAdmin, SWT.NONE);
+		btnNovoFuncionario.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				
+				
+				
+				
+				
+				
+				
+			}
+		});
 		btnNovoFuncionario.addSelectionListener(new SelectionAdapter() {
 
 			@Override
@@ -191,5 +207,22 @@ public class J04_MenuAdministrador {
 
 		btnNovoFuncionario.setText("Novo Funcionario");
 		btnNovoFuncionario.setBounds(10, 113, 154, 25);
+		
+		Nosadvs = new Button(shellMenuAdmin, SWT.NONE);
+		Nosadvs.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+			}
+		});
+		Nosadvs.setText("tba");
+		Nosadvs.setBounds(10, 177, 154, 25);
 	}
+	
+	
+	  public void apagaJanelaDedicada() {
+		// apaga tabela
+		  scrolledComposite.setVisible(false);
+		  table.setVisible(false); 
+		  //   zdfvzfd
+	    }
 }
