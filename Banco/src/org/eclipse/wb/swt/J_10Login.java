@@ -24,20 +24,26 @@ import org.eclipse.swt.events.MouseEvent;
 public class J_10Login {
 
 	protected Shell shlLogin;
-	private Text text;
-	private Text text_1;
-	private Gestao gestao;
+	private Text text_NUtilizador;
+	private Text text_Password;
+	private Utilizador devolveU;
 	
 
+	public Utilizador getDevolveU() {
+		return devolveU;
+	}
 
 
-	
+
+	public void setDevolveU(Utilizador devolveU) {
+		this.devolveU = devolveU;
+	}
 
 
 
-	public J_10Login(Gestao gestao) {
+	public J_10Login() {
 		super();
-		// TODO Auto-generated constructor stub
+		this.devolveU = null;
 	}
 
 	
@@ -48,7 +54,7 @@ public class J_10Login {
 	 */
 	public static void main(String[] args) {
 		try {
-			J_10Login window = new J_10Login(new Gestao());
+			J_10Login window = new J_10Login();
 			window.open();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -78,11 +84,20 @@ public class J_10Login {
 		shlLogin.setSize(450, 300);
 		shlLogin.setText("Java Bank - Login");
 		
-		text = new Text(shlLogin, SWT.BORDER);
-		text.setBounds(92, 143, 144, 26);
+		text_NUtilizador = new Text(shlLogin, SWT.BORDER);
 		
-		text_1 = new Text(shlLogin, SWT.BORDER);
-		text_1.setBounds(92, 80, 144, 26);
+		text_NUtilizador.setBounds(92, 80, 144, 26);
+		
+		text_Password = new Text(shlLogin, SWT.BORDER);
+		text_Password.setBounds(92, 143, 144, 26);
+		
+		/// -- So para nao ter de repetir o Login----
+		text_NUtilizador.setText("Machado");;
+		text_Password.setText("Admin");
+		// -----------------------------------------
+		
+		
+		
 		
 		Label lblEmail = new Label(shlLogin, SWT.NONE);
 		lblEmail.setAlignment(SWT.RIGHT);
@@ -104,7 +119,8 @@ public class J_10Login {
 		lblMensagemDeErro.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
 		lblMensagemDeErro.setFont(SWTResourceManager.getFont("Segoe UI", 6, SWT.NORMAL));
 		lblMensagemDeErro.setBounds(92, 175, 150, 20);
-		lblMensagemDeErro.setText("Erro! Login Inv\u00E1lido (eventual mensagem de erro)");
+		lblMensagemDeErro.setText("Erro! Login inválido");
+		lblMensagemDeErro.setVisible(false);
 		
 //		String Log=text.toString();
 //		String pass=text.toString();
@@ -115,11 +131,36 @@ public class J_10Login {
 		btnEntrar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
-				String Log=text.getText();
-				String pass=text_1.getText();
-			
+				//Passar para strings os textos introduzidos na caixa de email e password
+				String username=text_NUtilizador.getText();
+				String password=text_Password.getText();
+				
+				//Usa método verfLogin(username, password) para verificar as strings introduzidas
+//				e devolve utilizador 
+		
+				System.out.print(username);
+				System.out.print(password);
+				Gestao g=new Gestao();
+				
+				devolveU=g.verfLogin(username, password);
 				
 				
+				if (devolveU!=null) {
+					System.out.print("  - > OK utilizador");
+					utilizadorAprovado();
+					shlLogin.dispose();
+				}
+				else {System.out.print("não verifica");
+				lblMensagemDeErro.setVisible(true);
+				text_NUtilizador.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseDown(MouseEvent e) {
+						shlLogin.dispose();
+					}
+				});
+				
+				}
+
 				
 			}
 		});
@@ -129,20 +170,12 @@ public class J_10Login {
 
 	}
 	
-	public String getUserLog() {
-        return text.getText();
-    }
+	
  
-    public String getPassword() {
-    	return text_1.getText();
-    }
- 
-    public Utilizador utilizadorAprovado(Utilizador Aprova) {
-        return Aprova;
+    public Utilizador utilizadorAprovado() {
+        return devolveU;
     }
 	
     
-    public boolean fecha() {
-    	return true;
-    }
+  
 }
