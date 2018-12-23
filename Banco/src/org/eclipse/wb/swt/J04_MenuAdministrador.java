@@ -3,16 +3,11 @@ package org.eclipse.wb.swt;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
-
 import java.util.Arrays;
-
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-<<<<<<< HEAD
-import org.eclipse.swt.widgets.Label;
-=======
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.widgets.List;
@@ -21,25 +16,11 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.custom.ScrolledComposite;
->>>>>>> branch 'master' of https://github.com/tjcorreia/ProjetoIPJ.git
 
-/**
- * Breve descrição do código
- *
- * @sid 2019
- * @aid 1.1
- */
 public class J04_MenuAdministrador {
 
-<<<<<<< HEAD
+
 	protected Shell shlMenuAdministrador;
-	private Button btnTransferenciaBancria;
-	private Button btnAlterarLoginE;
-	private Button btnNewButton;
-	private Label lblNewLabel;
-	private Label lblNomeDeUtilizador;
-	private Label lblNewLabel_1;
-=======
 	protected Shell shell;
 	private Text txtBoasVindas;
 	private Button btnListaClientes;
@@ -66,7 +47,7 @@ public class J04_MenuAdministrador {
 		super();
 		// TODO Auto-generated constructor stub
 	}
->>>>>>> branch 'master' of https://github.com/tjcorreia/ProjetoIPJ.git
+
 
 	/**
 	 * Launch the application.
@@ -102,14 +83,7 @@ public class J04_MenuAdministrador {
 	 * Create contents of the window.
 	 */
 	protected void createContents() {
-<<<<<<< HEAD
-		shlMenuAdministrador = new Shell();
-		shlMenuAdministrador.setSize(468, 430);
-		shlMenuAdministrador.setText("Menu Administrador");
-		
-		Button btnAlterarDadosPessoais = new Button(shlMenuAdministrador, SWT.NONE);
-		btnAlterarDadosPessoais.addSelectionListener(new SelectionAdapter() {
-=======
+
 		Gestao g = new Gestao();
 		shell = new Shell();
 		shell.setSize(604, 429);
@@ -135,19 +109,13 @@ public class J04_MenuAdministrador {
 		// ********************* *************************
 		btnListaClientes = new Button(shell, SWT.NONE);
 		btnListaClientes.addSelectionListener(new SelectionAdapter() {
->>>>>>> branch 'master' of https://github.com/tjcorreia/ProjetoIPJ.git
+
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 			}
 		});
-<<<<<<< HEAD
-		btnAlterarDadosPessoais.setText("Alterar dados Pessoais");
-		btnAlterarDadosPessoais.setBounds(10, 208, 175, 25);
-		
-		Button btnExibirContas = new Button(shlMenuAdministrador, SWT.NONE);
-		btnExibirContas.addSelectionListener(new SelectionAdapter() {
-=======
 
+	
 		// carregar para exibir clientes do banco
 		btnListaClientes.addMouseListener(new MouseAdapter() {
 			@Override
@@ -198,58 +166,30 @@ public class J04_MenuAdministrador {
 
 		btnLogout = new Button(shell, SWT.NONE);
 		btnLogout.addSelectionListener(new SelectionAdapter() {
->>>>>>> branch 'master' of https://github.com/tjcorreia/ProjetoIPJ.git
+
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 			}
 		});
-<<<<<<< HEAD
-		btnExibirContas.setText("Novo funcionario");
-		btnExibirContas.setBounds(10, 115, 175, 25);
-=======
+
+
+
 		btnLogout.setBounds(485, 10, 75, 25);
 		btnLogout.setText("Log Out");
->>>>>>> branch 'master' of https://github.com/tjcorreia/ProjetoIPJ.git
-		
-<<<<<<< HEAD
-		btnTransferenciaBancria = new Button(shlMenuAdministrador, SWT.NONE);
-		btnTransferenciaBancria.setText("Lista de Clientes");
-		btnTransferenciaBancria.setBounds(10, 146, 175, 25);
-		
-		btnAlterarLoginE = new Button(shlMenuAdministrador, SWT.NONE);
-		btnAlterarLoginE.addSelectionListener(new SelectionAdapter() {
-=======
+
+
+
 		btnNovoFuncionario = new Button(shell, SWT.NONE);
 		btnNovoFuncionario.addSelectionListener(new SelectionAdapter() {
->>>>>>> branch 'master' of https://github.com/tjcorreia/ProjetoIPJ.git
+
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 			}
 		});
-<<<<<<< HEAD
-		btnAlterarLoginE.setText("Alterar Login e Password");
-		btnAlterarLoginE.setBounds(10, 177, 175, 25);
-		
-		btnNewButton = new Button(shlMenuAdministrador, SWT.NONE);
-		btnNewButton.setBounds(356, 12, 75, 25);
-		btnNewButton.setText("Log Out");
-		
-		lblNewLabel = new Label(shlMenuAdministrador, SWT.NONE);
-		lblNewLabel.setBounds(277, 12, -62, 7);
-		lblNewLabel.setText("New Label");
-		
-		lblNomeDeUtilizador = new Label(shlMenuAdministrador, SWT.NONE);
-		lblNomeDeUtilizador.setBounds(277, 12, -83, 25);
-		lblNomeDeUtilizador.setText("Nome de utilizador");
-		
-		lblNewLabel_1 = new Label(shlMenuAdministrador, SWT.NONE);
-		lblNewLabel_1.setAlignment(SWT.RIGHT);
-		lblNewLabel_1.setBounds(80, 17, 270, 20);
-		lblNewLabel_1.setText("Nome de utilizador");
-=======
+
+
+
 		btnNovoFuncionario.setText("Novo Funcionario");
 		btnNovoFuncionario.setBounds(10, 113, 154, 25);
->>>>>>> branch 'master' of https://github.com/tjcorreia/ProjetoIPJ.git
-
 	}
 }
