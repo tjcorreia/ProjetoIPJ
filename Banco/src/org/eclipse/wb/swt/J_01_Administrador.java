@@ -36,10 +36,10 @@ public class J_01_Administrador {
 	private Text text_Morada_NovoF;
 	private Text text_ValorID_NovoF;
 	private Text text_Email_NovoF;
-	private Text text_4;
-	private Text text_5;
-	private Text text_6;
-	private Text text_1;
+	private Text text_MobileNovoF;
+	private Text text_UserNovoF;
+	private Text text_PassNovoF;
+	private Text text_PosicaoNovoF;
 
 	
 	
@@ -107,9 +107,19 @@ public class J_01_Administrador {
 		text.setText("Bem Vindo <dynamic>");
 		text.setBounds(10, 10, 458, 25);
 		
+		Composite composite1 = new Composite(shell, SWT.NONE);
+		composite1.setBounds(182, 59, 430, 283);
+		
 		Composite composite = new Composite(shell, SWT.NONE);
 		composite.setBounds(182, 59, 430, 283);
 		
+		composite.setVisible(true);
+		composite1.setVisible(false);
+		
+		
+		
+		
+		// *********** Cria novo Funcionario 
 		Label Nome_novoF = new Label(composite, SWT.NONE);
 		Nome_novoF.setBounds(10, 47, 55, 15);
 		Nome_novoF.setText("Nome");
@@ -124,7 +134,9 @@ public class J_01_Administrador {
 		text_Morada_NovoF = new Text(composite, SWT.BORDER);
 		text_Morada_NovoF.setBounds(71, 72, 349, 21);
 		
+		String [] comboB= {"Cartao Cidadao","Passaporte"};
 		Combo TipoID_NovoF = new Combo(composite, SWT.NONE);
+		TipoID_NovoF.setItems(comboB);
 		TipoID_NovoF.setBounds(71, 99, 91, 23);
 		
 		text_ValorID_NovoF = new Text(composite, SWT.BORDER);
@@ -141,22 +153,22 @@ public class J_01_Administrador {
 		lblContacto.setText("Contacto");
 		lblContacto.setBounds(10, 165, 55, 15);
 		
-		text_4 = new Text(composite, SWT.BORDER);
-		text_4.setBounds(71, 162, 349, 21);
+		text_MobileNovoF = new Text(composite, SWT.BORDER);
+		text_MobileNovoF.setBounds(71, 162, 349, 21);
 		
 		Label lblNomeDeUtilizador = new Label(composite, SWT.NONE);
 		lblNomeDeUtilizador.setText("Utilizador");
 		lblNomeDeUtilizador.setBounds(10, 192, 55, 15);
 		
-		text_5 = new Text(composite, SWT.BORDER);
-		text_5.setBounds(71, 189, 131, 21);
+		text_UserNovoF = new Text(composite, SWT.BORDER);
+		text_UserNovoF.setBounds(71, 189, 131, 21);
 		
 		Label lblPassword = new Label(composite, SWT.NONE);
 		lblPassword.setText("Password");
 		lblPassword.setBounds(228, 192, 55, 15);
 		
-		text_6 = new Text(composite, SWT.BORDER);
-		text_6.setBounds(289, 189, 131, 21);
+		text_PassNovoF = new Text(composite, SWT.BORDER);
+		text_PassNovoF.setBounds(289, 189, 131, 21);
 		
 		Label Titulo_Novo_F = new Label(composite, SWT.NONE);
 		Titulo_Novo_F.setAlignment(SWT.CENTER);
@@ -167,24 +179,34 @@ public class J_01_Administrador {
 		lblPosio.setText("Posi\u00E7\u00E3o");
 		lblPosio.setBounds(10, 226, 55, 15);
 		
-		text_1 = new Text(composite, SWT.BORDER);
-		text_1.setBounds(71, 223, 98, 21);
+		text_PosicaoNovoF = new Text(composite, SWT.BORDER);
+		text_PosicaoNovoF.setBounds(71, 223, 98, 21);
 		
-		Button btnNewButton = new Button(composite, SWT.CENTER);
-		btnNewButton.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-			}
-		});
-		btnNewButton.setBounds(294, 233, 98, 40);
-		btnNewButton.setText("Guardar Novo Funcionario");
+		Button criarNovoF = new Button(composite, SWT.CENTER);
 		
+		criarNovoF.setBounds(294, 233, 98, 40);
+		criarNovoF.setText("Guardar Novo Funcionario");
+		
+		Button button_3 = new Button(shell, SWT.NONE);
+		button_3.setText("tba");
+		button_3.setBounds(10, 205, 154, 25);
+		
+		
+		
+		// *************    fim do menu novo funcionario
 		
 		Button button = new Button(shell, SWT.NONE);
 		button.setText("Log Out");
 		button.setBounds(550, 10, 75, 25);
 		
+		
+		// JA_BT1.0 Botao Criar novo Funcionario.
 		Button Novo_Funcionario = new Button(shell, SWT.NONE);
+		Novo_Funcionario.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+			}
+		});
 		Novo_Funcionario.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
@@ -192,18 +214,91 @@ public class J_01_Administrador {
 				
 				
 				
+				
+				
+				composite.setVisible(true);
+				composite1.setVisible(false);	
+				
+				
+				
+				
+					// *********** Cria novo Funcionario 
+			 
+
+					
+					criarNovoF.addSelectionListener(new SelectionAdapter() {
+						@Override
+						public void widgetSelected(SelectionEvent e) {
+							boolean verificatudo=true;
+							String textofinal="";
+							String NomeNovoF = text_NomeNovoF.getText();
+							String Morada_NovoF = text_Morada_NovoF.getText();
+							String ValorID_NovoF = text_ValorID_NovoF.getText();
+							String Email_NovoF=text_Email_NovoF.getText();
+							String MobileNovoF=text_MobileNovoF.getText();
+							String UserNovoF=text_UserNovoF.getText();
+							String PassNovoF=text_PassNovoF.getText();
+							String PosicaoNovoF=text_PosicaoNovoF.getText();
+							
+							System.out.println(NomeNovoF);
+							System.out.println(Morada_NovoF);
+							System.out.println(ValorID_NovoF);
+							System.out.println(Email_NovoF);
+							System.out.println(MobileNovoF);
+							System.out.println(UserNovoF);
+							System.out.println(PassNovoF);
+							System.out.println(PosicaoNovoF);
+							
+						
+							String  [] verifica=g.verificanovoF(NomeNovoF,Integer.parseInt(ValorID_NovoF),Email_NovoF ,UserNovoF); 	
+							textofinal="";
+							System.out.println(Arrays.toString(verifica));
+							for (int i=0;i<verifica.length;i++) {
+								textofinal=textofinal+verifica[i];
+								if (!verifica[i].equals("")) {verificatudo=false;}
+								
+								
+//								Label lblNewLabel = new Label(composite, SWT.NONE);
+//								lblNewLabel.setForeground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_DARK_SHADOW));
+//								lblNewLabel.setBounds(95, 23, 265, 174);
+//								lblNewLabel.setText(textofinal);
+//								lblNewLabel.setVisible(!verificatudo);
+								
+								composite.dispose();
+								
+							}
+							
+							
+							
+						}
+					});
+					
+				
+					
+					
+					// *************    fim do menu novo funcionario
+					
+					
+			
+				
+				
 			}
 		});
 		Novo_Funcionario.setText("Novo Funcionario");
 		Novo_Funcionario.setBounds(10, 141, 154, 25);
 		
+		
+// *****// JA_BT2.0 Botao para ver Lista de Cliente.
 		Button Lista_Clientes = new Button(shell, SWT.NONE);
 		Lista_Clientes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
 				
+				composite.setVisible(false);
+				composite1.setVisible(true);
+		
 				// *********************Tabela de Clientes *************************
-				ScrolledComposite scrolledComposite = new ScrolledComposite(composite, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
+				ScrolledComposite scrolledComposite = new ScrolledComposite(composite1, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
 				scrolledComposite.setBounds(0, 0, 420, 283);
 				scrolledComposite.setExpandHorizontal(true);
 				scrolledComposite.setExpandVertical(true);
@@ -256,9 +351,11 @@ public class J_01_Administrador {
 		Lista_Clientes.setText("Lista de Clientes");
 		Lista_Clientes.setBounds(10, 174, 154, 25);
 		
-		Button button_3 = new Button(shell, SWT.NONE);
-		button_3.setText("tba");
-		button_3.setBounds(10, 205, 154, 25);
+		
+		
+	
+		
+		
 		
 		
 		

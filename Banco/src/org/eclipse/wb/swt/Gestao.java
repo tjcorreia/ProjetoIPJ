@@ -2,10 +2,12 @@ package org.eclipse.wb.swt;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.eclipse.wb.swt.Conta.TipoC;
 import org.eclipse.wb.swt.Utilizador.TipoID;
@@ -41,6 +43,18 @@ public Gestao() {
 	
 	mapUtilizadores.put("Machado",MachadoU);
 	mapUtilizadores.put("Correia",CorreiaU);
+	
+	// Funcionarios
+	Funcionario MachadoFU= new  Funcionario(1002, "Maria", "Fun", "Machado0",
+			"Rua Maria Vitoria",Utilizador.TipoID.CARTAOCIDADAO,78456123,"mail",965420730);
+	
+	Funcionario CorreiaFU= new  Funcionario(1003, "Correia2", "Fun", "Coreia",
+			"Rua Maria Vitoria ",Utilizador.TipoID.CARTAOCIDADAO,12345678,"mail",965420730);
+	
+	mapUtilizadores.put("Maria",MachadoFU);
+	mapUtilizadores.put("Correia2",CorreiaFU);
+	
+	
 	
 	
 	// Clientes
@@ -141,12 +155,28 @@ public void Gerir() {
      return null;
  }
  
-////faz a verificação das entradas do login
-public String listaClientes() {
+////faz a verificação das entradas do novo funcionario
+public String [] verificanovoF(String nomeF, int valorIDF,String emailF ,String userNameF) {
+ String  verifica[]=new String [4];
+ verifica[0]="";
+ verifica[1]="";
+ verifica[2]="";
+ verifica[3]="";
  
-	
+	if (mapUtilizadores.containsKey(userNameF)) {verifica[3] ="O nome de Utilizador não é válido.";}
+	for (Entry<String, Utilizador> entry : mapUtilizadores.entrySet()) {
+		if (entry instanceof Funcionario) {
+			System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue());	
+		if (entry.getValue().nome.equals(nomeF)) {verifica[0] ="O nome do Funcioario já existe.";}
+		if ( entry.getValue().valorID ==(valorIDF) ) {
+			verifica[1] ="Já existe um funcionario com essa identificaçao.";}
+		if (entry.getValue().email.equals(emailF)) {verifica[2] ="Email Inváldo :O email já existe !";}
+		
+		}
  
- return null;
+	}
+	System.out.println(Arrays.toString(verifica));
+ return verifica;
 }
 
  
