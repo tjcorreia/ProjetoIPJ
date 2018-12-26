@@ -118,7 +118,11 @@ public void Gerir() {
 	System.out.println("passou ->>"+novoLogin.utilizadorAprovado().nome);
 	if (aprovado instanceof Administrador) {
 	
-		J04_MenuAdministrador novaJAdmin = new J04_MenuAdministrador (aprovado);
+//		J04_MenuAdministrador novaJAdmin = new J04_MenuAdministrador (aprovado);
+//		novaJAdmin.open();
+//		
+		
+		J_01_Administrador novaJAdmin= new J_01_Administrador(aprovado);
 		novaJAdmin.open();
 		
 	}

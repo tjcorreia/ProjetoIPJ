@@ -1,7 +1,10 @@
 package org.eclipse.wb.swt;
 
+
 import java.util.ArrayList;
 import java.util.Map;
+
+import javax.swing.ImageIcon;
 
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
@@ -12,6 +15,8 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.ImageData;
 
 
 /**  
@@ -112,7 +117,7 @@ public class J_10Login {
 		Label lblRedeInternaPara = new Label(shlLogin, SWT.NONE);
 		lblRedeInternaPara.setFont(SWTResourceManager.getFont("Segoe UI", 12, SWT.NORMAL));
 		lblRedeInternaPara.setAlignment(SWT.CENTER);
-		lblRedeInternaPara.setBounds(31, 10, 358, 49);
+		lblRedeInternaPara.setBounds(98, 21, 237, 26);
 		lblRedeInternaPara.setText("BEM VINDO AO JAVA BANK.");
 		
 		Label lblMensagemDeErro = new Label(shlLogin, SWT.NONE);
@@ -167,7 +172,17 @@ public class J_10Login {
 		
 		btnEntrar.setText("Entrar");
 		btnEntrar.setBounds(273, 112, 90, 30);
-
+		
+//		Label lblNewLabel = new Label(shlLogin, SWT.NONE);
+//		Image imagem=new Image(null, "/Logo/javaBank _Withe_48.png" );
+//		ImageData img=imagem.getImageData();
+//		img.scaledTo(lblNewLabel.getBounds().width, lblNewLabel.getBounds().height);
+//		Image imagem2= new Image(null,img);
+//		
+//		lblNewLabel.setImage(SWTResourceManager.g);
+//		lblNewLabel.setAlignment(SWT.CENTER);
+//		lblNewLabel.setBounds(38, 10, 54, 47);
+	
 	}
 	
 	
@@ -175,7 +190,4 @@ public class J_10Login {
     public Utilizador utilizadorAprovado() {
         return devolveU;
     }
-	
-    
-  
 }

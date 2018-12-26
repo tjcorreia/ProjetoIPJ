@@ -16,10 +16,9 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.custom.ScrolledComposite;
+import org.eclipse.swt.widgets.Composite;
 
 public class J04_MenuAdministrador {
-
-
 
 	protected Shell shellMenuAdmin;
 	private Text txtBoasVindas;
@@ -30,6 +29,7 @@ public class J04_MenuAdministrador {
 	private ScrolledComposite scrolledComposite;
 	private Button btnNovoFuncionario;
 	private Button Nosadvs;
+	private Composite composite;
 
 	public Utilizador getuAdministrador() {
 		return uAdministrador;
@@ -48,7 +48,6 @@ public class J04_MenuAdministrador {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
 
 	/**
 	 * Launch the application.
@@ -93,22 +92,6 @@ public class J04_MenuAdministrador {
 		txtBoasVindas = new Text(shellMenuAdmin, SWT.BORDER);
 		txtBoasVindas.setText("Bem Vindo " + uAdministrador.nome);
 		txtBoasVindas.setBounds(10, 12, 458, 25);
-
-		// *********************Tabela de Clientes *************************
-		scrolledComposite = new ScrolledComposite(shellMenuAdmin, SWT.BORDER | SWT.V_SCROLL);
-		scrolledComposite.setBounds(172, 62, 388, 305);
-		scrolledComposite.setExpandHorizontal(true);
-		scrolledComposite.setExpandVertical(true);
-		scrolledComposite.setVisible(true);// apaga tabela
-
-		table = new Table(scrolledComposite, SWT.BORDER | SWT.FULL_SELECTION);
-		table.setHeaderVisible(true);
-		table.setLinesVisible(true);
-		
-		table.setVisible(true); // apaga tabela
-		
-		scrolledComposite.setContent(table);
-		scrolledComposite.setMinSize(table.computeSize(SWT.DEFAULT, SWT.DEFAULT));
 		// ********************* *************************
 		btnListaClientes = new Button(shellMenuAdmin, SWT.NONE);
 		btnListaClientes.addSelectionListener(new SelectionAdapter() {
@@ -118,7 +101,6 @@ public class J04_MenuAdministrador {
 			}
 		});
 
-	
 		// carregar para exibir clientes do banco
 		btnListaClientes.addMouseListener(new MouseAdapter() {
 			@Override
@@ -127,26 +109,26 @@ public class J04_MenuAdministrador {
 				scrolledComposite.setVisible(true);
 				table.setVisible(true);
 				table.setHeaderVisible(true);
-				   
+
 				System.out.println("  - > " + g.getMapUtilizadores().size());
 				Utilizador u = new Utilizador();
-				String[] titulo = { "Cliente ID", "Nome", "Morada","email", "Telefone","nº contas"  };
-				
+				String[] titulo = { "Cliente ID", "Nome", "Morada", "email", "Telefone", "nº contas" };
+
 				for (int i = 0; i < titulo.length; i++) {
-				      TableColumn column = new TableColumn(table, SWT.NULL);
-				      column.setText(titulo[i]);
-				    }
-				
+					TableColumn column = new TableColumn(table, SWT.NULL);
+					column.setText(titulo[i]);
+				}
+
 				for (String key : g.getMapUtilizadores().keySet()) {
 					u = g.getMapUtilizadores().get(key);
 
 					if (u instanceof Cliente) {
 						System.out.println("-->" + ((Cliente) u).toString());
-						String [] ClienteI= new String [6] ;
-						ClienteI=((Cliente) u).toTable();
+						String[] ClienteI = new String[6];
+						ClienteI = ((Cliente) u).toTable();
 						System.out.println("-->" + (Arrays.toString(ClienteI)));
 						TableItem item = new TableItem(table, SWT.NULL);
-						
+
 						item.setText(0, ((Cliente) u).toTable()[0]);
 						item.setText(1, ((Cliente) u).toTable()[1]);
 						item.setText(2, ((Cliente) u).toTable()[2]);
@@ -155,11 +137,11 @@ public class J04_MenuAdministrador {
 						item.setText(5, ((Cliente) u).toTable()[5]);
 
 					}
-					
-					 for (int i = 0; i < titulo.length; i++) {
-					      table.getColumn(i).pack();
-					    }
-					 table.setSize(table.computeSize(SWT.DEFAULT, 200));
+
+					for (int i = 0; i < titulo.length; i++) {
+						table.getColumn(i).pack();
+					}
+					table.setSize(table.computeSize(SWT.DEFAULT, 200));
 				}
 			}
 		});
@@ -176,24 +158,15 @@ public class J04_MenuAdministrador {
 			}
 		});
 
-
-
 		btnLogout.setBounds(485, 10, 75, 25);
 		btnLogout.setText("Log Out");
-
 
 //*************************CRIAR NOVO FUN
 		btnNovoFuncionario = new Button(shellMenuAdmin, SWT.NONE);
 		btnNovoFuncionario.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
-				
-				
-				
-				
-				
-				
-				
+
 			}
 		});
 		btnNovoFuncionario.addSelectionListener(new SelectionAdapter() {
@@ -203,11 +176,9 @@ public class J04_MenuAdministrador {
 			}
 		});
 
-
-
 		btnNovoFuncionario.setText("Novo Funcionario");
 		btnNovoFuncionario.setBounds(10, 113, 154, 25);
-		
+
 		Nosadvs = new Button(shellMenuAdmin, SWT.NONE);
 		Nosadvs.addSelectionListener(new SelectionAdapter() {
 			@Override
@@ -216,13 +187,31 @@ public class J04_MenuAdministrador {
 		});
 		Nosadvs.setText("tba");
 		Nosadvs.setBounds(10, 177, 154, 25);
+
+		composite = new Composite(shellMenuAdmin, SWT.NONE);
+		composite.setBounds(184, 58, 394, 305);
+
+		// *********************Tabela de Clientes *************************
+		scrolledComposite = new ScrolledComposite(composite, SWT.BORDER | SWT.V_SCROLL);
+		scrolledComposite.setSize(388, 305);
+		scrolledComposite.setExpandHorizontal(true);
+		scrolledComposite.setExpandVertical(true);
+		scrolledComposite.setVisible(true);// apaga tabela
+
+		table = new Table(scrolledComposite, SWT.BORDER | SWT.FULL_SELECTION);
+		table.setHeaderVisible(true);
+		table.setLinesVisible(true);
+
+		table.setVisible(true); // apaga tabela
+
+		scrolledComposite.setContent(table);
+		scrolledComposite.setMinSize(table.computeSize(SWT.DEFAULT, SWT.DEFAULT));
 	}
-	
-	
-	  public void apagaJanelaDedicada() {
+
+	public void apagaJanelaDedicada() {
 		// apaga tabela
-		  scrolledComposite.setVisible(false);
-		  table.setVisible(false); 
-		  //   zdfvzfd
-	    }
+		scrolledComposite.setVisible(false);
+		table.setVisible(false);
+		// zdfvzfd
+	}
 }
