@@ -114,7 +114,7 @@ public class J_00Inicial {
 				//caso lista tenha livros
 				else {
 					//Abrir nova janela de ListaLivros, passando-lhe a lista de livros que correspondem à procura
-					J_01ListaLivros janelaListaLivros = new J_01ListaLivros(lvProcurados);
+					J_01ListaLivros janelaListaLivros = new J_01ListaLivros(lvProcurados, livraria);
 					janelaListaLivros.open();
 				}
 				
