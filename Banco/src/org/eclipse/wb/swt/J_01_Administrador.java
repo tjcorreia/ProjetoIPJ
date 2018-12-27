@@ -5,6 +5,8 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
 import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
@@ -17,6 +19,7 @@ import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -104,59 +107,63 @@ public class J_01_Administrador {
 		text = new Text(shell, SWT.BORDER);
 		text.setText("Bem Vindo " + uAdministrador.nome);
 		text.setBounds(10, 10, 458, 25);
-
-		Composite composite1 = new Composite(shell, SWT.NONE);
-		composite1.setBounds(182, 41, 430, 301);
-
+		
 		Composite composite = new Composite(shell, SWT.NONE);
 		composite.setBounds(182, 41, 430, 301);
 
 		composite.setVisible(true);
-		composite1.setVisible(false);
-
+		
 		// *********** Cria novo Funcionario
+		
+		
+		Label lblNewLabel = new Label(composite, SWT.NONE);
+		lblNewLabel.setBounds(10, 104, 70, 15);
+		lblNewLabel.setText("Identifica\u00E7ao");
+		
+		
+		
 		Label Nome_novoF = new Label(composite, SWT.NONE);
 		Nome_novoF.setBounds(10, 47, 55, 15);
 		Nome_novoF.setText("Nome");
 
 		text_NomeNovoF = new Text(composite, SWT.BORDER);
-		text_NomeNovoF.setBounds(71, 44, 349, 21);
+		text_NomeNovoF.setBounds(81, 44, 339, 21);
 
 		Label lblMoradaNovoF = new Label(composite, SWT.NONE);
 		lblMoradaNovoF.setText("Morada");
 		lblMoradaNovoF.setBounds(10, 75, 55, 15);
 
 		text_Morada_NovoF = new Text(composite, SWT.BORDER);
-		text_Morada_NovoF.setBounds(71, 72, 349, 21);
+		text_Morada_NovoF.setBounds(81, 72, 339, 21);
 
 		String[] comboB = { "Cartao Cidadao", "Passaporte" };
 		Combo TipoID_NovoF = new Combo(composite, SWT.NONE);
 		TipoID_NovoF.setItems(comboB);
-		TipoID_NovoF.setBounds(71, 99, 91, 23);
+		TipoID_NovoF.setBounds(81, 99, 131, 23);
 
 		text_ValorID_NovoF = new Text(composite, SWT.BORDER);
-		text_ValorID_NovoF.setBounds(168, 100, 252, 21);
+		text_ValorID_NovoF.setBounds(218, 100, 202, 21);
 
 		Label lblEmail_novoF = new Label(composite, SWT.NONE);
 		lblEmail_novoF.setText("Email");
 		lblEmail_novoF.setBounds(10, 131, 55, 15);
 
 		text_Email_NovoF = new Text(composite, SWT.BORDER);
-		text_Email_NovoF.setBounds(71, 128, 349, 21);
+		text_Email_NovoF.setBounds(81, 128, 339, 21);
 
 		Label lblContacto = new Label(composite, SWT.NONE);
 		lblContacto.setText("Contacto");
 		lblContacto.setBounds(10, 165, 55, 15);
 
 		text_MobileNovoF = new Text(composite, SWT.BORDER);
-		text_MobileNovoF.setBounds(71, 162, 349, 21);
+		text_MobileNovoF.setBounds(81, 162, 339, 21);
 
 		Label lblNomeDeUtilizador = new Label(composite, SWT.NONE);
 		lblNomeDeUtilizador.setText("Utilizador");
 		lblNomeDeUtilizador.setBounds(10, 192, 55, 15);
 
 		text_UserNovoF = new Text(composite, SWT.BORDER);
-		text_UserNovoF.setBounds(71, 189, 131, 21);
+		text_UserNovoF.setBounds(81, 189, 121, 21);
 
 		Label lblPassword = new Label(composite, SWT.NONE);
 		lblPassword.setText("Password");
@@ -175,18 +182,22 @@ public class J_01_Administrador {
 		lblPosio.setBounds(10, 226, 55, 15);
 
 		text_PosicaoNovoF = new Text(composite, SWT.BORDER);
-		text_PosicaoNovoF.setBounds(71, 223, 98, 21);
+		text_PosicaoNovoF.setBounds(81, 223, 88, 21);
 
-		Button criarNovoF = new Button(composite, SWT.CENTER);
-
-		criarNovoF.setBounds(294, 233, 98, 40);
-		criarNovoF.setText("Guardar Novo Funcionario");
+		Button criarNovoF = new Button(composite,SWT.MULTI|SWT.WRAP|SWT.NONE);
+		criarNovoF.setBounds(289, 233, 103, 58);
+		criarNovoF.setText("Guardar\nNovo Funcionario");
 
 		Button button_3 = new Button(shell, SWT.NONE);
 		button_3.setText("tba");
 		button_3.setBounds(10, 205, 154, 25);
 
 		// ************* fim do menu novo funcionario
+		
+		Composite composite1 = new Composite(shell, SWT.NONE);
+		composite1.setBounds(182, 41, 443, 301);
+		composite1.setVisible(false);
+	
 
 		Button button = new Button(shell, SWT.NONE);
 		button.setText("Log Out");
@@ -204,7 +215,7 @@ public class J_01_Administrador {
 			public void mouseUp(MouseEvent e) {
 
 				composite.setVisible(true);
-				composite1.setVisible(false);
+			
 
 				// *********** Cria novo Funcionario
 
@@ -231,13 +242,21 @@ public class J_01_Administrador {
 						System.out.println(PassNovoF);
 						System.out.println(PosicaoNovoF);
 						System.out.println("-------->");
+						
+						String mensagem="";
+						boolean naohaDadosPorPreencher=true;
+						// Verifica campos vazios colocou-se como 
 						if (estaVazio(text_NomeNovoF) || estaVazio(text_Morada_NovoF) || estaVazio(text_ValorID_NovoF)
 								|| estaVazio(text_Email_NovoF) || estaVazio(text_MobileNovoF)
 								|| estaVazio(text_UserNovoF) || estaVazio(text_PassNovoF)) {
-							Titulo_Novo_F.setText("Dados Obrigatorios por preencher");
+							Titulo_Novo_F.setText("Dados por preencher ou inválidos");
 							Titulo_Novo_F.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
 							System.out.println("ENTROU NA VERIFICACAO DE CAMPOS VAZIOS");
+							mensagem=mensagem+"Tem dados por preencher\n";
+							 String msg = "<html>this is a really long message<br>this is a really long message this is a really long message this is a really long message this is a really long message this is a really long message this is a really long message";
 
+							
+							
 							estaVazio(text_NomeNovoF);
 							estaVazio(text_Morada_NovoF);
 							estaVazio(text_ValorID_NovoF);
@@ -245,8 +264,41 @@ public class J_01_Administrador {
 							estaVazio(text_MobileNovoF);
 							estaVazio(text_UserNovoF);
 							estaVazio(text_PassNovoF);
+							
+							naohaDadosPorPreencher=false;
 
-						} else {
+						} 
+						
+						if (eNumero(text_ValorID_NovoF)==-1 ){
+							Titulo_Novo_F.setText("Dados por preencher ou inválidos");
+							
+							mensagem=mensagem+"Tem dados inválidos \n";
+							if (eNumero(text_ValorID_NovoF)==-1) {
+								mensagem=mensagem+",(ver ID)\n";
+							}
+							
+							mensagem=mensagem+".\n";
+							System.out.println("VERIFICACAO DE numeros");
+							
+							naohaDadosPorPreencher=false;
+							
+						}
+						
+						if (!validateMobileNumber(text_MobileNovoF.getText())){
+							System.out.println("VERIFICACAO DE Telemovel"+text_MobileNovoF.getText());
+							Titulo_Novo_F.setText("Dados por preencher ou inválidos");
+							
+							mensagem=mensagem+"Contacto inválido.\n";
+							
+							
+							
+							naohaDadosPorPreencher=false;
+							
+						}
+						
+						
+						
+						if (naohaDadosPorPreencher){
 
 							String[] verifica = g.verificanovoF(NomeNovoF, Integer.parseInt(ValorID_NovoF), Email_NovoF,
 									UserNovoF);
@@ -268,6 +320,10 @@ public class J_01_Administrador {
 
 							}
 						}
+						MessageBox box = new MessageBox(shell,SWT.MULTI| SWT.ICON_ERROR);
+						box.setText("Title");
+						box.setMessage(mensagem);
+						box.open();
 
 					}
 				});
@@ -342,6 +398,8 @@ public class J_01_Administrador {
 		});
 		Lista_Clientes.setText("Lista de Clientes");
 		Lista_Clientes.setBounds(10, 174, 154, 25);
+		
+				
 
 	}
 
@@ -354,5 +412,28 @@ public class J_01_Administrador {
 		texto.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
 		return false;
 	}
+	
+	public int eNumero(Text texto)
+	{
+	    for (char c : texto.getText().toCharArray())
+	    {
+	        if (!Character.isDigit(c)) 
+	        	{
+	        	texto.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
+	        	return -1;}
+	    }
+	    texto.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
+	    return texto.getText().length();
+	}
+	
+	public boolean validateMobileNumber(String mobileNumber) {
+		Pattern regexPattern = Pattern.compile("^\\+[0-9]{0,5}+-[0-9]{9}$");
+        Matcher regMatcher   = regexPattern.matcher(mobileNumber);
+        if(regMatcher.matches()) {
+            return true;//"Valid Mobile Number";
+        } else {
+            return false;// "Invalid Mobile Number";
+        }
+    }
 
 }

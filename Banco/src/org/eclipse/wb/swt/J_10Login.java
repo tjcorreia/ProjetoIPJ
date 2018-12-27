@@ -93,7 +93,7 @@ public class J_10Login {
 		
 		text_NUtilizador.setBounds(92, 80, 144, 26);
 		
-		text_Password = new Text(shlLogin, SWT.BORDER);
+		text_Password = new Text(shlLogin,SWT.PASSWORD| SWT.BORDER);
 		text_Password.setBounds(92, 143, 144, 26);
 		
 		/// -- So para nao ter de repetir o Login----
