@@ -427,13 +427,36 @@ public class J_01_Administrador {
 	}
 	
 	public boolean validateMobileNumber(String mobileNumber) {
-		Pattern regexPattern = Pattern.compile("^\\+[0-9]{0,5}+-[0-9]{9}$");
-        Matcher regMatcher   = regexPattern.matcher(mobileNumber);
-        if(regMatcher.matches()) {
+//		("^\\+?\\[0-9]{0,5}?\\-?\\[0-9]{9}$"
+//		Pattern regexPattern = Pattern.compile("^\\+?\\d{0,3}?\\d{9}$");
+		Pattern regexPattern2 = Pattern.compile("^\\d{0,5}?\\d{9}$");
+//        Matcher regMatcher   = regexPattern.matcher(mobileNumber);
+        Matcher regMatcher2   = regexPattern2.matcher(mobileNumber);
+        if( regMatcher2.matches()) {
             return true;//"Valid Mobile Number";
         } else {
             return false;// "Invalid Mobile Number";
         }
     }
 
+	
+//	\A[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\z
+//	Regex : ^[\\w!#$%&’*+/=?`{|}~^-]+(?:\\.[\\w!#$%&’*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$
+	
+	public boolean validateEmail(String emailStr) {
+		Pattern regexPattern = Pattern.compile("\\A[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\z");
+        Matcher regMatcher   = regexPattern.matcher(emailStr);
+        if( regMatcher.matches()) {
+            return true;//"Valid Email";
+        } else {
+            return false;// "Invalid Email";
+        }
+    }
+	
+	
+	
+	
+	
+	
+	
 }
