@@ -180,9 +180,16 @@ public String [] verificanovoF(String nomeF, int valorIDF,String emailF ,String 
 }
 
  
+public boolean eUmNumero(String texto)
+{
+    for (char c : texto.toCharArray())
+    {
+        if (!Character.isDigit(c)) return false;
+    }
+    return true;
+} 
  
- 
- 
+
  
 //*********************************************************************************
 ////	********** Adiciona Cliente **************
