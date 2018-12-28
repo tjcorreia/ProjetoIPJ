@@ -33,17 +33,18 @@ public class J_01ListaLivros {
 	protected ArrayList <Livro> listaLivrosCarrinho = new ArrayList<>();//adicionou-se este atributo para criar carrinho a partir desta lista
 	protected Livro livroSelecionado;//atributo que nos dá o livro que está selecionado na table
 	private Table table;
+	private Livraria livraria;//atributo adicionado para poder ir buscar o método 'procurarLivro' desta classe
 	private int indexLivroSelecionado;//adicionou-se este atributo para poder passá-lo entre métodos
 	private Carrinho carrinho = new Carrinho();
 	private Text text;;//adicionou-se carrinho para cria-lo e passar para outras classes
 	
 	
 	//Criou-se construtor para poder receber a lista de livros procurados de outra classe
-	public J_01ListaLivros(ArrayList<Livro> listaLivrosDaBusca) {
+	public J_01ListaLivros(ArrayList<Livro> listaLivrosDaBusca, Livraria livraria) {
 		super();
 		this.listaLivrosDaBusca = listaLivrosDaBusca;
+		this.livraria = livraria;
 	}
-
 
 	
 	/**
@@ -53,7 +54,7 @@ public class J_01ListaLivros {
 	public static void main(String[] args) {
 		try {
 			//Foi necessário adicionar aqui a arrayList de livros
-			J_01ListaLivros window = new J_01ListaLivros(new ArrayList<Livro>());
+			J_01ListaLivros window = new J_01ListaLivros(new ArrayList<Livro>(), new Livraria());
 			window.open();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -138,6 +139,11 @@ public class J_01ListaLivros {
 		buttonVoltar.setBounds(632, 477, 80, 26);
 		
 		
+		//texto a indicar quantos items tem o carrinho
+		Label lblItmes = new Label(shlViewComicsInc, SWT.NONE);
+		lblItmes.setText( listaLivrosCarrinho.size() + " itmes");
+		lblItmes.setBounds(511, 144, 70, 20);		
+		
 		//Listner para botão de 'adicionar ao carrinho'
 		Button btnAdicionarAoCarrinho = new Button(shlViewComicsInc, SWT.CENTER);
 		btnAdicionarAoCarrinho.addSelectionListener(new SelectionAdapter() {
@@ -150,12 +156,16 @@ public class J_01ListaLivros {
 			public void mouseUp(MouseEvent e) {
 				//se stock <= 0 não faz nada
 				if (livroSelecionado.stock <= 0) {	
+					//colocar label a dizer livro sem stock
 				}
 				//se stock > 0 adiciona livro a lista de livros para o carrinho e reduz stock
 				else {
 					listaLivrosCarrinho.add(livroSelecionado);
 					livroSelecionado.stock--;
+					//actualizar o label do número de items no carrinho
+					lblItmes.update();
 					System.out.println("STock=" + livroSelecionado.stock);
+					System.out.println("items no carrinho=" + listaLivrosCarrinho.size() );
 				}
 				
 			}
@@ -175,32 +185,71 @@ public class J_01ListaLivros {
 					//repor stock
 					livroSelecionado.stock++;
 				}
+				//se carrinho já está vazio, não fazer nada
+				else if ( listaLivrosCarrinho.isEmpty() ){
+					
+				}
 				//remover o último da lista
 				else {
 					Livro ultimoDaLista = listaLivrosCarrinho.get(listaLivrosCarrinho.size());
-					listaLivrosCarrinho.remove(ultimoDaLista);
+					listaLivrosCarrinho.remove(listaLivrosCarrinho.size());
 					//repor stock
 					ultimoDaLista.stock++;
 				}
+				//actualizar o label do número de items no carrinho
+				lblItmes.update();
+				System.out.println("items no carrinho=" + listaLivrosCarrinho.size() );
 			}
 		});
 		btnRemover.setText("Remover");
 		btnRemover.setBounds(610, 179, 90, 30);
 		
-		//texto a indicar quantos items tem o carrinho
-		Label lblItmes = new Label(shlViewComicsInc, SWT.NONE);
-		lblItmes.setText( listaLivrosCarrinho.size() + " itmes");
-		lblItmes.setBounds(511, 144, 70, 20);
+		
 		
 		Label lblCarrinho = new Label(shlViewComicsInc, SWT.NONE);
 		lblCarrinho.setBounds(511, 114, 70, 20);
 		lblCarrinho.setText("Carrinho");
 		
+		//mensagem de erro que aparece quando não há livros para a procura
+		Label label = new Label(shlViewComicsInc, SWT.NONE);
+		label.setVisible(false);
+		label.setText("N\u00E3o existem correspond\u00EAncias. Tente novamente");
+		label.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
+		label.setFont(SWTResourceManager.getFont("Segoe UI", 6, SWT.NORMAL));
+		label.setBounds(81, 59, 236, 12);		
 		
 		text = new Text(shlViewComicsInc, SWT.BORDER);
 		text.setBounds(81, 23, 196, 30);
 		
 		Button btnPesquisar = new Button(shlViewComicsInc, SWT.NONE);
+		btnPesquisar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				//Passar para string o texto introduzido na caixa de texto
+				String s = text.getText();
+				//Chamar método 'procurarLivro' para a string introduzida
+				ArrayList <Livro> lvProcurados = livraria.procurarLivro(s);
+				//Caso lista de livros não tenha resultados apresentar mensagem de procura vazia
+				if ( lvProcurados.isEmpty() ) {
+					label.setVisible(true);  
+				}
+				//caso lista tenha livros
+				else {
+					label.setVisible(false);  
+					//passar a nova procura para a 'listaLivrosDaBusca'
+					listaLivrosDaBusca = lvProcurados;
+					//limpar todos os resultados anteriores da tabela impressa
+					table.clearAll();
+					//adicionar um a um os livros da lista de livros da busca à table
+					int i = 0;
+					for (Livro lv : listaLivrosDaBusca) {
+					      TableItem item = new TableItem(table, SWT.NONE, i);
+					      i++;
+					      item.setText(lv.toString());
+					}
+				}
+			}
+		});
 		btnPesquisar.setBounds(310, 23, 90, 30);
 		btnPesquisar.setText("Pesquisar");
 		
@@ -209,6 +258,8 @@ public class J_01ListaLivros {
 		Button btnVerfinalizarCarrinho = new Button(shlViewComicsInc, SWT.CENTER);
 		btnVerfinalizarCarrinho.setText("Ver/Finalizar Carrinho");
 		btnVerfinalizarCarrinho.setBounds(514, 225, 186, 30);
+		
+		
 		
 		
 		
