@@ -107,21 +107,18 @@ public class J_01_Administrador {
 		text = new Text(shell, SWT.BORDER);
 		text.setText("Bem Vindo " + uAdministrador.nome);
 		text.setBounds(10, 10, 458, 25);
-		
+
 		Composite composite = new Composite(shell, SWT.NONE);
 		composite.setBounds(182, 41, 430, 301);
 
 		composite.setVisible(true);
-		
+
 		// *********** Cria novo Funcionario
-		
-		
+
 		Label lblNewLabel = new Label(composite, SWT.NONE);
 		lblNewLabel.setBounds(10, 104, 70, 15);
 		lblNewLabel.setText("Identifica\u00E7ao");
-		
-		
-		
+
 		Label Nome_novoF = new Label(composite, SWT.NONE);
 		Nome_novoF.setBounds(10, 47, 55, 15);
 		Nome_novoF.setText("Nome");
@@ -139,6 +136,7 @@ public class J_01_Administrador {
 		String[] comboB = { "Cartao Cidadao", "Passaporte" };
 		Combo TipoID_NovoF = new Combo(composite, SWT.NONE);
 		TipoID_NovoF.setItems(comboB);
+		TipoID_NovoF.select(0);
 		TipoID_NovoF.setBounds(81, 99, 131, 23);
 
 		text_ValorID_NovoF = new Text(composite, SWT.BORDER);
@@ -184,7 +182,7 @@ public class J_01_Administrador {
 		text_PosicaoNovoF = new Text(composite, SWT.BORDER);
 		text_PosicaoNovoF.setBounds(81, 223, 88, 21);
 
-		Button criarNovoF = new Button(composite,SWT.MULTI|SWT.WRAP|SWT.NONE);
+		Button criarNovoF = new Button(composite, SWT.MULTI | SWT.WRAP | SWT.NONE);
 		criarNovoF.setBounds(289, 233, 103, 58);
 		criarNovoF.setText("Guardar\nNovo Funcionario");
 
@@ -193,11 +191,10 @@ public class J_01_Administrador {
 		button_3.setBounds(10, 205, 154, 25);
 
 		// ************* fim do menu novo funcionario
-		
+
 		Composite composite1 = new Composite(shell, SWT.NONE);
 		composite1.setBounds(182, 41, 443, 301);
 		composite1.setVisible(false);
-	
 
 		Button button = new Button(shell, SWT.NONE);
 		button.setText("Log Out");
@@ -215,7 +212,7 @@ public class J_01_Administrador {
 			public void mouseUp(MouseEvent e) {
 
 				composite.setVisible(true);
-			
+				composite1.dispose();
 
 				// *********** Cria novo Funcionario
 
@@ -242,63 +239,70 @@ public class J_01_Administrador {
 						System.out.println(PassNovoF);
 						System.out.println(PosicaoNovoF);
 						System.out.println("-------->");
-						
-						String mensagem="";
-						boolean naohaDadosPorPreencher=true;
-						// Verifica campos vazios colocou-se como 
+
+						String mensagem = "";
+						boolean naohaDadosPorPreencher = true;
+						// Verifica campos vazios colocou-se como
 						if (estaVazio(text_NomeNovoF) || estaVazio(text_Morada_NovoF) || estaVazio(text_ValorID_NovoF)
 								|| estaVazio(text_Email_NovoF) || estaVazio(text_MobileNovoF)
 								|| estaVazio(text_UserNovoF) || estaVazio(text_PassNovoF)) {
 							Titulo_Novo_F.setText("Dados por preencher ou inválidos");
 							Titulo_Novo_F.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
 							System.out.println("ENTROU NA VERIFICACAO DE CAMPOS VAZIOS");
-							mensagem=mensagem+"Tem dados por preencher\n";
-							 String msg = "<html>this is a really long message<br>this is a really long message this is a really long message this is a really long message this is a really long message this is a really long message this is a really long message";
-
-							
-							
+							mensagem = mensagem + "Tem dados por preencher\n";
 							estaVazio(text_NomeNovoF);
 							estaVazio(text_Morada_NovoF);
 							estaVazio(text_ValorID_NovoF);
-							estaVazio(text_Email_NovoF); 
+							estaVazio(text_Email_NovoF);
 							estaVazio(text_MobileNovoF);
 							estaVazio(text_UserNovoF);
 							estaVazio(text_PassNovoF);
-							
-							naohaDadosPorPreencher=false;
+							naohaDadosPorPreencher = false;
 
-						} 
-						
-						if (eNumero(text_ValorID_NovoF)==-1 ){
-							Titulo_Novo_F.setText("Dados por preencher ou inválidos");
-							
-							mensagem=mensagem+"Tem dados inválidos \n";
-							if (eNumero(text_ValorID_NovoF)==-1) {
-								mensagem=mensagem+",(ver ID)\n";
+						}
+
+						if (TipoID_NovoF.getText().equals("Cartao Cidadao")) {
+							if (eNumero(text_ValorID_NovoF) == -1) {
+								Titulo_Novo_F.setText("Dados por preencher ou inválidos");
+								mensagem = mensagem + "Nº CC inválido .\n";
+								System.out.println("VERIFICACAO DE numeros CC");
+								naohaDadosPorPreencher = false;
+							} else if (eNumero(text_ValorID_NovoF) != 8 && eNumero(text_ValorID_NovoF) != -1) {
+								Titulo_Novo_F.setText("Dados por preencher ou inválidos");
+								mensagem = mensagem + "Nº Cartao Cidadao inválido\n";
+
+								mensagem = mensagem + ".\n";
+								System.out.println("VERIFICACAO DE CC");
+								naohaDadosPorPreencher = false;
 							}
-							
-							mensagem=mensagem+".\n";
-							System.out.println("VERIFICACAO DE numeros");
-							
-							naohaDadosPorPreencher=false;
-							
+						} else if (TipoID_NovoF.getText().equals("Passaporte")) {
+							/// falta verificar tamanho de passaporte
+							if (text_ValorID_NovoF.getText().length() < 7
+									|| text_ValorID_NovoF.getText().length() > 15) {
+								Titulo_Novo_F.setText("Dados por preencher ou inválidos");
+								mensagem = mensagem + "Nº Passaporte inválido .\n";
+								System.out.println("VERIFICACAO DE Passaporte");
+								naohaDadosPorPreencher = false;
+							}
+
 						}
-						
-						if (!validateMobileNumber(text_MobileNovoF.getText())){
-							System.out.println("VERIFICACAO DE Telemovel"+text_MobileNovoF.getText());
+
+						if (!validateMobileNumber(text_MobileNovoF)) {
+							System.out.println("VERIFICACAO DE Telemovel" + text_MobileNovoF.getText());
 							Titulo_Novo_F.setText("Dados por preencher ou inválidos");
-							
-							mensagem=mensagem+"Contacto inválido.\n";
-							
-							
-							
-							naohaDadosPorPreencher=false;
-							
+							mensagem = mensagem + "Contacto inválido.\n";
+							naohaDadosPorPreencher = false;
+
 						}
-						
-						
-						
-						if (naohaDadosPorPreencher){
+
+						if (!validateEmail(text_Email_NovoF)) {
+							System.out.println("VERIFICACAO DE Email ->" + text_Email_NovoF.getText());
+							Titulo_Novo_F.setText("Dados por preencher ou inválidos");
+							mensagem = mensagem + "Email inválido.\n";
+							naohaDadosPorPreencher = false;
+						}
+
+						if (naohaDadosPorPreencher) {
 
 							String[] verifica = g.verificanovoF(NomeNovoF, Integer.parseInt(ValorID_NovoF), Email_NovoF,
 									UserNovoF);
@@ -310,21 +314,24 @@ public class J_01_Administrador {
 									verificatudo = false;
 								}
 
-//								Label lblNewLabel = new Label(composite, SWT.NONE);
-//								lblNewLabel.setForeground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_DARK_SHADOW));
-//								lblNewLabel.setBounds(95, 23, 265, 174);
-//								lblNewLabel.setText(textofinal);
-//								lblNewLabel.setVisible(!verificatudo);
-
-							composite.dispose();
+								if (verificatudo) {
+									MessageBox box = new MessageBox(shell, SWT.MULTI );
+									box.setText("CONCLUSÃO");
+									box.setMessage(" O Funcionario foi adicionado");
+									box.open();
+									
+									
+								}
 
 							}
+						} else {
+							MessageBox box = new MessageBox(shell, SWT.MULTI | SWT.ICON_ERROR);
+							box.setText("ERRO");
+							box.setMessage(mensagem);
+							box.open();
+							Composite composite10 = new Composite(shell, SWT.NONE);
+							composite10.setBounds(182, 41, 430, 301);
 						}
-						MessageBox box = new MessageBox(shell,SWT.MULTI| SWT.ICON_ERROR);
-						box.setText("Title");
-						box.setMessage(mensagem);
-						box.open();
-
 					}
 				});
 
@@ -398,8 +405,6 @@ public class J_01_Administrador {
 		});
 		Lista_Clientes.setText("Lista de Clientes");
 		Lista_Clientes.setBounds(10, 174, 154, 25);
-		
-				
 
 	}
 
@@ -412,51 +417,50 @@ public class J_01_Administrador {
 		texto.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
 		return false;
 	}
-	
-	public int eNumero(Text texto)
-	{
-	    for (char c : texto.getText().toCharArray())
-	    {
-	        if (!Character.isDigit(c)) 
-	        	{
-	        	texto.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
-	        	return -1;}
-	    }
-	    texto.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
-	    return texto.getText().length();
+
+	public int eNumero(Text texto) {
+		for (char c : texto.getText().toCharArray()) {
+			if (!Character.isDigit(c)) {
+				texto.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
+				return -1;
+			}
+		}
+		texto.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
+		return texto.getText().length();
 	}
-	
-	public boolean validateMobileNumber(String mobileNumber) {
+
+	public boolean validateMobileNumber(Text texto) {
+		String mobileNumber = texto.getText();
 //		("^\\+?\\[0-9]{0,5}?\\-?\\[0-9]{9}$"
 //		Pattern regexPattern = Pattern.compile("^\\+?\\d{0,3}?\\d{9}$");
 		Pattern regexPattern2 = Pattern.compile("^\\d{0,5}?\\d{9}$");
 //        Matcher regMatcher   = regexPattern.matcher(mobileNumber);
-        Matcher regMatcher2   = regexPattern2.matcher(mobileNumber);
-        if( regMatcher2.matches()) {
-            return true;//"Valid Mobile Number";
-        } else {
-            return false;// "Invalid Mobile Number";
-        }
-    }
+		Matcher regMatcher2 = regexPattern2.matcher(mobileNumber);
+		if (regMatcher2.matches()) {
+			texto.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
+			return true;// "Valid Mobile Number";
+		} else {
+			texto.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
+			return false;// "Invalid Mobile Number";
 
-	
+		}
+	}
+
 //	\A[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\z
 //	Regex : ^[\\w!#$%&’*+/=?`{|}~^-]+(?:\\.[\\w!#$%&’*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$
-	
-	public boolean validateEmail(String emailStr) {
-		Pattern regexPattern = Pattern.compile("\\A[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\z");
-        Matcher regMatcher   = regexPattern.matcher(emailStr);
-        if( regMatcher.matches()) {
-            return true;//"Valid Email";
-        } else {
-            return false;// "Invalid Email";
-        }
-    }
-	
-	
-	
-	
-	
-	
-	
+
+	public boolean validateEmail(Text texto) {
+		String emailStr = texto.getText();
+		Pattern regexPattern = Pattern.compile(
+				"\\A[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\z");
+		Matcher regMatcher = regexPattern.matcher(emailStr);
+		if (regMatcher.matches()) {
+			texto.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
+			return true;// "Valid Email";
+		} else {
+			texto.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
+			return false;// "Invalid Email";
+		}
+	}
+
 }
