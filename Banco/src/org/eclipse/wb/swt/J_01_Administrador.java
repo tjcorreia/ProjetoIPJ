@@ -3,6 +3,7 @@ package org.eclipse.wb.swt;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.wb.swt.Utilizador.TipoID;
 
 import java.util.Arrays;
 import java.util.regex.Matcher;
@@ -63,6 +64,8 @@ public class J_01_Administrador {
 
 	public J_01_Administrador() {
 		super();
+		open();
+	
 		// TODO Auto-generated constructor stub
 	}
 
@@ -71,18 +74,23 @@ public class J_01_Administrador {
 	 * 
 	 * @param args
 	 */
-	public static void main(String[] args) {
-		try {
-			J_01_Administrador window = new J_01_Administrador(new Utilizador());
-			window.open();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+//	public static void main(String[] args) {
+//		try {
+//			J_01_Administrador window = new J_01_Administrador(new Utilizador());
+//			window.open();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 	/**
 	 * Open the window.
 	 */
+	
+	
+	
+	
+	
 	public void open() {
 		Display display = Display.getDefault();
 		createContents();
@@ -303,16 +311,29 @@ public class J_01_Administrador {
 						}
 
 						if (naohaDadosPorPreencher) {
-
-							String[] verifica = g.verificanovoF(NomeNovoF, Integer.parseInt(ValorID_NovoF), Email_NovoF,
-									UserNovoF);
+//							Funcionario fNovo=new Funcionario ();
+							if (TipoID_NovoF.getText().equals("Passaporte")) {
+								TipoID escolhadaID=Funcionario.TipoID.PASSAPORTE;}
+							else {TipoID escolhadaID=Funcionario.TipoID.PASSAPORTE;}
+//							fNovo.setNome(text_NomeNovoF.getText());
+//							fNovo.setMorada(text_Morada_NovoF.getText());
+//							fNovo.setValorID(Integer.parseInt(text_ValorID_NovoF.getText()));
+//							fNovo.setEmail(text_Email_NovoF.getText());
+//							fNovo.setMobile(Integer.parseInt(text_MobileNovoF.getText()));
+//							fNovo.setLogin((text_UserNovoF.getText()));
+//							fNovo.setPassword(text_PassNovoF.getText());
+//							fNovo.setPosicao(text_PosicaoNovoF.getText());
+							
+							String verifica = g.verificanovoF(
+									text_NomeNovoF,escolhadaID,text_ValorID_NovoF,text_Email_NovoF,text_MobileNovoF,text_UserNovoF);
+							
 							textofinal = "";
-							System.out.println(Arrays.toString(verifica));
-							for (int i = 0; i < verifica.length; i++) {
-								textofinal = textofinal + verifica[i];
-								if (!verifica[i].equals("")) {
-									verificatudo = false;
-								}
+//							System.out.println(Arrays.toString(verifica));
+//							for (int i = 0; i < verifica.length; i++) {
+//								textofinal = textofinal + verifica[i];
+//								if (!verifica[i].equals("")) {
+//									verificatudo = false;
+//								}
 
 								if (verificatudo) {
 									MessageBox box = new MessageBox(shell, SWT.MULTI );
@@ -321,10 +342,12 @@ public class J_01_Administrador {
 									box.open();
 									
 									
+									
 								}
 
-							}
-						} else {
+							
+						} 
+					else {
 							MessageBox box = new MessageBox(shell, SWT.MULTI | SWT.ICON_ERROR);
 							box.setText("ERRO");
 							box.setMessage(mensagem);

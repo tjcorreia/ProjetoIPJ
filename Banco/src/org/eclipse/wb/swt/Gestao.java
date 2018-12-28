@@ -9,6 +9,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Text;
 import org.eclipse.wb.swt.Conta.TipoC;
 import org.eclipse.wb.swt.Utilizador.TipoID;
 
@@ -156,22 +159,22 @@ public void Gerir() {
  }
  
 ////faz a verificação das entradas do novo funcionario
-public String [] verificanovoF(String nomeF, int valorIDF,String emailF ,String userNameF) {
- String  verifica[]=new String [4];
- verifica[0]="";
- verifica[1]="";
- verifica[2]="";
- verifica[3]="";
- 
-	if (mapUtilizadores.containsKey(userNameF)) {verifica[3] ="O nome de Utilizador não é válido.";}
+public String  verificanovoF(Text text_NomeNovoF,Text escolhadaID,Text text_ValorID_NovoF,
+		Text text_Email_NovoF,Text text_MobileNovoF,Text text_UserNovoF) { 
+	    texto.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
+ String  verifica ="";
+	if (mapUtilizadores.containsKey(text_UserNovoF.getText())) {
+		verifica ="O nome de Utilizador não é válido.";
+		text_UserNovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
+		}
 	for (Entry<String, Utilizador> entry : mapUtilizadores.entrySet()) {
 		if (entry instanceof Funcionario) {
-			System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue());	
-		if (entry.getValue().nome.equals(nomeF)) {verifica[0] ="O nome do Funcioario já existe.";}
-		if ( entry.getValue().valorID ==(valorIDF) ) {
-			verifica[1] ="Já existe um funcionario com essa identificaçao.";}
-		if (entry.getValue().email.equals(emailF)) {verifica[2] ="Email Inváldo :O email já existe !";}
-		
+//			System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue());	
+//		if (entry.getValue().nome.equals(nomeF)) {verifica[0] ="O nome do Funcioario já existe.";}
+//		if ( entry.getValue().valorID ==(valorIDF) ) {
+//			verifica[1] ="Já existe um funcionario com essa identificaçao.";}
+//		if (entry.getValue().email.equals(emailF)) {verifica[2] ="Email Inváldo :O email já existe !";}
+//		
 		}
  
 	}
