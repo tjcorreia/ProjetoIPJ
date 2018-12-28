@@ -324,9 +324,9 @@ public class J_01_Administrador {
 //							fNovo.setPassword(text_PassNovoF.getText());
 //							fNovo.setPosicao(text_PosicaoNovoF.getText());
 							
-							String verifica = g.verificanovoF(
-									text_NomeNovoF,escolhadaID,text_ValorID_NovoF,text_Email_NovoF,text_MobileNovoF,text_UserNovoF);
-							
+//							String verifica = g.verificanovoF(
+//									text_NomeNovoF,escolhadaID,text_ValorID_NovoF,text_Email_NovoF,text_MobileNovoF,text_UserNovoF);
+//							
 							textofinal = "";
 //							System.out.println(Arrays.toString(verifica));
 //							for (int i = 0; i < verifica.length; i++) {
