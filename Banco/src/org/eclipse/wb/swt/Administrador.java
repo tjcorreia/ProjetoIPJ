@@ -12,12 +12,17 @@ public class Administrador extends Utilizador {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Administrador(int uID, String login, String password, String nome, String morada, TipoID escolhaID,
-			int valorID, String email, int mobile) {
-		super(uID, login, password, nome, morada, escolhaID, valorID, email, mobile);
+	public Administrador(int uID, String login, String password, String nome, String sobrenome, String dataNascimento,
+			String morada, TipoID escolhaID, int valorID, String email, int mobile) {
+		super(uID, login, password, nome, sobrenome, dataNascimento, morada, escolhaID, valorID, email, mobile);
 		// TODO Auto-generated constructor stub
 	}
 
+	public Administrador( String login, String password, String nome, String sobrenome, String dataNascimento,
+			String morada, TipoID escolhaID, int valorID, String email, int mobile) {
+		super(login, password, nome, sobrenome, dataNascimento, morada, escolhaID, valorID, email, mobile);
+		// TODO Auto-generated constructor stub
+	}
 	
 
 }

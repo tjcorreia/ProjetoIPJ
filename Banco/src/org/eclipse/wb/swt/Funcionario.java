@@ -9,21 +9,34 @@ public class Funcionario extends Utilizador {
 
 	protected String  posicao;
 
-	public Funcionario(int uID, String login, String password, String nome, String morada, TipoID escolhaID,
-			int valorID, String email, int mobile, String posicao) {
-		super(uID, login, password, nome, morada, escolhaID, valorID, email, mobile);
-		this.posicao = posicao;
-	}
 
 	public Funcionario() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Funcionario(int uID, String login, String password, String nome, String morada, TipoID escolhaID,
-			int valorID, String email, int mobile) {
-		super(uID, login, password, nome, morada, escolhaID, valorID, email, mobile);
+	public Funcionario(int uID, String login, String password, String nome, String sobrenome, String dataNascimento,
+			String morada, TipoID escolhaID, int valorID, String email, int mobile) {
+		super(uID, login, password, nome, sobrenome, dataNascimento, morada, escolhaID, valorID, email, mobile);
 		// TODO Auto-generated constructor stub
+	}
+
+	public Funcionario(String login, String password, String nome, String sobrenome, String dataNascimento,
+			String morada, TipoID escolhaID, int valorID, String email, int mobile) {
+		super(login, password, nome, sobrenome, dataNascimento, morada, escolhaID, valorID, email, mobile);
+		// TODO Auto-generated constructor stub
+	}
+
+	public Funcionario(int uID, String login, String password, String nome, String sobrenome, String dataNascimento,
+			String morada, TipoID escolhaID, int valorID, String email, int mobile, String posicao) {
+		super(uID, login, password, nome, sobrenome, dataNascimento, morada, escolhaID, valorID, email, mobile);
+		this.posicao = posicao;
+	}
+	
+	public Funcionario( String login, String password, String nome, String sobrenome, String dataNascimento,
+			String morada, TipoID escolhaID, int valorID, String email, int mobile, String posicao) {
+		super( login, password, nome, sobrenome, dataNascimento, morada, escolhaID, valorID, email, mobile);
+		this.posicao = posicao;
 	}
 
 	public String getPosicao() {

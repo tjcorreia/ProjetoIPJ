@@ -11,7 +11,9 @@ public class Utilizador {
 	protected int uID;        //
 	protected String login;   // 
 	protected String password;// 
-	protected String  nome;   // 
+	protected String  nome;   //
+	protected String  sobrenome;   //
+	protected String  dataNascimento;   // 
 	protected String  morada; //
 	public TipoID escolhaID;
 	protected int valorID;     //numero do Passporte ou CC
@@ -20,13 +22,15 @@ public class Utilizador {
 	
 	protected enum TipoID {CARTAOCIDADAO,PASSAPORTE}
 
-	public Utilizador(int uID, String login, String password, String nome, String morada, TipoID escolhaID, int valorID,
-			String email, int mobile) {
+	public Utilizador(int uID, String login, String password, String nome, String sobrenome, String dataNascimento,
+			String morada, TipoID escolhaID, int valorID, String email, int mobile) {
 		super();
 		this.uID = uID;
 		this.login = login;
 		this.password = password;
 		this.nome = nome;
+		this.sobrenome = sobrenome;
+		this.dataNascimento = dataNascimento;
 		this.morada = morada;
 		this.escolhaID = escolhaID;
 		this.valorID = valorID;
@@ -34,6 +38,21 @@ public class Utilizador {
 		this.mobile = mobile;
 	}
 
+	public Utilizador( String login, String password, String nome, String sobrenome, String dataNascimento,
+			String morada, TipoID escolhaID, int valorID, String email, int mobile) {
+		super();
+		
+		this.login = login;
+		this.password = password;
+		this.nome = nome;
+		this.sobrenome = sobrenome;
+		this.dataNascimento = dataNascimento;
+		this.morada = morada;
+		this.escolhaID = escolhaID;
+		this.valorID = valorID;
+		this.email = email;
+		this.mobile = mobile;
+	}
 	public Utilizador() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -69,6 +88,22 @@ public class Utilizador {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public String getSobrenome() {
+		return sobrenome;
+	}
+
+	public void setSobrenome(String sobrenome) {
+		this.sobrenome = sobrenome;
+	}
+
+	public String getDataNascimento() {
+		return dataNascimento;
+	}
+
+	public void setDataNascimento(String dataNascimento) {
+		this.dataNascimento = dataNascimento;
 	}
 
 	public String getMorada() {
@@ -113,10 +148,14 @@ public class Utilizador {
 
 	@Override
 	public String toString() {
-		return "Utilizador [uID=" + uID + ", login=" + login + ", password=" + password + ", nome=" + nome + ", morada="
-				+ morada + ", escolhaID=" + escolhaID + ", valorID=" + valorID + ", email=" + email + ", mobile="
-				+ mobile + "]";
+		return "Utilizador [uID=" + uID + ", login=" + login + ", password=" + password + ", nome=" + nome
+				+ ", sobrenome=" + sobrenome + ", dataNascimento=" + dataNascimento + ", morada=" + morada
+				+ ", escolhaID=" + escolhaID + ", valorID=" + valorID + ", email=" + email + ", mobile=" + mobile + "]";
 	}
+
+	
+
+
 
 
 
