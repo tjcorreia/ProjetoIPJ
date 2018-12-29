@@ -14,7 +14,7 @@ public class ContaNormal extends Conta {
 	
 	private Cartao cartaodaConta;
 
-	public ContaNormal(int contaID, double saldo, ArrayList<Transacao> transacoesC, ArrayList<String> clientesDaC,
+	public ContaNormal(int contaID, double saldo, ArrayList<Transacao> transacoesC, ArrayList<Integer> clientesDaC,
 			TipoC escolhaID, Cartao cartaodaConta) {
 		super(contaID, saldo, transacoesC, clientesDaC, escolhaID);
 		this.cartaodaConta = cartaodaConta;
@@ -22,16 +22,28 @@ public class ContaNormal extends Conta {
 
 	public ContaNormal() {
 		super();
+		this.transacoesC = new ArrayList<Transacao>();
+		this.clientesDaC = new ArrayList<Integer>();
+		this.escolhaID = TipoC.ABERTA;
+		this.cartaodaConta = null;
 		// TODO Auto-generated constructor stub
 	}
 
 	public ContaNormal(int contaID, double saldo) {
 		super(contaID, saldo);
-		this.cartaodaConta = null;
 		this.transacoesC = new ArrayList<Transacao>();
-		this.clientesDaC = new ArrayList<String>();
-		this.escolhaID = TipoC.ABERTA;;
+		this.clientesDaC = new ArrayList<Integer>();
+		this.escolhaID = TipoC.ABERTA;
+		this.cartaodaConta = null;
 		// TODO Auto-generated constructor stub
+	}
+
+	public Cartao getCartaodaConta() {
+		return cartaodaConta;
+	}
+
+	public void setCartaodaConta(Cartao cartaodaConta) {
+		this.cartaodaConta = cartaodaConta;
 	}
 
 	

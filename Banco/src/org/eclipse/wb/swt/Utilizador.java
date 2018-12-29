@@ -16,14 +16,14 @@ public class Utilizador {
 	protected String  dataNascimento;   // 
 	protected String  morada; //
 	public TipoID escolhaID;
-	protected int valorID;     //numero do Passporte ou CC
+	protected String valorID;     //numero do Passporte ou CC
 	protected String  email;  //
 	protected int mobile;     //
 	
 	protected enum TipoID {CARTAOCIDADAO,PASSAPORTE}
 
 	public Utilizador(int uID, String login, String password, String nome, String sobrenome, String dataNascimento,
-			String morada, TipoID escolhaID, int valorID, String email, int mobile) {
+			String morada, TipoID escolhaID, String valorID, String email, int mobile) {
 		super();
 		this.uID = uID;
 		this.login = login;
@@ -39,7 +39,7 @@ public class Utilizador {
 	}
 
 	public Utilizador( String login, String password, String nome, String sobrenome, String dataNascimento,
-			String morada, TipoID escolhaID, int valorID, String email, int mobile) {
+			String morada, TipoID escolhaID, String valorID, String email, int mobile) {
 		super();
 		
 		this.login = login;
@@ -122,11 +122,11 @@ public class Utilizador {
 		this.escolhaID = escolhaID;
 	}
 
-	public int getValorID() {
+	public String getValorID() {
 		return valorID;
 	}
 
-	public void setValorID(int valorID) {
+	public void setValorID(String valorID) {
 		this.valorID = valorID;
 	}
 

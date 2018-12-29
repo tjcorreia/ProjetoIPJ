@@ -88,7 +88,8 @@ public class J_10Login {
 		shlLogin = new Shell();
 		shlLogin.setSize(450, 300);
 		shlLogin.setText("Java Bank - Login");
-		
+//		Image imagem=new Image(Display.getDefault());
+//		shlLogin.setImage(imagem);
 		text_NUtilizador = new Text(shlLogin, SWT.BORDER);
 		
 		text_NUtilizador.setBounds(92, 80, 144, 26);

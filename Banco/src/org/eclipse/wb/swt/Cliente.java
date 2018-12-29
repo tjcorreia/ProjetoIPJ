@@ -21,13 +21,13 @@ public class Cliente extends Utilizador {
 	}
 
 	public Cliente(int uID, String login, String password, String nome, String sobrenome, String dataNascimento,
-			String morada, TipoID escolhaID, int valorID, String email, int mobile) {
+			String morada, TipoID escolhaID, String valorID, String email, int mobile) {
 		super(uID, login, password, nome, sobrenome, dataNascimento, morada, escolhaID, valorID, email, mobile);
 		// TODO Auto-generated constructor stub
 	}
 
 	public Cliente(String login, String password, String nome, String sobrenome, String dataNascimento, String morada,
-			TipoID escolhaID, int valorID, String email, int mobile) {
+			TipoID escolhaID, String valorID, String email, int mobile) {
 		super(login, password, nome, sobrenome, dataNascimento, morada, escolhaID, valorID, email, mobile);
 		// TODO Auto-generated constructor stub
 		this.lcontaS = new ArrayList<Conta>() ;
@@ -35,13 +35,13 @@ public class Cliente extends Utilizador {
 	
 
 	public Cliente(int uID, String login, String password, String nome, String sobrenome, String dataNascimento,
-			String morada, TipoID escolhaID, int valorID, String email, int mobile, ArrayList<Conta> lcontaS) {
+			String morada, TipoID escolhaID, String valorID, String email, int mobile, ArrayList<Conta> lcontaS) {
 		super(uID, login, password, nome, sobrenome, dataNascimento, morada, escolhaID, valorID, email, mobile);
 		this.lcontaS = lcontaS;
 	}
 
 	public Cliente(String login, String password, String nome, String sobrenome, String dataNascimento,
-			String morada, TipoID escolhaID, int valorID, String email, int mobile, ArrayList<Conta> lcontaS) {
+			String morada, TipoID escolhaID, String valorID, String email, int mobile, ArrayList<Conta> lcontaS) {
 		super( login, password, nome, sobrenome, dataNascimento, morada, escolhaID, valorID, email, mobile);
 		this.lcontaS = lcontaS;
 	}	
