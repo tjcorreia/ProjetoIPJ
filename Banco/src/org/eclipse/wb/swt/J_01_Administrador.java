@@ -38,7 +38,7 @@ public class J_01_Administrador {
 	protected Shell shell;
 	private Text text;
 	private Utilizador uAdministrador;
-	private Table table;
+
 
 	public Utilizador getuAdministrador() {
 		return uAdministrador;
@@ -48,16 +48,22 @@ public class J_01_Administrador {
 		this.uAdministrador = uAdministrador;
 	}
 
+	/**
+	 * @wbp.parser.entryPoint
+	 */
 	public J_01_Administrador(Utilizador uAdministrador) {
 
 		this.uAdministrador = uAdministrador;
 		// TODO Auto-generated constructor stub
+		
 	}
 
+	/**
+	 * @wbp.parser.entryPoint
+	 */
 	public J_01_Administrador() {
 		super();
-		open();
-	
+		
 		// TODO Auto-generated constructor stub
 	}
 
@@ -66,7 +72,7 @@ public class J_01_Administrador {
 	 * 
 	 * @param args
 	 */
-	public static void main(String[] args) {
+	public static void maini(String[] args) {
 		try {
 			J_01_Administrador2 window = new J_01_Administrador2(new Utilizador());
 			window.open();
@@ -77,6 +83,7 @@ public class J_01_Administrador {
 
 	/**
 	 * Open the window.
+	 * @wbp.parser.entryPoint
 	 */
 	
 	
@@ -121,11 +128,11 @@ public class J_01_Administrador {
 		Button Novo_Funcionario = new Button(shell, SWT.NONE);
 		Novo_Funcionario.setText("Novo Funcionario");
 		Novo_Funcionario.setBounds(10, 141, 154, 25);
-		 int escolha =0;
+	
 		Novo_Funcionario.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
-				shell.dispose();
+//				shell.dispose();
 				J_01_Admin_NovoF NovoFuncionario = new J_01_Admin_NovoF(uAdministrador);
 				NovoFuncionario.open();
 				

@@ -26,32 +26,53 @@ public class Gestao {
 	private Map<String, Utilizador> mapUtilizadores; // String Username
 	private ArrayList<Conta> lContas;
 	private Map<Integer, Integer> mapCartaoConta; // numcartaonumconta
+	private Map<String, Integer> contadores;
+	private Utilizador uactual;
+
+
+
+
+
+
+public Gestao( Utilizador uactual) {
+		super();
+		this.mapUtilizadores = mapUtilizadores;
+		this.lContas = lContas;
+		this.mapCartaoConta = mapCartaoConta;
+		this.contadores = contadores;
+		this.uactual = uactual;
+	}
+
 
 public Gestao() {
 	super();
 	this.mapUtilizadores = new HashMap<String, Utilizador>();
 	this.lContas = new ArrayList<Conta>();
 	this.mapCartaoConta = new HashMap<Integer, Integer>();
+	this.contadores = new HashMap<String, Integer>();
+	contadores.put("Utilizador", 1000); //inicializa o Contador de Utilizadores
+	contadores.put("Contas", 1); //inicializa o Contador de Contas
+	
 	
 	// Administradores
 //	Administrador(int uID, String login, String password, String nome, String sobrenome, String dataNascimento,
 //			String morada, TipoID escolhaID, int valorID, String email, int mobile)
-	Administrador MachadoU= new  Administrador(1000, "Machado", "Admin", "Alberto","Machado0",
+	Administrador MachadoU= new  Administrador(contadores.get("Utilizador"), "Machado", "Admin", "Alberto","Machado0",
 			"1977/07/17","Rua Maria Vitoria",Administrador.TipoID.CARTAOCIDADAO,"78456123","mail@gmail.com",965420735);
 	
-	Administrador CorreiaU= new  Administrador(1001, "Correia", "Admin","Tiago", "Coreia",
+	Administrador CorreiaU= new  Administrador(contadores.get("Utilizador")+1, "Correia", "Admin","Tiago", "Coreia",
 			"1977/07/30","Rua Maria Vitoria ",Administrador.TipoID.CARTAOCIDADAO,"12345678","mail@gmail.com",965420733);
-	
+	contadores.put("Utilizador",contadores.get("Utilizador")+1);
 	mapUtilizadores.put("Machado",MachadoU);
 	mapUtilizadores.put("Correia",CorreiaU);
 	
 	// Funcionarios
-	Funcionario MachadoFU= new  Funcionario(1002, "Maria", "Fun","Maria", "Machado0",
+	Funcionario MachadoFU= new  Funcionario(contadores.get("Utilizador")+1, "Maria", "Fun","Maria", "Machado0",
 			"1977/07/30","Rua Maria Vitoria",Funcionario.TipoID.CARTAOCIDADAO,"78456123","mail1@gmail.com",965420730);
-	
-	Funcionario CorreiaFU= new  Funcionario(1003, "Correia2", "Fun","Tiago", "Coreia",
+	contadores.put("Utilizador",contadores.get("Utilizador")+1);
+	Funcionario CorreiaFU= new  Funcionario(contadores.get("Utilizador")+1, "Correia2", "Fun","Tiago", "Coreia",
 			"1977/07/30","Rua Maria Vitoria ",Funcionario.TipoID.CARTAOCIDADAO,"12345678","mail2@gmail.com",965420731);
-	
+	contadores.put("Utilizador",contadores.get("Utilizador")+1);
 	mapUtilizadores.put("Maria",MachadoFU);
 	mapUtilizadores.put("Correia2",CorreiaFU);
 	
@@ -62,11 +83,12 @@ public Gestao() {
 	
 //	Utilizador(uID,login,password,nome,morada,escolhaID,valorID,email,mobile)
 	
-		Cliente cl1= new  Cliente(1004, "MCliente", "Cliente", "Alberto","Machado0",
+		Cliente cl1= new  Cliente(contadores.get("Utilizador")+1, "MCliente", "Cliente", "Alberto","Machado0",
 				"1977/07/30","Rua Maria Vitoria",Administrador.TipoID.CARTAOCIDADAO,"78456123","mail",965420730);
-		
-		Cliente cl2= new  Cliente(1005, "CCliente", "Cliente", "Tiago","Coreia",
+		contadores.put("Utilizador",contadores.get("Utilizador")+1);
+		Cliente cl2= new  Cliente(contadores.get("Utilizador")+1, "CCliente", "Cliente", "Tiago","Coreia",
 				"1977/07/30","Rua Maria Vitoriazfgadfgadfgsdfgsdfg",Administrador.TipoID.CARTAOCIDADAO,"12345678","mail",965420730);
+		contadores.put("Utilizador",contadores.get("Utilizador")+1);
 		mapUtilizadores.put("MCliente",cl1);
 		mapUtilizadores.put("CCliente",cl2);
 		
@@ -89,6 +111,28 @@ public Gestao() {
 }
 
 
+public Utilizador getUactual() {
+		return uactual;
+	}
+
+
+
+
+	public void setUactual(Utilizador uactual) {
+		this.uactual = uactual;
+	}
+
+
+
+public Map<String, Integer> getContadores() {
+	return contadores;
+}
+
+
+public void setContadores(Map<String, Integer> contadores) {
+	this.contadores = contadores;
+}
+
 public Map<String, Utilizador> getMapUtilizadores() {
 	return mapUtilizadores;
 }
@@ -97,6 +141,7 @@ public Map<String, Utilizador> getMapUtilizadores() {
 public void setMapUtilizadores(Map<String, Utilizador> mapUtilizadores) {
 	this.mapUtilizadores = mapUtilizadores;
 }
+
 
 
 public ArrayList<Conta> getlContas() {
@@ -118,6 +163,7 @@ public void setMapCartaoConta(Map<Integer, Integer> mapCartaoConta) {
 	this.mapCartaoConta = mapCartaoConta;
 }
 
+
 public void Gerir() {
 	J_10Login novoLogin = new J_10Login ();
 
@@ -130,7 +176,7 @@ public void Gerir() {
 	
 	System.out.println("passou ->>"+novoLogin.utilizadorAprovado().nome);
 	if (aprovado instanceof Administrador) {
-	J_01_Administrador2 novaJAdmin= new J_01_Administrador2(aprovado);
+		J_01_Administrador novaJAdmin= new J_01_Administrador(aprovado);
 		novaJAdmin.open();
 		
 	}
@@ -159,7 +205,7 @@ public String  verificanovoF(TipoID escolhadaIDN,Text valorID_NovoF,Text email_N
  String  verifica ="";
  // verifica username
 	if (mapUtilizadores.containsKey(userNovoF.getText())) {
-		verifica =verifica+"O nome de Utilizador não é válido. /n";
+		verifica =verifica+"O nome de Utilizador não é válido. \n";
 		userNovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
 		}
 	
@@ -172,28 +218,28 @@ public String  verificanovoF(TipoID escolhadaIDN,Text valorID_NovoF,Text email_N
 //			sc.close();
 			 // verifica identificação
 		if (entry.getValue().getEscolhaID().equals(escolhadaIDN) && entry.getValue().getValorID().equals(valorID_NovoF.getText())) {
-			verifica = verifica+"O "+escolhadaIDN+" com o numero :"+valorID_NovoF+" já está associado a um Funcionario. /n";
+			verifica = verifica+"O "+escolhadaIDN+" com o numero :"+valorID_NovoF+" já está associado a um Funcionario. \n";
 			valorID_NovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
 		}
 		
 		else if  (!(entry.getValue().getEscolhaID().equals(escolhadaIDN)) && entry.getValue().getValorID().equals(valorID_NovoF.getText())) {
 			if (escolhadaIDN.equals(TipoID.CARTAOCIDADAO)) {
-			verifica =verifica+"O numero :"+valorID_NovoF.getText()+" já existe e está associado ao Passaporte. /n";
+			verifica =verifica+"O numero :"+valorID_NovoF.getText()+" já existe e está associado ao Passaporte. \n";
 		}
 			else {
-				verifica =verifica+"O numero :"+valorID_NovoF.getText()+" já existe e está associado ao Cartão de Cidadão. /n";
+				verifica =verifica+"O numero :"+valorID_NovoF.getText()+" já existe e está associado ao Cartão de Cidadão. \n";
 			}
 			valorID_NovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
 			}
 		
 		// verifica email
 		if (entry.getValue().getEmail().equals(email_NovoF.getText())) {
-			verifica =verifica+"Já existe um utilizador com este email/n";
+			verifica =verifica+"Já existe um utilizador com este email\n";
 			email_NovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
 		}
 //			// verifica telemovel
 		if ((""+entry.getValue().getMobile()).equals(mobileNovoF.getText())) {
-			verifica =verifica+"Já existe um utilizador com este contacto de telemovel. /n";
+			verifica =verifica+"Já existe um utilizador com este contacto de telemovel. \n";
 			mobileNovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
 		}
 		}
@@ -202,6 +248,19 @@ public String  verificanovoF(TipoID escolhadaIDN,Text valorID_NovoF,Text email_N
  return verifica;
 }
 
+//faz a adicção de um do novo funcionario
+
+public Funcionario addNovoF(String login, String password, String nome, String sobrenome, String dataNascimento,
+		String morada, TipoID escolhaID, String valorID, String email, int mobile, String posicao) {
+	int iD=contadores.get("Utilizador")+1;
+	Funcionario NovoFU= new  Funcionario(iD,login,password,nome,sobrenome,dataNascimento,
+			morada,escolhaID,valorID,email,mobile,posicao);
+	contadores.put("Utilizador",contadores.get("Utilizador")+1);
+	mapUtilizadores.put(login,NovoFU);
+	return NovoFU;
+}
+
+//faz a verificação se e numero
  
 public boolean eUmNumero(String texto)
 {

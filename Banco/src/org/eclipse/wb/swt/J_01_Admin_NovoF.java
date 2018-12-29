@@ -5,12 +5,24 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.wb.swt.Utilizador.TipoID;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.events.MouseAdapter;
+import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.MessageBox;
+import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
@@ -25,10 +37,6 @@ import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.graphics.Color;
-import org.eclipse.swt.graphics.Image;
-import com.toedter.calendar.JDateChooser;
-import com.toedter.calendar.JCalendar;
 
 /**
  * Breve descrição do código
@@ -41,7 +49,7 @@ public class J_01_Admin_NovoF {
 	protected Shell shell;
 	private Text text;
 	private Utilizador uAdministrador;
-	private Table table;
+
 	private Text text_PrimeiroNovoF;
 	private Text text_Morada_NovoF;
 	private Text text_ValorID_NovoF;
@@ -66,12 +74,13 @@ public class J_01_Admin_NovoF {
 	public J_01_Admin_NovoF(Utilizador uAdministrador) {
 
 		this.uAdministrador = uAdministrador;
+
 		// TODO Auto-generated constructor stub
 	}
 
 	public J_01_Admin_NovoF() {
 		super();
-		open();
+	
 
 		// TODO Auto-generated constructor stub
 	}
@@ -163,7 +172,7 @@ public class J_01_Admin_NovoF {
 		lblContacto.setBounds(10, 165, 55, 15);
 
 		text_MobileNovoF = new Text(composite, SWT.BORDER);
-		text_MobileNovoF.setBounds(81, 162, 121, 21);
+		text_MobileNovoF.setBounds(81, 162, 88, 21);
 
 		Label lblNomeDeUtilizador = new Label(composite, SWT.NONE);
 		lblNomeDeUtilizador.setText("Utilizador");
@@ -200,16 +209,18 @@ public class J_01_Admin_NovoF {
 		text_UltimoNovoF.setBounds(250, 44, 170, 21);
 
 		Label lblprimeiro = new Label(composite, SWT.NONE);
+		lblprimeiro.setFont(SWTResourceManager.getFont("Segoe UI", 7, SWT.NORMAL));
 		lblprimeiro.setText("(primeiro)");
-		lblprimeiro.setBounds(125, 23, 55, 15);
+		lblprimeiro.setBounds(125, 29, 55, 15);
 
 		Label lblultimo = new Label(composite, SWT.NONE);
+		lblultimo.setFont(SWTResourceManager.getFont("Segoe UI", 7, SWT.NORMAL));
 		lblultimo.setText("(ultimo)");
-		lblultimo.setBounds(302, 23, 55, 15);
+		lblultimo.setBounds(302, 29, 55, 15);
 
 		Label lblDataNas = new Label(composite, SWT.NONE);
-		lblDataNas.setText("Data Nas.(ano/m/d)");
-		lblDataNas.setBounds(205, 165, 105, 15);
+		lblDataNas.setText("Data Nas.(aaaa/mm/dd)");
+		lblDataNas.setBounds(175, 165, 132, 15);
 
 		text_DataN_Ano = new Text(composite, SWT.BORDER);
 		text_DataN_Ano.setBounds(313, 164, 40, 21);
@@ -237,9 +248,17 @@ public class J_01_Admin_NovoF {
 		button.setBounds(550, 10, 75, 25);
 
 		
-		text_ValorID_NovoF.setText("78456123");
-		text_Email_NovoF.setText("mail1@gmail.com");
-		text_MobileNovoF.setText("965420730");
+		String NomeNovoF = text_PrimeiroNovoF.getText();
+		String Morada_NovoF = text_Morada_NovoF.getText();
+		
+		
+		text_UserNovoF.setText("2222");
+		text_PassNovoF.setText("6666");
+		text_UltimoNovoF.setText("2222");;
+		text_PrimeiroNovoF.setText("2222");;
+		text_ValorID_NovoF.setText("78453123");
+		text_Email_NovoF.setText("mail31@gmail.com");
+		text_MobileNovoF.setText("969420730");
 		
 		// JA_BT1.0 Botao Criar novo Funcionario.
 		criarNovoF.addMouseListener(new MouseAdapter() {
@@ -317,7 +336,19 @@ public class J_01_Admin_NovoF {
 					}
 
 				}
+				
+				
+				if (!validateData2(text_DataN_Ano,text_DataN_mes,text_DataN_dia) ) {
+					System.out.println("VERIFICACAO DE Telemovel" + text_MobileNovoF.getText());
+					Titulo_Novo_F.setText("Dados por preencher ou inválidos");
+					mensagem = mensagem + "Data de Nascimento inválida.\n";
+					naohaDadosPorPreencher = false;
 
+				}
+				
+				
+				
+				
 				if (!validateMobileNumber(text_MobileNovoF)) {
 					System.out.println("VERIFICACAO DE Telemovel" + text_MobileNovoF.getText());
 					Titulo_Novo_F.setText("Dados por preencher ou inválidos");
@@ -351,13 +382,32 @@ public class J_01_Admin_NovoF {
 //						if (!verifica[i].equals("")) {
 //							verificatudo = false;
 //						}
-
+									System.out.println(("VERIFICA? --->"+verifica));
+									
 					if (verifica.equals("")) {
+					Funcionario f=new Funcionario();
+					
+					String dataStr = text_DataN_Ano.getText()+"/"+text_DataN_mes.getText()+"/"+text_DataN_dia.getText();
+					f=g.addNovoF(text_UserNovoF.getText(),text_PassNovoF.getText(),
+								text_PrimeiroNovoF.getText(),text_UltimoNovoF.getText(), dataStr,
+								text_Morada_NovoF.getText(), escolhadaID,text_ValorID_NovoF.getText(),
+								text_Email_NovoF.getText(),Integer.parseInt(text_MobileNovoF.getText()),
+								text_PosicaoNovoF.getText());
+						
 						MessageBox box = new MessageBox(shell, SWT.MULTI);
 						box.setText("CONCLUSÃO");
-						box.setMessage(" O Funcionario foi adicionado");
+						box.setMessage(" O Funcionario"+f.getNome()+" "
+									+f.getSobrenome()+" foi adicionado\n"+
+										"Morada:"+f.getMorada()+"\n"+
+										""+f.escolhaID.toString()+":"+f.getValorID()+"\n"+
+										"Email:"+f.getEmail()+"\n"+
+										"Contacto:"+f.getMobile()+"\n"+
+										"Data Nascimento:"+f.getDataNascimento()+"\n"+
+										"Posição:"+f.getPosicao());
+//						
 						box.open();
 						System.out.println(("verifica"));
+						
 					}
 					else {
 						System.out.println(("----> Nao verifica"));
@@ -387,23 +437,13 @@ public class J_01_Admin_NovoF {
 		});
 		Button Novo_Funcionario = new Button(shell, SWT.NONE);
 
-		Novo_Funcionario.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseUp(MouseEvent e) {
-
-			}
-		});
+		
 		Novo_Funcionario.setText("Novo Funcionario");
 		Novo_Funcionario.setBounds(10, 141, 154, 25);
 
 // *****// JA_BT2.0 Botao para ver Lista de Cliente.
 		Button Lista_Clientes = new Button(shell, SWT.NONE);
-		Lista_Clientes.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseUp(MouseEvent e) {
-
-			}
-		});
+		
 		Lista_Clientes.setText("Lista de Clientes");
 		Lista_Clientes.setBounds(10, 174, 154, 25);
 
@@ -464,19 +504,53 @@ public class J_01_Admin_NovoF {
 		}
 	}
 
-	public boolean validateData2(Text texto) {
-		new GregorianCalendar(2018, 10, 24);
-		String emailStr = texto.getText();
+	public boolean validateData2(Text texto1,Text texto2,Text texto3) {
+//		new GregorianCalendar(2018, 10, 24);
+		GregorianCalendar novoF= new GregorianCalendar();
+		GregorianCalendar actual= new GregorianCalendar();
+		GregorianCalendar actualMenos120= new GregorianCalendar();
+		actualMenos120=(GregorianCalendar) GregorianCalendar.getInstance();
+		actual=(GregorianCalendar) GregorianCalendar.getInstance();
+		
+		
+		String dataStr = texto1.getText()+"/"+texto2.getText()+"/"+texto3.getText();
+		System.out.println(dataStr);
 		Pattern regexPattern = Pattern.compile(
-				"\\A[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\z");
-		Matcher regMatcher = regexPattern.matcher(emailStr);
+				"^[0-9]{4}/(1[0-2]|0[1-9])/(3[01]|[12][0-9]|0[1-9])$");
+		Matcher regMatcher = regexPattern.matcher(dataStr);
 		if (regMatcher.matches()) {
-			texto.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
-			return true;// "Valid Email";
+			texto1.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
+			texto2.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
+			texto3.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
+			System.out.println("Formato Correto");
+			return true;// "Valid Data";
+//			novoF.set(Integer.parseInt(texto1.getText()), Integer.parseInt(texto1.getText())
+//					- 1, Integer.parseInt(texto1.getText()));
+//			actualMenos120.add(Calendar.YEAR, -120);
+//			SimpleDateFormat fmt = new SimpleDateFormat("dd-MMM-yyyy");
+//			
+//		
+//			String dateFormatted = fmt.format(actual);
+//			System.out.println(dateFormatted);
+////			&& (novoF).compareTo(actualMenos120)==1
+//			if ((novoF).compareTo(actual)==-1 ) {
+//			
+//			}
+//			else {
+//				texto1.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
+//				texto2.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
+//				texto3.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
+//				return false;// "Invalid Data";
+//			}
 		} else {
-			texto.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
-			return false;// "Invalid Email";
+			texto1.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
+			texto2.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
+			texto3.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
+			
+			return false;// "Invalid Data";
 		}
 	}
+	
+	
 
 }
