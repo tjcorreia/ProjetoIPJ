@@ -7,9 +7,7 @@ package org.eclipse.wb.swt;
 */
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
-import org.eclipse.wb.swt.Utilizador.TipoID;
 
 public class Conta {
 	

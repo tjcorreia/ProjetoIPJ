@@ -81,14 +81,14 @@ public class J_01_Admin_NovoF {
 	 * 
 	 * @param args
 	 */
-	public static void main(String[] args) {
-		try {
-			J_01_Admin_NovoF window = new J_01_Admin_NovoF(new Utilizador());
-			window.open();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+//	public static void main(String[] args) {
+//		try {
+//			J_01_Admin_NovoF window = new J_01_Admin_NovoF(new Utilizador());
+//			window.open();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 	/**
 	 * Open the window.
@@ -245,7 +245,7 @@ public class J_01_Admin_NovoF {
 		criarNovoF.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
-				boolean verificatudo = true;
+//				boolean verificatudo = true;
 				
 				String NomeNovoF = text_PrimeiroNovoF.getText();
 				String Morada_NovoF = text_Morada_NovoF.getText();
@@ -341,18 +341,7 @@ public class J_01_Admin_NovoF {
 						escolhadaID = Funcionario.TipoID.PASSAPORTE;
 					}
 					
-					estaVazio(text_UltimoNovoF);
-					estaVazio(text_PrimeiroNovoF);
-					estaVazio(text_Morada_NovoF);
-					estaVazio(text_ValorID_NovoF);
-					estaVazio(text_Email_NovoF);
-					estaVazio(text_MobileNovoF);
-					estaVazio(text_DataN_Ano);
-					estaVazio(text_DataN_mes);
-					estaVazio(text_DataN_dia);
-					estaVazio(text_UserNovoF);
-					estaVazio(text_PassNovoF);
-					String verifica = g.verificanovoF(
+									String verifica = g.verificanovoF(
 							escolhadaID,text_ValorID_NovoF,text_Email_NovoF,text_UserNovoF,text_MobileNovoF);
 //					
 					
@@ -368,10 +357,11 @@ public class J_01_Admin_NovoF {
 						box.setText("CONCLUSÃO");
 						box.setMessage(" O Funcionario foi adicionado");
 						box.open();
-
+						System.out.println(("verifica"));
 					}
 					else {
-						verifica="Dados por  inválidos"+verifica;
+						System.out.println(("----> Nao verifica"));
+						verifica="Dados por  inválidos:/n"+verifica;
 						MessageBox box = new MessageBox(shell, SWT.MULTI | SWT.ICON_ERROR);
 						box.setText("ERRO");
 						box.setMessage(verifica);

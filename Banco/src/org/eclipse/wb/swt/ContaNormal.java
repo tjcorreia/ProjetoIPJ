@@ -2,7 +2,7 @@ package org.eclipse.wb.swt;
 
 import java.util.ArrayList;
 
-import org.eclipse.wb.swt.Conta.TipoC;
+
 
 /**
 * Breve descrição do código

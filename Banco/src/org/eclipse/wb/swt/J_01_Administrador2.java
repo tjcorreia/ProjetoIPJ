@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.eclipse.jface.dialogs.MessageDialog;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
@@ -24,8 +24,6 @@ import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.graphics.Color;
-import org.eclipse.swt.graphics.Image;
 
 /**
  * Breve descrição do código
@@ -33,7 +31,7 @@ import org.eclipse.swt.graphics.Image;
  * @sid 2019
  * @aid 1.1
  */
-public class J_01_Administrador {
+public class J_01_Administrador2 {
 
 	protected Shell shell;
 	private Text text;
@@ -56,13 +54,13 @@ public class J_01_Administrador {
 		this.uAdministrador = uAdministrador;
 	}
 
-	public J_01_Administrador(Utilizador uAdministrador) {
+	public J_01_Administrador2(Utilizador uAdministrador) {
 
 		this.uAdministrador = uAdministrador;
 		// TODO Auto-generated constructor stub
 	}
 
-	public J_01_Administrador() {
+	public J_01_Administrador2() {
 		super();
 		open();
 	
@@ -76,7 +74,7 @@ public class J_01_Administrador {
 	 */
 	public static void main(String[] args) {
 		try {
-			J_01_Administrador window = new J_01_Administrador(new Utilizador());
+			J_01_Administrador2 window = new J_01_Administrador2(new Utilizador());
 			window.open();
 		} catch (Exception e) {
 			e.printStackTrace();

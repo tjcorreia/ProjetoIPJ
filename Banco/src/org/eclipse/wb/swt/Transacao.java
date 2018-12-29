@@ -6,9 +6,7 @@ package org.eclipse.wb.swt;
 * @aid 1.1
 */
 
-import java.util.ArrayList;
 
-import org.eclipse.wb.swt.Utilizador.TipoID;
 
 public class Transacao {
 	

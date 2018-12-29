@@ -1,19 +1,14 @@
 package org.eclipse.wb.swt;
 
-import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 import java.util.Map.Entry;
-
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Text;
-import org.eclipse.wb.swt.Conta.TipoC;
+
 import org.eclipse.wb.swt.Utilizador.TipoID;
 
 /**
@@ -52,10 +47,10 @@ public Gestao() {
 	
 	// Funcionarios
 	Funcionario MachadoFU= new  Funcionario(1002, "Maria", "Fun","Maria", "Machado0",
-			"1977/07/30","Rua Maria Vitoria",Utilizador.TipoID.CARTAOCIDADAO,"78456123","mail1@gmail.com",965420730);
+			"1977/07/30","Rua Maria Vitoria",Funcionario.TipoID.CARTAOCIDADAO,"78456123","mail1@gmail.com",965420730);
 	
 	Funcionario CorreiaFU= new  Funcionario(1003, "Correia2", "Fun","Tiago", "Coreia",
-			"1977/07/30","Rua Maria Vitoria ",Utilizador.TipoID.CARTAOCIDADAO,"12345678","mail2@gmail.com",965420731);
+			"1977/07/30","Rua Maria Vitoria ",Funcionario.TipoID.CARTAOCIDADAO,"12345678","mail2@gmail.com",965420731);
 	
 	mapUtilizadores.put("Maria",MachadoFU);
 	mapUtilizadores.put("Correia2",CorreiaFU);
@@ -135,7 +130,7 @@ public void Gerir() {
 	
 	System.out.println("passou ->>"+novoLogin.utilizadorAprovado().nome);
 	if (aprovado instanceof Administrador) {
-	J_01_Administrador novaJAdmin= new J_01_Administrador(aprovado);
+	J_01_Administrador2 novaJAdmin= new J_01_Administrador2(aprovado);
 		novaJAdmin.open();
 		
 	}
@@ -157,10 +152,6 @@ public void Gerir() {
 //faz a verificação da adicção de um do novo funcionario
 public String  verificanovoF(TipoID escolhadaIDN,Text valorID_NovoF,Text email_NovoF,Text userNovoF,Text mobileNovoF) { 
 	
-	
-	
-	
-	
 	valorID_NovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
 	email_NovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
 	userNovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
@@ -168,42 +159,41 @@ public String  verificanovoF(TipoID escolhadaIDN,Text valorID_NovoF,Text email_N
  String  verifica ="";
  // verifica username
 	if (mapUtilizadores.containsKey(userNovoF.getText())) {
-		verifica =verifica +"O nome de Utilizador não é válido./n";
+		verifica =verifica+"O nome de Utilizador não é válido. /n";
 		userNovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
 		}
 	
 	for (Entry<String, Utilizador> entry : mapUtilizadores.entrySet()) {
 		if (entry.getValue() instanceof Funcionario) {
 			
-			System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue());
-			Scanner sc = new Scanner(System.in);
-			String  vAr = sc.nextLine();
-			
-			sc.close();
+			System.out.println("VERIFICA ---->Key = " + entry.getKey() + ", Value = " + entry.getValue());
+//			Scanner sc = new Scanner(System.in);
+//			String  vAr = sc.nextLine();
+//			sc.close();
 			 // verifica identificação
-		if (entry.getValue().escolhaID.equals(escolhadaIDN) && entry.getValue().valorID.equals(valorID_NovoF)) {
+		if (entry.getValue().getEscolhaID().equals(escolhadaIDN) && entry.getValue().getValorID().equals(valorID_NovoF.getText())) {
 			verifica = verifica+"O "+escolhadaIDN+" com o numero :"+valorID_NovoF+" já está associado a um Funcionario. /n";
 			valorID_NovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
 		}
 		
-		else if  (!entry.getValue().escolhaID.equals(escolhadaIDN) && entry.getValue().valorID.equals(valorID_NovoF)) {
+		else if  (!(entry.getValue().getEscolhaID().equals(escolhadaIDN)) && entry.getValue().getValorID().equals(valorID_NovoF.getText())) {
 			if (escolhadaIDN.equals(TipoID.CARTAOCIDADAO)) {
-			verifica =verifica+" numero :"+valorID_NovoF+" já existe e está associado ao Passaporte. /n";
+			verifica =verifica+"O numero :"+valorID_NovoF.getText()+" já existe e está associado ao Passaporte. /n";
 		}
 			else {
-				verifica =verifica+" numero :"+valorID_NovoF+" já existe e está associado ao Cartão de Cidadão. /n";
+				verifica =verifica+"O numero :"+valorID_NovoF.getText()+" já existe e está associado ao Cartão de Cidadão. /n";
 			}
 			valorID_NovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
 			}
 		
 		// verifica email
-		if (entry.getValue().email.equals(email_NovoF)) {
+		if (entry.getValue().getEmail().equals(email_NovoF.getText())) {
 			verifica =verifica+"Já existe um utilizador com este email/n";
 			email_NovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
 		}
 //			// verifica telemovel
-		if (entry.getValue().email.equals(mobileNovoF)) {
-			verifica =verifica+"Já existe um utilizador com este contacto de telemovel /n";
+		if ((""+entry.getValue().getMobile()).equals(mobileNovoF.getText())) {
+			verifica =verifica+"Já existe um utilizador com este contacto de telemovel. /n";
 			mobileNovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
 		}
 		}

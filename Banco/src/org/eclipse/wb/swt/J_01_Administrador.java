@@ -68,7 +68,7 @@ public class J_01_Administrador {
 	 */
 	public static void main(String[] args) {
 		try {
-			J_01_Administrador window = new J_01_Administrador(new Utilizador());
+			J_01_Administrador2 window = new J_01_Administrador2(new Utilizador());
 			window.open();
 		} catch (Exception e) {
 			e.printStackTrace();
