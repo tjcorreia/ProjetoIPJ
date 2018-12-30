@@ -40,9 +40,7 @@ public class J_01_Administrador {
 	private Utilizador uAdministrador;
 
 
-	/**
-	 * @wbp.parser.entryPoint
-	 */
+	
 	public Utilizador getuAdministrador() {
 		return uAdministrador;
 	}
@@ -51,9 +49,7 @@ public class J_01_Administrador {
 		this.uAdministrador = uAdministrador;
 	}
 
-	/**
-	 * @wbp.parser.entryPoint
-	 */
+	
 	public J_01_Administrador(Utilizador uAdministrador) {
 
 		this.uAdministrador = uAdministrador;
@@ -62,7 +58,7 @@ public class J_01_Administrador {
 	}
 
 	/**
-	 * @wbp.parser.entryPoint
+	 * 
 	 */
 	public J_01_Administrador() {
 		super();
@@ -70,29 +66,32 @@ public class J_01_Administrador {
 		// TODO Auto-generated constructor stub
 	}
 
+//	/**
+//	 * Launch the application.
+//	 * 
+//
+//	 */
+//	public static void maini(String[] args) {
+//		try {
+//			J_01_AdminLClientes window = new J_01_AdminLClientes(new Utilizador());
+//			window.open();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
+//
+//	/**
+//	 * Open the window.
+//	 * 
+//	 */
+	
+	
+	
+	
 	/**
-	 * Launch the application.
-	 * 
-	 * @param args
-	 */
-	public static void maini(String[] args) {
-		try {
-			J_01_AdminLClientes window = new J_01_AdminLClientes(new Utilizador());
-			window.open();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Open the window.
+	 * Create contents of the window.
 	 * @wbp.parser.entryPoint
 	 */
-	
-	
-	
-	
-	
 	public void open() {
 		Display display = Display.getDefault();
 		createContents();
@@ -105,10 +104,7 @@ public class J_01_Administrador {
 		}
 	}
 
-	/**
-	 * Create contents of the window.
-	 * @wbp.parser.entryPoint
-	 */
+	
 	protected void createContents() {
 		Gestao g = new Gestao();
 		shell = new Shell();
@@ -117,13 +113,23 @@ public class J_01_Administrador {
 
 		text = new Text(shell, SWT.BORDER);
 		text.setText("Bem Vindo " + uAdministrador.nome);
-		text.setBounds(10, 10, 458, 25);
+		text.setBounds(167, 10, 301, 25);
 
 		String[] comboB = { "Cartao Cidadao", "Passaporte" };
 
-		Button button_3 = new Button(shell, SWT.NONE);
-		button_3.setText("tba");
-		button_3.setBounds(10, 205, 154, 25);
+		Button btnAlterarDadosPessoais = new Button(shell, SWT.NONE);
+		btnAlterarDadosPessoais.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				shell.dispose();
+				J_01_Admin_AlteraDados j=new J_01_Admin_AlteraDados();
+				j.open();
+				
+				
+			}
+		});
+		btnAlterarDadosPessoais.setText("Alterar dados pessoais");
+		btnAlterarDadosPessoais.setBounds(10, 205, 154, 25);
 
 		Button button = new Button(shell, SWT.NONE);
 		button.setText("Log Out");
@@ -137,7 +143,7 @@ public class J_01_Administrador {
 			@Override
 			public void mouseUp(MouseEvent e) {
 //				shell.dispose();
-				J_01_Admin_AlteraDados NovoFuncionario = new J_01_Admin_AlteraDados(uAdministrador);
+				J_01_Admin_NovoF NovoFuncionario = new J_01_Admin_NovoF(uAdministrador);
 				NovoFuncionario.open();
 				
 			}
@@ -148,8 +154,8 @@ public class J_01_Administrador {
 		Lista_Clientes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
-
-
+				J_01_AdminLClientes novaLClientes=new J_01_AdminLClientes(uAdministrador);
+				novaLClientes.open();
 			}
 		});
 		Lista_Clientes.setText("Lista de Clientes");

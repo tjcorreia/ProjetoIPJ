@@ -15,6 +15,8 @@ public class Cliente extends Utilizador {
 
 
 	
+
+
 	public Cliente() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -47,7 +49,13 @@ public class Cliente extends Utilizador {
 	}	
 	
 	
-	
+	public ArrayList<Conta> getLcontaS() {
+		return lcontaS;
+	}
+
+	public void setLcontaS(ArrayList<Conta> lcontaS) {
+		this.lcontaS = lcontaS;
+	}
 	
 	@Override
 	public String toString() {
@@ -59,9 +67,9 @@ public class Cliente extends Utilizador {
 	}
 	
 	public String [] toTable() {
-		String [] ClienteL= new String [6] ;
+		String [] ClienteL= new String [3] ;
 		ClienteL[0]=""+uID;
-		ClienteL[1]=""+nome+sobrenome;
+		ClienteL[1]=""+nome+" "+sobrenome;
 		
 		if (lcontaS==null) {
 			ClienteL[2]="0";
@@ -76,7 +84,12 @@ public class Cliente extends Utilizador {
 		return ClienteL;
 	}
 
-
+ public Conta addConta(Conta novaConta) {
+	 
+	 lcontaS.add(novaConta);
+	 return novaConta;
+	 
+ }
 	
 	
 

@@ -338,20 +338,22 @@ public class J_01_Admin_AlteraDados {
 //						userNovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_BLUE));
 //						}
 					if (verifica.equals("")) {				
-
+ 
 						uAdministrador.setLogin(text_UserNovoF.getText());
 						uAdministrador.setPassword(text_PassNovoF.getText());
 						uAdministrador.setEmail(text_Email_NovoF.getText());
                         Administrador f=new Administrador();
 						MessageBox box = new MessageBox(shell, SWT.MULTI);
 						f = (Administrador) (g.getMapUtilizadores().get(text_UserNovoF.getText()));
+						
 						box.setText("CONCLUSÃO");
-						box.setMessage(" O Funcionario" + f.getNome() + " " + f.getSobrenome() + " foi adicionado\n"
+						box.setMessage("" + f.getNome() + " " + f.getSobrenome() + " os seu dados foram Alterados\n"
 								+ "Morada:" + f.getMorada() + "\n" + "" + f.escolhaID.toString() + ":" + f.getValorID()
 								+ "\n" + "Email:" + f.getEmail() + "\n" + "Contacto:" + f.getMobile() + "\n"
 								+ "Data Nascimento:" + f.getDataNascimento() + "\n" );
 //						
 						box.open();
+						
 						System.out.println(("verifica"));
 
 					} else {
@@ -378,6 +380,14 @@ public class J_01_Admin_AlteraDados {
 			}
 		});
 		Button Novo_Funcionario = new Button(shell, SWT.NONE);
+		Novo_Funcionario.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				J_01_Admin_NovoF NovoFuncionario = new J_01_Admin_NovoF(uAdministrador);
+				NovoFuncionario.open();
+				
+			}
+		});
 
 		Novo_Funcionario.setText("Novo Funcionario");
 		Novo_Funcionario.setBounds(10, 141, 154, 25);
