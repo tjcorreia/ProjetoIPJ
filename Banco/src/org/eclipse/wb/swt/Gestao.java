@@ -271,7 +271,34 @@ public boolean eUmNumero(String texto)
     return true;
 } 
  
-
+//faz a verificação da alteracao de dados do Administrador
+public String  verificaA(Text email_NovoF,Text userNovoF,String emailA,String userNameA) { 
+	
+	
+	email_NovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
+	userNovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
+	
+String  verifica ="";
+// verifica username
+	if (mapUtilizadores.containsKey(userNovoF.getText()) && !userNovoF.getText().equals(userNameA) ) {
+		verifica =verifica+"O nome de Utilizador não é válido. \n";
+		userNovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
+		}
+	
+	
+	for (Entry<String, Utilizador> entry : mapUtilizadores.entrySet()) {
+		if (entry.getValue() instanceof Administrador) {
+			System.out.println("VERIFICA ---->Key = " + entry.getKey() + ", Value = " + entry.getValue());
+		// verifica email
+		if (entry.getValue().getEmail().equals(email_NovoF.getText()) && !email_NovoF.getText().equals(emailA)) {
+			verifica =verifica+"Já existe um utilizador com este email\n";
+			email_NovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
+		}
+		}
+	}
+	System.out.println((verifica));
+return verifica;
+}
  
 //*********************************************************************************
 ////	********** Adiciona Cliente **************

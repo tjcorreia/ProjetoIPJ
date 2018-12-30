@@ -31,7 +31,7 @@ import org.eclipse.swt.events.SelectionEvent;
  * @sid 2019
  * @aid 1.1
  */
-public class J_01_Administrador2 {
+public class J_01_AdminLClientes {
 
 	protected Shell shell;
 	private Text text;
@@ -54,13 +54,13 @@ public class J_01_Administrador2 {
 		this.uAdministrador = uAdministrador;
 	}
 
-	public J_01_Administrador2(Utilizador uAdministrador) {
+	public J_01_AdminLClientes(Utilizador uAdministrador) {
 
 		this.uAdministrador = uAdministrador;
 		// TODO Auto-generated constructor stub
 	}
 
-	public J_01_Administrador2() {
+	public J_01_AdminLClientes() {
 		super();
 		open();
 	
@@ -74,7 +74,7 @@ public class J_01_Administrador2 {
 	 */
 	public static void main(String[] args) {
 		try {
-			J_01_Administrador2 window = new J_01_Administrador2(new Utilizador());
+			J_01_AdminLClientes window = new J_01_AdminLClientes(new Utilizador());
 			window.open();
 		} catch (Exception e) {
 			e.printStackTrace();

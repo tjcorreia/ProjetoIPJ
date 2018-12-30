@@ -44,7 +44,7 @@ import org.eclipse.swt.events.SelectionEvent;
  * @sid 2019
  * @aid 1.1
  */
-public class J_01_Admin_NovoF {
+public class J_01_Admin_AlteraDados {
 
 	protected Shell shell;
 	private Text text;
@@ -57,7 +57,6 @@ public class J_01_Admin_NovoF {
 	private Text text_MobileNovoF;
 	private Text text_UserNovoF;
 	private Text text_PassNovoF;
-	private Text text_PosicaoNovoF;
 	private Text text_UltimoNovoF;
 	private Text text_DataN_Ano;
 	private Text text_DataN_mes;
@@ -71,16 +70,15 @@ public class J_01_Admin_NovoF {
 		this.uAdministrador = uAdministrador;
 	}
 
-	public J_01_Admin_NovoF(Utilizador uAdministrador) {
+	public J_01_Admin_AlteraDados(Utilizador uAdministrador) {
 
 		this.uAdministrador = uAdministrador;
 
 		// TODO Auto-generated constructor stub
 	}
 
-	public J_01_Admin_NovoF() {
+	public J_01_Admin_AlteraDados() {
 		super();
-	
 
 		// TODO Auto-generated constructor stub
 	}
@@ -92,7 +90,7 @@ public class J_01_Admin_NovoF {
 	 */
 	public static void main(String[] args) {
 		try {
-			J_01_Admin_NovoF window = new J_01_Admin_NovoF(new Utilizador());
+			J_01_Admin_AlteraDados window = new J_01_Admin_AlteraDados(new Utilizador());
 			window.open();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -126,7 +124,7 @@ public class J_01_Admin_NovoF {
 
 		text = new Text(shell, SWT.BORDER);
 		text.setText("Bem Vindo " + uAdministrador.nome);
-		text.setBounds(182, 10, 362, 25);
+		text.setBounds(180, 10, 288, 25);
 
 		Composite composite = new Composite(shell, SWT.NONE);
 		composite.setBounds(182, 41, 430, 301);
@@ -191,19 +189,12 @@ public class J_01_Admin_NovoF {
 		Label Titulo_Novo_F = new Label(composite, SWT.NONE);
 		Titulo_Novo_F.setAlignment(SWT.CENTER);
 		Titulo_Novo_F.setBounds(81, 2, 322, 15);
-		Titulo_Novo_F.setText("Dados do Novo Funcionario");
-
-		Label lblPosio = new Label(composite, SWT.NONE);
-		lblPosio.setText("Posi\u00E7\u00E3o");
-		lblPosio.setBounds(10, 226, 55, 15);
-
-		text_PosicaoNovoF = new Text(composite, SWT.BORDER);
-		text_PosicaoNovoF.setBounds(81, 223, 88, 21);
+		Titulo_Novo_F.setText("Dados Pessoais");
 
 		Button criarNovoF = new Button(composite, SWT.MULTI | SWT.WRAP | SWT.NONE);
 
 		criarNovoF.setBounds(289, 233, 103, 58);
-		criarNovoF.setText("Guardar\nNovo Funcionario");
+		criarNovoF.setText("Alterar os seus dados pessoais");
 
 		text_UltimoNovoF = new Text(composite, SWT.BORDER);
 		text_UltimoNovoF.setBounds(250, 44, 170, 21);
@@ -240,15 +231,6 @@ public class J_01_Admin_NovoF {
 		text_DataN_dia.setBounds(395, 164, 23, 21);
 
 		Button btnAlterarDadosPessoais = new Button(shell, SWT.NONE);
-		btnAlterarDadosPessoais.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseUp(MouseEvent e) {
-				shell.dispose();
-				J_01_Admin_AlteraDados alteraDados=new J_01_Admin_AlteraDados(uAdministrador);
-				alteraDados.open();
-				
-			}
-		});
 		btnAlterarDadosPessoais.setText("Alterar dados pessoais");
 		btnAlterarDadosPessoais.setBounds(10, 205, 154, 25);
 
@@ -256,28 +238,54 @@ public class J_01_Admin_NovoF {
 		button_Logout.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
-				
-				shell.dispose();	
-				
+
+				shell.dispose();
+
 			}
 		});
 		button_Logout.setText("Log Out");
 		button_Logout.setBounds(550, 10, 75, 25);
-			
-		text_UserNovoF.setText("2222");
-		text_PassNovoF.setText("6666");
-		text_UltimoNovoF.setText("2222");;
-		text_PrimeiroNovoF.setText("2222");;
-		text_ValorID_NovoF.setText("78453123");
-		text_Email_NovoF.setText("mail31@gmail.com");
-		text_MobileNovoF.setText("969420730");
-		
+
+		//// colocaca dados
+		text_PrimeiroNovoF.setText(uAdministrador.getNome());
+		text_UltimoNovoF.setText(uAdministrador.getSobrenome());
+		text_Morada_NovoF.setText(uAdministrador.getMorada());
+		text_UserNovoF.setText(uAdministrador.getLogin());
+		text_PassNovoF.setText(uAdministrador.getPassword());
+		;
+		text_ValorID_NovoF.setText(uAdministrador.getValorID());
+		text_Email_NovoF.setText(uAdministrador.getEmail());
+		text_MobileNovoF.setText("" + uAdministrador.getMobile());
+		String[] data = uAdministrador.getDataNascimento().split("/");
+		text_DataN_Ano.setText(data[0]);
+		;
+		text_DataN_mes.setText(data[1]);
+		;
+		text_DataN_dia.setText(data[2]);
+		;
+		TipoID_NovoF.setText(uAdministrador.getEscolhaID().toString());
+		// bolqueia campos não alteraveis
+		text_PrimeiroNovoF.setEnabled(false);
+
+		text_UltimoNovoF.setEnabled(false);
+		text_Morada_NovoF.setEnabled(false);
+		text_UserNovoF.setText(uAdministrador.getLogin());
+		text_PassNovoF.setText(uAdministrador.getPassword());
+		;
+		text_ValorID_NovoF.setEnabled(false);
+		text_Email_NovoF.setText(uAdministrador.getEmail());
+		text_MobileNovoF.setEnabled(false);
+		text_DataN_Ano.setEnabled(false);
+		text_DataN_mes.setEnabled(false);
+		text_DataN_dia.setEnabled(false);
+		TipoID_NovoF.setEnabled(false);
+
 		// JA_BT1.0 Botao Criar novo Funcionario.
 		criarNovoF.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
 //				boolean verificatudo = true;
-				
+
 				String NomeNovoF = text_PrimeiroNovoF.getText();
 				String Morada_NovoF = text_Morada_NovoF.getText();
 				String ValorID_NovoF = text_ValorID_NovoF.getText();
@@ -285,7 +293,6 @@ public class J_01_Admin_NovoF {
 				String MobileNovoF = text_MobileNovoF.getText();
 				String UserNovoF = text_UserNovoF.getText();
 				String PassNovoF = text_PassNovoF.getText();
-				String PosicaoNovoF = text_PosicaoNovoF.getText();
 
 				System.out.println(NomeNovoF);
 				System.out.println(Morada_NovoF);
@@ -294,77 +301,21 @@ public class J_01_Admin_NovoF {
 				System.out.println(MobileNovoF);
 				System.out.println(UserNovoF);
 				System.out.println(PassNovoF);
-				System.out.println(PosicaoNovoF);
+
 				System.out.println("-------->");
 
 				String mensagem = "";
 				boolean naohaDadosPorPreencher = true;
 				// Verifica campos vazios
-				if (estaVazio(text_PrimeiroNovoF) || estaVazio(text_UltimoNovoF) || estaVazio(text_Morada_NovoF)
-						|| estaVazio(text_ValorID_NovoF) || estaVazio(text_Email_NovoF) || estaVazio(text_MobileNovoF)
-						|| estaVazio(text_DataN_Ano) || estaVazio(text_DataN_mes) || estaVazio(text_DataN_dia)
-						|| estaVazio(text_UserNovoF) || estaVazio(text_PassNovoF)) {
+				if (estaVazio(text_Email_NovoF) || estaVazio(text_UserNovoF) || estaVazio(text_PassNovoF)) {
 					Titulo_Novo_F.setText("Dados por preencher ou inválidos");
 					Titulo_Novo_F.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
 					System.out.println("ENTROU NA VERIFICACAO DE CAMPOS VAZIOS");
 					mensagem = mensagem + "Tem dados por preencher\n";
 
-					estaVazio(text_UltimoNovoF);
-					estaVazio(text_PrimeiroNovoF);
-					estaVazio(text_Morada_NovoF);
-					estaVazio(text_ValorID_NovoF);
 					estaVazio(text_Email_NovoF);
-					estaVazio(text_MobileNovoF);
-					estaVazio(text_DataN_Ano);
-					estaVazio(text_DataN_mes);
-					estaVazio(text_DataN_dia);
 					estaVazio(text_UserNovoF);
 					estaVazio(text_PassNovoF);
-					naohaDadosPorPreencher = false;
-
-				}
-
-				if (TipoID_NovoF.getText().equals("Cartao Cidadao")&& !estaVazio(text_ValorID_NovoF)) {
-					if (eNumero(text_ValorID_NovoF) == -1) {
-						Titulo_Novo_F.setText("Dados por preencher ou inválidos");
-						mensagem = mensagem + "Nº CC inválido .\n";
-						System.out.println("VERIFICACAO DE numeros CC");
-						naohaDadosPorPreencher = false;
-					} else if (eNumero(text_ValorID_NovoF) != 8 && eNumero(text_ValorID_NovoF) != -1) {
-						Titulo_Novo_F.setText("Dados por preencher ou inválidos");
-						mensagem = mensagem + "Nº Cartao Cidadao inválido\n";
-
-						mensagem = mensagem + ".\n";
-						System.out.println("VERIFICACAO DE CC");
-						naohaDadosPorPreencher = false;
-					}
-				} else if (TipoID_NovoF.getText().equals("Passaporte")) {
-					/// falta verificar tamanho de passaporte
-					if (text_ValorID_NovoF.getText().length() < 8 || text_ValorID_NovoF.getText().length() > 10) {
-						Titulo_Novo_F.setText("Dados por preencher ou inválidos");
-						mensagem = mensagem + "Nº Passaporte inválido .\n";
-						System.out.println("VERIFICACAO DE Passaporte");
-						naohaDadosPorPreencher = false;
-					}
-
-				}
-				
-				
-				if (!validateData2(text_DataN_Ano,text_DataN_mes,text_DataN_dia) ) {
-					System.out.println("VERIFICACAO DE Telemovel" + text_MobileNovoF.getText());
-					Titulo_Novo_F.setText("Dados por preencher ou inválidos");
-					mensagem = mensagem + "Data de Nascimento inválida.\n";
-					naohaDadosPorPreencher = false;
-
-				}
-				
-				
-				
-				
-				if (!validateMobileNumber(text_MobileNovoF)) {
-					System.out.println("VERIFICACAO DE Telemovel" + text_MobileNovoF.getText());
-					Titulo_Novo_F.setText("Dados por preencher ou inválidos");
-					mensagem = mensagem + "Contacto inválido.\n";
 					naohaDadosPorPreencher = false;
 
 				}
@@ -377,54 +328,35 @@ public class J_01_Admin_NovoF {
 				}
 
 				if (naohaDadosPorPreencher) {
-					TipoID escolhadaID = Funcionario.TipoID.PASSAPORTE;
-					if (TipoID_NovoF.getText().equals("Passaporte")) {
-						escolhadaID = Funcionario.TipoID.PASSAPORTE;
-					} else {
-						escolhadaID = Funcionario.TipoID.PASSAPORTE;
-					}
-					
-									String verifica = g.verificanovoF(
-							escolhadaID,text_ValorID_NovoF,text_Email_NovoF,text_UserNovoF,text_MobileNovoF);
-//					
-					
-//					System.out.println(Arrays.toString(verifica));
-//					for (int i = 0; i < verifica.length; i++) {
-//						textofinal = textofinal + verifica[i];
-//						if (!verifica[i].equals("")) {
-//							verificatudo = false;
+			
+					String verifica = g.verificaA(text_Email_NovoF, text_UserNovoF,
+							uAdministrador.getEmail(),uAdministrador.getLogin());
+
+					System.out.println(("VERIFICA? --->" + verifica));
+//					else if (mapUtilizadores.containsKey(userNovoF.getText()) && userNovoF.getText().equals(userNameA) ) {
+//						verifica =verifica+"O nome de Utilizador não foi alterado. \n";
+//						userNovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_BLUE));
 //						}
-									System.out.println(("VERIFICA? --->"+verifica));
-									
-					if (verifica.equals("")) {
-					Funcionario f=new Funcionario();
-					
-					String dataStr = text_DataN_Ano.getText()+"/"+text_DataN_mes.getText()+"/"+text_DataN_dia.getText();
-					g.addNovoF(text_UserNovoF.getText(),text_PassNovoF.getText(),
-								text_PrimeiroNovoF.getText(),text_UltimoNovoF.getText(), dataStr,
-								text_Morada_NovoF.getText(), escolhadaID,text_ValorID_NovoF.getText(),
-								text_Email_NovoF.getText(),Integer.parseInt(text_MobileNovoF.getText()),
-								text_PosicaoNovoF.getText());
-						
+					if (verifica.equals("")) {				
+
+						uAdministrador.setLogin(text_UserNovoF.getText());
+						uAdministrador.setPassword(text_PassNovoF.getText());
+						uAdministrador.setEmail(text_Email_NovoF.getText());
+                        Administrador f=new Administrador();
 						MessageBox box = new MessageBox(shell, SWT.MULTI);
-					f=(Funcionario)(g.getMapUtilizadores().get(text_UserNovoF.getText()));
+						f = (Administrador) (g.getMapUtilizadores().get(text_UserNovoF.getText()));
 						box.setText("CONCLUSÃO");
-						box.setMessage(" O Funcionario"+f.getNome()+" "
-									+f.getSobrenome()+" foi adicionado\n"+
-										"Morada:"+f.getMorada()+"\n"+
-										""+f.escolhaID.toString()+":"+f.getValorID()+"\n"+
-										"Email:"+f.getEmail()+"\n"+
-										"Contacto:"+f.getMobile()+"\n"+
-										"Data Nascimento:"+f.getDataNascimento()+"\n"+
-										"Posição:"+f.getPosicao());
+						box.setMessage(" O Funcionario" + f.getNome() + " " + f.getSobrenome() + " foi adicionado\n"
+								+ "Morada:" + f.getMorada() + "\n" + "" + f.escolhaID.toString() + ":" + f.getValorID()
+								+ "\n" + "Email:" + f.getEmail() + "\n" + "Contacto:" + f.getMobile() + "\n"
+								+ "Data Nascimento:" + f.getDataNascimento() + "\n" );
 //						
 						box.open();
 						System.out.println(("verifica"));
-						
-					}
-					else {
+
+					} else {
 						System.out.println(("----> Nao verifica"));
-						verifica="Dados por  inválidos:/n"+verifica;
+						verifica = "Dados por  inválidos:/n" + verifica;
 						MessageBox box = new MessageBox(shell, SWT.MULTI | SWT.ICON_ERROR);
 						box.setText("ERRO");
 						box.setMessage(verifica);
@@ -432,9 +364,6 @@ public class J_01_Admin_NovoF {
 						Composite composite10 = new Composite(shell, SWT.NONE);
 						composite10.setBounds(182, 41, 430, 301);
 					}
-					
-					
-					
 
 				} else {
 					MessageBox box = new MessageBox(shell, SWT.MULTI | SWT.ICON_ERROR);
@@ -450,7 +379,6 @@ public class J_01_Admin_NovoF {
 		});
 		Button Novo_Funcionario = new Button(shell, SWT.NONE);
 
-		
 		Novo_Funcionario.setText("Novo Funcionario");
 		Novo_Funcionario.setBounds(10, 141, 154, 25);
 
@@ -460,13 +388,12 @@ public class J_01_Admin_NovoF {
 			@Override
 			public void mouseUp(MouseEvent e) {
 //				shell.dispose();
-				J_01_AdminLClientes novaLista=new J_01_AdminLClientes(uAdministrador);
+				J_01_AdminLClientes novaLista = new J_01_AdminLClientes(uAdministrador);
 				novaLista.open();
-				
-				
+
 			}
 		});
-		
+
 		Lista_Clientes.setText("Lista de Clientes");
 		Lista_Clientes.setBounds(10, 174, 154, 25);
 
@@ -493,25 +420,6 @@ public class J_01_Admin_NovoF {
 		return texto.getText().length();
 	}
 
-	public boolean validateMobileNumber(Text texto) {
-		String mobileNumber = texto.getText();
-//		("^\\+?\\[0-9]{0,5}?\\-?\\[0-9]{9}$"
-//		Pattern regexPattern = Pattern.compile("^\\+?\\d{0,3}?\\d{9}$");
-		Pattern regexPattern2 = Pattern.compile("^\\d{0,5}?\\d{9}$");
-//        Matcher regMatcher   = regexPattern.matcher(mobileNumber);
-		Matcher regMatcher2 = regexPattern2.matcher(mobileNumber);
-		if (regMatcher2.matches()) {
-			texto.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
-			return true;// "Valid Mobile Number";
-		} else {
-			texto.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
-			return false;// "Invalid Mobile Number";
-
-		}
-	}
-
-//	\A[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\z
-//	Regex : ^[\\w!#$%&’*+/=?`{|}~^-]+(?:\\.[\\w!#$%&’*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$
 
 	public boolean validateEmail(Text texto) {
 		String emailStr = texto.getText();
@@ -527,53 +435,6 @@ public class J_01_Admin_NovoF {
 		}
 	}
 
-	public boolean validateData2(Text texto1,Text texto2,Text texto3) {
-//		new GregorianCalendar(2018, 10, 24);
-		GregorianCalendar novoF= new GregorianCalendar();
-		GregorianCalendar actual= new GregorianCalendar();
-		GregorianCalendar actualMenos120= new GregorianCalendar();
-		actualMenos120=(GregorianCalendar) GregorianCalendar.getInstance();
-		actual=(GregorianCalendar) Calendar.getInstance();
-		
-		
-		String dataStr = texto1.getText()+"/"+texto2.getText()+"/"+texto3.getText();
-		System.out.println(dataStr);
-		Pattern regexPattern = Pattern.compile(
-				"^[0-9]{4}/(1[0-2]|0[1-9])/(3[01]|[12][0-9]|0[1-9])$");
-		Matcher regMatcher = regexPattern.matcher(dataStr);
-		if (regMatcher.matches()) {
-			texto1.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
-			texto2.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
-			texto3.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
-			System.out.println("Formato Correto");
-			return true;// "Valid Data";
-//			novoF.set(Integer.parseInt(texto1.getText()), Integer.parseInt(texto1.getText())
-//					- 1, Integer.parseInt(texto1.getText()));
-//			actualMenos120.add(Calendar.YEAR, -120);
-//			SimpleDateFormat fmt = new SimpleDateFormat("dd-MMM-yyyy");
-//			
-//		
-//			String dateFormatted = fmt.format(actual);
-//			System.out.println(dateFormatted);
-////			&& (novoF).compareTo(actualMenos120)==1
-//			if ((novoF).compareTo(actual)==-1 ) {
-//			
-//			}
-//			else {
-//				texto1.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
-//				texto2.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
-//				texto3.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
-//				return false;// "Invalid Data";
-//			}
-		} else {
-			texto1.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
-			texto2.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
-			texto3.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
-			
-			return false;// "Invalid Data";
-		}
-	}
-	
-	
+
 
 }

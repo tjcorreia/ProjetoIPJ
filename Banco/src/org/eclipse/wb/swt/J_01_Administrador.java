@@ -40,6 +40,9 @@ public class J_01_Administrador {
 	private Utilizador uAdministrador;
 
 
+	/**
+	 * @wbp.parser.entryPoint
+	 */
 	public Utilizador getuAdministrador() {
 		return uAdministrador;
 	}
@@ -74,7 +77,7 @@ public class J_01_Administrador {
 	 */
 	public static void maini(String[] args) {
 		try {
-			J_01_Administrador2 window = new J_01_Administrador2(new Utilizador());
+			J_01_AdminLClientes window = new J_01_AdminLClientes(new Utilizador());
 			window.open();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -104,6 +107,7 @@ public class J_01_Administrador {
 
 	/**
 	 * Create contents of the window.
+	 * @wbp.parser.entryPoint
 	 */
 	protected void createContents() {
 		Gestao g = new Gestao();
@@ -133,7 +137,7 @@ public class J_01_Administrador {
 			@Override
 			public void mouseUp(MouseEvent e) {
 //				shell.dispose();
-				J_01_Admin_NovoF NovoFuncionario = new J_01_Admin_NovoF(uAdministrador);
+				J_01_Admin_AlteraDados NovoFuncionario = new J_01_Admin_AlteraDados(uAdministrador);
 				NovoFuncionario.open();
 				
 			}
