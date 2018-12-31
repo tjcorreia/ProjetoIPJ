@@ -1,5 +1,6 @@
 package org.eclipse.wb.swt;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 * @sid 2019
 * @aid 1.1
 */
-public class Cliente extends Utilizador {
+public class Cliente extends Utilizador implements Serializable{
 	
 	private ArrayList<Conta> lcontaS;
 

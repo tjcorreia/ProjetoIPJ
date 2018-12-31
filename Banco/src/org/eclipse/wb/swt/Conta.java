@@ -6,10 +6,11 @@ package org.eclipse.wb.swt;
 * @aid 1.1
 */
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
-public class Conta {
+public class Conta implements Serializable{
 	
 
 	protected int contaID;        //

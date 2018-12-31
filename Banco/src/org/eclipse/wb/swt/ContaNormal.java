@@ -1,5 +1,6 @@
 package org.eclipse.wb.swt;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 * @sid 2019
 * @aid 1.1
 */
-public class ContaNormal extends Conta {
+public class ContaNormal extends Conta implements Serializable{
 	
 	private Cartao cartaodaConta;
 

@@ -35,9 +35,18 @@ public class J_01_AdminLClientes {
 
 	protected Shell shell;
 	private Text text;
+	private Gestao gestor;
 	private Utilizador uAdministrador;
 	private Table table;
 
+
+	public Gestao getGestor() {
+		return gestor;
+	}
+
+	public void setGestor(Gestao gestor) {
+		this.gestor = gestor;
+	}
 
 	public Utilizador getuAdministrador() {
 		return uAdministrador;
@@ -47,18 +56,15 @@ public class J_01_AdminLClientes {
 		this.uAdministrador = uAdministrador;
 	}
 
-	public J_01_AdminLClientes(Utilizador uAdministrador) {
-
-		this.uAdministrador = uAdministrador;
-		// TODO Auto-generated constructor stub
-	}
-
-	public J_01_AdminLClientes() {
+	public J_01_AdminLClientes(Gestao gestor,Utilizador uAdministrador) {
 		super();
+		this.uAdministrador = uAdministrador;
+		this.gestor = gestor;
 		open();
-	
 		// TODO Auto-generated constructor stub
 	}
+
+	
 
 	/**
 	 * Launch the application.
@@ -67,7 +73,7 @@ public class J_01_AdminLClientes {
 	 */
 	public static void main(String[] args) {
 		try {
-			J_01_AdminLClientes window = new J_01_AdminLClientes(new Utilizador());
+			J_01_AdminLClientes window = new J_01_AdminLClientes(new Gestao(),new Utilizador());
 			window.open();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -163,7 +169,8 @@ public class J_01_AdminLClientes {
 		btnAlterarDadosPessoais.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
-				J_01_Admin_AlteraDados alteraDados=new J_01_Admin_AlteraDados(uAdministrador);
+				shell.dispose();
+				J_01_Admin_AlteraDados alteraDados=new J_01_Admin_AlteraDados(gestor,uAdministrador);
 				alteraDados.open();
 			}
 		});
@@ -187,7 +194,8 @@ public class J_01_AdminLClientes {
 		Novo_Funcionario.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
-				J_01_Admin_NovoF n=new J_01_Admin_NovoF(uAdministrador);
+				shell.dispose();
+				J_01_Admin_NovoF n=new J_01_Admin_NovoF(gestor, uAdministrador);
 				n.open();
 				
 				

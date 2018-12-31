@@ -12,7 +12,18 @@ public class Principal {
 		
 		//begin_inputs
 		Gestao Machado=new Gestao();
-		Machado.Gerir();
+		
+		J_10Login novoLogin = new J_10Login (Machado);
+
+		Utilizador aprovado=new Utilizador();
+		do {
+			
+			novoLogin.open();
+			aprovado=novoLogin.utilizadorAprovado();
+		} while (aprovado==null);
+		
+		System.out.println("passou ->>"+novoLogin.utilizadorAprovado().nome);
+		Machado.Gerir(Machado,aprovado);
 		
 		//end_inputs
 

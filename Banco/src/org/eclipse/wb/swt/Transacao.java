@@ -1,4 +1,7 @@
 package org.eclipse.wb.swt;
+
+import java.io.Serializable;
+
 /**
 * Breve descrição do código
 *
@@ -8,7 +11,7 @@ package org.eclipse.wb.swt;
 
 
 
-public class Transacao {
+public class Transacao implements Serializable{
 	
 
 	protected int contaT;

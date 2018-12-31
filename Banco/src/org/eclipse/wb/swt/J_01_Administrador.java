@@ -38,9 +38,17 @@ public class J_01_Administrador {
 	protected Shell shell;
 	private Text text;
 	private Utilizador uAdministrador;
-
+	private Gestao gestor;
 
 	
+	public Gestao getGestor() {
+		return gestor;
+	}
+
+	public void setGestor(Gestao gestor) {
+		this.gestor = gestor;
+	}
+
 	public Utilizador getuAdministrador() {
 		return uAdministrador;
 	}
@@ -50,9 +58,10 @@ public class J_01_Administrador {
 	}
 
 	
-	public J_01_Administrador(Utilizador uAdministrador) {
+	public J_01_Administrador(Gestao gestor,Utilizador uAdministrador) {
 
 		this.uAdministrador = uAdministrador;
+		this.gestor = gestor;
 		// TODO Auto-generated constructor stub
 		
 	}
@@ -106,7 +115,7 @@ public class J_01_Administrador {
 
 	
 	protected void createContents() {
-		Gestao g = new Gestao();
+		
 		shell = new Shell();
 		shell.setSize(651, 408);
 		shell.setText("MENU ADMINISTRADOR");
@@ -122,7 +131,7 @@ public class J_01_Administrador {
 			@Override
 			public void mouseUp(MouseEvent e) {
 				shell.dispose();
-				J_01_Admin_AlteraDados j=new J_01_Admin_AlteraDados();
+				J_01_Admin_AlteraDados j=new J_01_Admin_AlteraDados(gestor,uAdministrador);
 				j.open();
 				
 				
@@ -132,6 +141,12 @@ public class J_01_Administrador {
 		btnAlterarDadosPessoais.setBounds(10, 205, 154, 25);
 
 		Button button = new Button(shell, SWT.NONE);
+		button.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				shell.dispose();
+			}
+		});
 		button.setText("Log Out");
 		button.setBounds(550, 10, 75, 25);
 
@@ -142,8 +157,8 @@ public class J_01_Administrador {
 		Novo_Funcionario.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
-//				shell.dispose();
-				J_01_Admin_NovoF NovoFuncionario = new J_01_Admin_NovoF(uAdministrador);
+				shell.dispose();
+				J_01_Admin_NovoF NovoFuncionario = new J_01_Admin_NovoF(gestor, uAdministrador);
 				NovoFuncionario.open();
 				
 			}
@@ -154,7 +169,8 @@ public class J_01_Administrador {
 		Lista_Clientes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
-				J_01_AdminLClientes novaLClientes=new J_01_AdminLClientes(uAdministrador);
+				shell.dispose();
+				J_01_AdminLClientes novaLClientes=new J_01_AdminLClientes(gestor,uAdministrador);
 				novaLClientes.open();
 			}
 		});

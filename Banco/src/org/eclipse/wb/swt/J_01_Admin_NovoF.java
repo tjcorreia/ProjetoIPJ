@@ -49,7 +49,7 @@ public class J_01_Admin_NovoF {
 	protected Shell shell;
 	private Text text;
 	private Utilizador uAdministrador;
-
+	private Gestao gestor;
 	private Text text_PrimeiroNovoF;
 	private Text text_Morada_NovoF;
 	private Text text_ValorID_NovoF;
@@ -63,6 +63,14 @@ public class J_01_Admin_NovoF {
 	private Text text_DataN_mes;
 	private Text text_DataN_dia;
 
+	public Gestao getGestor() {
+		return gestor;
+	}
+
+	public void setGestor(Gestao gestor) {
+		this.gestor = gestor;
+	}
+
 	public Utilizador getuAdministrador() {
 		return uAdministrador;
 	}
@@ -71,19 +79,14 @@ public class J_01_Admin_NovoF {
 		this.uAdministrador = uAdministrador;
 	}
 
-	public J_01_Admin_NovoF(Utilizador uAdministrador) {
+	public J_01_Admin_NovoF(Gestao gestor, Utilizador uAdministrador) {
 
 		this.uAdministrador = uAdministrador;
 
 		// TODO Auto-generated constructor stub
 	}
 
-	public J_01_Admin_NovoF() {
-		super();
 	
-
-		// TODO Auto-generated constructor stub
-	}
 
 	/**
 	 * Launch the application.
@@ -92,7 +95,7 @@ public class J_01_Admin_NovoF {
 	 */
 	public static void main(String[] args) {
 		try {
-			J_01_Admin_NovoF window = new J_01_Admin_NovoF(new Utilizador());
+			J_01_Admin_NovoF window = new J_01_Admin_NovoF(new Gestao(),new Utilizador());
 			window.open();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -119,7 +122,7 @@ public class J_01_Admin_NovoF {
 	 * Create contents of the window.
 	 */
 	protected void createContents() {
-		Gestao g = new Gestao();
+		
 		shell = new Shell();
 		shell.setSize(651, 408);
 		shell.setText("MENU ADMINISTRADOR");
@@ -244,7 +247,7 @@ public class J_01_Admin_NovoF {
 			@Override
 			public void mouseUp(MouseEvent e) {
 				shell.dispose();
-				J_01_Admin_AlteraDados alteraDados=new J_01_Admin_AlteraDados(uAdministrador);
+				J_01_Admin_AlteraDados alteraDados=new J_01_Admin_AlteraDados(gestor,uAdministrador);
 				alteraDados.open();
 				
 			}
@@ -256,9 +259,7 @@ public class J_01_Admin_NovoF {
 		button_Logout.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
-				
 				shell.dispose();	
-				
 			}
 		});
 		button_Logout.setText("Log Out");
@@ -384,7 +385,7 @@ public class J_01_Admin_NovoF {
 						escolhadaID = Funcionario.TipoID.PASSAPORTE;
 					}
 					
-									String verifica = g.verificanovoF(
+									String verifica = gestor.verificanovoF(
 							escolhadaID,text_ValorID_NovoF,text_Email_NovoF,text_UserNovoF,text_MobileNovoF);
 //					
 					
@@ -400,14 +401,14 @@ public class J_01_Admin_NovoF {
 					Funcionario f=new Funcionario();
 					
 					String dataStr = text_DataN_Ano.getText()+"/"+text_DataN_mes.getText()+"/"+text_DataN_dia.getText();
-					g.addNovoF(text_UserNovoF.getText(),text_PassNovoF.getText(),
+					gestor.addNovoF(text_UserNovoF.getText(),text_PassNovoF.getText(),
 								text_PrimeiroNovoF.getText(),text_UltimoNovoF.getText(), dataStr,
 								text_Morada_NovoF.getText(), escolhadaID,text_ValorID_NovoF.getText(),
 								text_Email_NovoF.getText(),Integer.parseInt(text_MobileNovoF.getText()),
 								text_PosicaoNovoF.getText());
 						
 						MessageBox box = new MessageBox(shell, SWT.MULTI);
-					f=(Funcionario)(g.getMapUtilizadores().get(text_UserNovoF.getText()));
+					f=(Funcionario)(gestor.getMapUtilizadores().get(text_UserNovoF.getText()));
 						box.setText("CONCLUSÃO");
 						box.setMessage(" O Funcionario"+f.getNome()+" "
 									+f.getSobrenome()+" foi adicionado\n"+
@@ -460,7 +461,7 @@ public class J_01_Admin_NovoF {
 			@Override
 			public void mouseUp(MouseEvent e) {
 //				shell.dispose();
-				J_01_AdminLClientes novaLista=new J_01_AdminLClientes(uAdministrador);
+				J_01_AdminLClientes novaLista=new J_01_AdminLClientes(gestor,uAdministrador);
 				novaLista.open();
 				
 				

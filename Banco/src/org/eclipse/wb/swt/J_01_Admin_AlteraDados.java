@@ -49,19 +49,29 @@ public class J_01_Admin_AlteraDados {
 	protected Shell shell;
 	private Text text;
 	private Utilizador uAdministrador;
-
-	private Text text_PrimeiroNovoF;
-	private Text text_Morada_NovoF;
-	private Text text_ValorID_NovoF;
-	private Text text_Email_NovoF;
-	private Text text_MobileNovoF;
-	private Text text_UserNovoF;
+	private Gestao gestor;
+	private Text text_PrimeiroNA;
+	private Text text_Morada_NA;
+	private Text text_ValorID_NA;
+	private Text text_Email_NA;
+	private Text text_MobileA;
+	private Text text_UserA;
 	private Text text_PassNovoF;
-	private Text text_UltimoNovoF;
-	private Text text_DataN_Ano;
-	private Text text_DataN_mes;
-	private Text text_DataN_dia;
+	private Text text_UltimoNA;
+	private Text text_DataA_Ano;
+	private Text text_DataA_mes;
+	private Text text_DataA_dia;
 
+	
+	
+
+	public Gestao getGestor() {
+		return gestor;
+	}
+
+	public void setGestor(Gestao gestor) {
+		this.gestor = gestor;
+	}
 	public Utilizador getuAdministrador() {
 		return uAdministrador;
 	}
@@ -70,9 +80,10 @@ public class J_01_Admin_AlteraDados {
 		this.uAdministrador = uAdministrador;
 	}
 
-	public J_01_Admin_AlteraDados(Utilizador uAdministrador) {
+	public J_01_Admin_AlteraDados(Gestao gestor, Utilizador uAdministrador) {
 
 		this.uAdministrador = uAdministrador;
+		this.gestor = gestor;
 
 		// TODO Auto-generated constructor stub
 	}
@@ -90,7 +101,7 @@ public class J_01_Admin_AlteraDados {
 	 */
 	public static void main(String[] args) {
 		try {
-			J_01_Admin_AlteraDados window = new J_01_Admin_AlteraDados(new Utilizador());
+			J_01_Admin_AlteraDados window = new J_01_Admin_AlteraDados(new Gestao(),new Utilizador());
 			window.open();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -117,7 +128,7 @@ public class J_01_Admin_AlteraDados {
 	 * Create contents of the window.
 	 */
 	protected void createContents() {
-		Gestao g = new Gestao();
+		
 		shell = new Shell();
 		shell.setSize(651, 408);
 		shell.setText("MENU ADMINISTRADOR");
@@ -139,15 +150,15 @@ public class J_01_Admin_AlteraDados {
 		Nome_novoF.setBounds(10, 47, 55, 15);
 		Nome_novoF.setText("Nome");
 
-		text_PrimeiroNovoF = new Text(composite, SWT.BORDER);
-		text_PrimeiroNovoF.setBounds(81, 44, 163, 21);
+		text_PrimeiroNA = new Text(composite, SWT.BORDER);
+		text_PrimeiroNA.setBounds(81, 44, 163, 21);
 
 		Label lblMoradaNovoF = new Label(composite, SWT.NONE);
 		lblMoradaNovoF.setText("Morada");
 		lblMoradaNovoF.setBounds(10, 75, 55, 15);
 
-		text_Morada_NovoF = new Text(composite, SWT.BORDER);
-		text_Morada_NovoF.setBounds(81, 72, 339, 21);
+		text_Morada_NA = new Text(composite, SWT.BORDER);
+		text_Morada_NA.setBounds(81, 72, 339, 21);
 
 		String[] comboB = { "Cartao Cidadao", "Passaporte" };
 		Combo TipoID_NovoF = new Combo(composite, SWT.NONE);
@@ -155,29 +166,29 @@ public class J_01_Admin_AlteraDados {
 		TipoID_NovoF.select(0);
 		TipoID_NovoF.setBounds(81, 99, 121, 23);
 
-		text_ValorID_NovoF = new Text(composite, SWT.BORDER);
-		text_ValorID_NovoF.setBounds(208, 101, 212, 21);
+		text_ValorID_NA = new Text(composite, SWT.BORDER);
+		text_ValorID_NA.setBounds(208, 101, 212, 21);
 
 		Label lblEmail_novoF = new Label(composite, SWT.NONE);
 		lblEmail_novoF.setText("Email");
 		lblEmail_novoF.setBounds(10, 131, 55, 15);
 
-		text_Email_NovoF = new Text(composite, SWT.BORDER);
-		text_Email_NovoF.setBounds(81, 128, 339, 21);
+		text_Email_NA = new Text(composite, SWT.BORDER);
+		text_Email_NA.setBounds(81, 128, 339, 21);
 
 		Label lblContacto = new Label(composite, SWT.NONE);
 		lblContacto.setText("Contacto");
 		lblContacto.setBounds(10, 165, 55, 15);
 
-		text_MobileNovoF = new Text(composite, SWT.BORDER);
-		text_MobileNovoF.setBounds(81, 162, 88, 21);
+		text_MobileA = new Text(composite, SWT.BORDER);
+		text_MobileA.setBounds(81, 162, 88, 21);
 
 		Label lblNomeDeUtilizador = new Label(composite, SWT.NONE);
 		lblNomeDeUtilizador.setText("Utilizador");
 		lblNomeDeUtilizador.setBounds(10, 192, 55, 15);
 
-		text_UserNovoF = new Text(composite, SWT.BORDER);
-		text_UserNovoF.setBounds(81, 189, 121, 21);
+		text_UserA = new Text(composite, SWT.BORDER);
+		text_UserA.setBounds(81, 189, 121, 21);
 
 		Label lblPassword = new Label(composite, SWT.NONE);
 		lblPassword.setText("Password");
@@ -196,8 +207,8 @@ public class J_01_Admin_AlteraDados {
 		criarNovoF.setBounds(289, 233, 103, 58);
 		criarNovoF.setText("Alterar os seus dados pessoais");
 
-		text_UltimoNovoF = new Text(composite, SWT.BORDER);
-		text_UltimoNovoF.setBounds(250, 44, 170, 21);
+		text_UltimoNA = new Text(composite, SWT.BORDER);
+		text_UltimoNA.setBounds(250, 44, 170, 21);
 
 		Label lblprimeiro = new Label(composite, SWT.NONE);
 		lblprimeiro.setFont(SWTResourceManager.getFont("Segoe UI", 7, SWT.NORMAL));
@@ -213,11 +224,11 @@ public class J_01_Admin_AlteraDados {
 		lblDataNas.setText("Data Nas.(aaaa/mm/dd)");
 		lblDataNas.setBounds(175, 165, 132, 15);
 
-		text_DataN_Ano = new Text(composite, SWT.BORDER);
-		text_DataN_Ano.setBounds(313, 164, 40, 21);
+		text_DataA_Ano = new Text(composite, SWT.BORDER);
+		text_DataA_Ano.setBounds(313, 164, 40, 21);
 
-		text_DataN_mes = new Text(composite, SWT.BORDER);
-		text_DataN_mes.setBounds(363, 164, 23, 21);
+		text_DataA_mes = new Text(composite, SWT.BORDER);
+		text_DataA_mes.setBounds(363, 164, 23, 21);
 
 		Label label = new Label(composite, SWT.NONE);
 		label.setText("/");
@@ -227,8 +238,8 @@ public class J_01_Admin_AlteraDados {
 		label_1.setText("/");
 		label_1.setBounds(387, 167, 8, 15);
 
-		text_DataN_dia = new Text(composite, SWT.BORDER);
-		text_DataN_dia.setBounds(395, 164, 23, 21);
+		text_DataA_dia = new Text(composite, SWT.BORDER);
+		text_DataA_dia.setBounds(395, 164, 23, 21);
 
 		Button btnAlterarDadosPessoais = new Button(shell, SWT.NONE);
 		btnAlterarDadosPessoais.setText("Alterar dados pessoais");
@@ -247,37 +258,37 @@ public class J_01_Admin_AlteraDados {
 		button_Logout.setBounds(550, 10, 75, 25);
 
 		//// colocaca dados
-		text_PrimeiroNovoF.setText(uAdministrador.getNome());
-		text_UltimoNovoF.setText(uAdministrador.getSobrenome());
-		text_Morada_NovoF.setText(uAdministrador.getMorada());
-		text_UserNovoF.setText(uAdministrador.getLogin());
+		text_PrimeiroNA.setText(uAdministrador.getNome());
+		text_UltimoNA.setText(uAdministrador.getSobrenome());
+		text_Morada_NA.setText(uAdministrador.getMorada());
+		text_UserA.setText(uAdministrador.getLogin());
 		text_PassNovoF.setText(uAdministrador.getPassword());
 		;
-		text_ValorID_NovoF.setText(uAdministrador.getValorID());
-		text_Email_NovoF.setText(uAdministrador.getEmail());
-		text_MobileNovoF.setText("" + uAdministrador.getMobile());
+		text_ValorID_NA.setText(uAdministrador.getValorID());
+		text_Email_NA.setText(uAdministrador.getEmail());
+		text_MobileA.setText("" + uAdministrador.getMobile());
 		String[] data = uAdministrador.getDataNascimento().split("/");
-		text_DataN_Ano.setText(data[0]);
+		text_DataA_Ano.setText(data[0]);
 		;
-		text_DataN_mes.setText(data[1]);
+		text_DataA_mes.setText(data[1]);
 		;
-		text_DataN_dia.setText(data[2]);
+		text_DataA_dia.setText(data[2]);
 		;
 		TipoID_NovoF.setText(uAdministrador.getEscolhaID().toString());
 		// bolqueia campos não alteraveis
-		text_PrimeiroNovoF.setEnabled(false);
+		text_PrimeiroNA.setEnabled(false);
 
-		text_UltimoNovoF.setEnabled(false);
-		text_Morada_NovoF.setEnabled(false);
-		text_UserNovoF.setText(uAdministrador.getLogin());
+		text_UltimoNA.setEnabled(false);
+		text_Morada_NA.setEnabled(false);
+		text_UserA.setText(uAdministrador.getLogin());
 		text_PassNovoF.setText(uAdministrador.getPassword());
 		;
-		text_ValorID_NovoF.setEnabled(false);
-		text_Email_NovoF.setText(uAdministrador.getEmail());
-		text_MobileNovoF.setEnabled(false);
-		text_DataN_Ano.setEnabled(false);
-		text_DataN_mes.setEnabled(false);
-		text_DataN_dia.setEnabled(false);
+		text_ValorID_NA.setEnabled(false);
+		text_Email_NA.setText(uAdministrador.getEmail());
+		text_MobileA.setEnabled(false);
+		text_DataA_Ano.setEnabled(false);
+		text_DataA_mes.setEnabled(false);
+		text_DataA_dia.setEnabled(false);
 		TipoID_NovoF.setEnabled(false);
 
 		// JA_BT1.0 Botao Criar novo Funcionario.
@@ -286,12 +297,12 @@ public class J_01_Admin_AlteraDados {
 			public void mouseUp(MouseEvent e) {
 //				boolean verificatudo = true;
 
-				String NomeNovoF = text_PrimeiroNovoF.getText();
-				String Morada_NovoF = text_Morada_NovoF.getText();
-				String ValorID_NovoF = text_ValorID_NovoF.getText();
-				String Email_NovoF = text_Email_NovoF.getText();
-				String MobileNovoF = text_MobileNovoF.getText();
-				String UserNovoF = text_UserNovoF.getText();
+				String NomeNovoF = text_PrimeiroNA.getText();
+				String Morada_NovoF = text_Morada_NA.getText();
+				String ValorID_NovoF = text_ValorID_NA.getText();
+				String Email_NovoF = text_Email_NA.getText();
+				String MobileNovoF = text_MobileA.getText();
+				String UserNovoF = text_UserA.getText();
 				String PassNovoF = text_PassNovoF.getText();
 
 				System.out.println(NomeNovoF);
@@ -301,35 +312,37 @@ public class J_01_Admin_AlteraDados {
 				System.out.println(MobileNovoF);
 				System.out.println(UserNovoF);
 				System.out.println(PassNovoF);
-
 				System.out.println("-------->");
-
 				String mensagem = "";
 				boolean naohaDadosPorPreencher = true;
 				// Verifica campos vazios
-				if (estaVazio(text_Email_NovoF) || estaVazio(text_UserNovoF) || estaVazio(text_PassNovoF)) {
+				if (estaVazio(text_Email_NA) || estaVazio(text_UserA) || estaVazio(text_PassNovoF)) {
 					Titulo_Novo_F.setText("Dados por preencher ou inválidos");
 					Titulo_Novo_F.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
 					System.out.println("ENTROU NA VERIFICACAO DE CAMPOS VAZIOS");
 					mensagem = mensagem + "Tem dados por preencher\n";
 
-					estaVazio(text_Email_NovoF);
-					estaVazio(text_UserNovoF);
+					estaVazio(text_Email_NA);
+					estaVazio(text_UserA);
 					estaVazio(text_PassNovoF);
 					naohaDadosPorPreencher = false;
 
 				}
 
-				if (!validateEmail(text_Email_NovoF)) {
-					System.out.println("VERIFICACAO DE Email ->" + text_Email_NovoF.getText());
+				if (!validateEmail(text_Email_NA)) {
+					System.out.println("VERIFICACAO DE Email ->" + text_Email_NA.getText());
 					Titulo_Novo_F.setText("Dados por preencher ou inválidos");
 					mensagem = mensagem + "Email inválido.\n";
 					naohaDadosPorPreencher = false;
 				}
 
 				if (naohaDadosPorPreencher) {
-			
-					String verifica = g.verificaA(text_Email_NovoF, text_UserNovoF,
+					System.out.println(text_Email_NA.getText());
+					System.out.println(text_UserA.getText());
+					System.out.println(uAdministrador.getEmail());
+					System.out.println(uAdministrador.getLogin());
+//			gestor.verificaA(email_NovoF, userNovoF, emailA, userNameA);
+					String verifica = gestor.verificaA(text_Email_NA, text_UserA,
 							uAdministrador.getEmail(),uAdministrador.getLogin());
 
 					System.out.println(("VERIFICA? --->" + verifica));
@@ -338,27 +351,30 @@ public class J_01_Admin_AlteraDados {
 //						userNovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_BLUE));
 //						}
 					if (verifica.equals("")) {				
- 
-						uAdministrador.setLogin(text_UserNovoF.getText());
+						String oldkey=uAdministrador.getLogin();
+						uAdministrador.setLogin(text_UserA.getText());
 						uAdministrador.setPassword(text_PassNovoF.getText());
-						uAdministrador.setEmail(text_Email_NovoF.getText());
+						uAdministrador.setEmail(text_Email_NA.getText());
+						gestor.getMapUtilizadores().remove(oldkey);
+						gestor.getMapUtilizadores().put(uAdministrador.getLogin(), uAdministrador);
                         Administrador f=new Administrador();
 						MessageBox box = new MessageBox(shell, SWT.MULTI);
-						f = (Administrador) (g.getMapUtilizadores().get(text_UserNovoF.getText()));
+						System.out.println(("ERRO 1? --->" + verifica));
+						f = (Administrador) (gestor.getMapUtilizadores().get(text_UserA.getText()));
 						
 						box.setText("CONCLUSÃO");
-						box.setMessage("" + f.getNome() + " " + f.getSobrenome() + " os seu dados foram Alterados\n"
-								+ "Morada:" + f.getMorada() + "\n" + "" + f.escolhaID.toString() + ":" + f.getValorID()
-								+ "\n" + "Email:" + f.getEmail() + "\n" + "Contacto:" + f.getMobile() + "\n"
-								+ "Data Nascimento:" + f.getDataNascimento() + "\n" );
+						box.setMessage("" + f.getNome() + "  " + f.getSobrenome() + " os seu dados foram Actualizados\n"
+								+ "\n" + "Email:" + f.getEmail() + "\nLogin: "+f.getLogin()+" /nPassword: "+f.getPassword());
 //						
 						box.open();
 						
 						System.out.println(("verifica"));
+						
+						shell.redraw();
 
 					} else {
 						System.out.println(("----> Nao verifica"));
-						verifica = "Dados por  inválidos:/n" + verifica;
+						verifica = "Dados por  inválidos:\n" + verifica;
 						MessageBox box = new MessageBox(shell, SWT.MULTI | SWT.ICON_ERROR);
 						box.setText("ERRO");
 						box.setMessage(verifica);
@@ -383,7 +399,8 @@ public class J_01_Admin_AlteraDados {
 		Novo_Funcionario.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
-				J_01_Admin_NovoF NovoFuncionario = new J_01_Admin_NovoF(uAdministrador);
+				shell.dispose();
+				J_01_Admin_NovoF NovoFuncionario = new J_01_Admin_NovoF(gestor,uAdministrador);
 				NovoFuncionario.open();
 				
 			}
@@ -397,8 +414,8 @@ public class J_01_Admin_AlteraDados {
 		Lista_Clientes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
-//				shell.dispose();
-				J_01_AdminLClientes novaLista = new J_01_AdminLClientes(uAdministrador);
+				shell.dispose();
+				J_01_AdminLClientes novaLista = new J_01_AdminLClientes(gestor, uAdministrador);
 				novaLista.open();
 
 			}

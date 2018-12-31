@@ -1,12 +1,17 @@
 package org.eclipse.wb.swt;
 
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
 import org.eclipse.wb.swt.Utilizador.TipoID;
@@ -50,64 +55,74 @@ public Gestao() {
 	this.lContas = new ArrayList<Conta>();
 	this.mapCartaoConta = new HashMap<Integer, Integer>();
 	this.contadores = new HashMap<String, Integer>();
-	contadores.put("Utilizador", 1000); //inicializa o Contador de Utilizadores
-	contadores.put("Contas", 1); //inicializa o Contador de Contas
+	
+	// load data 
+		try {
+			loadAll();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	
 	
-	// Administradores
-//	Administrador(int uID, String login, String password, String nome, String sobrenome, String dataNascimento,
-//			String morada, TipoID escolhaID, int valorID, String email, int mobile)
-	Administrador MachadoU= new  Administrador(contadores.get("Utilizador"), "Machado", "Admin", "Alberto","Machado0",
-			"1977/07/17","Rua Maria Vitoria",Administrador.TipoID.CARTAOCIDADAO,"78456123","mail@gmail.com",965420735);
-	
-	Administrador CorreiaU= new  Administrador(contadores.get("Utilizador")+1, "Correia", "Admin","Tiago", "Coreia",
-			"1977/07/30","Rua Maria Vitoria ",Administrador.TipoID.CARTAOCIDADAO,"12345678","mail@gmail.com",965420733);
-	contadores.put("Utilizador",contadores.get("Utilizador")+1);
-	mapUtilizadores.put("Machado",MachadoU);
-	mapUtilizadores.put("Correia",CorreiaU);
-	
-	// Funcionarios
-	Funcionario MachadoFU= new  Funcionario(contadores.get("Utilizador")+1, "Maria", "Fun","Maria", "Machado0",
-			"1977/07/30","Rua Maria Vitoria",Funcionario.TipoID.CARTAOCIDADAO,"78456123","mail1@gmail.com",965420730);
-	contadores.put("Utilizador",contadores.get("Utilizador")+1);
-	Funcionario CorreiaFU= new  Funcionario(contadores.get("Utilizador")+1, "Correia2", "Fun","Tiago", "Coreia",
-			"1977/07/30","Rua Maria Vitoria ",Funcionario.TipoID.CARTAOCIDADAO,"12345678","mail2@gmail.com",965420731);
-	contadores.put("Utilizador",contadores.get("Utilizador")+1);
-	mapUtilizadores.put("Maria",MachadoFU);
-	mapUtilizadores.put("Correia2",CorreiaFU);
-	
-	
-	
-	
-	// Clientes
-	
-//	Utilizador(uID,login,password,nome,morada,escolhaID,valorID,email,mobile)
-	
-		Cliente cl1= new  Cliente(contadores.get("Utilizador")+1, "MCliente", "Cliente", "Alberto","Machado0",
-				"1977/07/30","Rua Maria Vitoria",Administrador.TipoID.CARTAOCIDADAO,"78456123","mail",965420730);
-		contadores.put("Utilizador",contadores.get("Utilizador")+1);
-		Cliente cl2= new  Cliente(contadores.get("Utilizador")+1, "CCliente", "Cliente", "Tiago","Coreia",
-				"1977/07/30","Rua Maria Vitoriazfgadfgadfgsdfgsdfg",Administrador.TipoID.CARTAOCIDADAO,"12345678","mail",965420730);
-		contadores.put("Utilizador",contadores.get("Utilizador")+1);
-		mapUtilizadores.put("MCliente",cl1);
-		mapUtilizadores.put("CCliente",cl2);
-		
-		
-		
-		
-		
-		
-	
-	// Contas 
-	
-	ContaNormal cn1= new ContaNormal(1,1500);
-	cn1.getClientesDaC().add(1004);
-	ContaNormal cn2= new ContaNormal(2,2500);
-	cn1.getClientesDaC().add(1005);
-	lContas.add(cn1);
-	lContas.add(cn2);
-	
-	
+//	contadores.put("Utilizador", 1000); //inicializa o Contador de Utilizadores
+//	contadores.put("Contas", 1); //inicializa o Contador de Contas
+//	
+//	
+//	// Administradores
+////	Administrador(int uID, String login, String password, String nome, String sobrenome, String dataNascimento,
+////			String morada, TipoID escolhaID, int valorID, String email, int mobile)
+//	Administrador MachadoU= new  Administrador(contadores.get("Utilizador"), "Machado", "Admin", "Alberto","Machado0",
+//			"1977/07/17","Rua Maria Vitoria",Administrador.TipoID.CARTAOCIDADAO,"78456123","mail@gmail.com",965420735);
+//	
+//	Administrador CorreiaU= new  Administrador(contadores.get("Utilizador")+1, "Correia", "Admin","Tiago", "Coreia",
+//			"1977/07/30","Rua Maria Vitoria ",Administrador.TipoID.CARTAOCIDADAO,"12345678","mail@gmail.com",965420733);
+//	contadores.put("Utilizador",contadores.get("Utilizador")+1);
+//	mapUtilizadores.put("Machado",MachadoU);
+//	mapUtilizadores.put("Correia",CorreiaU);
+//	
+//	// Funcionarios
+//	Funcionario MachadoFU= new  Funcionario(contadores.get("Utilizador")+1, "Maria", "Fun","Maria", "Machado0",
+//			"1977/07/30","Rua Maria Vitoria",Funcionario.TipoID.CARTAOCIDADAO,"78456123","mail1@gmail.com",965420730);
+//	contadores.put("Utilizador",contadores.get("Utilizador")+1);
+//	Funcionario CorreiaFU= new  Funcionario(contadores.get("Utilizador")+1, "Correia2", "Fun","Tiago", "Coreia",
+//			"1977/07/30","Rua Maria Vitoria ",Funcionario.TipoID.CARTAOCIDADAO,"12345678","mail2@gmail.com",965420731);
+//	contadores.put("Utilizador",contadores.get("Utilizador")+1);
+//	mapUtilizadores.put("Maria",MachadoFU);
+//	mapUtilizadores.put("Correia2",CorreiaFU);
+//	
+//	
+//	
+//	
+//	// Clientes
+//	
+////	Utilizador(uID,login,password,nome,morada,escolhaID,valorID,email,mobile)
+//	
+//		Cliente cl1= new  Cliente(contadores.get("Utilizador")+1, "MCliente", "Cliente", "Alberto","Machado0",
+//				"1977/07/30","Rua Maria Vitoria",Administrador.TipoID.CARTAOCIDADAO,"78456123","mail",965420730);
+//		contadores.put("Utilizador",contadores.get("Utilizador")+1);
+//		Cliente cl2= new  Cliente(contadores.get("Utilizador")+1, "CCliente", "Cliente", "Tiago","Coreia",
+//				"1977/07/30","Rua Maria Vitoriazfgadfgadfgsdfgsdfg",Administrador.TipoID.CARTAOCIDADAO,"12345678","mail",965420730);
+//		contadores.put("Utilizador",contadores.get("Utilizador")+1);
+//		mapUtilizadores.put("MCliente",cl1);
+//		mapUtilizadores.put("CCliente",cl2);
+//		
+//		
+//		
+//		
+//		
+//		
+//	
+//	// Contas 
+//	
+//	ContaNormal cn1= new ContaNormal(1,1500);
+//	cn1.getClientesDaC().add(1004);
+//	ContaNormal cn2= new ContaNormal(2,2500);
+//	cn1.getClientesDaC().add(1005);
+//	lContas.add(cn1);
+//	lContas.add(cn2);
+//	
+//	
 }
 
 
@@ -164,22 +179,42 @@ public void setMapCartaoConta(Map<Integer, Integer> mapCartaoConta) {
 }
 
 
-public void Gerir() {
-	J_10Login novoLogin = new J_10Login ();
-
-	Utilizador aprovado=new Utilizador();
-	do {
-		
-		novoLogin.open();
-		aprovado=novoLogin.utilizadorAprovado();
-	} while (aprovado==null);
+public void Gerir(Gestao gestor,Utilizador uactual){
 	
-	System.out.println("passou ->>"+novoLogin.utilizadorAprovado().nome);
-	if (aprovado instanceof Administrador) {
-		J_01_Administrador novaJAdmin= new J_01_Administrador(aprovado);
+
+//	this.mapUtilizadores = new HashMap<String, Utilizador>();
+//	this.lContas = new ArrayList<Conta>();
+//	this.mapCartaoConta = new HashMap<Integer, Integer>();
+//	this.contadores = new HashMap<String, Integer>();
+	System.out.println("lOAD");
+	for (Entry<String, Utilizador> entry : mapUtilizadores.entrySet()) {
+		
+			System.out.println("VERIFICA ---->Key = " + entry.getKey() + ", Value = " + entry.getValue());
+			System.out.println(entry.getValue().toString());
+		}
+		
+	
+	
+	
+	
+	
+	
+	
+
+	if (uactual instanceof Administrador) {
+		J_01_Administrador novaJAdmin= new J_01_Administrador( gestor,uactual);
 		novaJAdmin.open();
 		
 	}
+	
+	
+	
+	
+	
+	System.out.println("<---------------------- Log out ---------------->" );
+	
+	saveAll();
+	
 }
 
 
@@ -260,6 +295,9 @@ public Funcionario addNovoF(String login, String password, String nome, String s
 	return NovoFU;
 }
 
+
+
+
 //faz a verificação se e numero
  
 public boolean eUmNumero(String texto)
@@ -273,7 +311,7 @@ public boolean eUmNumero(String texto)
  
 //faz a verificação da alteracao de dados do Administrador
 public String  verificaA(Text email_NovoF,Text userNovoF,String emailA,String userNameA) { 
-	
+	System.out.println("VERIFICA ADMINISTRADOR");
 	
 	email_NovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
 	userNovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
@@ -480,6 +518,134 @@ return verifica;
 //		return dateFormatted;
 //	}
 // 
- 
+
+public void loadAll() throws ClassNotFoundException {
+//	this.mapUtilizadores = mapUtilizadores;
+//	this.lContas = lContas;
+//	this.mapCartaoConta = mapCartaoConta;
+//	this.contadores = contadores;
+	String pathMapUtilizadores ="C:\\Users\\Jorge\\Documents\\GitHub\\ProjetoIPJ\\MapUtilizadores";
+	 FicheiroDeObjectos ut= new  FicheiroDeObjectos();
+  try {
+	ut.abreLeitura(pathMapUtilizadores);
+	mapUtilizadores =(Map<String, Utilizador>) ut.leObjecto();
+	ut.fechaLeitura();
+
+} catch (IOException e) {
+	// TODO Auto-generated catch block
+	e.printStackTrace();
+}
+  ////----------- 
+  String pathlContas ="C:\\Users\\Jorge\\Documents\\GitHub\\ProjetoIPJ\\Lcontas";
+  FicheiroDeObjectos lc= new  FicheiroDeObjectos();
+  try {
+	lc.abreLeitura(pathlContas);
+	lContas=(ArrayList<Conta>) lc.leObjecto();
+	lc.fechaLeitura();
+	
+} catch (IOException e) {
+	// TODO Auto-generated catch block
+	e.printStackTrace();
+}
+////----------- 
+String pathlCarões ="C:\\Users\\Jorge\\Documents\\GitHub\\ProjetoIPJ\\Lcartões";
+
+FicheiroDeObjectos lcartoes= new  FicheiroDeObjectos();
+try {
+	lcartoes.abreLeitura(pathlCarões);
+	mapCartaoConta=(Map<Integer, Integer>) lcartoes.leObjecto();
+	lcartoes.fechaLeitura();
+	
+} catch (IOException e) {
+	// TODO Auto-generated catch block
+	e.printStackTrace();
+}
+////----------- 
+String pathlContadores ="C:\\Users\\Jorge\\Documents\\GitHub\\ProjetoIPJ\\Contadores";
+
+FicheiroDeObjectos contador= new  FicheiroDeObjectos();
+try {
+	contador.abreLeitura(pathlContadores);
+	contadores =(Map<String, Integer>) contador.leObjecto();
+	contador.fechaLeitura();
+
+} catch (IOException e) {
+// TODO Auto-generated catch block
+e.printStackTrace();
+}  
+  
+}
+
+
+
+
+/// grava todos os ficheiros
+public void saveAll() {
+	
+//	private Map<String, Utilizador> mapUtilizadores; // String Username
+	
+//	private ArrayList<Conta> lContas;
+	
+//	private Map<Integer, Integer> mapCartaoConta; // numcartaonumconta
+//	private Map<String, Integer> contadores;
+
+	
+
+//	this.uactual = uactual;
+	String pathMapUtilizadores ="C:\\Users\\Jorge\\Documents\\GitHub\\ProjetoIPJ\\MapUtilizadores";
+	 FicheiroDeObjectos ut= new  FicheiroDeObjectos();
+  try {
+	ut.abreEscrita(pathMapUtilizadores);
+	ut.escreveObjecto(this.mapUtilizadores);
+	ut.fechaEscrita();;
+
+} catch (IOException e) {
+	// TODO Auto-generated catch block
+	e.printStackTrace();
+}
+  ////----------- 
+  String pathlContas ="C:\\Users\\Jorge\\Documents\\GitHub\\ProjetoIPJ\\Lcontas";
+  FicheiroDeObjectos lc= new  FicheiroDeObjectos();
+  try {
+	lc.abreEscrita(pathlContas);
+	lc.escreveObjecto(this.lContas);
+	lc.fechaEscrita();;
+	
+} catch (IOException e) {
+	// TODO Auto-generated catch block
+	e.printStackTrace();
+}
+////----------- 
+String pathlCarões ="C:\\Users\\Jorge\\Documents\\GitHub\\ProjetoIPJ\\Lcartões";
+
+FicheiroDeObjectos lcartoes= new  FicheiroDeObjectos();
+try {
+	lcartoes.abreEscrita(pathlCarões);
+	lcartoes.escreveObjecto(this.mapCartaoConta);
+	lcartoes.fechaEscrita();
+	
+} catch (IOException e) {
+	// TODO Auto-generated catch block
+	e.printStackTrace();
+}
+////----------- 
+String pathlContadores ="C:\\Users\\Jorge\\Documents\\GitHub\\ProjetoIPJ\\Contadores";
+
+FicheiroDeObjectos contador= new  FicheiroDeObjectos();
+try {
+	contador.abreEscrita(pathlContadores);
+	contador.escreveObjecto(this.contadores);
+	contador.fechaEscrita();
+
+} catch (IOException e) {
+// TODO Auto-generated catch block
+e.printStackTrace();
+}  
+  
+}
+
+
+
+
  
 }

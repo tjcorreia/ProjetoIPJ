@@ -1,7 +1,8 @@
 package org.eclipse.wb.swt;
 
+import java.io.Serializable;
 
-public class Cartao {
+public class Cartao implements Serializable{
 	
 	protected int cartaoID;       
 	protected String nome;

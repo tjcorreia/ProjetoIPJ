@@ -1,11 +1,14 @@
 package org.eclipse.wb.swt;
+
+import java.io.Serializable;
+
 /**
 * Breve descrição do código
 *
 * @sid 2019
 * @aid 1.1
 */
-public class Funcionario extends Utilizador {
+public class Funcionario extends Utilizador implements Serializable{
 
 	protected String  posicao;
 
