@@ -10,7 +10,7 @@ import java.io.Serializable;
 */
 public class ContaPrazo extends Conta implements Serializable{
 	
-	private String datacria;
+	
 
 
 	

@@ -24,6 +24,7 @@ import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.graphics.Image;
 
 /**
  * Breve descrição do código
@@ -215,7 +216,13 @@ public class J_01_AdminLClientes {
 		lblListaDeClientes.setText("Lista de Clientes");
 		lblListaDeClientes.setAlignment(SWT.CENTER);
 		lblListaDeClientes.setBounds(226, 62, 322, 15);
+		
+		Label lblNewLabel = new Label(shell, SWT.NONE);
+		
+		
+		lblNewLabel.setImage(SWTResourceManager.getImage(J_01_AdminLClientes.class, 
+				"C:\\Users\\Jorge\\Documents\\GitHub\\ProjetoIPJ\\Banco\\Imagens\\LogojavaBank _Withe_104.png"));
+		lblNewLabel.setBounds(10, 10, 154, 111);
 
 	}
-
 }

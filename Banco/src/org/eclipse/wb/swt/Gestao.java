@@ -37,18 +37,6 @@ public class Gestao {
 
 
 
-
-
-public Gestao( Utilizador uactual) {
-		super();
-		this.mapUtilizadores = mapUtilizadores;
-		this.lContas = lContas;
-		this.mapCartaoConta = mapCartaoConta;
-		this.contadores = contadores;
-		this.uactual = uactual;
-	}
-
-
 public Gestao() {
 	super();
 	this.mapUtilizadores = new HashMap<String, Utilizador>();
@@ -192,21 +180,18 @@ public void Gerir(Gestao gestor,Utilizador uactual){
 			System.out.println("VERIFICA ---->Key = " + entry.getKey() + ", Value = " + entry.getValue());
 			System.out.println(entry.getValue().toString());
 		}
-		
-	
-	
-	
-	
-	
-	
-	
+
 
 	if (uactual instanceof Administrador) {
 		J_01_Administrador novaJAdmin= new J_01_Administrador( gestor,uactual);
 		novaJAdmin.open();
 		
 	}
-	
+	else if (uactual instanceof Funcionario) {
+		J_02Menu_F novaJFuncionario= new J_02Menu_F(gestor, uactual) ;
+		novaJFuncionario.open();
+		
+	}
 	
 	
 	

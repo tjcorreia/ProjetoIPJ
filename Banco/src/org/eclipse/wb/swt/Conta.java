@@ -14,7 +14,8 @@ public class Conta implements Serializable{
 	
 
 	protected int contaID;        //
-	protected double saldo;   // 
+	protected double saldo;   //
+	protected String datacria;
 	protected ArrayList<Transacao> transacoesC;// 
 	protected ArrayList<Integer> clientesDaC;// 
 	public TipoC escolhaID;
@@ -23,17 +24,23 @@ public class Conta implements Serializable{
 
 
 
-	public Conta(int contaID, double saldo, ArrayList<Transacao> transacoesC, ArrayList<Integer> clientesDaC,
-			TipoC escolhaID) {
+
+
+
+
+	public Conta(int contaID, double saldo, String datacria, ArrayList<Transacao> transacoesC,
+			ArrayList<Integer> clientesDaC, TipoC escolhaID) {
 		super();
 		this.contaID = contaID;
 		this.saldo = saldo;
+		this.datacria = datacria;
 		this.transacoesC = transacoesC;
 		this.clientesDaC = clientesDaC;
 		this.escolhaID = escolhaID;
 	}
 
 
+	
 
 	public Conta() {
 		super();
@@ -43,7 +50,7 @@ public class Conta implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Conta(int contaID, double saldo) {
+	public Conta(int contaID, double saldo, String datacria) {
 		super();
 		this.transacoesC = new ArrayList<Transacao>();
 		this.clientesDaC = new ArrayList<Integer>();
@@ -53,9 +60,11 @@ public class Conta implements Serializable{
 
 
 
+
 	public int getContaID() {
 		return contaID;
 	}
+
 
 
 
@@ -65,9 +74,11 @@ public class Conta implements Serializable{
 
 
 
+
 	public double getSaldo() {
 		return saldo;
 	}
+
 
 
 
@@ -77,9 +88,25 @@ public class Conta implements Serializable{
 
 
 
+
+	public String getDatacria() {
+		return datacria;
+	}
+
+
+
+
+	public void setDatacria(String datacria) {
+		this.datacria = datacria;
+	}
+
+
+
+
 	public ArrayList<Transacao> getTransacoesC() {
 		return transacoesC;
 	}
+
 
 
 
@@ -89,9 +116,11 @@ public class Conta implements Serializable{
 
 
 
+
 	public ArrayList<Integer> getClientesDaC() {
 		return clientesDaC;
 	}
+
 
 
 
@@ -101,15 +130,20 @@ public class Conta implements Serializable{
 
 
 
+
 	public TipoC getEscolhaID() {
 		return escolhaID;
 	}
 
 
 
+
 	public void setEscolhaID(TipoC escolhaID) {
 		this.escolhaID = escolhaID;
 	}
+
+
+
 
 
 	
