@@ -263,15 +263,7 @@ public class J_01_Admin_NovoF {
 			}
 		});
 		button_Logout.setText("Log Out");
-		button_Logout.setBounds(550, 10, 75, 25);
-			
-		text_UserNovoF.setText("2222");
-		text_PassNovoF.setText("6666");
-		text_UltimoNovoF.setText("2222");;
-		text_PrimeiroNovoF.setText("2222");;
-		text_ValorID_NovoF.setText("78453123");
-		text_Email_NovoF.setText("mail31@gmail.com");
-		text_MobileNovoF.setText("969420730");
+		button_Logout.setBounds(550, 10, 75, 25);;;
 		
 		// JA_BT1.0 Botao Criar novo Funcionario.
 		criarNovoF.addMouseListener(new MouseAdapter() {

@@ -275,10 +275,77 @@ public Funcionario addNovoF(String login, String password, String nome, String s
 	int iD=contadores.get("Utilizador")+1;
 	Funcionario NovoFU= new  Funcionario(iD,login,password,nome,sobrenome,dataNascimento,
 			morada,escolhaID,valorID,email,mobile,posicao);
-	contadores.put("Utilizador",contadores.get("Utilizador")+1);
+	contadores.replace("Utilizador",iD);
 	mapUtilizadores.put(login,NovoFU);
 	return NovoFU;
 }
+
+//faz a verificação da adicção de um do novo Cliente
+public String  verificanovoC(TipoID escolhadaIDN,Text valorID_NovoF,Text email_NovoF,Text userNovoF,Text mobileNovoF) { 
+	
+	valorID_NovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
+	email_NovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
+	userNovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
+	mobileNovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
+String  verifica ="";
+// verifica username
+	if (mapUtilizadores.containsKey(userNovoF.getText())) {
+		verifica =verifica+"O nome de Utilizador não é válido. \n";
+		userNovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
+		}
+	
+	for (Entry<String, Utilizador> entry : mapUtilizadores.entrySet()) {
+		if (entry.getValue() instanceof Cliente) {
+			
+			System.out.println("VERIFICA ---->Key = " + entry.getKey() + ", Value = " + entry.getValue());
+//			Scanner sc = new Scanner(System.in);
+//			String  vAr = sc.nextLine();
+//			sc.close();
+			 // verifica identificação
+		if (entry.getValue().getEscolhaID().equals(escolhadaIDN) && entry.getValue().getValorID().equals(valorID_NovoF.getText())) {
+			verifica = verifica+"O "+escolhadaIDN+" com o numero :"+valorID_NovoF+" já está associado a um Funcionario. \n";
+			valorID_NovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
+		}
+		
+		else if  (!(entry.getValue().getEscolhaID().equals(escolhadaIDN)) && entry.getValue().getValorID().equals(valorID_NovoF.getText())) {
+			if (escolhadaIDN.equals(TipoID.CARTAOCIDADAO)) {
+			verifica =verifica+"O numero :"+valorID_NovoF.getText()+" já existe e está associado ao Passaporte. \n";
+		}
+			else {
+				verifica =verifica+"O numero :"+valorID_NovoF.getText()+" já existe e está associado ao Cartão de Cidadão. \n";
+			}
+			valorID_NovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
+			}
+		
+		// verifica email
+		if (entry.getValue().getEmail().equals(email_NovoF.getText())) {
+			verifica =verifica+"Já existe um utilizador com este email\n";
+			email_NovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
+		}
+//			// verifica telemovel
+		if ((""+entry.getValue().getMobile()).equals(mobileNovoF.getText())) {
+			verifica =verifica+"Já existe um utilizador com este contacto de telemovel. \n";
+			mobileNovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
+		}
+		}
+	}
+	System.out.println((verifica));
+return verifica;
+}
+
+//faz a adicção de um do novo Cliente
+
+public Cliente addNovoC(String login, String password, String nome, String sobrenome, String dataNascimento,
+		String morada, TipoID escolhaID, String valorID, String email, int mobile) {
+	int iD=contadores.get("Utilizador")+1;
+	Cliente novoCl= new  Cliente(iD,login,password,nome,sobrenome,dataNascimento,
+			morada,escolhaID,valorID,email,mobile);
+	contadores.replace("Utilizador",iD);
+	mapUtilizadores.put(login,novoCl);
+	return novoCl;
+}
+
+
 
 
 
