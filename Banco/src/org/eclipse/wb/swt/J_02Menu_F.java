@@ -105,8 +105,8 @@ public class J_02Menu_F {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				
-//				J_02Menu_F_CriaCliente alteraDados=new J_02Menu_F_CriaCliente(gestor,uUtilizador);
-//				alteraDados.open();
+				J_02Menu_F_CriaCliente alteraDados=new J_02Menu_F_CriaCliente(gestor,uUtilizador);
+				alteraDados.open();
 				shlMenuFuncionrio.dispose();
 			}
 		});
