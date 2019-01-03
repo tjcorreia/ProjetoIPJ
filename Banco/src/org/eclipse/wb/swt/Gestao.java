@@ -44,73 +44,75 @@ public Gestao() {
 	this.mapCartaoConta = new HashMap<Integer, Integer>();
 	this.contadores = new HashMap<String, Integer>();
 	
-	// load data 
-		try {
-			loadAll();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//	// load data 
+//		try {
+//			loadAll();
+//		} catch (ClassNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 	
 	
-//	contadores.put("Utilizador", 1000); //inicializa o Contador de Utilizadores
-//	contadores.put("Contas", 1); //inicializa o Contador de Contas
-//	
-//	
-//	// Administradores
-////	Administrador(int uID, String login, String password, String nome, String sobrenome, String dataNascimento,
-////			String morada, TipoID escolhaID, int valorID, String email, int mobile)
-//	Administrador MachadoU= new  Administrador(contadores.get("Utilizador"), "Machado", "Admin", "Alberto","Machado0",
-//			"1977/07/17","Rua Maria Vitoria",Administrador.TipoID.CARTAOCIDADAO,"78456123","mail@gmail.com",965420735);
-//	
-//	Administrador CorreiaU= new  Administrador(contadores.get("Utilizador")+1, "Correia", "Admin","Tiago", "Coreia",
-//			"1977/07/30","Rua Maria Vitoria ",Administrador.TipoID.CARTAOCIDADAO,"12345678","mail@gmail.com",965420733);
-//	contadores.put("Utilizador",contadores.get("Utilizador")+1);
-//	mapUtilizadores.put("Machado",MachadoU);
-//	mapUtilizadores.put("Correia",CorreiaU);
-//	
-//	// Funcionarios
-//	Funcionario MachadoFU= new  Funcionario(contadores.get("Utilizador")+1, "Maria", "Fun","Maria", "Machado0",
-//			"1977/07/30","Rua Maria Vitoria",Funcionario.TipoID.CARTAOCIDADAO,"78456123","mail1@gmail.com",965420730);
-//	contadores.put("Utilizador",contadores.get("Utilizador")+1);
-//	Funcionario CorreiaFU= new  Funcionario(contadores.get("Utilizador")+1, "Correia2", "Fun","Tiago", "Coreia",
-//			"1977/07/30","Rua Maria Vitoria ",Funcionario.TipoID.CARTAOCIDADAO,"12345678","mail2@gmail.com",965420731);
-//	contadores.put("Utilizador",contadores.get("Utilizador")+1);
-//	mapUtilizadores.put("Maria",MachadoFU);
-//	mapUtilizadores.put("Correia2",CorreiaFU);
-//	
-//	
-//	
-//	
-//	// Clientes
-//	
-////	Utilizador(uID,login,password,nome,morada,escolhaID,valorID,email,mobile)
-//	
-//		Cliente cl1= new  Cliente(contadores.get("Utilizador")+1, "MCliente", "Cliente", "Alberto","Machado0",
-//				"1977/07/30","Rua Maria Vitoria",Administrador.TipoID.CARTAOCIDADAO,"78456123","mail",965420730);
-//		contadores.put("Utilizador",contadores.get("Utilizador")+1);
-//		Cliente cl2= new  Cliente(contadores.get("Utilizador")+1, "CCliente", "Cliente", "Tiago","Coreia",
-//				"1977/07/30","Rua Maria Vitoriazfgadfgadfgsdfgsdfg",Administrador.TipoID.CARTAOCIDADAO,"12345678","mail",965420730);
-//		contadores.put("Utilizador",contadores.get("Utilizador")+1);
-//		mapUtilizadores.put("MCliente",cl1);
-//		mapUtilizadores.put("CCliente",cl2);
-//		
-//		
-//		
-//		
-//		
-//		
-//	
-//	// Contas 
-//	
-//	ContaNormal cn1= new ContaNormal(1,1500);
-//	cn1.getClientesDaC().add(1004);
-//	ContaNormal cn2= new ContaNormal(2,2500);
-//	cn1.getClientesDaC().add(1005);
-//	lContas.add(cn1);
-//	lContas.add(cn2);
-//	
-//	
+	contadores.put("Utilizador", 1000); //inicializa o Contador de Utilizadores
+	contadores.put("Contas", 1); //inicializa o Contador de Contas
+	
+	
+	// Administradores
+//	Administrador(int uID, String login, String password, String nome, String sobrenome, String dataNascimento,
+//			String morada, TipoID escolhaID, int valorID, String email, int mobile)
+	Administrador MachadoU= new  Administrador(contadores.get("Utilizador"), "Machado", "Admin", "Alberto","Machado0",
+			"1977/07/17","Rua Maria Vitoria",Administrador.TipoID.CARTAOCIDADAO,"78456123","mail@gmail.com",965420735);
+	
+	Administrador CorreiaU= new  Administrador(contadores.get("Utilizador")+1, "Correia", "Admin","Tiago", "Coreia",
+			"1977/07/30","Rua Maria Vitoria ",Administrador.TipoID.CARTAOCIDADAO,"12345678","mail@gmail.com",965420733);
+	contadores.put("Utilizador",contadores.get("Utilizador")+1);
+	mapUtilizadores.put("Machado",MachadoU);
+	mapUtilizadores.put("Correia",CorreiaU);
+	
+	// Funcionarios
+	Funcionario MachadoFU= new  Funcionario(contadores.get("Utilizador")+1, "Maria", "Fun","Maria", "Machado0",
+			"1977/07/30","Rua Maria Vitoria",Funcionario.TipoID.CARTAOCIDADAO,"78456123","mail1@gmail.com",965420730);
+	contadores.put("Utilizador",contadores.get("Utilizador")+1);
+	Funcionario CorreiaFU= new  Funcionario(contadores.get("Utilizador")+1, "Correia2", "Fun","Tiago", "Coreia",
+			"1977/07/30","Rua Maria Vitoria ",Funcionario.TipoID.CARTAOCIDADAO,"12345678","mail2@gmail.com",965420731);
+	contadores.put("Utilizador",contadores.get("Utilizador")+1);
+	mapUtilizadores.put("Maria",MachadoFU);
+	mapUtilizadores.put("Correia2",CorreiaFU);
+	
+	
+	
+	
+	// Clientes
+	
+//	Utilizador(uID,login,password,nome,morada,escolhaID,valorID,email,mobile)
+	
+		Cliente cl1= new  Cliente(contadores.get("Utilizador")+1, "MCliente", "Cliente", "Alberto","Machado0",
+				"1977/07/30","Rua Maria Vitoria",Administrador.TipoID.CARTAOCIDADAO,"78456123","mail",965420730);
+		contadores.put("Utilizador",contadores.get("Utilizador")+1);
+		Cliente cl2= new  Cliente(contadores.get("Utilizador")+1, "CCliente", "Cliente", "Tiago","Coreia",
+				"1977/07/30","Rua Maria Vitoriazfgadfgadfgsdfgsdfg",Administrador.TipoID.CARTAOCIDADAO,"12345678","mail",965420730);
+		contadores.put("Utilizador",contadores.get("Utilizador")+1);
+		mapUtilizadores.put("MCliente",cl1);
+		mapUtilizadores.put("CCliente",cl2);
+		
+		
+		
+		
+		
+		
+	
+	// Contas 
+	
+	ContaNormal cn1= new ContaNormal(1,1500,"2017/06/02");
+	cn1.getClientesDaC().add(cl1.getuID());
+	cl1.getLcontaS().add(cn1);
+	ContaNormal cn2= new ContaNormal(2,2500,"2017/06/02");
+	cn2.getClientesDaC().add(cl2.getuID());
+	cl1.getLcontaS().add(cn2);
+	lContas.add(cn1);
+	lContas.add(cn2);
+	
+	
 }
 
 

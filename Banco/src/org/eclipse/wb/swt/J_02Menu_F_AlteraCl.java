@@ -133,10 +133,10 @@ public class J_02Menu_F_AlteraCl {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				
-				clienteAID=text_NumeroCliente.getText();
-				J_02Menu_F_ContasCliente novosDados = new J_02Menu_F_ContasCliente(gestor,uUtilizador, clienteAID);	
-				novosDados.open();
-				shellMF.dispose();
+//				clienteAID=text_NumeroCliente.getText();
+//				J_02Menu_F_ContasCliente novosDados = new J_02Menu_F_ContasCliente(gestor,uUtilizador, clienteAID);	
+//				novosDados.open();
+//				shellMF.dispose();
 			}
 		});
 		btnExibirContasDo.setText("Exibir Contas do Cliente");
@@ -163,10 +163,10 @@ public class J_02Menu_F_AlteraCl {
 		btnFazerDepsitoEm.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				clienteAID=text_NumeroCliente.getText();
-				J_02Menu_F_ContasCliente novosDados = new J_02Menu_F_ContasCliente(gestor,uUtilizador, clienteAID);	
-				novosDados.open();
-				shellMF.dispose();
+//				clienteAID=text_NumeroCliente.getText();
+//				J_02Menu_F_ContasCliente novosDados = new J_02Menu_F_ContasCliente(gestor,uUtilizador, clienteAID);	
+//				novosDados.open();
+//				shellMF.dispose();
 			}
 		});
 		btnFazerDepsitoEm.setBounds(10, 270, 192, 25);
@@ -190,10 +190,10 @@ public class J_02Menu_F_AlteraCl {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				
-				clienteAID=text_NumeroCliente.getText();
-				J_02Menu_F_PedeCartao novosDados = new J_02Menu_F_PedeCartao(gestor,uUtilizador, clienteAID);	
-				novosDados.open();
-				shellMF.dispose();
+//				clienteAID=text_NumeroCliente.getText();
+//				J_02Menu_F_PedeCartao novosDados = new J_02Menu_F_PedeCartao(gestor,uUtilizador, clienteAID);	
+//				novosDados.open();
+//				shellMF.dispose();
 				
 			}
 		});
@@ -255,10 +255,10 @@ public class J_02Menu_F_AlteraCl {
 		button_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
-				clienteAID="*** Procura de Cliente";
-				J_02Menu_F_ProcuraCl novaProcura = new J_02Menu_F_ProcuraCl( gestor,uUtilizador, clienteAID);	
-				novaProcura.open();
-				shellMF.dispose();
+//				clienteAID="*** Procura de Cliente";
+//				J_02Menu_F_ProcuraCl novaProcura = new J_02Menu_F_ProcuraCl( gestor,uUtilizador, clienteAID);	
+//				novaProcura.open();
+//				shellMF.dispose();
 				
 			}
 		});

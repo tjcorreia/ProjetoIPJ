@@ -136,6 +136,15 @@ public class J_02Menu_F {
 		btnFazerDepsitoEm.setBounds(10, 298, 192, 25);
 		
 		Button btnListarClientes = new Button(shlMenuFuncionrio, SWT.NONE);
+		btnListarClientes.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+			
+				J_02Menu_F_ListaClientes lclientes=new J_02Menu_F_ListaClientes(gestor,uUtilizador);
+				lclientes.open();
+				shlMenuFuncionrio.dispose();
+			}
+		});
 		btnListarClientes.setText("Listar Clientes");
 		btnListarClientes.setBounds(10, 112, 192, 25);
 		

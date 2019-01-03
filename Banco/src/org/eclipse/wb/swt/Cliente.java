@@ -26,6 +26,7 @@ public class Cliente extends Utilizador implements Serializable{
 	public Cliente(int uID, String login, String password, String nome, String sobrenome, String dataNascimento,
 			String morada, TipoID escolhaID, String valorID, String email, int mobile) {
 		super(uID, login, password, nome, sobrenome, dataNascimento, morada, escolhaID, valorID, email, mobile);
+		this.lcontaS = new ArrayList<Conta>() ;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -85,6 +86,22 @@ public class Cliente extends Utilizador implements Serializable{
 		return ClienteL;
 	}
 
+	public String listadeContasC() {
+		String ClienteL="";
+		if (lcontaS==null) {
+		ClienteL="0";
+		return ClienteL;
+				}
+	
+	for (int i=0;i<lcontaS.size();i++) {
+		ClienteL=ClienteL+"<";
+	ClienteL=ClienteL+lcontaS.get(i).contaID;
+	ClienteL=ClienteL+">";
+	}
+	return ClienteL;
+	}
+	
+	
  public Conta addConta(Conta novaConta) {
 	 
 	 lcontaS.add(novaConta);
