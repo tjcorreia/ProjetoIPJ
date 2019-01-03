@@ -196,12 +196,8 @@ public class J_02Menu_F_ListaClientes {
 		txtIntroduzaClienteId.setText(clienteActua);
 		txtIntroduzaClienteId.setBounds(10, 143, 192, 24);
 
-		Button btnProcuraCliente = new Button(shlMenuFuncionrio, SWT.NONE);
-		btnProcuraCliente.setText("Procura Cliente");
-		btnProcuraCliente.setBounds(10, 174, 192, 25);
-
 		Composite composite = new Composite(shlMenuFuncionrio, SWT.NONE);
-		composite.setBounds(213, 55, 420, 348);
+		composite.setBounds(215, 85, 420, 348);
 
 		ScrolledComposite scrolledComposite = new ScrolledComposite(composite,
 				SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);

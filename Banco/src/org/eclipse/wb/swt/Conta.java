@@ -52,6 +52,9 @@ public class Conta implements Serializable{
 	
 	public Conta(int contaID, double saldo, String datacria) {
 		super();
+		this.contaID = contaID;
+		this.saldo = saldo;
+		this.datacria = datacria;
 		this.transacoesC = new ArrayList<Transacao>();
 		this.clientesDaC = new ArrayList<Integer>();
 		this.escolhaID = TipoC.ABERTA;
@@ -144,6 +147,20 @@ public class Conta implements Serializable{
 
 
 
+
+	@Override
+	public String toString() {
+		return "Conta [contaID=" + contaID + ", saldo=" + saldo + ", datacria=" + datacria + ", transacoesC="
+				+ transacoesC + ", clientesDaC=" + clientesDaC + ", escolhaID=" + escolhaID + "]";
+	}
+
+
+	 public int addClienteC(int clienteID) {
+		 
+		 clientesDaC.add(clienteID);
+		 return clienteID;
+		 
+	 }
 
 
 	

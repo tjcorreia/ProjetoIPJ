@@ -103,14 +103,25 @@ public Gestao() {
 	
 	// Contas 
 	
-	ContaNormal cn1= new ContaNormal(1,1500,"2017/06/02");
-	cn1.getClientesDaC().add(cl1.getuID());
-	cl1.getLcontaS().add(cn1);
-	ContaNormal cn2= new ContaNormal(2,2500,"2017/06/02");
-	cn2.getClientesDaC().add(cl2.getuID());
-	cl1.getLcontaS().add(cn2);
+	Conta cn1= new ContaNormal(1,1500,"2017/06/02");
 	lContas.add(cn1);
+//	System.out.println("Conta-->" + (lContas.toString()));
+//	System.out.println("Conta-->" + (cn1.toString()));
+	cn1.addClienteC(cl1.getuID());
+	cl1.addConta(cn1);
+	
+	
+	
+	ContaNormal cn2= new ContaNormal(2,2500,"2017/06/02");
+	cn2.addClienteC(cl2.getuID());
+	cl2.addConta(cn2);
+	
+	
 	lContas.add(cn2);
+	
+//	
+//	System.out.println("Conta-->" + (cn1.toString()));
+//	System.out.println("GeRAL-->" + (cl1.toString()));
 	
 	
 }

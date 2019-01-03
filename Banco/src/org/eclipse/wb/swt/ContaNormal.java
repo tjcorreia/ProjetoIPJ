@@ -49,6 +49,13 @@ public class ContaNormal extends Conta implements Serializable{
 		this.cartaodaConta = cartaodaConta;
 	}
 
+	@Override
+	public String toString() {
+		return "ContaNormal [cartaodaConta=" + cartaodaConta + ", contaID=" + contaID + ", saldo=" + saldo
+				+ ", datacria=" + datacria + ", transacoesC=" + transacoesC + ", clientesDaC=" + clientesDaC
+				+ ", escolhaID=" + escolhaID + "]";
+	}
+
 
 	
 	
