@@ -206,7 +206,35 @@ public class J_02Menu_F_ListaClientes {
 		scrolledComposite.setExpandHorizontal(true);
 		scrolledComposite.setBounds(0, 107, 409, 231);
 
-		table = new Table(scrolledComposite, SWT.BORDER | SWT.FULL_SELECTION);
+		table = new Table(scrolledComposite, SWT.BORDER | SWT.FULL_SELECTION|SWT.SINGLE);
+		
+		table.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				
+				System.out.println(e.toString());
+				int indexLivroSelecionado = ((Table)e.widget).indexOf((TableItem)e.item);
+				System.out.println( indexLivroSelecionado );
+				
+				
+				table.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseDoubleClick(MouseEvent e) {
+					
+						Cliente actual=new Cliente();
+						actual=gestor.procuraCid(Integer.parseInt((table.getItem(table.getSelectionIndex())).getText(0)));
+						
+						
+						J_02Menu_F_DadosCl cliente=new J_02Menu_F_DadosCl(gestor,uUtilizador,actual);
+						cliente.open();
+						shlMenuFuncionrio.dispose();	
+						
+						
+					}
+				});
+		
+			}
+		});
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
 

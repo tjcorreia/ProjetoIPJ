@@ -42,6 +42,7 @@ public class J_02Menu_F_DadosCl {
 	private Text Funcionario;
 	private Text text_2;
 	private Text text_PrimeiroNovoC;
+	private Text text_UltimoNovoC;
 	private Text text_MoradaNovoC;
 	private Text text_ValorID_NovoC;
 	private Text text_Email_NovoC;
@@ -52,6 +53,7 @@ public class J_02Menu_F_DadosCl {
 	private Text text_DataN_mes;
 	private Text text_DataN_dia;
 	private Text txt_Indique_ID;
+	private Combo combo_TipoID_NovoC;
 	private Table table_ListadeContas;
 
 	public Cliente getClienteActual() {
@@ -241,7 +243,7 @@ public class J_02Menu_F_DadosCl {
 		text_MoradaNovoC = new Text(composite, SWT.BORDER);
 		text_MoradaNovoC.setBounds(81, 90, 339, 21);
 
-		Combo combo_TipoID_NovoC = new Combo(composite, SWT.NONE);
+		combo_TipoID_NovoC = new Combo(composite, SWT.NONE);
 		combo_TipoID_NovoC.setItems(new String[] { "Cartao Cidadao", "Passaporte" });
 		combo_TipoID_NovoC.setBounds(81, 117, 121, 23);
 		combo_TipoID_NovoC.select(0);
@@ -283,7 +285,7 @@ public class J_02Menu_F_DadosCl {
 		text_PassNovoC.setText("*********");
 		text_PassNovoC.setBounds(289, 207, 131, 21);
 
-		Text text_UltimoNovoC = new Text(composite, SWT.BORDER);
+		text_UltimoNovoC = new Text(composite, SWT.BORDER);
 		text_UltimoNovoC.setBounds(250, 62, 170, 21);
 
 		Label label_9 = new Label(composite, SWT.NONE);
@@ -362,6 +364,18 @@ public class J_02Menu_F_DadosCl {
 		tblclmnTitulares.setWidth(57);
 		tblclmnTitulares.setText("Titulares");
 		
+		if (!(clienteActual==null)) {
+	//// colocaca dados
+			txt_Indique_ID.setText(""+clienteActual.getuID());
+			preecheTabela(clienteActual);
+		
+		}
+		
+		
+		
+		
+		
+		
 		Button btnNewButton = new Button(composite, SWT.NONE);
 		btnNewButton.setGrayed(true);
 		//*procura pelo cliente através da ID e devolve toda a informação
@@ -371,11 +385,7 @@ public class J_02Menu_F_DadosCl {
 				
 				String mensagem="";
 				if (estaVazio(txt_Indique_ID)){
-//					O Cliente" + f.getNome() + " " + f.getSobrenome() + " foi adicionado\n"
-//							+ "Morada:" + f.getMorada() + "\n" + "" + f.escolhaID.toString() + ":" + f.getValorID()
-//							+ "\n" + "Email:" + f.getEmail() + "\n" + "Contacto:" + f.getMobile() + "\n"
-//							+ "Data Nascimento:" + f.getDataNascimento() + "\n"
-					
+
 					mensagem=" Para procurar um Cliente tem de introduzir um ID"	;
 				}
 				else {
@@ -393,56 +403,8 @@ public class J_02Menu_F_DadosCl {
 							+ "Data Nascimento:" + clienteActual.getDataNascimento() + "\n";
 							
 						//// colocaca dados
-							
-							text_PrimeiroNovoC.setText(clienteActual.getNome());
-							text_UltimoNovoC.setText(clienteActual.getSobrenome());
-							text_MoradaNovoC.setText(clienteActual.getMorada());
-							text_UserNovoC.setText("********");
-							text_PassNovoC.setText("********");
-							;
-							text_ValorID_NovoC.setText(clienteActual.getValorID());
-							text_Email_NovoC.setText(clienteActual.getEmail());
-							text_MobileNovoC.setText("" + clienteActual.getMobile());
-							String[] data = clienteActual.getDataNascimento().split("/");
-							text_DataN_Ano.setText(data[0]);
-							;
-							text_DataN_mes.setText(data[1]);
-							;
-							text_DataN_dia.setText(data[2]);
-							;
-							combo_TipoID_NovoC.setText(clienteActual.getEscolhaID().toString());
-							// bolqueia campos não alteraveis
-							text_PrimeiroNovoC.setEnabled(false);
-
-							text_UltimoNovoC.setEnabled(false);
-							text_MoradaNovoC.setEnabled(false);
-							text_UserNovoC.setEnabled(false);
-							text_PassNovoC.setEnabled(false);
-							text_ValorID_NovoC.setEnabled(false);
-							text_Email_NovoC.setEnabled(false);
-							text_MobileNovoC.setEnabled(false);
-							text_DataN_Ano.setEnabled(false);
-							text_DataN_mes.setEnabled(false);
-							text_DataN_dia.setEnabled(false);
-							combo_TipoID_NovoC.setEnabled(false);
-							
-
-							table_ListadeContas.clearAll();
-							table_ListadeContas.removeAll();
-							
-							if(!(clienteActual.getLcontaSC()==null)){
-							for (int i=0;i<clienteActual.getLcontaSC().size();i++) {
-								TableItem item = new TableItem(table_ListadeContas, SWT.NULL);
-								item.setText(0, ("" + clienteActual.getLcontaSC().get(i).getContaID()));
-								item.setText(1, ("" + clienteActual.getLcontaSC().get(i).getClientesDaC().size()));
-//								
-							}
-							
-							
-							
-							}
-							
-							
+							preecheTabela(clienteActual);			
+													
 						}	
 					}
 					}
@@ -455,7 +417,7 @@ public class J_02Menu_F_DadosCl {
 				MessageBox box = new MessageBox(shellMF, SWT.MULTI);
 //				f = (Cliente) (gestor.getMapUtilizadores().get(text_UserNovoC.getText()));
 				box.setText("DADOS DO CLIENTE");
-				box.setMessage("  ");
+				box.setMessage("  "+ mensagem);
 //				
 				box.open();
 			}
@@ -466,6 +428,60 @@ public class J_02Menu_F_DadosCl {
 
 	}
 
+	// preenche tabela de dados do cliente
+	
+	public void preecheTabela(Cliente clienteActual) {
+		text_PrimeiroNovoC.setText(clienteActual.getNome());
+		text_UltimoNovoC.setText(clienteActual.getSobrenome());
+		text_MoradaNovoC.setText(clienteActual.getMorada());
+		text_UserNovoC.setText("********");
+		text_PassNovoC.setText("********");
+		;
+		text_ValorID_NovoC.setText(clienteActual.getValorID());
+		text_Email_NovoC.setText(clienteActual.getEmail());
+		text_MobileNovoC.setText("" + clienteActual.getMobile());
+		String[] data = clienteActual.getDataNascimento().split("/");
+		text_DataN_Ano.setText(data[0]);
+		;
+		text_DataN_mes.setText(data[1]);
+		;
+		text_DataN_dia.setText(data[2]);
+		;
+		combo_TipoID_NovoC.setText(clienteActual.getEscolhaID().toString());
+		// bolqueia campos não alteraveis
+		text_PrimeiroNovoC.setEnabled(false);
+		text_UltimoNovoC.setEnabled(false);
+		text_MoradaNovoC.setEnabled(false);
+		text_UserNovoC.setEnabled(false);
+		text_PassNovoC.setEnabled(false);
+		text_ValorID_NovoC.setEnabled(false);
+		text_Email_NovoC.setEnabled(false);
+		text_MobileNovoC.setEnabled(false);
+		text_DataN_Ano.setEnabled(false);
+		text_DataN_mes.setEnabled(false);
+		text_DataN_dia.setEnabled(false);
+		combo_TipoID_NovoC.setEnabled(false);
+		
+
+		this.table_ListadeContas.clearAll();
+		this.table_ListadeContas.removeAll();
+		
+		if(!(clienteActual.getLcontaSC()==null)){
+		for (int i=0;i<clienteActual.getLcontaSC().size();i++) {
+			TableItem item = new TableItem(this.table_ListadeContas, SWT.NULL);
+			item.setText(0, ("" + clienteActual.getLcontaSC().get(i).getContaID()));
+			item.setText(1, ("" + clienteActual.getLcontaSC().get(i).getClientesDaC().size()));	
+		}
+		}	
+		
+	}
+	
+	
+	
+	
+	
+	
+	
 	// ***************metodos**************
 
 	public boolean estaVazio(Text texto) {
