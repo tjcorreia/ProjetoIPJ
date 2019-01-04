@@ -23,7 +23,6 @@ public class J_02Menu_F {
 	private Gestao gestor;
 	private Utilizador uUtilizador;
 	private Text Funcionario;
-	private Text txtIntroduzaClienteId;
 
 	
 	
@@ -133,7 +132,7 @@ public class J_02Menu_F {
 			}
 		});
 		btnDadosDoCliente.setText("Dados do cliente");
-		btnDadosDoCliente.setBounds(10, 205, 192, 25);
+		btnDadosDoCliente.setBounds(10, 143, 192, 25);
 		
 		Button btnFazerDepsitoEm = new Button(shlMenuFuncionrio, SWT.NONE);
 		btnFazerDepsitoEm.setText("Dep\u00F3sito em Dinheiro");
@@ -204,13 +203,6 @@ public class J_02Menu_F {
 		Funcionario.setBounds(215, 10, 326, 25);
 		
 		String clienteActua="Introduza Cliente ID";
-		txtIntroduzaClienteId = new Text(shlMenuFuncionrio, SWT.BORDER | SWT.CENTER | SWT.MULTI);
-		txtIntroduzaClienteId.setText(clienteActua);
-		txtIntroduzaClienteId.setBounds(10, 143, 192, 24);
-		
-		Button btnProcuraCliente = new Button(shlMenuFuncionrio, SWT.NONE);
-		btnProcuraCliente.setText("Procura Cliente");
-		btnProcuraCliente.setBounds(10, 174, 192, 25);
 
 	}
 }

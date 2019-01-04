@@ -32,7 +32,6 @@ public class J_02Menu_F_ListaClientes {
 	private Gestao gestor;
 	private Utilizador uUtilizador;
 	private Text Funcionario;
-	private Text txtIntroduzaClienteId;
 	private Text text_nome;
 	private Text text_identifica;
 	private Text text_telemovel;
@@ -128,10 +127,6 @@ public class J_02Menu_F_ListaClientes {
 		btnExibirContasDo.setText("Exibir Contas do Cliente");
 		btnExibirContasDo.setBounds(10, 236, 192, 25);
 
-		Button btnDadosDoCliente = new Button(shlMenuFuncionrio, SWT.NONE);
-		btnDadosDoCliente.setText("Altera dados do cliente");
-		btnDadosDoCliente.setBounds(10, 205, 192, 25);
-
 		Button btnFazerDepsitoEm = new Button(shlMenuFuncionrio, SWT.NONE);
 		btnFazerDepsitoEm.setText("Dep\u00F3sito em Dinheiro");
 		btnFazerDepsitoEm.addSelectionListener(new SelectionAdapter() {
@@ -192,9 +187,6 @@ public class J_02Menu_F_ListaClientes {
 		Funcionario.setBounds(215, 10, 326, 25);
 
 		String clienteActua = "Introduza Cliente ID";
-		txtIntroduzaClienteId = new Text(shlMenuFuncionrio, SWT.BORDER | SWT.CENTER | SWT.MULTI);
-		txtIntroduzaClienteId.setText(clienteActua);
-		txtIntroduzaClienteId.setBounds(10, 143, 192, 24);
 
 		Composite composite = new Composite(shlMenuFuncionrio, SWT.NONE);
 		composite.setBounds(215, 85, 420, 348);
@@ -204,7 +196,7 @@ public class J_02Menu_F_ListaClientes {
 		scrolledComposite.setVisible(true);
 		scrolledComposite.setExpandVertical(true);
 		scrolledComposite.setExpandHorizontal(true);
-		scrolledComposite.setBounds(0, 107, 409, 231);
+		scrolledComposite.setBounds(10, 107, 400, 231);
 
 		table = new Table(scrolledComposite, SWT.BORDER | SWT.FULL_SELECTION|SWT.SINGLE);
 		
@@ -255,7 +247,7 @@ public class J_02Menu_F_ListaClientes {
 		tblclmnTelemovel.setText("Telemovel");
 
 		TableColumn tblclmnLContas = new TableColumn(table, SWT.NONE);
-		tblclmnLContas.setWidth(113);
+		tblclmnLContas.setWidth(105);
 		tblclmnLContas.setText("Lista de Contas");
 		scrolledComposite.setContent(table);
 		scrolledComposite.setMinSize(new Point(417, 45));
@@ -377,6 +369,10 @@ public class J_02Menu_F_ListaClientes {
 		});
 		btnNewButton.setBounds(159, 76, 106, 25);
 		btnNewButton.setText("Pesquisa Cliente");
+		
+		Button button_1 = new Button(shlMenuFuncionrio, SWT.NONE);
+		button_1.setText("Dados do cliente");
+		button_1.setBounds(10, 143, 192, 25);
 
 	}
 }
