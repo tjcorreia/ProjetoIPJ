@@ -163,7 +163,7 @@ public class J_01ListaLivros {
 					listaLivrosCarrinho.add(livroSelecionado);
 					livroSelecionado.stock--;
 					//actualizar o label do número de items no carrinho
-					lblItmes.update();
+					lblItmes.setText( listaLivrosCarrinho.size() + " itmes");
 					System.out.println("STock=" + livroSelecionado.stock);
 					System.out.println("items no carrinho=" + listaLivrosCarrinho.size() );
 				}
@@ -197,7 +197,7 @@ public class J_01ListaLivros {
 					ultimoDaLista.stock++;
 				}
 				//actualizar o label do número de items no carrinho
-				lblItmes.update();
+				lblItmes.setText( listaLivrosCarrinho.size() + " itmes");
 				System.out.println("items no carrinho=" + listaLivrosCarrinho.size() );
 			}
 		});
