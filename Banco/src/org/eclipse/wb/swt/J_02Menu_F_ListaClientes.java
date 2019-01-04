@@ -204,7 +204,7 @@ public class J_02Menu_F_ListaClientes {
 		scrolledComposite.setVisible(true);
 		scrolledComposite.setExpandVertical(true);
 		scrolledComposite.setExpandHorizontal(true);
-		scrolledComposite.setBounds(0, 107, 407, 231);
+		scrolledComposite.setBounds(0, 107, 409, 231);
 
 		table = new Table(scrolledComposite, SWT.BORDER | SWT.FULL_SELECTION);
 		table.setHeaderVisible(true);

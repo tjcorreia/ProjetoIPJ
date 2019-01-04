@@ -23,6 +23,9 @@ import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Spinner;
 import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.List;
+import org.eclipse.swt.widgets.TableColumn;
+import org.eclipse.swt.widgets.TableItem;
 
 /**
  * Breve descrição do código
@@ -30,7 +33,7 @@ import org.eclipse.swt.widgets.Table;
  * @sid 2019
  * @aid 1.1
  */
-public class J_02Menu_F_AlteraCl {
+public class J_02Menu_F_DadosCl {
 
 	protected Shell shellMF;
 	private Gestao gestor;
@@ -49,6 +52,7 @@ public class J_02Menu_F_AlteraCl {
 	private Text text_DataN_mes;
 	private Text text_DataN_dia;
 	private Text txt_Indique_ID;
+	private Table table_ListadeContas;
 
 	public Cliente getClienteActual() {
 		return clienteActual;
@@ -74,7 +78,7 @@ public class J_02Menu_F_AlteraCl {
 		this.gestor = gestor;
 	}
 
-	public J_02Menu_F_AlteraCl() {
+	public J_02Menu_F_DadosCl() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -82,7 +86,7 @@ public class J_02Menu_F_AlteraCl {
 	/**
 	 * @wbp.parser.entryPoint
 	 */
-	public J_02Menu_F_AlteraCl(Gestao gestor, Utilizador uUtilizador,Cliente clienteActual) {
+	public J_02Menu_F_DadosCl(Gestao gestor, Utilizador uUtilizador,Cliente clienteActual) {
 		super();
 		this.uUtilizador = uUtilizador;
 		this.gestor = gestor;
@@ -96,7 +100,7 @@ public class J_02Menu_F_AlteraCl {
 	 */
 //	public static void main(String[] args) {
 //		try {
-//			J_02Menu_F_AlteraCl window = new J_02Menu_F_AlteraCl(new Gestao(), new Funcionario(), new cliente());
+//			J_02Menu_F_DadosCl window = new J_02Menu_F_DadosCl(new Gestao(), new Funcionario(), new cliente());
 //			window.open();
 //		} catch (Exception e) {
 //			e.printStackTrace();
@@ -228,7 +232,6 @@ public class J_02Menu_F_AlteraCl {
 		label_1.setBounds(10, 65, 55, 15);
 
 		text_PrimeiroNovoC = new Text(composite, SWT.BORDER);
-		text_PrimeiroNovoC.setText("2222");
 		text_PrimeiroNovoC.setBounds(81, 62, 163, 21);
 
 		Label label_2 = new Label(composite, SWT.NONE);
@@ -244,7 +247,7 @@ public class J_02Menu_F_AlteraCl {
 		combo_TipoID_NovoC.select(0);
 
 		text_ValorID_NovoC = new Text(composite, SWT.BORDER);
-		text_ValorID_NovoC.setText("78453123");
+		text_ValorID_NovoC.setText("");
 		text_ValorID_NovoC.setBounds(208, 119, 212, 21);
 
 		Label label_3 = new Label(composite, SWT.NONE);
@@ -252,7 +255,7 @@ public class J_02Menu_F_AlteraCl {
 		label_3.setBounds(10, 149, 55, 15);
 
 		text_Email_NovoC = new Text(composite, SWT.BORDER);
-		text_Email_NovoC.setText("mail31@gmail.com");
+		text_Email_NovoC.setText("");
 		text_Email_NovoC.setBounds(81, 146, 339, 21);
 
 		Label label_4 = new Label(composite, SWT.NONE);
@@ -260,7 +263,7 @@ public class J_02Menu_F_AlteraCl {
 		label_4.setBounds(10, 183, 55, 15);
 
 		text_MobileNovoC = new Text(composite, SWT.BORDER);
-		text_MobileNovoC.setText("969420730");
+		text_MobileNovoC.setText("");
 		text_MobileNovoC.setBounds(81, 180, 88, 21);
 
 		Label label_5 = new Label(composite, SWT.NONE);
@@ -268,7 +271,7 @@ public class J_02Menu_F_AlteraCl {
 		label_5.setBounds(10, 210, 55, 15);
 
 		text_UserNovoC = new Text(composite, SWT.BORDER);
-		text_UserNovoC.setText("2222");
+		text_UserNovoC.setText("*********");
 		text_UserNovoC.setBounds(81, 207, 121, 21);
 
 		Label label_6 = new Label(composite, SWT.NONE);
@@ -276,11 +279,10 @@ public class J_02Menu_F_AlteraCl {
 		label_6.setBounds(228, 210, 55, 15);
 
 		text_PassNovoC = new Text(composite, SWT.BORDER);
-		text_PassNovoC.setText("6666");
+		text_PassNovoC.setText("*********");
 		text_PassNovoC.setBounds(289, 207, 131, 21);
 
 		Text text_UltimoNovoC = new Text(composite, SWT.BORDER);
-		text_UltimoNovoC.setText("2222");
 		text_UltimoNovoC.setBounds(250, 62, 170, 21);
 
 		Label label_9 = new Label(composite, SWT.NONE);
@@ -307,15 +309,19 @@ public class J_02Menu_F_AlteraCl {
 		label_12.setText("/");
 		label_12.setBounds(355, 185, 8, 15);
 		
-		Button btnNewButton = new Button(composite, SWT.NONE);
-		btnNewButton.setLocation(10, 28);
-		btnNewButton.setSize(88, 25);
-		btnNewButton.setText("Cliente");
+
 		
 		txt_Indique_ID = new Text(composite, SWT.BORDER | SWT.CENTER);
 		txt_Indique_ID.setText("Indique o ID");
 		txt_Indique_ID.setLocation(10, 7);
 		txt_Indique_ID.setSize(88, 21);
+		txt_Indique_ID.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseDown(MouseEvent e) {
+				txt_Indique_ID.setText("");	
+			}
+		});
+		
 
 		Label label_13 = new Label(composite, SWT.NONE);
 		label_13.setText("/");
@@ -329,17 +335,131 @@ public class J_02Menu_F_AlteraCl {
 		lblDadosDoCliente.setAlignment(SWT.CENTER);
 		lblDadosDoCliente.setBounds(104, 10, 291, 15);
 		
-		Button btnAlterarCliente = new Button(composite, SWT.TOGGLE);
-		btnAlterarCliente.setText("Alterar\r\n Cliente");
-		btnAlterarCliente.setBounds(180, 267, 103, 58);
-		
-		Button btnMovimentarConta = new Button(composite, SWT.TOGGLE);
+		Button btnMovimentarConta = new Button(composite, SWT.TOGGLE | SWT.MULTI | SWT.WRAP | SWT.NONE);
 		btnMovimentarConta.setText("Movimentar Contas");
-		btnMovimentarConta.setBounds(10, 267, 138, 58);
+		btnMovimentarConta.setBounds(245, 267, 88, 58);
 		
-		Button button_1 = new Button(composite, SWT.TOGGLE);
+		Button button_1 = new Button(composite, SWT.TOGGLE | SWT.MULTI | SWT.WRAP | SWT.NONE);
 		button_1.setText("Alterar\r\nNovo Cliente");
-		button_1.setBounds(317, 267, 103, 58);
+		button_1.setBounds(339, 267, 81, 58);
+		
+		Label lblListaDeContas = new Label(composite, SWT.NONE);
+		lblListaDeContas.setText("Lista de Contas");
+		lblListaDeContas.setBounds(81, 234, 88, 15);
+		
+		table_ListadeContas = new Table(composite, SWT.BORDER | SWT.FULL_SELECTION);
+		table_ListadeContas.setBounds(81, 255, 131, 82);
+		table_ListadeContas.setHeaderVisible(true);
+		table_ListadeContas.setLinesVisible(true);
+		
+		TableColumn tblclmnId = new TableColumn(table_ListadeContas, SWT.NONE);
+		tblclmnId.setWidth(67);
+		tblclmnId.setText("ID");
+		
+		TableColumn tblclmnTitulares = new TableColumn(table_ListadeContas, SWT.NONE);
+		tblclmnTitulares.setWidth(57);
+		tblclmnTitulares.setText("Titulares");
+		
+		Button btnNewButton = new Button(composite, SWT.NONE);
+		//*procura pelo cliente através da ID e devolve toda a informação
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				txt_Indique_ID.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
+				String mensagem="";
+				if (estaVazio(txt_Indique_ID)){
+//					O Cliente" + f.getNome() + " " + f.getSobrenome() + " foi adicionado\n"
+//							+ "Morada:" + f.getMorada() + "\n" + "" + f.escolhaID.toString() + ":" + f.getValorID()
+//							+ "\n" + "Email:" + f.getEmail() + "\n" + "Contacto:" + f.getMobile() + "\n"
+//							+ "Data Nascimento:" + f.getDataNascimento() + "\n"
+					
+					mensagem=" Para procurar um Cliente tem de introduzir um ID"	;
+				}
+				else {
+					if(eNumero(txt_Indique_ID)==-1) {
+						mensagem=" O ID do cliente tem de ser numerico"	;
+					}
+					else {
+						if (gestor.procuraCid(Integer.parseInt(txt_Indique_ID.getText()))==null) {
+						txt_Indique_ID.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));}
+						else {
+							clienteActual=gestor.procuraCid(Integer.parseInt(txt_Indique_ID.getText()));
+							mensagem="O Cliente" + clienteActual.getNome() + " " + clienteActual.getSobrenome() + " foi encontrado\n"
+							+ "Morada:" + clienteActual.getMorada() + "\n" + "" + clienteActual.escolhaID.toString() + ":" + clienteActual.getValorID()
+							+ "\n" + "Email:" + clienteActual.getEmail() + "\n" + "Contacto:" + clienteActual.getMobile() + "\n"
+							+ "Data Nascimento:" + clienteActual.getDataNascimento() + "\n";
+							
+						//// colocaca dados
+							
+							text_PrimeiroNovoC.setText(clienteActual.getNome());
+							text_UltimoNovoC.setText(clienteActual.getSobrenome());
+							text_MoradaNovoC.setText(clienteActual.getMorada());
+							text_UserNovoC.setText("********");
+							text_PassNovoC.setText("********");
+							;
+							text_ValorID_NovoC.setText(clienteActual.getValorID());
+							text_Email_NovoC.setText(clienteActual.getEmail());
+							text_MobileNovoC.setText("" + clienteActual.getMobile());
+							String[] data = clienteActual.getDataNascimento().split("/");
+							text_DataN_Ano.setText(data[0]);
+							;
+							text_DataN_mes.setText(data[1]);
+							;
+							text_DataN_dia.setText(data[2]);
+							;
+							combo_TipoID_NovoC.setText(clienteActual.getEscolhaID().toString());
+							// bolqueia campos não alteraveis
+							text_PrimeiroNovoC.setEnabled(false);
+
+							text_UltimoNovoC.setEnabled(false);
+							text_MoradaNovoC.setEnabled(false);
+							text_UserNovoC.setEnabled(false);
+							text_PassNovoC.setEnabled(false);
+							text_ValorID_NovoC.setEnabled(false);
+							text_Email_NovoC.setEnabled(false);
+							text_MobileNovoC.setEnabled(false);
+							text_DataN_Ano.setEnabled(false);
+							text_DataN_mes.setEnabled(false);
+							text_DataN_dia.setEnabled(false);
+							combo_TipoID_NovoC.setEnabled(false);
+							
+
+							table_ListadeContas.clearAll();
+							table_ListadeContas.removeAll();
+							
+							if(!(clienteActual.getLcontaSC()==null)){
+							for (int i=0;i<clienteActual.getLcontaSC().size();i++) {
+								TableItem item = new TableItem(table_ListadeContas, SWT.NULL);
+								item.setText(0, ("" + clienteActual.getLcontaSC().get(i).getContaID()));
+								item.setText(1, ("" + clienteActual.getLcontaSC().get(i).getClientesDaC().size()));
+//								
+							}
+							
+							
+							
+							}
+							
+							
+						}	
+					}
+					}
+				
+				
+				
+				
+				
+				
+				MessageBox box = new MessageBox(shellMF, SWT.MULTI);
+//				f = (Cliente) (gestor.getMapUtilizadores().get(text_UserNovoC.getText()));
+				box.setText("DADOS DO CLIENTE");
+				box.setMessage("  ");
+//				
+				box.open();
+			}
+		});
+		btnNewButton.setLocation(10, 28);
+		btnNewButton.setSize(88, 25);
+		btnNewButton.setText("Obter Cliente");
 
 	}
 

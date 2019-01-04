@@ -123,7 +123,16 @@ public class J_02Menu_F {
 		btnExibirContasDo.setBounds(10, 236, 192, 25);
 		
 		Button btnDadosDoCliente = new Button(shlMenuFuncionrio, SWT.NONE);
-		btnDadosDoCliente.setText("Altera dados do cliente");
+		btnDadosDoCliente.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				J_02Menu_F_DadosCl cliente=new J_02Menu_F_DadosCl(gestor,uUtilizador,null);
+				cliente.open();
+				shlMenuFuncionrio.dispose();
+				
+			}
+		});
+		btnDadosDoCliente.setText("Dados do cliente");
 		btnDadosDoCliente.setBounds(10, 205, 192, 25);
 		
 		Button btnFazerDepsitoEm = new Button(shlMenuFuncionrio, SWT.NONE);

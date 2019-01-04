@@ -358,6 +358,18 @@ public Cliente addNovoC(String login, String password, String nome, String sobre
 	return novoCl;
 }
 
+//faz a procura de um Cliente pela ID
+
+public Cliente procuraCid(int idCliente) {
+	Cliente clienteID=null;
+	for (Entry<String, Utilizador> entry : mapUtilizadores.entrySet()) {
+		if ((entry.getValue() instanceof Cliente)&(entry.getValue().getuID()==idCliente)) {
+			return 	(Cliente) entry.getValue();		
+		}
+		}
+
+	return null;
+}
 
 
 
