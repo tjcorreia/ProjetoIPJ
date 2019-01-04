@@ -247,6 +247,7 @@ public class J_02Menu_F_DadosCl {
 		combo_TipoID_NovoC.select(0);
 
 		text_ValorID_NovoC = new Text(composite, SWT.BORDER);
+		text_ValorID_NovoC.setTouchEnabled(true);
 		text_ValorID_NovoC.setText("");
 		text_ValorID_NovoC.setBounds(208, 119, 212, 21);
 
@@ -318,6 +319,7 @@ public class J_02Menu_F_DadosCl {
 		txt_Indique_ID.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseDown(MouseEvent e) {
+				txt_Indique_ID.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
 				txt_Indique_ID.setText("");	
 			}
 		});
@@ -337,11 +339,11 @@ public class J_02Menu_F_DadosCl {
 		
 		Button btnMovimentarConta = new Button(composite, SWT.TOGGLE | SWT.MULTI | SWT.WRAP | SWT.NONE);
 		btnMovimentarConta.setText("Movimentar Contas");
-		btnMovimentarConta.setBounds(245, 267, 88, 58);
+		btnMovimentarConta.setBounds(339, 298, 81, 58);
 		
-		Button button_1 = new Button(composite, SWT.TOGGLE | SWT.MULTI | SWT.WRAP | SWT.NONE);
-		button_1.setText("Alterar\r\nNovo Cliente");
-		button_1.setBounds(339, 267, 81, 58);
+		Button btnAlterarDados = new Button(composite, SWT.TOGGLE | SWT.MULTI | SWT.WRAP | SWT.NONE);
+		btnAlterarDados.setText("Alterar\r\n Dados");
+		btnAlterarDados.setBounds(339, 234, 81, 58);
 		
 		Label lblListaDeContas = new Label(composite, SWT.NONE);
 		lblListaDeContas.setText("Lista de Contas");
@@ -361,11 +363,12 @@ public class J_02Menu_F_DadosCl {
 		tblclmnTitulares.setText("Titulares");
 		
 		Button btnNewButton = new Button(composite, SWT.NONE);
+		btnNewButton.setGrayed(true);
 		//*procura pelo cliente através da ID e devolve toda a informação
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
-				txt_Indique_ID.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
+				
 				String mensagem="";
 				if (estaVazio(txt_Indique_ID)){
 //					O Cliente" + f.getNome() + " " + f.getSobrenome() + " foi adicionado\n"
