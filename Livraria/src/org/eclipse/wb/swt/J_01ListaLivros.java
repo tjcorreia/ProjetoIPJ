@@ -30,10 +30,10 @@ public class J_01ListaLivros {
 
 	protected Shell shlViewComicsInc;
 	private ArrayList <Livro> listaLivrosDaBusca;//adicionou-se este atributo para listar os livros na table
-	protected ArrayList <Livro> listaLivrosCarrinho = new ArrayList<>();//adicionou-se este atributo para criar carrinho a partir desta lista
+	protected static ArrayList <Livro> listaLivrosCarrinho = new ArrayList<>();//adicionou-se este atributo para criar carrinho a partir desta lista
 	protected Livro livroSelecionado;//atributo que nos dá o livro que está selecionado na table
 	private Table table;
-	private Livraria livraria;//atributo adicionado para poder ir buscar o método 'procurarLivro' desta classe
+	protected static Livraria livraria;//atributo adicionado para poder ir buscar o método 'procurarLivro' desta classe
 	private int indexLivroSelecionado;//adicionou-se este atributo para poder passá-lo entre métodos
 	private Carrinho carrinho = new Carrinho();
 	private Text text;;//adicionou-se carrinho para cria-lo e passar para outras classes
