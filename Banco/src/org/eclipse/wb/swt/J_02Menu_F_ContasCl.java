@@ -295,14 +295,14 @@ public class J_02Menu_F_ContasCl {
 		combo.setBounds(171, 59, 224, 23);
 		
 				Button btnPedirCartaoDe = new Button(composite, SWT.NONE);
-				btnPedirCartaoDe.setBounds(23, 326, 192, 25);
+				btnPedirCartaoDe.setBounds(23, 271, 184, 25);
 				btnPedirCartaoDe.setSelection(true);
 				btnPedirCartaoDe.addSelectionListener(new SelectionAdapter() {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
 					}
 				});
-				btnPedirCartaoDe.setText("Pedir Cartao de Debito");
+				btnPedirCartaoDe.setText("Criar Cartao de Debito");
 				
 				txtSelecioneUmaConta = new Text(composite, SWT.BORDER | SWT.CENTER);
 				txtSelecioneUmaConta.setText("Selecione uma Conta");
@@ -343,10 +343,15 @@ public class J_02Menu_F_ContasCl {
 				text.setText("Indique o ID");
 				text.setBounds(343, 7, 88, 21);
 				
-				Button button_1 = new Button(composite, SWT.NONE);
-				button_1.setText("Obter Cliente");
-				button_1.setGrayed(true);
-				button_1.setBounds(343, 28, 88, 25);
+				Button btnObterConta = new Button(composite, SWT.NONE);
+				btnObterConta.setText("Obter Conta");
+				btnObterConta.setGrayed(true);
+				btnObterConta.setBounds(343, 28, 88, 25);
+				
+				Button btnMovimentarConta = new Button(composite, SWT.NONE);
+				btnMovimentarConta.setText("Movimentar Conta");
+				btnMovimentarConta.setSelection(true);
+				btnMovimentarConta.setBounds(211, 271, 184, 25);
 
 	}
 

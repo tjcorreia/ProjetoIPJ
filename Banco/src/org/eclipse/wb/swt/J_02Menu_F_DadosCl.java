@@ -344,7 +344,46 @@ public class J_02Menu_F_DadosCl {
 		btnMovimentarConta.setBounds(339, 298, 81, 58);
 		
 		Button btnAlterarDados = new Button(composite, SWT.TOGGLE | SWT.MULTI | SWT.WRAP | SWT.NONE);
-		btnAlterarDados.setText("Alterar\r\n Dados");
+		String alterarDadosC="Alterar\r\n Dados";
+		btnAlterarDados.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				if (btnAlterarDados.getText().equals("Alterar\r\n Dados") && !txt_Indique_ID.getText().equals("Indique o ID") ){
+					String alterarDadosC="Pode alterar\r\n Dados";
+					btnAlterarDados.setText(alterarDadosC);
+					btnAlterarDados.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_GREEN));
+					// desbolqueia campos não alteraveis
+					text_PrimeiroNovoC.setEnabled(true);
+					text_UltimoNovoC.setEnabled(true);
+					text_MoradaNovoC.setEnabled(true);
+					text_UserNovoC.setEnabled(true);
+					text_PassNovoC.setEnabled(true);
+					text_ValorID_NovoC.setEnabled(true);
+					text_Email_NovoC.setEnabled(true);
+					text_MobileNovoC.setEnabled(true);
+					text_DataN_Ano.setEnabled(true);
+					text_DataN_mes.setEnabled(true);
+					text_DataN_dia.setEnabled(true);
+					combo_TipoID_NovoC.setEnabled(true);
+					
+					
+				}
+				else if (btnAlterarDados.getText().equals("Pode alterar\r\n Dados")){
+					
+					
+					
+					
+					
+					
+					
+					String alterarDadosC="Alterar\r\n Dados";
+					btnAlterarDados.setText(alterarDadosC);
+					btnAlterarDados.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_GRAY));
+				}
+				
+			}
+		});
+		btnAlterarDados.setText(alterarDadosC);
 		btnAlterarDados.setBounds(339, 234, 81, 58);
 		
 		Label lblListaDeContas = new Label(composite, SWT.NONE);
@@ -429,6 +468,10 @@ public class J_02Menu_F_DadosCl {
 		Button btnCriarConta = new Button(composite, SWT.TOGGLE);
 		btnCriarConta.setText("Criar Conta");
 		btnCriarConta.setBounds(238, 234, 81, 58);
+		
+		Button btnListaDeMovimentos = new Button(composite, SWT.TOGGLE);
+		btnListaDeMovimentos.setText("Lista de Movimentos");
+		btnListaDeMovimentos.setBounds(239, 298, 81, 58);
 
 	}
 
