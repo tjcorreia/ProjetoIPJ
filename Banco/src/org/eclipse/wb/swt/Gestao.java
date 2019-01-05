@@ -1,6 +1,5 @@
 package org.eclipse.wb.swt;
 
-
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -13,37 +12,31 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
-
+import org.eclipse.wb.swt.Transacao.TipoT;
 import org.eclipse.wb.swt.Utilizador.TipoID;
 
 /**
-* Breve descrição do código
-*
-* @sid 2019
-* @aid 1.1
-*/
-
-
+ * Breve descrição do código
+ *
+ * @sid 2019
+ * @aid 1.1
+ */
 
 public class Gestao {
-	
-	
+
 	private Map<String, Utilizador> mapUtilizadores; // String Username
 	private ArrayList<Conta> lContas;
 	private Map<Integer, Integer> mapCartaoConta; // numcartaonumconta
 	private Map<String, Integer> contadores;
 	private Utilizador uactual;
 
+	public Gestao() {
+		super();
+		this.mapUtilizadores = new HashMap<String, Utilizador>();
+		this.lContas = new ArrayList<Conta>();
+		this.mapCartaoConta = new HashMap<Integer, Integer>();
+		this.contadores = new HashMap<String, Integer>();
 
-
-
-public Gestao() {
-	super();
-	this.mapUtilizadores = new HashMap<String, Utilizador>();
-	this.lContas = new ArrayList<Conta>();
-	this.mapCartaoConta = new HashMap<Integer, Integer>();
-	this.contadores = new HashMap<String, Integer>();
-	
 //	// load data 
 //		try {
 //			loadAll();
@@ -51,370 +44,430 @@ public Gestao() {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
-	
-	
-	contadores.put("Utilizador", 1000); //inicializa o Contador de Utilizadores
-	contadores.put("Contas", 1); //inicializa o Contador de Contas
-	
-	
-	// Administradores
+
+		contadores.put("Utilizador", 1000); // inicializa o Contador de Utilizadores
+		contadores.put("Contas", 1); // inicializa o Contador de Contas
+
+		// Administradores
 //	Administrador(int uID, String login, String password, String nome, String sobrenome, String dataNascimento,
 //			String morada, TipoID escolhaID, int valorID, String email, int mobile)
-	Administrador MachadoU= new  Administrador(contadores.get("Utilizador"), "Machado", "Admin", "Alberto","Machado0",
-			"1977/07/17","Rua Maria Vitoria",Administrador.TipoID.CARTAOCIDADAO,"78456123","mail@gmail.com",965420735);
-	
-	Administrador CorreiaU= new  Administrador(contadores.get("Utilizador")+1, "Correia", "Admin","Tiago", "Coreia",
-			"1977/07/30","Rua Maria Vitoria ",Administrador.TipoID.CARTAOCIDADAO,"12345678","mail@gmail.com",965420733);
-	contadores.put("Utilizador",contadores.get("Utilizador")+1);
-	mapUtilizadores.put("Machado",MachadoU);
-	mapUtilizadores.put("Correia",CorreiaU);
-	
-	// Funcionarios
-	Funcionario MachadoFU= new  Funcionario(contadores.get("Utilizador")+1, "Maria", "Fun","Maria", "Machado0",
-			"1977/07/30","Rua Maria Vitoria",Funcionario.TipoID.CARTAOCIDADAO,"78456123","mail1@gmail.com",965420730);
-	contadores.put("Utilizador",contadores.get("Utilizador")+1);
-	Funcionario CorreiaFU= new  Funcionario(contadores.get("Utilizador")+1, "Correia2", "Fun","Tiago", "Coreia",
-			"1977/07/30","Rua Maria Vitoria ",Funcionario.TipoID.CARTAOCIDADAO,"12345678","mail2@gmail.com",965420731);
-	contadores.put("Utilizador",contadores.get("Utilizador")+1);
-	mapUtilizadores.put("Maria",MachadoFU);
-	mapUtilizadores.put("Correia2",CorreiaFU);
-	
-	
-	
-	
-	// Clientes
-	
+		Administrador MachadoU = new Administrador(contadores.get("Utilizador"), "Machado", "Admin", "Alberto",
+				"Machado0", "1977/07/17", "Rua Maria Vitoria", Administrador.TipoID.CARTAOCIDADAO, "78456123",
+				"mail@gmail.com", 965420735);
+
+		Administrador CorreiaU = new Administrador(contadores.get("Utilizador") + 1, "Correia", "Admin", "Tiago",
+				"Coreia", "1977/07/30", "Rua Maria Vitoria ", Administrador.TipoID.CARTAOCIDADAO, "12345678",
+				"mail@gmail.com", 965420733);
+		contadores.put("Utilizador", contadores.get("Utilizador") + 1);
+		mapUtilizadores.put("Machado", MachadoU);
+		mapUtilizadores.put("Correia", CorreiaU);
+
+		// Funcionarios
+		Funcionario MachadoFU = new Funcionario(contadores.get("Utilizador") + 1, "Maria", "Fun", "Maria", "Machado0",
+				"1977/07/30", "Rua Maria Vitoria", Funcionario.TipoID.CARTAOCIDADAO, "78456123", "mail1@gmail.com",
+				965420730);
+		contadores.put("Utilizador", contadores.get("Utilizador") + 1);
+		Funcionario CorreiaFU = new Funcionario(contadores.get("Utilizador") + 1, "Correia2", "Fun", "Tiago", "Coreia",
+				"1977/07/30", "Rua Maria Vitoria ", Funcionario.TipoID.CARTAOCIDADAO, "12345678", "mail2@gmail.com",
+				965420731);
+		contadores.put("Utilizador", contadores.get("Utilizador") + 1);
+		mapUtilizadores.put("Maria", MachadoFU);
+		mapUtilizadores.put("Correia2", CorreiaFU);
+
+		// Clientes
+
 //	Utilizador(uID,login,password,nome,morada,escolhaID,valorID,email,mobile)
-	
-		Cliente cl1= new  Cliente(contadores.get("Utilizador")+1, "MCliente", "Cliente", "Alberto","Machado0",
-				"1977/07/30","Rua Maria Vitoria",Administrador.TipoID.CARTAOCIDADAO,"78456123","mail",965420730);
-		contadores.put("Utilizador",contadores.get("Utilizador")+1);
-		Cliente cl2= new  Cliente(contadores.get("Utilizador")+1, "CCliente", "Cliente", "Tiago","Coreia",
-				"1977/07/30","Rua Maria Vitoriazfgadfgadfgsdfgsdfg",Administrador.TipoID.CARTAOCIDADAO,"12345678","mail",965420730);
-		contadores.put("Utilizador",contadores.get("Utilizador")+1);
-		mapUtilizadores.put("MCliente",cl1);
-		mapUtilizadores.put("CCliente",cl2);
+
+		Cliente cl1 = new Cliente(contadores.get("Utilizador") + 1, "MCliente", "Cliente", "Alberto", "Machado0",
+				"1977/07/30", "Rua Maria Vitoria", Administrador.TipoID.CARTAOCIDADAO, "78456123", "mail", 965420731);
+		contadores.put("Utilizador", contadores.get("Utilizador") + 1);
+		Cliente cl2 = new Cliente(contadores.get("Utilizador") + 1, "CCliente", "Cliente", "Tiago", "Coreia",
+				"1977/07/30", "Rua Maria Vitoriazfgadfgadfgsdfgsdfg", Administrador.TipoID.CARTAOCIDADAO, "12345678",
+				"mail", 965420730);
+		contadores.put("Utilizador", contadores.get("Utilizador") + 1);
+		mapUtilizadores.put("MCliente", cl1);
+		mapUtilizadores.put("CCliente", cl2);
+
+		// Contas
+
 		
-		
-		
-		
-		
-		
-	
-	// Contas 
-	
-	Conta cn1= new ContaNormal(1,1500,"2017/06/02");
-	lContas.add(cn1);
+		Conta cn1 = new ContaNormal(1, 9000, "2017/06/02");
+		lContas.add(cn1);
 //	System.out.println("Conta-->" + (lContas.toString()));
 //	System.out.println("Conta-->" + (cn1.toString()));
-	cn1.addClienteC(cl1.getuID());
-	cl1.addConta(cn1);
-	
-	
-	
-	ContaNormal cn2= new ContaNormal(2,2500,"2017/06/02");
-	cn2.addClienteC(cl2.getuID());
-	cl2.addConta(cn2);
-	
-	
-	lContas.add(cn2);
-	
-//	
+		cn1.addClienteC(cl1.getuID());
+		cl1.addConta(cn1);
+
+		ContaNormal cn2 = new ContaNormal(2, 2500, "2017/06/02");
+		cn2.addClienteC(cl2.getuID());
+		cl2.addConta(cn2);
+
+		lContas.add(cn2);
+
+//	transações
+		
+		Transacao T0Cn1 = new Transacao(MachadoFU.getuID(), "2018/01/02", 1500,"", 0,Transacao.TipoT.DEP_CASH);
+		cn1.addTransacaoC(T0Cn1);
+		Transacao T1Cn1 = new Transacao(CorreiaFU.getuID(), "2018/02/02", -500,"", 0,Transacao.TipoT.LEV_CASH);
+		cn1.addTransacaoC(T1Cn1);
+		Transacao T2Cn1 = new Transacao(MachadoFU.getuID(), "2018/03/02", 2000,"", 0,Transacao.TipoT.DEP_CASH);
+		cn1.addTransacaoC(T2Cn1);
+		Transacao T3Cn1 = new Transacao(CorreiaFU.getuID(), "2018/04/02", 1000,"", 0,Transacao.TipoT.DEP_CASH);
+		cn1.addTransacaoC(T3Cn1);
+		Transacao T4Cn1 = new Transacao(MachadoFU.getuID(), "2018/05/02", 1000,"", 0,Transacao.TipoT.DEP_CASH);
+		cn1.addTransacaoC(T4Cn1);
+		Transacao T5Cn1 = new Transacao(CorreiaFU.getuID(), "2018/06/02", 1000,"", 0,Transacao.TipoT.DEP_CASH);
+		cn1.addTransacaoC(T5Cn1);
+		Transacao T6Cn1 = new Transacao(MachadoFU.getuID(), "2018/07/02", 1000,"", 0,Transacao.TipoT.DEP_CASH);
+		cn1.addTransacaoC(T6Cn1);
+		Transacao T7Cn1 = new Transacao(CorreiaFU.getuID(), "2018/08/02", 1000,"", 0,Transacao.TipoT.DEP_CASH);
+		cn1.addTransacaoC(T7Cn1);
+		Transacao T8Cn1 = new Transacao(MachadoFU.getuID(), "2018/09/02", 1000,"", 0,Transacao.TipoT.DEP_CASH);
+		cn1.addTransacaoC(T8Cn1);
+		Transacao T9Cn1 = new Transacao(MachadoFU.getuID(), "2018/10/02", 1000,"", 0,Transacao.TipoT.DEP_CASH);
+		cn1.addTransacaoC(T9Cn1);
+		Transacao T10Cn1 = new Transacao(MachadoFU.getuID(), "2018/10/02", -1000,"", 2,Transacao.TipoT.TRANSFERENCIA);
+		cn1.addTransacaoC(T10Cn1);
+		Transacao T0Cn2 = new Transacao(MachadoFU.getuID(), "2018/01/02", 1500,"", 0,Transacao.TipoT.DEP_CASH);
+		cn1.addTransacaoC(T0Cn2);
+		Transacao T1Cn2 = new Transacao(MachadoFU.getuID(), "2018/10/02", 1000,"", -1,Transacao.TipoT.TRANSFERENCIA);
+		cn1.addTransacaoC(T1Cn2);//( duvida colocar conta de origem ?)
+		
 //	System.out.println("Conta-->" + (cn1.toString()));
 //	System.out.println("GeRAL-->" + (cl1.toString()));
-	
-	
-}
 
-
-public Utilizador getUactual() {
-		return uactual;
 	}
 
-
-
+	public Utilizador getUactual() {
+		return uactual;
+	}
 
 	public void setUactual(Utilizador uactual) {
 		this.uactual = uactual;
 	}
 
+	public Map<String, Integer> getContadores() {
+		return contadores;
+	}
 
+	public void setContadores(Map<String, Integer> contadores) {
+		this.contadores = contadores;
+	}
 
-public Map<String, Integer> getContadores() {
-	return contadores;
-}
+	public Map<String, Utilizador> getMapUtilizadores() {
+		return mapUtilizadores;
+	}
 
+	public void setMapUtilizadores(Map<String, Utilizador> mapUtilizadores) {
+		this.mapUtilizadores = mapUtilizadores;
+	}
 
-public void setContadores(Map<String, Integer> contadores) {
-	this.contadores = contadores;
-}
+	public ArrayList<Conta> getlContas() {
+		return lContas;
+	}
 
-public Map<String, Utilizador> getMapUtilizadores() {
-	return mapUtilizadores;
-}
+	public void setlContas(ArrayList<Conta> lContas) {
+		this.lContas = lContas;
+	}
 
+	public Map<Integer, Integer> getMapCartaoConta() {
+		return mapCartaoConta;
+	}
 
-public void setMapUtilizadores(Map<String, Utilizador> mapUtilizadores) {
-	this.mapUtilizadores = mapUtilizadores;
-}
+	public void setMapCartaoConta(Map<Integer, Integer> mapCartaoConta) {
+		this.mapCartaoConta = mapCartaoConta;
+	}
 
-
-
-public ArrayList<Conta> getlContas() {
-	return lContas;
-}
-
-
-public void setlContas(ArrayList<Conta> lContas) {
-	this.lContas = lContas;
-}
-
-
-public Map<Integer, Integer> getMapCartaoConta() {
-	return mapCartaoConta;
-}
-
-
-public void setMapCartaoConta(Map<Integer, Integer> mapCartaoConta) {
-	this.mapCartaoConta = mapCartaoConta;
-}
-
-
-public void Gerir(Gestao gestor,Utilizador uactual){
-	
+	public void Gerir(Gestao gestor, Utilizador uactual) {
 
 //	this.mapUtilizadores = new HashMap<String, Utilizador>();
 //	this.lContas = new ArrayList<Conta>();
 //	this.mapCartaoConta = new HashMap<Integer, Integer>();
 //	this.contadores = new HashMap<String, Integer>();
-	System.out.println("lOAD");
-	for (Entry<String, Utilizador> entry : mapUtilizadores.entrySet()) {
-		
+		System.out.println("lOAD");
+		for (Entry<String, Utilizador> entry : mapUtilizadores.entrySet()) {
+
 			System.out.println("VERIFICA ---->Key = " + entry.getKey() + ", Value = " + entry.getValue());
 			System.out.println(entry.getValue().toString());
 		}
 
+		if (uactual instanceof Administrador) {
+			J_01_Administrador novaJAdmin = new J_01_Administrador(gestor, uactual);
+			novaJAdmin.open();
 
-	if (uactual instanceof Administrador) {
-		J_01_Administrador novaJAdmin= new J_01_Administrador( gestor,uactual);
-		novaJAdmin.open();
-		
-	}
-	else if (uactual instanceof Funcionario) {
-		J_02Menu_F novaJFuncionario= new J_02Menu_F(gestor, uactual) ;
-		novaJFuncionario.open();
-		
-	}
-	
-	
-	
-	
-	System.out.println("<---------------------- Log out ---------------->" );
-	
-	saveAll();
-	
-}
+		} else if (uactual instanceof Funcionario) {
+			J_02Menu_F novaJFuncionario = new J_02Menu_F(gestor, uactual);
+			novaJFuncionario.open();
 
-
-	
- //// faz a verificação das entradas do login
- public Utilizador  verfLogin(String username, String passwordV) {
-     
-     if (mapUtilizadores.containsKey(username)) {
-    	 if (mapUtilizadores.get(username).password.equals(passwordV)) {       	 
-             return mapUtilizadores.get(username);
-         }
-     }
-     return null;
- }
- 
-//faz a verificação da adicção de um do novo funcionario
-public String  verificanovoF(TipoID escolhadaIDN,Text valorID_NovoF,Text email_NovoF,Text userNovoF,Text mobileNovoF) { 
-	
-	valorID_NovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
-	email_NovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
-	userNovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
-	mobileNovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
- String  verifica ="";
- // verifica username
-	if (mapUtilizadores.containsKey(userNovoF.getText())) {
-		verifica =verifica+"O nome de Utilizador não é válido. \n";
-		userNovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
 		}
-	
-	for (Entry<String, Utilizador> entry : mapUtilizadores.entrySet()) {
-		if (entry.getValue() instanceof Funcionario) {
-			
-			System.out.println("VERIFICA ---->Key = " + entry.getKey() + ", Value = " + entry.getValue());
+
+		System.out.println("<---------------------- Log out ---------------->");
+
+		saveAll();
+
+	}
+
+	//// faz a verificação das entradas do login
+	public Utilizador verfLogin(String username, String passwordV) {
+
+		if (mapUtilizadores.containsKey(username)) {
+			if (mapUtilizadores.get(username).password.equals(passwordV)) {
+				return mapUtilizadores.get(username);
+			}
+		}
+		return null;
+	}
+
+//faz a verificação da adicção de um do novo funcionario
+	public String verificanovoF(TipoID escolhadaIDN, Text valorID_NovoF, Text email_NovoF, Text userNovoF,
+			Text mobileNovoF) {
+
+		valorID_NovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
+		email_NovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
+		userNovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
+		mobileNovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
+		String verifica = "";
+		// verifica username
+		if (mapUtilizadores.containsKey(userNovoF.getText())) {
+			verifica = verifica + "O nome de Utilizador não é válido. \n";
+			userNovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
+		}
+
+		for (Entry<String, Utilizador> entry : mapUtilizadores.entrySet()) {
+			if (entry.getValue() instanceof Funcionario) {
+
+				System.out.println("VERIFICA ---->Key = " + entry.getKey() + ", Value = " + entry.getValue());
 //			Scanner sc = new Scanner(System.in);
 //			String  vAr = sc.nextLine();
 //			sc.close();
-			 // verifica identificação
-		if (entry.getValue().getEscolhaID().equals(escolhadaIDN) && entry.getValue().getValorID().equals(valorID_NovoF.getText())) {
-			verifica = verifica+"O "+escolhadaIDN+" com o numero :"+valorID_NovoF+" já está associado a um Funcionario. \n";
-			valorID_NovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
-		}
-		
-		else if  (!(entry.getValue().getEscolhaID().equals(escolhadaIDN)) && entry.getValue().getValorID().equals(valorID_NovoF.getText())) {
-			if (escolhadaIDN.equals(TipoID.CARTAOCIDADAO)) {
-			verifica =verifica+"O numero :"+valorID_NovoF.getText()+" já existe e está associado ao Passaporte. \n";
-		}
-			else {
-				verifica =verifica+"O numero :"+valorID_NovoF.getText()+" já existe e está associado ao Cartão de Cidadão. \n";
-			}
-			valorID_NovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
-			}
-		
-		// verifica email
-		if (entry.getValue().getEmail().equals(email_NovoF.getText())) {
-			verifica =verifica+"Já existe um utilizador com este email\n";
-			email_NovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
-		}
+				// verifica identificação
+				if (entry.getValue().getEscolhaID().equals(escolhadaIDN)
+						&& entry.getValue().getValorID().equals(valorID_NovoF.getText())) {
+					verifica = verifica + "O " + escolhadaIDN + " com o numero :" + valorID_NovoF
+							+ " já está associado a um Funcionario. \n";
+					valorID_NovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
+				}
+
+				else if (!(entry.getValue().getEscolhaID().equals(escolhadaIDN))
+						&& entry.getValue().getValorID().equals(valorID_NovoF.getText())) {
+					if (escolhadaIDN.equals(TipoID.CARTAOCIDADAO)) {
+						verifica = verifica + "O numero :" + valorID_NovoF.getText()
+								+ " já existe e está associado ao Passaporte. \n";
+					} else {
+						verifica = verifica + "O numero :" + valorID_NovoF.getText()
+								+ " já existe e está associado ao Cartão de Cidadão. \n";
+					}
+					valorID_NovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
+				}
+
+				// verifica email
+				if (entry.getValue().getEmail().equals(email_NovoF.getText())) {
+					verifica = verifica + "Já existe um utilizador com este email\n";
+					email_NovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
+				}
 //			// verifica telemovel
-		if ((""+entry.getValue().getMobile()).equals(mobileNovoF.getText())) {
-			verifica =verifica+"Já existe um utilizador com este contacto de telemovel. \n";
-			mobileNovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
+				if (("" + entry.getValue().getMobile()).equals(mobileNovoF.getText())) {
+					verifica = verifica + "Já existe um utilizador com este contacto de telemovel. \n";
+					mobileNovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
+				}
+			}
 		}
-		}
+		System.out.println((verifica));
+		return verifica;
 	}
-	System.out.println((verifica));
- return verifica;
-}
 
 //faz a adicção de um do novo funcionario
 
-public Funcionario addNovoF(String login, String password, String nome, String sobrenome, String dataNascimento,
-		String morada, TipoID escolhaID, String valorID, String email, int mobile, String posicao) {
-	int iD=contadores.get("Utilizador")+1;
-	Funcionario NovoFU= new  Funcionario(iD,login,password,nome,sobrenome,dataNascimento,
-			morada,escolhaID,valorID,email,mobile,posicao);
-	contadores.replace("Utilizador",iD);
-	mapUtilizadores.put(login,NovoFU);
-	return NovoFU;
-}
+	public Funcionario addNovoF(String login, String password, String nome, String sobrenome, String dataNascimento,
+			String morada, TipoID escolhaID, String valorID, String email, int mobile, String posicao) {
+		int iD = contadores.get("Utilizador") + 1;
+		Funcionario NovoFU = new Funcionario(iD, login, password, nome, sobrenome, dataNascimento, morada, escolhaID,
+				valorID, email, mobile, posicao);
+		contadores.replace("Utilizador", iD);
+		mapUtilizadores.put(login, NovoFU);
+		return NovoFU;
+	}
 
 //faz a verificação da adicção de um do novo Cliente
-public String  verificanovoC(TipoID escolhadaIDN,Text valorID_NovoF,Text email_NovoF,Text userNovoF,Text mobileNovoF) { 
-	
-	valorID_NovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
-	email_NovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
-	userNovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
-	mobileNovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
-String  verifica ="";
+	public String verificanovoC(TipoID escolhadaIDN, Text valorID_NovoF, Text email_NovoF, Text userNovoF,
+			Text mobileNovoF) {
+
+		valorID_NovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
+		email_NovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
+		userNovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
+		mobileNovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
+		String verifica = "";
 // verifica username
-	if (mapUtilizadores.containsKey(userNovoF.getText())) {
-		verifica =verifica+"O nome de Utilizador não é válido. \n";
-		userNovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
+		if (mapUtilizadores.containsKey(userNovoF.getText())) {
+			verifica = verifica + "O nome de Utilizador não é válido. \n";
+			userNovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
 		}
-	
-	for (Entry<String, Utilizador> entry : mapUtilizadores.entrySet()) {
-		if (entry.getValue() instanceof Cliente) {
-			
-			System.out.println("VERIFICA ---->Key = " + entry.getKey() + ", Value = " + entry.getValue());
-//			Scanner sc = new Scanner(System.in);
-//			String  vAr = sc.nextLine();
-//			sc.close();
-			 // verifica identificação
-		if (entry.getValue().getEscolhaID().equals(escolhadaIDN) && entry.getValue().getValorID().equals(valorID_NovoF.getText())) {
-			verifica = verifica+"O "+escolhadaIDN+" com o numero :"+valorID_NovoF+" já está associado a um Funcionario. \n";
-			valorID_NovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
-		}
-		
-		else if  (!(entry.getValue().getEscolhaID().equals(escolhadaIDN)) && entry.getValue().getValorID().equals(valorID_NovoF.getText())) {
-			if (escolhadaIDN.equals(TipoID.CARTAOCIDADAO)) {
-			verifica =verifica+"O numero :"+valorID_NovoF.getText()+" já existe e está associado ao Passaporte. \n";
-		}
-			else {
-				verifica =verifica+"O numero :"+valorID_NovoF.getText()+" já existe e está associado ao Cartão de Cidadão. \n";
+
+		for (Entry<String, Utilizador> entry : mapUtilizadores.entrySet()) {
+			if (entry.getValue() instanceof Cliente) {
+
+				System.out.println("VERIFICA ---->Key = " + entry.getKey() + ", Value = " + entry.getValue());
+
+				// verifica identificação ***FALTA RETIRAR A VERIFICAçÃO EM FUNÇÂO DO TIPO - o passporte e sempre diferente
+				if (entry.getValue().getEscolhaID().equals(escolhadaIDN)
+						&& entry.getValue().getValorID().equals(valorID_NovoF.getText())) {
+					verifica = verifica + "O " + escolhadaIDN + " com o numero :" + valorID_NovoF
+							+ " já está associado a um Funcionario. \n";
+					valorID_NovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
+				}
+
+				else if (!(entry.getValue().getEscolhaID().equals(escolhadaIDN))
+						&& entry.getValue().getValorID().equals(valorID_NovoF.getText())) {
+					if (escolhadaIDN.equals(TipoID.CARTAOCIDADAO)) {
+						verifica = verifica + "O numero :" + valorID_NovoF.getText()
+								+ " já existe e está associado ao Passaporte. \n";
+					} else {
+						verifica = verifica + "O numero :" + valorID_NovoF.getText()
+								+ " já existe e está associado ao Cartão de Cidadão. \n";
+					}
+					valorID_NovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
+				}
+
+				// verifica email
+				if (entry.getValue().getEmail().equals(email_NovoF.getText())) {
+					verifica = verifica + "Já existe um utilizador com este email\n";
+					email_NovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
+				}
+			// verifica telemovel
+				if (("" + entry.getValue().getMobile()).equals(mobileNovoF.getText())) {
+					verifica = verifica + "Já existe um utilizador com este contacto de telemovel. \n";
+					mobileNovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
+				}
 			}
-			valorID_NovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
-			}
-		
-		// verifica email
-		if (entry.getValue().getEmail().equals(email_NovoF.getText())) {
-			verifica =verifica+"Já existe um utilizador com este email\n";
-			email_NovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
 		}
-//			// verifica telemovel
-		if ((""+entry.getValue().getMobile()).equals(mobileNovoF.getText())) {
-			verifica =verifica+"Já existe um utilizador com este contacto de telemovel. \n";
-			mobileNovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
-		}
-		}
+		System.out.println((verifica));
+		return verifica;
 	}
-	System.out.println((verifica));
-return verifica;
-}
+	
+	
+	
+	//faz a verificação da adicção de um do novo Cliente
+		public String verificaAlteraCl(Cliente actual,TipoID escolhadaIDN, Text valorID_NovoF, Text email_NovoF, Text userNovoF,
+				Text mobileNovoF) {
+
+			valorID_NovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
+			email_NovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
+			userNovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
+			mobileNovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
+			String verifica = "";
+//	// verifica username (não é nessário considerando que o funcionario nao pode alerar estes dados
+//			if (mapUtilizadores.containsKey(userNovoF.getText())) {
+//				verifica = verifica + "O nome de Utilizador não é válido. \n";
+//				userNovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
+//			}
+
+			for (Entry<String, Utilizador> entry : mapUtilizadores.entrySet()) {
+				if (entry.getValue() instanceof Cliente & !(entry.getValue()==actual)) {
+
+					System.out.println("VERIFICA ---->Key = " + entry.getKey() + ", Value = " + entry.getValue());
+
+					// verifica identificação ***FALTA RETIRAR A VERIFICAçÃO EM FUNÇÂO DO TIPO - o passporte e sempre diferente
+					if (entry.getValue().getEscolhaID().equals(escolhadaIDN)
+							&& entry.getValue().getValorID().equals(valorID_NovoF.getText())) {
+						verifica = verifica + "O " + escolhadaIDN + " com o numero :" + valorID_NovoF
+								+ " já está associado a um Funcionario. \n";
+						valorID_NovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
+					}
+
+					else if (!(entry.getValue().getEscolhaID().equals(escolhadaIDN))
+							&& entry.getValue().getValorID().equals(valorID_NovoF.getText())) {
+						if (escolhadaIDN.equals(TipoID.CARTAOCIDADAO)) {
+							verifica = verifica + "O numero :" + valorID_NovoF.getText()
+									+ " já existe e está associado ao Passaporte. \n";
+						} else {
+							verifica = verifica + "O numero :" + valorID_NovoF.getText()
+									+ " já existe e está associado ao Cartão de Cidadão. \n";
+						}
+						valorID_NovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
+					}
+
+					// verifica email
+					if (entry.getValue().getEmail().equals(email_NovoF.getText())) {
+						verifica = verifica + "Já existe um utilizador com este email\n";
+						email_NovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
+					}
+				// verifica telemovel
+					if (("" + entry.getValue().getMobile()).equals(mobileNovoF.getText())) {
+						verifica = verifica + "Já existe um utilizador com este contacto de telemovel. \n";
+						mobileNovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
+					}
+					
+				}
+			}
+			System.out.println((verifica));
+			return verifica;
+		}
+
 
 //faz a adicção de um do novo Cliente
 
-public Cliente addNovoC(String login, String password, String nome, String sobrenome, String dataNascimento,
-		String morada, TipoID escolhaID, String valorID, String email, int mobile) {
-	int iD=contadores.get("Utilizador")+1;
-	Cliente novoCl= new  Cliente(iD,login,password,nome,sobrenome,dataNascimento,
-			morada,escolhaID,valorID,email,mobile);
-	contadores.replace("Utilizador",iD);
-	mapUtilizadores.put(login,novoCl);
-	return novoCl;
-}
+	public Cliente addNovoC(String login, String password, String nome, String sobrenome, String dataNascimento,
+			String morada, TipoID escolhaID, String valorID, String email, int mobile) {
+		int iD = contadores.get("Utilizador") + 1;
+		Cliente novoCl = new Cliente(iD, login, password, nome, sobrenome, dataNascimento, morada, escolhaID, valorID,
+				email, mobile);
+		contadores.replace("Utilizador", iD);
+		mapUtilizadores.put(login, novoCl);
+		return novoCl;
+	}
 
 //faz a procura de um Cliente pela ID
 
-public Cliente procuraCid(int idCliente) {
-	Cliente clienteID=null;
-	for (Entry<String, Utilizador> entry : mapUtilizadores.entrySet()) {
-		if ((entry.getValue() instanceof Cliente)&(entry.getValue().getuID()==idCliente)) {
-			return 	(Cliente) entry.getValue();		
+	public Cliente procuraCid(int idCliente) {
+		Cliente clienteID = null;
+		for (Entry<String, Utilizador> entry : mapUtilizadores.entrySet()) {
+			if ((entry.getValue() instanceof Cliente) & (entry.getValue().getuID() == idCliente)) {
+				return (Cliente) entry.getValue();
+			}
 		}
-		}
 
-	return null;
-}
-
-
-
-
+		return null;
+	}
 
 //faz a verificação se e numero
- 
-public boolean eUmNumero(String texto)
-{
-    for (char c : texto.toCharArray())
-    {
-        if (!Character.isDigit(c)) return false;
-    }
-    return true;
-} 
- 
-//faz a verificação da alteracao de dados do Administrador
-public String  verificaA(Text email_NovoF,Text userNovoF,String emailA,String userNameA) { 
-	System.out.println("VERIFICA ADMINISTRADOR");
-	
-	email_NovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
-	userNovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
-	
-String  verifica ="";
-// verifica username
-	if (mapUtilizadores.containsKey(userNovoF.getText()) && !userNovoF.getText().equals(userNameA) ) {
-		verifica =verifica+"O nome de Utilizador não é válido. \n";
-		userNovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
+
+	public boolean eUmNumero(String texto) {
+		for (char c : texto.toCharArray()) {
+			if (!Character.isDigit(c))
+				return false;
 		}
-	
-	
-	for (Entry<String, Utilizador> entry : mapUtilizadores.entrySet()) {
-		if (entry.getValue() instanceof Administrador) {
-			System.out.println("VERIFICA ---->Key = " + entry.getKey() + ", Value = " + entry.getValue());
-		// verifica email
-		if (entry.getValue().getEmail().equals(email_NovoF.getText()) && !email_NovoF.getText().equals(emailA)) {
-			verifica =verifica+"Já existe um utilizador com este email\n";
-			email_NovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
-		}
-		}
+		return true;
 	}
-	System.out.println((verifica));
-return verifica;
-}
- 
+
+//faz a verificação da alteracao de dados do Administrador
+	public String verificaA(Text email_NovoF, Text userNovoF, String emailA, String userNameA) {
+		System.out.println("VERIFICA ADMINISTRADOR");
+
+		email_NovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
+		userNovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
+
+		String verifica = "";
+// verifica username
+		if (mapUtilizadores.containsKey(userNovoF.getText()) && !userNovoF.getText().equals(userNameA)) {
+			verifica = verifica + "O nome de Utilizador não é válido. \n";
+			userNovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
+		}
+
+		for (Entry<String, Utilizador> entry : mapUtilizadores.entrySet()) {
+			if (entry.getValue() instanceof Administrador) {
+				System.out.println("VERIFICA ---->Key = " + entry.getKey() + ", Value = " + entry.getValue());
+				// verifica email
+				if (entry.getValue().getEmail().equals(email_NovoF.getText())
+						&& !email_NovoF.getText().equals(emailA)) {
+					verifica = verifica + "Já existe um utilizador com este email\n";
+					email_NovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
+				}
+			}
+		}
+		System.out.println((verifica));
+		return verifica;
+	}
+
 //*********************************************************************************
 ////	********** Adiciona Cliente **************
 //	public Cliente addCliente(Cliente novoC) {
@@ -596,133 +649,126 @@ return verifica;
 //	}
 // 
 
-public void loadAll() throws ClassNotFoundException {
+	public void loadAll() throws ClassNotFoundException {
 //	this.mapUtilizadores = mapUtilizadores;
 //	this.lContas = lContas;
 //	this.mapCartaoConta = mapCartaoConta;
 //	this.contadores = contadores;
-	String pathMapUtilizadores ="C:\\Users\\Jorge\\Documents\\GitHub\\ProjetoIPJ\\MapUtilizadores";
-	 FicheiroDeObjectos ut= new  FicheiroDeObjectos();
-  try {
-	ut.abreLeitura(pathMapUtilizadores);
-	mapUtilizadores =(Map<String, Utilizador>) ut.leObjecto();
-	ut.fechaLeitura();
+		String pathMapUtilizadores = "C:\\Users\\Jorge\\Documents\\GitHub\\ProjetoIPJ\\MapUtilizadores";
+		FicheiroDeObjectos ut = new FicheiroDeObjectos();
+		try {
+			ut.abreLeitura(pathMapUtilizadores);
+			mapUtilizadores = (Map<String, Utilizador>) ut.leObjecto();
+			ut.fechaLeitura();
 
-} catch (IOException e) {
-	// TODO Auto-generated catch block
-	e.printStackTrace();
-}
-  ////----------- 
-  String pathlContas ="C:\\Users\\Jorge\\Documents\\GitHub\\ProjetoIPJ\\Lcontas";
-  FicheiroDeObjectos lc= new  FicheiroDeObjectos();
-  try {
-	lc.abreLeitura(pathlContas);
-	lContas=(ArrayList<Conta>) lc.leObjecto();
-	lc.fechaLeitura();
-	
-} catch (IOException e) {
-	// TODO Auto-generated catch block
-	e.printStackTrace();
-}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//// -----------
+		String pathlContas = "C:\\Users\\Jorge\\Documents\\GitHub\\ProjetoIPJ\\Lcontas";
+		FicheiroDeObjectos lc = new FicheiroDeObjectos();
+		try {
+			lc.abreLeitura(pathlContas);
+			lContas = (ArrayList<Conta>) lc.leObjecto();
+			lc.fechaLeitura();
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 ////----------- 
-String pathlCarões ="C:\\Users\\Jorge\\Documents\\GitHub\\ProjetoIPJ\\Lcartões";
+		String pathlCarões = "C:\\Users\\Jorge\\Documents\\GitHub\\ProjetoIPJ\\Lcartões";
 
-FicheiroDeObjectos lcartoes= new  FicheiroDeObjectos();
-try {
-	lcartoes.abreLeitura(pathlCarões);
-	mapCartaoConta=(Map<Integer, Integer>) lcartoes.leObjecto();
-	lcartoes.fechaLeitura();
-	
-} catch (IOException e) {
-	// TODO Auto-generated catch block
-	e.printStackTrace();
-}
+		FicheiroDeObjectos lcartoes = new FicheiroDeObjectos();
+		try {
+			lcartoes.abreLeitura(pathlCarões);
+			mapCartaoConta = (Map<Integer, Integer>) lcartoes.leObjecto();
+			lcartoes.fechaLeitura();
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 ////----------- 
-String pathlContadores ="C:\\Users\\Jorge\\Documents\\GitHub\\ProjetoIPJ\\Contadores";
+		String pathlContadores = "C:\\Users\\Jorge\\Documents\\GitHub\\ProjetoIPJ\\Contadores";
 
-FicheiroDeObjectos contador= new  FicheiroDeObjectos();
-try {
-	contador.abreLeitura(pathlContadores);
-	contadores =(Map<String, Integer>) contador.leObjecto();
-	contador.fechaLeitura();
+		FicheiroDeObjectos contador = new FicheiroDeObjectos();
+		try {
+			contador.abreLeitura(pathlContadores);
+			contadores = (Map<String, Integer>) contador.leObjecto();
+			contador.fechaLeitura();
 
-} catch (IOException e) {
+		} catch (IOException e) {
 // TODO Auto-generated catch block
-e.printStackTrace();
-}  
-  
-}
+			e.printStackTrace();
+		}
 
-
-
+	}
 
 /// grava todos os ficheiros
-public void saveAll() {
-	
+	public void saveAll() {
+
 //	private Map<String, Utilizador> mapUtilizadores; // String Username
-	
+
 //	private ArrayList<Conta> lContas;
-	
+
 //	private Map<Integer, Integer> mapCartaoConta; // numcartaonumconta
 //	private Map<String, Integer> contadores;
 
-	
-
 //	this.uactual = uactual;
-	String pathMapUtilizadores ="C:\\Users\\Jorge\\Documents\\GitHub\\ProjetoIPJ\\MapUtilizadores";
-	 FicheiroDeObjectos ut= new  FicheiroDeObjectos();
-  try {
-	ut.abreEscrita(pathMapUtilizadores);
-	ut.escreveObjecto(this.mapUtilizadores);
-	ut.fechaEscrita();;
+		String pathMapUtilizadores = "C:\\Users\\Jorge\\Documents\\GitHub\\ProjetoIPJ\\MapUtilizadores";
+		FicheiroDeObjectos ut = new FicheiroDeObjectos();
+		try {
+			ut.abreEscrita(pathMapUtilizadores);
+			ut.escreveObjecto(this.mapUtilizadores);
+			ut.fechaEscrita();
+			;
 
-} catch (IOException e) {
-	// TODO Auto-generated catch block
-	e.printStackTrace();
-}
-  ////----------- 
-  String pathlContas ="C:\\Users\\Jorge\\Documents\\GitHub\\ProjetoIPJ\\Lcontas";
-  FicheiroDeObjectos lc= new  FicheiroDeObjectos();
-  try {
-	lc.abreEscrita(pathlContas);
-	lc.escreveObjecto(this.lContas);
-	lc.fechaEscrita();;
-	
-} catch (IOException e) {
-	// TODO Auto-generated catch block
-	e.printStackTrace();
-}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//// -----------
+		String pathlContas = "C:\\Users\\Jorge\\Documents\\GitHub\\ProjetoIPJ\\Lcontas";
+		FicheiroDeObjectos lc = new FicheiroDeObjectos();
+		try {
+			lc.abreEscrita(pathlContas);
+			lc.escreveObjecto(this.lContas);
+			lc.fechaEscrita();
+			;
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 ////----------- 
-String pathlCarões ="C:\\Users\\Jorge\\Documents\\GitHub\\ProjetoIPJ\\Lcartões";
+		String pathlCarões = "C:\\Users\\Jorge\\Documents\\GitHub\\ProjetoIPJ\\Lcartões";
 
-FicheiroDeObjectos lcartoes= new  FicheiroDeObjectos();
-try {
-	lcartoes.abreEscrita(pathlCarões);
-	lcartoes.escreveObjecto(this.mapCartaoConta);
-	lcartoes.fechaEscrita();
-	
-} catch (IOException e) {
-	// TODO Auto-generated catch block
-	e.printStackTrace();
-}
+		FicheiroDeObjectos lcartoes = new FicheiroDeObjectos();
+		try {
+			lcartoes.abreEscrita(pathlCarões);
+			lcartoes.escreveObjecto(this.mapCartaoConta);
+			lcartoes.fechaEscrita();
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 ////----------- 
-String pathlContadores ="C:\\Users\\Jorge\\Documents\\GitHub\\ProjetoIPJ\\Contadores";
+		String pathlContadores = "C:\\Users\\Jorge\\Documents\\GitHub\\ProjetoIPJ\\Contadores";
 
-FicheiroDeObjectos contador= new  FicheiroDeObjectos();
-try {
-	contador.abreEscrita(pathlContadores);
-	contador.escreveObjecto(this.contadores);
-	contador.fechaEscrita();
+		FicheiroDeObjectos contador = new FicheiroDeObjectos();
+		try {
+			contador.abreEscrita(pathlContadores);
+			contador.escreveObjecto(this.contadores);
+			contador.fechaEscrita();
 
-} catch (IOException e) {
+		} catch (IOException e) {
 // TODO Auto-generated catch block
-e.printStackTrace();
-}  
-  
-}
+			e.printStackTrace();
+		}
 
+	}
 
-
-
- 
 }

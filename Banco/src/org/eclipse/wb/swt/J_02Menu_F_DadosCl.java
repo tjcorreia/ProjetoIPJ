@@ -146,15 +146,6 @@ public class J_02Menu_F_DadosCl {
 		btnNovoCliente.setBounds(10, 84, 192, 25);
 		btnNovoCliente.setText("Criar novo Cliente");
 
-		Button btnExibirContasDo = new Button(shellMF, SWT.NONE);
-		btnExibirContasDo.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-			}
-		});
-		btnExibirContasDo.setText("Exibir Contas do Cliente");
-		btnExibirContasDo.setBounds(10, 177, 192, 25);
-
 		Button btnDadosDoCliente = new Button(shellMF, SWT.NONE);
 		btnDadosDoCliente.setText("Altera dados do cliente");
 		btnDadosDoCliente.setBounds(10, 208, 192, 25);
@@ -369,16 +360,118 @@ public class J_02Menu_F_DadosCl {
 					
 				}
 				else if (btnAlterarDados.getText().equals("Pode alterar\r\n Dados")){
+					// falta ver
+					String mensagem="";
+					boolean naohaDadosPorPreencher = true;
+					// Verifica campos vazios
+					if (estaVazio(text_PrimeiroNovoC) || estaVazio(text_UltimoNovoC) || estaVazio(text_MoradaNovoC)
+					|| estaVazio(text_ValorID_NovoC) || estaVazio(text_Email_NovoC) || estaVazio(text_MobileNovoC)
+					|| estaVazio(text_DataN_Ano) || estaVazio(text_DataN_mes) || estaVazio(text_DataN_dia)
+							) {
+//						Titulo_Novo_F.setText("Dados por preencher ou inválidos");
+//						Titulo_Novo_F.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
+						System.out.println("ENTROU NA VERIFICACAO DE CAMPOS VAZIOS");
+						mensagem = mensagem + "Tem dados por preencher\n";
+
+						estaVazio(text_PrimeiroNovoC);
+						estaVazio(text_UltimoNovoC);
+						estaVazio(text_MoradaNovoC);
+						estaVazio(text_ValorID_NovoC);
+						estaVazio(text_Email_NovoC);
+						estaVazio(text_MobileNovoC);
+						estaVazio(text_DataN_Ano);
+						estaVazio(text_DataN_mes);
+						estaVazio(text_DataN_dia);
+						naohaDadosPorPreencher = false;
+
+					}
+
+					if (!validateEmail(text_Email_NovoC)) {
+						System.out.println("VERIFICACAO DE Email ->" + text_Email_NovoC.getText());
+//						Titulo_Novo_F.setText("Dados por preencher ou inválidos");
+						mensagem = mensagem + "Email inválido.\n";
+						naohaDadosPorPreencher = false;
+					}
+
+					if (naohaDadosPorPreencher) {
+						System.out.println(text_Email_NovoC.getText());
+						System.out.println(text_UserNovoC.getText());
+						System.out.println(clienteActual.getEmail());
+						System.out.println(clienteActual.getLogin());
+//						verificanovoC(TipoID escolhadaIDN, Text valorID_NovoF, Text email_NovoF, Text userNovoF,
+//								Text mobileNovoF)
+						
+						TipoID escolhadaID = Cliente.TipoID.PASSAPORTE;
+						if (combo_TipoID_NovoC.getText().equals("Passaporte")) {
+							escolhadaID = Cliente.TipoID.PASSAPORTE;
+						} else {
+							escolhadaID = Cliente.TipoID.CARTAOCIDADAO;
+						}
+						
+						// nota esta a usar como UserLogin=**** o que vai verificar , podendo no futuro ser alterado para
+						// o funcionario poder alterar este parametro
+						String verifica = gestor.verificaAlteraCl(clienteActual,escolhadaID,text_ValorID_NovoC,text_Email_NovoC,text_UserNovoC,
+								text_MobileNovoC);
+//								
+
+						System.out.println(("VERIFICA? --->" + verifica));
+//						
+						if (verifica.equals("")) {				
+							clienteActual.setDataNascimento(text_DataN_Ano.getText()+"/"+text_DataN_mes.getText()+"/"+text_DataN_dia.getText());
+							clienteActual.setEmail(text_Email_NovoC.getText());
+							clienteActual.setEscolhaID(escolhadaID);
+							clienteActual.setMobile(Integer.parseInt(text_MobileNovoC.getText()));
+							clienteActual.setNome(text_PrimeiroNovoC.getText());
+							clienteActual.setSobrenome(text_UltimoNovoC.getText());
+							
+							
+							
+							gestor.getMapUtilizadores().replace(clienteActual.getLogin(),clienteActual);
+	                        Cliente f=new Cliente();
+							MessageBox box = new MessageBox(shellMF, SWT.MULTI);
+							System.out.println(("ERRO 1? --->" + verifica));
+							f = (Cliente) (gestor.getMapUtilizadores().get(clienteActual.getLogin()));
+							
+							box.setText("CONCLUSÃO");
+							box.setMessage("Os  dados de" + f.getNome() + " " + f.getSobrenome() + "\n  foram Actualizados .\n");
+//							
+							box.open();
+							
+							System.out.println(("verifica"));
+							
+							
+							String alterarDadosC="Alterar\r\n Dados";
+							btnAlterarDados.setText(alterarDadosC);
+							btnAlterarDados.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_GRAY));
+							shellMF.redraw();
+
+						} else {
+							System.out.println(("----> Nao verifica"));
+							verifica = "Dados por  inválidos:\n" + verifica;
+							MessageBox box = new MessageBox(shellMF, SWT.MULTI | SWT.ICON_ERROR);
+							box.setText("ERRO");
+							box.setMessage(verifica);
+							box.open();
+							Composite composite10 = new Composite(shellMF, SWT.NONE);
+							composite10.setBounds(182, 41, 430, 301);
+						}
+
+					} else {
+						MessageBox box = new MessageBox(shellMF, SWT.MULTI | SWT.ICON_ERROR);
+						box.setText("ERRO");
+						box.setMessage(mensagem);
+						box.open();
+						Composite composite10 = new Composite(shellMF, SWT.NONE);
+						composite10.setBounds(182, 41, 430, 301);
+						naohaDadosPorPreencher = true;
+					} 
 					
 					
 					
 					
 					
+			
 					
-					
-					String alterarDadosC="Alterar\r\n Dados";
-					btnAlterarDados.setText(alterarDadosC);
-					btnAlterarDados.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_GRAY));
 				}
 				
 			}
@@ -465,12 +558,12 @@ public class J_02Menu_F_DadosCl {
 		btnNewButton.setSize(88, 25);
 		btnNewButton.setText("Obter Cliente");
 		
-		Button btnCriarConta = new Button(composite, SWT.TOGGLE);
+		Button btnCriarConta = new Button(composite, SWT.TOGGLE | SWT.MULTI | SWT.WRAP | SWT.NONE);
 		btnCriarConta.setText("Criar Conta");
 		btnCriarConta.setBounds(238, 234, 81, 58);
 		
-		Button btnListaDeMovimentos = new Button(composite, SWT.TOGGLE);
-		btnListaDeMovimentos.setText("Lista de Movimentos");
+		Button btnListaDeMovimentos = new Button(composite, SWT.TOGGLE | SWT.MULTI | SWT.WRAP | SWT.NONE);
+		btnListaDeMovimentos.setText("Lista de Movimentos da Conta");
 		btnListaDeMovimentos.setBounds(239, 298, 81, 58);
 
 	}

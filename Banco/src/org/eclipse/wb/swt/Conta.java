@@ -18,7 +18,7 @@ public class Conta implements Serializable{
 	protected String datacria;
 	protected ArrayList<Transacao> transacoesC;// 
 	protected ArrayList<Integer> clientesDaC;// 
-	public TipoC escolhaID;
+	public TipoC abertaFechada;
 	
 	protected enum TipoC {ABERTA,ENCERADA}
 
@@ -36,7 +36,7 @@ public class Conta implements Serializable{
 		this.datacria = datacria;
 		this.transacoesC = transacoesC;
 		this.clientesDaC = clientesDaC;
-		this.escolhaID = escolhaID;
+		this.abertaFechada = escolhaID;
 	}
 
 
@@ -46,7 +46,7 @@ public class Conta implements Serializable{
 		super();
 		this.transacoesC = new ArrayList<Transacao>();
 		this.clientesDaC = new ArrayList<Integer>();
-		this.escolhaID = TipoC.ABERTA;
+		this.abertaFechada = TipoC.ABERTA;
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -57,7 +57,7 @@ public class Conta implements Serializable{
 		this.datacria = datacria;
 		this.transacoesC = new ArrayList<Transacao>();
 		this.clientesDaC = new ArrayList<Integer>();
-		this.escolhaID = TipoC.ABERTA;
+		this.abertaFechada = TipoC.ABERTA;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -134,15 +134,15 @@ public class Conta implements Serializable{
 
 
 
-	public TipoC getEscolhaID() {
-		return escolhaID;
+	public TipoC getAbertaFechada() {
+		return abertaFechada;
 	}
 
 
 
 
-	public void setEscolhaID(TipoC escolhaID) {
-		this.escolhaID = escolhaID;
+	public void setAbertaFechada(TipoC escolhaID) {
+		this.abertaFechada = escolhaID;
 	}
 
 
@@ -151,19 +151,28 @@ public class Conta implements Serializable{
 	@Override
 	public String toString() {
 		return "Conta [contaID=" + contaID + ", saldo=" + saldo + ", datacria=" + datacria + ", transacoesC="
-				+ transacoesC + ", clientesDaC=" + clientesDaC + ", escolhaID=" + escolhaID + "]";
+				+ transacoesC + ", clientesDaC=" + clientesDaC + ", abertaFechada=" + abertaFechada + "]";
 	}
 
 
-	 public int addClienteC(int clienteID) {
-		 
+	 public int addClienteC(int clienteID) { 
 		 clientesDaC.add(clienteID);
 		 return clienteID;
 		 
 	 }
 
 
-	
+	 public Transacao addTransacaoC(Transacao novaT) {
+		 if (transacoesC==null) {
+			 novaT.settID(1000);
+			 transacoesC.add(novaT);
+			 return novaT;  
+		 }
+		 novaT.settID(transacoesC.size()+1000);
+		 transacoesC.add(novaT);
+		 return novaT;
+		 
+	 }
 	
 
 	

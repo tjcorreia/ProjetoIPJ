@@ -419,7 +419,7 @@ public class J_02Menu_F_CriaCliente {
 					if (combo_TipoID_NovoC.getText().equals("Passaporte")) {
 						escolhadaID = Cliente.TipoID.PASSAPORTE;
 					} else {
-						escolhadaID = Cliente.TipoID.PASSAPORTE;
+						escolhadaID = Cliente.TipoID.CARTAOCIDADAO;
 					}
 
 					String verifica = gestor.verificanovoC(escolhadaID, text_ValorID_NovoC, text_Email_NovoC,

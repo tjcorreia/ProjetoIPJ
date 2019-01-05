@@ -27,7 +27,7 @@ public class ContaNormal extends Conta implements Serializable{
 		super();
 		this.transacoesC = new ArrayList<Transacao>();
 		this.clientesDaC = new ArrayList<Integer>();
-		this.escolhaID = TipoC.ABERTA;
+		this.abertaFechada = TipoC.ABERTA;
 		this.cartaodaConta = null;
 		// TODO Auto-generated constructor stub
 	}
@@ -36,7 +36,7 @@ public class ContaNormal extends Conta implements Serializable{
 		super(contaID,saldo,datacria);
 		this.transacoesC = new ArrayList<Transacao>();
 		this.clientesDaC = new ArrayList<Integer>();
-		this.escolhaID = TipoC.ABERTA;
+		this.abertaFechada = TipoC.ABERTA;
 		this.cartaodaConta = null;
 		// TODO Auto-generated constructor stub
 	}
@@ -53,7 +53,7 @@ public class ContaNormal extends Conta implements Serializable{
 	public String toString() {
 		return "ContaNormal [cartaodaConta=" + cartaodaConta + ", contaID=" + contaID + ", saldo=" + saldo
 				+ ", datacria=" + datacria + ", transacoesC=" + transacoesC + ", clientesDaC=" + clientesDaC
-				+ ", escolhaID=" + escolhaID + "]";
+				+ ", abertaFechada=" + abertaFechada + "]";
 	}
 
 
