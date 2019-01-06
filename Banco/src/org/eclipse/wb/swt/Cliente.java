@@ -110,6 +110,16 @@ public class Cliente extends Utilizador implements Serializable{
 	 
  }
 	
+public Conta procuraConta(int idDaConta) {
+	 
+	if (!(lcontaSC==null)) {
+		for (Conta c:lcontaSC) {
+		if (c.getContaID()==idDaConta)
+			return c;
+		}
+	}
+	return null;
+ }
 	
 
 }

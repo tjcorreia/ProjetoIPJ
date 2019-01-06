@@ -508,10 +508,10 @@ public class J_02Menu_F_DadosCl {
 		
 		
 		
-		Button btnNewButton = new Button(composite, SWT.NONE);
-		btnNewButton.setGrayed(true);
+		Button btn_ProcuraCliente = new Button(composite, SWT.NONE);
+		btn_ProcuraCliente.setGrayed(true);
 		//*procura pelo cliente através da ID e devolve toda a informação
-		btnNewButton.addMouseListener(new MouseAdapter() {
+		btn_ProcuraCliente.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
 				
@@ -554,15 +554,25 @@ public class J_02Menu_F_DadosCl {
 				box.open();
 			}
 		});
-		btnNewButton.setLocation(10, 28);
-		btnNewButton.setSize(88, 25);
-		btnNewButton.setText("Obter Cliente");
+		btn_ProcuraCliente.setLocation(10, 28);
+		btn_ProcuraCliente.setSize(88, 25);
+		btn_ProcuraCliente.setText("Obter Cliente");
 		
 		Button btnCriarConta = new Button(composite, SWT.TOGGLE | SWT.MULTI | SWT.WRAP | SWT.NONE);
 		btnCriarConta.setText("Criar Conta");
 		btnCriarConta.setBounds(238, 234, 81, 58);
 		
 		Button btnListaDeMovimentos = new Button(composite, SWT.TOGGLE | SWT.MULTI | SWT.WRAP | SWT.NONE);
+		btnListaDeMovimentos.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				J_02Menu_F_ContasCl contasDoCliente= new J_02Menu_F_ContasCl(gestor,uUtilizador,clienteActual);
+				contasDoCliente.open();
+				shellMF.dispose();
+				
+				
+			}
+		});
 		btnListaDeMovimentos.setText("Lista de Movimentos da Conta");
 		btnListaDeMovimentos.setBounds(239, 298, 81, 58);
 

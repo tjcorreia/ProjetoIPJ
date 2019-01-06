@@ -93,8 +93,6 @@ public class Gestao {
 		
 		Conta cn1 = new ContaNormal(1, 9000, "2017/06/02");
 		lContas.add(cn1);
-//	System.out.println("Conta-->" + (lContas.toString()));
-//	System.out.println("Conta-->" + (cn1.toString()));
 		cn1.addClienteC(cl1.getuID());
 		cl1.addConta(cn1);
 
@@ -103,6 +101,11 @@ public class Gestao {
 		cl2.addConta(cn2);
 
 		lContas.add(cn2);
+		
+		Conta cn3 = new ContaNormal(3, 1000, "2017/06/02");
+		lContas.add(cn3);
+		cn3.addClienteC(cl1.getuID());
+		cl1.addConta(cn3);
 
 //	transações
 		
@@ -131,7 +134,12 @@ public class Gestao {
 		Transacao T0Cn2 = new Transacao(MachadoFU.getuID(), "2018/01/02", 1500,"", 0,Transacao.TipoT.DEP_CASH);
 		cn1.addTransacaoC(T0Cn2);
 		Transacao T1Cn2 = new Transacao(MachadoFU.getuID(), "2018/10/02", 1000,"", -1,Transacao.TipoT.TRANSFERENCIA);
-		cn1.addTransacaoC(T1Cn2);//( duvida colocar conta de origem ?)
+		cn1.addTransacaoC(T1Cn2);
+		Transacao T0Cn3 = new Transacao(MachadoFU.getuID(), "2018/01/02", 1000,"", 0,Transacao.TipoT.DEP_CASH);
+		cn3.addTransacaoC(T0Cn3);
+		
+		
+		//( duvida colocar conta de origem ?)
 		
 //	System.out.println("Conta-->" + (cn1.toString()));
 //	System.out.println("GeRAL-->" + (cl1.toString()));

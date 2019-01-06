@@ -40,12 +40,32 @@ public class J_02Menu_F_ContasCl {
 	private Gestao gestor;
 	private Utilizador uUtilizador;
 	private Cliente clienteActual;
+	private Conta contaActual;
 	private Text Funcionario;
 	private Text text_2;
 	private Text txt_Indique_ID;
 	private Text txtSelecioneUmaConta;
 	private Table table;
-	private Text text;
+	private Text text_contaActual;
+	private Combo combo_EscolhaConta;
+
+	
+	
+	public Combo getCombo_EscolhaConta() {
+		return combo_EscolhaConta;
+	}
+
+	public void setCombo_EscolhaConta(Combo combo_EscolhaConta) {
+		this.combo_EscolhaConta = combo_EscolhaConta;
+	}
+
+	public Conta getContaActual() {
+		return contaActual;
+	}
+
+	public void setContaActual(Conta contaActual) {
+		this.contaActual = contaActual;
+	}
 
 	public Cliente getClienteActual() {
 		return clienteActual;
@@ -84,8 +104,14 @@ public class J_02Menu_F_ContasCl {
 		this.uUtilizador = uUtilizador;
 		this.gestor = gestor;
 		this.clienteActual = clienteActual;
+		if (!(clienteActual==null)) {
+		this.contaActual=clienteActual.getLcontaSC().get(0);}
+		else {contaActual=null;}
 		open();
 	}
+	
+	
+	
 
 	/**
 	 * Launch the application.
@@ -99,6 +125,15 @@ public class J_02Menu_F_ContasCl {
 //			e.printStackTrace();
 //		}
 //	}
+
+	public J_02Menu_F_ContasCl(Gestao gestor, Utilizador uUtilizador, Cliente clienteActual, Conta contaActual) {
+		super();
+		this.gestor = gestor;
+		this.uUtilizador = uUtilizador;
+		this.clienteActual = clienteActual;
+		this.contaActual = contaActual;
+		open();
+	}
 
 	/**
 	 * Open the window.
@@ -123,7 +158,118 @@ public class J_02Menu_F_ContasCl {
 		shellMF.setBackground(SWTResourceManager.getColor(SWT.COLOR_DARK_GRAY));
 		shellMF.setSize(707, 533);
 		shellMF.setText("Menu Funcion\u00E1rio");
+		
+		System.out.println("<---- Utilizador Actual --->/n"+uUtilizador);
+		System.out.println("<---- Cliente Actual --->/n"+clienteActual);
+		System.out.println("<---- Conta Actual --->/n"+contaActual);
+		
+		Composite composite = new Composite(shellMF, SWT.NONE);
+		composite.setVisible(true);
+		composite.setBounds(215, 84, 441, 371);
 
+		ScrolledComposite scrolledComposite = new ScrolledComposite(composite, SWT.V_SCROLL);
+		scrolledComposite.setBounds(24, 106, 370, 159);
+		scrolledComposite.setExpandHorizontal(true);
+		scrolledComposite.setExpandVertical(true);
+		
+		table = new Table(scrolledComposite, SWT.BORDER | SWT.FULL_SELECTION | SWT.VIRTUAL);
+		table.setHeaderVisible(true);
+		table.setLinesVisible(true);
+		
+		TableColumn tblclmn_ID = new TableColumn(table, SWT.NONE);
+		tblclmn_ID.setWidth(43);
+		tblclmn_ID.setText("ID");
+		
+		TableColumn tblclmnNewColumn_1 = new TableColumn(table, SWT.NONE);
+		tblclmnNewColumn_1.setWidth(73);
+		tblclmnNewColumn_1.setText("Data");
+		
+		TableColumn tblclmnNewColumn_2 = new TableColumn(table, SWT.NONE);
+		tblclmnNewColumn_2.setWidth(105);
+		tblclmnNewColumn_2.setText("Tipo");
+		
+		TableColumn tblclmnNewColumn_3 = new TableColumn(table, SWT.NONE);
+		tblclmnNewColumn_3.setWidth(70);
+		tblclmnNewColumn_3.setText("Movimento");
+		
+		TableColumn tblclmnNewColumn_4 = new TableColumn(table, SWT.NONE);
+		tblclmnNewColumn_4.setWidth(73);
+		tblclmnNewColumn_4.setText("Saldo");
+		scrolledComposite.setContent(table);
+		scrolledComposite.setMinSize(table.computeSize(SWT.DEFAULT, SWT.DEFAULT));
+		
+		combo_EscolhaConta = new Combo(composite, SWT.NONE);
+				combo_EscolhaConta.setBounds(171, 59, 224, 23);
+		
+		text_contaActual = new Text(composite, SWT.BORDER | SWT.CENTER);
+		if (contaActual==null) {
+			text_contaActual.setText("Indique o ID");
+			}
+		text_contaActual.setText("Indique o ID");
+		text_contaActual.setBounds(343, 7, 88, 21);
+		
+		txt_Indique_ID = new Text(composite, SWT.BORDER | SWT.CENTER);
+		if (clienteActual==null) {
+		txt_Indique_ID.setText("Indique o ID");
+		}
+		else { // preeche os dados 
+			txt_Indique_ID.setText(""+clienteActual.getuID());
+			
+			if (!(clienteActual.getLcontaSC().size()==0)) {
+			String[] listaContas= new String[clienteActual.getLcontaSC().size()];
+			System.out.println("<---- lista de contas --->/n"+clienteActual.getLcontaSC().size());
+				for (int i=0;i<clienteActual.getLcontaSC().size();i++) {
+					listaContas[i]=""+clienteActual.getLcontaSC().get(i).getContaID();
+
+				}
+				System.out.println("<---- lista de contas --->/n"+listaContas.length);
+				combo_EscolhaConta.setItems(listaContas);
+//				item.setText(0, ("" + clienteActual.getLcontaSC().get(i).getContaID()));
+//				item.setText(1, ("" + clienteActual.getLcontaSC().get(i).getClientesDaC().size()));	
+			}
+			else {	
+				combo_EscolhaConta.setItems("Não existem contas a apresentar");
+			}
+			
+			
+			
+			
+			
+		}
+		txt_Indique_ID.setLocation(10, 7);
+		txt_Indique_ID.setSize(88, 21);
+		txt_Indique_ID.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseDown(MouseEvent e) {
+				txt_Indique_ID.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
+				txt_Indique_ID.setText("");	
+			}
+		});
+		
+		
+		// seleção da conta a presentar
+		combo_EscolhaConta.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				table.clearAll();
+				table.removeAll();
+				int contaID=Integer.parseInt(combo_EscolhaConta.getText());
+				contaActual=clienteActual.procuraConta(contaID);
+				System.out.println("<---- Conta Actual-Transaçoes ( "+contaActual.getTransacoesC().size()+") --->\n"+contaActual.getTransacoesC().toString());
+				double saldoI=contaActual.getSaldo();
+				for (int i=contaActual.getTransacoesC().size()-1;i>=0;i--) {
+					TableItem item = new TableItem(table, SWT.NULL);
+					item.setText(0, (""+contaActual.getTransacoesC().get(i).gettID()));
+					item.setText(1, (""+contaActual.getTransacoesC().get(i).getData()));
+					item.setText(2, (""+contaActual.getTransacoesC().get(i).getEscolhaT()));
+					item.setText(3, (""+contaActual.getTransacoesC().get(i).getValor()));
+					item.setText(4, (""+(saldoI)));
+					saldoI=saldoI-contaActual.getTransacoesC().get(i).getValor();
+				}	
+			}
+		});
+
+		
 		Button btnNovoCliente = new Button(shellMF, SWT.NONE);
 		btnNovoCliente.addSelectionListener(new SelectionAdapter() {
 			@Override
@@ -202,49 +348,23 @@ public class J_02Menu_F_ContasCl {
 		text_2 = new Text(shellMF, SWT.BORDER);
 		text_2.setBounds(10, 363, 192, 26);
 
-		Composite composite = new Composite(shellMF, SWT.NONE);
-		composite.setVisible(true);
-		composite.setBounds(215, 84, 441, 371);
-		
-
-		
-		txt_Indique_ID = new Text(composite, SWT.BORDER | SWT.CENTER);
-		txt_Indique_ID.setText("Indique o ID");
-		txt_Indique_ID.setLocation(10, 7);
-		txt_Indique_ID.setSize(88, 21);
-		txt_Indique_ID.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseDown(MouseEvent e) {
-				txt_Indique_ID.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
-				txt_Indique_ID.setText("");	
-			}
-		});
+	
 		
 		Label lblDadosDoCliente = new Label(composite, SWT.NONE);
 		lblDadosDoCliente.setText("Contas do Cliente");
 		lblDadosDoCliente.setAlignment(SWT.CENTER);
-		lblDadosDoCliente.setBounds(104, 10, 231, 35);
+		lblDadosDoCliente.setBounds(104, 10, 231, 15);
 		
 		Label lblListaDeContas = new Label(composite, SWT.CENTER);
 		lblListaDeContas.setText("Lista de Transa\u00E7\u00F5es");
 		lblListaDeContas.setBounds(23, 85, 372, 15);
 		
-		if (!(clienteActual==null)) {
-	//// colocaca dados
-			txt_Indique_ID.setText(""+clienteActual.getuID());
+
 		
-		
-		}
-		
-		
-		
-		
-		
-		
-		Button btnNewButton = new Button(composite, SWT.NONE);
-		btnNewButton.setGrayed(true);
+		Button btn_ProcuraCliente = new Button(composite, SWT.NONE);
+		btn_ProcuraCliente.setGrayed(true);
 		//*procura pelo cliente através da ID e devolve toda a informação
-		btnNewButton.addMouseListener(new MouseAdapter() {
+		btn_ProcuraCliente.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
 				
@@ -268,16 +388,28 @@ public class J_02Menu_F_ContasCl {
 							+ "Data Nascimento:" + clienteActual.getDataNascimento() + "\n";
 							
 						//// colocaca dados
+							txt_Indique_ID.setText(""+clienteActual.getuID());
+							
+							if (!(clienteActual.getLcontaSC().size()==0)) {
+							String[] listaContas= new String[clienteActual.getLcontaSC().size()];
+							System.out.println("<---- lista de contas --->/n"+clienteActual.getLcontaSC().size());
+								for (int i=0;i<clienteActual.getLcontaSC().size();i++) {
+									listaContas[i]=""+clienteActual.getLcontaSC().get(i).getContaID();
+
+								}
+								System.out.println("<---- lista de contas --->/n"+listaContas.length);
+								combo_EscolhaConta.setItems(listaContas);
+//								item.setText(0, ("" + clienteActual.getLcontaSC().get(i).getContaID()));
+//								item.setText(1, ("" + clienteActual.getLcontaSC().get(i).getClientesDaC().size()));	
+							}
+							else {	
+								combo_EscolhaConta.setItems("Não existem contas a apresentar");
+							}
 								
-													
+												
 						}	
 					}
 					}
-				
-				
-				
-				
-				
 				
 				MessageBox box = new MessageBox(shellMF, SWT.MULTI);
 //				f = (Cliente) (gestor.getMapUtilizadores().get(text_UserNovoC.getText()));
@@ -287,12 +419,11 @@ public class J_02Menu_F_ContasCl {
 				box.open();
 			}
 		});
-		btnNewButton.setLocation(10, 28);
-		btnNewButton.setSize(88, 25);
-		btnNewButton.setText("Obter Cliente");
+		btn_ProcuraCliente.setLocation(10, 28);
+		btn_ProcuraCliente.setSize(88, 25);
+		btn_ProcuraCliente.setText("Obter Cliente");
 		
-		Combo combo = new Combo(composite, SWT.NONE);
-		combo.setBounds(171, 59, 224, 23);
+		
 		
 				Button btnPedirCartaoDe = new Button(composite, SWT.NONE);
 				btnPedirCartaoDe.setBounds(23, 271, 184, 25);
@@ -308,40 +439,7 @@ public class J_02Menu_F_ContasCl {
 				txtSelecioneUmaConta.setText("Selecione uma Conta");
 				txtSelecioneUmaConta.setBounds(24, 60, 147, 21);
 				
-				ScrolledComposite scrolledComposite = new ScrolledComposite(composite, SWT.V_SCROLL);
-				scrolledComposite.setBounds(24, 106, 370, 159);
-				scrolledComposite.setExpandHorizontal(true);
-				scrolledComposite.setExpandVertical(true);
 				
-				table = new Table(scrolledComposite, SWT.BORDER | SWT.FULL_SELECTION | SWT.VIRTUAL);
-				table.setHeaderVisible(true);
-				table.setLinesVisible(true);
-				
-				TableColumn tblclmnNewColumn = new TableColumn(table, SWT.NONE);
-				tblclmnNewColumn.setWidth(47);
-				tblclmnNewColumn.setText("ID");
-				
-				TableColumn tblclmnNewColumn_1 = new TableColumn(table, SWT.NONE);
-				tblclmnNewColumn_1.setWidth(66);
-				tblclmnNewColumn_1.setText("Data");
-				
-				TableColumn tblclmnNewColumn_2 = new TableColumn(table, SWT.NONE);
-				tblclmnNewColumn_2.setWidth(66);
-				tblclmnNewColumn_2.setText("Tipo");
-				
-				TableColumn tblclmnNewColumn_3 = new TableColumn(table, SWT.NONE);
-				tblclmnNewColumn_3.setWidth(71);
-				tblclmnNewColumn_3.setText("Movimento");
-				
-				TableColumn tblclmnNewColumn_4 = new TableColumn(table, SWT.NONE);
-				tblclmnNewColumn_4.setWidth(117);
-				tblclmnNewColumn_4.setText("Saldo");
-				scrolledComposite.setContent(table);
-				scrolledComposite.setMinSize(table.computeSize(SWT.DEFAULT, SWT.DEFAULT));
-				
-				text = new Text(composite, SWT.BORDER | SWT.CENTER);
-				text.setText("Indique o ID");
-				text.setBounds(343, 7, 88, 21);
 				
 				Button btnObterConta = new Button(composite, SWT.NONE);
 				btnObterConta.setText("Obter Conta");
