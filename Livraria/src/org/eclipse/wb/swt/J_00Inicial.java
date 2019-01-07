@@ -28,7 +28,7 @@ public class J_00Inicial {
 	private Text text;
 	protected static Livraria livraria;//atributo adicionado para poder ir buscar o método 'procurarLivro' desta classe
 
-
+//
 	/**
 	 * Launch the application.
 	 * @param args
