@@ -11,9 +11,9 @@ public class Principal {
 		
 		
 		//begin_inputs
-		Gestao Machado=new Gestao();
+		Gestao jbGEST=new Gestao();
 		
-		J_10Login novoLogin = new J_10Login (Machado);
+		J_10Login novoLogin = new J_10Login (jbGEST);
 
 		Utilizador aprovado=new Utilizador();
 		do {
@@ -23,7 +23,7 @@ public class Principal {
 		} while (aprovado==null);
 		
 		System.out.println("passou ->>"+novoLogin.utilizadorAprovado().nome);
-		Machado.Gerir(Machado,aprovado);
+		jbGEST.Gerir(jbGEST,aprovado);
 		
 		//end_inputs
 
