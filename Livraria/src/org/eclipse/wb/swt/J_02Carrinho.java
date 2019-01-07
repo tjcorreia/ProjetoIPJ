@@ -32,21 +32,16 @@ import org.eclipse.swt.custom.SashForm;
  */
 
 public class J_02Carrinho extends J_01ListaLivros{ //criou-se janela como subclasse para poder receber variáveis da superclasse
-
-	//criou-se construtor que vai buscar variáveis à supercalsse
-	public J_02Carrinho() {
-		super(listaLivrosCarrinho, livraria);
-	}
-
-	
-
 	protected Shell shell;
 	private Table table;
 	private Table table_1;
-	private Table table_2;
 	
 	
-		
+	//criou-se construtor que vai buscar variáveis à supercalsse
+	public J_02Carrinho( ) {
+		super(listaLivrosCarrinho);
+	}
+
 
 	/**
 	 * Launch the application.
@@ -54,17 +49,21 @@ public class J_02Carrinho extends J_01ListaLivros{ //criou-se janela como subcla
 	 */
 	public static void main(String[] args) {
 		try {
-			J_02Carrinho window = new J_02Carrinho();
+			J_02Carrinho window = new J_02Carrinho( );
 			window.open();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 	}
 
 	/**
 	 * Open the window.
 	 */
 	public void open() {
+		//impressão para ver se passa o carrinho corretamente
+		System.out.println(carrinho);
+		
 		Display display = Display.getDefault();
 		createContents();
 		shell.open();
@@ -133,30 +132,6 @@ public class J_02Carrinho extends J_01ListaLivros{ //criou-se janela como subcla
 		TableColumn tblclmnQuantidade_1 = tableViewerColumn_1.getColumn();
 		tblclmnQuantidade_1.setWidth(100);
 		tblclmnQuantidade_1.setText("Quantidade");
-		new Label(shell, SWT.NONE);
-		new Label(shell, SWT.NONE);
-		
-		Composite composite = new Composite(shell, SWT.NONE);
-		GridData gd_composite = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
-		gd_composite.widthHint = 372;
-		composite.setLayoutData(gd_composite);
-		TableColumnLayout tcl_composite = new TableColumnLayout();
-		composite.setLayout(tcl_composite);
-		
-		TableViewer tableViewer_1 = new TableViewer(composite, SWT.BORDER | SWT.FULL_SELECTION);
-		table_2 = tableViewer_1.getTable();
-		table_2.setHeaderVisible(true);
-		table_2.setLinesVisible(true);
-		
-		TableViewerColumn tableViewerColumn_2 = new TableViewerColumn(tableViewer_1, SWT.NONE);
-		TableColumn tblclmnNewColumn_1 = tableViewerColumn_2.getColumn();
-		tcl_composite.setColumnData(tblclmnNewColumn_1, new ColumnPixelData(303, true, true));
-		tblclmnNewColumn_1.setText("Livros3");
-		
-		TableViewerColumn tableViewerColumn_3 = new TableViewerColumn(tableViewer_1, SWT.NONE);
-		TableColumn tblclmnQuantidade_2 = tableViewerColumn_3.getColumn();
-		tcl_composite.setColumnData(tblclmnQuantidade_2, new ColumnPixelData(150, true, true));
-		tblclmnQuantidade_2.setText("Quantidade3");
 		new Label(shell, SWT.NONE);
 		new Label(shell, SWT.NONE);
 		

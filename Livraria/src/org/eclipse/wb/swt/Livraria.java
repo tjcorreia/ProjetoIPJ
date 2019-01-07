@@ -135,8 +135,24 @@ public class Livraria {
 		}
 		//caso não se verifique nenhuma das anteriores é porque o email é errado
 		return "emailErrado";
-	}			
+	}
 	
+	//método para transformar lista de livros em hashMap e depois em carrinho
+	public Carrinho listaToCarrinho ( ArrayList <Livro> listaLivrosCarrinho ) {
+		HashMap <Livro, Integer> novoCarrinho = new HashMap<>();
+		int i = 0;
+		int quantidade = 1;
+		for ( Livro lv : listaLivrosCarrinho) {
+			//Se livro já existe no HashMap => aumenta-se quantidade
+			if ( novoCarrinho.containsKey(lv)) {
+				quantidade = novoCarrinho.get(lv)+1;
+			}
+			//acrrescentar livros ao HashMap
+			novoCarrinho.put( lv , quantidade);	
+		}
+		Carrinho cr = new Carrinho(novoCarrinho);
+		return cr;
+	}
 	
 	
 }

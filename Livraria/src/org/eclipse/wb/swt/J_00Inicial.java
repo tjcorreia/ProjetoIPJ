@@ -26,7 +26,7 @@ public class J_00Inicial {
 
 	protected Shell shlViewComicsInc;
 	private Text text;
-	private Livraria livraria;//atributo adicionado para poder ir buscar o método 'procurarLivro' desta classe
+	protected static Livraria livraria;//atributo adicionado para poder ir buscar o método 'procurarLivro' desta classe
 
 
 	/**
@@ -45,7 +45,7 @@ public class J_00Inicial {
 	//Construtor para poder trazer a Livraria para esta classe
 	public J_00Inicial(Livraria livraria) {
 		super();
-		this.livraria = livraria;
+		this.livraria=livraria;
 	}
 
 	/**
@@ -114,7 +114,7 @@ public class J_00Inicial {
 				//caso lista tenha livros
 				else {
 					//Abrir nova janela de ListaLivros, passando-lhe a lista de livros que correspondem à procura
-					J_01ListaLivros janelaListaLivros = new J_01ListaLivros(lvProcurados, livraria);
+					J_01ListaLivros janelaListaLivros = new J_01ListaLivros(lvProcurados);
 					janelaListaLivros.open();
 				}
 				
@@ -122,10 +122,8 @@ public class J_00Inicial {
 		});
 		btnPesquisarLivro.setBounds(271, 89, 167, 25);
 		btnPesquisarLivro.setText("Pesquisar/Comprar Livro");
-		
-		
-		
-		
 
 	}
+
+
 }

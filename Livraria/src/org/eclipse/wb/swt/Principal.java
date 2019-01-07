@@ -10,8 +10,8 @@ public class Principal {
 		Livraria viewComics = new Livraria();
 		//viewComics.testar();
 
-		J_00Inicial teste = new J_00Inicial(viewComics);
-		teste.open();
+		J_00Inicial janelaInicial = new J_00Inicial(viewComics);
+		janelaInicial.open();
 	}
 
 }

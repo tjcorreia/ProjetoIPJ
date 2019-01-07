@@ -24,26 +24,22 @@ import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.widgets.Text;
 
 
-
-
-public class J_01ListaLivros {
+public class J_01ListaLivros extends J_00Inicial {
 
 	protected Shell shlViewComicsInc;
-	private ArrayList <Livro> listaLivrosDaBusca;//adicionou-se este atributo para listar os livros na table
+	protected ArrayList <Livro> listaLivrosDaBusca;//adicionou-se este atributo para listar os livros na table
 	protected static ArrayList <Livro> listaLivrosCarrinho = new ArrayList<>();//adicionou-se este atributo para criar carrinho a partir desta lista
 	protected Livro livroSelecionado;//atributo que nos dá o livro que está selecionado na table
+	protected static Carrinho carrinho = new Carrinho();
 	private Table table;
-	protected static Livraria livraria;//atributo adicionado para poder ir buscar o método 'procurarLivro' desta classe
 	private int indexLivroSelecionado;//adicionou-se este atributo para poder passá-lo entre métodos
-	private Carrinho carrinho = new Carrinho();
 	private Text text;;//adicionou-se carrinho para cria-lo e passar para outras classes
 	
 	
-	//Criou-se construtor para poder receber a lista de livros procurados de outra classe
-	public J_01ListaLivros(ArrayList<Livro> listaLivrosDaBusca, Livraria livraria) {
-		super();
+	//Criou-se construtor para poder receber a lista de livros procurados da janela anterior
+	public J_01ListaLivros(ArrayList <Livro> listaLivrosDaBusca) {
+		super(livraria);
 		this.listaLivrosDaBusca = listaLivrosDaBusca;
-		this.livraria = livraria;
 	}
 
 	
@@ -54,7 +50,7 @@ public class J_01ListaLivros {
 	public static void main(String[] args) {
 		try {
 			//Foi necessário adicionar aqui a arrayList de livros
-			J_01ListaLivros window = new J_01ListaLivros(new ArrayList<Livro>(), new Livraria());
+			J_01ListaLivros window = new J_01ListaLivros(new ArrayList<Livro>());
 			window.open();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -75,8 +71,6 @@ public class J_01ListaLivros {
 			}
 		}
 	}
-
-	
 	
 	/**
 	 * 
@@ -254,15 +248,22 @@ public class J_01ListaLivros {
 		btnPesquisar.setText("Pesquisar");
 		
 		
-		
+		//Butão ver/finalizar carrinho
 		Button btnVerfinalizarCarrinho = new Button(shlViewComicsInc, SWT.CENTER);
+		btnVerfinalizarCarrinho.addMouseListener(new MouseAdapter() {
+			@Override
+			//listner para ao clicar com rato abrir janela de carrinho
+			public void mouseUp(MouseEvent e) {
+				//chamar método para transformar lista de livros em carrinho
+				carrinho = livraria.listaToCarrinho(listaLivrosCarrinho);
+				J_02Carrinho janelaCarrinho = new J_02Carrinho();
+				janelaCarrinho.open();
+			}
+		});
 		btnVerfinalizarCarrinho.setText("Ver/Finalizar Carrinho");
 		btnVerfinalizarCarrinho.setBounds(514, 225, 186, 30);
 		
-		
-		
-		
-		
+
 		// Listner que deixa definir a altura de cada linha da table
 		// é preciso importar o org.eclipse.swt.widgets.Event;
 		table.addListener(SWT.MeasureItem, new Listener() {
