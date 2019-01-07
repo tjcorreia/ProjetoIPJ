@@ -33,6 +33,18 @@ public class Transacao implements Serializable{
 		this.escolhaT = escolhaT;
 	}
 
+	public Transacao(int funcionarioID, String data, double valor, int contadestino, TipoT escolhaT) {
+		super();
+		this.funcionarioID = funcionarioID;
+		this.data = data;
+		this.valor = valor;
+		this.contadestino = contadestino;
+		this.escolhaT = escolhaT;
+	}	
+	
+	
+	
+	
 	public Transacao() {
 		super();
 		// TODO Auto-generated constructor stub

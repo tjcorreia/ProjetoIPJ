@@ -91,21 +91,32 @@ public class Gestao {
 		// Contas
 
 		
-		Conta cn1 = new ContaNormal(1, 9000, "2017/06/02");
+		Conta cn1 = new ContaNormal(100000, 9000, "2017/06/02");
 		lContas.add(cn1);
 		cn1.addClienteC(cl1.getuID());
 		cl1.addConta(cn1);
 
-		ContaNormal cn2 = new ContaNormal(2, 2500, "2017/06/02");
+		ContaNormal cn2 = new ContaNormal(100001, 2500, "2017/06/02");
 		cn2.addClienteC(cl2.getuID());
 		cl2.addConta(cn2);
 
 		lContas.add(cn2);
 		
-		Conta cn3 = new ContaNormal(3, 1000, "2017/06/02");
+		Conta cn3 = new ContaNormal(100002, 1000, "2017/06/02");
 		lContas.add(cn3);
 		cn3.addClienteC(cl1.getuID());
 		cl1.addConta(cn3);
+		
+		Conta cn4 = new ContaPrazo(100003, 1000, "2017/06/02");
+		lContas.add(cn4);
+		cn4.addClienteC(cl1.getuID());
+		cl1.addConta(cn4);
+		
+		Conta cn5 = new ContaPrazo(100004, 1000, "2017/06/02");
+		cn5.setAbertaFechada(Conta.TipoC.ENCERADA);
+		lContas.add(cn5);
+		cn5.addClienteC(cl1.getuID());
+		cl1.addConta(cn5);
 
 //	transações
 		
@@ -214,7 +225,27 @@ public class Gestao {
 		saveAll();
 
 	}
+//++++++++++++++++++++++++++++++++++++++++++++++++++ metodos++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	
+// cria uma conta nova para um cliente 
 
+	public Conta criaContaNova(Cliente clienteActual, Conta contaNova,int funcionarioID) {
+		
+		contaNova.setContaID(lContas.size()+100000);
+		lContas.add(contaNova);
+		contaNova.addClienteC(clienteActual.getuID());
+		clienteActual.addConta(contaNova);
+		Transacao tAbertura = new Transacao(funcionarioID,contaNova.getDatacria(),contaNova.getSaldo(),"ABERTURA", 0,Transacao.TipoT.DEP_CASH);
+		contaNova.addTransacaoC(tAbertura);
+		return contaNova;
+	}
+	
+	
+	
+	
+	
+	
+	
 	//// faz a verificação das entradas do login
 	public Utilizador verfLogin(String username, String passwordV) {
 

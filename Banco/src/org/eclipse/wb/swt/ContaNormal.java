@@ -40,6 +40,15 @@ public class ContaNormal extends Conta implements Serializable{
 		this.cartaodaConta = null;
 		// TODO Auto-generated constructor stub
 	}
+	
+	public ContaNormal( double saldo, String datacria) {
+		super(saldo,datacria);
+		this.transacoesC = new ArrayList<Transacao>();
+		this.clientesDaC = new ArrayList<Integer>();
+		this.abertaFechada = TipoC.ABERTA;
+		this.cartaodaConta = null;
+		// TODO Auto-generated constructor stub
+	}
 
 	public Cartao getCartaodaConta() {
 		return cartaodaConta;

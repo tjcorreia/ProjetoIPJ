@@ -559,6 +559,16 @@ public class J_02Menu_F_DadosCl {
 		btn_ProcuraCliente.setText("Obter Cliente");
 		
 		Button btnCriarConta = new Button(composite, SWT.TOGGLE | SWT.MULTI | SWT.WRAP | SWT.NONE);
+		btnCriarConta.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				J_02Menu_F_Conta criaConta=new J_02Menu_F_Conta(gestor,uUtilizador,clienteActual);
+				criaConta.open();
+				shellMF.dispose();
+				
+				
+			}
+		});
 		btnCriarConta.setText("Criar Conta");
 		btnCriarConta.setBounds(238, 234, 81, 58);
 		

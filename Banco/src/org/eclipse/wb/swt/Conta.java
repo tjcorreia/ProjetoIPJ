@@ -62,6 +62,15 @@ public class Conta implements Serializable{
 	}
 
 
+	public Conta(double saldo, String datacria) {
+		super();
+		this.saldo = saldo;
+		this.datacria = datacria;
+		this.transacoesC = new ArrayList<Transacao>();
+		this.clientesDaC = new ArrayList<Integer>();
+		this.abertaFechada = TipoC.ABERTA;
+		// TODO Auto-generated constructor stub
+	}
 
 
 	public int getContaID() {
