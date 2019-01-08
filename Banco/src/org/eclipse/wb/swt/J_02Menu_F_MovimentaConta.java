@@ -46,6 +46,7 @@ public class J_02Menu_F_MovimentaConta {
 	private Utilizador uUtilizador;
 	private Cliente clienteActual;
 	private Conta contaActual;
+	private Conta contaFinal;
 	private TipoT escolhaTA;
 	private Text Funcionario;
 	private Text txt_Indique_ID;
@@ -53,12 +54,18 @@ public class J_02Menu_F_MovimentaConta {
 	private Table table;
 	private Text text_contaActual;
 	private Combo combo_EscolhaConta;
-	private Text text;
-	private Text text_1;
+	private Text text_ValorTrf;
+	private Text text_Levantamento;
 	private Text text_Deposito;
-	private Text text_4;
-	private Text text_2;
-	private Text text_5;
+	private Text text_Contadestinotrf;
+
+		public Conta getContaFinal() {
+		return contaFinal;
+	}
+
+	public void setContaFinal(Conta contaFinal) {
+		this.contaFinal = contaFinal;
+	}
 
 	public TipoT getEscolhaTA() {
 		return escolhaTA;
@@ -151,20 +158,20 @@ public class J_02Menu_F_MovimentaConta {
 	protected void createContents() {
 		shellMF_ModificaContas = new Shell();
 		shellMF_ModificaContas.setBackground(SWTResourceManager.getColor(SWT.COLOR_DARK_GRAY));
-		shellMF_ModificaContas.setSize(707, 545);
+		shellMF_ModificaContas.setSize(729, 545);
 		shellMF_ModificaContas.setText("Menu Funcion\u00E1rio");
 
-		System.out.println("<---- MENU MOVIMENTOS --->/n" + contaActual);
-		System.out.println("<---- Utilizador Actual --->/n" + uUtilizador);
-		System.out.println("<---- Cliente Actual --->/n" + clienteActual);
-		System.out.println("<---- Conta Actual --->/n" + contaActual);
+		System.out.println("<---- MENU MOVIMENTOS --->\n" + contaActual);
+		System.out.println("<---- Utilizador Actual --->\n" + uUtilizador);
+		System.out.println("<---- Cliente Actual --->\n" + clienteActual);
+		System.out.println("<---- Conta Actual --->\n" + contaActual);
 
 		Composite composite = new Composite(shellMF_ModificaContas, SWT.NONE);
 		composite.setVisible(true);
-		composite.setBounds(215, 84, 441, 400);
+		composite.setBounds(215, 84, 456, 400);
 
 		ScrolledComposite scrolledComposite_Tabela = new ScrolledComposite(composite, SWT.V_SCROLL);
-		scrolledComposite_Tabela.setBounds(24, 106, 395, 67);
+		scrolledComposite_Tabela.setBounds(24, 106, 422, 67);
 		scrolledComposite_Tabela.setExpandHorizontal(true);
 		scrolledComposite_Tabela.setExpandVertical(true);
 
@@ -173,7 +180,7 @@ public class J_02Menu_F_MovimentaConta {
 		table.setLinesVisible(true);
 
 		TableColumn tblclmn_ID = new TableColumn(table, SWT.CENTER);
-		tblclmn_ID.setWidth(50);
+		tblclmn_ID.setWidth(62);
 		tblclmn_ID.setText("ID");
 
 		TableColumn tblclmnNewColumn_1 = new TableColumn(table, SWT.CENTER);
@@ -185,7 +192,7 @@ public class J_02Menu_F_MovimentaConta {
 		tblclmnNewColumn_2.setText("Tipo");
 
 		TableColumn tblclmnNewColumn_3 = new TableColumn(table, SWT.CENTER);
-		tblclmnNewColumn_3.setWidth(70);
+		tblclmnNewColumn_3.setWidth(76);
 		tblclmnNewColumn_3.setText("Movimento");
 
 		TableColumn tblclmnNewColumn_4 = new TableColumn(table, SWT.CENTER);
@@ -193,7 +200,7 @@ public class J_02Menu_F_MovimentaConta {
 		tblclmnNewColumn_4.setText("Saldo");
 		scrolledComposite_Tabela.setContent(table);
 		scrolledComposite_Tabela.setMinSize(table.computeSize(SWT.DEFAULT, SWT.DEFAULT));
-
+		
 		combo_EscolhaConta = new Combo(composite, SWT.NONE);
 		combo_EscolhaConta.setBounds(171, 59, 224, 23);
 
@@ -223,7 +230,7 @@ public class J_02Menu_F_MovimentaConta {
 						index = i;
 					}
 				}
-				System.out.println("<---- lista de contas --->/n" + listaContas.length);
+				System.out.println("<---- lista de contas --->\n" + listaContas.length);
 				combo_EscolhaConta.setItems(listaContas);
 				combo_EscolhaConta.select(index);
 
@@ -236,6 +243,16 @@ public class J_02Menu_F_MovimentaConta {
 		if (contaActual == null) {
 			text_contaActual.setText("Indique o ID");
 		} else {
+			String[] listaClientes= new String [contaActual.getClientesDaC().size()];
+//			int[] listaClientes= new int [contaActual.getClientesDaC().size()];
+			System.out.println("<---- lista de clientes--->\n" + listaClientes.length);
+			System.out.println("<---- lista de clientes--->\n" + Arrays.toString(listaClientes));
+			for (int i = 0; i < contaActual.getClientesDaC().size(); i++) {
+				listaClientes[i]=""+contaActual.getClientesDaC().get(i);
+			}
+			
+			
+			
 			if (clienteActual == null) {
 				combo_EscolhaConta.setItems("" + contaActual.getContaID());
 				combo_EscolhaConta.select(0);
@@ -263,7 +280,6 @@ public class J_02Menu_F_MovimentaConta {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				preencheTabela();
-
 			}
 		});
 
@@ -402,40 +418,37 @@ public class J_02Menu_F_MovimentaConta {
 		btnObterConta.setGrayed(true);
 		btnObterConta.setBounds(343, 28, 88, 25);
 
-		Button button_1 = new Button(composite, SWT.NONE);
-		button_1.setText("Encerrar Conta");
-		button_1.setSelection(true);
-		button_1.setBounds(25, 318, 141, 25);
+		Button btnEditarConta = new Button(composite, SWT.NONE);
+		btnEditarConta.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				
+				J_02Menu_F_EditarConta editarconta= new J_02Menu_F_EditarConta(gestor, uUtilizador, clienteActual, contaActual);
+				editarconta.open();
+				shellMF_ModificaContas.dispose();
+			}
+		});
+		btnEditarConta.setText("Editar Conta");
+		btnEditarConta.setSelection(true);
+		btnEditarConta.setBounds(25, 318, 141, 25);
 
-		Button button_2 = new Button(composite, SWT.NONE);
-		button_2.setText("Criar Cart\u00E3o de Credito");
-		button_2.setSelection(true);
-		button_2.setBounds(25, 287, 141, 25);
+		Button button_Transferencia = new Button(composite, SWT.NONE);
+		
+		button_Transferencia.setText("Transaferencia");
+		button_Transferencia.setSelection(true);
+		button_Transferencia.setBounds(24, 256, 142, 25);
 
-		Combo combo_1 = new Combo(composite, SWT.NONE);
-		combo_1.setBounds(172, 289, 93, 23);
-
-		Label label = new Label(composite, SWT.NONE);
-		label.setText("(escolha titular)");
-		label.setFont(SWTResourceManager.getFont("Segoe UI", 7, SWT.ITALIC));
-		label.setAlignment(SWT.CENTER);
-		label.setBounds(172, 278, 93, 10);
-
-		Button button_3 = new Button(composite, SWT.NONE);
-		button_3.setText("Transaferencia");
-		button_3.setSelection(true);
-		button_3.setBounds(24, 256, 142, 25);
-
-		text = new Text(composite, SWT.BORDER);
-		text.setBounds(172, 256, 93, 21);
+		text_ValorTrf = new Text(composite, SWT.BORDER);
+		text_ValorTrf.setBounds(172, 256, 93, 21);
 
 		Button button_4 = new Button(composite, SWT.NONE);
+		
 		button_4.setText("Levantar Valor");
 		button_4.setSelection(true);
 		button_4.setBounds(24, 223, 142, 25);
 
-		text_1 = new Text(composite, SWT.BORDER);
-		text_1.setBounds(172, 224, 93, 21);
+		text_Levantamento = new Text(composite, SWT.BORDER);
+		text_Levantamento.setBounds(172, 224, 93, 21);
 
 		Label label_1 = new Label(composite, SWT.NONE);
 		label_1.setText("(valor)");
@@ -469,90 +482,140 @@ public class J_02Menu_F_MovimentaConta {
 		label_4.setAlignment(SWT.CENTER);
 		label_4.setBounds(271, 240, 111, 15);
 
-		text_4 = new Text(composite, SWT.BORDER);
-		text_4.setBounds(271, 256, 111, 21);
-
-		text_2 = new Text(composite, SWT.BORDER);
-		text_2.setBounds(271, 291, 111, 21);
-
-		Label lblcartaoAssociado = new Label(composite, SWT.NONE);
-		lblcartaoAssociado.setText("(cartao associado)");
-		lblcartaoAssociado.setFont(SWTResourceManager.getFont("Segoe UI", 7, SWT.ITALIC));
-		lblcartaoAssociado.setAlignment(SWT.CENTER);
-		lblcartaoAssociado.setBounds(271, 278, 111, 10);
-
-		Button btnAdicionarTitular = new Button(composite, SWT.NONE);
-		btnAdicionarTitular.setText("Adicionar Titular");
-		btnAdicionarTitular.setSelection(true);
-		btnAdicionarTitular.setBounds(24, 346, 141, 25);
-
-		text_5 = new Text(composite, SWT.BORDER);
-		text_5.setBounds(171, 348, 93, 21);
-
-		Label lblidDoCliente = new Label(composite, SWT.NONE);
-		lblidDoCliente.setText("(ID do Cliente)");
-		lblidDoCliente.setFont(SWTResourceManager.getFont("Segoe UI", 7, SWT.ITALIC));
-		lblidDoCliente.setAlignment(SWT.CENTER);
-		lblidDoCliente.setBounds(171, 334, 93, 10);
-
-		Button button_6 = new Button(composite, SWT.NONE);
-		button_6.setText("Obter Cliente");
-		button_6.setGrayed(true);
-		button_6.setBounds(270, 346, 88, 25);
+		text_Contadestinotrf = new Text(composite, SWT.BORDER);
+		text_Contadestinotrf.setBounds(271, 256, 111, 21);
 		// ************ FAZ UM DEPOSITO
 		button_Deposito.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
 				text_Deposito.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
 				escolhaTA = Transacao.TipoT.DEP_CASH;
-
-				int contaID = 0;
-				String mensagem = "";
-
-				if (estaVazio(text_Deposito)) {
-					estaVazio(text_Deposito);
-					mensagem = "tem de introduzir o valor a depositar";
-				}
-
-				else {
-					if (Integer.parseInt(text_Deposito.getText()) < 0) {
-						text_Deposito.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
-						mensagem = "tem de introduzir um valor absoluto (positivo)";
-
-					} else if (!eNumeroIouD(text_Deposito)) {
-						text_Deposito.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
-						mensagem = "tem de introduzir um valor numerico";
-					} else if (!verifMovimentos()) {
-						text_Deposito.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
-						mensagem = "Atingiu o limite maximo que pode levantar ou transaferir";
-						
-					}
-
-					else if (!(Integer.parseInt(text_Deposito.getText()) < 0)&
-							eNumeroIouD(text_Deposito)&
-							verifMovimentos()) {
-
-						Transacao novaT = new Transacao(uUtilizador.getuID(), Integer.parseInt(text_Deposito.getText()),
-								"", contaID, escolhaTA);
-						contaActual.addTransacaoC(novaT);
-						preencheTabela();
-					}
-				}
-				MessageBox box = new MessageBox(shellMF_ModificaContas, SWT.MULTI);
-				box.setText("ATENÇÃO");
-				box.setMessage(mensagem);
-				box.open();
-
+			
+				movimenta(escolhaTA,text_Deposito);
+				text_Deposito.setText("");
+				text_Contadestinotrf.setText("");
 			}
 		});
-
+		// ************ FAZ UM Levantamento ********************
+		button_4.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				text_Levantamento.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
+				escolhaTA = Transacao.TipoT.LEV_CASH;
+			
+				movimenta(escolhaTA,text_Levantamento);
+				text_Levantamento.setText("");
+			}
+		});
+		// ************ FAZ UMA Transferencia********************
+		button_Transferencia.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				text_ValorTrf.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
+				escolhaTA = Transacao.TipoT.TRANSFERENCIA;
+				contaFinal=null;
+				movimenta(escolhaTA,text_ValorTrf);
+				text_ValorTrf.setText("");
+			}
+		});
+		
+		
+		
+		
 	}
 
 	// ***************metodos**************
 
-	public boolean verifMovimentos() {
+	
+	// ************ faz depositos e levantamentos**********
+	public void movimenta(TipoT escolhaTA,Text texoVerifica) {
+		int contaID = 0;
+		String mensagem = "";
+		String textoTitulo="ATENÇÃO";
+		if (escolhaTA.equals(TipoT.TRANSFERENCIA)) {
+			text_Contadestinotrf.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
+			if (estaVazio(texoVerifica)) {
+				estaVazio(texoVerifica);
+				mensagem = mensagem+"tem de introduzir o valor a Conta destino.\n";
+			}
+			else  {
+				if (eNumero(text_Contadestinotrf) == -1) {
+					mensagem = mensagem+ " O ID do cliente tem de ser numerico.\n";
+				}
+				else {
+					contaFinal=gestor.contaExiste(Integer.parseInt(text_Contadestinotrf.getText()));
+					if (contaFinal==null) {
+						text_Contadestinotrf.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
+						mensagem =mensagem+ " A conta não existe!!!!!\n";	
+					}
+					else {
+						contaID=contaFinal.getContaID();
+					}
+				}
+				
+			}
+			
+			}
+		if (estaVazio(texoVerifica)) {
+			estaVazio(texoVerifica);
+			mensagem = mensagem + "tem de introduzir o valor a depositar.\n";
+		}
+
+		else   {
+			if (eNumeroIouD(texoVerifica)&&Integer.parseInt(texoVerifica.getText()) < 0) {
+				texoVerifica.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
+				mensagem =mensagem+"tem de introduzir um valor absoluto (positivo)\n";
+
+			} else if (!eNumeroIouD(texoVerifica)) {
+				texoVerifica.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
+				mensagem = mensagem+"tem de introduzir um valor numerico absoluto (positivo)\\n";
+				
+			} else if (!verifMovimentos(escolhaTA)&eNumeroIouD(texoVerifica)&!(Integer.parseInt(texoVerifica.getText()) < 0)) {
+				texoVerifica.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
+				mensagem = mensagem + "Atingiu o limite maximo que pode levantar ou transaferir.\n";
+				
+			}
+
+			else if (
+	(!(Integer.parseInt(texoVerifica.getText()) < 0)&eNumeroIouD(texoVerifica)&verifMovimentos(escolhaTA)&!escolhaTA.equals(TipoT.TRANSFERENCIA)) 
+	||(!(contaFinal==null))&!(Integer.parseInt(texoVerifica.getText()) < 0)&eNumeroIouD(texoVerifica)&verifMovimentos(escolhaTA))
+			{
+
+				double valor=Integer.parseInt(texoVerifica.getText());
+				if (escolhaTA.equals(TipoT.LEV_CASH)||escolhaTA.equals(TipoT.TRANSFERENCIA)) {valor=valor*-1;}
+				Transacao novaT = new Transacao(uUtilizador.getuID(),valor ,"", contaID, escolhaTA);
+				contaActual.addTransacaoC(novaT);
+				
+				textoTitulo="TRANSÇÃO CONCLUIDA";
+				preencheTabela();
+				if (escolhaTA.equals(TipoT.TRANSFERENCIA)) {
+					Transacao novaTcontaF = new Transacao(uUtilizador.getuID(),valor*-1 ,"", contaID, escolhaTA);
+					System.out.println("<---- Conta FINAL- Verifica Saldo ( " + contaFinal + ") --->\n");
+					contaFinal.addTransacaoC(novaTcontaF);
+					System.out.println("<---- Conta Actual- Verifica Saldo ( " + contaFinal+ ") --->\n");
+				}
+			}
+		}
+		MessageBox box = new MessageBox(shellMF_ModificaContas, SWT.MULTI);
+		box.setText(textoTitulo);
+		box.setMessage(mensagem);
+		box.open();
+	}
+
+	
+	
+
+	
+	
+	
+	// verifiva restriçoes da conta
+	public boolean verifMovimentos(TipoT escolhaTA) {
+		
+		if(escolhaTA==TipoT.DEP_CASH) {
+			return true;
+		}
 		if (contaActual instanceof ContaNormal) {
-			double maxdiario = 500; // max diario conta normal
+			double maxdiario = 1000; // max diario conta normal
 			LocalDate actual = LocalDate.now();
 			String[] dataS = ("" + actual).split("-");
 			System.out.println("<---- Conta Actual- Verifica max diario ( " + Arrays.toString(dataS) + ") --->\n");
@@ -579,6 +642,7 @@ public class J_02Menu_F_MovimentaConta {
 		table.setEnabled(true);
 		table.clearAll();
 		table.removeAll();
+	
 		int contaID = 0;
 		if (combo_EscolhaConta.getText().contains("(ENCERRADA)")) {
 			String textoConta = combo_EscolhaConta.getText();
@@ -598,7 +662,11 @@ public class J_02Menu_F_MovimentaConta {
 			TableItem item = new TableItem(table, SWT.NULL);
 			item.setText(0, ("" + contaActual.getTransacoesC().get(i).gettID()));
 			item.setText(1, ("" + contaActual.getTransacoesC().get(i).getData()));
-			item.setText(2, ("" + contaActual.getTransacoesC().get(i).getEscolhaT()));
+			if (contaActual.getTransacoesC().get(i).getEscolhaT().equals(TipoT.TRANSFERENCIA)) {
+				item.setText(2, ("TRF<" + contaActual.getTransacoesC().get(i).getContadestino())+">");
+			}
+			else {item.setText(2, ("" + contaActual.getTransacoesC().get(i).getEscolhaT()));}
+			
 			item.setText(3, ("" + contaActual.getTransacoesC().get(i).getValor()));
 			item.setText(4, ("" + (saldoI)));
 			saldoI = saldoI - contaActual.getTransacoesC().get(i).getValor();

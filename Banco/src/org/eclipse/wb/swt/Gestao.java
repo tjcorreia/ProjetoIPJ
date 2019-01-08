@@ -72,47 +72,64 @@ public class Gestao {
 				965420731);
 		contadores.put("Utilizador", contadores.get("Utilizador") + 1);
 		mapUtilizadores.put("Maria", MachadoFU);
+		
 		mapUtilizadores.put("Correia2", CorreiaFU);
 
 		// Clientes
 
 //	Utilizador(uID,login,password,nome,morada,escolhaID,valorID,email,mobile)
 
-		Cliente cl1 = new Cliente(contadores.get("Utilizador") + 1, "MCliente", "Cliente", "Alberto", "Machado0",
-				"1977/07/30", "Rua Maria Vitoria", Administrador.TipoID.CARTAOCIDADAO, "78456123", "mail", 965420731);
+		Cliente cl1 = new Cliente(contadores.get("Utilizador") + 1, "AlbertoCliente", "Cliente", "Alberto", "Machado0",
+				"1977/07/30", "Rua Maria Vitoria", Utilizador.TipoID.CARTAOCIDADAO, "78456123", "mail", 965420731);
 		contadores.put("Utilizador", contadores.get("Utilizador") + 1);
-		Cliente cl2 = new Cliente(contadores.get("Utilizador") + 1, "CCliente", "Cliente", "Tiago", "Coreia",
-				"1977/07/30", "Rua Maria Vitoriazfgadfgadfgsdfgsdfg", Administrador.TipoID.CARTAOCIDADAO, "12345678",
+		Cliente cl2 = new Cliente(contadores.get("Utilizador") + 1, "CorreiaCliente", "Cliente", "Tiago", "Coreia",
+				"1977/07/30", "Rua Maria Vitoriazfgadfgadfgsdfgsdfg", Utilizador.TipoID.CARTAOCIDADAO, "12345678",
 				"mail", 965420730);
 		contadores.put("Utilizador", contadores.get("Utilizador") + 1);
-		mapUtilizadores.put("MCliente", cl1);
-		mapUtilizadores.put("CCliente", cl2);
+		Cliente cl3 = new Cliente(contadores.get("Utilizador") + 1, "MariaCliente", "Cliente", "Tiago2", "Coreia2",
+				"1977/07/30", "Rua Maria Vitoriazfgadfgadfgsdfgsdfg",Utilizador.TipoID.CARTAOCIDADAO, "92345678",
+				"mail2@gmail.com", 965420530);
+		contadores.put("Utilizador", contadores.get("Utilizador") + 1);
+		
+		mapUtilizadores.put("AlbertoCliente", cl1);
+		
+		mapUtilizadores.put("CorreiaCliente", cl2);
+		
+		mapUtilizadores.put("MariaCliente", cl3);
 
 		// Contas
 
 		
-		Conta cn1 = new ContaNormal(100000, 9000, "2017/06/02");
+		Conta cn1 = new ContaNormal(100000, 0, "2017/06/02");
 		lContas.add(cn1);
 		cn1.addClienteC(cl1.getuID());
 		cl1.addConta(cn1);
 
-		ContaNormal cn2 = new ContaNormal(100001, 2500, "2017/06/02");
+		ContaNormal cn2 = new ContaNormal(100001, 0, "2017/06/02");
 		cn2.addClienteC(cl2.getuID());
+		cn2.addClienteC(cl1.getuID());
+		cn2.addClienteC(cl3.getuID());
 		cl2.addConta(cn2);
+		cl1.addConta(cn2);
+		cl3.addConta(cn2);
 
 		lContas.add(cn2);
 		
-		Conta cn3 = new ContaNormal(100002, 1000, "2017/06/02");
+		Conta cn3 = new ContaNormal(100002, 0, "2017/06/02");
 		lContas.add(cn3);
 		cn3.addClienteC(cl1.getuID());
 		cl1.addConta(cn3);
 		
-		Conta cn4 = new ContaPrazo(100003, 1000, "2017/06/02");
+		Conta cn4 = new ContaPrazo(100003, 0, "2017/06/02");
 		lContas.add(cn4);
 		cn4.addClienteC(cl1.getuID());
+		cn4.addClienteC(cl2.getuID());
+		cn4.addClienteC(cl3.getuID());
+		cn4.addClienteC(cl3.getuID());
 		cl1.addConta(cn4);
+		cl3.addConta(cn4);
 		
-		Conta cn5 = new ContaPrazo(100004, 1000, "2017/06/02");
+		Conta cn5 = new ContaPrazo(100004, 0, "2017/06/02");
 		cn5.setAbertaFechada(Conta.TipoC.ENCERADA);
 		lContas.add(cn5);
 		cn5.addClienteC(cl1.getuID());
@@ -120,7 +137,7 @@ public class Gestao {
 
 //	transações
 		
-		Transacao T0Cn1 = new Transacao(MachadoFU.getuID(), "2018-01-02", 1500,"", 0,Transacao.TipoT.DEP_CASH);
+		Transacao T0Cn1 = new Transacao(MachadoFU.getuID(), "2018-01-02", 1500,"ABERTURA", 0,Transacao.TipoT.DEP_CASH);
 		cn1.addTransacaoC(T0Cn1);
 		Transacao T1Cn1 = new Transacao(CorreiaFU.getuID(), "2018-02-02", -500,"", 0,Transacao.TipoT.LEV_CASH);
 		cn1.addTransacaoC(T1Cn1);
@@ -138,15 +155,15 @@ public class Gestao {
 		cn1.addTransacaoC(T7Cn1);
 		Transacao T8Cn1 = new Transacao(MachadoFU.getuID(), "2019-01-08", 1000,"", 0,Transacao.TipoT.DEP_CASH);
 		cn1.addTransacaoC(T8Cn1);
-		Transacao T9Cn1 = new Transacao(MachadoFU.getuID(), "2019-01-08", -1000,"", 0,Transacao.TipoT.LEV_CASH);
+		Transacao T9Cn1 = new Transacao(MachadoFU.getuID(), "2019-01-08", -50,"", 0,Transacao.TipoT.LEV_CASH);
 		cn1.addTransacaoC(T9Cn1);
-		Transacao T10Cn1 = new Transacao(MachadoFU.getuID(), "2019-01-08", -1000,"", 100002,Transacao.TipoT.TRANSFERENCIA);
+		Transacao T10Cn1 = new Transacao(MachadoFU.getuID(), "2019-01-08", -500,"", 100002,Transacao.TipoT.TRANSFERENCIA);
 		cn1.addTransacaoC(T10Cn1);
-		Transacao T0Cn2 = new Transacao(MachadoFU.getuID(), "2019-01-08", 1500,"", 0,Transacao.TipoT.DEP_CASH);
-		cn1.addTransacaoC(T0Cn2);
-		Transacao T1Cn2 = new Transacao(MachadoFU.getuID(), "2019-01-08", 1000,"", -100001,Transacao.TipoT.TRANSFERENCIA);
-		cn1.addTransacaoC(T1Cn2);
-		Transacao T0Cn3 = new Transacao(MachadoFU.getuID(), 1000,"", 0,Transacao.TipoT.DEP_CASH);
+		Transacao T0Cn2 = new Transacao(MachadoFU.getuID(), "2019-01-08", 1500,"ABERTURA", 0,Transacao.TipoT.DEP_CASH);
+		cn2.addTransacaoC(T0Cn2);
+		Transacao T1Cn2 = new Transacao(MachadoFU.getuID(), "2019-01-08", 200,"", -100001,Transacao.TipoT.TRANSFERENCIA);
+		cn2.addTransacaoC(T1Cn2);
+		Transacao T0Cn3 = new Transacao(MachadoFU.getuID(), 1000,"ABERTURA", 0,Transacao.TipoT.DEP_CASH);
 		cn3.addTransacaoC(T0Cn3);
 		
 		
@@ -226,6 +243,25 @@ public class Gestao {
 
 	}
 //++++++++++++++++++++++++++++++++++++++++++++++++++ metodos++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	
+	
+//***********  verifica se a conta existe ******************
+	public Conta contaExiste(int contaID) {
+		
+		for ( Conta c:lContas ) {
+			if (c.getContaID()==contaID) {
+				return c;
+			}
+		}
+		return null;
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 // cria uma conta nova para um cliente 
 
