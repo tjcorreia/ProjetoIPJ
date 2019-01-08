@@ -175,17 +175,45 @@ public class Conta implements Serializable{
 		 if (transacoesC==null) {
 			 novaT.settID(1000);
 			 transacoesC.add(novaT);
+			 saldo=novaT.getValor();
 			 return novaT;  
 		 }
 		 novaT.settID(transacoesC.size()+1000);
 		 transacoesC.add(novaT);
+		 saldo=saldo+novaT.getValor();
 		 return novaT;
 		 
 	 }
-	
+	 public double  mensal(int anoA,int mesA) {
+		double totalmensal=0;
+		Transacao t=new Transacao();
+		for (int i=transacoesC.size()-1;i>=0;i--) {
+			String [] dataS=transacoesC.get(i).getData().split("-");
+			if(anoA==Integer.parseInt(dataS[0])& mesA==Integer.parseInt(dataS[1])) {
+				if (transacoesC.get(i).getValor()<0) {
+					totalmensal=totalmensal+transacoesC.get(i).getValor();
+				}
+			}
+			else  return totalmensal;
+		}
+		 return totalmensal;
+	 }
 
 	
-	
+	 public double  diario(String anoA,String mesA,String diaA) {
+			double totalmensal=0;
+			Transacao t=new Transacao();
+			for (int i=transacoesC.size()-1;i>=0;i--) {
+				String [] dataS=transacoesC.get(i).getData().split("-");
+				if(anoA.equals(dataS[0])& mesA.equals(dataS[1])& diaA.equals(dataS[2])) {
+					if (transacoesC.get(i).getValor()<0) {
+						totalmensal=totalmensal+transacoesC.get(i).getValor();
+					}
+				}
+				else  return totalmensal;
+			}
+			 return totalmensal;
+		 }
 	
 	
 
