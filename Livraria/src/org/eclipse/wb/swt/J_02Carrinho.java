@@ -155,7 +155,7 @@ public class J_02Carrinho extends J_01ListaLivros{ //criou-se janela como subcla
 		});
 		tabela.setBounds(5, 31, 535, 421);
 		tabela.setHeaderVisible(true);
-		//
+		
 			
 		TableViewerColumn tableViewerColumn = new TableViewerColumn(tableViewer, SWT.NONE);
 		TableColumn tblclmnLivros = tableViewerColumn.getColumn();
