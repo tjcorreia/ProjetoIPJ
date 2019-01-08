@@ -47,9 +47,8 @@ import org.eclipse.swt.graphics.Rectangle;
 
 public class J_02Carrinho extends J_01ListaLivros{ //criou-se janela como subclasse para poder receber variáveis da superclasse
 	protected Shell shell;
-	private Table tabela1;
-	private Table tabela2;
-	private final FormToolkit formToolkit = new FormToolkit(Display.getDefault());
+	private Table tabela;
+
 	
 	
 	//criou-se construtor que vai buscar variáveis à supercalsse
@@ -80,9 +79,11 @@ public class J_02Carrinho extends J_01ListaLivros{ //criou-se janela como subcla
 				"Ficção Científica. Viagens espaciais de um inadaptado", 
 				new GregorianCalendar (2017,11,18) , 16.5, 3, precos2);
 		//Criar alguns mapas de livros-quantidade para os carrinhos de compras 
-		Map <Livro, Integer> livros1 = new HashMap <>();
-		livros1.put(lv1, 3);
-		livros1.put(lv2, 1);
+		ArrayList <Livro> livros1 = new ArrayList <>();
+		livros1.add(lv1);
+		livros1.add(lv1);
+		livros1.add(lv1);
+		livros1.add(lv2);
 		//criar um carrinho
 		carrinho = new Carrinho(livros1);
 	}
@@ -107,7 +108,7 @@ public class J_02Carrinho extends J_01ListaLivros{ //criou-se janela como subcla
 	 * Open the window.
 	 */
 	public void open() {
-		System.out.println(carrinho);
+		//System.out.println(carrinho);
 		
 		Display display = Display.getDefault();
 		createContents();
@@ -127,154 +128,138 @@ public class J_02Carrinho extends J_01ListaLivros{ //criou-se janela como subcla
 		
 		shell = new Shell();
 		shell.setSize(724, 561);
-		shell.setText("SWT Application");
-		shell.setLayout(new GridLayout(3, false));
+		shell.setText("ViewComics-Carrinho");
+		shell.setLayout(null);
 		
-		Label lblNewLabel = new Label(shell, SWT.NONE);
-		lblNewLabel.setText("New Label");
-		new Label(shell, SWT.NONE);
-		new Label(shell, SWT.NONE);
+		Label lblCarrinho = new Label(shell, SWT.NONE);
+		lblCarrinho.setBounds(141, 5, 229, 20);
+		lblCarrinho.setText("CARRINHO");
 		
-		SashForm sashForm = new SashForm(shell, SWT.NONE);
-		sashForm.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
-		
-
-		
-		tabela1 = new Table( sashForm, SWT.BORDER | SWT.FULL_SELECTION);
-		tabela1.setHeaderVisible(true);
-		tabela1.setLinesVisible(true);
-		
-		TableColumn colunaLivros = new TableColumn(tabela1, SWT.NONE);
-		colunaLivros.setWidth(379);
-		colunaLivros.setText("Livros");
-		
-		TableColumn colunaQuantidades = new TableColumn(tabela1, SWT.NONE);
-		colunaQuantidades.setWidth(100);
-		colunaQuantidades.setText("Quantidade");
-		sashForm.setWeights(new int[] {1});
-		
-		//adicionar um a um os livros do Carrinho de livros à table
-		for (Livro lv : carrinho.livrosQuant.keySet()) {
-		      TableItem item = new TableItem(tabela1, SWT.NONE);
-		      //primeira coluna com o título do livro e segunda coluna com a quantidade
-		      item.setText( new String[] { lv.nome , "" + carrinho.livrosQuant.get(lv) } );
-		}		
-		new Label(shell, SWT.NONE);
-		
-		Button btnNewButton_1 = new Button(shell, SWT.NONE);
-		btnNewButton_1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
-		btnNewButton_1.setText("New Button");
-		new Label(shell, SWT.NONE);
-		new Label(shell, SWT.NONE);
-		
-		Button btnNewButton = new Button(shell, SWT.NONE);
-		btnNewButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
-		btnNewButton.setText("New Button");
+		Label lblSemStock = new Label(shell, SWT.NONE);
+		lblSemStock.setVisible(false);
+		lblSemStock.setText("Sem Stock");
+		lblSemStock.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
+		lblSemStock.setBounds(548, 31, 153, 20);
 		
 		TableViewer tableViewer = new TableViewer(shell, SWT.BORDER | SWT.FULL_SELECTION);
-		tabela2 = tableViewer.getTable();
-		tabela2.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
-		
+		tabela = tableViewer.getTable();
+		//Listner que devolve o indice e o livro do livro selecionado na tabela como 'indexLivroSelecionado' e 'livroSelecionado'
+		tabela.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				lblSemStock.setVisible(false);
+				System.out.println(e.toString());
+				indexLivroSelecionado = ((Table)e.widget).indexOf((TableItem)e.item);
+				System.out.println( indexLivroSelecionado );
+				livroSelecionado = carrinho.livros.get(indexLivroSelecionado);
+			}
+		});
+		tabela.setBounds(5, 31, 535, 421);
+		tabela.setHeaderVisible(true);
+			
 		TableViewerColumn tableViewerColumn = new TableViewerColumn(tableViewer, SWT.NONE);
 		TableColumn tblclmnLivros = tableViewerColumn.getColumn();
 		tblclmnLivros.setWidth(379);
 		tblclmnLivros.setText("Livros");
 		
-		
 		TableViewerColumn tableViewerColumn_1 = new TableViewerColumn(tableViewer, SWT.NONE);
-		TableColumn tblclmnQuantidade_1 = tableViewerColumn_1.getColumn();
-		
-		//editor para poder mudar a quantidade de livros na própria tabela
-		final TableEditor editor = new TableEditor(tabela2);
-	    editor.horizontalAlignment = SWT.LEFT;
-	    editor.grabHorizontal = true;
-		tabela2.addListener(SWT.MouseDown, new Listener() {
-		      public void handleEvent(Event event) {
-		        Rectangle clientArea = tabela2.getClientArea();
-		        Point pt = new Point(event.x, event.y);
-		        int index = tabela2.getTopIndex();
-		        while (index < tabela2.getItemCount()) {
-		          boolean visible = false;
-		          TableItem item = tabela2.getItem(index);
-		            Rectangle rect = item.getBounds(1);
-		            if (rect.contains(pt)) {
-		              int column = 1;
-		              Text texto = new Text(tabela2, SWT.NONE);
-		              Listener textListener = new Listener() {
-		                public void handleEvent(final Event e) {
-		                  switch (e.type) {
-		                  case SWT.FocusOut:
-		                    item.setText(column, texto.getText());
-		                    texto.dispose();
-		                    //colocar aqui e no outro switch uma cena para actualizar o carrinho
-		                    //
-		                    //
-		                    //
-		                    //
-		                    //
-		                    //
-		                    //
-		                    //w
-		                    
-		                    System.out.println(carrinho);
-		                    break;
-		                  case SWT.Traverse:
-		                    switch (e.detail) {
-		                    case SWT.TRAVERSE_RETURN:
-		                      item.setText(column, texto.getText());
-		                      System.out.println(carrinho);
-		                    // 
-		                    case SWT.TRAVERSE_ESCAPE:
-		                      texto.dispose();
-		                      e.doit = false;
-		                    }
-		                    break;
-		                  }
-		                }
-		              };
-		              texto.addListener(SWT.FocusOut, textListener);
-		              texto.addListener(SWT.Traverse, textListener);
-		              editor.setEditor(texto, item, 1);
-		              texto.setText(item.getText(1));
-		              texto.selectAll();
-		              texto.setFocus();
-		              return;
-		            }
-		            if (!visible && rect.intersects(clientArea)) {
-		              visible = true;
-		            }
-		          if (!visible)
-		            return;
-		          index++;
-		        }
-		      }
-		    });
-		
-		
-		
-		tblclmnQuantidade_1.setWidth(100);
-		tblclmnQuantidade_1.setText("Quantidade");
-		new Label(shell, SWT.NONE);
-		new Label(shell, SWT.NONE);
-		
-		//adicionar um a um os livros do Carrinho de livros à table
-		for (Livro lv : carrinho.livrosQuant.keySet()) {
-		      TableItem item = new TableItem(tabela2, SWT.NONE);
-		      //primeira coluna com o título do livro e segunda coluna com a quantidade
-		      item.setText( new String[] { lv.toString() , "" + carrinho.livrosQuant.get(lv) } );
-		}	
-		
-		
-		Label lblNewLabel_1 = new Label(shell, SWT.CENTER);
-		GridData gd_lblNewLabel_1 = new GridData(SWT.LEFT, SWT.FILL, false, false, 1, 1);
-		gd_lblNewLabel_1.widthHint = 477;
-		lblNewLabel_1.setLayoutData(gd_lblNewLabel_1);
-		lblNewLabel_1.setText("TOTAL");
-		new Label(shell, SWT.NONE);
-		new Label(shell, SWT.NONE);
-		
+		TableColumn tblclmnQuantidades = tableViewerColumn_1.getColumn();
+		tblclmnQuantidades.setWidth(151);
+		tblclmnQuantidades.setText("Quantidade");
+		//Chamar método para preencher tabela
+		preencherTabela();
+				
 		
 
+		//Botão para voltar à janela anterior de procura de livros
+		Button botaoVoltar = new Button(shell, SWT.NONE);
+		botaoVoltar.setBounds(574, 474, 127, 30);
+		botaoVoltar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				//fechar janela corrente
+				shell.close();
+				//abrir janela de busca de livros, com o carrinho atual
+				J_01ListaLivros janelaDeProcura = new J_01ListaLivros(carrinho.livros);
+				janelaDeProcura.open();
+			}
+		});
+		botaoVoltar.setText("Voltar/Pesquisar");
+		
+
+		Button botaoFinalizarCarrinho = new Button(shell, SWT.NONE);
+		botaoFinalizarCarrinho.setBounds(574, 422, 127, 30);
+		botaoFinalizarCarrinho.setText("Finalizar Carrinho");
+		
+		
+		Label lblTotal = new Label(shell, SWT.CENTER);
+		lblTotal.setBounds(394, 466, 133, 20);
+		lblTotal.setText("TOTAL: " + carrinho.totalCarrinho() + "€");
+		
+		Label lblQuantidade = new Label(shell, SWT.NONE);
+		lblQuantidade.setBounds(558, 65, 84, 20);
+		lblQuantidade.setText("Quantidade");
+		
+		
+		
+		Button butaoAumentarQuantidade = new Button(shell, SWT.NONE);
+		butaoAumentarQuantidade.setBounds(645, 54, 22, 22);
+		butaoAumentarQuantidade.setText("+");
+		butaoAumentarQuantidade.addMouseListener(new MouseAdapter() {
+			public void mouseUp(MouseEvent e) {
+				//Se nenhum item da tabela estiver selecionado, não fazer nada
+				if (livroSelecionado==null) {
+				}
+				//Verificar se livro tem stock e eventualmente escrever mensagem de falta de stock
+				else if (livroSelecionado.stock <= 0) {
+					//tornar visivel mensagem de falta de stock
+					lblSemStock.setVisible(true);
+				}
+				//caso em que há stock, actualiza-se carrinho e actualiza-se a tabela
+				else {
+					carrinho.adicionarLivroAoCarrinho(livroSelecionado);
+					System.out.println(carrinho);
+					//limpar tabela
+					tabela.removeAll();
+					preencherTabela();
+					lblSemStock.setVisible(false);
+					lblTotal.setText("TOTAL: " + carrinho.totalCarrinho() + "€");
+					//lblTotal.redraw();
+				}
+			}
+		});
+		
+		
+		Button butaoDiminuirQuantidade = new Button(shell, SWT.NONE);
+		butaoDiminuirQuantidade.setText("-");
+		butaoDiminuirQuantidade.setBounds(645, 82, 22, 22);
+		butaoDiminuirQuantidade.addMouseListener(new MouseAdapter() {
+			public void mouseUp(MouseEvent e) {
+				lblSemStock.setVisible(false);
+				//Se nenhum item da tabela estiver selecionado (ou se carrinho já foi esvaziado), não fazer nada
+				if (livroSelecionado==null || !carrinho.livros.contains(livroSelecionado)) {
+				}
+				//reduzir quantidade de livros
+				else {
+					carrinho.removerLivroDoCarrinho(livroSelecionado);
+					System.out.println(carrinho);
+					//limpar tabela
+					tabela.removeAll();
+					preencherTabela();
+					lblTotal.setText("TOTAL: " + carrinho.totalCarrinho() + "€");
+					//lblTotal.redraw();
+				}
+			}
+		});
 	}
-
+	
+	public void preencherTabela() {
+		//adicionar um a um os livros e quantidades do Carrinho à tabela2
+		for (Livro lv : carrinho.livros ) {
+		      TableItem item = new TableItem(tabela, SWT.NONE);
+		      int indice = carrinho.livros.indexOf(lv);
+		      //primeira coluna com o título do livro e segunda coluna com a quantidade
+		      item.setText( new String[] { lv.nome , "" + carrinho.quantidades.get(indice) } );
+		}
+	}
+	
 }

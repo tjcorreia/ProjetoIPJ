@@ -32,7 +32,7 @@ public class J_01ListaLivros extends J_00Inicial {
 	protected Livro livroSelecionado;//atributo que nos dá o livro que está selecionado na table
 	protected static Carrinho carrinho = new Carrinho();
 	private Table table;
-	private int indexLivroSelecionado;//adicionou-se este atributo para poder passá-lo entre métodos
+	protected int indexLivroSelecionado;//adicionou-se este atributo para poder passá-lo entre métodos
 	private Text text;;//adicionou-se carrinho para cria-lo e passar para outras classes
 	
 	
@@ -91,6 +91,7 @@ public class J_01ListaLivros extends J_00Inicial {
 		
 		table = new Table(shlViewComicsInc, SWT.BORDER | SWT.FULL_SELECTION);
 		
+		
 		//listner para ação ao selecionar um dos items da table e devolve o index do item na lista de livros
 		table.addSelectionListener(new SelectionAdapter() {
 			@Override
@@ -110,7 +111,7 @@ public class J_01ListaLivros extends J_00Inicial {
 				}
 			}
 		});
-		table.setBounds(10, 75, 481, 428);
+		table.setBounds(10, 75, 495, 367);
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
 		
@@ -137,31 +138,31 @@ public class J_01ListaLivros extends J_00Inicial {
 		
 		//texto a indicar quantos items tem o carrinho
 		Label lblItmes = new Label(shlViewComicsInc, SWT.NONE);
-		lblItmes.setText( listaLivrosCarrinho.size() + " itmes");
+		//lblItmes.setText( listaLivrosCarrinho.size() + " itmes");
+		lblItmes.setText( carrinho.numeroItemsDoCarrinho() + " itmes");
 		lblItmes.setBounds(511, 144, 70, 20);		
 		
 		//Listner para botão de 'adicionar ao carrinho'
 		Button btnAdicionarAoCarrinho = new Button(shlViewComicsInc, SWT.CENTER);
-		btnAdicionarAoCarrinho.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-			}
-		});
+//		btnAdicionarAoCarrinho.addSelectionListener(new SelectionAdapter() {
+//			@Override
+//			public void widgetSelected(SelectionEvent e) {
+//			}
+//		});
 		btnAdicionarAoCarrinho.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
 				//se stock <= 0 não faz nada
 				if (livroSelecionado.stock <= 0) {	
-					//colocar label a dizer livro sem stock
 				}
 				//se stock > 0 adiciona livro a lista de livros para o carrinho e reduz stock
 				else {
-					listaLivrosCarrinho.add(livroSelecionado);
+					carrinho.adicionarLivroAoCarrinho(livroSelecionado);
 					livroSelecionado.stock--;
 					//actualizar o label do número de items no carrinho
-					lblItmes.setText( listaLivrosCarrinho.size() + " itmes");
+					lblItmes.setText( carrinho.numeroItemsDoCarrinho() + " itmes");
 					System.out.println("STock=" + livroSelecionado.stock);
-					System.out.println("items no carrinho=" + listaLivrosCarrinho.size() );
+					System.out.println("items no carrinho=" + carrinho.numeroItemsDoCarrinho() );
 				}
 				
 			}
@@ -176,14 +177,14 @@ public class J_01ListaLivros extends J_00Inicial {
 			@Override
 			public void mouseUp(MouseEvent e) {
 				//remover o item selecionado
-				if ( listaLivrosCarrinho.contains(livroSelecionado)) {
-					listaLivrosCarrinho.remove(livroSelecionado);
+				if ( carrinho.livros.contains(livroSelecionado)) {
+					carrinho.removerLivroDoCarrinho(livroSelecionado);
 					//repor stock
-					livroSelecionado.stock++;
+					//livroSelecionado.stock++; //passei isto para o método 'removerLivroDoCarrinho'
 				}
 				//se carrinho já está vazio, não fazer nada
-				else if ( listaLivrosCarrinho.isEmpty() ){
-					
+				else if ( carrinho.livros.isEmpty() ){
+				
 				}
 				//remover o último da lista
 				else {
@@ -193,7 +194,7 @@ public class J_01ListaLivros extends J_00Inicial {
 					ultimoDaLista.stock++;
 				}
 				//actualizar o label do número de items no carrinho
-				lblItmes.setText( listaLivrosCarrinho.size() + " itmes");
+				lblItmes.setText( carrinho.numeroItemsDoCarrinho() + " itmes" );
 				System.out.println("items no carrinho=" + listaLivrosCarrinho.size() );
 			}
 		});
@@ -257,12 +258,12 @@ public class J_01ListaLivros extends J_00Inicial {
 			//listner para ao clicar com rato abrir janela de carrinho
 			public void mouseUp(MouseEvent e) {
 				//chamar método para transformar lista de livros em carrinho
-				carrinho = livraria.listaToCarrinho(listaLivrosCarrinho);
+				carrinho = new Carrinho (listaLivrosCarrinho);
 				J_02Carrinho janelaCarrinho = new J_02Carrinho();
 				janelaCarrinho.open();
 			}
 		});
-		btnVerfinalizarCarrinho.setText("Ver/Finalizar Carrinho");
+		btnVerfinalizarCarrinho.setText("Ver Carrinho");
 		btnVerfinalizarCarrinho.setBounds(514, 225, 186, 30);
 		
 

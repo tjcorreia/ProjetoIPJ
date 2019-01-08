@@ -71,14 +71,26 @@ public class Livraria {
 		utilizadores.add( u3 );
 		utilizadores.add( u4 );
 		//Criar alguns mapas de livros-quantidade para os carrinhos de compras 
-		Map <Livro, Integer> livros1 = new HashMap <>();
-		livros1.put(lv1, 2);
-		livros1.put(lv2, 1);
-		Map <Livro, Integer> livros2 = new HashMap <>();
-		livros2.put(lv2, 1);
-		livros2.put(lv3, 3);
-		Map <Livro, Integer> livros3 = new HashMap <>();
-		livros3.put(lv2, 1);
+//		Map <Livro, Integer> livros1 = new HashMap <>();
+//		livros1.put(lv1, 2);
+//		livros1.put(lv2, 1);
+//		Map <Livro, Integer> livros2 = new HashMap <>();
+//		livros2.put(lv2, 1);
+//		livros2.put(lv3, 3);
+//		Map <Livro, Integer> livros3 = new HashMap <>();
+//		livros3.put(lv2, 1);
+		//Criar alguns mapas de livros-quantidade para os carrinhos de compras 
+		ArrayList <Livro> livros1 = new ArrayList <>();
+		livros1.add(lv1);
+		livros1.add(lv1);
+		livros1.add(lv2);
+		ArrayList <Livro> livros2 = new ArrayList <>();
+		livros2.add(lv2);
+		livros2.add(lv3);
+		livros2.add(lv3);
+		livros2.add(lv3);
+		ArrayList <Livro> livros3 = new ArrayList <>();
+		livros3.add(lv2);		
 		//criar alguns carrinhos
 		Carrinho c1 = new Carrinho(livros1);
 		Carrinho c2 = new Carrinho(livros2);
@@ -128,7 +140,16 @@ public class Livraria {
 	
 	
 	
-	
+	//Método para obter Livro a partir do seu isbn
+	public Livro getLivro(String isbn) {
+		for ( Livro lv : livros) {
+			if ( lv.isbn.equals(isbn) ) {
+				return lv;
+			}
+		}
+		return new Livro();
+	}
+
 	//método que recebe password e email de login e devolve string com ok ou eventual erro
 	public String verificarLogin( String email, String password){
 		for ( Utilizador u : utilizadores ) {
@@ -146,22 +167,22 @@ public class Livraria {
 		return "emailErrado";
 	}
 	
-	//método para transformar lista de livros em hashMap e depois em carrinho
-	public Carrinho listaToCarrinho ( ArrayList <Livro> listaLivrosCarrinho ) {
-		HashMap <Livro, Integer> novoCarrinho = new HashMap<>();
-		int i = 0;
-		int quantidade = 1;
-		for ( Livro lv : listaLivrosCarrinho) {
-			//Se livro já existe no HashMap => aumenta-se quantidade
-			if ( novoCarrinho.containsKey(lv)) {
-				quantidade = novoCarrinho.get(lv)+1;
-			}
-			//acrrescentar livros ao HashMap
-			novoCarrinho.put( lv , quantidade);	
-		}
-		Carrinho cr = new Carrinho(novoCarrinho);
-		return cr;
-	}
+//	//método para transformar lista de livros em hashMap e depois em carrinho
+//	public Carrinho listaToCarrinho ( ArrayList <Livro> listaLivrosCarrinho ) {
+//		HashMap <Livro, Integer> novoCarrinho = new HashMap<>();
+//		int i = 0;
+//		int quantidade = 1;
+//		for ( Livro lv : listaLivrosCarrinho) {
+//			//Se livro já existe no HashMap => aumenta-se quantidade
+//			if ( novoCarrinho.containsKey(lv)) {
+//				quantidade = novoCarrinho.get(lv)+1;
+//			}
+//			//acrrescentar livros ao HashMap
+//			novoCarrinho.put( lv , quantidade);	
+//		}
+//		Carrinho cr = new Carrinho(novoCarrinho);
+//		return cr;
+//	}
 	
 	
 }
