@@ -28,25 +28,37 @@ public class J_00Inicial {
 	private Text text;
 	protected static Livraria livraria;//atributo adicionado para poder ir buscar o método 'procurarLivro' desta classe
 
-//
+
+	//Construtor para poder trazer a Livraria para esta classe
+	public J_00Inicial(Livraria livraria2) {
+		livraria=livraria2;
+		/**+++++++++++++++++++++++
+		 * Só para efeito de testes, define-se agora uma livraria
+		 * !!!!!!!!!!!!!!!!!!!!!!!
+		 * APAGAR MAIS TARDE O RESTO DESTE CONSTRUTOR
+		 * 1
+		 * 1
+		 * 1
+		 * 
+		 */
+		livraria=new Livraria();
+	}
+		
 	/**
 	 * Launch the application.
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		try {
-			J_00Inicial window = new J_00Inicial(new Livraria());
+			//Depois da fase de testes, vai ter de se retirar o 'new Livraria()' e mudar para 'livraria'
+			J_00Inicial window = new J_00Inicial( new Livraria() );
 			window.open();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
-	//Construtor para poder trazer a Livraria para esta classe
-	public J_00Inicial(Livraria livraria) {
-		super();
-		this.livraria=livraria;
-	}
+	
 
 	/**
 	 * Open the window.

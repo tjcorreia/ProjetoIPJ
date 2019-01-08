@@ -19,6 +19,15 @@ public class Livraria {
 	
 	//Construtor que cria alguns livros, utilizadores e compras pré definidos
 	Livraria(){
+		/**+++++++++++++++++++++++
+		 * Só para efeito de testes, define-se agora uma livraria
+		 * !!!!!!!!!!!!!!!!!!!!!!!
+		 * APAGAR MAIS TARDE O RESTO DESTE CONSTRUTOR
+		 * 1
+		 * 1
+		 * 1
+		 * 
+		 */
 		//criar 3 pequenos historicos de preços
 		Map <GregorianCalendar, Double > precos1 = new HashMap<>();
 		precos1.put(new GregorianCalendar(2017,2,5), 15.0);

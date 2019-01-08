@@ -81,15 +81,15 @@ public class J_01ListaLivros extends J_00Inicial {
 		shlViewComicsInc.setSize(740, 560);
 		shlViewComicsInc.setText("View Comics Inc.");
 		
-		
-		table = new Table(shlViewComicsInc, SWT.BORDER | SWT.FULL_SELECTION);
-		
 		//Label que dá mensagem de erro caso o livro não esteja dizponível
 		Label lblMensagemDeErro = new Label(shlViewComicsInc, SWT.NONE);
 		lblMensagemDeErro.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
 		lblMensagemDeErro.setBounds(511, 76, 153, 20);
 		lblMensagemDeErro.setText("Livro Indispon\u00EDvel");
 		lblMensagemDeErro.setVisible(false);		
+		
+		
+		table = new Table(shlViewComicsInc, SWT.BORDER | SWT.FULL_SELECTION);
 		
 		//listner para ação ao selecionar um dos items da table e devolve o index do item na lista de livros
 		table.addSelectionListener(new SelectionAdapter() {
@@ -114,11 +114,13 @@ public class J_01ListaLivros extends J_00Inicial {
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
 		
+		
 		//adicionar um a um os livros da lista de livros da busca à table
 		for (Livro lv : listaLivrosDaBusca) {
 		      TableItem item = new TableItem(table, SWT.NONE);
 		      item.setText(lv.toString());
 		}
+		table.redraw();
 		
 		//Listner para o botão de 'voltar'
 		Button buttonVoltar = new Button(shlViewComicsInc, SWT.NONE);
