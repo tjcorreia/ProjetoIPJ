@@ -1,6 +1,7 @@
 package org.eclipse.wb.swt;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 /**
 * Breve descrição do código
@@ -33,6 +34,16 @@ public class Transacao implements Serializable{
 		this.escolhaT = escolhaT;
 	}
 
+	public Transacao(int funcionarioID, double valor, String info, int contadestino, TipoT escolhaT) {
+		super();
+		LocalDate actual=LocalDate.now();
+		this.funcionarioID = funcionarioID;
+		this.data = ""+actual;
+		this.valor = valor;
+		this.info = info;
+		this.contadestino = contadestino;
+		this.escolhaT = escolhaT;
+	}
 	public Transacao(int funcionarioID, String data, double valor, int contadestino, TipoT escolhaT) {
 		super();
 		this.funcionarioID = funcionarioID;
@@ -41,8 +52,19 @@ public class Transacao implements Serializable{
 		this.contadestino = contadestino;
 		this.escolhaT = escolhaT;
 	}	
+	;
 	
 	
+	public Transacao(int funcionarioID, double valor, int contadestino, TipoT escolhaT) {
+		super();
+		LocalDate actual=LocalDate.now();
+		this.funcionarioID = funcionarioID;
+		this.data = ""+actual;
+		this.valor = valor;
+		this.info = "";
+		this.contadestino = contadestino;
+		this.escolhaT = escolhaT;
+	}	
 	
 	
 	public Transacao() {

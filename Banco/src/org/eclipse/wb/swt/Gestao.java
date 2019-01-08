@@ -120,33 +120,33 @@ public class Gestao {
 
 //	transações
 		
-		Transacao T0Cn1 = new Transacao(MachadoFU.getuID(), "2018/01/02", 1500,"", 0,Transacao.TipoT.DEP_CASH);
+		Transacao T0Cn1 = new Transacao(MachadoFU.getuID(), "2018-01-02", 1500,"", 0,Transacao.TipoT.DEP_CASH);
 		cn1.addTransacaoC(T0Cn1);
-		Transacao T1Cn1 = new Transacao(CorreiaFU.getuID(), "2018/02/02", -500,"", 0,Transacao.TipoT.LEV_CASH);
+		Transacao T1Cn1 = new Transacao(CorreiaFU.getuID(), "2018-02-02", -500,"", 0,Transacao.TipoT.LEV_CASH);
 		cn1.addTransacaoC(T1Cn1);
-		Transacao T2Cn1 = new Transacao(MachadoFU.getuID(), "2018/03/02", 2000,"", 0,Transacao.TipoT.DEP_CASH);
+		Transacao T2Cn1 = new Transacao(MachadoFU.getuID(), "2018-03-02", 2000,"", 0,Transacao.TipoT.DEP_CASH);
 		cn1.addTransacaoC(T2Cn1);
-		Transacao T3Cn1 = new Transacao(CorreiaFU.getuID(), "2018/04/02", 1000,"", 0,Transacao.TipoT.DEP_CASH);
+		Transacao T3Cn1 = new Transacao(CorreiaFU.getuID(), "2018-04-02", 1000,"", 0,Transacao.TipoT.DEP_CASH);
 		cn1.addTransacaoC(T3Cn1);
-		Transacao T4Cn1 = new Transacao(MachadoFU.getuID(), "2018/05/02", 1000,"", 0,Transacao.TipoT.DEP_CASH);
+		Transacao T4Cn1 = new Transacao(MachadoFU.getuID(), "2018-05-02", 1000,"", 0,Transacao.TipoT.DEP_CASH);
 		cn1.addTransacaoC(T4Cn1);
-		Transacao T5Cn1 = new Transacao(CorreiaFU.getuID(), "2018/06/02", 1000,"", 0,Transacao.TipoT.DEP_CASH);
+		Transacao T5Cn1 = new Transacao(CorreiaFU.getuID(), "2018-06-02", 1000,"", 0,Transacao.TipoT.DEP_CASH);
 		cn1.addTransacaoC(T5Cn1);
-		Transacao T6Cn1 = new Transacao(MachadoFU.getuID(), "2018/07/02", 1000,"", 0,Transacao.TipoT.DEP_CASH);
+		Transacao T6Cn1 = new Transacao(MachadoFU.getuID(), "2018-07-02", 1000,"", 0,Transacao.TipoT.DEP_CASH);
 		cn1.addTransacaoC(T6Cn1);
-		Transacao T7Cn1 = new Transacao(CorreiaFU.getuID(), "2018/08/02", 1000,"", 0,Transacao.TipoT.DEP_CASH);
+		Transacao T7Cn1 = new Transacao(CorreiaFU.getuID(), "2018-01-02", 1000,"", 0,Transacao.TipoT.DEP_CASH);
 		cn1.addTransacaoC(T7Cn1);
-		Transacao T8Cn1 = new Transacao(MachadoFU.getuID(), "2018/09/02", 1000,"", 0,Transacao.TipoT.DEP_CASH);
+		Transacao T8Cn1 = new Transacao(MachadoFU.getuID(), "2019-01-08", 1000,"", 0,Transacao.TipoT.DEP_CASH);
 		cn1.addTransacaoC(T8Cn1);
-		Transacao T9Cn1 = new Transacao(MachadoFU.getuID(), "2018/10/02", 1000,"", 0,Transacao.TipoT.DEP_CASH);
+		Transacao T9Cn1 = new Transacao(MachadoFU.getuID(), "2019-01-08", -1000,"", 0,Transacao.TipoT.LEV_CASH);
 		cn1.addTransacaoC(T9Cn1);
-		Transacao T10Cn1 = new Transacao(MachadoFU.getuID(), "2018/10/02", -1000,"", 2,Transacao.TipoT.TRANSFERENCIA);
+		Transacao T10Cn1 = new Transacao(MachadoFU.getuID(), "2019-01-08", -1000,"", 100002,Transacao.TipoT.TRANSFERENCIA);
 		cn1.addTransacaoC(T10Cn1);
-		Transacao T0Cn2 = new Transacao(MachadoFU.getuID(), "2018/01/02", 1500,"", 0,Transacao.TipoT.DEP_CASH);
+		Transacao T0Cn2 = new Transacao(MachadoFU.getuID(), "2019-01-08", 1500,"", 0,Transacao.TipoT.DEP_CASH);
 		cn1.addTransacaoC(T0Cn2);
-		Transacao T1Cn2 = new Transacao(MachadoFU.getuID(), "2018/10/02", 1000,"", -1,Transacao.TipoT.TRANSFERENCIA);
+		Transacao T1Cn2 = new Transacao(MachadoFU.getuID(), "2019-01-08", 1000,"", -100001,Transacao.TipoT.TRANSFERENCIA);
 		cn1.addTransacaoC(T1Cn2);
-		Transacao T0Cn3 = new Transacao(MachadoFU.getuID(), "2018/01/02", 1000,"", 0,Transacao.TipoT.DEP_CASH);
+		Transacao T0Cn3 = new Transacao(MachadoFU.getuID(), 1000,"", 0,Transacao.TipoT.DEP_CASH);
 		cn3.addTransacaoC(T0Cn3);
 		
 		
