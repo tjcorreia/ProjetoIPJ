@@ -179,6 +179,23 @@ public class J_02Menu_F_EditarConta {
 		composite.setBounds(215, 84, 456, 400);
 
 		combo_titularesDaconta = new Combo(composite, SWT.NONE);
+		combo_titularesDaconta.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				int titularID = Integer.parseInt(combo_EscolhaConta.getText().replaceAll("\\D+", ""));
+				if (contaActual instanceof ContaPrazo) {
+					text_cartaoAssociado.setText("Conta a Prazo");
+				}
+				else {
+				if ( (((ContaNormal)contaActual).getCartaodaConta())==null) {
+					text_cartaoAssociado.setText("Não tem cartão associado");
+				}
+				else {
+				text_cartaoAssociado.setText(""+((ContaNormal)contaActual).getCartaodaConta().getCartaoID());
+				}
+				}
+			}
+		});
 		combo_titularesDaconta.setBounds(170, 253, 93, 23);
 
 		combo_EscolhaConta = new Combo(composite, SWT.NONE);
