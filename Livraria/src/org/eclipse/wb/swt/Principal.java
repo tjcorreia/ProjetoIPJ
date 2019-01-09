@@ -12,6 +12,7 @@ public class Principal {
 		J_00Inicial janelaInicial = new J_00Inicial(viewComics);
 		janelaInicial.open();
 	}
+	//
 
 }
 
