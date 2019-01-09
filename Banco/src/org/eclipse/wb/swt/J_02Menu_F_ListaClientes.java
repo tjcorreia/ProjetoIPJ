@@ -66,20 +66,9 @@ public class J_02Menu_F_ListaClientes {
 		this.uUtilizador = uUtilizador;
 		this.gestor = gestor;
 		open();
+	
 	}
 
-	/**
-	 * Launch the application.
-	 * 
-	 */
-//	public static void main(String[] args) {
-//		try {
-//			J_02Menu_F_CriaCliente window = new J_02Menu_F_CriaCliente(new Gestao(),new Funcionario());
-//			window.open();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
 
 	/**
 	 * Open the window.
@@ -371,6 +360,15 @@ public class J_02Menu_F_ListaClientes {
 		btnNewButton.setText("Pesquisa Cliente");
 		
 		Button button_1 = new Button(shlMenuFuncionrio, SWT.NONE);
+		button_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				J_02Menu_F_DadosCl dados= new J_02Menu_F_DadosCl(gestor, uUtilizador,null);
+				dados.open();
+				shlMenuFuncionrio.dispose();
+				
+			}
+		});
 		button_1.setText("Dados do cliente");
 		button_1.setBounds(10, 143, 192, 25);
 

@@ -213,7 +213,7 @@ public class J_02Menu_F_ContasCl {
 		});
 		btnMovimentarConta.setText("Movimentar Conta");
 		btnMovimentarConta.setSelection(true);
-		btnMovimentarConta.setBounds(117, 290, 184, 25);
+		btnMovimentarConta.setBounds(24, 287, 184, 25);
 
 		text_contaActual = new Text(composite, SWT.BORDER | SWT.CENTER);
 		text_contaActual.setText("Indique o ID");

@@ -24,15 +24,12 @@ public class J_02Menu_F {
 	private Utilizador uUtilizador;
 	private Text Funcionario;
 
-	
-	
-	
-	public Utilizador getuUtilizador() {
-		return uUtilizador;
+	public Shell getShlMenuFuncionrio() {
+		return shlMenuFuncionrio;
 	}
 
-	public void setuUtilizador(Utilizador uUtilizador) {
-		this.uUtilizador = uUtilizador;
+	public void setShlMenuFuncionrio(Shell shlMenuFuncionrio) {
+		this.shlMenuFuncionrio = shlMenuFuncionrio;
 	}
 
 	public Gestao getGestor() {
@@ -43,41 +40,33 @@ public class J_02Menu_F {
 		this.gestor = gestor;
 	}
 
-	
-	public J_02Menu_F() {
-		super();
-		// TODO Auto-generated constructor stub
+	public Utilizador getuUtilizador() {
+		return uUtilizador;
+	}
+
+	public void setuUtilizador(Utilizador uUtilizador) {
+		this.uUtilizador = uUtilizador;
+	}
+
+	public Text getFuncionario() {
+		return Funcionario;
+	}
+
+	public void setFuncionario(Text funcionario) {
+		Funcionario = funcionario;
 	}
 
 	
 	
-	
-	/**
-	 * @wbp.parser.entryPoint
-	 */
 	public J_02Menu_F( Gestao gestor,Utilizador uUtilizador) {
 		super();
 		this.uUtilizador = uUtilizador;
 		this.gestor = gestor;
 		open();
+	
 	}
 
-	/**
-	 * Launch the application.
-	 
-	 */
-//	public static void main(String[] args) {
-//		try {
-//			J_02Menu_F_CriaCliente window = new J_02Menu_F_CriaCliente(new Gestao(),new Funcionario());
-//			window.open();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
-
-	/**
-	 * Open the window.
-	 */
+	
 	public void open() {
 		Display display = Display.getDefault();
 		createContents();
@@ -103,23 +92,14 @@ public class J_02Menu_F {
 		btnNovoCliente.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				
+				shlMenuFuncionrio.dispose();
 				J_02Menu_F_CriaCliente alteraDados=new J_02Menu_F_CriaCliente(gestor,uUtilizador);
 				alteraDados.open();
-				shlMenuFuncionrio.dispose();
+				
 			}
 		});
 		btnNovoCliente.setBounds(10, 84, 192, 25);
 		btnNovoCliente.setText("Criar novo Cliente");
-		
-		Button btnExibirContasDo = new Button(shlMenuFuncionrio, SWT.NONE);
-		btnExibirContasDo.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-			}
-		});
-		btnExibirContasDo.setText("Exibir Contas do Cliente");
-		btnExibirContasDo.setBounds(10, 236, 192, 25);
 		
 		Button btnDadosDoCliente = new Button(shlMenuFuncionrio, SWT.NONE);
 		btnDadosDoCliente.addMouseListener(new MouseAdapter() {
@@ -134,15 +114,6 @@ public class J_02Menu_F {
 		btnDadosDoCliente.setText("Dados do cliente");
 		btnDadosDoCliente.setBounds(10, 143, 192, 25);
 		
-		Button btnFazerDepsitoEm = new Button(shlMenuFuncionrio, SWT.NONE);
-		btnFazerDepsitoEm.setText("Dep\u00F3sito em Dinheiro");
-		btnFazerDepsitoEm.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-			}
-		});
-		btnFazerDepsitoEm.setBounds(10, 298, 192, 25);
-		
 		Button btnListarClientes = new Button(shlMenuFuncionrio, SWT.NONE);
 		btnListarClientes.addMouseListener(new MouseAdapter() {
 			@Override
@@ -153,7 +124,7 @@ public class J_02Menu_F {
 				shlMenuFuncionrio.dispose();
 			}
 		});
-		btnListarClientes.setText("Listar Clientes");
+		btnListarClientes.setText("Listar/Procurar Clientes");
 		btnListarClientes.setBounds(10, 112, 192, 25);
 		
 		Button btnAlterarLoginE = new Button(shlMenuFuncionrio, SWT.NONE);
@@ -163,36 +134,14 @@ public class J_02Menu_F {
 			}
 		});
 		btnAlterarLoginE.setText("Alterar Login e Password");
-		btnAlterarLoginE.setBounds(10, 423, 192, 25);
-		
-		Button btnPedirCartaoDe = new Button(shlMenuFuncionrio, SWT.NONE);
-		btnPedirCartaoDe.setSelection(true);
-		btnPedirCartaoDe.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-			}
-		});
-		btnPedirCartaoDe.setText("Pedir Cartao de Debito");
-		btnPedirCartaoDe.setBounds(10, 267, 192, 25);
-		
-		Button btnLevantamentoEmDinheiro = new Button(shlMenuFuncionrio, SWT.NONE);
-		btnLevantamentoEmDinheiro.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-			}
-		});
-		btnLevantamentoEmDinheiro.setText("Levantamento em Dinheiro");
-		btnLevantamentoEmDinheiro.setBounds(10, 329, 192, 25);
-		
-		Button btnTransferncia = new Button(shlMenuFuncionrio, SWT.NONE);
-		btnTransferncia.setText("Transfer\u00EAncia");
-		btnTransferncia.setBounds(10, 361, 192, 25);
+		btnAlterarLoginE.setBounds(10, 238, 192, 25);
 		
 		Button button = new Button(shlMenuFuncionrio, SWT.NONE);
 		button.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
 				shlMenuFuncionrio.dispose();
+				
 			}
 		});
 		button.setText("Log Out");
@@ -201,6 +150,25 @@ public class J_02Menu_F {
 		Funcionario = new Text(shlMenuFuncionrio, SWT.BORDER);
 		Funcionario.setText("Bem Vindo "+uUtilizador.getNome());
 		Funcionario.setBounds(215, 10, 326, 25);
+		
+		Button button_1 = new Button(shlMenuFuncionrio, SWT.TOGGLE);
+		button_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				J_02Menu_F_MovimentaConta editarconta= new J_02Menu_F_MovimentaConta(gestor, uUtilizador, null, null);
+				editarconta.open();
+				shlMenuFuncionrio.dispose();
+			}
+		});
+		button_1.setText("Movimentar Contas");
+		button_1.setBounds(10, 174, 192, 25);
+		
+		Button button_2 = new Button(shlMenuFuncionrio, SWT.NONE);
+		button_2.setBounds(10, 207, 192, 25);
+		
+		Label lblNewLabel = new Label(shlMenuFuncionrio, SWT.NONE);
+		lblNewLabel.setBounds(215, 84, 407, 296);
+		lblNewLabel.setText("Java BANK INAGE");
 		
 		String clienteActua="Introduza Cliente ID";
 
