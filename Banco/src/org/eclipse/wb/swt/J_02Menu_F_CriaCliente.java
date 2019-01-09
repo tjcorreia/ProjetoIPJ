@@ -65,7 +65,6 @@ public class J_02Menu_F_CriaCliente {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
 	/**
 	 * @wbp.parser.entryPoint
 	 */
@@ -73,25 +72,23 @@ public class J_02Menu_F_CriaCliente {
 		super();
 		this.uUtilizador = uUtilizador;
 		this.gestor = gestor;
-		open();
+	
 	}
 
-	/**
-	 * Launch the application.
-	 * 
-	 */
-	public static void main(String[] args) {
-		try {
-			J_02Menu_F_CriaCliente window = new J_02Menu_F_CriaCliente(new Gestao(), new Funcionario());
-			window.open();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+//	/**
+//	 * Launch the application.
+//	 * 
+//	 */
+//	public static void main(String[] args) {
+//		try {
+//			J_02Menu_F_CriaCliente window = new J_02Menu_F_CriaCliente(new Gestao(), new Funcionario());
+//			window.open();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
 
-	/**
-	 * Open the window.
-	 */
+	
 	public void open() {
 		Display display = Display.getDefault();
 		createContents();

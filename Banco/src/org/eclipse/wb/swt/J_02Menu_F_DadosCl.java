@@ -40,7 +40,6 @@ public class J_02Menu_F_DadosCl {
 	private Utilizador uUtilizador;
 	private Cliente clienteActual;
 	private Text Funcionario;
-	private Text text_2;
 	private Text text_PrimeiroNovoC;
 	private Text text_UltimoNovoC;
 	private Text text_MoradaNovoC;
@@ -146,18 +145,14 @@ public class J_02Menu_F_DadosCl {
 		btnNovoCliente.setBounds(10, 84, 192, 25);
 		btnNovoCliente.setText("Criar novo Cliente");
 
-		Button btnDadosDoCliente = new Button(shellMF, SWT.NONE);
-		btnDadosDoCliente.setText("Altera dados do cliente");
-		btnDadosDoCliente.setBounds(10, 208, 192, 25);
-
-		Button btnFazerDepsitoEm = new Button(shellMF, SWT.NONE);
-		btnFazerDepsitoEm.setText("Dep\u00F3sito em Dinheiro");
-		btnFazerDepsitoEm.addSelectionListener(new SelectionAdapter() {
+		Button btnTBD = new Button(shellMF, SWT.NONE);
+		btnTBD.setText("\"\"");
+		btnTBD.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 			}
 		});
-		btnFazerDepsitoEm.setBounds(10, 270, 192, 25);
+		btnTBD.setBounds(10, 212, 192, 25);
 
 		Button btnListarClientes = new Button(shellMF, SWT.NONE);
 		btnListarClientes.setText("Listar Clientes");
@@ -171,29 +166,6 @@ public class J_02Menu_F_DadosCl {
 		});
 		btnAlterarLoginE.setText("Alterar Login e Password");
 		btnAlterarLoginE.setBounds(10, 423, 192, 25);
-
-		Button btnPedirCartaoDe = new Button(shellMF, SWT.NONE);
-		btnPedirCartaoDe.setSelection(true);
-		btnPedirCartaoDe.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-			}
-		});
-		btnPedirCartaoDe.setText("Pedir Cartao de Debito");
-		btnPedirCartaoDe.setBounds(10, 239, 192, 25);
-
-		Button btnLevantamentoEmDinheiro = new Button(shellMF, SWT.NONE);
-		btnLevantamentoEmDinheiro.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-			}
-		});
-		btnLevantamentoEmDinheiro.setText("Levantamento em Dinheiro");
-		btnLevantamentoEmDinheiro.setBounds(10, 301, 192, 25);
-
-		Button btnTransferncia = new Button(shellMF, SWT.NONE);
-		btnTransferncia.setText("Transfer\u00EAncia");
-		btnTransferncia.setBounds(10, 333, 192, 25);
 
 		Button button = new Button(shellMF, SWT.NONE);
 		button.addMouseListener(new MouseAdapter() {
@@ -209,12 +181,9 @@ public class J_02Menu_F_DadosCl {
 		Funcionario.setText("Bem Vindo " + uUtilizador.getNome());
 		Funcionario.setBounds(215, 10, 326, 25);
 
-		text_2 = new Text(shellMF, SWT.BORDER);
-		text_2.setBounds(10, 363, 192, 26);
-
 		Composite composite = new Composite(shellMF, SWT.NONE);
 		composite.setVisible(true);
-		composite.setBounds(215, 84, 441, 371);
+		composite.setBounds(215, 84, 441, 384);
 
 		Label label = new Label(composite, SWT.NONE);
 		label.setText("Identifica\u00E7ao");
@@ -332,7 +301,7 @@ public class J_02Menu_F_DadosCl {
 		
 		Button btnMovimentarConta = new Button(composite, SWT.TOGGLE | SWT.MULTI | SWT.WRAP | SWT.NONE);
 		btnMovimentarConta.setText("Movimentar Contas");
-		btnMovimentarConta.setBounds(339, 298, 81, 58);
+		btnMovimentarConta.setBounds(228, 323, 181, 25);
 		
 		Button btnAlterarDados = new Button(composite, SWT.TOGGLE | SWT.MULTI | SWT.WRAP | SWT.NONE);
 		String alterarDadosC="Alterar\r\n Dados";
@@ -476,15 +445,15 @@ public class J_02Menu_F_DadosCl {
 				
 			}
 		});
-		btnAlterarDados.setText(alterarDadosC);
-		btnAlterarDados.setBounds(339, 234, 81, 58);
+		btnAlterarDados.setText("Alterar dados pessoais");
+		btnAlterarDados.setBounds(228, 263, 181, 25);
 		
 		Label lblListaDeContas = new Label(composite, SWT.NONE);
 		lblListaDeContas.setText("Lista de Contas");
 		lblListaDeContas.setBounds(81, 234, 88, 15);
 		
 		table_ListadeContas = new Table(composite, SWT.BORDER | SWT.FULL_SELECTION);
-		table_ListadeContas.setBounds(81, 255, 131, 82);
+		table_ListadeContas.setBounds(81, 255, 131, 106);
 		table_ListadeContas.setHeaderVisible(true);
 		table_ListadeContas.setLinesVisible(true);
 		
@@ -570,7 +539,7 @@ public class J_02Menu_F_DadosCl {
 			}
 		});
 		btnCriarConta.setText("Criar Conta");
-		btnCriarConta.setBounds(238, 234, 81, 58);
+		btnCriarConta.setBounds(228, 233, 181, 25);
 		
 		Button btnListaDeMovimentos = new Button(composite, SWT.TOGGLE | SWT.MULTI | SWT.WRAP | SWT.NONE);
 		btnListaDeMovimentos.addMouseListener(new MouseAdapter() {
@@ -583,8 +552,16 @@ public class J_02Menu_F_DadosCl {
 				
 			}
 		});
-		btnListaDeMovimentos.setText("Lista de Movimentos da Conta");
-		btnListaDeMovimentos.setBounds(239, 298, 81, 58);
+		btnListaDeMovimentos.setText("Lista de Movimentos da Contas");
+		btnListaDeMovimentos.setBounds(228, 292, 181, 25);
+		
+		Button button_1 = new Button(composite, SWT.TOGGLE);
+		button_1.setText("Movimentar Contas");
+		button_1.setBounds(228, 354, 181, 25);
+		
+		Button button_DadosCliente = new Button(shellMF, SWT.NONE);
+		button_DadosCliente.setText("Dados do cliente");
+		button_DadosCliente.setBounds(10, 146, 192, 25);
 
 	}
 

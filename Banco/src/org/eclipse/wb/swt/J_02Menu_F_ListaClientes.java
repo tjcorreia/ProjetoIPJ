@@ -65,7 +65,7 @@ public class J_02Menu_F_ListaClientes {
 		super();
 		this.uUtilizador = uUtilizador;
 		this.gestor = gestor;
-		open();
+	
 	}
 
 	/**

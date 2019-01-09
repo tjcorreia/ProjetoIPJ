@@ -13,14 +13,16 @@ import java.util.ArrayList;
 */
 public class ContaNormal extends Conta implements Serializable{
 	
-	private Cartao cartaodaConta;
+	private  ArrayList<Cartao> listaCartoesC;// 
+
+
 
 
 
 	public ContaNormal(int contaID, double saldo, String datacria, ArrayList<Transacao> transacoesC,
-			ArrayList<Integer> clientesDaC, TipoC escolhaID, Cartao cartaodaConta) {
+			ArrayList<Integer> clientesDaC, TipoC escolhaID, ArrayList<Cartao> listaCartoesC) {
 		super(contaID, saldo, datacria, transacoesC, clientesDaC, escolhaID);
-		this.cartaodaConta = cartaodaConta;
+		this.listaCartoesC = listaCartoesC;
 	}
 
 	public ContaNormal() {
@@ -28,7 +30,7 @@ public class ContaNormal extends Conta implements Serializable{
 		this.transacoesC = new ArrayList<Transacao>();
 		this.clientesDaC = new ArrayList<Integer>();
 		this.abertaFechada = TipoC.ABERTA;
-		this.cartaodaConta = null;
+		this.listaCartoesC =new ArrayList<Cartao>();
 		// TODO Auto-generated constructor stub
 	}
 
@@ -37,36 +39,53 @@ public class ContaNormal extends Conta implements Serializable{
 		this.transacoesC = new ArrayList<Transacao>();
 		this.clientesDaC = new ArrayList<Integer>();
 		this.abertaFechada = TipoC.ABERTA;
-		this.cartaodaConta = null;
+		this.listaCartoesC =new ArrayList<Cartao>();;
 		// TODO Auto-generated constructor stub
 	}
 	
+
 	public ContaNormal( double saldo, String datacria) {
 		super(saldo,datacria);
 		this.transacoesC = new ArrayList<Transacao>();
 		this.clientesDaC = new ArrayList<Integer>();
 		this.abertaFechada = TipoC.ABERTA;
-		this.cartaodaConta = null;
+		this.listaCartoesC =new ArrayList<Cartao>();;
 		// TODO Auto-generated constructor stub
 	}
 
-	public Cartao getCartaodaConta() {
-		return cartaodaConta;
+	public ArrayList<Cartao> getListaCartoesC() {
+		return listaCartoesC;
 	}
 
-	public void setCartaodaConta(Cartao cartaodaConta) {
-		this.cartaodaConta = cartaodaConta;
-	}
-
-	@Override
-	public String toString() {
-		return "ContaNormal [cartaodaConta=" + cartaodaConta + ", contaID=" + contaID + ", saldo=" + saldo
-				+ ", datacria=" + datacria + ", transacoesC=" + transacoesC + ", clientesDaC=" + clientesDaC
-				+ ", abertaFechada=" + abertaFechada + "]";
+	public void setListaCartoesC(ArrayList<Cartao> listaCartoesC) {
+		this.listaCartoesC = listaCartoesC;
 	}
 
 
+	public Cartao addCartaoC(Cartao novoCartao) {
+		listaCartoesC.add(novoCartao);
+		 return novoCartao;
+		 
+	 }
+
+	public Cartao procuraCartaoC(int cartaoID) {
+		for (Cartao c:listaCartoesC ) {
+			if(c.getCartaoID()==cartaoID) {
+				 return c;	
+			}
+		}
+		 return null;
+	 }
 	
+	public Cartao procuraCartaoCTitular(int titularID) {
+		for (Cartao c:listaCartoesC ) {
+			System.out.println("<---- ID do Cartaoobjeto--->\n" + c.getTitularCartaoID());
+			if(c.getTitularCartaoID()==titularID) {
+				 return c;	
+			}
+		}
+		 return null;
+	 }
 	
 
 }

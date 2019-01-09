@@ -58,6 +58,17 @@ public class J_02Menu_F_EditarConta {
 	private Combo combo_titularesDaconta;
 	private Text text_cartaoAssociado;
 	private Text text_NovoTitular;
+	private Button button_CriaCartao;
+	
+	
+
+	public Button getButton_CriaCartao() {
+		return button_CriaCartao;
+	}
+
+	public void setButton_CriaCartao(Button button_CriaCartao) {
+		this.button_CriaCartao = button_CriaCartao;
+	}
 
 	public Combo getCombo_titularesDaconta() {
 		return combo_titularesDaconta;
@@ -182,31 +193,35 @@ public class J_02Menu_F_EditarConta {
 		combo_titularesDaconta.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				int titularID = Integer.parseInt(combo_EscolhaConta.getText().replaceAll("\\D+", ""));
+				text_cartaoAssociado.setEnabled(true);
+				int titularID = Integer.parseInt(combo_titularesDaconta.getText());
+				button_CriaCartao.setEnabled(true);
 				if (contaActual instanceof ContaPrazo) {
 					text_cartaoAssociado.setText("Conta a Prazo");
 				}
 				else {
-				if ( (((ContaNormal)contaActual).getCartaodaConta())==null) {
+					System.out.println("<---- Conta actual --->\n" + contaActual);
+					System.out.println("<---- ID --->\n" + titularID);
+					System.out.println("<---- Cartao --->" + ((ContaNormal)contaActual).procuraCartaoCTitular(titularID)+"\n");
+				if ( (((ContaNormal)contaActual).procuraCartaoCTitular(titularID))==null) {
 					text_cartaoAssociado.setText("Não tem cartão associado");
 				}
 				else {
-				text_cartaoAssociado.setText(""+((ContaNormal)contaActual).getCartaodaConta().getCartaoID());
+					System.out.println("<---- CartaoID --->\n" + ((ContaNormal)contaActual).procuraCartaoCTitular(titularID).getCartaoID());
+				
+					button_CriaCartao.setEnabled(false);
+					text_cartaoAssociado.setText(""+((ContaNormal)contaActual).procuraCartaoCTitular(titularID).getCartaoID());
 				}
 				}
+				text_cartaoAssociado.setEnabled(false);
 			}
 		});
 		combo_titularesDaconta.setBounds(170, 253, 93, 23);
-
 		combo_EscolhaConta = new Combo(composite, SWT.NONE);
-
 		combo_EscolhaConta.setBounds(170, 85, 224, 23);
-
 		text_contaActual = new Text(composite, SWT.BORDER | SWT.CENTER);
 		text_contaActual.setText("Indique o ID");
-
 		text_contaActual.setBounds(343, 7, 88, 21);
-
 		txt_Indique_ID = new Text(composite, SWT.BORDER | SWT.CENTER);
 		// introduz o ID do Cliente actual se vier de outra janela
 		int index = 0;
@@ -309,6 +324,7 @@ public class J_02Menu_F_EditarConta {
 			@Override
 			public void mouseUp(MouseEvent e) {
 				shellMF_EditarC.dispose();
+				
 			}
 		});
 		button_Logout.setText("Log Out");
@@ -322,7 +338,28 @@ public class J_02Menu_F_EditarConta {
 		lblDadosDoCliente.setText("Contas do Cliente");
 		lblDadosDoCliente.setAlignment(SWT.CENTER);
 		lblDadosDoCliente.setBounds(104, 10, 231, 15);
-
+		button_CriaCartao = new Button(composite, SWT.NONE);
+		button_CriaCartao.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				int titularID = Integer.parseInt(combo_titularesDaconta.getText());
+				Cliente clienteCartao=gestor.procuraCid(titularID);
+				Cartao cartaoN=gestor.criaCartao(titularID,contaActual, clienteCartao.getNome()+" "+clienteCartao.getSobrenome());
+				MessageBox boxCartao = new MessageBox(shellMF_EditarC, SWT.MULTI);
+				boxCartao.setText("CARTAO CRIADO");
+				boxCartao.setMessage(cartaoN.toString());
+				boxCartao.open();
+				text_cartaoAssociado.setText(""+cartaoN.getCartaoID());
+				button_CriaCartao.setEnabled(false);
+				
+			}
+		});
+		button_CriaCartao.setText("Criar Cart\u00E3o de Credito");
+		button_CriaCartao.setSelection(true);
+		button_CriaCartao.setBounds(23, 251, 141, 25);
+		mudarbotaoCC ();
+		
+		
 		Button btn_ProcuraCliente = new Button(composite, SWT.NONE);
 		btn_ProcuraCliente.setGrayed(true);
 		// *procura pelo cliente através da ID e devolve toda a informação
@@ -430,10 +467,7 @@ public class J_02Menu_F_EditarConta {
 		button_EncerraConta.setSelection(true);
 		button_EncerraConta.setBounds(23, 157, 141, 25);
 
-		Button button_CriaCartao = new Button(composite, SWT.NONE);
-		button_CriaCartao.setText("Criar Cart\u00E3o de Credito");
-		button_CriaCartao.setSelection(true);
-		button_CriaCartao.setBounds(23, 251, 141, 25);
+		
 
 		Label label = new Label(composite, SWT.NONE);
 		label.setText("(escolha titular)");
@@ -525,12 +559,31 @@ public class J_02Menu_F_EditarConta {
 				text_contaActual.setText("" + contaActual.getContaID());
 				listaClientes = listaClientesActual();
 				combo_titularesDaconta.setItems(listaClientes);
+				mudarbotaoCC ();
 			}
 		});
 
 	}
 
 	// ***************metodos**************
+	
+	public void mudarbotaoCC () {
+		if (!(contaActual==null)) {
+		if (contaActual instanceof ContaPrazo) {
+			button_CriaCartao.setText("A Conta é Prazo!!!");
+			button_CriaCartao.setEnabled(false);
+		}
+		else {
+			button_CriaCartao.setText("Criar Cart\u00E3o de Credito");
+			button_CriaCartao.setEnabled(true);}
+		}
+	}
+	
+	
+	
+	
+	
+	
 	public String[] listaClientesActual() {
 		listaClientes = new String[contaActual.getClientesDaC().size()];
 //	int[] listaClientes= new int [contaActual.getClientesDaC().size()];

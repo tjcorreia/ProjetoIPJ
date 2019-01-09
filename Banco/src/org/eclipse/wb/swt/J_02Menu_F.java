@@ -52,6 +52,7 @@ public class J_02Menu_F {
 	
 	
 	
+
 	/**
 	 * @wbp.parser.entryPoint
 	 */
@@ -59,13 +60,13 @@ public class J_02Menu_F {
 		super();
 		this.uUtilizador = uUtilizador;
 		this.gestor = gestor;
-		open();
+		
 	}
 
-	/**
-	 * Launch the application.
-	 
-	 */
+//	/**
+//	 * Launch the application.
+//	 
+//	 */
 //	public static void main(String[] args) {
 //		try {
 //			J_02Menu_F_CriaCliente window = new J_02Menu_F_CriaCliente(new Gestao(),new Funcionario());
@@ -193,6 +194,7 @@ public class J_02Menu_F {
 			@Override
 			public void mouseUp(MouseEvent e) {
 				shlMenuFuncionrio.dispose();
+				
 			}
 		});
 		button.setText("Log Out");

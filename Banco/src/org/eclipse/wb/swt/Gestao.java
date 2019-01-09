@@ -3,6 +3,7 @@ package org.eclipse.wb.swt;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -46,8 +47,8 @@ public class Gestao {
 //		}
 
 		contadores.put("Utilizador", 1000); // inicializa o Contador de Utilizadores
-		contadores.put("Contas", 1); // inicializa o Contador de Contas
-
+		contadores.put("Contas", 100000); // inicializa o Contador de Contas
+		contadores.put("Cartoes", 109010000); // inicializa o Contador de Cartoes
 		// Administradores
 //	Administrador(int uID, String login, String password, String nome, String sobrenome, String dataNascimento,
 //			String morada, TipoID escolhaID, int valorID, String email, int mobile)
@@ -58,7 +59,7 @@ public class Gestao {
 		Administrador CorreiaU = new Administrador(contadores.get("Utilizador") + 1, "Correia", "Admin", "Tiago",
 				"Coreia", "1977/07/30", "Rua Maria Vitoria ", Administrador.TipoID.CARTAOCIDADAO, "12345678",
 				"mail@gmail.com", 965420733);
-		contadores.put("Utilizador", contadores.get("Utilizador") + 1);
+		contadores.replace("Utilizador", contadores.get("Utilizador") + 1);
 		mapUtilizadores.put("Machado", MachadoU);
 		mapUtilizadores.put("Correia", CorreiaU);
 
@@ -66,11 +67,11 @@ public class Gestao {
 		Funcionario MachadoFU = new Funcionario(contadores.get("Utilizador") + 1, "Maria", "Fun", "Maria", "Machado0",
 				"1977/07/30", "Rua Maria Vitoria", Funcionario.TipoID.CARTAOCIDADAO, "78456123", "mail1@gmail.com",
 				965420730);
-		contadores.put("Utilizador", contadores.get("Utilizador") + 1);
+		contadores.replace("Utilizador", contadores.get("Utilizador") + 1);
 		Funcionario CorreiaFU = new Funcionario(contadores.get("Utilizador") + 1, "Correia2", "Fun", "Tiago", "Coreia",
 				"1977/07/30", "Rua Maria Vitoria ", Funcionario.TipoID.CARTAOCIDADAO, "12345678", "mail2@gmail.com",
 				965420731);
-		contadores.put("Utilizador", contadores.get("Utilizador") + 1);
+		contadores.replace("Utilizador", contadores.get("Utilizador") + 1);
 		mapUtilizadores.put("Maria", MachadoFU);
 		
 		mapUtilizadores.put("Correia2", CorreiaFU);
@@ -81,15 +82,15 @@ public class Gestao {
 
 		Cliente cl1 = new Cliente(contadores.get("Utilizador") + 1, "AlbertoCliente", "Cliente", "Alberto", "Machado0",
 				"1977/07/30", "Rua Maria Vitoria", Utilizador.TipoID.CARTAOCIDADAO, "78456123", "mail", 965420731);
-		contadores.put("Utilizador", contadores.get("Utilizador") + 1);
+		contadores.replace("Utilizador", contadores.get("Utilizador") + 1);
 		Cliente cl2 = new Cliente(contadores.get("Utilizador") + 1, "CorreiaCliente", "Cliente", "Tiago", "Coreia",
 				"1977/07/30", "Rua Maria Vitoriazfgadfgadfgsdfgsdfg", Utilizador.TipoID.CARTAOCIDADAO, "12345678",
 				"mail", 965420730);
-		contadores.put("Utilizador", contadores.get("Utilizador") + 1);
+		contadores.replace("Utilizador", contadores.get("Utilizador") + 1);
 		Cliente cl3 = new Cliente(contadores.get("Utilizador") + 1, "MariaCliente", "Cliente", "Tiago2", "Coreia2",
 				"1977/07/30", "Rua Maria Vitoriazfgadfgadfgsdfgsdfg",Utilizador.TipoID.CARTAOCIDADAO, "92345678",
 				"mail2@gmail.com", 965420530);
-		contadores.put("Utilizador", contadores.get("Utilizador") + 1);
+		contadores.replace("Utilizador", contadores.get("Utilizador") + 1);
 		
 		mapUtilizadores.put("AlbertoCliente", cl1);
 		
@@ -166,7 +167,20 @@ public class Gestao {
 		Transacao T0Cn3 = new Transacao(MachadoFU.getuID(), 1000,"ABERTURA", 0,Transacao.TipoT.DEP_CASH);
 		cn3.addTransacaoC(T0Cn3);
 		
+		// cartao
 		
+		LocalDate data = LocalDate.now().plusYears(5);
+		Cartao ct1 = new Cartao(109010000,cl1.getuID(),cn1.getContaID(),cl1.getNome()+" "+cl1.getSobrenome(),""+data, "0000");
+		((ContaNormal)cn1).addCartaoC(ct1);
+		
+	    mapCartaoConta.put(109010000,cn1.getContaID());
+			LocalDate data2 =LocalDate.of(2015,12, 01);
+		Cartao ct2 = new Cartao(contadores.get("Cartoes") + 1,cl1.getuID(),cn2.getContaID(),cl1.getNome()+" "+cl1.getSobrenome(),""+data2,"0000");
+		((ContaNormal)cn2).addCartaoC(ct2);
+		
+		mapCartaoConta.put(109010000,cn2.getContaID());
+		contadores.replace("Cartoes", contadores.get("Cartoes") + 1); // inicializa o Contador de Cartoes
+
 		//( duvida colocar conta de origem ?)
 		
 //	System.out.println("Conta-->" + (cn1.toString()));
@@ -234,6 +248,7 @@ public class Gestao {
 		} else if (uactual instanceof Funcionario) {
 			J_02Menu_F novaJFuncionario = new J_02Menu_F(gestor, uactual);
 			novaJFuncionario.open();
+			
 
 		}
 
@@ -243,6 +258,16 @@ public class Gestao {
 
 	}
 //++++++++++++++++++++++++++++++++++++++++++++++++++ metodos++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	
+// criacartao para conta e cliente especifico	
+	
+	public Cartao criaCartao(int titularCartaoID,Conta contaC, String nome) {
+		
+		Cartao novoC=new Cartao(contadores.get("Cartoes")+1,titularCartaoID,contaC.getContaID(), nome);
+		contadores.replace("Cartoes", contadores.get("Cartoes") + 1);
+		((ContaNormal)contaC).addCartaoC(novoC);
+		return novoC;
+	}
 	
 	
 //***********  verifica se a conta existe ******************
