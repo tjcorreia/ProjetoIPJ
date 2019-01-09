@@ -97,46 +97,45 @@ public class Carrinho {
 		return s;
 	}
 	
-	//Método para adicionar um novo (ou repetido) livro ao carrinho
-	public void adicionarLivroAoCarrinho (Livro lv) {
-		//Se livro não tem stock, não fazer nada
-		if ( lv.stock <= 0 ) {		
-		}
-		//Se livro já existe na lista, aumentar a quantidade
-		else if ( livros.contains(lv)) {
-			int indice = livros.indexOf(lv);
-			int quantidade = quantidades.get(indice);
-			quantidades.set(indice, quantidade+1);
-			lv.stock--;
-		}
-		//se livro não existia, acrescenta-se livro a 'livros' e quantidade a 'quantidades'
-		else {
-			livros.add(lv);
-			quantidades.add(1);
-			lv.stock--;
-		}
-	}
-	
-	//Método para remover um livro do carrinho
-	public void removerLivroDoCarrinho (Livro lv) {
-		int indice = livros.indexOf(lv);
-		int quantidade = quantidades.get(indice);
-		//se livro não vem na lista do carrinho, não fazer nada
-		if ( !livros.contains(lv) ) {
-		}
-		//Se só havia um exemplar, remover o livro
-		else if ( quantidade == 1 ) {
-			livros.remove(indice);
-			quantidades.remove(indice);
-			lv.stock++;
-		}
-		//se há mais do que um exemplar, reduzir quantidade
-		else {
-			quantidades.set(indice, quantidade-1);
-			lv.stock++;
-		}
-		
-	}	
+//	//Método para adicionar um novo (ou repetido) livro ao carrinho
+//	public void adicionarLivroAoCarrinho (Livro lv) {
+//		//Se livro não tem stock, não fazer nada
+//		if ( lv.stock <= 0 ) {		
+//		}
+//		//Se livro já existe na lista, aumentar a quantidade
+//		else if ( livros.contains(lv)) {
+//			int indice = livros.indexOf(lv);
+//			int quantidade = quantidades.get(indice);
+//			quantidades.set(indice, quantidade+1);
+//			lv.reduzirStock(1);
+//		}
+//		//se livro não existia, acrescenta-se livro a 'livros' e quantidade a 'quantidades'
+//		else {
+//			livros.add(lv);
+//			quantidades.add(1);
+//			lv.reduzirStock(1);
+//		}
+//	}
+//	
+//	//Método para remover um livro do carrinho
+//	public void removerLivroDoCarrinho (Livro lv) {
+//		int indice = livros.indexOf(lv);
+//		int quantidade = quantidades.get(indice);
+//		//se livro não vem na lista do carrinho, não fazer nada
+//		if ( !livros.contains(lv) ) {
+//		}
+//		//Se só havia um exemplar, remover o livro
+//		else if ( quantidade == 1 ) {
+//			livros.remove(indice);
+//			quantidades.remove(indice);
+//			lv.aumentarStock(1);
+//		}
+//		//se há mais do que um exemplar, reduzir quantidade
+//		else {
+//			quantidades.set(indice, quantidade-1);
+//			lv.aumentarStock(1);
+//		}
+//	}	
 	
 	//Método para remover um livro do carrinho
 	public int numeroItemsDoCarrinho () {

@@ -27,20 +27,26 @@ import org.eclipse.swt.widgets.Text;
 public class J_01ListaLivros extends J_00Inicial {
 
 	protected Shell shlViewComicsInc;
-	protected ArrayList <Livro> listaLivrosDaBusca;//adicionou-se este atributo para listar os livros na table
-	protected static ArrayList <Livro> listaLivrosCarrinho = new ArrayList<>();//adicionou-se este atributo para criar carrinho a partir desta lista
-	protected Livro livroSelecionado;//atributo que nos dá o livro que está selecionado na table
-	protected static Carrinho carrinho = new Carrinho();
-	private Table table;
-	protected int indexLivroSelecionado;//adicionou-se este atributo para poder passá-lo entre métodos
-	private Text text;;//adicionou-se carrinho para cria-lo e passar para outras classes
 	
+	//protected static ArrayList <Livro> listaLivrosCarrinho = new ArrayList<>();//adicionou-se este atributo para criar carrinho a partir desta lista
+	protected Livro livroSelecionado;//atributo que nos dá o livro que está selecionado na table
+	protected Carrinho carrinho = new Carrinho();
+	protected int indexLivroSelecionado;//adicionou-se este atributo para poder passá-lo entre métodos
+	private Table table;
+	private Text caixaDeBusca;//adicionou-se carrinho para cria-lo e passar para outras classes
+	
+	
+//	//Criou-se construtor para poder receber a lista de livros procurados da janela anterior
+//	public J_01ListaLivros(ArrayList <Livro> listaLivrosDaBusca) {
+//		super(livraria);
+//		this.listaLivrosDaBusca = listaLivrosDaBusca;
+//	}
 	
 	//Criou-se construtor para poder receber a lista de livros procurados da janela anterior
-	public J_01ListaLivros(ArrayList <Livro> listaLivrosDaBusca) {
+	public J_01ListaLivros() {
 		super(livraria);
-		this.listaLivrosDaBusca = listaLivrosDaBusca;
-	}
+		
+	}	
 
 	
 	/**
@@ -50,7 +56,8 @@ public class J_01ListaLivros extends J_00Inicial {
 	public static void main(String[] args) {
 		try {
 			//Foi necessário adicionar aqui a arrayList de livros
-			J_01ListaLivros window = new J_01ListaLivros(new ArrayList<Livro>());
+			//J_01ListaLivros window = new J_01ListaLivros(new ArrayList<Livro>());
+			J_01ListaLivros window = new J_01ListaLivros();
 			window.open();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -100,8 +107,15 @@ public class J_01ListaLivros extends J_00Inicial {
 				indexLivroSelecionado = ((Table)e.widget).indexOf((TableItem)e.item);
 				System.out.println( indexLivroSelecionado );
 				livroSelecionado = listaLivrosDaBusca.get(indexLivroSelecionado);
+				//?????SERÁ SÓ ESTA MERDA EM BAIXO????????
+//				
+//				
+//				
+//				
+//				
+				livroSelecionado = livraria.getLivro(livroSelecionado.isbn);
 				//Verificar se livro tem stock e eventualmente escrever mensagem de falta de stock
-				if (livroSelecionado.stock <= 0) {
+				if (livroSelecionado.getStock() <= 0) {
 					//tornar visivel mensagem de falta de stock
 					lblMensagemDeErro.setVisible(true);
 				}
@@ -114,22 +128,28 @@ public class J_01ListaLivros extends J_00Inicial {
 		table.setBounds(10, 75, 495, 367);
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
+		preencherTabela();
 		
 		
-		//adicionar um a um os livros da lista de livros da busca à table
-		for (Livro lv : listaLivrosDaBusca) {
-		      TableItem item = new TableItem(table, SWT.NONE);
-		      item.setText(lv.toString());
-		}
-		table.redraw();
+//		//ACRESCENTAR BUTÃO LIMPAR CARRINHO E COPIAR PARA A JANELA CARRINHO
+//		***
+//		
+//		
+//		
+//		
+//		
+//		
+		
 		
 		//Listner para o botão de 'voltar'
 		Button buttonVoltar = new Button(shlViewComicsInc, SWT.NONE);
 		buttonVoltar.addMouseListener(new MouseAdapter() {
-			@Override
 			public void mouseUp(MouseEvent e) {
-				//comando para fechar a janela
+				//comando para fechar a janela corrente
 				shlViewComicsInc.close();
+				//Abrir de novo a janela inicial
+				J_00Inicial janelaInicial = new J_00Inicial(livraria);
+				janelaInicial.open();
 			}
 		});
 		buttonVoltar.setText("Voltar");
@@ -152,17 +172,28 @@ public class J_01ListaLivros extends J_00Inicial {
 		btnAdicionarAoCarrinho.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
-				//se stock <= 0 não faz nada
+				//se stock <= 0 apenas mostra mensagem de falta de stock
 				if (livroSelecionado.stock <= 0) {	
+					lblMensagemDeErro.setVisible(true);
 				}
 				//se stock > 0 adiciona livro a lista de livros para o carrinho e reduz stock
 				else {
-					carrinho.adicionarLivroAoCarrinho(livroSelecionado);
-					livroSelecionado.stock--;
+					livraria.adicionarLivroAoCarrinho(livroSelecionado, carrinho);
+//					VER SE BASTA O QUE ESTÁ EM CIMA OU SE É PRECISO SER:
+//					carrinho = livraria.adicionarLivroAoCarrinho(livroSelecionado, carrinho);
+//					
+//					
+//					
+//					
+//					
+//					
+					//livroSelecionado.stock--;
 					//actualizar o label do número de items no carrinho
 					lblItmes.setText( carrinho.numeroItemsDoCarrinho() + " itmes");
+					System.out.println("LIVRARIA:" + livraria);
 					System.out.println("STock=" + livroSelecionado.stock);
 					System.out.println("items no carrinho=" + carrinho.numeroItemsDoCarrinho() );
+					preencherTabela();
 				}
 				
 			}
@@ -178,7 +209,16 @@ public class J_01ListaLivros extends J_00Inicial {
 			public void mouseUp(MouseEvent e) {
 				//remover o item selecionado
 				if ( carrinho.livros.contains(livroSelecionado)) {
-					carrinho.removerLivroDoCarrinho(livroSelecionado);
+					livraria.removerLivroDoCarrinho(livroSelecionado, carrinho);
+//					VER SE BASTA O QUE ESTÁ EM CIMA OU SE É PRECISO SER:
+//					carrinho = livraria.removerLivroDoCarrinho(livroSelecionado, carrinho);
+//					
+//					
+//					
+//					
+//					
+//
+					preencherTabela();
 					//repor stock
 					//livroSelecionado.stock++; //passei isto para o método 'removerLivroDoCarrinho'
 				}
@@ -186,16 +226,28 @@ public class J_01ListaLivros extends J_00Inicial {
 				else if ( carrinho.livros.isEmpty() ){
 				
 				}
-				//remover o último da lista
+				//Se não estiver nenhum selecionado, remover o último da lista
 				else {
-					Livro ultimoDaLista = listaLivrosCarrinho.get(listaLivrosCarrinho.size());
-					listaLivrosCarrinho.remove(listaLivrosCarrinho.size());
+					Livro ultimoDoCarrinho = carrinho.livros.get( carrinho.livros.size()-1 );
+					livraria.removerLivroDoCarrinho( ultimoDoCarrinho, carrinho );
+				
+//					VER SE BASTA O QUE ESTÁ EM CIMA OU SE É PRECISO SER:
+//					carrinho = livraria.removerLivroDoCarrinho( ultimoDoCarrinho, carrinho );
+//					
+//					
+//					
+//					
+//					
+//
+					
+					preencherTabela();
 					//repor stock
-					ultimoDaLista.stock++;
+					//ultimoDaLista.stock++;
 				}
 				//actualizar o label do número de items no carrinho
 				lblItmes.setText( carrinho.numeroItemsDoCarrinho() + " itmes" );
-				System.out.println("items no carrinho=" + listaLivrosCarrinho.size() );
+				System.out.println("LIVRARIA:" + livraria);
+				System.out.println("items no carrinho=" + carrinho.numeroItemsDoCarrinho() );
 			}
 		});
 		btnRemover.setText("Remover");
@@ -208,42 +260,41 @@ public class J_01ListaLivros extends J_00Inicial {
 		lblCarrinho.setText("Carrinho");
 		
 		//mensagem de erro que aparece quando não há livros para a procura
-		Label label = new Label(shlViewComicsInc, SWT.NONE);
-		label.setVisible(false);
-		label.setText("N\u00E3o existem correspond\u00EAncias. Tente novamente");
-		label.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
-		label.setFont(SWTResourceManager.getFont("Segoe UI", 6, SWT.NORMAL));
-		label.setBounds(81, 59, 236, 12);		
+		Label lblMensagemSemCorrespondencias = new Label(shlViewComicsInc, SWT.NONE);
+		lblMensagemSemCorrespondencias.setVisible(false);
+		lblMensagemSemCorrespondencias.setText("N\u00E3o existem correspond\u00EAncias. Tente novamente");
+		lblMensagemSemCorrespondencias.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
+		lblMensagemSemCorrespondencias.setFont(SWTResourceManager.getFont("Segoe UI", 6, SWT.NORMAL));
+		lblMensagemSemCorrespondencias.setBounds(81, 59, 236, 12);		
 		
-		text = new Text(shlViewComicsInc, SWT.BORDER);
-		text.setBounds(81, 23, 196, 30);
+		caixaDeBusca = new Text(shlViewComicsInc, SWT.BORDER);
+		caixaDeBusca.setBounds(81, 23, 196, 30);
 		
 		Button btnPesquisar = new Button(shlViewComicsInc, SWT.NONE);
 		btnPesquisar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
 				//Passar para string o texto introduzido na caixa de texto
-				String s = text.getText();
+				stringProcurada = caixaDeBusca.getText();
 				//Chamar método 'procurarLivro' para a string introduzida
-				ArrayList <Livro> lvProcurados = livraria.procurarLivro(s);
+				listaLivrosDaBusca = livraria.procurarLivro(stringProcurada);
 				//Caso lista de livros não tenha resultados apresentar mensagem de procura vazia
-				if ( lvProcurados.isEmpty() ) {
-					label.setVisible(true);  
+				if ( listaLivrosDaBusca.isEmpty() ) {
+					lblMensagemSemCorrespondencias.setVisible(true);  
 				}
 				//caso lista tenha livros
 				else {
-					label.setVisible(false);  
-					//passar a nova procura para a 'listaLivrosDaBusca'
-					listaLivrosDaBusca = lvProcurados;
+					lblMensagemSemCorrespondencias.setVisible(false);  
 					//limpar todos os resultados anteriores da tabela impressa
-					table.clearAll();
+					
+					preencherTabela();
 					//adicionar um a um os livros da lista de livros da busca à table
-					int i = 0;
-					for (Livro lv : listaLivrosDaBusca) {
-					      TableItem item = new TableItem(table, SWT.NONE, i);
-					      i++;
-					      item.setText(lv.toString());
-					}
+//					int i = 0;
+//					for (Livro lv : listaLivrosDaBusca) {
+//					      TableItem item = new TableItem(table, SWT.NONE, i);
+//					      i++;
+//					      item.setText(lv.toString());
+//					}
 				}
 			}
 		});
@@ -252,19 +303,21 @@ public class J_01ListaLivros extends J_00Inicial {
 		
 		
 		//Butão ver/finalizar carrinho
-		Button btnVerfinalizarCarrinho = new Button(shlViewComicsInc, SWT.CENTER);
-		btnVerfinalizarCarrinho.addMouseListener(new MouseAdapter() {
+		Button btnVerCarrinho = new Button(shlViewComicsInc, SWT.CENTER);
+		btnVerCarrinho.addMouseListener(new MouseAdapter() {
 			@Override
 			//listner para ao clicar com rato abrir janela de carrinho
 			public void mouseUp(MouseEvent e) {
-				//chamar método para transformar lista de livros em carrinho
-				carrinho = new Carrinho (listaLivrosCarrinho);
+				//comando para fechar a janela corrente
+				shlViewComicsInc.close();
+				//Abrir nova janela do carrinho
 				J_02Carrinho janelaCarrinho = new J_02Carrinho();
 				janelaCarrinho.open();
+				
 			}
 		});
-		btnVerfinalizarCarrinho.setText("Ver Carrinho");
-		btnVerfinalizarCarrinho.setBounds(514, 225, 186, 30);
+		btnVerCarrinho.setText("Ver Carrinho");
+		btnVerCarrinho.setBounds(514, 225, 186, 30);
 		
 
 		// Listner que deixa definir a altura de cada linha da table
@@ -277,4 +330,20 @@ public class J_01ListaLivros extends J_00Inicial {
 		});
 
 	}
+	
+	//Método para limpar e preencher novamente a tabela 
+	public void preencherTabela() {
+		//limpar tabela
+		table.removeAll();
+		//Chamar novamente o método 'procurarLivro' para actualizar os stocks dos livros da 'listaLivrosDaBusca'
+		listaLivrosDaBusca = livraria.procurarLivro(stringProcurada);
+		//adicionar um a um os livros da lista de livros da busca à table
+		for (Livro lv : listaLivrosDaBusca) {
+		      TableItem item = new TableItem(table, SWT.NONE);
+		      item.setText(lv.toString());
+		}
+		table.redraw();	
+	}
+	
+	
 }
