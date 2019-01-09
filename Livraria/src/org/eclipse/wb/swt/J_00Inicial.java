@@ -25,12 +25,15 @@ import org.eclipse.swt.events.MouseEvent;
 public class J_00Inicial {
 
 	protected Shell shlViewComicsInc;
-	private Text text;
-	protected static Livraria livraria;//atributo adicionado para poder ir buscar o método 'procurarLivro' desta classe
+	protected String stringProcurada;
+	protected static ArrayList <Livro> listaLivrosDaBusca;
+	protected static Livraria livraria;//atributo adicionado para poder ir buscar métodos à livraria
+	private Text caixaDeBusca;
 
 
 	//Construtor para poder trazer a Livraria para esta classe
 	public J_00Inicial(Livraria livraria2) {
+		stringProcurada="";
 		livraria=livraria2;
 		/**+++++++++++++++++++++++
 		 * Só para efeito de testes, define-se agora uma livraria
@@ -41,7 +44,7 @@ public class J_00Inicial {
 		 * 1
 		 * 
 		 */
-		livraria=new Livraria();
+		//livraria=new Livraria();
 	}
 		
 	/**
@@ -51,6 +54,12 @@ public class J_00Inicial {
 	public static void main(String[] args) {
 		try {
 			//Depois da fase de testes, vai ter de se retirar o 'new Livraria()' e mudar para 'livraria'
+//			
+//			
+//			
+//			
+//			
+//			
 			J_00Inicial window = new J_00Inicial( new Livraria() );
 			window.open();
 		} catch (Exception e) {
@@ -90,43 +99,46 @@ public class J_00Inicial {
 		lblViewComicsInc.setText("View Comics Inc.");
 		
 		//Label com mensagem de livro não encontrado que aparece quando procura retorna uma lista vazia de livros
-		Label label = new Label(shlViewComicsInc, SWT.NONE);
-		label.setText("Não existem correspondências. Tente novamente");
-		label.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
-		label.setFont(SWTResourceManager.getFont("Segoe UI", 6, SWT.NORMAL));
-		label.setBounds(32, 121, 236, 20);
-		label.setVisible(false);
+		Label MensagemSemCorrespondencias = new Label(shlViewComicsInc, SWT.NONE);
+		MensagemSemCorrespondencias.setText("Não existem correspondências. Tente novamente");
+		MensagemSemCorrespondencias.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
+		MensagemSemCorrespondencias.setFont(SWTResourceManager.getFont("Segoe UI", 6, SWT.NORMAL));
+		MensagemSemCorrespondencias.setBounds(32, 121, 236, 20);
+		MensagemSemCorrespondencias.setVisible(false);
 		
-		Button btnNewButton = new Button(shlViewComicsInc, SWT.NONE);
-		btnNewButton.addSelectionListener(new SelectionAdapter() {
+		Button butaoAdmin = new Button(shlViewComicsInc, SWT.NONE);
+		butaoAdmin.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 			}
 		});
-		btnNewButton.setBounds(366, 247, 72, 23);
-		btnNewButton.setText("Admin");
+		butaoAdmin.setBounds(366, 247, 72, 23);
+		butaoAdmin.setText("Admin");
 		
 		//Caixa para introdução de texto a pesquisar
-		text = new Text(shlViewComicsInc, SWT.BORDER);
-		text.setBounds(32, 89, 227, 26);
+		caixaDeBusca = new Text(shlViewComicsInc, SWT.BORDER);
+		caixaDeBusca.setBounds(32, 89, 227, 26);
 		
 		//Listner para botão 'pesquisar livro'
 		Button btnPesquisarLivro = new Button(shlViewComicsInc, SWT.NONE);
 		btnPesquisarLivro.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
-				//Passar para string o texto introduzido na caixa de texto
-				String s = text.getText();
+				//Passar para 'stringProcurada' o texto introduzido na caixa de texto
+				stringProcurada = caixaDeBusca.getText();
 				//Chamar método 'procurarLivro' para a string introduzida
-				ArrayList <Livro> lvProcurados = livraria.procurarLivro(s);
+				listaLivrosDaBusca = livraria.procurarLivro(stringProcurada);
 				//Caso lista de livros não tenha resultados apresentar mensagem de procura vazia
-				if ( lvProcurados.isEmpty() ) {
-					label.setVisible(true);  
+				if ( listaLivrosDaBusca.isEmpty() ) {
+					MensagemSemCorrespondencias.setVisible(true);  
 				}
 				//caso lista tenha livros
 				else {
+					//Fechar janela de busca corrente
+					shlViewComicsInc.close();
 					//Abrir nova janela de ListaLivros, passando-lhe a lista de livros que correspondem à procura
-					J_01ListaLivros janelaListaLivros = new J_01ListaLivros(lvProcurados);
+					//J_01ListaLivros janelaListaLivros = new J_01ListaLivros(listaLivrosDaBusca);
+					J_01ListaLivros janelaListaLivros = new J_01ListaLivros();
 					janelaListaLivros.open();
 				}
 				
@@ -134,7 +146,6 @@ public class J_00Inicial {
 		});
 		btnPesquisarLivro.setBounds(271, 89, 167, 25);
 		btnPesquisarLivro.setText("Pesquisar/Comprar Livro");
-
 	}
 
 

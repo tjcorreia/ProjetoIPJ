@@ -71,14 +71,26 @@ public class Livraria {
 		utilizadores.add( u3 );
 		utilizadores.add( u4 );
 		//Criar alguns mapas de livros-quantidade para os carrinhos de compras 
-		Map <Livro, Integer> livros1 = new HashMap <>();
-		livros1.put(lv1, 2);
-		livros1.put(lv2, 1);
-		Map <Livro, Integer> livros2 = new HashMap <>();
-		livros2.put(lv2, 1);
-		livros2.put(lv3, 3);
-		Map <Livro, Integer> livros3 = new HashMap <>();
-		livros3.put(lv2, 1);
+//		Map <Livro, Integer> livros1 = new HashMap <>();
+//		livros1.put(lv1, 2);
+//		livros1.put(lv2, 1);
+//		Map <Livro, Integer> livros2 = new HashMap <>();
+//		livros2.put(lv2, 1);
+//		livros2.put(lv3, 3);
+//		Map <Livro, Integer> livros3 = new HashMap <>();
+//		livros3.put(lv2, 1);
+		//Criar alguns mapas de livros-quantidade para os carrinhos de compras 
+		ArrayList <Livro> livros1 = new ArrayList <>();
+		livros1.add(lv1);
+		livros1.add(lv1);
+		livros1.add(lv2);
+		ArrayList <Livro> livros2 = new ArrayList <>();
+		livros2.add(lv2);
+		livros2.add(lv3);
+		livros2.add(lv3);
+		livros2.add(lv3);
+		ArrayList <Livro> livros3 = new ArrayList <>();
+		livros3.add(lv2);		
 		//criar alguns carrinhos
 		Carrinho c1 = new Carrinho(livros1);
 		Carrinho c2 = new Carrinho(livros2);
@@ -126,9 +138,26 @@ public class Livraria {
 		return livrosProcurados;
 	}
 	
+	public String toString() {
+		String s = "";
+		for ( Livro lv : livros) {
+			s = s + "-----------------------------------\n" + 
+					lv + "\n" + 
+					"Stock: " + lv.stock + "\n";	
+		}
+		return s;
+	}
 	
-	
-	
+	//Método para obter Livro a partir do seu isbn
+	public Livro getLivro(String isbn) {
+		for ( Livro lv : livros) {
+			if ( lv.isbn.equals(isbn) ) {
+				return lv;
+			}
+		}
+		return new Livro();
+	}
+
 	//método que recebe password e email de login e devolve string com ok ou eventual erro
 	public String verificarLogin( String email, String password){
 		for ( Utilizador u : utilizadores ) {
@@ -146,22 +175,93 @@ public class Livraria {
 		return "emailErrado";
 	}
 	
-	//método para transformar lista de livros em hashMap e depois em carrinho
-	public Carrinho listaToCarrinho ( ArrayList <Livro> listaLivrosCarrinho ) {
-		HashMap <Livro, Integer> novoCarrinho = new HashMap<>();
-		int i = 0;
-		int quantidade = 1;
-		for ( Livro lv : listaLivrosCarrinho) {
-			//Se livro já existe no HashMap => aumenta-se quantidade
-			if ( novoCarrinho.containsKey(lv)) {
-				quantidade = novoCarrinho.get(lv)+1;
-			}
-			//acrrescentar livros ao HashMap
-			novoCarrinho.put( lv , quantidade);	
-		}
-		Carrinho cr = new Carrinho(novoCarrinho);
-		return cr;
+//	
+//	REVER BEM ESTES DOIS MÉTODOS SEGUINTES
+//	
+//	
+//	
+//	
+//	
+//	public void aumentarStock(Livro lv, int quantidade) {
+//		lv.setStock( lv.getStock() + quantidade );
+//	}
+//	
+//	public void reduzirStock(Livro lv, int quantidade) {
+//		lv.setStock( lv.getStock() - quantidade );
+//	}
+	
+	public void aumentarStock(Livro lv, int quantidade) {
+		
+//		if ( livros.contains(lv)) {
+//			int ordem = livros.indexOf(lv);
+//			livros.get(ordem).stock = livros.get(ordem).stock + quantidade;
+//		}
+		
+		lv.setStock( lv.getStock() + quantidade );
 	}
+	
+	public void reduzirStock(Livro lv, int quantidade) {
+		lv.setStock( lv.getStock() - quantidade );
+	}
+	
+	//Método para adicionar um novo (ou repetido) livro ao carrinho
+	public Carrinho adicionarLivroAoCarrinho (Livro lv, Carrinho carrinho) {
+		//Se livro não tem stock, não fazer nada
+		if ( lv.stock <= 0 ) {		
+		}
+		//Se livro já existe na lista, aumentar a quantidade
+		else if ( carrinho.livros.contains(lv)) {
+			int indice = carrinho.livros.indexOf(lv);
+			int quantidade = carrinho.quantidades.get(indice);
+			carrinho.quantidades.set(indice, quantidade+1);
+			reduzirStock( lv, 1 );
+		}
+		//se livro não existia, acrescenta-se livro a 'livros' e quantidade a 'quantidades'
+		else {
+			carrinho.livros.add(lv);
+			carrinho.quantidades.add(1);
+			reduzirStock(lv,1);
+		}
+		return carrinho;
+	}
+	
+	//Método para remover um livro do carrinho
+	public Carrinho removerLivroDoCarrinho (Livro lv, Carrinho carrinho) {
+		int indice = carrinho.livros.indexOf(lv);
+		int quantidade = carrinho.quantidades.get(indice);
+		//se livro não vem na lista do carrinho, não fazer nada
+		if ( !carrinho.livros.contains(lv) ) {
+		}
+		//Se só havia um exemplar, remover o livro
+		else if ( quantidade == 1 ) {
+			carrinho.livros.remove(indice);
+			carrinho.quantidades.remove(indice);
+			aumentarStock(lv,1);
+		}
+		//se há mais do que um exemplar, reduzir quantidade
+		else {
+			carrinho.quantidades.set(indice, quantidade-1);
+			aumentarStock(lv,1);
+		}
+		return carrinho;
+	}	
+	
+//	//método para transformar lista de livros em hashMap e depois em carrinho
+//	public Carrinho listaToCarrinho ( ArrayList <Livro> listaLivrosCarrinho ) {
+//		HashMap <Livro, Integer> novoCarrinho = new HashMap<>();
+//		int i = 0;
+//		int quantidade = 1;
+//		for ( Livro lv : listaLivrosCarrinho) {
+//			//Se livro já existe no HashMap => aumenta-se quantidade
+//			if ( novoCarrinho.containsKey(lv)) {
+//				quantidade = novoCarrinho.get(lv)+1;
+//			}
+//			//acrrescentar livros ao HashMap
+//			novoCarrinho.put( lv , quantidade);	
+//		}
+//		Carrinho cr = new Carrinho(novoCarrinho);
+//		return cr;
+//	}
 	
 	
 }

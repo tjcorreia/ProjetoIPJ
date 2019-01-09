@@ -71,6 +71,16 @@ public class Livro {
 				"\n\t\t PREÇO:" + preco + "€";
 		return s;
 	}
+
+	public int getStock() {
+		return stock;
+	}
+
+	public void setStock(int stock) {
+		this.stock = stock;
+	}
+	
+	
 	
 }
 
