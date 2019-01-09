@@ -65,7 +65,7 @@ public class Livro {
 	
 	public String toString() {
 		String s = "Título:" + nome + ", Autor:" + autor + ", Editora:" + editora + 
-				"\n\t ISNB:" + isbn + ", Data:" + data.get(Calendar.YEAR) + "/"  + data.get(Calendar.MONTH) +
+				"\n\t ISNB:" + isbn + ", Data:" + data.get(Calendar.YEAR) + "/"  + (data.get(Calendar.MONTH)+1) +
 				"/"  + data.get(Calendar.DAY_OF_MONTH) + ", Stock:" + stock + " unidades" +
 				"\n\t Descrição:" + descricao + 
 				"\n\t\t PREÇO:" + preco + "€";

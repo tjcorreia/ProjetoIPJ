@@ -36,18 +36,13 @@ public class J_01ListaLivros extends J_00Inicial {
 	private Text caixaDeBusca;//adicionou-se carrinho para cria-lo e passar para outras classes
 	
 	
-//	//Criou-se construtor para poder receber a lista de livros procurados da janela anterior
-//	public J_01ListaLivros(ArrayList <Livro> listaLivrosDaBusca) {
-//		super(livraria);
-//		this.listaLivrosDaBusca = listaLivrosDaBusca;
-//	}
-	
-	//Criou-se construtor para poder receber a lista de livros procurados da janela anterior
+	//Criou-se construtor para poder receber o carrinho da janela seguinte 'J_02Carrinho'
 	public J_01ListaLivros(Carrinho carrinho1) {
 		super(livraria);
 		carrinho = carrinho1;
 	}
 	
+	//Construtor para quando se vem da janela anterior 'J_00Inicial'
 	public J_01ListaLivros() {
 		super(livraria);
 		carrinho = new Carrinho();
@@ -109,8 +104,6 @@ public class J_01ListaLivros extends J_00Inicial {
 		
 		
 		table = new Table(shlViewComicsInc, SWT.BORDER | SWT.FULL_SELECTION);
-		
-		
 		//listner para ação ao selecionar um dos items da table e devolve o index do item na lista de livros
 		table.addSelectionListener(new SelectionAdapter() {
 			@Override
@@ -119,12 +112,8 @@ public class J_01ListaLivros extends J_00Inicial {
 				indexLivroSelecionado = ((Table)e.widget).indexOf((TableItem)e.item);
 				System.out.println( indexLivroSelecionado );
 				livroSelecionado = listaLivrosDaBusca.get(indexLivroSelecionado);
-				//?????SERÁ SÓ ESTA MERDA EM BAIXO????????
-//				
-//				
-//				
-//				
-//				
+				//fazer corresponder o livro selecionado a um dos livros da livraria, para as mudanças
+				//de stock, se reproduzirem na livraria
 				livroSelecionado = livraria.getLivro(livroSelecionado.isbn);
 				//caso não haja nenhum selecionado, não acontece nada
 				if (livroSelecionado==null) {

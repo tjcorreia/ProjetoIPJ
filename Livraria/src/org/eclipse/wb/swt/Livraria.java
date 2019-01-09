@@ -19,6 +19,7 @@ public class Livraria {
 	
 	//Construtor que cria alguns livros, utilizadores e compras pré definidos
 	Livraria(){
+		
 		/**+++++++++++++++++++++++
 		 * Só para efeito de testes, define-se agora uma livraria
 		 * !!!!!!!!!!!!!!!!!!!!!!!
@@ -97,9 +98,9 @@ public class Livraria {
 		Carrinho c3 = new Carrinho(livros3);
 		//Criar algumas compras finalizadas e adicionar à lista de compras
 		compras = new ArrayList<>();
-		compras.add( new Compra( 1, c1, 156987569, new GregorianCalendar (2018,11,14), Compra.Estado.FINALIZADA));
-		compras.add( new Compra( 1, c2, 235648978, new GregorianCalendar (2018,11,15), Compra.Estado.FINALIZADA));
-		compras.add( new Compra( 1, c3, 225498631, new GregorianCalendar (2018,11,13), Compra.Estado.FINALIZADA));
+		compras.add( new Compra( 1, c1, "156987569", new GregorianCalendar (2018,11,14), Compra.Estado.FINALIZADA));
+		compras.add( new Compra( 2, c2, "235648978", new GregorianCalendar (2018,11,15), Compra.Estado.FINALIZADA));
+		compras.add( new Compra( 3, c3, "225498631", new GregorianCalendar (2018,11,13), Compra.Estado.FINALIZADA));
 	}
 	
 	public void testar() {
@@ -155,6 +156,7 @@ public class Livraria {
 				return lv;
 			}
 		}
+		//apenas porque tem de ser devolvido algum livro no fim. Mas esta parte nunca será usada
 		return new Livro();
 	}
 
@@ -190,13 +192,10 @@ public class Livraria {
 //		lv.setStock( lv.getStock() - quantidade );
 //	}
 	
+	
+	
+	
 	public void aumentarStock(Livro lv, int quantidade) {
-		
-//		if ( livros.contains(lv)) {
-//			int ordem = livros.indexOf(lv);
-//			livros.get(ordem).stock = livros.get(ordem).stock + quantidade;
-//		}
-		
 		lv.setStock( lv.getStock() + quantidade );
 	}
 	
@@ -245,6 +244,40 @@ public class Livraria {
 		}
 		return carrinho;
 	}	
+	
+	//Método para esvaziar carrinho, repondo os stocks na livraria
+	public Carrinho esvaziarCarrinhoReporStock (Carrinho carrinho) {
+		for ( int i = 0; i < carrinho.livros.size(); i++ ) {
+			String isbn = carrinho.livros.get(i).isbn;
+			int quantidade = carrinho.quantidades.get(i);
+			Livro lv = getLivro(isbn);
+			//repor o stock
+			lv.stock = lv.stock + quantidade;
+		}
+		//limpar carrinho
+		carrinho.livros.clear();
+		carrinho.quantidades.clear();
+		return carrinho;
+	}	
+	
+	//Método para esvaziar carrinho, repondo os stocks na livraria
+	public Carrinho esvaziarCarrinhoSemReporStock (Carrinho carrinho) {
+		//limpar carrinho
+		carrinho.livros.clear();
+		carrinho.quantidades.clear();
+		return carrinho;
+	}	
+	
+	//Método que devolve um novo número de compra (a seguir ao número de compra existente maior)
+	public int gerarNovoNumCompra() {
+		int novoNum = 0;
+		for ( Compra c : compras) {
+			if ( c.numCompra > novoNum) {
+				novoNum = c.numCompra + 1;
+			}
+		}
+		return novoNum;
+	}
 	
 //	//método para transformar lista de livros em hashMap e depois em carrinho
 //	public Carrinho listaToCarrinho ( ArrayList <Livro> listaLivrosCarrinho ) {

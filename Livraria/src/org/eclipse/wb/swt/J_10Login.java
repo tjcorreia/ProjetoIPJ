@@ -27,9 +27,17 @@ import org.eclipse.swt.events.KeyEvent;
 public class J_10Login {
 
 	protected Shell shlLogin;
-	private Text text_password;
-	private Text text_email;
-	private Livraria livraria;//atributo adicionado para poder ir buscar o método 'verificarLogin' 
+	private Text caixaParaPassword;
+	private Text caixaParaEmail;
+	private Livraria livraria;//atributo adicionado para poder ir buscar métodos e elemnetos à livraria 
+	
+
+	//Construtor para poder trazer a Livraria para esta classe
+	public J_10Login(Livraria livraria) {
+		//super();
+		this.livraria = livraria;
+	}
+		
 
 	/**
 	 * Launch the application.
@@ -43,15 +51,6 @@ public class J_10Login {
 			e.printStackTrace();
 		}
 	}
-	
-	
-	
-	//Construtor para poder trazer a Livraria para esta classe
-	public J_10Login(Livraria livraria) {
-		super();
-		this.livraria = livraria;
-	}	
-	
 	
 	
 	/**
@@ -78,12 +77,12 @@ public class J_10Login {
 		shlLogin.setText("View Comics Inc. - Login");
 		
 		//Caixa para introdução de email
-		text_email = new Text(shlLogin, SWT.BORDER);
-		text_email.setBounds(92, 80, 144, 26);		
+		caixaParaEmail = new Text(shlLogin, SWT.BORDER);
+		caixaParaEmail.setBounds(92, 80, 144, 26);		
 		
 		//Caixa para introdução de password
-		text_password = new Text(shlLogin, SWT.PASSWORD | SWT.BORDER);
-		text_password.setBounds(92, 143, 144, 26);
+		caixaParaPassword = new Text(shlLogin, SWT.PASSWORD | SWT.BORDER);
+		caixaParaPassword.setBounds(92, 143, 144, 26);
 		
 		Label lblEmail = new Label(shlLogin, SWT.NONE);
 		lblEmail.setAlignment(SWT.RIGHT);
@@ -134,17 +133,23 @@ public class J_10Login {
 			@Override
 			public void mouseUp(MouseEvent e) {
 				//Passar para strings os textos introduzidos na caixa de email e password
-				String email = text_email.getText();
-				String password = text_password.getText();
+				String email = caixaParaEmail.getText();
+				String password = caixaParaPassword.getText();
 				//Chamar método 'verificarLogin' para as strings introduzidas
 				String resultadoVerificacao = livraria.verificarLogin ( email, password );
 				//Caso pass e mail corretos e utilizador do tipo Admin, abre janela de Admin
 				if ( resultadoVerificacao.equals("okAdmin") ) {
+					//comando para fechar a janela atual
+					shlLogin.close();
+					//abrir janela admin
 					J_11Menu_Admin j = new J_11Menu_Admin();
 					j.open();
 				}
 				//Caso pass e mail corretos e utilizador do tipo Vendedor, abre janela de Vendedor
 				else if ( resultadoVerificacao.equals("okVendedor") ) {
+					//comando para fechar a janela atual
+					shlLogin.close();
+					//abrir janela vendedor
 					J_12Menu_Vendedor j = new J_12Menu_Vendedor();
 					j.open();
 				}
@@ -165,6 +170,16 @@ public class J_10Login {
 		btnEntrar.setBounds(273, 112, 90, 30);
 		
 		Button btnVoltar = new Button(shlLogin, SWT.NONE);
+		btnVoltar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				//comando para fechar a janela atual
+				shlLogin.close();
+				//Abrir de novo a janela inicial
+				J_00Inicial janelaInicial = new J_00Inicial(livraria);
+				janelaInicial.open();
+			}
+		});
 		btnVoltar.setBounds(342, 217, 80, 26);
 		btnVoltar.setText("Voltar");
 

@@ -106,10 +106,16 @@ public class J_00Inicial {
 		MensagemSemCorrespondencias.setBounds(32, 121, 236, 20);
 		MensagemSemCorrespondencias.setVisible(false);
 		
+		//butão que remete para a janela de login de vendedores e administradores
 		Button butaoAdmin = new Button(shlViewComicsInc, SWT.NONE);
 		butaoAdmin.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
+				//Fechar janela de busca corrente
+				shlViewComicsInc.close();
+				//Abrir nova janela de login
+				J_10Login janelaLogin = new J_10Login(livraria);
+				janelaLogin.open();
 			}
 		});
 		butaoAdmin.setBounds(366, 247, 72, 23);
