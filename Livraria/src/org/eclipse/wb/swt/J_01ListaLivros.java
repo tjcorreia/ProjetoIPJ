@@ -30,7 +30,7 @@ public class J_01ListaLivros extends J_00Inicial {
 	
 	//protected static ArrayList <Livro> listaLivrosCarrinho = new ArrayList<>();//adicionou-se este atributo para criar carrinho a partir desta lista
 	protected Livro livroSelecionado;//atributo que nos dá o livro que está selecionado na table
-	protected Carrinho carrinho = new Carrinho();
+	protected static Carrinho carrinho;
 	protected int indexLivroSelecionado;//adicionou-se este atributo para poder passá-lo entre métodos
 	private Table table;
 	private Text caixaDeBusca;//adicionou-se carrinho para cria-lo e passar para outras classes
@@ -43,10 +43,15 @@ public class J_01ListaLivros extends J_00Inicial {
 //	}
 	
 	//Criou-se construtor para poder receber a lista de livros procurados da janela anterior
+	public J_01ListaLivros(Carrinho carrinho1) {
+		super(livraria);
+		carrinho = carrinho1;
+	}
+	
 	public J_01ListaLivros() {
 		super(livraria);
-		
-	}	
+		carrinho = new Carrinho();
+	}
 
 	
 	/**
@@ -89,11 +94,18 @@ public class J_01ListaLivros extends J_00Inicial {
 		shlViewComicsInc.setText("View Comics Inc.");
 		
 		//Label que dá mensagem de erro caso o livro não esteja dizponível
-		Label lblMensagemDeErro = new Label(shlViewComicsInc, SWT.NONE);
-		lblMensagemDeErro.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
-		lblMensagemDeErro.setBounds(511, 76, 153, 20);
-		lblMensagemDeErro.setText("Livro Indispon\u00EDvel");
-		lblMensagemDeErro.setVisible(false);		
+		Label lblMensagemLivroIndisponivel = new Label(shlViewComicsInc, SWT.NONE);
+		lblMensagemLivroIndisponivel.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
+		lblMensagemLivroIndisponivel.setBounds(511, 76, 153, 20);
+		lblMensagemLivroIndisponivel.setText("Livro Indispon\u00EDvel");
+		lblMensagemLivroIndisponivel.setVisible(false);	
+		
+		//Label que dá mensagem de erro caso o livro não esteja dizponível
+		Label lblMensagemSelecioneLivro = new Label(shlViewComicsInc, SWT.NONE);
+		lblMensagemSelecioneLivro.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
+		lblMensagemSelecioneLivro.setBounds(511, 76, 153, 20);
+		lblMensagemSelecioneLivro.setText("Selecione um livro");
+		lblMensagemSelecioneLivro.setVisible(false);			
 		
 		
 		table = new Table(shlViewComicsInc, SWT.BORDER | SWT.FULL_SELECTION);
@@ -114,14 +126,24 @@ public class J_01ListaLivros extends J_00Inicial {
 //				
 //				
 				livroSelecionado = livraria.getLivro(livroSelecionado.isbn);
+				//caso não haja nenhum selecionado, não acontece nada
+				if (livroSelecionado==null) {
+					lblMensagemLivroIndisponivel.setVisible(false);
+					//tornar visivel mensagem para selecionar um livro
+					lblMensagemSelecioneLivro.setVisible(true);
+				}
 				//Verificar se livro tem stock e eventualmente escrever mensagem de falta de stock
-				if (livroSelecionado.getStock() <= 0) {
+				else if (livroSelecionado.getStock() <= 0) {
 					//tornar visivel mensagem de falta de stock
-					lblMensagemDeErro.setVisible(true);
+					lblMensagemLivroIndisponivel.setVisible(true);
+					//tornar invisivel mensagem para selecionar um livro
+					lblMensagemSelecioneLivro.setVisible(false);
 				}
 				//caso em que há stock
 				else {
-					lblMensagemDeErro.setVisible(false);
+					lblMensagemLivroIndisponivel.setVisible(false);
+					//tornar invisivel mensagem para selecionar um livro
+					lblMensagemSelecioneLivro.setVisible(false);
 				}
 			}
 		});
@@ -172,9 +194,16 @@ public class J_01ListaLivros extends J_00Inicial {
 		btnAdicionarAoCarrinho.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
+				//caso não haja nenhum selecionado, não acontece nada
+				if (livroSelecionado==null) {
+					//tornar visivel mensagem para selecionar um livro
+					lblMensagemSelecioneLivro.setVisible(true);
+				}
 				//se stock <= 0 apenas mostra mensagem de falta de stock
-				if (livroSelecionado.stock <= 0) {	
-					lblMensagemDeErro.setVisible(true);
+				else if (livroSelecionado.stock <= 0) {	
+					lblMensagemLivroIndisponivel.setVisible(true);
+					//tornar invisivel mensagem para selecionar um livro
+					lblMensagemSelecioneLivro.setVisible(false);
 				}
 				//se stock > 0 adiciona livro a lista de livros para o carrinho e reduz stock
 				else {
@@ -207,8 +236,11 @@ public class J_01ListaLivros extends J_00Inicial {
 		btnRemover.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
+				//caso não haja nenhum selecionado, não acontece nada
+				if (livroSelecionado==null) {
+				}
 				//remover o item selecionado
-				if ( carrinho.livros.contains(livroSelecionado)) {
+				else if ( carrinho.livros.contains(livroSelecionado)) {
 					livraria.removerLivroDoCarrinho(livroSelecionado, carrinho);
 //					VER SE BASTA O QUE ESTÁ EM CIMA OU SE É PRECISO SER:
 //					carrinho = livraria.removerLivroDoCarrinho(livroSelecionado, carrinho);
@@ -226,7 +258,8 @@ public class J_01ListaLivros extends J_00Inicial {
 				else if ( carrinho.livros.isEmpty() ){
 				
 				}
-				//Se não estiver nenhum selecionado, remover o último da lista
+				//Mesmo que o livro selecionado, não esteja no carrinho, 
+				// ao carregar em remover, remove-se o último livro a entrar para o carrinho
 				else {
 					Livro ultimoDoCarrinho = carrinho.livros.get( carrinho.livros.size()-1 );
 					livraria.removerLivroDoCarrinho( ultimoDoCarrinho, carrinho );

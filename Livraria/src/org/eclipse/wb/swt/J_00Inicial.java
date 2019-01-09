@@ -44,7 +44,7 @@ public class J_00Inicial {
 		 * 1
 		 * 
 		 */
-		livraria=new Livraria();
+		//livraria=new Livraria();
 	}
 		
 	/**

@@ -53,7 +53,7 @@ public class J_02Carrinho extends J_01ListaLivros{ //criou-se janela como subcla
 	
 	//criou-se construtor que vai buscar variáveis à supercalsse
 	public J_02Carrinho( ) {
-		super();
+		super(carrinho);
 		//super(listaLivrosDaBusca);
 		/**+++++++++++++++++++++++
 		 * Só para efeito de testes, define-se agora um carrinho
@@ -142,12 +142,19 @@ public class J_02Carrinho extends J_01ListaLivros{ //criou-se janela como subcla
 		lblSemStock.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
 		lblSemStock.setBounds(548, 31, 153, 20);
 		
+		Label lblSelecionarLivro = new Label(shell, SWT.NONE);
+		lblSelecionarLivro.setVisible(false);
+		lblSelecionarLivro.setText("Selecione um livro");
+		lblSelecionarLivro.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
+		lblSelecionarLivro.setBounds(548, 31, 153, 20);
+		
 		TableViewer tableViewer = new TableViewer(shell, SWT.BORDER | SWT.FULL_SELECTION);
 		tabela = tableViewer.getTable();
 		//Listner que devolve o indice e o livro do livro selecionado na tabela como 'indexLivroSelecionado' e 'livroSelecionado'
 		tabela.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
 				lblSemStock.setVisible(false);
+				lblSelecionarLivro.setVisible(false);
 				System.out.println(e.toString());
 				indexLivroSelecionado = ((Table)e.widget).indexOf((TableItem)e.item);
 				System.out.println( indexLivroSelecionado );
@@ -182,7 +189,7 @@ public class J_02Carrinho extends J_01ListaLivros{ //criou-se janela como subcla
 				shell.close();
 				//abrir janela de busca de livros, com o carrinho atual
 				//J_01ListaLivros janelaDeProcura = new J_01ListaLivros(carrinho.livros);
-				J_01ListaLivros janelaDeProcura = new J_01ListaLivros();
+				J_01ListaLivros janelaDeProcura = new J_01ListaLivros(carrinho);
 				janelaDeProcura.open();
 			}
 		});
@@ -211,6 +218,7 @@ public class J_02Carrinho extends J_01ListaLivros{ //criou-se janela como subcla
 			public void mouseUp(MouseEvent e) {
 				//Se nenhum item da tabela estiver selecionado, não fazer nada
 				if (livroSelecionado==null) {
+					lblSelecionarLivro.setVisible(true);
 				}
 				//Verificar se livro tem stock e eventualmente escrever mensagem de falta de stock
 				else if (livroSelecionado.stock <= 0) {
@@ -246,8 +254,13 @@ public class J_02Carrinho extends J_01ListaLivros{ //criou-se janela como subcla
 		butaoDiminuirQuantidade.addMouseListener(new MouseAdapter() {
 			public void mouseUp(MouseEvent e) {
 				lblSemStock.setVisible(false);
-				//Se nenhum item da tabela estiver selecionado (ou se carrinho já foi esvaziado), não fazer nada
-				if (livroSelecionado==null || !carrinho.livros.contains(livroSelecionado)) {
+				//Se nenhum item da tabela estiver selecionado mostrar mensagem para selecionar
+				if (livroSelecionado==null ) {
+					lblSelecionarLivro.setVisible(true);
+				}
+				// se carrinho já foi esvaziado, não fazer nada
+				if ( !carrinho.livros.contains(livroSelecionado)) {
+					
 				}
 				//reduzir quantidade de livros
 				else {
