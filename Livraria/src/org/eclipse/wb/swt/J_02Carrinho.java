@@ -1,6 +1,7 @@
 package org.eclipse.wb.swt;
 
 import org.eclipse.swt.widgets.Display;
+
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Shell;
 import swing2swt.layout.BorderLayout;
@@ -310,12 +311,12 @@ public class J_02Carrinho extends J_01ListaLivros{ //criou-se janela como subcla
 							//criar nova compra e adicionar à livraria
 							Compra novaCompra = new Compra
 									(livraria.gerarNovoNumCompra(), carrinho, nifIntroduzido, new GregorianCalendar(), Compra.Estado.SUBMETIDA);
-							livraria.compras.add(novaCompra);
+							livraria.getCompras().add(novaCompra);
 //							
 //							
 //							IMPRESSÃO DE VERIFICAÇÃO PARA APAGAR + TARDE
 //							
-							System.out.println("LIVRARIA APÓS CONCLUSÃO DA COMPRA:" + livraria.compras);
+							System.out.println("LIVRARIA APÓS CONCLUSÃO DA COMPRA:" + livraria.getCompras());
 							//fechar janela corrente
 							shell.close();
 							//abrir janela de mensagem de compra submetida
@@ -342,12 +343,12 @@ public class J_02Carrinho extends J_01ListaLivros{ //criou-se janela como subcla
 								CompraCartao novaCompra2 = new CompraCartao	(livraria.gerarNovoNumCompra(), 
 										carrinho, nifIntroduzido, new GregorianCalendar(), Compra.Estado.SUBMETIDA, 
 										numCartaoIntroduzido, pinIntroduzido);
-								livraria.compras.add(novaCompra2);
+								livraria.getCompras().add(novaCompra2);
 //								
 //								
 //								IMPRESSÃO DE VERIFICAÇÃO PARA APAGAR + TARDE
 //								
-								System.out.println("LIVRARIA APÓS CONCLUSÃO DA COMPRA:" + livraria.compras);
+								System.out.println("LIVRARIA APÓS CONCLUSÃO DA COMPRA:" + livraria.getCompras());
 								//fechar janela corrente
 								shell.close();
 								//abrir janela de mensagem de compra submetida
