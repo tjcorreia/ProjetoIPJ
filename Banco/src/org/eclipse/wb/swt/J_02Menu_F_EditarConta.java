@@ -293,19 +293,6 @@ public class J_02Menu_F_EditarConta {
 		btnNovoCliente.setBounds(10, 84, 192, 25);
 		btnNovoCliente.setText("Criar novo Cliente");
 
-		Button btnExibirContasDo = new Button(shellMF_EditarC, SWT.NONE);
-		btnExibirContasDo.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-			}
-		});
-		btnExibirContasDo.setText("Exibir Contas do Cliente");
-		btnExibirContasDo.setBounds(10, 177, 192, 25);
-
-		Button btnDadosDoCliente = new Button(shellMF_EditarC, SWT.NONE);
-		btnDadosDoCliente.setText("Altera dados do cliente");
-		btnDadosDoCliente.setBounds(10, 208, 192, 25);
-
 		Button btnListarClientes = new Button(shellMF_EditarC, SWT.NONE);
 		btnListarClientes.setText("Listar Clientes");
 		btnListarClientes.setBounds(10, 115, 192, 25);
@@ -317,7 +304,7 @@ public class J_02Menu_F_EditarConta {
 			}
 		});
 		btnAlterarLoginE.setText("Alterar Login e Password");
-		btnAlterarLoginE.setBounds(10, 423, 192, 25);
+		btnAlterarLoginE.setBounds(10, 239, 192, 25);
 
 		Button button_Logout = new Button(shellMF_EditarC, SWT.NONE);
 		button_Logout.addMouseListener(new MouseAdapter() {
@@ -550,6 +537,25 @@ public class J_02Menu_F_EditarConta {
 		button_BuscarCliente.setText("Obter Cliente");
 		button_BuscarCliente.setGrayed(true);
 		button_BuscarCliente.setBounds(269, 201, 88, 25);
+		
+		Button button = new Button(shellMF_EditarC, SWT.NONE);
+		button.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				J_02Menu_F_DadosCl cliente=new J_02Menu_F_DadosCl(gestor,uUtilizador,clienteActual);
+				cliente.open();
+				shellMF_EditarC.dispose();
+			}
+		});
+		button.setText("Dados do cliente");
+		button.setBounds(10, 146, 192, 25);
+		
+		Button button_1 = new Button(shellMF_EditarC, SWT.TOGGLE);
+		button_1.setText("Movimentar Contas");
+		button_1.setBounds(10, 176, 192, 25);
+		
+		Button button_2 = new Button(shellMF_EditarC, SWT.NONE);
+		button_2.setBounds(10, 208, 192, 25);
 		/// seleciona uma conta
 		combo_EscolhaConta.addSelectionListener(new SelectionAdapter() {
 			@Override

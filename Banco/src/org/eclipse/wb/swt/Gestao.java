@@ -48,7 +48,7 @@ public class Gestao {
 
 		contadores.put("Utilizador", 1000); // inicializa o Contador de Utilizadores
 		contadores.put("Contas", 100000); // inicializa o Contador de Contas
-		contadores.put("Cartoes", 109010000); // inicializa o Contador de Cartoes
+		contadores.put("Cartoes", 500010000); // inicializa o Contador de Cartoes
 		// Administradores
 //	Administrador(int uID, String login, String password, String nome, String sobrenome, String dataNascimento,
 //			String morada, TipoID escolhaID, int valorID, String email, int mobile)
@@ -170,15 +170,15 @@ public class Gestao {
 		// cartao
 		
 		LocalDate data = LocalDate.now().plusYears(5);
-		Cartao ct1 = new Cartao(109010000,cl1.getuID(),cn1.getContaID(),cl1.getNome()+" "+cl1.getSobrenome(),""+data, "0000");
+		Cartao ct1 = new Cartao(500010000,cl1.getuID(),cn1.getContaID(),cl1.getNome()+" "+cl1.getSobrenome(),""+data, "0000");
 		((ContaNormal)cn1).addCartaoC(ct1);
 		
-	    mapCartaoConta.put(109010000,cn1.getContaID());
+	    mapCartaoConta.put(500010000,cn1.getContaID());
 			LocalDate data2 =LocalDate.of(2015,12, 01);
 		Cartao ct2 = new Cartao(contadores.get("Cartoes") + 1,cl1.getuID(),cn2.getContaID(),cl1.getNome()+" "+cl1.getSobrenome(),""+data2,"0000");
 		((ContaNormal)cn2).addCartaoC(ct2);
 		
-		mapCartaoConta.put(109010000,cn2.getContaID());
+		mapCartaoConta.put(500010000,cn2.getContaID());
 		contadores.replace("Cartoes", contadores.get("Cartoes") + 1); // inicializa o Contador de Cartoes
 
 		//( duvida colocar conta de origem ?)
@@ -280,13 +280,7 @@ public class Gestao {
 		}
 		return null;
 	}
-	
-	
-	
-	
-	
-	
-	
+
 	
 // cria uma conta nova para um cliente 
 

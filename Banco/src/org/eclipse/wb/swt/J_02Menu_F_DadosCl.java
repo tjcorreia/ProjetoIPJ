@@ -83,7 +83,9 @@ public class J_02Menu_F_DadosCl {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
+	
+	
+	
 	/**
 	 * @wbp.parser.entryPoint
 	 */
@@ -137,8 +139,8 @@ public class J_02Menu_F_DadosCl {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 
-//				J_02Menu_F_CriaCliente alteraDados=new J_02Menu_F_CriaCliente(gestor,uUtilizador);
-//				alteraDados.open();
+				J_02Menu_F_CriaCliente criaCliente=new J_02Menu_F_CriaCliente(gestor,uUtilizador);
+				criaCliente.open();
 				shellMF.dispose();
 			}
 		});
@@ -146,15 +148,22 @@ public class J_02Menu_F_DadosCl {
 		btnNovoCliente.setText("Criar novo Cliente");
 
 		Button btnTBD = new Button(shellMF, SWT.NONE);
-		btnTBD.setText("\"\"");
 		btnTBD.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 			}
 		});
-		btnTBD.setBounds(10, 212, 192, 25);
+		btnTBD.setBounds(10, 209, 192, 25);
 
 		Button btnListarClientes = new Button(shellMF, SWT.NONE);
+		btnListarClientes.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				J_02Menu_F_ListaClientes listaC= new J_02Menu_F_ListaClientes(gestor, uUtilizador);
+				listaC.open();
+				shellMF.dispose();
+			}
+		});
 		btnListarClientes.setText("Listar Clientes");
 		btnListarClientes.setBounds(10, 115, 192, 25);
 
@@ -165,7 +174,7 @@ public class J_02Menu_F_DadosCl {
 			}
 		});
 		btnAlterarLoginE.setText("Alterar Login e Password");
-		btnAlterarLoginE.setBounds(10, 423, 192, 25);
+		btnAlterarLoginE.setBounds(10, 240, 192, 25);
 
 		Button button = new Button(shellMF, SWT.NONE);
 		button.addMouseListener(new MouseAdapter() {
@@ -300,6 +309,14 @@ public class J_02Menu_F_DadosCl {
 		lblDadosDoCliente.setBounds(104, 10, 291, 15);
 		
 		Button btnMovimentarConta = new Button(composite, SWT.TOGGLE | SWT.MULTI | SWT.WRAP | SWT.NONE);
+		btnMovimentarConta.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				J_02Menu_F_MovimentaConta editarconta= new J_02Menu_F_MovimentaConta(gestor, uUtilizador, clienteActual, null);
+				editarconta.open();
+				shellMF.dispose();
+			}
+		});
 		btnMovimentarConta.setText("Movimentar Contas");
 		btnMovimentarConta.setBounds(228, 323, 181, 25);
 		
@@ -445,7 +462,7 @@ public class J_02Menu_F_DadosCl {
 				
 			}
 		});
-		btnAlterarDados.setText("Alterar dados pessoais");
+		btnAlterarDados.setText("Alterar dados Cliente");
 		btnAlterarDados.setBounds(228, 263, 181, 25);
 		
 		Label lblListaDeContas = new Label(composite, SWT.NONE);
@@ -555,13 +572,34 @@ public class J_02Menu_F_DadosCl {
 		btnListaDeMovimentos.setText("Lista de Movimentos da Contas");
 		btnListaDeMovimentos.setBounds(228, 292, 181, 25);
 		
-		Button button_1 = new Button(composite, SWT.TOGGLE);
-		button_1.setText("Movimentar Contas");
-		button_1.setBounds(228, 354, 181, 25);
+		Button btnEditarContas = new Button(composite, SWT.TOGGLE);
+		btnEditarContas.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				J_02Menu_F_EditarConta editarconta= new J_02Menu_F_EditarConta(gestor, uUtilizador, clienteActual, null);
+				editarconta.open();
+				shellMF.dispose();
+			}
+		});
+		btnEditarContas.setText("Editar Contas");
+		btnEditarContas.setBounds(228, 354, 181, 25);
 		
 		Button button_DadosCliente = new Button(shellMF, SWT.NONE);
+		button_DadosCliente.setEnabled(false);
 		button_DadosCliente.setText("Dados do cliente");
 		button_DadosCliente.setBounds(10, 146, 192, 25);
+		
+		Button button_1 = new Button(shellMF, SWT.TOGGLE);
+		button_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				J_02Menu_F_MovimentaConta editarconta= new J_02Menu_F_MovimentaConta(gestor, uUtilizador, clienteActual, null);
+				editarconta.open();
+				shellMF.dispose();
+			}
+		});
+		button_1.setText("Movimentar Contas");
+		button_1.setBounds(10, 177, 192, 25);
 
 	}
 

@@ -44,23 +44,106 @@ public class J_02Menu_F_CriaCliente {
 	private Text text_DataN_Ano;
 	private Text text_DataN_mes;
 	private Text text_DataN_dia;
+	private Text text_UltimoNovoC;
 
-	public Utilizador getuUtilizador() {
-		return uUtilizador;
+	
+
+	public Text getText_UltimoNovoC() {
+		return text_UltimoNovoC;
 	}
-
-	public void setuUtilizador(Utilizador uUtilizador) {
-		this.uUtilizador = uUtilizador;
+	public void setText_UltimoNovoC(Text text_UltimoNovoC) {
+		this.text_UltimoNovoC = text_UltimoNovoC;
 	}
-
+	public Shell getShellMF() {
+		return shellMF;
+	}
+	public void setShellMF(Shell shellMF) {
+		this.shellMF = shellMF;
+	}
 	public Gestao getGestor() {
 		return gestor;
 	}
-
 	public void setGestor(Gestao gestor) {
 		this.gestor = gestor;
 	}
-
+	public Utilizador getuUtilizador() {
+		return uUtilizador;
+	}
+	public void setuUtilizador(Utilizador uUtilizador) {
+		this.uUtilizador = uUtilizador;
+	}
+	public Text getFuncionario() {
+		return Funcionario;
+	}
+	public void setFuncionario(Text funcionario) {
+		Funcionario = funcionario;
+	}
+	public Text getText_2() {
+		return text_2;
+	}
+	public void setText_2(Text text_2) {
+		this.text_2 = text_2;
+	}
+	public Text getText_PrimeiroNovoC() {
+		return text_PrimeiroNovoC;
+	}
+	public void setText_PrimeiroNovoC(Text text_PrimeiroNovoC) {
+		this.text_PrimeiroNovoC = text_PrimeiroNovoC;
+	}
+	public Text getText_MoradaNovoC() {
+		return text_MoradaNovoC;
+	}
+	public void setText_MoradaNovoC(Text text_MoradaNovoC) {
+		this.text_MoradaNovoC = text_MoradaNovoC;
+	}
+	public Text getText_ValorID_NovoC() {
+		return text_ValorID_NovoC;
+	}
+	public void setText_ValorID_NovoC(Text text_ValorID_NovoC) {
+		this.text_ValorID_NovoC = text_ValorID_NovoC;
+	}
+	public Text getText_Email_NovoC() {
+		return text_Email_NovoC;
+	}
+	public void setText_Email_NovoC(Text text_Email_NovoC) {
+		this.text_Email_NovoC = text_Email_NovoC;
+	}
+	public Text getText_MobileNovoC() {
+		return text_MobileNovoC;
+	}
+	public void setText_MobileNovoC(Text text_MobileNovoC) {
+		this.text_MobileNovoC = text_MobileNovoC;
+	}
+	public Text getText_UserNovoC() {
+		return text_UserNovoC;
+	}
+	public void setText_UserNovoC(Text text_UserNovoC) {
+		this.text_UserNovoC = text_UserNovoC;
+	}
+	public Text getText_PassNovoC() {
+		return text_PassNovoC;
+	}
+	public void setText_PassNovoC(Text text_PassNovoC) {
+		this.text_PassNovoC = text_PassNovoC;
+	}
+	public Text getText_DataN_Ano() {
+		return text_DataN_Ano;
+	}
+	public void setText_DataN_Ano(Text text_DataN_Ano) {
+		this.text_DataN_Ano = text_DataN_Ano;
+	}
+	public Text getText_DataN_mes() {
+		return text_DataN_mes;
+	}
+	public void setText_DataN_mes(Text text_DataN_mes) {
+		this.text_DataN_mes = text_DataN_mes;
+	}
+	public Text getText_DataN_dia() {
+		return text_DataN_dia;
+	}
+	public void setText_DataN_dia(Text text_DataN_dia) {
+		this.text_DataN_dia = text_DataN_dia;
+	}
 	public J_02Menu_F_CriaCliente() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -72,23 +155,10 @@ public class J_02Menu_F_CriaCliente {
 		super();
 		this.uUtilizador = uUtilizador;
 		this.gestor = gestor;
+		open();
 	
 	}
 
-//	/**
-//	 * Launch the application.
-//	 * 
-//	 */
-//	public static void main(String[] args) {
-//		try {
-//			J_02Menu_F_CriaCliente window = new J_02Menu_F_CriaCliente(new Gestao(), new Funcionario());
-//			window.open();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
-
-	
 	public void open() {
 		Display display = Display.getDefault();
 		createContents();
@@ -109,6 +179,7 @@ public class J_02Menu_F_CriaCliente {
 		shellMF.setBackground(SWTResourceManager.getColor(SWT.COLOR_DARK_GRAY));
 		shellMF.setSize(707, 533);
 		shellMF.setText("Menu Funcion\u00E1rio");
+		
 
 		Button btnNovoCliente = new Button(shellMF, SWT.NONE);
 		btnNovoCliente.addSelectionListener(new SelectionAdapter() {
@@ -146,6 +217,15 @@ public class J_02Menu_F_CriaCliente {
 		btnFazerDepsitoEm.setBounds(10, 270, 192, 25);
 
 		Button btnListarClientes = new Button(shellMF, SWT.NONE);
+		btnListarClientes.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				J_02Menu_F_ListaClientes listaC= new J_02Menu_F_ListaClientes(gestor, uUtilizador);
+				listaC.open();
+				shellMF.dispose();
+				
+			}
+		});
 		btnListarClientes.setText("Listar Clientes");
 		btnListarClientes.setBounds(10, 115, 192, 25);
 
@@ -224,7 +304,6 @@ public class J_02Menu_F_CriaCliente {
 		label_1.setBounds(10, 47, 55, 15);
 
 		text_PrimeiroNovoC = new Text(composite, SWT.BORDER);
-		text_PrimeiroNovoC.setText("2222");
 		text_PrimeiroNovoC.setBounds(81, 44, 163, 21);
 
 		Label label_2 = new Label(composite, SWT.NONE);
@@ -240,7 +319,6 @@ public class J_02Menu_F_CriaCliente {
 		combo_TipoID_NovoC.select(0);
 
 		text_ValorID_NovoC = new Text(composite, SWT.BORDER);
-		text_ValorID_NovoC.setText("78453123");
 		text_ValorID_NovoC.setBounds(208, 101, 212, 21);
 
 		Label label_3 = new Label(composite, SWT.NONE);
@@ -248,7 +326,6 @@ public class J_02Menu_F_CriaCliente {
 		label_3.setBounds(10, 131, 55, 15);
 
 		text_Email_NovoC = new Text(composite, SWT.BORDER);
-		text_Email_NovoC.setText("mail31@gmail.com");
 		text_Email_NovoC.setBounds(81, 128, 339, 21);
 
 		Label label_4 = new Label(composite, SWT.NONE);
@@ -256,7 +333,6 @@ public class J_02Menu_F_CriaCliente {
 		label_4.setBounds(10, 165, 55, 15);
 
 		text_MobileNovoC = new Text(composite, SWT.BORDER);
-		text_MobileNovoC.setText("969420730");
 		text_MobileNovoC.setBounds(81, 162, 88, 21);
 
 		Label label_5 = new Label(composite, SWT.NONE);
@@ -264,7 +340,6 @@ public class J_02Menu_F_CriaCliente {
 		label_5.setBounds(10, 192, 55, 15);
 
 		text_UserNovoC = new Text(composite, SWT.BORDER);
-		text_UserNovoC.setText("2222");
 		text_UserNovoC.setBounds(81, 189, 121, 21);
 
 		Label label_6 = new Label(composite, SWT.NONE);
@@ -272,7 +347,6 @@ public class J_02Menu_F_CriaCliente {
 		label_6.setBounds(228, 192, 55, 15);
 
 		text_PassNovoC = new Text(composite, SWT.BORDER);
-		text_PassNovoC.setText("6666");
 		text_PassNovoC.setBounds(289, 189, 131, 21);
 
 		Label lbl_Titulo_DadosDoNovo = new Label(composite, SWT.NONE);
@@ -280,8 +354,7 @@ public class J_02Menu_F_CriaCliente {
 		lbl_Titulo_DadosDoNovo.setAlignment(SWT.CENTER);
 		lbl_Titulo_DadosDoNovo.setBounds(81, 2, 322, 15);
 
-		Text text_UltimoNovoC = new Text(composite, SWT.BORDER);
-		text_UltimoNovoC.setText("2222");
+		text_UltimoNovoC = new Text(composite, SWT.BORDER);
 		text_UltimoNovoC.setBounds(250, 44, 170, 21);
 
 		Label label_9 = new Label(composite, SWT.NONE);
@@ -314,28 +387,31 @@ public class J_02Menu_F_CriaCliente {
 
 		text_DataN_dia = new Text(composite, SWT.BORDER);
 		text_DataN_dia.setBounds(395, 164, 23, 21);
+		
+		/// PRECHE PARA FACILIAR
+		
+		text_PrimeiroNovoC.setText("2222");
+		text_UltimoNovoC.setText("2222");
+		text_ValorID_NovoC.setText("78453123");
+		text_MoradaNovoC.setText("Morada");
+		text_Email_NovoC.setText("mail31@gmail.com");
+		text_MobileNovoC.setText("969420730");
+		text_UserNovoC.setText("2222");
+		text_PassNovoC.setText("6666");
+		text_DataN_Ano.setText("2018");
+		text_DataN_mes.setText("06");
+		text_DataN_dia.setText("06");
+		
+		
+		
 
 		Button button_GuardaCliente = new Button(composite, SWT.TOGGLE | SWT.MULTI | SWT.WRAP | SWT.NONE);
 		button_GuardaCliente.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
-				String NomeNovoF = text_PrimeiroNovoC.getText();
-				String Morada_NovoF = text_MoradaNovoC.getText();
-				String ValorID_NovoF = text_ValorID_NovoC.getText();
-				String Email_NovoF = text_Email_NovoC.getText();
-				String MobileNovoF = text_MobileNovoC.getText();
-				String UserNovoF = text_UserNovoC.getText();
-				String PassNovoF = text_PassNovoC.getText();
+				
 
-				System.out.println(NomeNovoF);
-				System.out.println(Morada_NovoF);
-				System.out.println(ValorID_NovoF);
-				System.out.println(Email_NovoF);
-				System.out.println(MobileNovoF);
-				System.out.println(UserNovoF);
-				System.out.println(PassNovoF);
-
-				System.out.println("-------->");
+			
 				String mensagem = "";
 				boolean naohaDadosPorPreencher = true;
 				// Verifica campos vazios
@@ -474,12 +550,29 @@ public class J_02Menu_F_CriaCliente {
 					composite10.setBounds(182, 41, 430, 301);
 					naohaDadosPorPreencher = true;
 				}
-
+				text_PrimeiroNovoC.setText("");
+				text_UltimoNovoC.setText("");
+				text_ValorID_NovoC.setText("");
+				text_MoradaNovoC.setText("");
+				text_Email_NovoC.setText("");
+				text_MobileNovoC.setText("");
+				text_UserNovoC.setText("");
+				text_PassNovoC.setText("");
+				text_DataN_Ano.setText("");
+				text_DataN_mes.setText("");
+				text_DataN_dia.setText("");
+				
+				
 			}
 		});
 		button_GuardaCliente.setText("Guardar\nNovo Cliente");
 		button_GuardaCliente.setBounds(289, 233, 103, 58);
 
+		
+	
+		
+		
+		
 	}
 
 	// ***************metodos**************

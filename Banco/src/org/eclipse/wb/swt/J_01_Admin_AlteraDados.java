@@ -48,7 +48,7 @@ public class J_01_Admin_AlteraDados {
 
 	protected Shell shell;
 	private Text text;
-	private Utilizador uAdministrador;
+	private Utilizador uUtilizador;
 	private Gestao gestor;
 	private Text text_PrimeiroNA;
 	private Text text_Morada_NA;
@@ -62,8 +62,29 @@ public class J_01_Admin_AlteraDados {
 	private Text text_DataA_mes;
 	private Text text_DataA_dia;
 
-	
-	
+	public Shell getShell() {
+		return shell;
+	}
+
+	public void setShell(Shell shell) {
+		this.shell = shell;
+	}
+
+	public Text getText() {
+		return text;
+	}
+
+	public void setText(Text text) {
+		this.text = text;
+	}
+
+	public Utilizador getuUtilizador() {
+		return uUtilizador;
+	}
+
+	public void setuUtilizador(Utilizador uUtilizador) {
+		this.uUtilizador = uUtilizador;
+	}
 
 	public Gestao getGestor() {
 		return gestor;
@@ -72,17 +93,98 @@ public class J_01_Admin_AlteraDados {
 	public void setGestor(Gestao gestor) {
 		this.gestor = gestor;
 	}
-	public Utilizador getuAdministrador() {
-		return uAdministrador;
+
+	public Text getText_PrimeiroNA() {
+		return text_PrimeiroNA;
 	}
 
-	public void setuAdministrador(Utilizador uAdministrador) {
-		this.uAdministrador = uAdministrador;
+	public void setText_PrimeiroNA(Text text_PrimeiroNA) {
+		this.text_PrimeiroNA = text_PrimeiroNA;
+	}
+
+	public Text getText_Morada_NA() {
+		return text_Morada_NA;
+	}
+
+	public void setText_Morada_NA(Text text_Morada_NA) {
+		this.text_Morada_NA = text_Morada_NA;
+	}
+
+	public Text getText_ValorID_NA() {
+		return text_ValorID_NA;
+	}
+
+	public void setText_ValorID_NA(Text text_ValorID_NA) {
+		this.text_ValorID_NA = text_ValorID_NA;
+	}
+
+	public Text getText_Email_NA() {
+		return text_Email_NA;
+	}
+
+	public void setText_Email_NA(Text text_Email_NA) {
+		this.text_Email_NA = text_Email_NA;
+	}
+
+	public Text getText_MobileA() {
+		return text_MobileA;
+	}
+
+	public void setText_MobileA(Text text_MobileA) {
+		this.text_MobileA = text_MobileA;
+	}
+
+	public Text getText_UserA() {
+		return text_UserA;
+	}
+
+	public void setText_UserA(Text text_UserA) {
+		this.text_UserA = text_UserA;
+	}
+
+	public Text getText_PassNovoF() {
+		return text_PassNovoF;
+	}
+
+	public void setText_PassNovoF(Text text_PassNovoF) {
+		this.text_PassNovoF = text_PassNovoF;
+	}
+
+	public Text getText_UltimoNA() {
+		return text_UltimoNA;
+	}
+
+	public void setText_UltimoNA(Text text_UltimoNA) {
+		this.text_UltimoNA = text_UltimoNA;
+	}
+
+	public Text getText_DataA_Ano() {
+		return text_DataA_Ano;
+	}
+
+	public void setText_DataA_Ano(Text text_DataA_Ano) {
+		this.text_DataA_Ano = text_DataA_Ano;
+	}
+
+	public Text getText_DataA_mes() {
+		return text_DataA_mes;
+	}
+
+	public void setText_DataA_mes(Text text_DataA_mes) {
+		this.text_DataA_mes = text_DataA_mes;
+	}
+
+	public Text getText_DataA_dia() {
+		return text_DataA_dia;
+	}
+
+	public void setText_DataA_dia(Text text_DataA_dia) {
+		this.text_DataA_dia = text_DataA_dia;
 	}
 
 	public J_01_Admin_AlteraDados(Gestao gestor, Utilizador uAdministrador) {
 
-		this.uAdministrador = uAdministrador;
+		this.uUtilizador = uAdministrador;
 		this.gestor = gestor;
 
 		// TODO Auto-generated constructor stub
@@ -134,7 +236,7 @@ public class J_01_Admin_AlteraDados {
 		shell.setText("MENU ADMINISTRADOR");
 
 		text = new Text(shell, SWT.BORDER);
-		text.setText("Bem Vindo " + uAdministrador.nome);
+		text.setText("Bem Vindo " + uUtilizador.nome);
 		text.setBounds(180, 10, 288, 25);
 
 		Composite composite = new Composite(shell, SWT.NONE);
@@ -258,33 +360,33 @@ public class J_01_Admin_AlteraDados {
 		button_Logout.setBounds(550, 10, 75, 25);
 
 		//// colocaca dados
-		text_PrimeiroNA.setText(uAdministrador.getNome());
-		text_UltimoNA.setText(uAdministrador.getSobrenome());
-		text_Morada_NA.setText(uAdministrador.getMorada());
-		text_UserA.setText(uAdministrador.getLogin());
-		text_PassNovoF.setText(uAdministrador.getPassword());
+		text_PrimeiroNA.setText(uUtilizador.getNome());
+		text_UltimoNA.setText(uUtilizador.getSobrenome());
+		text_Morada_NA.setText(uUtilizador.getMorada());
+		text_UserA.setText(uUtilizador.getLogin());
+		text_PassNovoF.setText(uUtilizador.getPassword());
 		;
-		text_ValorID_NA.setText(uAdministrador.getValorID());
-		text_Email_NA.setText(uAdministrador.getEmail());
-		text_MobileA.setText("" + uAdministrador.getMobile());
-		String[] data = uAdministrador.getDataNascimento().split("/");
+		text_ValorID_NA.setText(uUtilizador.getValorID());
+		text_Email_NA.setText(uUtilizador.getEmail());
+		text_MobileA.setText("" + uUtilizador.getMobile());
+		String[] data = uUtilizador.getDataNascimento().split("/");
 		text_DataA_Ano.setText(data[0]);
 		;
 		text_DataA_mes.setText(data[1]);
 		;
 		text_DataA_dia.setText(data[2]);
 		;
-		TipoID_NovoF.setText(uAdministrador.getEscolhaID().toString());
+		TipoID_NovoF.setText(uUtilizador.getEscolhaID().toString());
 		// bolqueia campos não alteraveis
 		text_PrimeiroNA.setEnabled(false);
 
 		text_UltimoNA.setEnabled(false);
 		text_Morada_NA.setEnabled(false);
-		text_UserA.setText(uAdministrador.getLogin());
-		text_PassNovoF.setText(uAdministrador.getPassword());
+		text_UserA.setText(uUtilizador.getLogin());
+		text_PassNovoF.setText(uUtilizador.getPassword());
 		;
 		text_ValorID_NA.setEnabled(false);
-		text_Email_NA.setText(uAdministrador.getEmail());
+		text_Email_NA.setText(uUtilizador.getEmail());
 		text_MobileA.setEnabled(false);
 		text_DataA_Ano.setEnabled(false);
 		text_DataA_mes.setEnabled(false);
@@ -339,11 +441,11 @@ public class J_01_Admin_AlteraDados {
 				if (naohaDadosPorPreencher) {
 					System.out.println(text_Email_NA.getText());
 					System.out.println(text_UserA.getText());
-					System.out.println(uAdministrador.getEmail());
-					System.out.println(uAdministrador.getLogin());
+					System.out.println(uUtilizador.getEmail());
+					System.out.println(uUtilizador.getLogin());
 //			gestor.verificaA(email_NovoF, userNovoF, emailA, userNameA);
 					String verifica = gestor.verificaA(text_Email_NA, text_UserA,
-							uAdministrador.getEmail(),uAdministrador.getLogin());
+							uUtilizador.getEmail(),uUtilizador.getLogin());
 
 					System.out.println(("VERIFICA? --->" + verifica));
 //					else if (mapUtilizadores.containsKey(userNovoF.getText()) && userNovoF.getText().equals(userNameA) ) {
@@ -351,12 +453,12 @@ public class J_01_Admin_AlteraDados {
 //						userNovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_BLUE));
 //						}
 					if (verifica.equals("")) {				
-						String oldkey=uAdministrador.getLogin();
-						uAdministrador.setLogin(text_UserA.getText());
-						uAdministrador.setPassword(text_PassNovoF.getText());
-						uAdministrador.setEmail(text_Email_NA.getText());
+						String oldkey=uUtilizador.getLogin();
+						uUtilizador.setLogin(text_UserA.getText());
+						uUtilizador.setPassword(text_PassNovoF.getText());
+						uUtilizador.setEmail(text_Email_NA.getText());
 						gestor.getMapUtilizadores().remove(oldkey);
-						gestor.getMapUtilizadores().put(uAdministrador.getLogin(), uAdministrador);
+						gestor.getMapUtilizadores().put(uUtilizador.getLogin(), uUtilizador);
                         Administrador f=new Administrador();
 						MessageBox box = new MessageBox(shell, SWT.MULTI);
 						System.out.println(("ERRO 1? --->" + verifica));
@@ -400,7 +502,7 @@ public class J_01_Admin_AlteraDados {
 			@Override
 			public void mouseUp(MouseEvent e) {
 				shell.dispose();
-				J_01_Admin_NovoF NovoFuncionario = new J_01_Admin_NovoF(gestor,uAdministrador);
+				J_01_Admin_NovoF NovoFuncionario = new J_01_Admin_NovoF(gestor,uUtilizador);
 				NovoFuncionario.open();
 				
 			}
@@ -415,7 +517,7 @@ public class J_01_Admin_AlteraDados {
 			@Override
 			public void mouseUp(MouseEvent e) {
 				shell.dispose();
-				J_01_AdminLClientes novaLista = new J_01_AdminLClientes(gestor, uAdministrador);
+				J_01_AdminLClientes novaLista = new J_01_AdminLClientes(gestor, uUtilizador);
 				novaLista.open();
 
 			}
