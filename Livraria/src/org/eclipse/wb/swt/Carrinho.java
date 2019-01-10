@@ -54,8 +54,13 @@ public class Carrinho {
 	//Método que devolve o número de items que tem o carrinho
 	public int numeroItemsDoCarrinho () {
 		int items = 0;
-		for ( Integer i : quantidades ){
-			items = items + i;
+		if ( livros.isEmpty() ) {
+			return items;
+		}
+		else {
+			for ( Integer i : quantidades ){
+				items = items + i;
+			}
 		}
 		return items;
 	}	

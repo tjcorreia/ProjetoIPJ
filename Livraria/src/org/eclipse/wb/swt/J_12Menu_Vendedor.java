@@ -16,19 +16,27 @@ import org.eclipse.swt.widgets.Button;
 public class J_12Menu_Vendedor {
 
 	protected Shell shell;
+	protected static Livraria livraria;//atributo adicionado para poder ir buscar métodos à livraria
+	
+	//Construtor para poder trazer a Livraria para esta classe
+	public J_12Menu_Vendedor (Livraria livraria) {
+		//super();
+		this.livraria = livraria;
+		open();
+	}	
 
-	/**
-	 * Launch the application.
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		try {
-			J_12Menu_Vendedor window = new J_12Menu_Vendedor();
-			window.open();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+//	/**
+//	 * Launch the application.
+//	 * @param args
+//	 */
+//	public static void main(String[] args) {
+//		try {
+//			J_12Menu_Vendedor window = new J_12Menu_Vendedor(livraria);
+//			window.open();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 	/**
 	 * Open the window.

@@ -27,30 +27,32 @@ import org.eclipse.swt.events.KeyEvent;
 public class J_10Login {
 
 	protected Shell shlLogin;
+	protected Livraria livraria;//atributo adicionado para poder ir buscar métodos e elemnetos à livraria 
 	private Text caixaParaPassword;
 	private Text caixaParaEmail;
-	private Livraria livraria;//atributo adicionado para poder ir buscar métodos e elemnetos à livraria 
+	
 	
 
 	//Construtor para poder trazer a Livraria para esta classe
 	public J_10Login(Livraria livraria) {
 		//super();
 		this.livraria = livraria;
+		open();
 	}
 		
 
-	/**
-	 * Launch the application.
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		try {
-			J_10Login window = new J_10Login(new Livraria());
-			window.open();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+//	/**
+//	 * Launch the application.
+//	 * @param args
+//	 */
+//	public static void main(String[] args) {
+//		try {
+//			J_10Login window = new J_10Login(new Livraria());
+//			window.open();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
 	
 	
 	/**
@@ -142,7 +144,7 @@ public class J_10Login {
 					//comando para fechar a janela atual
 					shlLogin.close();
 					//abrir janela admin
-					J_11Menu_Admin j = new J_11Menu_Admin();
+					J_11Menu_Admin j = new J_11Menu_Admin(livraria);
 					j.open();
 				}
 				//Caso pass e mail corretos e utilizador do tipo Vendedor, abre janela de Vendedor
@@ -150,7 +152,7 @@ public class J_10Login {
 					//comando para fechar a janela atual
 					shlLogin.close();
 					//abrir janela vendedor
-					J_12Menu_Vendedor j = new J_12Menu_Vendedor();
+					J_12Menu_Vendedor j = new J_12Menu_Vendedor(livraria);
 					j.open();
 				}
 				//caso mail correto e password não

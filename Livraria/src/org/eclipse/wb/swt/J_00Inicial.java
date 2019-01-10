@@ -27,14 +27,15 @@ public class J_00Inicial {
 	protected Shell shlViewComicsInc;
 	protected String stringProcurada;
 	protected static ArrayList <Livro> listaLivrosDaBusca;
-	protected static Livraria livraria;//atributo adicionado para poder ir buscar métodos à livraria
+	protected Livraria livraria;//atributo adicionado para poder ir buscar métodos à livraria
 	private Text caixaDeBusca;
 
 
 	//Construtor para poder trazer a Livraria para esta classe
-	public J_00Inicial(Livraria livraria2) {
+	public J_00Inicial(Livraria livraria) {
 		stringProcurada="";
-		livraria=livraria2;
+		this.livraria=livraria;
+		open();
 		/**+++++++++++++++++++++++
 		 * Só para efeito de testes, define-se agora uma livraria
 		 * !!!!!!!!!!!!!!!!!!!!!!!
@@ -47,25 +48,19 @@ public class J_00Inicial {
 		//livraria=new Livraria();
 	}
 		
-	/**
-	 * Launch the application.
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		try {
-			//Depois da fase de testes, vai ter de se retirar o 'new Livraria()' e mudar para 'livraria'
-//			
-//			
-//			
-//			
-//			
-//			
-			J_00Inicial window = new J_00Inicial( new Livraria() );
-			window.open();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+//	/**
+//	 * Launch the application.
+//	 * @param args
+//	 */
+//	public static void main(String[] args) {
+//		try {
+//			//Depois da fase de testes, vai ter de se retirar o 'new Livraria()' e mudar para 'livraria'			
+//			J_00Inicial window = new J_00Inicial( new Livraria() );
+//			window.open();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
 	
 	
 
@@ -144,7 +139,9 @@ public class J_00Inicial {
 					shlViewComicsInc.close();
 					//Abrir nova janela de ListaLivros, passando-lhe a lista de livros que correspondem à procura
 					//J_01ListaLivros janelaListaLivros = new J_01ListaLivros(listaLivrosDaBusca);
-					J_01ListaLivros janelaListaLivros = new J_01ListaLivros();
+					System.out.println("criou janela");
+					J_01ListaLivros janelaListaLivros = new J_01ListaLivros(livraria, listaLivrosDaBusca, stringProcurada);
+					System.out.println("criou janela");
 					janelaListaLivros.open();
 				}
 				

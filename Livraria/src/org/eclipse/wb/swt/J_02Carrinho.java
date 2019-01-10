@@ -49,8 +49,11 @@ import org.eclipse.swt.widgets.Group;
  * @aid 1.1  
  */
 
-public class J_02Carrinho extends J_01ListaLivros{ //criou-se janela como subclasse para poder receber variáveis da superclasse
+public class J_02Carrinho { //criou-se janela como subclasse para poder receber variáveis da superclasse
 	protected Shell shell;
+	protected Livraria livraria;//atributo adicionado para poder ir buscar métodos à livraria
+	protected Carrinho carrinho;
+	protected Livro livroSelecionado;//atributo que nos dá o livro que está selecionado na table
 	private Table tabela;
 	private Text caixaParaNIF;
 	private Text caixaParaNumCartao;
@@ -59,8 +62,10 @@ public class J_02Carrinho extends J_01ListaLivros{ //criou-se janela como subcla
 	
 	
 	//criou-se construtor que vai buscar variáveis à supercalsse
-	public J_02Carrinho( ) {
-		super(carrinho);
+	public J_02Carrinho( Livraria livraria, Carrinho carrinho) {
+		this.livraria = livraria;
+		this.carrinho = carrinho;
+		open();
 		//super(listaLivrosDaBusca);
 		/**+++++++++++++++++++++++
 		 * Só para efeito de testes, define-se agora um carrinho
@@ -72,45 +77,45 @@ public class J_02Carrinho extends J_01ListaLivros{ //criou-se janela como subcla
 		 * 
 		 */
 		//criar 3 pequenos historicos de preços
-		Map <GregorianCalendar, Double > precos1 = new HashMap<>();
-		precos1.put(new GregorianCalendar(2017,2,5), 15.0);
-		precos1.put(new GregorianCalendar(2016,6,14), 13.0);
-		precos1.put(new GregorianCalendar(2016,11,14), 14.0);
-		Map <GregorianCalendar, Double > precos2 = new HashMap<>();
-		precos2.put(new GregorianCalendar(2017,2,5), 15.0);
-		precos2.put(new GregorianCalendar(2016,6,14), 13.0);
-		precos2.put(new GregorianCalendar(2016,11,14), 14.0);
-		//criar 3 livros
-		Livro lv1 = new Livro ("O último voo do Flamingo", "1548967532745", "Mia Couto", "Plátano", 
-				"Romance. Um estranho encontro", new GregorianCalendar (2018,11,12) , 15.5, 20, precos1);
-		Livro lv2 = new Livro ("Hitchhicker's Guide to the Galaxy", "8695477532745", "Douglas Adams", "Leya", 
-				"Ficção Científica. Viagens espaciais de um inadaptado", 
-				new GregorianCalendar (2017,11,18) , 16.5, 3, precos2);
-		//Criar alguns mapas de livros-quantidade para os carrinhos de compras 
-		ArrayList <Livro> livros1 = new ArrayList <>();
-		livros1.add(lv1);
-		livros1.add(lv1);
-		livros1.add(lv1);
-		livros1.add(lv2);
-		//criar um carrinho
-		carrinho = new Carrinho(livros1);
+//		Map <GregorianCalendar, Double > precos1 = new HashMap<>();
+//		precos1.put(new GregorianCalendar(2017,2,5), 15.0);
+//		precos1.put(new GregorianCalendar(2016,6,14), 13.0);
+//		precos1.put(new GregorianCalendar(2016,11,14), 14.0);
+//		Map <GregorianCalendar, Double > precos2 = new HashMap<>();
+//		precos2.put(new GregorianCalendar(2017,2,5), 15.0);
+//		precos2.put(new GregorianCalendar(2016,6,14), 13.0);
+//		precos2.put(new GregorianCalendar(2016,11,14), 14.0);
+//		//criar 3 livros
+//		Livro lv1 = new Livro ("O último voo do Flamingo", "1548967532745", "Mia Couto", "Plátano", 
+//				"Romance. Um estranho encontro", new GregorianCalendar (2018,11,12) , 15.5, 20, precos1);
+//		Livro lv2 = new Livro ("Hitchhicker's Guide to the Galaxy", "8695477532745", "Douglas Adams", "Leya", 
+//				"Ficção Científica. Viagens espaciais de um inadaptado", 
+//				new GregorianCalendar (2017,11,18) , 16.5, 3, precos2);
+//		//Criar alguns mapas de livros-quantidade para os carrinhos de compras 
+//		ArrayList <Livro> livros1 = new ArrayList <>();
+//		livros1.add(lv1);
+//		livros1.add(lv1);
+//		livros1.add(lv1);
+//		livros1.add(lv2);
+//		//criar um carrinho
+//		carrinho = new Carrinho(livros1);
 	}
 
 
 
-	/**
-	 * Launch the application.
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		try {
-			J_02Carrinho window = new J_02Carrinho( );
-			window.open();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-	}
+//	/**
+//	 * Launch the application.
+//	 * @param args
+//	 */
+//	public static void main(String[] args) {
+//		try {
+//			J_02Carrinho window = new J_02Carrinho( );
+//			window.open();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		
+//	}
 
 	/**
 	 * Open the window.
@@ -163,7 +168,7 @@ public class J_02Carrinho extends J_01ListaLivros{ //criou-se janela como subcla
 				lblSemStock.setVisible(false);
 				lblSelecionarLivro.setVisible(false);
 				System.out.println(e.toString());
-				indexLivroSelecionado = ((Table)e.widget).indexOf((TableItem)e.item);
+				int indexLivroSelecionado = ((Table)e.widget).indexOf((TableItem)e.item);
 				System.out.println( indexLivroSelecionado );
 				livroSelecionado = carrinho.livros.get(indexLivroSelecionado);
 			}
@@ -196,7 +201,7 @@ public class J_02Carrinho extends J_01ListaLivros{ //criou-se janela como subcla
 				shell.close();
 				//abrir janela de busca de livros, com o carrinho atual
 				//J_01ListaLivros janelaDeProcura = new J_01ListaLivros(carrinho.livros);
-				J_01ListaLivros janelaDeProcura = new J_01ListaLivros(carrinho);
+				J_01ListaLivros janelaDeProcura = new J_01ListaLivros(livraria, carrinho);
 				janelaDeProcura.open();
 			}
 		});
@@ -252,6 +257,13 @@ public class J_02Carrinho extends J_01ListaLivros{ //criou-se janela como subcla
 		lblMensagemParaPIN.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
 		lblMensagemParaPIN.setBounds(558, 391, 127, 20);
 		
+		Label lblCarrinhoVazio = new Label(shell, SWT.NONE);
+		lblCarrinhoVazio.setVisible(false);
+		lblCarrinhoVazio.setText("Carrinho Vazio");
+		lblCarrinhoVazio.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
+		lblCarrinhoVazio.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.NORMAL));
+		lblCarrinhoVazio.setBounds(574, 398, 127, 20);
+		
 		//Grupo de butões radio para selecionar o tipo de pagamento, dinheiro ou cartão
 	    Group groupoTipoDePagamento = new Group(shell, SWT.SHADOW_IN);
 	    groupoTipoDePagamento.setText("Pagamento");
@@ -288,62 +300,36 @@ public class J_02Carrinho extends J_01ListaLivros{ //criou-se janela como subcla
 		botaoFinalizarCarrinho.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
-				caixaParaNIF.setVisible(true);
-				lblNIF.setVisible(true);
-				lblIntroduzaNIF.setVisible(true);
-				groupoTipoDePagamento.setVisible(true);
-				lblMensagemParaPIN.setVisible(false);
-				lblMensagemNumCartao.setVisible(false);
-				//guardar NIF introduzido na caixa de NIF
-				String nifIntroduzido = caixaParaNIF.getText();
-				String pinIntroduzido = caixaParaPIN.getText();
-				String numCartaoIntroduzido = caixaParaNumCartao.getText();
-				//Se não tiver intoduzido nenhum texto nada na caixa de NIF, não fazer nada
-				if ( nifIntroduzido.equals("")) {
+				// se carrinho estiver vazio, não avançar e mostrar mensagem de carrinho vazio
+				if ( carrinho.livros.isEmpty() ) {
+					lblCarrinhoVazio.setVisible(true);
+					lblSelecionarLivro.setVisible(false);
 				}
-				//Se tiver introduzido algum texto na caixa de NIF
 				else {
-					//Se o texto introduzido for um NIF -> verificar se tipo de pagamento é cartão ou dinheiro
-					if ( verificarSeNIFouCartao(nifIntroduzido)==true ) {
-						lblIntroduzaNIF.setVisible(false);
-						//caso seja pagamento em dinheiro -> criar nova compra e abrir janela/mensagem de compra submetida
-						if ( butaoRadioDinheiro.isEnabled() ) {
-							//criar nova compra e adicionar à livraria
-							Compra novaCompra = new Compra
-									(livraria.gerarNovoNumCompra(), carrinho, nifIntroduzido, new GregorianCalendar(), Compra.Estado.SUBMETIDA);
-							livraria.getCompras().add(novaCompra);
-//							
-//							
-//							IMPRESSÃO DE VERIFICAÇÃO PARA APAGAR + TARDE
-//							
-							System.out.println("LIVRARIA APÓS CONCLUSÃO DA COMPRA:" + livraria.getCompras());
-							//fechar janela corrente
-							shell.close();
-							//abrir janela de mensagem de compra submetida
-							J_03CompraSubmetida janelaMensgCompraSubmetida = new J_03CompraSubmetida();
-							janelaMensgCompraSubmetida.open();
-							//voltar à janela inicial
-							J_00Inicial janelaInicial = new J_00Inicial(livraria);
-							janelaInicial.open();
-						}
-						//caso seja pagamento com cartão -> verificar pin e número de cartão
-						//e se corretos criar nova compraCartao e abrir janela/mensagem de compra submetida
-						else {
-							//Se PIN incorreto, mostrar mensagem de erro de pin
-							if ( verificarSePIN(pinIntroduzido)==false ) {
-								lblMensagemParaPIN.setVisible(true);
-							}
-							//Se Num de cartão incorreto, mostrar mensagem de erro de número de cartão
-							if ( verificarSeNIFouCartao(numCartaoIntroduzido)==false ) {
-								lblMensagemNumCartao.setVisible(true);
-							}
-							//Se pin e num cartão corretos
-							else if ( verificarSePIN(pinIntroduzido)==true && verificarSeNIFouCartao(numCartaoIntroduzido)==true) {
+					caixaParaNIF.setVisible(true);
+					lblNIF.setVisible(true);
+					lblIntroduzaNIF.setVisible(true);
+					groupoTipoDePagamento.setVisible(true);
+					lblMensagemParaPIN.setVisible(false);
+					lblMensagemNumCartao.setVisible(false);
+					//guardar NIF introduzido na caixa de NIF
+					String nifIntroduzido = caixaParaNIF.getText();
+					String pinIntroduzido = caixaParaPIN.getText();
+					String numCartaoIntroduzido = caixaParaNumCartao.getText();
+					//Se não tiver intoduzido nenhum texto nada na caixa de NIF, não fazer nada
+					if ( nifIntroduzido.equals("")) {
+					}
+					//Se tiver introduzido algum texto na caixa de NIF
+					else {
+						//Se o texto introduzido for um NIF -> verificar se tipo de pagamento é cartão ou dinheiro
+						if ( verificarSeNIFouCartao(nifIntroduzido)==true ) {
+							lblIntroduzaNIF.setVisible(false);
+							//caso seja pagamento em dinheiro -> criar nova compra e abrir janela/mensagem de compra submetida
+							if ( butaoRadioDinheiro.isEnabled() ) {
 								//criar nova compra e adicionar à livraria
-								CompraCartao novaCompra2 = new CompraCartao	(livraria.gerarNovoNumCompra(), 
-										carrinho, nifIntroduzido, new GregorianCalendar(), Compra.Estado.SUBMETIDA, 
-										numCartaoIntroduzido, pinIntroduzido);
-								livraria.getCompras().add(novaCompra2);
+								Compra novaCompra = new Compra
+										(livraria.gerarNovoNumCompra(), carrinho, nifIntroduzido, new GregorianCalendar(), Compra.Estado.SUBMETIDA);
+								livraria.getCompras().add(novaCompra);
 //								
 //								
 //								IMPRESSÃO DE VERIFICAÇÃO PARA APAGAR + TARDE
@@ -358,15 +344,49 @@ public class J_02Carrinho extends J_01ListaLivros{ //criou-se janela como subcla
 								J_00Inicial janelaInicial = new J_00Inicial(livraria);
 								janelaInicial.open();
 							}
-							
+							//caso seja pagamento com cartão -> verificar pin e número de cartão
+							//e se corretos criar nova compraCartao e abrir janela/mensagem de compra submetida
+							else {
+								//Se PIN incorreto, mostrar mensagem de erro de pin
+								if ( verificarSePIN(pinIntroduzido)==false ) {
+									lblMensagemParaPIN.setVisible(true);
+								}
+								//Se Num de cartão incorreto, mostrar mensagem de erro de número de cartão
+								if ( verificarSeNIFouCartao(numCartaoIntroduzido)==false ) {
+									lblMensagemNumCartao.setVisible(true);
+								}
+								//Se pin e num cartão corretos
+								else if ( verificarSePIN(pinIntroduzido)==true && verificarSeNIFouCartao(numCartaoIntroduzido)==true) {
+									//criar nova compra e adicionar à livraria
+									CompraCartao novaCompra2 = new CompraCartao	(livraria.gerarNovoNumCompra(), 
+											carrinho, nifIntroduzido, new GregorianCalendar(), Compra.Estado.SUBMETIDA, 
+											numCartaoIntroduzido, pinIntroduzido);
+									livraria.getCompras().add(novaCompra2);
+//									
+//									
+//									IMPRESSÃO DE VERIFICAÇÃO PARA APAGAR + TARDE
+//									
+									System.out.println("LIVRARIA APÓS CONCLUSÃO DA COMPRA:" + livraria.getCompras());
+									//fechar janela corrente
+									shell.close();
+									//abrir janela de mensagem de compra submetida
+									J_03CompraSubmetida janelaMensgCompraSubmetida = new J_03CompraSubmetida();
+									janelaMensgCompraSubmetida.open();
+									//voltar à janela inicial
+									J_00Inicial janelaInicial = new J_00Inicial(livraria);
+									janelaInicial.open();
+								}
+								
+							}
+						}
+						//Se o texto introduzido não for um NIF -> visualizar mensagem de NIF incorreto
+						else {
+							lblIntroduzaNIF.setText("NIF incorreto (9 dígitos)");
+							lblIntroduzaNIF.setVisible(true);
 						}
 					}
-					//Se o texto introduzido não for um NIF -> visualizar mensagem de NIF incorreto
-					else {
-						lblIntroduzaNIF.setText("NIF incorreto (9 dígitos)");
-						lblIntroduzaNIF.setVisible(true);
-					}
 				}
+				
 			}
 		});
 		

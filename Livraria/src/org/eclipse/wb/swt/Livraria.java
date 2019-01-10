@@ -271,8 +271,8 @@ public class Livraria {
 	//Método que devolve um novo número de compra (a seguir ao número de compra existente maior)
 	public int gerarNovoNumCompra() {
 		int novoNum = 0;
-		for ( Compra c : getCompras()) {
-			if ( c.numCompra > novoNum) {
+		for ( Compra c : compras) {
+			if ( c.numCompra >= novoNum) {
 				novoNum = c.numCompra + 1;
 			}
 		}

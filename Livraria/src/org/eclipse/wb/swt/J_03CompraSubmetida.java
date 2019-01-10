@@ -22,20 +22,21 @@ public class J_03CompraSubmetida {
 	
 	//Construtor para abrir uma nova janela deste tipo
 	public J_03CompraSubmetida() {
+		open();
 	}	
 
-	/**
-	 * Launch the application.
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		try {
-			J_03CompraSubmetida window = new J_03CompraSubmetida();
-			window.open();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+//	/**
+//	 * Launch the application.
+//	 * @param args
+//	 */
+//	public static void main(String[] args) {
+//		try {
+//			J_03CompraSubmetida window = new J_03CompraSubmetida();
+//			window.open();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 	/**
 	 * Open the window.

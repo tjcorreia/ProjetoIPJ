@@ -24,45 +24,53 @@ import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.widgets.Text;
 
 
-public class J_01ListaLivros extends J_00Inicial {
+public class J_01ListaLivros {
 
 	protected Shell shlViewComicsInc;
 	
 	//protected static ArrayList <Livro> listaLivrosCarrinho = new ArrayList<>();//adicionou-se este atributo para criar carrinho a partir desta lista
 	protected Livro livroSelecionado;//atributo que nos dá o livro que está selecionado na table
-	protected static Carrinho carrinho;
-	protected int indexLivroSelecionado;//adicionou-se este atributo para poder passá-lo entre métodos
+	protected Livraria livraria;//atributo adicionado para poder ir buscar métodos à livraria
+	protected Carrinho carrinho;
+	protected String stringProcurada;
+	protected static ArrayList <Livro> listaLivrosDaBusca;
+	//protected int indexLivroSelecionado;//adicionou-se este atributo para poder passá-lo entre métodos
 	private Table table;
 	private Text caixaDeBusca;//adicionou-se carrinho para cria-lo e passar para outras classes
 	
 	
 	//Criou-se construtor para poder receber o carrinho da janela seguinte 'J_02Carrinho'
-	public J_01ListaLivros(Carrinho carrinho1) {
-		super(livraria);
+	public J_01ListaLivros(Livraria livraria, Carrinho carrinho1) {
+		this.livraria = livraria;
 		carrinho = carrinho1;
+		stringProcurada = "";
+		open();
 	}
 	
 	//Construtor para quando se vem da janela anterior 'J_00Inicial'
-	public J_01ListaLivros() {
-		super(livraria);
+	public J_01ListaLivros(Livraria livraria, ArrayList <Livro> listaLivrosDaBusca, String stringProcurada) {
+		this.livraria = livraria;
+		System.out.println("criar carrinho");
 		carrinho = new Carrinho();
+		this.stringProcurada = stringProcurada;
+		open();
 	}
 
 	
-	/**
-	 * Launch the application.
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		try {
-			//Foi necessário adicionar aqui a arrayList de livros
-			//J_01ListaLivros window = new J_01ListaLivros(new ArrayList<Livro>());
-			J_01ListaLivros window = new J_01ListaLivros();
-			window.open();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+//	/**
+//	 * Launch the application.
+//	 * @param args
+//	 */
+//	public static void main(String[] args) {
+//		try {
+//			//Foi necessário adicionar aqui a arrayList de livros
+//			//J_01ListaLivros window = new J_01ListaLivros(new ArrayList<Livro>());
+//			J_01ListaLivros window = new J_01ListaLivros();
+//			window.open();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 	/**
 	 * Open the window.
@@ -109,7 +117,7 @@ public class J_01ListaLivros extends J_00Inicial {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				System.out.println(e.toString());
-				indexLivroSelecionado = ((Table)e.widget).indexOf((TableItem)e.item);
+				int indexLivroSelecionado = ((Table)e.widget).indexOf((TableItem)e.item);
 				System.out.println( indexLivroSelecionado );
 				livroSelecionado = listaLivrosDaBusca.get(indexLivroSelecionado);
 				//fazer corresponder o livro selecionado a um dos livros da livraria, para as mudanças
@@ -169,8 +177,7 @@ public class J_01ListaLivros extends J_00Inicial {
 		
 		//texto a indicar quantos items tem o carrinho
 		Label lblItmes = new Label(shlViewComicsInc, SWT.NONE);
-		//lblItmes.setText( listaLivrosCarrinho.size() + " itmes");
-		lblItmes.setText( carrinho.numeroItemsDoCarrinho() + " itmes");
+		lblItmes.setText( "" + carrinho.numeroItemsDoCarrinho() + " itmes");
 		lblItmes.setBounds(511, 144, 70, 20);		
 		
 		//Listner para botão de 'adicionar ao carrinho'
@@ -333,7 +340,7 @@ public class J_01ListaLivros extends J_00Inicial {
 				//comando para fechar a janela corrente
 				shlViewComicsInc.close();
 				//Abrir nova janela do carrinho
-				J_02Carrinho janelaCarrinho = new J_02Carrinho();
+				J_02Carrinho janelaCarrinho = new J_02Carrinho(livraria, carrinho);
 				janelaCarrinho.open();
 				
 			}
