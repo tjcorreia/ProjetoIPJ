@@ -30,7 +30,7 @@ public class J_00Inicial {
 	protected Livraria livraria;//atributo adicionado para poder ir buscar métodos à livraria
 	private Text caixaDeBusca;
 
-
+//
 	//Construtor para poder trazer a Livraria para esta classe
 	public J_00Inicial(Livraria livraria) {
 		stringProcurada="";
