@@ -44,17 +44,25 @@ public class J_02Menu_F_Conta {
 	private Conta contaActual;
 	private Combo combo;
 	private Text Funcionario;
-	private Text text_2;
 	private Text txt_Indique_ID;
 	private Text text_DepositoInicial;
 	private Text text_Data;
 	private Label lblDadosDoCliente;
+	private Combo combo_NormalPrazo;
 	
 	
 	
 	
 	
 	
+	public Combo getCombo_NormalPrazo() {
+		return combo_NormalPrazo;
+	}
+
+	public void setCombo_NormalPrazo(Combo combo_NormalPrazo) {
+		this.combo_NormalPrazo = combo_NormalPrazo;
+	}
+
 	public Label getLblDadosDoCliente() {
 		return lblDadosDoCliente;
 	}
@@ -203,54 +211,6 @@ public class J_02Menu_F_Conta {
 		btnNovoCliente.setBounds(10, 84, 192, 25);
 		btnNovoCliente.setText("Criar novo Cliente");
 
-		Button btnExibirContasDo = new Button(shellConta, SWT.NONE);
-		btnExibirContasDo.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-			}
-		});
-		btnExibirContasDo.setText("Exibir Contas do Cliente");
-		btnExibirContasDo.setBounds(10, 177, 192, 25);
-
-		Button btnDadosDoCliente = new Button(shellConta, SWT.NONE);
-		btnDadosDoCliente.setText("Altera dados do cliente");
-		btnDadosDoCliente.setBounds(10, 208, 192, 25);
-
-		Button btnFazerDepsitoEm = new Button(shellConta, SWT.NONE);
-		btnFazerDepsitoEm.setText("Dep\u00F3sito em Dinheiro");
-		btnFazerDepsitoEm.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-			}
-		});
-		btnFazerDepsitoEm.setBounds(10, 270, 192, 25);
-
-		Button btnListarClientes = new Button(shellConta, SWT.NONE);
-		btnListarClientes.setText("Listar Clientes");
-		btnListarClientes.setBounds(10, 115, 192, 25);
-
-		Button btnAlterarLoginE = new Button(shellConta, SWT.NONE);
-		btnAlterarLoginE.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-			}
-		});
-		btnAlterarLoginE.setText("Alterar Login e Password");
-		btnAlterarLoginE.setBounds(10, 423, 192, 25);
-
-		Button btnLevantamentoEmDinheiro = new Button(shellConta, SWT.NONE);
-		btnLevantamentoEmDinheiro.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-			}
-		});
-		btnLevantamentoEmDinheiro.setText("Levantamento em Dinheiro");
-		btnLevantamentoEmDinheiro.setBounds(10, 301, 192, 25);
-
-		Button btnTransferncia = new Button(shellConta, SWT.NONE);
-		btnTransferncia.setText("Transfer\u00EAncia");
-		btnTransferncia.setBounds(10, 333, 192, 25);
-
 		Button button = new Button(shellConta, SWT.NONE);
 		button.addMouseListener(new MouseAdapter() {
 			@Override
@@ -265,16 +225,16 @@ public class J_02Menu_F_Conta {
 		Funcionario.setText("Bem Vindo " + uUtilizador.getNome());
 		Funcionario.setBounds(215, 10, 326, 25);
 
-		text_2 = new Text(shellConta, SWT.BORDER);
-		text_2.setBounds(10, 363, 192, 26);
-
 		
 		
 		lblDadosDoCliente = new Label(composite, SWT.NONE);
 		String textoCliente="";
 		if(!(clienteActual==null)) {
-			textoCliente=("Cliente \n"+clienteActual.getNome()+" "+clienteActual.getSobrenome());}
-		else {textoCliente=("Cliente \n");}
+			textoCliente=("Cliente \n"+clienteActual.getNome()+" "+clienteActual.getSobrenome()+
+					 "Morada:" + clienteActual.getMorada() +
+					 "\n" + "Email:" + clienteActual.getEmail() +"Contacto:" + clienteActual.getMobile()
+					);}
+		else {textoCliente=("Cliente não definido \n");}
 		lblDadosDoCliente.setText(textoCliente);
 		lblDadosDoCliente.setAlignment(SWT.CENTER);
 		lblDadosDoCliente.setBounds(104, 10, 231, 43);
@@ -296,8 +256,24 @@ public class J_02Menu_F_Conta {
 		
 		
 		
-		Combo combo_NormalPrazo = new Combo(composite, SWT.NONE);
-		combo_NormalPrazo.setItems(new String[] { "Conta Normal", "Conta prazo" });
+		 combo_NormalPrazo = new Combo(composite, SWT.NONE);
+	
+	if (clienteActual==null) {
+		String textoCombo []= { "ERRO", "ERRO" };
+		combo_NormalPrazo.setItems(textoCombo);
+	}
+	else if (!(clienteActual==null)) {
+		if (!(clienteActual.procuraContaPrazo()==null)) {
+			String textoCombo []= { "Conta Normal" };
+			combo_NormalPrazo.setItems(textoCombo);
+		
+		}
+		if (clienteActual.procuraContaPrazo()==null) {
+			String textoCombo []= { "Conta Normal", "Conta prazo" };
+			combo_NormalPrazo.setItems(textoCombo);
+			}
+	}
+		
 		combo_NormalPrazo.setBounds(104, 101, 103, 23);
 		combo_NormalPrazo.select(0);
 		
@@ -373,6 +349,21 @@ public class J_02Menu_F_Conta {
 					// conta a Prazo
 					else if (combo_NormalPrazo.getText().equals("Conta prazo")){
 						
+						Conta novaConta=  new ContaPrazo(Double.parseDouble(text_DepositoInicial.getText()), ""+actual);
+						contaActual=gestor.criaContaNova(clienteActual,novaConta,uUtilizador.getuID());
+						MessageBox box = new MessageBox(shellConta, SWT.MULTI | SWT.ICON_ERROR);
+						box.setText("CONCLUIDO");
+						box.setMessage("Conta Prazo:"+contaActual.getContaID()+" Criada !\n");
+						box.open();
+						J_02Menu_F_DadosCl back= new J_02Menu_F_DadosCl(gestor,uUtilizador,clienteActual);
+						back.open();
+					shellConta.dispose();
+						
+						
+						
+						
+						
+						
 						
 					}
 					
@@ -388,6 +379,50 @@ public class J_02Menu_F_Conta {
 		});
 		btnCriarConta.setBounds(23, 240, 184, 25);
 		btnCriarConta.setText("Criar Conta Nova");
+		
+		Button button_1 = new Button(shellConta, SWT.NONE);
+		button_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				J_02Menu_F_ListaClientes lclientes=new J_02Menu_F_ListaClientes(gestor,uUtilizador);
+				lclientes.open();
+				shellConta.dispose();
+			}
+		});
+		button_1.setText("Listar/Procurar Clientes");
+		button_1.setBounds(10, 115, 192, 25);
+		
+		Button button_2 = new Button(shellConta, SWT.NONE);
+		button_2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				J_02Menu_F_DadosCl cliente=new J_02Menu_F_DadosCl(gestor,uUtilizador,clienteActual);
+				cliente.open();
+				shellConta.dispose();
+				
+			}
+		});
+		button_2.setText("Dados do cliente");
+		button_2.setBounds(10, 146, 192, 25);
+		
+		Button button_3 = new Button(shellConta, SWT.TOGGLE);
+		button_3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				J_02Menu_F_MovimentaConta editarconta= new J_02Menu_F_MovimentaConta(gestor, uUtilizador, clienteActual, null);
+				editarconta.open();
+				shellConta.dispose();
+			}
+		});
+		button_3.setText("Movimentar Contas");
+		button_3.setBounds(10, 177, 192, 25);
+		
+		Button button_4 = new Button(shellConta, SWT.NONE);
+		button_4.setBounds(10, 210, 192, 25);
+		
+		Button button_5 = new Button(shellConta, SWT.NONE);
+		button_5.setText("Alterar Login e Password");
+		button_5.setBounds(10, 241, 192, 25);
 		
 		
 		
@@ -427,6 +462,16 @@ public class J_02Menu_F_Conta {
 		box.setText("DADOS DO CLIENTE");
 		box.setMessage("  " + mensagem);
 		box.open();
+		
+		if (!(clienteActual.procuraContaPrazo()==null)) {
+			String textoCombo []= { "Conta Normal" };
+			combo_NormalPrazo.setItems(textoCombo);
+		
+		}
+		if (clienteActual.procuraContaPrazo()==null) {
+			String textoCombo []= { "Conta Normal", "Conta prazo" };
+			combo_NormalPrazo.setItems(textoCombo);
+			}
 	}
 
 	// *************** verifica de cxtexto esta vazia**************

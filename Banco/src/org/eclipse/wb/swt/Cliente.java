@@ -73,16 +73,16 @@ public class Cliente extends Utilizador implements Serializable{
 		String [] ClienteL= new String [3] ;
 		ClienteL[0]=""+uID;
 		ClienteL[1]=""+nome+" "+sobrenome;
-		
+		ClienteL[2]="";
 		if (lcontaSC==null) {
 			ClienteL[2]="0";
 			return ClienteL;
 					}
 		
 		for (int i=0;i<lcontaSC.size();i++) {
-			ClienteL[2]="<";
-		ClienteL[2]=ClienteL[2]+lcontaSC.get(i).contaID;
-		ClienteL[2]=">";
+			ClienteL[2]=ClienteL[2]+"<";
+		ClienteL[2]=ClienteL[2]+""+lcontaSC.get(i).getContaID();
+		ClienteL[2]=ClienteL[2]+">";
 		}
 		return ClienteL;
 	}
@@ -121,5 +121,15 @@ public Conta procuraConta(int idDaConta) {
 	return null;
  }
 	
+public Conta procuraContaPrazo() {
+	 
+	if (!(lcontaSC==null)) {
+		for (Conta c:lcontaSC) {
+		if (c instanceof ContaPrazo)
+			return c;
+		}
+	}
+	return null;
+ }
 
 }

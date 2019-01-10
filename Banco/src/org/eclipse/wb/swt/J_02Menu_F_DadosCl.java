@@ -54,6 +54,7 @@ public class J_02Menu_F_DadosCl {
 	private Text txt_Indique_ID;
 	private Combo combo_TipoID_NovoC;
 	private Table table_ListadeContas;
+	private Button btnAlterarDados;
 
 	public Cliente getClienteActual() {
 		return clienteActual;
@@ -83,13 +84,11 @@ public class J_02Menu_F_DadosCl {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	
-	
+
 	/**
 	 * @wbp.parser.entryPoint
 	 */
-	public J_02Menu_F_DadosCl(Gestao gestor, Utilizador uUtilizador,Cliente clienteActual) {
+	public J_02Menu_F_DadosCl(Gestao gestor, Utilizador uUtilizador, Cliente clienteActual) {
 		super();
 		this.uUtilizador = uUtilizador;
 		this.gestor = gestor;
@@ -139,7 +138,7 @@ public class J_02Menu_F_DadosCl {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 
-				J_02Menu_F_CriaCliente criaCliente=new J_02Menu_F_CriaCliente(gestor,uUtilizador);
+				J_02Menu_F_CriaCliente criaCliente = new J_02Menu_F_CriaCliente(gestor, uUtilizador);
 				criaCliente.open();
 				shellMF.dispose();
 			}
@@ -159,7 +158,7 @@ public class J_02Menu_F_DadosCl {
 		btnListarClientes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
-				J_02Menu_F_ListaClientes listaC= new J_02Menu_F_ListaClientes(gestor, uUtilizador);
+				J_02Menu_F_ListaClientes listaC = new J_02Menu_F_ListaClientes(gestor, uUtilizador);
 				listaC.open();
 				shellMF.dispose();
 			}
@@ -280,9 +279,7 @@ public class J_02Menu_F_DadosCl {
 		Label label_12 = new Label(composite, SWT.NONE);
 		label_12.setText("/");
 		label_12.setBounds(355, 185, 8, 15);
-		
 
-		
 		txt_Indique_ID = new Text(composite, SWT.BORDER | SWT.CENTER);
 		txt_Indique_ID.setText("Indique o ID");
 		txt_Indique_ID.setLocation(10, 7);
@@ -291,10 +288,9 @@ public class J_02Menu_F_DadosCl {
 			@Override
 			public void mouseDown(MouseEvent e) {
 				txt_Indique_ID.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
-				txt_Indique_ID.setText("");	
+				txt_Indique_ID.setText("");
 			}
 		});
-		
 
 		Label label_13 = new Label(composite, SWT.NONE);
 		label_13.setText("/");
@@ -302,31 +298,35 @@ public class J_02Menu_F_DadosCl {
 
 		text_DataN_dia = new Text(composite, SWT.BORDER);
 		text_DataN_dia.setBounds(395, 182, 23, 21);
-		
+
 		Label lblDadosDoCliente = new Label(composite, SWT.NONE);
 		lblDadosDoCliente.setText("Dados do Cliente");
 		lblDadosDoCliente.setAlignment(SWT.CENTER);
 		lblDadosDoCliente.setBounds(104, 10, 291, 15);
-		
+
 		Button btnMovimentarConta = new Button(composite, SWT.TOGGLE | SWT.MULTI | SWT.WRAP | SWT.NONE);
 		btnMovimentarConta.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
-				J_02Menu_F_MovimentaConta editarconta= new J_02Menu_F_MovimentaConta(gestor, uUtilizador, clienteActual, null);
+				J_02Menu_F_MovimentaConta editarconta = new J_02Menu_F_MovimentaConta(gestor, uUtilizador,
+						clienteActual, null);
 				editarconta.open();
 				shellMF.dispose();
 			}
 		});
 		btnMovimentarConta.setText("Movimentar Contas");
 		btnMovimentarConta.setBounds(228, 323, 181, 25);
+
+		btnAlterarDados = new Button(composite, SWT.TOGGLE | SWT.MULTI | SWT.WRAP | SWT.NONE);
 		
-		Button btnAlterarDados = new Button(composite, SWT.TOGGLE | SWT.MULTI | SWT.WRAP | SWT.NONE);
-		String alterarDadosC="Alterar\r\n Dados";
+		btnAlterarDados.setText("Alterar dados Cliente");
+		String alterarDadosC = "Alterar dados Cliente";
 		btnAlterarDados.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
-				if (btnAlterarDados.getText().equals("Alterar\r\n Dados") && !txt_Indique_ID.getText().equals("Indique o ID") ){
-					String alterarDadosC="Pode alterar\r\n Dados";
+				if (btnAlterarDados.getText().equals("Alterar dados Cliente")
+						&& (!(txt_Indique_ID.getText().equals("Indique o ID"))||!(txt_Indique_ID.getText().equals("Indique o ID")))) {
+					String alterarDadosC = "Pode alterar Dados";
 					btnAlterarDados.setText(alterarDadosC);
 					btnAlterarDados.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_GREEN));
 					// desbolqueia campos não alteraveis
@@ -342,18 +342,16 @@ public class J_02Menu_F_DadosCl {
 					text_DataN_mes.setEnabled(true);
 					text_DataN_dia.setEnabled(true);
 					combo_TipoID_NovoC.setEnabled(true);
-					
-					
-				}
-				else if (btnAlterarDados.getText().equals("Pode alterar\r\n Dados")){
+
+				} else if (btnAlterarDados.getText().equals("Pode alterar Dados")) {
 					// falta ver
-					String mensagem="";
+					String mensagem = "";
 					boolean naohaDadosPorPreencher = true;
 					// Verifica campos vazios
 					if (estaVazio(text_PrimeiroNovoC) || estaVazio(text_UltimoNovoC) || estaVazio(text_MoradaNovoC)
-					|| estaVazio(text_ValorID_NovoC) || estaVazio(text_Email_NovoC) || estaVazio(text_MobileNovoC)
-					|| estaVazio(text_DataN_Ano) || estaVazio(text_DataN_mes) || estaVazio(text_DataN_dia)
-							) {
+							|| estaVazio(text_ValorID_NovoC) || estaVazio(text_Email_NovoC)
+							|| estaVazio(text_MobileNovoC) || estaVazio(text_DataN_Ano) || estaVazio(text_DataN_mes)
+							|| estaVazio(text_DataN_dia)) {
 //						Titulo_Novo_F.setText("Dados por preencher ou inválidos");
 //						Titulo_Novo_F.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
 						System.out.println("ENTROU NA VERIFICACAO DE CAMPOS VAZIOS");
@@ -386,47 +384,47 @@ public class J_02Menu_F_DadosCl {
 						System.out.println(clienteActual.getLogin());
 //						verificanovoC(TipoID escolhadaIDN, Text valorID_NovoF, Text email_NovoF, Text userNovoF,
 //								Text mobileNovoF)
-						
+
 						TipoID escolhadaID = Cliente.TipoID.PASSAPORTE;
 						if (combo_TipoID_NovoC.getText().equals("Passaporte")) {
 							escolhadaID = Cliente.TipoID.PASSAPORTE;
 						} else {
 							escolhadaID = Cliente.TipoID.CARTAOCIDADAO;
 						}
-						
-						// nota esta a usar como UserLogin=**** o que vai verificar , podendo no futuro ser alterado para
+
+						// nota esta a usar como UserLogin=**** o que vai verificar , podendo no futuro
+						// ser alterado para
 						// o funcionario poder alterar este parametro
-						String verifica = gestor.verificaAlteraCl(clienteActual,escolhadaID,text_ValorID_NovoC,text_Email_NovoC,text_UserNovoC,
-								text_MobileNovoC);
+						String verifica = gestor.verificaAlteraCl(clienteActual, escolhadaID, text_ValorID_NovoC,
+								text_Email_NovoC, text_UserNovoC, text_MobileNovoC);
 //								
 
 						System.out.println(("VERIFICA? --->" + verifica));
 //						
-						if (verifica.equals("")) {				
-							clienteActual.setDataNascimento(text_DataN_Ano.getText()+"/"+text_DataN_mes.getText()+"/"+text_DataN_dia.getText());
+						if (verifica.equals("")) {
+							clienteActual.setDataNascimento(text_DataN_Ano.getText() + "/" + text_DataN_mes.getText()
+									+ "/" + text_DataN_dia.getText());
 							clienteActual.setEmail(text_Email_NovoC.getText());
 							clienteActual.setEscolhaID(escolhadaID);
 							clienteActual.setMobile(Integer.parseInt(text_MobileNovoC.getText()));
 							clienteActual.setNome(text_PrimeiroNovoC.getText());
 							clienteActual.setSobrenome(text_UltimoNovoC.getText());
-							
-							
-							
-							gestor.getMapUtilizadores().replace(clienteActual.getLogin(),clienteActual);
-	                        Cliente f=new Cliente();
+
+							gestor.getMapUtilizadores().replace(clienteActual.getLogin(), clienteActual);
+							Cliente f = new Cliente();
 							MessageBox box = new MessageBox(shellMF, SWT.MULTI);
 							System.out.println(("ERRO 1? --->" + verifica));
 							f = (Cliente) (gestor.getMapUtilizadores().get(clienteActual.getLogin()));
-							
+
 							box.setText("CONCLUSÃO");
-							box.setMessage("Os  dados de" + f.getNome() + " " + f.getSobrenome() + "\n  foram Actualizados .\n");
+							box.setMessage("Os  dados de" + f.getNome() + " " + f.getSobrenome()
+									+ "\n  foram Actualizados .\n");
 //							
 							box.open();
-							
+
 							System.out.println(("verifica"));
-							
-							
-							String alterarDadosC="Alterar\r\n Dados";
+
+							btnAlterarDados.setText("Alterar dados Cliente");
 							btnAlterarDados.setText(alterarDadosC);
 							btnAlterarDados.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_GRAY));
 							shellMF.redraw();
@@ -438,8 +436,8 @@ public class J_02Menu_F_DadosCl {
 							box.setText("ERRO");
 							box.setMessage(verifica);
 							box.open();
-							Composite composite10 = new Composite(shellMF, SWT.NONE);
-							composite10.setBounds(182, 41, 430, 301);
+//							Composite composite10 = new Composite(shellMF, SWT.NONE);
+//							composite10.setBounds(182, 41, 430, 301);
 						}
 
 					} else {
@@ -447,95 +445,79 @@ public class J_02Menu_F_DadosCl {
 						box.setText("ERRO");
 						box.setMessage(mensagem);
 						box.open();
-						Composite composite10 = new Composite(shellMF, SWT.NONE);
-						composite10.setBounds(182, 41, 430, 301);
+//						Composite composite10 = new Composite(shellMF, SWT.NONE);
+//						composite10.setBounds(182, 41, 430, 301);
 						naohaDadosPorPreencher = true;
-					} 
-					
-					
-					
-					
-					
-			
-					
+					}
+
 				}
-				
+
 			}
 		});
-		btnAlterarDados.setText("Alterar dados Cliente");
-		btnAlterarDados.setBounds(228, 263, 181, 25);
 		
+		btnAlterarDados.setBounds(228, 263, 181, 25);
+
 		Label lblListaDeContas = new Label(composite, SWT.NONE);
 		lblListaDeContas.setText("Lista de Contas");
 		lblListaDeContas.setBounds(81, 234, 88, 15);
-		
+
 		table_ListadeContas = new Table(composite, SWT.BORDER | SWT.FULL_SELECTION);
 		table_ListadeContas.setBounds(81, 255, 131, 106);
 		table_ListadeContas.setHeaderVisible(true);
 		table_ListadeContas.setLinesVisible(true);
-		
+
 		TableColumn tblclmnId = new TableColumn(table_ListadeContas, SWT.NONE);
 		tblclmnId.setWidth(67);
 		tblclmnId.setText("ID");
-		
+
 		TableColumn tblclmnTitulares = new TableColumn(table_ListadeContas, SWT.NONE);
 		tblclmnTitulares.setWidth(57);
 		tblclmnTitulares.setText("Titulares");
-		
-		if (!(clienteActual==null)) {
-	//// colocaca dados
-			txt_Indique_ID.setText(""+clienteActual.getuID());
+
+		if (!(clienteActual == null)) {
+			//// colocaca dados
+			txt_Indique_ID.setText("" + clienteActual.getuID());
 			preecheTabela(clienteActual);
-		
+
 		}
-		
-		
-		
-		
-		
-		
+
 		Button btn_ProcuraCliente = new Button(composite, SWT.NONE);
 		btn_ProcuraCliente.setGrayed(true);
-		//*procura pelo cliente através da ID e devolve toda a informação
+		// *procura pelo cliente através da ID e devolve toda a informação
 		btn_ProcuraCliente.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
-				
-				String mensagem="";
-				if (estaVazio(txt_Indique_ID)){
 
-					mensagem=" Para procurar um Cliente tem de introduzir um ID"	;
+				String mensagem = "";
+				if (estaVazio(txt_Indique_ID)) {
+
+					mensagem = " Para procurar um Cliente tem de introduzir um ID";
+				} else {
+					if (eNumero(txt_Indique_ID) == -1) {
+						mensagem = " O ID do cliente tem de ser numerico";
+					} else {
+						if (gestor.procuraCid(Integer.parseInt(txt_Indique_ID.getText())) == null) {
+							txt_Indique_ID.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
+						} else {
+							clienteActual = gestor.procuraCid(Integer.parseInt(txt_Indique_ID.getText()));
+							mensagem = "O Cliente" + clienteActual.getNome() + " " + clienteActual.getSobrenome()
+									+ " foi encontrado\n" + "Morada:" + clienteActual.getMorada() + "\n" + ""
+									+ clienteActual.escolhaID.toString() + ":" + clienteActual.getValorID() + "\n"
+									+ "Email:" + clienteActual.getEmail() + "\n" + "Contacto:"
+									+ clienteActual.getMobile() + "\n" + "Data Nascimento:"
+									+ clienteActual.getDataNascimento() + "\n";
+
+							//// colocaca dados
+							preecheTabela(clienteActual);
+
+						}
+					}
 				}
-				else {
-					if(eNumero(txt_Indique_ID)==-1) {
-						mensagem=" O ID do cliente tem de ser numerico"	;
-					}
-					else {
-						if (gestor.procuraCid(Integer.parseInt(txt_Indique_ID.getText()))==null) {
-						txt_Indique_ID.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));}
-						else {
-							clienteActual=gestor.procuraCid(Integer.parseInt(txt_Indique_ID.getText()));
-							mensagem="O Cliente" + clienteActual.getNome() + " " + clienteActual.getSobrenome() + " foi encontrado\n"
-							+ "Morada:" + clienteActual.getMorada() + "\n" + "" + clienteActual.escolhaID.toString() + ":" + clienteActual.getValorID()
-							+ "\n" + "Email:" + clienteActual.getEmail() + "\n" + "Contacto:" + clienteActual.getMobile() + "\n"
-							+ "Data Nascimento:" + clienteActual.getDataNascimento() + "\n";
-							
-						//// colocaca dados
-							preecheTabela(clienteActual);			
-													
-						}	
-					}
-					}
-				
-				
-				
-				
-				
-				
+
 				MessageBox box = new MessageBox(shellMF, SWT.MULTI);
 //				f = (Cliente) (gestor.getMapUtilizadores().get(text_UserNovoC.getText()));
 				box.setText("DADOS DO CLIENTE");
-				box.setMessage("  "+ mensagem);
+				box.setMessage("  " + mensagem);
 //				
 				box.open();
 			}
@@ -543,57 +525,57 @@ public class J_02Menu_F_DadosCl {
 		btn_ProcuraCliente.setLocation(10, 28);
 		btn_ProcuraCliente.setSize(88, 25);
 		btn_ProcuraCliente.setText("Obter Cliente");
-		
+
 		Button btnCriarConta = new Button(composite, SWT.TOGGLE | SWT.MULTI | SWT.WRAP | SWT.NONE);
 		btnCriarConta.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
-				J_02Menu_F_Conta criaConta=new J_02Menu_F_Conta(gestor,uUtilizador,clienteActual);
+				J_02Menu_F_Conta criaConta = new J_02Menu_F_Conta(gestor, uUtilizador, clienteActual);
 				criaConta.open();
 				shellMF.dispose();
-				
-				
+
 			}
 		});
 		btnCriarConta.setText("Criar Conta");
 		btnCriarConta.setBounds(228, 233, 181, 25);
-		
+
 		Button btnListaDeMovimentos = new Button(composite, SWT.TOGGLE | SWT.MULTI | SWT.WRAP | SWT.NONE);
 		btnListaDeMovimentos.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
-				J_02Menu_F_ContasCl contasDoCliente= new J_02Menu_F_ContasCl(gestor,uUtilizador,clienteActual);
+				J_02Menu_F_ContasCl contasDoCliente = new J_02Menu_F_ContasCl(gestor, uUtilizador, clienteActual);
 				contasDoCliente.open();
 				shellMF.dispose();
-				
-				
+
 			}
 		});
 		btnListaDeMovimentos.setText("Lista de Movimentos da Contas");
 		btnListaDeMovimentos.setBounds(228, 292, 181, 25);
-		
+
 		Button btnEditarContas = new Button(composite, SWT.TOGGLE);
 		btnEditarContas.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
-				J_02Menu_F_EditarConta editarconta= new J_02Menu_F_EditarConta(gestor, uUtilizador, clienteActual, null);
+				J_02Menu_F_EditarConta editarconta = new J_02Menu_F_EditarConta(gestor, uUtilizador, clienteActual,
+						null);
 				editarconta.open();
 				shellMF.dispose();
 			}
 		});
 		btnEditarContas.setText("Editar Contas");
 		btnEditarContas.setBounds(228, 354, 181, 25);
-		
+
 		Button button_DadosCliente = new Button(shellMF, SWT.NONE);
 		button_DadosCliente.setEnabled(false);
 		button_DadosCliente.setText("Dados do cliente");
 		button_DadosCliente.setBounds(10, 146, 192, 25);
-		
+
 		Button button_1 = new Button(shellMF, SWT.TOGGLE);
 		button_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
-				J_02Menu_F_MovimentaConta editarconta= new J_02Menu_F_MovimentaConta(gestor, uUtilizador, clienteActual, null);
+				J_02Menu_F_MovimentaConta editarconta = new J_02Menu_F_MovimentaConta(gestor, uUtilizador,
+						clienteActual, null);
 				editarconta.open();
 				shellMF.dispose();
 			}
@@ -604,7 +586,7 @@ public class J_02Menu_F_DadosCl {
 	}
 
 	// preenche tabela de dados do cliente
-	
+
 	public void preecheTabela(Cliente clienteActual) {
 		text_PrimeiroNovoC.setText(clienteActual.getNome());
 		text_UltimoNovoC.setText(clienteActual.getSobrenome());
@@ -636,27 +618,20 @@ public class J_02Menu_F_DadosCl {
 		text_DataN_mes.setEnabled(false);
 		text_DataN_dia.setEnabled(false);
 		combo_TipoID_NovoC.setEnabled(false);
-		
 
 		this.table_ListadeContas.clearAll();
 		this.table_ListadeContas.removeAll();
-		
-		if(!(clienteActual.getLcontaSC()==null)){
-		for (int i=0;i<clienteActual.getLcontaSC().size();i++) {
-			TableItem item = new TableItem(this.table_ListadeContas, SWT.NULL);
-			item.setText(0, ("" + clienteActual.getLcontaSC().get(i).getContaID()));
-			item.setText(1, ("" + clienteActual.getLcontaSC().get(i).getClientesDaC().size()));	
+
+		if (!(clienteActual.getLcontaSC() == null)) {
+			for (int i = 0; i < clienteActual.getLcontaSC().size(); i++) {
+				TableItem item = new TableItem(this.table_ListadeContas, SWT.NULL);
+				item.setText(0, ("" + clienteActual.getLcontaSC().get(i).getContaID()));
+				item.setText(1, ("" + clienteActual.getLcontaSC().get(i).getClientesDaC().size()));
+			}
 		}
-		}	
-		
+
 	}
-	
-	
-	
-	
-	
-	
-	
+
 	// ***************metodos**************
 
 	public boolean estaVazio(Text texto) {

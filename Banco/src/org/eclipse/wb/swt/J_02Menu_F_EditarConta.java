@@ -501,6 +501,12 @@ public class J_02Menu_F_EditarConta {
 					verifica = false;
 				}
 				} 
+				if (!(clienteActual.procuraContaPrazo()==null)) {
+					mensagem = mensagem + " O Cliente Já é titular de uma Conta a Prazo.\n";
+					verifica = false;
+				
+				}
+				
 				if (verifica) {
 					Cliente clienteTitular = gestor.procuraCid(Integer.parseInt(text_NovoTitular.getText()));
 					contaActual.addClienteC(clienteTitular.getuID());

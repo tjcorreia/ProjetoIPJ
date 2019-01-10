@@ -135,7 +135,7 @@ public class J_01_AdminLClientes {
 
 		System.out.println("  - > " + g.getMapUtilizadores().size());
 		Utilizador u = new Utilizador();
-		String[] titulo = { "Cliente ID", "Nome", "nº contas" };
+		String[] titulo = { "Cliente ID", "Nome", "contas" };
 
 		for (int i = 0; i < titulo.length; i++) {
 			TableColumn column = new TableColumn(table, SWT.NULL);
@@ -147,7 +147,7 @@ public class J_01_AdminLClientes {
 
 			if (u instanceof Cliente) {
 				System.out.println("-->" + ((Cliente) u).toString());
-				String[] ClienteI = new String[6];
+				String[] ClienteI = new String[3];
 				ClienteI = ((Cliente) u).toTable();
 				System.out.println("-->" + (Arrays.toString(ClienteI)));
 				TableItem item = new TableItem(table, SWT.NULL);

@@ -31,11 +31,30 @@ public class J_02Menu_F_ListaClientes {
 	protected Shell shlMenuFuncionrio;
 	private Gestao gestor;
 	private Utilizador uUtilizador;
+	private Cliente clienteActual;
+	private Conta contaActual;
 	private Text Funcionario;
 	private Text text_nome;
 	private Text text_identifica;
 	private Text text_telemovel;
 	private Table table;
+
+	
+	public Cliente getClienteActual() {
+		return clienteActual;
+	}
+
+	public void setClienteActual(Cliente clienteActual) {
+		this.clienteActual = clienteActual;
+	}
+
+	public Conta getContaActual() {
+		return contaActual;
+	}
+
+	public void setContaActual(Conta contaActual) {
+		this.contaActual = contaActual;
+	}
 
 	public Utilizador getuUtilizador() {
 		return uUtilizador;
@@ -107,59 +126,10 @@ public class J_02Menu_F_ListaClientes {
 		btnNovoCliente.setBounds(10, 84, 192, 25);
 		btnNovoCliente.setText("Criar novo Cliente");
 
-		Button btnExibirContasDo = new Button(shlMenuFuncionrio, SWT.NONE);
-		btnExibirContasDo.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-			}
-		});
-		btnExibirContasDo.setText("Exibir Contas do Cliente");
-		btnExibirContasDo.setBounds(10, 236, 192, 25);
-
-		Button btnFazerDepsitoEm = new Button(shlMenuFuncionrio, SWT.NONE);
-		btnFazerDepsitoEm.setText("Dep\u00F3sito em Dinheiro");
-		btnFazerDepsitoEm.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-			}
-		});
-		btnFazerDepsitoEm.setBounds(10, 298, 192, 25);
-
 		Button btnListarClientes = new Button(shlMenuFuncionrio, SWT.NONE);
 		btnListarClientes.setText("Listar Clientes");
 		btnListarClientes.setBounds(10, 112, 192, 25);
-
-		Button btnAlterarLoginE = new Button(shlMenuFuncionrio, SWT.NONE);
-		btnAlterarLoginE.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-			}
-		});
-		btnAlterarLoginE.setText("Alterar Login e Password");
-		btnAlterarLoginE.setBounds(10, 423, 192, 25);
-
-		Button btnPedirCartaoDe = new Button(shlMenuFuncionrio, SWT.NONE);
-		btnPedirCartaoDe.setSelection(true);
-		btnPedirCartaoDe.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-			}
-		});
-		btnPedirCartaoDe.setText("Pedir Cartao de Debito");
-		btnPedirCartaoDe.setBounds(10, 267, 192, 25);
-
-		Button btnLevantamentoEmDinheiro = new Button(shlMenuFuncionrio, SWT.NONE);
-		btnLevantamentoEmDinheiro.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-			}
-		});
-		btnLevantamentoEmDinheiro.setText("Levantamento em Dinheiro");
-		btnLevantamentoEmDinheiro.setBounds(10, 329, 192, 25);
-
-		Button btnTransferncia = new Button(shlMenuFuncionrio, SWT.NONE);
-		btnTransferncia.setText("Transfer\u00EAncia");
-		btnTransferncia.setBounds(10, 361, 192, 25);
+		btnListarClientes.setEnabled(false);
 
 		Button button = new Button(shlMenuFuncionrio, SWT.NONE);
 		button.addMouseListener(new MouseAdapter() {
@@ -181,7 +151,7 @@ public class J_02Menu_F_ListaClientes {
 		composite.setBounds(215, 85, 420, 348);
 
 		ScrolledComposite scrolledComposite = new ScrolledComposite(composite,
-				SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
+				SWT.H_SCROLL | SWT.V_SCROLL);
 		scrolledComposite.setVisible(true);
 		scrolledComposite.setExpandVertical(true);
 		scrolledComposite.setExpandHorizontal(true);
@@ -291,7 +261,7 @@ public class J_02Menu_F_ListaClientes {
 
 						if (text_nome.getText().equals("") & text_identifica.getText().equals("")
 								& text_telemovel.getText().equals("")) {
-
+							
 							System.out.println("GeRAL-->" + ((Cliente) u).toString());
 							System.out.println("-->" + (u));
 							TableItem item = new TableItem(table, SWT.NULL);
@@ -371,6 +341,26 @@ public class J_02Menu_F_ListaClientes {
 		});
 		button_1.setText("Dados do cliente");
 		button_1.setBounds(10, 143, 192, 25);
+		
+		Button button_MovimentaConta = new Button(shlMenuFuncionrio, SWT.TOGGLE);
+		button_MovimentaConta.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				J_02Menu_F_MovimentaConta editarconta= new J_02Menu_F_MovimentaConta(gestor, uUtilizador,null, null);
+				editarconta.open();
+				shlMenuFuncionrio.dispose();
+				
+			}
+		});
+		button_MovimentaConta.setText("Movimentar Contas");
+		button_MovimentaConta.setBounds(10, 174, 192, 25);
+		
+		Button button_3 = new Button(shlMenuFuncionrio, SWT.NONE);
+		button_3.setBounds(10, 207, 192, 25);
+		
+		Button button_4 = new Button(shlMenuFuncionrio, SWT.NONE);
+		button_4.setText("Alterar Login e Password");
+		button_4.setBounds(10, 238, 192, 25);
 
 	}
 }

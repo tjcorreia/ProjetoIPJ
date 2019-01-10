@@ -201,18 +201,18 @@ public class Conta implements Serializable{
 
 	
 	 public double  diario(String anoA,String mesA,String diaA) {
-			double totalmensal=0;
+			double diario=0;
 			Transacao t=new Transacao();
 			for (int i=transacoesC.size()-1;i>=0;i--) {
 				String [] dataS=transacoesC.get(i).getData().split("-");
 				if(anoA.equals(dataS[0])& mesA.equals(dataS[1])& diaA.equals(dataS[2])) {
 					if (transacoesC.get(i).getValor()<0) {
-						totalmensal=totalmensal+transacoesC.get(i).getValor();
+						diario=diario+transacoesC.get(i).getValor();
 					}
 				}
-				else  return totalmensal;
+				else  return diario;
 			}
-			 return totalmensal;
+			 return diario;
 		 }
 	
 	
