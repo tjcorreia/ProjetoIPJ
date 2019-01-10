@@ -203,7 +203,7 @@ public class J_01_Admin_AlteraDados {
 	 */
 	public static void main(String[] args) {
 		try {
-			J_01_Admin_AlteraDados window = new J_01_Admin_AlteraDados(new Gestao(),new Utilizador());
+			J_01_Admin_AlteraDados window = new J_01_Admin_AlteraDados(new Gestao(), new Utilizador());
 			window.open();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -230,7 +230,7 @@ public class J_01_Admin_AlteraDados {
 	 * Create contents of the window.
 	 */
 	protected void createContents() {
-		
+
 		shell = new Shell();
 		shell.setSize(651, 408);
 		shell.setText("MENU ADMINISTRADOR");
@@ -444,34 +444,35 @@ public class J_01_Admin_AlteraDados {
 					System.out.println(uUtilizador.getEmail());
 					System.out.println(uUtilizador.getLogin());
 //			gestor.verificaA(email_NovoF, userNovoF, emailA, userNameA);
-					String verifica = gestor.verificaA(text_Email_NA, text_UserA,
-							uUtilizador.getEmail(),uUtilizador.getLogin());
+					String verifica = gestor.verificaA(uUtilizador, text_Email_NA, text_UserA, uUtilizador.getEmail(),
+							uUtilizador.getLogin());
 
 					System.out.println(("VERIFICA? --->" + verifica));
 //					else if (mapUtilizadores.containsKey(userNovoF.getText()) && userNovoF.getText().equals(userNameA) ) {
 //						verifica =verifica+"O nome de Utilizador não foi alterado. \n";
 //						userNovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_BLUE));
 //						}
-					if (verifica.equals("")) {				
-						String oldkey=uUtilizador.getLogin();
+					if (verifica.equals("")) {
+						String oldkey = uUtilizador.getLogin();
 						uUtilizador.setLogin(text_UserA.getText());
 						uUtilizador.setPassword(text_PassNovoF.getText());
 						uUtilizador.setEmail(text_Email_NA.getText());
 						gestor.getMapUtilizadores().remove(oldkey);
 						gestor.getMapUtilizadores().put(uUtilizador.getLogin(), uUtilizador);
-                        Administrador f=new Administrador();
+						Administrador f = new Administrador();
 						MessageBox box = new MessageBox(shell, SWT.MULTI);
 						System.out.println(("ERRO 1? --->" + verifica));
 						f = (Administrador) (gestor.getMapUtilizadores().get(text_UserA.getText()));
-						
+
 						box.setText("CONCLUSÃO");
 						box.setMessage("" + f.getNome() + "  " + f.getSobrenome() + " os seu dados foram Actualizados\n"
-								+ "\n" + "Email:" + f.getEmail() + "\nLogin: "+f.getLogin()+" /nPassword: "+f.getPassword());
+								+ "\n" + "Email:" + f.getEmail() + "\nLogin: " + f.getLogin() + " \nPassword: "
+								+ f.getPassword());
 //						
 						box.open();
-						
+
 						System.out.println(("verifica"));
-						
+
 						shell.redraw();
 
 					} else {
@@ -502,9 +503,9 @@ public class J_01_Admin_AlteraDados {
 			@Override
 			public void mouseUp(MouseEvent e) {
 				shell.dispose();
-				J_01_Admin_NovoF NovoFuncionario = new J_01_Admin_NovoF(gestor,uUtilizador);
+				J_01_Admin_NovoF NovoFuncionario = new J_01_Admin_NovoF(gestor, uUtilizador);
 				NovoFuncionario.open();
-				
+
 			}
 		});
 
@@ -549,7 +550,6 @@ public class J_01_Admin_AlteraDados {
 		return texto.getText().length();
 	}
 
-
 	public boolean validateEmail(Text texto) {
 		String emailStr = texto.getText();
 		Pattern regexPattern = Pattern.compile(
@@ -563,7 +563,5 @@ public class J_01_Admin_AlteraDados {
 			return false;// "Invalid Email";
 		}
 	}
-
-
 
 }

@@ -45,7 +45,6 @@ public class J_02Menu_F_ContasCl {
 	private Cliente clienteActual;
 	private Conta contaActual;
 	private Text Funcionario;
-	private Text text_2;
 	private Text txt_Indique_ID;
 	private Text txtSelecioneUmaConta;
 	private Table table;
@@ -284,32 +283,6 @@ public class J_02Menu_F_ContasCl {
 		btnNovoCliente.setBounds(10, 84, 192, 25);
 		btnNovoCliente.setText("Criar novo Cliente");
 
-		Button btnExibirContasDo = new Button(shellMF_Contas, SWT.NONE);
-		btnExibirContasDo.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-			}
-		});
-		btnExibirContasDo.setText("Exibir Contas do Cliente");
-		btnExibirContasDo.setBounds(10, 177, 192, 25);
-
-		Button btnDadosDoCliente = new Button(shellMF_Contas, SWT.NONE);
-		btnDadosDoCliente.setText("Altera dados do cliente");
-		btnDadosDoCliente.setBounds(10, 208, 192, 25);
-
-		Button btnFazerDepsitoEm = new Button(shellMF_Contas, SWT.NONE);
-		btnFazerDepsitoEm.setText("Dep\u00F3sito em Dinheiro");
-		btnFazerDepsitoEm.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-			}
-		});
-		btnFazerDepsitoEm.setBounds(10, 270, 192, 25);
-
-		Button btnListarClientes = new Button(shellMF_Contas, SWT.NONE);
-		btnListarClientes.setText("Listar Clientes");
-		btnListarClientes.setBounds(10, 115, 192, 25);
-
 		Button btnAlterarLoginE = new Button(shellMF_Contas, SWT.NONE);
 		btnAlterarLoginE.addSelectionListener(new SelectionAdapter() {
 			@Override
@@ -318,19 +291,6 @@ public class J_02Menu_F_ContasCl {
 		});
 		btnAlterarLoginE.setText("Alterar Login e Password");
 		btnAlterarLoginE.setBounds(10, 423, 192, 25);
-
-		Button btnLevantamentoEmDinheiro = new Button(shellMF_Contas, SWT.NONE);
-		btnLevantamentoEmDinheiro.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-			}
-		});
-		btnLevantamentoEmDinheiro.setText("Levantamento em Dinheiro");
-		btnLevantamentoEmDinheiro.setBounds(10, 301, 192, 25);
-
-		Button btnTransferncia = new Button(shellMF_Contas, SWT.NONE);
-		btnTransferncia.setText("Transfer\u00EAncia");
-		btnTransferncia.setBounds(10, 333, 192, 25);
 
 		Button button = new Button(shellMF_Contas, SWT.NONE);
 		button.addMouseListener(new MouseAdapter() {
@@ -345,9 +305,6 @@ public class J_02Menu_F_ContasCl {
 		Funcionario = new Text(shellMF_Contas, SWT.BORDER);
 		Funcionario.setText("Bem Vindo " + uUtilizador.getNome());
 		Funcionario.setBounds(215, 10, 326, 25);
-
-		text_2 = new Text(shellMF_Contas, SWT.BORDER);
-		text_2.setBounds(10, 363, 192, 26);
 
 		Label lblDadosDoCliente = new Label(composite, SWT.NONE);
 		lblDadosDoCliente.setText("Contas do Cliente");
@@ -431,6 +388,51 @@ public class J_02Menu_F_ContasCl {
 		btnObterConta.setText("Obter Conta");
 		btnObterConta.setGrayed(true);
 		btnObterConta.setBounds(343, 28, 88, 25);
+		
+		Button button_1 = new Button(shellMF_Contas, SWT.NONE);
+		button_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				J_02Menu_F_ListaClientes listaC = new J_02Menu_F_ListaClientes(gestor, uUtilizador);
+				listaC.open();
+				shellMF_Contas.dispose();
+			}
+			
+		});
+		button_1.setText("Listar/Procurar Clientes");
+		button_1.setBounds(10, 115, 192, 25);
+		
+		Button button_2 = new Button(shellMF_Contas, SWT.NONE);
+		button_2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				J_02Menu_F_DadosCl cliente=new J_02Menu_F_DadosCl(gestor,uUtilizador,clienteActual);
+				cliente.open();
+				shellMF_Contas.dispose();
+			}
+		});
+		button_2.setText("Dados do cliente");
+		button_2.setBounds(10, 146, 192, 25);
+		
+		Button button_3 = new Button(shellMF_Contas, SWT.TOGGLE);
+		button_3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				J_02Menu_F_MovimentaConta editarconta = new J_02Menu_F_MovimentaConta(gestor, uUtilizador,
+						clienteActual, null);
+				editarconta.open();
+				shellMF_Contas.dispose();
+			}
+		});
+		button_3.setText("Movimentar Contas");
+		button_3.setBounds(10, 177, 192, 25);
+		
+		Button button_4 = new Button(shellMF_Contas, SWT.NONE);
+		button_4.setBounds(10, 210, 192, 25);
+		
+		Button button_5 = new Button(shellMF_Contas, SWT.NONE);
+		button_5.setText("Alterar Login e Password");
+		button_5.setBounds(10, 241, 192, 25);
 
 	}
 

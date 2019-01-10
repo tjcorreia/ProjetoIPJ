@@ -126,7 +126,7 @@ public class Gestao {
 		cn4.addClienteC(cl1.getuID());
 		cn4.addClienteC(cl2.getuID());
 		cn4.addClienteC(cl3.getuID());
-		cn4.addClienteC(cl3.getuID());
+		
 		cl1.addConta(cn4);
 		cl3.addConta(cn4);
 		
@@ -170,6 +170,10 @@ public class Gestao {
 		// cartao
 		
 		LocalDate data = LocalDate.now().plusYears(5);
+		int dia=data.getDayOfMonth();
+		int anomes=data.getMonthValue();
+		int ano=data.getYear();
+		
 		Cartao ct1 = new Cartao(500010000,cl1.getuID(),cn1.getContaID(),cl1.getNome()+" "+cl1.getSobrenome(),""+data, "0000");
 		((ContaNormal)cn1).addCartaoC(ct1);
 		
@@ -258,6 +262,46 @@ public class Gestao {
 
 	}
 //++++++++++++++++++++++++++++++++++++++++++++++++++ metodos++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+	
+	// verifiva restriçoes de movimentos da conta
+		public boolean verifMovimentos(Conta contaAct,TipoT escolhaTA) {
+			
+			if(escolhaTA==TipoT.DEP_CASH) {
+				return true;
+			}
+			
+			if (contaAct instanceof ContaNormal) {
+				double maxdiario = 1000; // max diario conta normal
+				LocalDate actual = LocalDate.now();
+				String[] dataS = ("" + actual).split("-");
+				System.out.println("<---- Conta Actual- Verifica max diario ( " + Arrays.toString(dataS) + ") --->\n");
+				System.out.println("---- > " + contaAct.diario(dataS[0], dataS[1],dataS[2])*-1+ "< ---\n");
+				if (contaAct.diario(dataS[0], dataS[1],dataS[2])*-1 > maxdiario) {
+					return false;
+				}
+				return true;
+			} else if (contaAct instanceof ContaPrazo){
+
+				double maxmensal = 10000;// max mensal conta a prazo
+
+				LocalDate actual = LocalDate.now();
+				String[] dataS = ("" + actual).split("-");
+				if (contaAct.mensal(Integer.parseInt(dataS[0]), Integer.parseInt(dataS[1]))*-1 > maxmensal) {
+					return false;
+				}
+				return true;
+			}
+			
+			return false;
+
+		}	
+	
+	
+	
+	
+	
+	
 	
 // criacartao para conta e cliente especifico	
 	
@@ -533,20 +577,20 @@ public class Gestao {
 		return true;
 	}
 
-//faz a verificação da alteracao de dados do Administrador
-	public String verificaA(Text email_NovoF, Text userNovoF, String emailA, String userNameA) {
+//faz a verificação da alteracao de dados do Utilizador
+	public String verificaA(Utilizador uUtilizador,Text email_NovoF, Text userNovoF, String emailA, String userNameA) {
 		System.out.println("VERIFICA ADMINISTRADOR");
 
 		email_NovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
 		userNovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
 
 		String verifica = "";
-// verifica username
+		// verifica username
 		if (mapUtilizadores.containsKey(userNovoF.getText()) && !userNovoF.getText().equals(userNameA)) {
 			verifica = verifica + "O nome de Utilizador não é válido. \n";
 			userNovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
 		}
-
+if (uUtilizador instanceof Administrador) {
 		for (Entry<String, Utilizador> entry : mapUtilizadores.entrySet()) {
 			if (entry.getValue() instanceof Administrador) {
 				System.out.println("VERIFICA ---->Key = " + entry.getKey() + ", Value = " + entry.getValue());
@@ -558,6 +602,34 @@ public class Gestao {
 				}
 			}
 		}
+}
+else if (uUtilizador instanceof Funcionario) {
+	for (Entry<String, Utilizador> entry : mapUtilizadores.entrySet()) {
+		if (entry.getValue() instanceof Funcionario) {
+			System.out.println("VERIFICA ---->Key = " + entry.getKey() + ", Value = " + entry.getValue());
+			// verifica email
+			if (entry.getValue().getEmail().equals(email_NovoF.getText())
+					&& !email_NovoF.getText().equals(emailA)) {
+				verifica = verifica + "Já existe um utilizador com este email\n";
+				email_NovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
+			}
+		}
+	}
+}
+
+else if (uUtilizador instanceof Cliente) {
+	for (Entry<String, Utilizador> entry : mapUtilizadores.entrySet()) {
+		if (entry.getValue() instanceof Cliente) {
+			System.out.println("VERIFICA ---->Key = " + entry.getKey() + ", Value = " + entry.getValue());
+			// verifica email
+			if (entry.getValue().getEmail().equals(email_NovoF.getText())
+					&& !email_NovoF.getText().equals(emailA)) {
+				verifica = verifica + "Já existe um utilizador com este email\n";
+				email_NovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
+			}
+		}
+	}
+}
 		System.out.println((verifica));
 		return verifica;
 	}

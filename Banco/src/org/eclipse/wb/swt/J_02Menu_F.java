@@ -3,9 +3,17 @@ package org.eclipse.wb.swt;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Button;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.graphics.GC;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.ImageData;
+import org.eclipse.swt.graphics.ImageLoader;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.events.MouseAdapter;
@@ -23,6 +31,15 @@ public class J_02Menu_F {
 	private Gestao gestor;
 	private Utilizador uUtilizador;
 	private Text Funcionario;
+	private Label lbl_Imagem ;
+
+	public Label getLbl_Imagem() {
+		return lbl_Imagem;
+	}
+
+	public void setLbl_Imagem(Label lbl_Imagem) {
+		this.lbl_Imagem = lbl_Imagem;
+	}
 
 	public Shell getShlMenuFuncionrio() {
 		return shlMenuFuncionrio;
@@ -93,6 +110,7 @@ public class J_02Menu_F {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				shlMenuFuncionrio.dispose();
+				
 				J_02Menu_F_CriaCliente alteraDados=new J_02Menu_F_CriaCliente(gestor,uUtilizador);
 				alteraDados.open();
 				
@@ -166,11 +184,35 @@ public class J_02Menu_F {
 		Button button_2 = new Button(shlMenuFuncionrio, SWT.NONE);
 		button_2.setBounds(10, 207, 192, 25);
 		
-		Label lblNewLabel = new Label(shlMenuFuncionrio, SWT.NONE);
-		lblNewLabel.setBounds(215, 84, 407, 296);
-		lblNewLabel.setText("Java BANK INAGE");
+		Image image = (Image) SWTResourceManager.getImage(J_02Menu_F.class, "/Logo/javaBank _Withe_48_V2.png");
+		image.isAutoScalable();
+
+		lbl_Imagem = new Label(shlMenuFuncionrio, SWT.BORDER);
+		lbl_Imagem.setBounds(215, 84, 385, 296);
+		lbl_Imagem.setImage(resize(image,lbl_Imagem.getBounds().width,lbl_Imagem.getBounds().height));
 		
 		String clienteActua="Introduza Cliente ID";
 
+	}
+	
+	// metodo
+	
+	protected Image resize(Image imageFromSource, int width, int height) {
+	    if(width>0 && height>0){
+	        Image scaledImage = new Image(shlMenuFuncionrio.getDisplay(), width, height);
+	        GC gc = new GC(scaledImage);            //Graphics Capabilities(GC instance) in SWT used to draw an Image, graphics, display
+	        gc.setAntialias(SWT.ON);        // Anti aliasing is used for making the low resolution image to redraw and make into a good resolution Image
+	        gc.setInterpolation(SWT.HIGH);      //Interpolation is based in the Graphics, it may not work properly in some systems
+	        gc.drawImage(imageFromSource, 0, 0, 
+	                imageFromSource.getBounds().width, imageFromSource.getBounds().height, 
+	                0, 0, width, height);       
+
+	        /*drawImage(Image image, int srcX, int srcY, int srcWidth, int srcHeight, int destX, int destY, int destWidth, int destHeight)
+	        Copies a rectangular area from the source image into a (potentially different sized) rectangular area in the receiver.*/
+
+	        gc.dispose();
+	        return scaledImage;
+	        }
+	        else return imageFromSource;
 	}
 }

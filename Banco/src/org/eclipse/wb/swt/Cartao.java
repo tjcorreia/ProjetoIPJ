@@ -125,8 +125,8 @@ public class Cartao implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Cartao [cartaoID=" + cartaoID + "\n, titularCartaoID=" + titularCartaoID + "\n, contaCartaoID="
-				+ contaCartaoID + "\n, nome=" + nome + "\n, dataV=" + dataV + "\n\n, codigo=" + codigo + "]";
+		return "[ Novo Cartao ] \nCartaoID: " + cartaoID + "\nTitularCartaoID: " + titularCartaoID + "\nNº Conta do Cartao: "
+				+ contaCartaoID + "\nNome: " + nome + "\nDataValidade:" + dataV + "\n\n, Codigo: *" + codigo + "*";
 	}
 
 	
