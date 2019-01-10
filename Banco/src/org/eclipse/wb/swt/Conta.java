@@ -215,8 +215,27 @@ public class Conta implements Serializable{
 			 return diario;
 		 }
 	
-	
+	 public Transacao  jurosMensais(String anoA,String mesA) {
+		 // simplicado média (saldo final+saldo inicial)/2
+			double totalInicio=saldo;
+			double taxaJuro=0.05;
+			
+			for (int i=transacoesC.size()-1;i>=0;i--) {
+				String [] dataS=transacoesC.get(i).getData().split("-");
+				if(anoA.equals(dataS[0])& mesA.equals(dataS[1])) {
 
+						totalInicio=totalInicio+transacoesC.get(i).getValor();
+					
+				}
+				
+			}
+			double juros=(taxaJuro/12)*(saldo+totalInicio)/2;
+			Transacao t = new Transacao(10002, anoA+"-"+mesA+"-"+"1", juros,"JUROS", 0,Transacao.TipoT.JUROS);
+			addTransacaoC(t);
+			  return t;
+			
+		 }
+	 
 
 
 

@@ -79,7 +79,7 @@ public class J_02Menu_F {
 		super();
 		this.uUtilizador = uUtilizador;
 		this.gestor = gestor;
-		open();
+open();
 	
 	}
 
@@ -102,6 +102,7 @@ public class J_02Menu_F {
 	protected void createContents() {
 		shlMenuFuncionrio = new Shell();
 		shlMenuFuncionrio.setBackground(SWTResourceManager.getColor(SWT.COLOR_DARK_GRAY));
+		shlMenuFuncionrio.setImage((Image) SWTResourceManager.getImage(J_02Menu_F.class, "/Logo/Java-logo-png Logo.png"));
 		shlMenuFuncionrio.setSize(659, 522);
 		shlMenuFuncionrio.setText("Menu Funcion\u00E1rio");
 		
@@ -149,6 +150,9 @@ public class J_02Menu_F {
 		btnAlterarLoginE.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
+				shlMenuFuncionrio.close();
+				J_02_MenuFun_AlteraDados2 alteradados=new J_02_MenuFun_AlteraDados2(gestor, uUtilizador); 
+				alteradados.open();
 			}
 		});
 		btnAlterarLoginE.setText("Alterar Login e Password");
@@ -184,35 +188,23 @@ public class J_02Menu_F {
 		Button button_2 = new Button(shlMenuFuncionrio, SWT.NONE);
 		button_2.setBounds(10, 207, 192, 25);
 		
-		Image image = (Image) SWTResourceManager.getImage(J_02Menu_F.class, "/Logo/javaBank _Withe_48_V2.png");
-		image.isAutoScalable();
-
-		lbl_Imagem = new Label(shlMenuFuncionrio, SWT.BORDER);
-		lbl_Imagem.setBounds(215, 84, 385, 296);
-		lbl_Imagem.setImage(resize(image,lbl_Imagem.getBounds().width,lbl_Imagem.getBounds().height));
+		Image image = (Image) SWTResourceManager.getImage(J_02Menu_F.class, "/Logo/Java-logo-png Logo14.png");
+		image.isAutoScalable();;
 		
+		
+
+		lbl_Imagem = new Label(shlMenuFuncionrio,SWT.NONE);
+		lbl_Imagem.setBounds(215, 84, 385, 296);
+		lbl_Imagem.setImage(gestor.resize(shlMenuFuncionrio,image,lbl_Imagem.getBounds().width,lbl_Imagem.getBounds().height));
+		
+		Image image2 = (Image) SWTResourceManager.getImage(J_02Menu_F.class, "/Logo/Java-logo-png Logo13.png");
+		image.isAutoScalable();;
+		Label lblimagem = new Label(shlMenuFuncionrio, SWT.NONE);
+		lblimagem.setBounds(10, 10, 192, 68);
+		lblimagem.setImage(gestor.resize(shlMenuFuncionrio,image2,lblimagem.getBounds().width,lblimagem.getBounds().height));
 		String clienteActua="Introduza Cliente ID";
 
 	}
 	
-	// metodo
 	
-	protected Image resize(Image imageFromSource, int width, int height) {
-	    if(width>0 && height>0){
-	        Image scaledImage = new Image(shlMenuFuncionrio.getDisplay(), width, height);
-	        GC gc = new GC(scaledImage);            //Graphics Capabilities(GC instance) in SWT used to draw an Image, graphics, display
-	        gc.setAntialias(SWT.ON);        // Anti aliasing is used for making the low resolution image to redraw and make into a good resolution Image
-	        gc.setInterpolation(SWT.HIGH);      //Interpolation is based in the Graphics, it may not work properly in some systems
-	        gc.drawImage(imageFromSource, 0, 0, 
-	                imageFromSource.getBounds().width, imageFromSource.getBounds().height, 
-	                0, 0, width, height);       
-
-	        /*drawImage(Image image, int srcX, int srcY, int srcWidth, int srcHeight, int destX, int destY, int destWidth, int destHeight)
-	        Copies a rectangular area from the source image into a (potentially different sized) rectangular area in the receiver.*/
-
-	        gc.dispose();
-	        return scaledImage;
-	        }
-	        else return imageFromSource;
-	}
 }

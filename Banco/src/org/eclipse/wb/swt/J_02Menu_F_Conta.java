@@ -27,6 +27,8 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
+import org.eclipse.swt.graphics.GC;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
 
 /**
@@ -424,9 +426,21 @@ public class J_02Menu_F_Conta {
 		button_5.setText("Alterar Login e Password");
 		button_5.setBounds(10, 241, 192, 25);
 		
+		Label lblNewLabel = new Label(shellConta, SWT.NONE);
+		lblNewLabel.setBounds(10, 10, 192, 68);
 		
 		
+		
+		Image image3 = (Image) SWTResourceManager.getImage(J_02Menu_F.class,"/Java-logo-png Logo13.png");
+		image3.isAutoScalable();
+		Label lblimagem = new Label(shellConta, SWT.NONE);
+		lblimagem.setBounds(10, 10, 192, 68);
+		lblimagem.setImage(gestor.resize(shellConta,image3,lblimagem.getBounds().width,lblimagem.getBounds().height));
+		String clienteActua="Introduza Cliente ID";
+
 	}
+	
+	
 
 	// ***************metodos**************
 		// *************** procura cliente por ID**************
