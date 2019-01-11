@@ -7,6 +7,8 @@ import org.eclipse.swt.widgets.Button;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.Scanner;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Label;
@@ -19,6 +21,7 @@ import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Spinner;
+import org.eclipse.swt.custom.CCombo;
 
 /**  
  * Breve descrição do código   
@@ -59,6 +62,15 @@ public class J_11Menu_Admin {
 	
 	private Spinner caixaStock;
 	private DateTime caixaData;
+	
+	private Label lblIntroduzaTitulo;
+	private Label lblIsbIncorreto;
+	private Label lblIntroduzaAutor;
+	private Label lblIntroduzaEditora;
+	private Label lblPrecoIncorreto;
+	private Label lblIntroduzaDescricao;
+	
+	
 	
 	
 	//Construtor para poder trazer a Livraria para esta classe
@@ -286,8 +298,6 @@ public class J_11Menu_Admin {
 		lblDescricao.setBounds(184, 415, 70, 20);
 		
 		caixaTitulo = new Text(shlMenuAdmin, SWT.BORDER);
-		System.out.println("texto para caixa de titulo");
-		System.out.println(livroSelecionado.getNome());
 		caixaTitulo.setText(livroSelecionado.getNome());
 		caixaTitulo.setVisible(false);
 		caixaTitulo.setBounds(261, 65, 196, 30);
@@ -320,42 +330,42 @@ public class J_11Menu_Admin {
 		caixaDescricao.setVisible(false);
 		caixaDescricao.setBounds(260, 415, 266, 70);
 		
-		Label lblIntroduzaTitulo = new Label(shlMenuAdmin, SWT.NONE);
+		lblIntroduzaTitulo = new Label(shlMenuAdmin, SWT.NONE);
 		lblIntroduzaTitulo.setVisible(false);
 		lblIntroduzaTitulo.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
 		lblIntroduzaTitulo.setFont(SWTResourceManager.getFont("Segoe UI", 7, SWT.NORMAL));
 		lblIntroduzaTitulo.setText("Introduza t\u00EDtulo");
 		lblIntroduzaTitulo.setBounds(261, 94, 196, 18);
 		
-		Label lblIsbIncorreto = new Label(shlMenuAdmin, SWT.NONE);
+		lblIsbIncorreto = new Label(shlMenuAdmin, SWT.NONE);
 		lblIsbIncorreto.setVisible(false);
 		lblIsbIncorreto.setText("ISBN incorreto (13 d\u00EDgitos)");
 		lblIsbIncorreto.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
 		lblIsbIncorreto.setFont(SWTResourceManager.getFont("Segoe UI", 7, SWT.NORMAL));
 		lblIsbIncorreto.setBounds(261, 146, 196, 18);
 		
-		Label lblIntroduzaAutor = new Label(shlMenuAdmin, SWT.NONE);
+		lblIntroduzaAutor = new Label(shlMenuAdmin, SWT.NONE);
 		lblIntroduzaAutor.setVisible(false);
 		lblIntroduzaAutor.setText("Introduza autor");
 		lblIntroduzaAutor.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
 		lblIntroduzaAutor.setFont(SWTResourceManager.getFont("Segoe UI", 7, SWT.NORMAL));
 		lblIntroduzaAutor.setBounds(261, 196, 196, 18);
 		
-		Label lblIntroduzaEditora = new Label(shlMenuAdmin, SWT.NONE);
+		lblIntroduzaEditora = new Label(shlMenuAdmin, SWT.NONE);
 		lblIntroduzaEditora.setVisible(false);
 		lblIntroduzaEditora.setText("Introduza editora");
 		lblIntroduzaEditora.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
 		lblIntroduzaEditora.setFont(SWTResourceManager.getFont("Segoe UI", 7, SWT.NORMAL));
 		lblIntroduzaEditora.setBounds(261, 245, 196, 18);
 		
-		Label lblPrecoIncorreto = new Label(shlMenuAdmin, SWT.NONE);
+		lblPrecoIncorreto = new Label(shlMenuAdmin, SWT.NONE);
 		lblPrecoIncorreto.setVisible(false);
 		lblPrecoIncorreto.setText("Pre\u00E7o incorreto");
 		lblPrecoIncorreto.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
 		lblPrecoIncorreto.setFont(SWTResourceManager.getFont("Segoe UI", 7, SWT.NORMAL));
 		lblPrecoIncorreto.setBounds(261, 295, 196, 18);
 		
-		Label lblIntroduzaDescricao = new Label(shlMenuAdmin, SWT.NONE);
+		lblIntroduzaDescricao = new Label(shlMenuAdmin, SWT.NONE);
 		lblIntroduzaDescricao.setVisible(false);
 		lblIntroduzaDescricao.setText("Introduza descri\u00E7\u00E3o");
 		lblIntroduzaDescricao.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
@@ -366,17 +376,33 @@ public class J_11Menu_Admin {
 		btnSubmeterAlteracoes.setVisible(false);
 		btnSubmeterAlteracoes.setBounds(520, 234, 150, 78);
 		btnSubmeterAlteracoes.setText("Submeter Altera\u00E7\u00F5es");
-		
-		
-		
-		
-		
-		
-		
+		btnSubmeterAlteracoes.addMouseListener(new MouseAdapter() {
+			public void mouseUp(MouseEvent e) {
+				//se dados introduzidos forem válidos para um livro
+				if ( verificarSeLivroValido() ) {
+					//registar alterações no livro
+					livroSelecionado.imprimirHistoricoPrecos();
+					registarAlteracoesNoLivroSelecionado();
+					livroSelecionado.imprimirHistoricoPrecos();
+					
+				}
+				//caso os dados não sejam válidos, não fazer nada, porque o método 'verificarSeValido' 
+				//vai fazer mostrar os alertas de erros
+				else {
+				}
+			}
+		});
 
 	}
 	
 	
+
+	
+	/**
+	 *
+	 * Métodos fora do 'createContents()'
+	 * 
+	 */
 	
 	public void visibilidadesBtnAlterarLivro() {
 		lblMensagemSemCorrespondencias.setVisible(false);
@@ -404,6 +430,11 @@ public class J_11Menu_Admin {
 		caixaDescricao.setVisible(false);
 		
 		btnSubmeterAlteracoes.setVisible(false);
+		
+		lblIntroduzaTitulo.setVisible(false);
+		lblIntroduzaAutor.setVisible(false);
+		lblIntroduzaEditora.setVisible(false);
+		lblIntroduzaDescricao.setVisible(false);
 	}
 	
 	public void visibilidadesSelecionadoLivroAlterar() {
@@ -432,6 +463,7 @@ public class J_11Menu_Admin {
 		caixaDescricao.setVisible(true);
 		
 		btnSubmeterAlteracoes.setVisible(true);
+		
 	}
 	
 	//Método para limpar e preencher novamente a tabela 
@@ -457,16 +489,135 @@ public class J_11Menu_Admin {
 		caixaEditora.setText(livroSelecionado.editora);
 		caixaPreco.setText(String.valueOf(livroSelecionado.preco));
 		caixaStock.setSelection(livroSelecionado.stock);
-		System.out.println(livroSelecionado.getData());
-		System.out.println(livroSelecionado.data);
-		System.out.println("" + livroSelecionado.getData().get(Calendar.YEAR)+"/" +(livroSelecionado.getData().get(Calendar.MONTH) + 1) 
-				+ "/" + livroSelecionado.getData().get(Calendar.DAY_OF_MONTH));
-		int ano = livroSelecionado.getData().get(Calendar.YEAR);
-		int mes = livroSelecionado.getData().get(Calendar.MONTH) + 1;
-		int dia =  livroSelecionado.getData().get(Calendar.DAY_OF_MONTH) ;
-		caixaData.setDate(dia,mes,ano);
-		//caixaData.setDate(livroSelecionado.getData().get(Calendar.YEAR), (livroSelecionado.getData().get(Calendar.MONTH) + 1), 
-		//		livroSelecionado.getData().get(Calendar.DAY_OF_MONTH));
+		caixaData.setYear(livroSelecionado.getData().get(Calendar.YEAR));
+		caixaData.setMonth(livroSelecionado.getData().get(Calendar.MONTH));
+		caixaData.setDay(livroSelecionado.getData().get(Calendar.DAY_OF_MONTH));
 		caixaDescricao.setText(livroSelecionado.descricao);
 	}	
+	
+	
+	//Método para recolher dados das caixas de alteração de dados de livro
+	public boolean verificarSeLivroValido() {
+		//verificar se título não está em branco
+		String novoTitulo = caixaTitulo.getText();
+		if ( novoTitulo.equals("") ) {
+			lblIntroduzaTitulo.setVisible(true);
+			return false;
+		}
+		else {
+			lblIntroduzaTitulo.setVisible(false);
+		}
+		//verificar se é um ISBN válido
+		String novoIsbn = caixaIsbn.getText();
+		if ( !verificarISBN(novoIsbn) ) {
+			lblIsbIncorreto.setVisible(true);
+			return false;
+		}
+		else {
+			lblIsbIncorreto.setVisible(false);
+		}
+		//verificar se autor não está em branco
+		String novoAutor = caixaAutor.getText();
+		if ( novoAutor.equals("") ) {
+			lblIntroduzaAutor.setVisible(true);
+			return false;
+		}
+		else {
+			lblIntroduzaAutor.setVisible(false);
+		}
+		//verificar se editora não está em branco
+		String novaEditora = caixaEditora.getText();
+		if ( novaEditora.equals("") ) {
+			lblIntroduzaEditora.setVisible(true);
+			return false;
+		}
+		else {
+			lblIntroduzaEditora.setVisible(false);
+		}
+		//verificar se preço é válido
+		String novoPreco = caixaPreco.getText();
+		if ( novoPreco.equals("") ) {
+			lblPrecoIncorreto.setVisible(true);
+			return false;
+		}
+		else if ( !verificarSeDouble(novoPreco) ){
+			lblPrecoIncorreto.setVisible(true);
+		}
+		else {
+			lblPrecoIncorreto.setVisible(false);
+		}
+		//verificar se descrição não está em branco
+		String novaDescricao = caixaDescricao.getText();
+		if ( novaDescricao.equals("") ) {
+			lblIntroduzaDescricao.setVisible(true);
+			return false;
+		}
+		else {
+			lblIntroduzaDescricao.setVisible(false);
+		}
+		return true;
+	}	
+	
+	//Método para verificar se ISBN é válido
+	public boolean verificarISBN(String s) {
+		//ver se tem algum carater que não seja numero
+		for (char c : s.toCharArray()) {
+			if (!Character.isDigit(c)) {
+				return false;
+			}
+		}
+		//ver se tem 13 digitos
+		if ( s.toCharArray().length!=13 ) {
+			return false;
+		}
+		return true;
+	}
+	
+	//Método para verificar se preço é um double
+	public boolean verificarSeDouble(String s) {
+		try {
+	        double d = Double.parseDouble(s);
+	    } catch (NumberFormatException | NullPointerException nfe) {
+	        return false;
+	    }
+	    return true;
+	}	
+	
+	
+	//Método para recolher dados das caixas de alteração de dados de livro
+	public void registarAlteracoesNoLivroSelecionado() {
+		
+		livroSelecionado.setNome( caixaTitulo.getText());
+		livroSelecionado.setIsbn(caixaIsbn.getText());
+		livroSelecionado.setAutor( caixaAutor.getText());
+		livroSelecionado.setEditora(caixaEditora.getText());
+		double novoPreco = Double.parseDouble(caixaPreco.getText());
+		//Se preço foi alterado -> actualizar o novo preço e actualizar o HashMap de datas/preços
+		if ( novoPreco != livroSelecionado.preco ) {
+			livroSelecionado.precosAnteriores.put(new GregorianCalendar(), novoPreco);
+			livroSelecionado.setPreco( novoPreco );
+			
+		}
+//		livroSelecionado.setint novoStock = caixaStock.getDigits();
+//		livroSelecionado.setGregorianCalendar novaData = new GregorianCalendar(caixaData.getYear(), caixaData.getMonth()-1, caixaData.getDay()); 
+//		livroSelecionado.setString novaDescricao = caixaDescricao.getText();
+
+
+//		String novoIsbn = caixaIsbn.getText();
+//		String novoAutor = caixaAutor.getText();
+//		String novaEditora = caixaEditora.getText();
+//		double novoPreco = Double.parseDouble(caixaPreco.getText());
+//		//Se preço foi alterado -> actualizar HashMap de datas/preços
+//		if ( novoPreco != livroSelecionado.preco ) {
+//			
+//		}
+//		int novoStock = caixaStock.getDigits();
+//		GregorianCalendar novaData = new GregorianCalendar(caixaData.getYear(), caixaData.getMonth()-1, caixaData.getDay()); 
+//		String novaDescricao = caixaDescricao.getText();
+//
+//		Livro lv = new Livro(novoTitulo, novoIsbn, novoAutor, novaEditora, novaDescricao, novaData, novoPreco, novoStock);
+		
+	}	
+	
+	
 }
