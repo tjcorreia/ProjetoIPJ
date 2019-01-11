@@ -15,6 +15,7 @@ import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.custom.ScrolledComposite;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
@@ -72,19 +73,21 @@ public class J_02Menu_F_ListaClientes {
 		this.gestor = gestor;
 	}
 
-	public J_02Menu_F_ListaClientes() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+
 
 	/**
 	 * @wbp.parser.entryPoint
 	 */
+	public J_02Menu_F_ListaClientes() {
+		super();
+		open();
+		// TODO Auto-generated constructor stub
+	}
 	public J_02Menu_F_ListaClientes(Gestao gestor, Utilizador uUtilizador) {
 		super();
 		this.uUtilizador = uUtilizador;
 		this.gestor = gestor;
-		open();
+		
 	
 	}
 
@@ -110,6 +113,7 @@ public class J_02Menu_F_ListaClientes {
 	protected void createContents() {
 		shlMenuFuncionrio = new Shell();
 		shlMenuFuncionrio.setBackground(SWTResourceManager.getColor(SWT.COLOR_DARK_GRAY));
+		shlMenuFuncionrio.setImage((Image) SWTResourceManager.getImage(J_02Menu_F.class, "/Logo/Java-logo-png Logo.png"));
 		shlMenuFuncionrio.setSize(659, 522);
 		shlMenuFuncionrio.setText("Menu Funcion\u00E1rio");
 
@@ -359,6 +363,14 @@ public class J_02Menu_F_ListaClientes {
 		button_3.setBounds(10, 207, 192, 25);
 		
 		Button button_4 = new Button(shlMenuFuncionrio, SWT.NONE);
+		button_4.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				shlMenuFuncionrio.close();
+				J_02_MenuFun_AlteraDados2 alteradados=new J_02_MenuFun_AlteraDados2(gestor, uUtilizador); 
+				alteradados.open();
+			}
+		});
 		button_4.setText("Alterar Login e Password");
 		button_4.setBounds(10, 238, 192, 25);
 

@@ -30,6 +30,7 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.events.VerifyListener;
 import org.eclipse.swt.events.VerifyEvent;
@@ -133,14 +134,21 @@ public class J_02Menu_F_EditarConta {
 	public void setGestor(Gestao gestor) {
 		this.gestor = gestor;
 	}
-
+	/**
+	 * @wbp.parser.entryPoint
+	 */
+	public J_02Menu_F_EditarConta() {
+		super();
+		
+		open();
+	}
 	public J_02Menu_F_EditarConta(Gestao gestor, Utilizador uUtilizador, Cliente clienteActual, Conta contaActual) {
 		super();
 		this.gestor = gestor;
 		this.uUtilizador = uUtilizador;
 		this.clienteActual = clienteActual;
 		this.contaActual = contaActual;
-		open();
+		
 	}
 
 	/**
@@ -177,6 +185,10 @@ public class J_02Menu_F_EditarConta {
 	protected void createContents() {
 		shellMF_EditarC = new Shell();
 		shellMF_EditarC.setBackground(SWTResourceManager.getColor(SWT.COLOR_DARK_GRAY));
+	
+		
+		shellMF_EditarC.setImage((Image) SWTResourceManager.getImage(J_02Menu_F.class, "/Logo/Java-logo-png Logo.png"));
+		
 		shellMF_EditarC.setSize(729, 545);
 		shellMF_EditarC.setText("Menu Funcion\u00E1rio");
 
@@ -301,6 +313,9 @@ public class J_02Menu_F_EditarConta {
 		btnAlterarLoginE.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
+				shellMF_EditarC.close();
+				J_02_MenuFun_AlteraDados2 alteradados=new J_02_MenuFun_AlteraDados2(gestor, uUtilizador); 
+				alteradados.open();
 			}
 		});
 		btnAlterarLoginE.setText("Alterar Login e Password");

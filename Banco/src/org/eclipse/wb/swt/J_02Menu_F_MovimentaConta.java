@@ -29,6 +29,7 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.events.VerifyListener;
 import org.eclipse.swt.events.VerifyEvent;
@@ -64,6 +65,8 @@ public class J_02Menu_F_MovimentaConta {
 
 
 
+
+
 	public Shell getShellMF_ModificaContas() {
 		return shellMF_ModificaContas;
 	}
@@ -94,6 +97,30 @@ public class J_02Menu_F_MovimentaConta {
 
 	public void setClienteActual(Cliente clienteActual) {
 		this.clienteActual = clienteActual;
+	}
+
+	public Button getButton_Deposito() {
+		return button_Deposito;
+	}
+
+	public void setButton_Deposito(Button button_Deposito) {
+		this.button_Deposito = button_Deposito;
+	}
+
+	public Button getButton_Levanta() {
+		return button_Levanta;
+	}
+
+	public void setButton_Levanta(Button button_Levanta) {
+		this.button_Levanta = button_Levanta;
+	}
+
+	public Button getButton_Transferencia() {
+		return button_Transferencia;
+	}
+
+	public void setButton_Transferencia(Button button_Transferencia) {
+		this.button_Transferencia = button_Transferencia;
 	}
 
 	public Conta getContaActual() {
@@ -199,14 +226,21 @@ public class J_02Menu_F_MovimentaConta {
 	public void setText_Contadestinotrf(Text text_Contadestinotrf) {
 		this.text_Contadestinotrf = text_Contadestinotrf;
 	}
-
+	/**
+	 * @wbp.parser.entryPoint
+	 */
+	public J_02Menu_F_MovimentaConta() {
+		super();
+	
+		open();
+	}
 	public J_02Menu_F_MovimentaConta(Gestao gestor, Utilizador uUtilizador, Cliente clienteActual, Conta contaActual) {
 		super();
 		this.gestor = gestor;
 		this.uUtilizador = uUtilizador;
 		this.clienteActual = clienteActual;
 		this.contaActual = contaActual;
-		open();
+		
 	}
 
 	/**
@@ -242,6 +276,10 @@ public class J_02Menu_F_MovimentaConta {
 	 */
 	protected void createContents() {
 		shellMF_ModificaContas = new Shell();
+		
+		
+		shellMF_ModificaContas.setImage((Image) SWTResourceManager.getImage(J_02Menu_F.class, "/Logo/Java-logo-png Logo.png"));
+		
 
 		shellMF_ModificaContas.setBackground(SWTResourceManager.getColor(SWT.COLOR_DARK_GRAY));
 		shellMF_ModificaContas.setSize(729, 545);
@@ -294,8 +332,7 @@ public class J_02Menu_F_MovimentaConta {
 			button_Deposito.setSelection(true);
 			button_Deposito.setBounds(24, 187, 142, 25);
 			
-			button_Levanta = new Button(composite, SWT.NONE);
-			
+			button_Levanta = new Button(composite, SWT.NONE);	
 			button_Levanta.setText("Levantar Valor");
 			button_Levanta.setSelection(true);
 			button_Levanta.setBounds(24, 223, 142, 25);
@@ -305,7 +342,9 @@ public class J_02Menu_F_MovimentaConta {
 				button_Transferencia.setText("Transaferencia");
 				button_Transferencia.setSelection(true);
 				button_Transferencia.setBounds(24, 256, 142, 25);
-			
+				button_Deposito.setEnabled(true);
+				button_Levanta.setEnabled(true);
+				button_Transferencia.setEnabled(true);
 			
 		
 		combo_EscolhaConta = new Combo(composite, SWT.NONE);
@@ -428,6 +467,9 @@ public class J_02Menu_F_MovimentaConta {
 			@Override
 			public void mouseUp(MouseEvent e) {
 				shellMF_ModificaContas.dispose();
+				
+				J_02_MenuFun_AlteraDados2 alteradados=new J_02_MenuFun_AlteraDados2(gestor, uUtilizador); 
+				alteradados.open();
 			}
 		});
 		button.setText("Log Out");
@@ -568,20 +610,11 @@ public class J_02Menu_F_MovimentaConta {
 		btnEditarConta.setSelection(true);
 		btnEditarConta.setBounds(25, 318, 141, 25);
 
-		 button_Transferencia = new Button(composite, SWT.NONE);
-		
-		button_Transferencia.setText("Transaferencia");
-		button_Transferencia.setSelection(true);
-		button_Transferencia.setBounds(24, 256, 142, 25);
-
+		 
 		text_ValorTrf = new Text(composite, SWT.BORDER);
 		text_ValorTrf.setBounds(172, 256, 93, 21);
 
-	 button_Levanta = new Button(composite, SWT.NONE);
-		
-		button_Levanta.setText("Levantar Valor");
-		button_Levanta.setSelection(true);
-		button_Levanta.setBounds(24, 223, 142, 25);
+	 
 
 		text_Levantamento = new Text(composite, SWT.BORDER);
 		text_Levantamento.setBounds(172, 224, 93, 21);
@@ -640,6 +673,7 @@ public class J_02Menu_F_MovimentaConta {
 		button_Deposito.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
+				System.out.println("<---- DEPOSITO --->\n");
 				text_Deposito.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
 				escolhaTA = Transacao.TipoT.DEP_CASH;
 			
@@ -649,9 +683,11 @@ public class J_02Menu_F_MovimentaConta {
 			}
 		});
 		// ************ FAZ UM Levantamento ********************
+		
 		button_Levanta.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
+				System.out.println("<---- LEVANTAMENTO --->\n");
 				text_Levantamento.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
 				escolhaTA = Transacao.TipoT.LEV_CASH;
 			
@@ -659,6 +695,7 @@ public class J_02Menu_F_MovimentaConta {
 				text_Levantamento.setText("");
 			}
 		});
+		
 		// ************ FAZ UMA Transferencia********************
 		button_Transferencia.addMouseListener(new MouseAdapter() {
 			@Override
@@ -740,7 +777,8 @@ public class J_02Menu_F_MovimentaConta {
 				mensagem = mensagem + "O Valaor a transaferir é superior ao Saldo da Conta.\n";
 				verifica=false;
 			}
-			else if (!gestor.verifMovimentos(contaActual,escolhaTA)&eNumeroIouD(texoVerifica)&!(Integer.parseInt(texoVerifica.getText()) < 0)) {
+			else if (eNumeroIouD(texoVerifica)&!(Integer.parseInt(texoVerifica.getText()) < 0)&
+					!(gestor.verifMovimentos(contaActual,escolhaTA,Integer.parseInt(texoVerifica.getText())))) {
 				texoVerifica.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
 				mensagem = mensagem + "Atingiu o limite maximo que pode levantar ou transaferir.\n";
 				verifica=false;
@@ -813,7 +851,7 @@ public class J_02Menu_F_MovimentaConta {
 			item.setText(4, ("" + (saldoI)));
 			saldoI = saldoI - contaActual.getTransacoesC().get(i).getValor();
 		}
-		if (combo_EscolhaConta.getText().contains("(ENCERRADA)")) {
+		if (combo_EscolhaConta.getText().contains("ENCERRADA")) {
 
 //		btnMovimentarConta.setVisible(false);
 			System.out.println("<---- ?????????? Bloqueia Botao");

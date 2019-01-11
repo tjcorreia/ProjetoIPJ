@@ -37,6 +37,7 @@ import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.graphics.Image;
 
 /**
  * Breve descrição do código
@@ -190,25 +191,24 @@ public class J_02_MenuFun_AlteraDados2 {
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * @wbp.parser.entryPoint
+	 */
 	public J_02_MenuFun_AlteraDados2() {
-		super();
-
+	
+		open();
 		// TODO Auto-generated constructor stub
 	}
 
-	/**
-	 * Launch the application.
-	 * 
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		try {
-			J_02_MenuFun_AlteraDados2 window = new J_02_MenuFun_AlteraDados2(new Gestao(), new Utilizador());
-			window.open();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	
+//	public static void main(String[] args) {
+//		try {
+//			J_02_MenuFun_AlteraDados2 window = new J_02_MenuFun_AlteraDados2();
+//			window.open();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 	/**
 	 * Open the window.
@@ -233,6 +233,8 @@ public class J_02_MenuFun_AlteraDados2 {
 
 		shell = new Shell();
 		shell.setSize(743, 450);
+		shell.setBackground(SWTResourceManager.getColor(SWT.COLOR_DARK_GRAY));
+		shell.setImage((Image) SWTResourceManager.getImage(J_02Menu_F.class, "/Logo/Java-logo-png Logo.png"));
 		shell.setText("MENU ADMINISTRADOR");
 
 		text = new Text(shell, SWT.BORDER);
