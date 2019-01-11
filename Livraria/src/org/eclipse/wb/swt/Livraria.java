@@ -38,15 +38,15 @@ public class Livraria {
 		 * 
 		 */
 		//criar 3 pequenos historicos de preços
-		Map <GregorianCalendar, Double > precos1 = new HashMap<>();
-		precos1.put(new GregorianCalendar(2017,2,5), 15.0);
+		HashMap <GregorianCalendar, Double > precos1 = new HashMap<>();
+		precos1.put(new GregorianCalendar(2017,2,5), 15.5);
 		precos1.put(new GregorianCalendar(2016,6,14), 13.0);
 		precos1.put(new GregorianCalendar(2016,11,14), 14.0);
-		Map <GregorianCalendar, Double > precos2 = new HashMap<>();
-		precos2.put(new GregorianCalendar(2017,2,5), 15.0);
+		HashMap <GregorianCalendar, Double > precos2 = new HashMap<>();
+		precos2.put(new GregorianCalendar(2017,2,5), 16.5);
 		precos2.put(new GregorianCalendar(2016,6,14), 13.0);
 		precos2.put(new GregorianCalendar(2016,11,14), 14.0);
-		Map <GregorianCalendar, Double > precos3 = new HashMap<>();
+		HashMap <GregorianCalendar, Double > precos3 = new HashMap<>();
 		precos3.put(new GregorianCalendar(2017,2,5), 23.0);
 		precos3.put(new GregorianCalendar(2017,5,14), 25.0);
 		precos3.put(new GregorianCalendar(2018,10,2), 25.8);
@@ -58,10 +58,10 @@ public class Livraria {
 				new GregorianCalendar (2017,11,18) , 16.5, 3, precos2);
 		Livro lv3 = new Livro ("Nove Amanhãs", "1549657432745", "Isak Asimov", "Nébula", 
 				"Ficção Científica. Nove pequenos contos futurísticos", 
-				new GregorianCalendar (2018,11,12) , 15.5, 20, precos3);
+				new GregorianCalendar (2018,11,12) , 25.8, 20, precos3);
 		Livro lv4 = new Livro ("Um homem estranho numa terra estranha", "9635874432745", "Ursula K Leguin", "Nébula", 
 				"Ficção Científica. Um extra-terrestre chega à terra", 
-				new GregorianCalendar (2017,11,12) , 11, 0, precos1);
+				new GregorianCalendar (2017,11,12) , 15.5, 0, precos1);
 		// adicionar livros à lista de livros
 		livros = new ArrayList<>();
 		livros.add(lv1);
