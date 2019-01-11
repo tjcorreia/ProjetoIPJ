@@ -457,8 +457,16 @@ public class J_11Menu_Admin {
 		caixaEditora.setText(livroSelecionado.editora);
 		caixaPreco.setText(String.valueOf(livroSelecionado.preco));
 		caixaStock.setSelection(livroSelecionado.stock);
-		caixaData.setDate(livroSelecionado.getData().get(Calendar.YEAR), (livroSelecionado.getData().get(Calendar.MONTH) + 1), 
-				livroSelecionado.getData().get(Calendar.DAY_OF_MONTH));
+		System.out.println(livroSelecionado.getData());
+		System.out.println(livroSelecionado.data);
+		System.out.println("" + livroSelecionado.getData().get(Calendar.YEAR)+"/" +(livroSelecionado.getData().get(Calendar.MONTH) + 1) 
+				+ "/" + livroSelecionado.getData().get(Calendar.DAY_OF_MONTH));
+		int ano = livroSelecionado.getData().get(Calendar.YEAR);
+		int mes = livroSelecionado.getData().get(Calendar.MONTH) + 1;
+		int dia =  livroSelecionado.getData().get(Calendar.DAY_OF_MONTH) ;
+		caixaData.setDate(dia,mes,ano);
+		//caixaData.setDate(livroSelecionado.getData().get(Calendar.YEAR), (livroSelecionado.getData().get(Calendar.MONTH) + 1), 
+		//		livroSelecionado.getData().get(Calendar.DAY_OF_MONTH));
 		caixaDescricao.setText(livroSelecionado.descricao);
 	}	
 }
