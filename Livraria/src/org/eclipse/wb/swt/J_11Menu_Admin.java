@@ -596,7 +596,7 @@ public class J_11Menu_Admin {
 		if ( novoPreco != livroSelecionado.preco ) {
 			livroSelecionado.precosAnteriores.put(new GregorianCalendar(), novoPreco);
 			livroSelecionado.setPreco( novoPreco );
-			
+			//
 		}
 //		livroSelecionado.setint novoStock = caixaStock.getDigits();
 //		livroSelecionado.setGregorianCalendar novaData = new GregorianCalendar(caixaData.getYear(), caixaData.getMonth()-1, caixaData.getDay()); 
