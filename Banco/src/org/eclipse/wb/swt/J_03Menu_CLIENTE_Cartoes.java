@@ -127,6 +127,7 @@ public class J_03Menu_CLIENTE_Cartoes {
 		this.gestor = gestor;
 		clienteActual=(Cliente)uUtilizador;
 
+		
 	}
 
 	
