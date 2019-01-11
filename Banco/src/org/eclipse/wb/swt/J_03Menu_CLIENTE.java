@@ -131,7 +131,7 @@ public class J_03Menu_CLIENTE {
 			@Override
 			public void mouseUp(MouseEvent e) {
 				shlMenuFuncionrio.dispose();
-				J_02Menu_F_ListaClientes lclientes=new J_02Menu_F_ListaClientes(gestor,uUtilizador);
+				J_03Menu_CLIENTE_contas lclientes=new J_03Menu_CLIENTE_contas(gestor,uUtilizador);
 				lclientes.open();
 				
 			}

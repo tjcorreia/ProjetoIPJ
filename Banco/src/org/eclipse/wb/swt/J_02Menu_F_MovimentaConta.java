@@ -767,7 +767,7 @@ public class J_02Menu_F_MovimentaConta {
 				mensagem = mensagem+"tem de introduzir um valor numerico absoluto (positivo)\\n";
 				verifica=false;
 			} 
-			else if (verifica &&escolhaTA.equals(TipoT.TRANSFERENCIA)& (Integer.parseInt(texoVerifica.getText()))>contaActual.getSaldo()) {
+			else if (verifica &&escolhaTA.equals(TipoT.TRANSFERENCIA)& (Double.parseDouble(texoVerifica.getText()))>contaActual.getSaldo()) {
 				texoVerifica.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
 				mensagem = mensagem + "O Valaor a transaferir é superior ao Saldo da Conta.\n";
 				verifica=false;
