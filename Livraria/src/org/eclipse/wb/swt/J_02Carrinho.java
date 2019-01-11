@@ -351,8 +351,9 @@ public class J_02Carrinho { //criou-se janela como subclasse para poder receber 
 								//fechar janela corrente
 								shell.close();
 								//abrir janela de mensagem de compra submetida
-								J_03CompraSubmetida janelaMensgCompraSubmetida = new J_03CompraSubmetida();
-								janelaMensgCompraSubmetida.open();
+								J_20AlteracaoSubmetida janela = new J_20AlteracaoSubmetida(""
+										+ "Compra submetida com sucesso","Aguarde/solicite confirmação de um vendedor");
+								janela.open();
 								//voltar à janela inicial
 								J_00Inicial janelaInicial = new J_00Inicial(livraria);
 								janelaInicial.open();
@@ -383,8 +384,9 @@ public class J_02Carrinho { //criou-se janela como subclasse para poder receber 
 									//fechar janela corrente
 									shell.close();
 									//abrir janela de mensagem de compra submetida
-									J_03CompraSubmetida janelaMensgCompraSubmetida = new J_03CompraSubmetida();
-									janelaMensgCompraSubmetida.open();
+									J_20AlteracaoSubmetida janela = new J_20AlteracaoSubmetida(""
+											+ "Compra submetida com sucesso","Aguarde/solicite confirmação de um vendedor");
+									janela.open();
 									//voltar à janela inicial
 									J_00Inicial janelaInicial = new J_00Inicial(livraria);
 									janelaInicial.open();

@@ -8,7 +8,9 @@ import org.eclipse.swt.widgets.Button;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.Scanner;
+
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Label;
@@ -53,6 +55,7 @@ public class J_11Menu_Admin {
 	private Label lblStock;
 	private Button btnPesquisar;
 	private Button btnSubmeterAlteracoes;
+	private Button btnSubmeterNovoLivro;
 	private Text caixaTitulo;
 	private Text caixaIsbn;
 	private Text caixaAutor;
@@ -69,20 +72,28 @@ public class J_11Menu_Admin {
 	private Label lblIntroduzaEditora;
 	private Label lblPrecoIncorreto;
 	private Label lblIntroduzaDescricao;
+	private Label lblDataIncorreta;
+	private Label lblNomeVendedor;
+	private Label lblEmail;
+	private Label lblSenha;
+	private Label lblIntroduzaNome;
+	private Label lblEmailIncorreto;
+	private Label lblSenhaIncorreta;
+	private Button btbSubmeterVendedor;
 	
 	
 	
 	
-	//Construtor para poder trazer a Livraria para esta classe
-		public J_11Menu_Admin(Livraria livraria, Utilizador utilizador) {
-			//super();
-			this.utilizador = utilizador;
-			this.livraria = livraria;
-			listaLivrosDaBusca =  livraria.getLivros();
-			stringProcurada = "";
-			livroSelecionado = new Livro();
-			open();
-		}
+	//Construtor para poder trazer a Livraria e o utilizador para esta classe
+	public J_11Menu_Admin(Livraria livraria, Utilizador utilizador) {
+		//super();
+		this.utilizador = utilizador;
+		this.livraria = livraria;
+		listaLivrosDaBusca =  livraria.getLivros();
+		stringProcurada = "";
+		livroSelecionado = new Livro();
+		open();
+	}	
 	
 
 
@@ -121,8 +132,7 @@ public class J_11Menu_Admin {
 		Label lblMenuAdministrador = new Label(shlMenuAdmin, SWT.NONE);
 		lblMenuAdministrador.setText("MENU ADMINISTRADOR");
 		lblMenuAdministrador.setFont(SWTResourceManager.getFont("Segoe UI", 12, SWT.NORMAL));
-		lblMenuAdministrador.setAlignment(SWT.CENTER);
-		lblMenuAdministrador.setBounds(10, 10, 358, 38);
+		lblMenuAdministrador.setBounds(10, 10, 229, 38);
 		
 		Label lblNomeUtilizador = new Label(shlMenuAdmin, SWT.NONE);
 		lblNomeUtilizador.setAlignment(SWT.RIGHT);
@@ -144,15 +154,25 @@ public class J_11Menu_Admin {
 		Button btnAdicionarLivro = new Button(shlMenuAdmin, SWT.NONE);
 		btnAdicionarLivro.setText("Adicionar livro");
 		btnAdicionarLivro.setBounds(10, 146, 133, 30);
-		btnAdicionarLivro.addSelectionListener(new SelectionAdapter() {
+		btnAdicionarLivro.addMouseListener(new MouseAdapter() {
 			@Override
-			public void widgetSelected(SelectionEvent e) {
+			public void mouseUp(MouseEvent e) {
+				limparCaixasLivro();
+				visibilidadesBtnAdicionarLivro();
+				
 			}
 		});
+		
 		
 		Button btnRegistarVendedor = new Button(shlMenuAdmin, SWT.NONE);
 		btnRegistarVendedor.setText("Registar vendedor");
 		btnRegistarVendedor.setBounds(10, 234, 133, 30);
+		btnRegistarVendedor.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				visibilidadesBtnRegistarVendedor();
+			}
+		});
 		
 
 		Button btnVoltar = new Button(shlMenuAdmin, SWT.NONE);
@@ -217,7 +237,7 @@ public class J_11Menu_Admin {
 		btnPesquisar.setText("Pesquisar");
 		btnPesquisar.setBounds(449, 65, 90, 30);
 		
-		tabelaLivros = new Table(shlMenuAdmin, SWT.BORDER | SWT.FULL_SELECTION);
+		tabelaLivros = new Table(shlMenuAdmin, SWT.WRAP | SWT.BORDER | SWT.FULL_SELECTION);
 		tabelaLivros.setVisible(false);
 		tabelaLivros.setLinesVisible(true);
 		tabelaLivros.setHeaderVisible(true);
@@ -246,7 +266,7 @@ public class J_11Menu_Admin {
 		
 		/**
 		 *
-		 * elementos visiveis para 'alterar livro'
+		 * elementos visiveis para 'alterar livro' e 'adicionar livro'
 		 * 
 		 */
 		lblTitulo = new Label(shlMenuAdmin, SWT.NONE);
@@ -365,6 +385,13 @@ public class J_11Menu_Admin {
 		lblPrecoIncorreto.setFont(SWTResourceManager.getFont("Segoe UI", 7, SWT.NORMAL));
 		lblPrecoIncorreto.setBounds(261, 295, 196, 18);
 		
+		lblDataIncorreta = new Label(shlMenuAdmin, SWT.NONE);
+		lblDataIncorreta.setVisible(false);
+		lblDataIncorreta.setText("Data posterior \u00E0 atual");
+		lblDataIncorreta.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
+		lblDataIncorreta.setFont(SWTResourceManager.getFont("Segoe UI", 7, SWT.NORMAL));
+		lblDataIncorreta.setBounds(261, 395, 196, 18);
+		
 		lblIntroduzaDescricao = new Label(shlMenuAdmin, SWT.NONE);
 		lblIntroduzaDescricao.setVisible(false);
 		lblIntroduzaDescricao.setText("Introduza descri\u00E7\u00E3o");
@@ -381,10 +408,11 @@ public class J_11Menu_Admin {
 				//se dados introduzidos forem válidos para um livro
 				if ( verificarSeLivroValido() ) {
 					//registar alterações no livro
-					livroSelecionado.imprimirHistoricoPrecos();
 					registarAlteracoesNoLivroSelecionado();
-					livroSelecionado.imprimirHistoricoPrecos();
-					
+					//abrir janela de mensagem de livro alterado
+					visibilidadesInicio();
+					J_20AlteracaoSubmetida janela = new J_20AlteracaoSubmetida("Livro alterado com sucesso","");
+					janela.open();
 				}
 				//caso os dados não sejam válidos, não fazer nada, porque o método 'verificarSeValido' 
 				//vai fazer mostrar os alertas de erros
@@ -392,9 +420,110 @@ public class J_11Menu_Admin {
 				}
 			}
 		});
+		
+		btnSubmeterNovoLivro = new Button(shlMenuAdmin, SWT.NONE);
+		btnSubmeterNovoLivro.setVisible(false);
+		btnSubmeterNovoLivro.setBounds(520, 234, 150, 78);
+		btnSubmeterNovoLivro.setText("Submeter novo livro");
+		btnSubmeterNovoLivro.addMouseListener(new MouseAdapter() {
+			public void mouseUp(MouseEvent e) {
+				//se dados introduzidos forem válidos para um livro
+				if ( verificarSeLivroValido() ) {
+					//criar novo livro a partir dos dados inseridos e adicionar novo livro à livraria
+					livraria.getLivros().add( recolherDadosNovoLivro() );
+					//abrir janela de mensagem de novo livro registado
+					visibilidadesInicio();
+					J_20AlteracaoSubmetida janela = new J_20AlteracaoSubmetida("Livro registado com sucesso","");
+					janela.open();
+				}
+				//caso os dados não sejam válidos, não fazer nada, porque o método 'verificarSeValido' 
+				//vai fazer mostrar os alertas de erros
+				else {
+				}
+			}
+		});
+		
+		
+		/**
+		 *
+		 * elementos visiveis para 'registar vendedor'
+		 * 
+		 */
+		lblNomeVendedor = new Label(shlMenuAdmin, SWT.NONE);
+		lblNomeVendedor.setVisible(false);
+		lblNomeVendedor.setText("Nome do vendedor");
+		lblNomeVendedor.setAlignment(SWT.RIGHT);
+		lblNomeVendedor.setBounds(96, 65, 158, 20);
+		
+		lblEmail = new Label(shlMenuAdmin, SWT.NONE);
+		lblEmail.setVisible(false);
+		lblEmail.setText("e-mail");
+		lblEmail.setAlignment(SWT.RIGHT);
+		lblEmail.setBounds(184, 115, 70, 20);
+		
+		lblSenha = new Label(shlMenuAdmin, SWT.NONE);
+		lblSenha.setVisible(false);
+		lblSenha.setText("Senha");
+		lblSenha.setAlignment(SWT.RIGHT);
+		lblSenha.setBounds(184, 165, 70, 20);
+		
+		lblIntroduzaNome = new Label(shlMenuAdmin, SWT.NONE);
+		lblIntroduzaNome.setVisible(false);
+		lblIntroduzaNome.setText("Introduza nome");
+		lblIntroduzaNome.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
+		lblIntroduzaNome.setFont(SWTResourceManager.getFont("Segoe UI", 7, SWT.NORMAL));
+		lblIntroduzaNome.setBounds(261, 94, 196, 18);
+		
+		lblEmailIncorreto = new Label(shlMenuAdmin, SWT.NONE);
+		lblEmailIncorreto.setVisible(false);
+		lblEmailIncorreto.setText("e-mail incorreto");
+		lblEmailIncorreto.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
+		lblEmailIncorreto.setFont(SWTResourceManager.getFont("Segoe UI", 7, SWT.NORMAL));
+		lblEmailIncorreto.setBounds(261, 146, 196, 18);
+		
+		lblSenhaIncorreta = new Label(shlMenuAdmin, SWT.NONE);
+		lblSenhaIncorreta.setVisible(false);
+		lblSenhaIncorreta.setText("Senha incorreta (minimo 3 carateres)");
+		lblSenhaIncorreta.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
+		lblSenhaIncorreta.setFont(SWTResourceManager.getFont("Segoe UI", 7, SWT.NORMAL));
+		lblSenhaIncorreta.setBounds(261, 196, 196, 18);
+		
+		btbSubmeterVendedor = new Button(shlMenuAdmin, SWT.NONE);
+		btbSubmeterVendedor.setVisible(false);
+		btbSubmeterVendedor.setText("Submeter novo vendedor");
+		btbSubmeterVendedor.setBounds(260, 286, 207, 78);
+		btbSubmeterVendedor.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				//se dados introduzidos forem válidos para um vendedor
+				if ( verificarSeUtilizadorValido() ) {
+					//criar novo livro a partir dos dados inseridos e adicionar novo livro à livraria
+					livraria.getUtilizadores().add( recolherDadosNovoUtilizador() );
+					//abrir janela de mensagem de novo vendedor registado
+					visibilidadesInicio();
+					J_20AlteracaoSubmetida janela = new J_20AlteracaoSubmetida("Vendedor registado com sucesso","");
+					janela.open();
+//					J_20AlteracaoSubmetida janelaMensgUtilizadorRegistado = new J_20AlteracaoSubmetida("Vendedor registado com sucesso" , "");
+//					janelaMensgUtilizadorRegistado.open();
+//					janelaMensgCompraSubmetida.setTextoMensagens("Vendedor submetido com sucesso" , "");
+//					J_20AlteracaoSubmetida janelaMensgVendedorRegistado = new J_20AlteracaoSubmetida();
+//					janelaMensgVendedorRegistado.open();
+				}
+				//caso os dados não sejam válidos, não fazer nada, porque o método 'verificarSeUtilizadorValido' 
+				//vai fazer mostrar os alertas de erros
+				else {
+				}
+			}
+		});
+		
 
 	}
 	
+	
+	
+	
+	
+
 	
 
 	
@@ -404,67 +533,8 @@ public class J_11Menu_Admin {
 	 * 
 	 */
 	
-	public void visibilidadesBtnAlterarLivro() {
-		lblMensagemSemCorrespondencias.setVisible(false);
-		lblSelecioneLivro.setVisible(true);
-		CaixaDePesquisa.setVisible(true);
-		btnPesquisar.setVisible(true);
-		tabelaLivros.setVisible(true);
-		
-		lblTitulo.setVisible(false);
-		lblIsbn.setVisible(false);
-		lblAutor.setVisible(false);
-		lblEditora.setVisible(false);
-		lblDescricao.setVisible(false);
-		lblData.setVisible(false);
-		lblPreco.setVisible(false);
-		lblStock.setVisible(false);
-		
-		caixaTitulo.setVisible(false);
-		caixaIsbn.setVisible(false);
-		caixaAutor.setVisible(false);
-		caixaEditora.setVisible(false);
-		caixaPreco.setVisible(false);
-		caixaStock.setVisible(false);
-		caixaData.setVisible(false);
-		caixaDescricao.setVisible(false);
-		
-		btnSubmeterAlteracoes.setVisible(false);
-		
-		lblIntroduzaTitulo.setVisible(false);
-		lblIntroduzaAutor.setVisible(false);
-		lblIntroduzaEditora.setVisible(false);
-		lblIntroduzaDescricao.setVisible(false);
-	}
 	
-	public void visibilidadesSelecionadoLivroAlterar() {
-		lblMensagemSemCorrespondencias.setVisible(false);
-		lblSelecioneLivro.setVisible(false);
-		CaixaDePesquisa.setVisible(false);
-		btnPesquisar.setVisible(false);
-		tabelaLivros.setVisible(false);
-		
-		lblTitulo.setVisible(true);
-		lblIsbn.setVisible(true);
-		lblAutor.setVisible(true);
-		lblEditora.setVisible(true);
-		lblDescricao.setVisible(true);
-		lblData.setVisible(true);
-		lblPreco.setVisible(true);
-		lblStock.setVisible(true);
-		
-		caixaTitulo.setVisible(true);
-		caixaIsbn.setVisible(true);
-		caixaAutor.setVisible(true);
-		caixaEditora.setVisible(true);
-		caixaPreco.setVisible(true);
-		caixaStock.setVisible(true);
-		caixaData.setVisible(true);
-		caixaDescricao.setVisible(true);
-		
-		btnSubmeterAlteracoes.setVisible(true);
-		
-	}
+	
 	
 	//Método para limpar e preencher novamente a tabela 
 	public void preencherTabela() {
@@ -480,7 +550,6 @@ public class J_11Menu_Admin {
 		tabelaLivros.redraw();	
 	}	
 	
-	//
 	//Método para preencher as caixas de alteração de dados de livro, com os dados do livro selecionado
 	public void preencherCaixasLivro() {
 		caixaTitulo.setText(livroSelecionado.nome);
@@ -490,11 +559,26 @@ public class J_11Menu_Admin {
 		caixaPreco.setText(String.valueOf(livroSelecionado.preco));
 		caixaStock.setSelection(livroSelecionado.stock);
 		caixaData.setYear(livroSelecionado.getData().get(Calendar.YEAR));
-		caixaData.setMonth(livroSelecionado.getData().get(Calendar.MONTH));
+		caixaData.setMonth( (livroSelecionado.getData().get(Calendar.MONTH)-1) );
 		caixaData.setDay(livroSelecionado.getData().get(Calendar.DAY_OF_MONTH));
 		caixaDescricao.setText(livroSelecionado.descricao);
 	}	
 	
+	
+	//Método para preencher as caixas de alteração de dados de livro, com os dados do livro selecionado
+	public void limparCaixasLivro() {
+		caixaTitulo.setText("");
+		caixaIsbn.setText("");
+		caixaAutor.setText("");
+		caixaEditora.setText("");
+		caixaPreco.setText("");
+		caixaStock.setSelection(0);
+		GregorianCalendar data = new GregorianCalendar();
+		caixaData.setYear(data.get(Calendar.YEAR));
+		caixaData.setMonth( (data.get(Calendar.MONTH)));
+		caixaData.setDay(data.get(Calendar.DAY_OF_MONTH));
+		caixaDescricao.setText("");
+	}	
 	
 	//Método para recolher dados das caixas de alteração de dados de livro
 	public boolean verificarSeLivroValido() {
@@ -546,6 +630,18 @@ public class J_11Menu_Admin {
 		else {
 			lblPrecoIncorreto.setVisible(false);
 		}
+		//verificar se data posterior à atual
+		GregorianCalendar novaData = new GregorianCalendar(caixaData.getYear(), caixaData.getMonth()-1, caixaData.getDay());
+		GregorianCalendar agora = new GregorianCalendar();
+		//adicionar um dia mais a agora, para evitar conflitos com o dia atual
+		agora.add(Calendar.DATE, 1);
+		if ( novaData.after(agora) ){
+			lblDataIncorreta.setVisible(true);
+			return false;
+		}
+		else {
+			lblDataIncorreta.setVisible(false);
+		}
 		//verificar se descrição não está em branco
 		String novaDescricao = caixaDescricao.getText();
 		if ( novaDescricao.equals("") ) {
@@ -557,6 +653,38 @@ public class J_11Menu_Admin {
 		}
 		return true;
 	}	
+	
+	//Método para recolher dados das caixas de alteração de dados de livro
+	public boolean verificarSeUtilizadorValido() {
+		//verificar se nome não está em branco
+		String nome = caixaTitulo.getText();
+		if ( nome.equals("") ) {
+			lblIntroduzaNome.setVisible(true);
+			return false;
+		}
+		else {
+			lblIntroduzaNome.setVisible(false);
+		}
+		//verificar se é um email válido
+		String email = caixaIsbn.getText();
+		if ( !verificarSeEmail( email) ) {
+			lblEmailIncorreto.setVisible(true);
+			return false;
+		}
+		else {
+			lblEmailIncorreto.setVisible(false);
+		}
+		//verificar se senha tem mais de 3 carateres
+		String senha = caixaAutor.getText();
+		if ( senha.toCharArray().length < 3 ) {
+			lblSenhaIncorreta.setVisible(true);
+			return false;
+		}		
+		else {
+			lblSenhaIncorreta.setVisible(false);
+		}
+		return true;
+	}		
 	
 	//Método para verificar se ISBN é válido
 	public boolean verificarISBN(String s) {
@@ -583,10 +711,16 @@ public class J_11Menu_Admin {
 	    return true;
 	}	
 	
+	public boolean verificarSeEmail(String email) {
+        String ePattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
+        java.util.regex.Pattern p = java.util.regex.Pattern.compile(ePattern);
+        java.util.regex.Matcher m = p.matcher(email);
+        return m.matches();
+	}
 	
-	//Método para recolher dados das caixas de alteração de dados de livro
+	
+	//Método para recolher dados das caixas de alteração de dados de livro e registar no livro selecionado
 	public void registarAlteracoesNoLivroSelecionado() {
-		
 		livroSelecionado.setNome( caixaTitulo.getText());
 		livroSelecionado.setIsbn(caixaIsbn.getText());
 		livroSelecionado.setAutor( caixaAutor.getText());
@@ -596,28 +730,249 @@ public class J_11Menu_Admin {
 		if ( novoPreco != livroSelecionado.preco ) {
 			livroSelecionado.precosAnteriores.put(new GregorianCalendar(), novoPreco);
 			livroSelecionado.setPreco( novoPreco );
-			//
 		}
-//		livroSelecionado.setint novoStock = caixaStock.getDigits();
-//		livroSelecionado.setGregorianCalendar novaData = new GregorianCalendar(caixaData.getYear(), caixaData.getMonth()-1, caixaData.getDay()); 
-//		livroSelecionado.setString novaDescricao = caixaDescricao.getText();
-
-
-//		String novoIsbn = caixaIsbn.getText();
-//		String novoAutor = caixaAutor.getText();
-//		String novaEditora = caixaEditora.getText();
-//		double novoPreco = Double.parseDouble(caixaPreco.getText());
-//		//Se preço foi alterado -> actualizar HashMap de datas/preços
-//		if ( novoPreco != livroSelecionado.preco ) {
-//			
-//		}
-//		int novoStock = caixaStock.getDigits();
-//		GregorianCalendar novaData = new GregorianCalendar(caixaData.getYear(), caixaData.getMonth()-1, caixaData.getDay()); 
-//		String novaDescricao = caixaDescricao.getText();
-//
-//		Livro lv = new Livro(novoTitulo, novoIsbn, novoAutor, novaEditora, novaDescricao, novaData, novoPreco, novoStock);
-		
+		livroSelecionado.setStock(Integer.parseInt(caixaStock.getText()));
+		livroSelecionado.setData( new GregorianCalendar(caixaData.getYear(), caixaData.getMonth()-1, caixaData.getDay()) ); 
+		livroSelecionado.setDescricao( caixaDescricao.getText() );
 	}	
+	
+	//Método para recolher dados das caixas para novo livro e devolver esse livro
+	public Livro recolherDadosNovoLivro() {
+		String titulo = caixaTitulo.getText();
+		String isbn = caixaIsbn.getText();
+		String autor = caixaAutor.getText();
+		String editora = caixaEditora.getText();
+		int stock = Integer.parseInt(caixaStock.getText());
+		GregorianCalendar data = new GregorianCalendar(caixaData.getYear(), caixaData.getMonth()-1, caixaData.getDay() ); 
+		String descricao = caixaDescricao.getText();
+		double preco = Double.parseDouble(caixaPreco.getText());
+		//Criar novo hashmap de datas/preços com o novo preço, para a data atual
+		HashMap <GregorianCalendar, Double > precos = new HashMap<>();
+		precos.put(new GregorianCalendar(), preco);
+		return new Livro(titulo, isbn, autor, editora, descricao, data, preco, stock, precos);	
+	}	
+	
+	
+	//Método para recolher dados das caixas para novo livro e devolver esse livro
+	public Utilizador recolherDadosNovoUtilizador() {
+		String nome = caixaTitulo.getText();
+		String email = caixaIsbn.getText();
+		String senha = caixaAutor.getText();
+		int uID = livraria.gerarNovoNumUtilizador();
+		//como queremos um vendedor o utilizador é do tipo vendedor
+		return new Utilizador(uID, nome, email, senha, Utilizador.Tipo.VENDEDOR );	
+	}	
+	
+	public void visibilidadesInicio() {
+		lblMensagemSemCorrespondencias.setVisible(false);
+		lblSelecioneLivro.setVisible(false);
+		CaixaDePesquisa.setVisible(false);
+		btnPesquisar.setVisible(false);
+		tabelaLivros.setVisible(false);
+		
+		lblTitulo.setVisible(false);
+		lblIsbn.setVisible(false);
+		lblAutor.setVisible(false);
+		lblEditora.setVisible(false);
+		lblDescricao.setVisible(false);
+		lblData.setVisible(false);
+		lblPreco.setVisible(false);
+		lblStock.setVisible(false);
+		
+		caixaTitulo.setVisible(false);
+		caixaIsbn.setVisible(false);
+		caixaAutor.setVisible(false);
+		caixaEditora.setVisible(false);
+		caixaPreco.setVisible(false);
+		caixaStock.setVisible(false);
+		caixaData.setVisible(false);
+		caixaDescricao.setVisible(false);
+		
+		btnSubmeterAlteracoes.setVisible(false);
+		btnSubmeterNovoLivro.setVisible(false);
+		
+		lblIntroduzaTitulo.setVisible(false);
+		lblIntroduzaAutor.setVisible(false);
+		lblIntroduzaEditora.setVisible(false);
+		lblIntroduzaDescricao.setVisible(false);
+		lblDataIncorreta.setVisible(false);
+		
+		lblNomeVendedor.setVisible(false);
+		lblEmail.setVisible(false);
+		lblSenha.setVisible(false);
+		lblIntroduzaNome.setVisible(false);
+		lblEmailIncorreto.setVisible(false);
+		lblSenhaIncorreta.setVisible(false);
+		btbSubmeterVendedor.setVisible(false);
+	}
+	
+	public void visibilidadesBtnAlterarLivro() {
+		preencherTabela();
+		lblMensagemSemCorrespondencias.setVisible(false);
+		lblSelecioneLivro.setVisible(true);
+		CaixaDePesquisa.setVisible(true);
+		btnPesquisar.setVisible(true);
+		tabelaLivros.setVisible(true);
+		
+		lblTitulo.setVisible(false);
+		lblIsbn.setVisible(false);
+		lblAutor.setVisible(false);
+		lblEditora.setVisible(false);
+		lblDescricao.setVisible(false);
+		lblData.setVisible(false);
+		lblPreco.setVisible(false);
+		lblStock.setVisible(false);
+		
+		caixaTitulo.setVisible(false);
+		caixaIsbn.setVisible(false);
+		caixaAutor.setVisible(false);
+		caixaEditora.setVisible(false);
+		caixaPreco.setVisible(false);
+		caixaStock.setVisible(false);
+		caixaData.setVisible(false);
+		caixaDescricao.setVisible(false);
+		
+		btnSubmeterAlteracoes.setVisible(false);
+		btnSubmeterNovoLivro.setVisible(false);
+		
+		lblIntroduzaTitulo.setVisible(false);
+		lblIntroduzaAutor.setVisible(false);
+		lblIntroduzaEditora.setVisible(false);
+		lblIntroduzaDescricao.setVisible(false);
+		lblDataIncorreta.setVisible(false);
+		
+		lblNomeVendedor.setVisible(false);
+		lblEmail.setVisible(false);
+		lblSenha.setVisible(false);
+		lblIntroduzaNome.setVisible(false);
+		lblEmailIncorreto.setVisible(false);
+		lblSenhaIncorreta.setVisible(false);
+		btbSubmeterVendedor.setVisible(false);
+	}
+	
+	public void visibilidadesSelecionadoLivroAlterar() {
+		lblMensagemSemCorrespondencias.setVisible(false);
+		lblSelecioneLivro.setVisible(false);
+		CaixaDePesquisa.setVisible(false);
+		btnPesquisar.setVisible(false);
+		tabelaLivros.setVisible(false);
+		
+		lblTitulo.setVisible(true);
+		lblIsbn.setVisible(true);
+		lblAutor.setVisible(true);
+		lblEditora.setVisible(true);
+		lblDescricao.setVisible(true);
+		lblData.setVisible(true);
+		lblPreco.setVisible(true);
+		lblStock.setVisible(true);
+		
+		caixaTitulo.setVisible(true);
+		caixaIsbn.setVisible(true);
+		caixaAutor.setVisible(true);
+		caixaEditora.setVisible(true);
+		caixaPreco.setVisible(true);
+		caixaStock.setVisible(true);
+		caixaData.setVisible(true);
+		caixaDescricao.setVisible(true);
+		
+		btnSubmeterAlteracoes.setVisible(true);
+		btnSubmeterNovoLivro.setVisible(false);
+		
+		lblNomeVendedor.setVisible(false);
+		lblEmail.setVisible(false);
+		lblSenha.setVisible(false);
+		lblIntroduzaNome.setVisible(false);
+		lblEmailIncorreto.setVisible(false);
+		lblSenhaIncorreta.setVisible(false);
+		btbSubmeterVendedor.setVisible(false);
+	}
+	
+	public void visibilidadesBtnAdicionarLivro() {
+		lblMensagemSemCorrespondencias.setVisible(false);
+		lblSelecioneLivro.setVisible(false);
+		CaixaDePesquisa.setVisible(false);
+		btnPesquisar.setVisible(false);
+		tabelaLivros.setVisible(false);
+		
+		lblTitulo.setVisible(true);
+		lblIsbn.setVisible(true);
+		lblAutor.setVisible(true);
+		lblEditora.setVisible(true);
+		lblDescricao.setVisible(true);
+		lblData.setVisible(true);
+		lblPreco.setVisible(true);
+		lblStock.setVisible(true);
+		
+		caixaTitulo.setVisible(true);
+		caixaIsbn.setVisible(true);
+		caixaAutor.setVisible(true);
+		caixaEditora.setVisible(true);
+		caixaPreco.setVisible(true);
+		caixaStock.setVisible(true);
+		caixaData.setVisible(true);
+		caixaDescricao.setVisible(true);
+		
+		btnSubmeterAlteracoes.setVisible(false);
+		btnSubmeterNovoLivro.setVisible(true);
+		
+		lblIntroduzaTitulo.setVisible(false);
+		lblIntroduzaAutor.setVisible(false);
+		lblIntroduzaEditora.setVisible(false);
+		lblIntroduzaDescricao.setVisible(false);
+		lblDataIncorreta.setVisible(false);
+		
+		lblNomeVendedor.setVisible(false);
+		lblEmail.setVisible(false);
+		lblSenha.setVisible(false);
+		lblIntroduzaNome.setVisible(false);
+		lblEmailIncorreto.setVisible(false);
+		lblSenhaIncorreta.setVisible(false);
+		btbSubmeterVendedor.setVisible(false);
+	}
+	
+	public void visibilidadesBtnRegistarVendedor() {
+		limparCaixasLivro();
+		lblMensagemSemCorrespondencias.setVisible(false);
+		lblSelecioneLivro.setVisible(false);
+		CaixaDePesquisa.setVisible(false);
+		btnPesquisar.setVisible(false);
+		tabelaLivros.setVisible(false);
+		
+		lblTitulo.setVisible(false);
+		lblIsbn.setVisible(false);
+		lblAutor.setVisible(false);
+		lblEditora.setVisible(false);
+		lblDescricao.setVisible(false);
+		lblData.setVisible(false);
+		lblPreco.setVisible(false);
+		lblStock.setVisible(false);
+		
+		caixaTitulo.setVisible(true);
+		caixaIsbn.setVisible(true);
+		caixaAutor.setVisible(true);
+		caixaEditora.setVisible(false);
+		caixaPreco.setVisible(false);
+		caixaStock.setVisible(false);
+		caixaData.setVisible(false);
+		caixaDescricao.setVisible(false);
+		
+		btnSubmeterAlteracoes.setVisible(false);
+		btnSubmeterNovoLivro.setVisible(false);
+		
+		lblIntroduzaTitulo.setVisible(false);
+		lblIntroduzaAutor.setVisible(false);
+		lblIntroduzaEditora.setVisible(false);
+		lblIntroduzaDescricao.setVisible(false);
+		lblDataIncorreta.setVisible(false);
+		
+		lblNomeVendedor.setVisible(true);
+		lblEmail.setVisible(true);
+		lblSenha.setVisible(true);
+		lblIntroduzaNome.setVisible(false);
+		lblEmailIncorreto.setVisible(false);
+		lblSenhaIncorreta.setVisible(false);
+		btbSubmeterVendedor.setVisible(true);
+	}
 	
 	
 }
