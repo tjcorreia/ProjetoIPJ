@@ -10,6 +10,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.GC;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
@@ -46,7 +48,7 @@ public class Gestao {
 //			e.printStackTrace();
 //		}
 
-		contadores.put("Utilizador", 1000); // inicializa o Contador de Utilizadores
+		contadores.put("Utilizador", 10000); // inicializa o Contador de Utilizadores
 		contadores.put("Contas", 100000); // inicializa o Contador de Contas
 		contadores.put("Cartoes", 500010000); // inicializa o Contador de Cartoes
 		// Administradores
@@ -63,11 +65,17 @@ public class Gestao {
 		mapUtilizadores.put("Machado", MachadoU);
 		mapUtilizadores.put("Correia", CorreiaU);
 
-		// Funcionarios
-		Funcionario MachadoFU = new Funcionario(contadores.get("Utilizador") + 1, "Maria", "Fun", "Maria", "Machado0",
-				"1977/07/30", "Rua Maria Vitoria", Funcionario.TipoID.CARTAOCIDADAO, "78456123", "mail1@gmail.com",
-				965420730);
+		// Funcionarios (o funcionario banco tem de existir sempre)
+		Funcionario BANCOFU = new Funcionario(contadores.get("Utilizador") + 1, "BANCO", "Fun", "BANCO", "BANCO0",
+				"1977/07/30", "BANCO", Funcionario.TipoID.CARTAOCIDADAO, "78456123", "banco@gmail.com",
+				960000000);
 		contadores.replace("Utilizador", contadores.get("Utilizador") + 1);
+		
+		Funcionario MachadoFU = new Funcionario(contadores.get("Utilizador") + 1, "BANCO", "Fun", "BANCO", "BANCO0",
+				"1977/07/30", "BANCO", Funcionario.TipoID.CARTAOCIDADAO, "78456123", "banco@gmail.com",
+				960000000);
+		contadores.replace("Utilizador", contadores.get("Utilizador") + 1);
+		
 		Funcionario CorreiaFU = new Funcionario(contadores.get("Utilizador") + 1, "Correia2", "Fun", "Tiago", "Coreia",
 				"1977/07/30", "Rua Maria Vitoria ", Funcionario.TipoID.CARTAOCIDADAO, "12345678", "mail2@gmail.com",
 				965420731);
@@ -166,6 +174,8 @@ public class Gestao {
 		cn2.addTransacaoC(T1Cn2);
 		Transacao T0Cn3 = new Transacao(MachadoFU.getuID(), 1000,"ABERTURA", 0,Transacao.TipoT.DEP_CASH);
 		cn3.addTransacaoC(T0Cn3);
+		Transacao T0Cn4 = new Transacao(MachadoFU.getuID(), 1000,"ABERTURA", 0,Transacao.TipoT.DEP_CASH);
+		cn4.addTransacaoC(T0Cn4);
 		
 		// cartao
 		
@@ -187,6 +197,7 @@ public class Gestao {
 
 		//( duvida colocar conta de origem ?)
 		
+		pagajuros();
 //	System.out.println("Conta-->" + (cn1.toString()));
 //	System.out.println("GeRAL-->" + (cl1.toString()));
 
@@ -262,7 +273,27 @@ public class Gestao {
 
 	}
 //++++++++++++++++++++++++++++++++++++++++++++++++++ metodos++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
+	// metodo
+	
+	public Transacao pagajuros() {
+		 LocalDate data = LocalDate.now();
+		 Transacao t =null;
+		 double taxa=0.05;
+		 if (data.getDayOfMonth()==10) {
+		for (Conta c:lContas) {
+			if (c instanceof ContaPrazo) {
+				if(c.getAbertaFechada().ABERTA != null) {
+			 c.jurosMensais(""+data.getYear(),""+data.getMonthValue());	
+				}
+			}
+		}
+		 }
+		 
+		 return t;
+	}
+	
+	
+	
 	
 	// verifiva restriçoes de movimentos da conta
 		public boolean verifMovimentos(Conta contaAct,TipoT escolhaTA) {
@@ -634,7 +665,26 @@ else if (uUtilizador instanceof Cliente) {
 		return verifica;
 	}
 
+	
 //*********************************************************************************
+	public Image resize(Shell estashell, Image imageFromSource, int width, int height) {
+	    if(width>0 && height>0){
+	        Image scaledImage = new Image(estashell.getDisplay(), width, height);
+	        GC gc = new GC(scaledImage);            //Graphics Capabilities(GC instance) in SWT used to draw an Image, graphics, display
+	        gc.setAntialias(SWT.ON);        // Anti aliasing is used for making the low resolution image to redraw and make into a good resolution Image
+	        gc.setInterpolation(SWT.HIGH);      //Interpolation is based in the Graphics, it may not work properly in some systems
+	        gc.drawImage(imageFromSource, 0, 0, 
+	                imageFromSource.getBounds().width, imageFromSource.getBounds().height, 
+	                0, 0, width, height);       
+
+	        /*drawImage(Image image, int srcX, int srcY, int srcWidth, int srcHeight, int destX, int destY, int destWidth, int destHeight)
+	        Copies a rectangular area from the source image into a (potentially different sized) rectangular area in the receiver.*/
+
+	        gc.dispose();
+	        return scaledImage;
+	        }
+	        else return imageFromSource;
+	}
 ////	********** Adiciona Cliente **************
 //	public Cliente addCliente(Cliente novoC) {
 //		novoC.setClienteID(lClientes.get(lClientes.size() - 1).getClienteID() + 1);

@@ -22,7 +22,7 @@ public class Transacao implements Serializable{
 	private String info;
 	private int contadestino;
 	private TipoT escolhaT;
-	public enum TipoT {DEP_CASH,LEV_CASH,TRANSFERENCIA}
+	public enum TipoT {DEP_CASH,LEV_CASH,TRANSFERENCIA,JUROS}
 	
 	public Transacao(int funcionarioID, String data, double valor, String info, int contadestino, TipoT escolhaT) {
 		super();

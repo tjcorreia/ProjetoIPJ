@@ -44,7 +44,7 @@ import org.eclipse.swt.events.SelectionEvent;
  * @sid 2019
  * @aid 1.1
  */
-public class J_01_Admin_AlteraDados {
+public class J_02_MenuFun_AlteraDados2 {
 
 	protected Shell shell;
 	private Text text;
@@ -182,22 +182,33 @@ public class J_01_Admin_AlteraDados {
 		this.text_DataA_dia = text_DataA_dia;
 	}
 
-	public J_01_Admin_AlteraDados(Gestao gestor, Utilizador uUtilizador) {
+	public J_02_MenuFun_AlteraDados2(Gestao gestor, Utilizador uUtilizador) {
 
 		this.uUtilizador = uUtilizador;
 		this.gestor = gestor;
-		open();
 
 		// TODO Auto-generated constructor stub
 	}
 
-	public J_01_Admin_AlteraDados() {
+	public J_02_MenuFun_AlteraDados2() {
 		super();
 
 		// TODO Auto-generated constructor stub
 	}
 
-	
+	/**
+	 * Launch the application.
+	 * 
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		try {
+			J_02_MenuFun_AlteraDados2 window = new J_02_MenuFun_AlteraDados2(new Gestao(), new Utilizador());
+			window.open();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	/**
 	 * Open the window.
@@ -221,15 +232,15 @@ public class J_01_Admin_AlteraDados {
 	protected void createContents() {
 
 		shell = new Shell();
-		shell.setSize(651, 408);
+		shell.setSize(743, 450);
 		shell.setText("MENU ADMINISTRADOR");
 
 		text = new Text(shell, SWT.BORDER);
 		text.setText("Bem Vindo " + uUtilizador.nome);
-		text.setBounds(180, 10, 288, 25);
+		text.setBounds(236, 12, 288, 25);
 
 		Composite composite = new Composite(shell, SWT.NONE);
-		composite.setBounds(182, 41, 430, 301);
+		composite.setBounds(236, 84, 430, 301);
 
 		composite.setVisible(true);
 
@@ -332,10 +343,6 @@ public class J_01_Admin_AlteraDados {
 		text_DataA_dia = new Text(composite, SWT.BORDER);
 		text_DataA_dia.setBounds(395, 164, 23, 21);
 
-		Button btnAlterarDadosPessoais = new Button(shell, SWT.NONE);
-		btnAlterarDadosPessoais.setText("Alterar dados pessoais");
-		btnAlterarDadosPessoais.setBounds(10, 205, 154, 25);
-
 		Button button_Logout = new Button(shell, SWT.NONE);
 		button_Logout.addMouseListener(new MouseAdapter() {
 			@Override
@@ -346,7 +353,7 @@ public class J_01_Admin_AlteraDados {
 			}
 		});
 		button_Logout.setText("Log Out");
-		button_Logout.setBounds(550, 10, 75, 25);
+		button_Logout.setBounds(591, 10, 75, 25);
 
 		//// colocaca dados
 		text_PrimeiroNA.setText(uUtilizador.getNome());
@@ -381,6 +388,65 @@ public class J_01_Admin_AlteraDados {
 		text_DataA_mes.setEnabled(false);
 		text_DataA_dia.setEnabled(false);
 		TipoID_NovoF.setEnabled(false);
+		
+		Button btnNovoCliente = new Button(shell, SWT.NONE);
+		btnNovoCliente.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				shell.dispose();
+				
+				J_02Menu_F_CriaCliente alteraDados=new J_02Menu_F_CriaCliente(gestor,uUtilizador);
+				alteraDados.open();
+				
+			}
+		});
+		btnNovoCliente.setBounds(10, 84, 192, 25);
+		btnNovoCliente.setText("Criar novo Cliente");
+		
+		Button btnListarClientes = new Button(shell, SWT.NONE);
+		btnListarClientes.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+			
+				J_02Menu_F_ListaClientes lclientes=new J_02Menu_F_ListaClientes(gestor,uUtilizador);
+				lclientes.open();
+				shell.dispose();
+			}
+		});
+		btnListarClientes.setText("Listar/Procurar Clientes");
+		btnListarClientes.setBounds(10, 112, 192, 25);
+		
+		Button btnDadosDoCliente = new Button(shell, SWT.NONE);
+		btnDadosDoCliente.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				J_02Menu_F_DadosCl cliente=new J_02Menu_F_DadosCl(gestor,uUtilizador,null);
+				cliente.open();
+				shell.dispose();
+				
+			}
+		});
+		btnDadosDoCliente.setText("Dados do cliente");
+		btnDadosDoCliente.setBounds(10, 143, 192, 25);
+		
+		Button button_1 = new Button(shell, SWT.TOGGLE);
+		button_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				J_02Menu_F_MovimentaConta editarconta= new J_02Menu_F_MovimentaConta(gestor, uUtilizador, null, null);
+				editarconta.open();
+				shell.dispose();
+			}
+		});
+		button_1.setText("Movimentar Contas");
+		button_1.setBounds(10, 174, 192, 25);
+		
+		Button button_4 = new Button(shell, SWT.NONE);
+		button_4.setBounds(10, 205, 192, 25);
+		
+		Button button_5 = new Button(shell, SWT.NONE);
+		button_5.setText("Alterar Login e Password");
+		button_5.setBounds(10, 234, 192, 25);
 
 		// JA_BT1.0 Botao Criar novo Funcionario.
 		criarNovoF.addMouseListener(new MouseAdapter() {
@@ -448,7 +514,7 @@ public class J_01_Admin_AlteraDados {
 						uUtilizador.setEmail(text_Email_NA.getText());
 						gestor.getMapUtilizadores().remove(oldkey);
 						gestor.getMapUtilizadores().put(uUtilizador.getLogin(), uUtilizador);
-						Funcionario f = new Funcionario();
+						Funcionario	 f = new Funcionario();
 						MessageBox box = new MessageBox(shell, SWT.MULTI);
 						System.out.println(("ERRO 1? --->" + verifica));
 						f = (Funcionario) (gestor.getMapUtilizadores().get(text_UserA.getText()));
@@ -487,34 +553,6 @@ public class J_01_Admin_AlteraDados {
 
 			}
 		});
-		Button Novo_Funcionario = new Button(shell, SWT.NONE);
-		Novo_Funcionario.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseUp(MouseEvent e) {
-				shell.dispose();
-				J_01_Admin_NovoF NovoFuncionario = new J_01_Admin_NovoF(gestor, uUtilizador);
-				NovoFuncionario.open();
-
-			}
-		});
-
-		Novo_Funcionario.setText("Novo Funcionario");
-		Novo_Funcionario.setBounds(10, 141, 154, 25);
-
-// *****// JA_BT2.0 Botao para ver Lista de Cliente.
-		Button Lista_Clientes = new Button(shell, SWT.NONE);
-		Lista_Clientes.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseUp(MouseEvent e) {
-				shell.dispose();
-				J_01_AdminLClientes novaLista = new J_01_AdminLClientes(gestor, uUtilizador);
-				novaLista.open();
-
-			}
-		});
-
-		Lista_Clientes.setText("Lista de Clientes");
-		Lista_Clientes.setBounds(10, 174, 154, 25);
 
 	}
 
