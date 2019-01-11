@@ -197,6 +197,8 @@ public class Gestao {
 
 		//( duvida colocar conta de origem ?)
 		
+		
+		// verifica data e paga juro
 		pagajuros();
 //	System.out.println("Conta-->" + (cn1.toString()));
 //	System.out.println("GeRAL-->" + (cl1.toString()));
@@ -266,6 +268,12 @@ public class Gestao {
 			
 
 		}
+	else if (uactual instanceof Cliente) {
+		J_03Menu_CLIENTE novaCliente = new J_03Menu_CLIENTE(gestor, uactual);
+		novaCliente.open();
+		
+	}
+	
 
 		System.out.println("<---------------------- Log out ---------------->");
 
@@ -275,10 +283,10 @@ public class Gestao {
 //++++++++++++++++++++++++++++++++++++++++++++++++++ metodos++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	// metodo
 	
-	public Transacao pagajuros() {
+	public void pagajuros() {
 		 LocalDate data = LocalDate.now();
-		 Transacao t =null;
-		 double taxa=0.05;
+		 
+		
 		 if (data.getDayOfMonth()==10) {
 		for (Conta c:lContas) {
 			if (c instanceof ContaPrazo) {
@@ -289,14 +297,14 @@ public class Gestao {
 		}
 		 }
 		 
-		 return t;
+		 
 	}
 	
 	
 	
 	
 	// verifiva restriçoes de movimentos da conta
-		public boolean verifMovimentos(Conta contaAct,TipoT escolhaTA) {
+		public boolean verifMovimentos(Conta contaAct,TipoT escolhaTA,int movimento) {
 			
 			if(escolhaTA==TipoT.DEP_CASH) {
 				return true;
@@ -304,11 +312,15 @@ public class Gestao {
 			
 			if (contaAct instanceof ContaNormal) {
 				double maxdiario = 1000; // max diario conta normal
+				double maxMovimento=500;// max movimento conta normal
 				LocalDate actual = LocalDate.now();
 				String[] dataS = ("" + actual).split("-");
 				System.out.println("<---- Conta Actual- Verifica max diario ( " + Arrays.toString(dataS) + ") --->\n");
 				System.out.println("---- > " + contaAct.diario(dataS[0], dataS[1],dataS[2])*-1+ "< ---\n");
-				if (contaAct.diario(dataS[0], dataS[1],dataS[2])*-1 > maxdiario) {
+				if (movimento>maxMovimento) {
+					return false;
+				}
+				if (contaAct.diario(dataS[0], dataS[1],dataS[2])*-1 + movimento> maxdiario) {
 					return false;
 				}
 				return true;
@@ -318,7 +330,7 @@ public class Gestao {
 
 				LocalDate actual = LocalDate.now();
 				String[] dataS = ("" + actual).split("-");
-				if (contaAct.mensal(Integer.parseInt(dataS[0]), Integer.parseInt(dataS[1]))*-1 > maxmensal) {
+				if (contaAct.mensal(Integer.parseInt(dataS[0]), Integer.parseInt(dataS[1]))*-1 +movimento> maxmensal) {
 					return false;
 				}
 				return true;

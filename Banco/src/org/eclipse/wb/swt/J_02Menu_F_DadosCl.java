@@ -12,6 +12,7 @@ import java.util.regex.Pattern;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.wb.swt.Utilizador.TipoID;
 import org.eclipse.swt.widgets.Label;
@@ -80,20 +81,22 @@ public class J_02Menu_F_DadosCl {
 		this.gestor = gestor;
 	}
 
-	public J_02Menu_F_DadosCl() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+	
 
 	/**
 	 * @wbp.parser.entryPoint
 	 */
+	public J_02Menu_F_DadosCl() {
+		super();
+		open();
+		// TODO Auto-generated constructor stub
+	}
 	public J_02Menu_F_DadosCl(Gestao gestor, Utilizador uUtilizador, Cliente clienteActual) {
 		super();
 		this.uUtilizador = uUtilizador;
 		this.gestor = gestor;
 		this.clienteActual = clienteActual;
-		open();
+		
 	}
 
 	/**
@@ -130,6 +133,10 @@ public class J_02Menu_F_DadosCl {
 	protected void createContents() {
 		shellMF = new Shell();
 		shellMF.setBackground(SWTResourceManager.getColor(SWT.COLOR_DARK_GRAY));
+		
+		
+		shellMF.setImage((Image) SWTResourceManager.getImage(J_02Menu_F.class, "/Logo/Java-logo-png Logo.png"));
+		
 		shellMF.setSize(707, 533);
 		shellMF.setText("Menu Funcion\u00E1rio");
 
@@ -170,6 +177,9 @@ public class J_02Menu_F_DadosCl {
 		btnAlterarLoginE.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
+				shellMF.close();
+				J_02_MenuFun_AlteraDados2 alteradados=new J_02_MenuFun_AlteraDados2(gestor, uUtilizador); 
+				alteradados.open();
 			}
 		});
 		btnAlterarLoginE.setText("Alterar Login e Password");

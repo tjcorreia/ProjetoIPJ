@@ -8,6 +8,7 @@ import java.io.Serializable;
 * @sid 2019
 * @aid 1.1
 */
+@SuppressWarnings("serial")
 public class Utilizador implements Serializable{
 	
 	

@@ -109,7 +109,8 @@ public class J_01_AdminLClientes {
 		shell = new Shell();
 		shell.setSize(651, 408);
 		shell.setText("MENU ADMINISTRADOR");
-
+		shell.setBackground(SWTResourceManager.getColor(SWT.COLOR_DARK_GRAY));
+		shell.setImage((Image) SWTResourceManager.getImage(J_02Menu_F.class, "/Logo/Java-logo-png Logo.png"));
 		text = new Text(shell, SWT.BORDER);
 		text.setText("Bem Vindo " + uAdministrador.nome);
 		text.setBounds(182, 10, 286, 25);

@@ -27,6 +27,7 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.events.VerifyListener;
 import org.eclipse.swt.events.VerifyEvent;
@@ -92,14 +93,18 @@ public class J_02Menu_F_ContasCl {
 		this.gestor = gestor;
 	}
 
-	public J_02Menu_F_ContasCl() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+	
 
 	/**
 	 * @wbp.parser.entryPoint
 	 */
+	
+	public J_02Menu_F_ContasCl() {
+		super();
+		open();
+		// TODO Auto-generated constructor stub
+	}
+	
 	public J_02Menu_F_ContasCl(Gestao gestor, Utilizador uUtilizador, Cliente clienteActual) {
 		super();
 		this.uUtilizador = uUtilizador;
@@ -110,7 +115,7 @@ public class J_02Menu_F_ContasCl {
 		} else {
 			contaActual = null;
 		}
-		open();
+		
 	}
 
 	/**
@@ -132,7 +137,7 @@ public class J_02Menu_F_ContasCl {
 		this.uUtilizador = uUtilizador;
 		this.clienteActual = clienteActual;
 		this.contaActual = contaActual;
-		open();
+		
 	}
 
 	/**
@@ -156,6 +161,8 @@ public class J_02Menu_F_ContasCl {
 	protected void createContents() {
 		shellMF_Contas = new Shell();
 		shellMF_Contas.setBackground(SWTResourceManager.getColor(SWT.COLOR_DARK_GRAY));
+	
+		shellMF_Contas.setImage((Image) SWTResourceManager.getImage(J_02Menu_F.class, "/Logo/Java-logo-png Logo.png"));
 		shellMF_Contas.setSize(707, 533);
 		shellMF_Contas.setText("Menu Funcion\u00E1rio");
 
@@ -431,6 +438,14 @@ public class J_02Menu_F_ContasCl {
 		button_4.setBounds(10, 210, 192, 25);
 		
 		Button button_5 = new Button(shellMF_Contas, SWT.NONE);
+		button_5.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				shellMF_Contas.close();
+				J_02_MenuFun_AlteraDados2 alteradados=new J_02_MenuFun_AlteraDados2(gestor, uUtilizador); 
+				alteradados.open();
+			}
+		});
 		button_5.setText("Alterar Login e Password");
 		button_5.setBounds(10, 241, 192, 25);
 

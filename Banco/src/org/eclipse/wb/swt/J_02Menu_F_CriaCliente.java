@@ -12,6 +12,7 @@ import java.util.regex.Pattern;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.wb.swt.Utilizador.TipoID;
 import org.eclipse.swt.widgets.Label;
@@ -146,18 +147,20 @@ public class J_02Menu_F_CriaCliente {
 	public void setText_DataN_dia(Text text_DataN_dia) {
 		this.text_DataN_dia = text_DataN_dia;
 	}
-	public J_02Menu_F_CriaCliente() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+	
 	/**
 	 * @wbp.parser.entryPoint
 	 */
+	public J_02Menu_F_CriaCliente() {
+		super();
+		open();
+		// TODO Auto-generated constructor stub
+	}
 	public J_02Menu_F_CriaCliente(Gestao gestor, Utilizador uUtilizador) {
 		super();
 		this.uUtilizador = uUtilizador;
 		this.gestor = gestor;
-		open();
+		
 	
 	}
 
@@ -179,6 +182,7 @@ public class J_02Menu_F_CriaCliente {
 	protected void createContents() {
 		shellMF = new Shell();
 		shellMF.setBackground(SWTResourceManager.getColor(SWT.COLOR_DARK_GRAY));
+	shellMF.setImage((Image) SWTResourceManager.getImage(J_02Menu_F.class, "/Logo/Java-logo-png Logo.png"));
 		shellMF.setSize(707, 533);
 		shellMF.setText("Menu Funcion\u00E1rio");
 		
@@ -538,6 +542,14 @@ public class J_02Menu_F_CriaCliente {
 		button_3.setBounds(10, 208, 192, 25);
 		
 		Button button_4 = new Button(shellMF, SWT.NONE);
+		button_4.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				shellMF.close();
+				J_02_MenuFun_AlteraDados2 alteradados=new J_02_MenuFun_AlteraDados2(gestor, uUtilizador); 
+				alteradados.open();
+			}
+		});
 		button_4.setText("Alterar Login e Password");
 		button_4.setBounds(10, 239, 192, 25);
 

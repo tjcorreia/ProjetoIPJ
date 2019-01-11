@@ -72,15 +72,19 @@ public class J_02Menu_F {
 	public void setFuncionario(Text funcionario) {
 		Funcionario = funcionario;
 	}
-
-	
+	/**
+	 * @wbp.parser.entryPoint
+	 */
+	public J_02Menu_F() {
+		super();
+    open();
+	}
 	
 	public J_02Menu_F( Gestao gestor,Utilizador uUtilizador) {
 		super();
 		this.uUtilizador = uUtilizador;
 		this.gestor = gestor;
-open();
-	
+
 	}
 
 	
@@ -101,6 +105,7 @@ open();
 	 */
 	protected void createContents() {
 		shlMenuFuncionrio = new Shell();
+		shlMenuFuncionrio.setTouchEnabled(true);
 		shlMenuFuncionrio.setBackground(SWTResourceManager.getColor(SWT.COLOR_DARK_GRAY));
 		shlMenuFuncionrio.setImage((Image) SWTResourceManager.getImage(J_02Menu_F.class, "/Logo/Java-logo-png Logo.png"));
 		shlMenuFuncionrio.setSize(659, 522);
@@ -110,10 +115,11 @@ open();
 		btnNovoCliente.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				shlMenuFuncionrio.dispose();
 				
+				shlMenuFuncionrio.dispose();
 				J_02Menu_F_CriaCliente alteraDados=new J_02Menu_F_CriaCliente(gestor,uUtilizador);
 				alteraDados.open();
+				
 				
 			}
 		});
@@ -124,9 +130,9 @@ open();
 		btnDadosDoCliente.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
+				shlMenuFuncionrio.dispose();
 				J_02Menu_F_DadosCl cliente=new J_02Menu_F_DadosCl(gestor,uUtilizador,null);
 				cliente.open();
-				shlMenuFuncionrio.dispose();
 				
 			}
 		});
@@ -137,10 +143,10 @@ open();
 		btnListarClientes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
-			
+				shlMenuFuncionrio.dispose();
 				J_02Menu_F_ListaClientes lclientes=new J_02Menu_F_ListaClientes(gestor,uUtilizador);
 				lclientes.open();
-				shlMenuFuncionrio.dispose();
+				
 			}
 		});
 		btnListarClientes.setText("Listar/Procurar Clientes");
@@ -153,6 +159,7 @@ open();
 				shlMenuFuncionrio.close();
 				J_02_MenuFun_AlteraDados2 alteradados=new J_02_MenuFun_AlteraDados2(gestor, uUtilizador); 
 				alteradados.open();
+				
 			}
 		});
 		btnAlterarLoginE.setText("Alterar Login e Password");
@@ -177,9 +184,10 @@ open();
 		button_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
+				shlMenuFuncionrio.dispose();
 				J_02Menu_F_MovimentaConta editarconta= new J_02Menu_F_MovimentaConta(gestor, uUtilizador, null, null);
 				editarconta.open();
-				shlMenuFuncionrio.dispose();
+				
 			}
 		});
 		button_1.setText("Movimentar Contas");

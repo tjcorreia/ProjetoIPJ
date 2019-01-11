@@ -5,7 +5,7 @@ package org.eclipse.wb.swt;
 * @sid 2019
 * @aid 1.1
 */
-public class Principal {
+public class Principal_PROJETO {
 
 	public static void main(String[] args) {
 		

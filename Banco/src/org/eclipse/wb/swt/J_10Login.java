@@ -8,6 +8,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.graphics.Image;
 
 /**
  * Breve descrição do código
@@ -43,8 +44,12 @@ public class J_10Login {
 	public J_10Login(Gestao gestor) {
 		this.gestor = gestor;
 	}
-
+	/**
+	 * @wbp.parser.entryPoint
+	 */
 	public J_10Login() {
+		super();
+		open();
 		// TODO Auto-generated constructor stub
 	}
 
@@ -53,14 +58,14 @@ public class J_10Login {
 	 * 
 	 * @param args
 	 */
-	public static void main(String[] args) {
-		try {
-			J_10Login window = new J_10Login();
-			window.open();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+//	public static void main(String[] args) {
+//		try {
+//			J_10Login window = new J_10Login();
+//			window.open();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 	/**
 	 * Open the window.
@@ -85,6 +90,10 @@ public class J_10Login {
 		shlLogin = new Shell();
 		shlLogin.setSize(450, 300);
 		shlLogin.setText("Java Bank - Login");
+		shlLogin.setBackground(SWTResourceManager.getColor(SWT.COLOR_DARK_GRAY));
+		
+		shlLogin.setImage((Image) SWTResourceManager.getImage(J_02Menu_F.class, "/Logo/Java-logo-png Logo.png"));
+		
 //		Image imagem=new Image(Display.getDefault());
 //		shlLogin.setImage(imagem);
 		text_NUtilizador = new Text(shlLogin, SWT.BORDER);
@@ -95,19 +104,21 @@ public class J_10Login {
 		text_Password.setBounds(92, 143, 144, 26);
 
 		/// -- So para nao ter de repetir o Login----
-		text_NUtilizador.setText("Maria");
+		text_NUtilizador.setText("AlbertoCliente");
 		;
-		text_Password.setText("Fun");
+		text_Password.setText("Cliente");
 		// -----------------------------------------
 
 		Label lblEmail = new Label(shlLogin, SWT.NONE);
+		lblEmail.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
 		lblEmail.setAlignment(SWT.RIGHT);
 		lblEmail.setBounds(10, 83, 70, 20);
-		lblEmail.setText("Login:");
+		lblEmail.setText("Login :   ");
 
 		Label lblPassword = new Label(shlLogin, SWT.NONE);
+		lblPassword.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
 		lblPassword.setAlignment(SWT.RIGHT);
-		lblPassword.setText("Password:");
+		lblPassword.setText("Password :   ");
 		lblPassword.setBounds(10, 146, 70, 20);
 
 		Label lblRedeInternaPara = new Label(shlLogin, SWT.NONE);
@@ -129,6 +140,7 @@ public class J_10Login {
 		//// listner Entar
 
 		Button btnEntrar = new Button(shlLogin, SWT.NONE);
+		btnEntrar.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
 		btnEntrar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
@@ -165,7 +177,7 @@ public class J_10Login {
 		});
 
 		btnEntrar.setText("Entrar");
-		btnEntrar.setBounds(273, 112, 90, 30);
+		btnEntrar.setBounds(273, 112, 105, 30);
 
 //		Label lblNewLabel = new Label(shlLogin, SWT.NONE);
 //		Image imagem=new Image(null, "/Logo/javaBank _Withe_48.png" );

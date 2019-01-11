@@ -113,20 +113,22 @@ public class J_02Menu_F_Conta {
 		this.gestor = gestor;
 	}
 
-	public J_02Menu_F_Conta() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+	
 
 	/**
 	 * @wbp.parser.entryPoint
 	 */
+	public J_02Menu_F_Conta() {
+		super();
+		open();
+		// TODO Auto-generated constructor stub
+	}
 	public J_02Menu_F_Conta(Gestao gestor, Utilizador uUtilizador, Cliente clienteActual) {
 		super();
 		this.uUtilizador = uUtilizador;
 		this.gestor = gestor;
 		this.clienteActual = clienteActual;
-		open();
+		
 	}
 
 	/**
@@ -148,7 +150,7 @@ public class J_02Menu_F_Conta {
 		this.uUtilizador = uUtilizador;
 		this.clienteActual = clienteActual;
 		this.contaActual = contaActual;
-		open();
+	
 	}
 
 	/**
@@ -423,6 +425,14 @@ public class J_02Menu_F_Conta {
 		button_4.setBounds(10, 210, 192, 25);
 		
 		Button button_5 = new Button(shellConta, SWT.NONE);
+		button_5.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				shellConta.close();
+				J_02_MenuFun_AlteraDados2 alteradados=new J_02_MenuFun_AlteraDados2(gestor, uUtilizador); 
+				alteradados.open();
+			}
+		});
 		button_5.setText("Alterar Login e Password");
 		button_5.setBounds(10, 241, 192, 25);
 		
