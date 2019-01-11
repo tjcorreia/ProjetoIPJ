@@ -27,13 +27,12 @@ import org.eclipse.swt.widgets.Text;
 public class J_01ListaLivros {
 
 	protected Shell shlViewComicsInc;
-	
 	//protected static ArrayList <Livro> listaLivrosCarrinho = new ArrayList<>();//adicionou-se este atributo para criar carrinho a partir desta lista
 	protected Livro livroSelecionado;//atributo que nos dá o livro que está selecionado na table
 	protected Livraria livraria;//atributo adicionado para poder ir buscar métodos à livraria
 	protected Carrinho carrinho;
 	protected String stringProcurada;
-	protected static ArrayList <Livro> listaLivrosDaBusca;
+	protected ArrayList <Livro> listaLivrosDaBusca;
 	//protected int indexLivroSelecionado;//adicionou-se este atributo para poder passá-lo entre métodos
 	private Table table;
 	private Text caixaDeBusca;//adicionou-se carrinho para cria-lo e passar para outras classes
@@ -50,7 +49,7 @@ public class J_01ListaLivros {
 	//Construtor para quando se vem da janela anterior 'J_00Inicial'
 	public J_01ListaLivros(Livraria livraria, ArrayList <Livro> listaLivrosDaBusca, String stringProcurada) {
 		this.livraria = livraria;
-		System.out.println("criar carrinho");
+		this.listaLivrosDaBusca = listaLivrosDaBusca;
 		carrinho = new Carrinho();
 		this.stringProcurada = stringProcurada;
 		open();
@@ -165,6 +164,7 @@ public class J_01ListaLivros {
 		buttonVoltar.addMouseListener(new MouseAdapter() {
 			public void mouseUp(MouseEvent e) {
 				//comando para fechar a janela corrente
+				livraria.esvaziarCarrinhoReporStock(carrinho);
 				shlViewComicsInc.close();
 				//Abrir de novo a janela inicial
 				J_00Inicial janelaInicial = new J_00Inicial(livraria);
@@ -182,13 +182,7 @@ public class J_01ListaLivros {
 		
 		//Listner para botão de 'adicionar ao carrinho'
 		Button btnAdicionarAoCarrinho = new Button(shlViewComicsInc, SWT.CENTER);
-//		btnAdicionarAoCarrinho.addSelectionListener(new SelectionAdapter() {
-//			@Override
-//			public void widgetSelected(SelectionEvent e) {
-//			}
-//		});
 		btnAdicionarAoCarrinho.addMouseListener(new MouseAdapter() {
-			@Override
 			public void mouseUp(MouseEvent e) {
 				//caso não haja nenhum selecionado, não acontece nada
 				if (livroSelecionado==null) {
@@ -204,15 +198,6 @@ public class J_01ListaLivros {
 				//se stock > 0 adiciona livro a lista de livros para o carrinho e reduz stock
 				else {
 					livraria.adicionarLivroAoCarrinho(livroSelecionado, carrinho);
-//					VER SE BASTA O QUE ESTÁ EM CIMA OU SE É PRECISO SER:
-//					carrinho = livraria.adicionarLivroAoCarrinho(livroSelecionado, carrinho);
-//					
-//					
-//					
-//					
-//					
-//					
-					//livroSelecionado.stock--;
 					//actualizar o label do número de items no carrinho
 					lblItmes.setText( carrinho.numeroItemsDoCarrinho() + " itmes");
 					System.out.println("LIVRARIA:" + livraria);
@@ -230,7 +215,6 @@ public class J_01ListaLivros {
 		//remove o último livro adicionado, caso o livro selecionado não faça parte do carrinho
 		Button btnRemover = new Button(shlViewComicsInc, SWT.CENTER);
 		btnRemover.addMouseListener(new MouseAdapter() {
-			@Override
 			public void mouseUp(MouseEvent e) {
 				//caso não haja nenhum selecionado, não acontece nada
 				if (livroSelecionado==null) {
@@ -238,17 +222,7 @@ public class J_01ListaLivros {
 				//remover o item selecionado
 				else if ( carrinho.livros.contains(livroSelecionado)) {
 					livraria.removerLivroDoCarrinho(livroSelecionado, carrinho);
-//					VER SE BASTA O QUE ESTÁ EM CIMA OU SE É PRECISO SER:
-//					carrinho = livraria.removerLivroDoCarrinho(livroSelecionado, carrinho);
-//					
-//					
-//					
-//					
-//					
-//
 					preencherTabela();
-					//repor stock
-					//livroSelecionado.stock++; //passei isto para o método 'removerLivroDoCarrinho'
 				}
 				//se carrinho já está vazio, não fazer nada
 				else if ( carrinho.livros.isEmpty() ){
@@ -259,19 +233,7 @@ public class J_01ListaLivros {
 				else {
 					Livro ultimoDoCarrinho = carrinho.livros.get( carrinho.livros.size()-1 );
 					livraria.removerLivroDoCarrinho( ultimoDoCarrinho, carrinho );
-				
-//					VER SE BASTA O QUE ESTÁ EM CIMA OU SE É PRECISO SER:
-//					carrinho = livraria.removerLivroDoCarrinho( ultimoDoCarrinho, carrinho );
-//					
-//					
-//					
-//					
-//					
-//
-					
 					preencherTabela();
-					//repor stock
-					//ultimoDaLista.stock++;
 				}
 				//actualizar o label do número de items no carrinho
 				lblItmes.setText( carrinho.numeroItemsDoCarrinho() + " itmes" );
@@ -314,16 +276,7 @@ public class J_01ListaLivros {
 				//caso lista tenha livros
 				else {
 					lblMensagemSemCorrespondencias.setVisible(false);  
-					//limpar todos os resultados anteriores da tabela impressa
-					
 					preencherTabela();
-					//adicionar um a um os livros da lista de livros da busca à table
-//					int i = 0;
-//					for (Livro lv : listaLivrosDaBusca) {
-//					      TableItem item = new TableItem(table, SWT.NONE, i);
-//					      i++;
-//					      item.setText(lv.toString());
-//					}
 				}
 			}
 		});

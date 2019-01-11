@@ -26,26 +26,16 @@ public class J_00Inicial {
 
 	protected Shell shlViewComicsInc;
 	protected String stringProcurada;
-	protected static ArrayList <Livro> listaLivrosDaBusca;
+	protected ArrayList <Livro> listaLivrosDaBusca;
 	protected Livraria livraria;//atributo adicionado para poder ir buscar métodos à livraria
 	private Text caixaDeBusca;
 
-//
-	//Construtor para poder trazer a Livraria para esta classe
+
+	//Construtor que traz Livraria para esta classe
 	public J_00Inicial(Livraria livraria) {
 		stringProcurada="";
 		this.livraria=livraria;
 		open();
-		/**+++++++++++++++++++++++
-		 * Só para efeito de testes, define-se agora uma livraria
-		 * !!!!!!!!!!!!!!!!!!!!!!!
-		 * APAGAR MAIS TARDE O RESTO DESTE CONSTRUTOR
-		 * 1
-		 * 1
-		 * 1
-		 * 
-		 */
-		//livraria=new Livraria();
 	}
 		
 //	/**

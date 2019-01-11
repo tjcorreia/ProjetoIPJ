@@ -139,33 +139,35 @@ public class J_10Login {
 				String password = caixaParaPassword.getText();
 				//Chamar método 'verificarLogin' para as strings introduzidas
 				String resultadoVerificacao = livraria.verificarLogin ( email, password );
-				//Caso pass e mail corretos e utilizador do tipo Admin, abre janela de Admin
-				if ( resultadoVerificacao.equals("okAdmin") ) {
+				//Caso pass e mail corretos
+				if ( resultadoVerificacao.equals("ok") ) {
+					//ir buscar utilizador 
+					Utilizador u = livraria.getUtilizadorPorEmail(email);
 					//comando para fechar a janela atual
 					shlLogin.close();
-					//abrir janela admin
-					J_11Menu_Admin j = new J_11Menu_Admin(livraria);
-					j.open();
-				}
-				//Caso pass e mail corretos e utilizador do tipo Vendedor, abre janela de Vendedor
-				else if ( resultadoVerificacao.equals("okVendedor") ) {
-					//comando para fechar a janela atual
-					shlLogin.close();
-					//abrir janela vendedor
-					J_12Menu_Vendedor j = new J_12Menu_Vendedor(livraria);
-					j.open();
+					//se utilizador do tipo vendedor
+					if ( u.tipo == Tipo.VENDEDOR ) {
+						//abrir janela vendedor
+						J_12Menu_Vendedor j = new J_12Menu_Vendedor(livraria, u);
+						j.open();
+					}
+					//se utilizador do tipo admin
+					else {
+						//abrir janela admin
+						J_11Menu_Admin j = new J_11Menu_Admin(livraria, u);
+						j.open();
+					}
 				}
 				//caso mail correto e password não
 				else if ( resultadoVerificacao.equals("passwordErrada") ) {
 					lblMensagemDeErroUtilizador.setVisible(false);
 					lblMensagemDeErroPassword.setVisible(true);
 				}
-				//
+				//caso em que utilizador não existe
 				else  {
 					lblMensagemDeErroUtilizador.setVisible(true);
 					lblMensagemDeErroPassword.setVisible(false);
 				}
-				
 			}
 		});
 		btnEntrar.setText("Entrar");

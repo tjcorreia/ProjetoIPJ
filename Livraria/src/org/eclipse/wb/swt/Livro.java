@@ -72,6 +72,70 @@ public class Livro {
 		return s;
 	}
 
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getIsbn() {
+		return isbn;
+	}
+
+	public void setIsbn(String isbn) {
+		this.isbn = isbn;
+	}
+
+	public String getAutor() {
+		return autor;
+	}
+
+	public void setAutor(String autor) {
+		this.autor = autor;
+	}
+
+	public String getEditora() {
+		return editora;
+	}
+
+	public void setEditora(String editora) {
+		this.editora = editora;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public GregorianCalendar getData() {
+		return data;
+	}
+
+	public void setData(GregorianCalendar data) {
+		this.data = data;
+	}
+
+	public double getPreco() {
+		return preco;
+	}
+
+	public void setPreco(double preco) {
+		this.preco = preco;
+	}
+
+	public Map<GregorianCalendar, Double> getPrecosAnteriores() {
+		return precosAnteriores;
+	}
+
+	public void setPrecosAnteriores(Map<GregorianCalendar, Double> precosAnteriores) {
+		this.precosAnteriores = precosAnteriores;
+	}
+
 	public int getStock() {
 		return stock;
 	}

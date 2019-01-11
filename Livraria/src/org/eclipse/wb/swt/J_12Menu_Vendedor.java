@@ -17,10 +17,12 @@ public class J_12Menu_Vendedor {
 
 	protected Shell shell;
 	protected static Livraria livraria;//atributo adicionado para poder ir buscar métodos à livraria
+	protected Utilizador utilizador;
 	
 	//Construtor para poder trazer a Livraria para esta classe
-	public J_12Menu_Vendedor (Livraria livraria) {
+	public J_12Menu_Vendedor (Livraria livraria, Utilizador utilizador) {
 		//super();
+		this.utilizador = utilizador;
 		this.livraria = livraria;
 		open();
 	}	

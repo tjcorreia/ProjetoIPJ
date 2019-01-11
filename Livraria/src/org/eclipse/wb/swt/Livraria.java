@@ -12,11 +12,19 @@ import org.eclipse.wb.swt.Utilizador.Tipo;
 
 
 public class Livraria {
-	private List <Livro> livros;
-	private List <Utilizador> utilizadores;
-	private List <Compra> compras;
+	private ArrayList <Livro> livros;
+	private ArrayList <Utilizador> utilizadores;
+	private ArrayList <Compra> compras;
 	
 	
+	public ArrayList <Livro> getLivros() {
+		return livros;
+	}
+
+	public void setLivros(ArrayList <Livro> livros) {
+		this.livros = livros;
+	}
+
 	//Construtor que cria alguns livros, utilizadores e compras pré definidos
 	Livraria(){
 		
@@ -62,9 +70,9 @@ public class Livraria {
 		livros.add(lv4);
 		//Criar alguns utilizadores
 		Utilizador u1 = new Utilizador( "António Cunha", "tocunha@gmail.com", "tocunha2000", Utilizador.Tipo.ADMIN);
-		Utilizador u2 = new Utilizador( "Tiago Correia", "admin", "admin", Utilizador.Tipo.ADMIN);
+		Utilizador u2 = new Utilizador( "Tiago Correia", "a", "a", Utilizador.Tipo.ADMIN);
 		Utilizador u3 = new Utilizador( "Márcia Campos", "mcampos.a@gmail.com", "heyd6wx", Utilizador.Tipo.VENDEDOR);
-		Utilizador u4 = new Utilizador( "Beatriz Costa", "vende", "vende", Utilizador.Tipo.VENDEDOR);
+		Utilizador u4 = new Utilizador( "Beatriz Costa", "v", "v", Utilizador.Tipo.VENDEDOR);
 		//adicionar utilizadores à lista de utilizadores
 		utilizadores = new ArrayList<>();
 		utilizadores.add( u1 );
@@ -108,7 +116,7 @@ public class Livraria {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("introduza livro a pesquisar");
 		String s = sc.nextLine();
-		List <Livro> livrosProcurados = procurarLivro(s);
+		ArrayList <Livro> livrosProcurados = procurarLivro(s);
 		for ( Livro lv : livrosProcurados ) {
 			System.out.println(lv);
 		}
@@ -163,11 +171,8 @@ public class Livraria {
 	//método que recebe password e email de login e devolve string com ok ou eventual erro
 	public String verificarLogin( String email, String password){
 		for ( Utilizador u : utilizadores ) {
-			if ( u.email.equals(email) && u.senha.equals(password) && u.tipo==Tipo.ADMIN) {
-				return "okAdmin";
-			}
-			else if ( u.email.equals(email) && u.senha.equals(password) && u.tipo==Tipo.VENDEDOR) {
-				return "okVendedor";
+			if ( u.email.equals(email) && u.senha.equals(password) ) {
+				return "ok";
 			}
 			else if ( u.email.equals(email) && !u.senha.equals(password)) {
 				return "passwordErrada";
@@ -176,6 +181,17 @@ public class Livraria {
 		//caso não se verifique nenhuma das anteriores é porque o email é errado
 		return "emailErrado";
 	}
+	
+	//método que atravez do email de login devolve o utilizador
+	public Utilizador getUtilizadorPorEmail( String email){
+		for ( Utilizador u : utilizadores ) {
+			if ( u.email.equals(email) ) {
+				return u;
+			}
+		}
+		//caso por defeito que nunca será usado
+		return new Utilizador();
+	}	
 	
 //	
 //	REVER BEM ESTES DOIS MÉTODOS SEGUINTES
@@ -279,11 +295,11 @@ public class Livraria {
 		return novoNum;
 	}
 
-	public List <Compra> getCompras() {
+	public ArrayList <Compra> getCompras() {
 		return compras;
 	}
 
-	public void setCompras(List <Compra> compras) {
+	public void setCompras(ArrayList <Compra> compras) {
 		this.compras = compras;
 	}
 	

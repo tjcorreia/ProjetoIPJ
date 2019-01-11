@@ -41,6 +41,8 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Group;
+import org.eclipse.swt.events.ShellAdapter;
+import org.eclipse.swt.events.ShellEvent;
 
 /**  
  * Breve descrição do código   
@@ -143,6 +145,17 @@ public class J_02Carrinho { //criou-se janela como subclasse para poder receber 
 		shell.setSize(724, 561);
 		shell.setText("ViewComics-Carrinho");
 		shell.setLayout(null);
+		//listner para se fecharem a janela a meio de um carrinho, reporem o stock dos livros que estavam no carrinho
+//		
+//		
+//		VERIFICAR SE ESTE LISTNER FICARÁ A FUNCIONAR BEM DEPOIS DE RETIRAR OS 'open()' dos construtores
+//		ele agora não funciona bem
+//		
+		shell.addShellListener(new ShellAdapter() {
+			public void shellClosed(ShellEvent e) {
+				livraria.esvaziarCarrinhoReporStock(carrinho);
+			}
+		});		
 		
 		Label lblCarrinho = new Label(shell, SWT.NONE);
 		lblCarrinho.setBounds(141, 5, 229, 20);
