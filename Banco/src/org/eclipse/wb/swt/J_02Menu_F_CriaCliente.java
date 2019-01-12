@@ -148,14 +148,6 @@ public class J_02Menu_F_CriaCliente {
 		this.text_DataN_dia = text_DataN_dia;
 	}
 	
-	/**
-	 * @wbp.parser.entryPoint
-	 */
-	public J_02Menu_F_CriaCliente() {
-		super();
-		open();
-		// TODO Auto-generated constructor stub
-	}
 	public J_02Menu_F_CriaCliente(Gestao gestor, Utilizador uUtilizador) {
 		super();
 		this.uUtilizador = uUtilizador;
@@ -163,6 +155,15 @@ public class J_02Menu_F_CriaCliente {
 		
 	
 	}
+	/**
+	 * @wbp.parser.entryPoint
+	 */
+	public J_02Menu_F_CriaCliente() {
+	
+		open();
+		// TODO Auto-generated constructor stub
+	}
+	
 
 	public void open() {
 		Display display = Display.getDefault();

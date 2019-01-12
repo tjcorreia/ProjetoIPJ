@@ -187,13 +187,16 @@ public class J_01_Admin_AlteraDados {
 
 		this.uUtilizador = uUtilizador;
 		this.gestor = gestor;
-		open();
+		
 
 		// TODO Auto-generated constructor stub
 	}
-
+	/**
+	 * @wbp.parser.entryPoint
+	 */
 	public J_01_Admin_AlteraDados() {
 		super();
+		open();
 
 		// TODO Auto-generated constructor stub
 	}

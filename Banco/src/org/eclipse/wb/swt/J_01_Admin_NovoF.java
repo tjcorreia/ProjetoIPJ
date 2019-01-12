@@ -86,22 +86,27 @@ public class J_01_Admin_NovoF {
 
 		// TODO Auto-generated constructor stub
 	}
-
-	
-
 	/**
-	 * Launch the application.
-	 * 
-	 * @param args
+	 * @wbp.parser.entryPoint
 	 */
-	public static void main(String[] args) {
-		try {
-			J_01_Admin_NovoF window = new J_01_Admin_NovoF(new Gestao(),new Utilizador());
-			window.open();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	
+	public J_01_Admin_NovoF() {
+		open();
+		// TODO Auto-generated constructor stub
 	}
+//	/**
+//	 * Launch the application.
+//	 * 
+//	 * @param args
+//	 */
+//	public static void main(String[] args) {
+//		try {
+//			J_01_Admin_NovoF window = new J_01_Admin_NovoF(new Gestao(),new Utilizador());
+//			window.open();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 	/**
 	 * Open the window.

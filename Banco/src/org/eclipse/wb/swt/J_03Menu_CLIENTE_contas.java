@@ -179,7 +179,7 @@ public class J_03Menu_CLIENTE_contas {
 				
 			}
 		});
-		btnExibirContas.setText("Exibir Contas");
+		btnExibirContas.setText(" Contas");
 		btnExibirContas.setBounds(10, 112, 192, 25);
 		
 		Button button = new Button(shlMenu, SWT.NONE);
@@ -197,8 +197,8 @@ public class J_03Menu_CLIENTE_contas {
 		Funcionario.setText("Bem Vindo "+uUtilizador.getNome());
 		Funcionario.setBounds(215, 10, 326, 25);
 		
-		Button button_MovimentarConta = new Button(shlMenu, SWT.TOGGLE);
-		button_MovimentarConta.addMouseListener(new MouseAdapter() {
+		Button btnCartesDaConta = new Button(shlMenu, SWT.TOGGLE);
+		btnCartesDaConta.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
 				shlMenu.dispose();
@@ -207,11 +207,8 @@ public class J_03Menu_CLIENTE_contas {
 				
 			}
 		});
-		button_MovimentarConta.setText("Movimentar Contas");
-		button_MovimentarConta.setBounds(10, 143, 192, 25);
-		
-		Button button_2 = new Button(shlMenu, SWT.NONE);
-		button_2.setBounds(10, 176, 192, 25);
+		btnCartesDaConta.setText("Cart\u00F5es da Conta");
+		btnCartesDaConta.setBounds(10, 143, 192, 25);
 		
 		
 		
@@ -342,8 +339,8 @@ public class J_03Menu_CLIENTE_contas {
 				text_valordaTransferencia.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
 				
 				Conta contaFinal = null;
-				gestor.TransferenciaCl(uUtilizador,shlMenu,contaActual,text_valordaTransferencia,text_Contadestino, contaFinal);
 				
+				gestor.TransferenciaCl(uUtilizador,shlMenu,contaActual,text_valordaTransferencia,text_Contadestino, contaFinal);
 				preencheTabela();
 				text_valordaTransferencia.setText("");
 			}

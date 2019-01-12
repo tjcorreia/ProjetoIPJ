@@ -257,6 +257,8 @@ public class J_02Menu_F_EditarConta {
 				System.out.println("<---- lista de contas --->\n" + listaContas.length);
 				combo_EscolhaConta.setItems(listaContas);
 				combo_EscolhaConta.select(index);
+				listaClientes = listaClientesActual();
+				combo_titularesDaconta.setItems(listaClientes);
 
 			} else {
 				combo_EscolhaConta.setItems("Não existem contas a apresentar");
@@ -344,6 +346,7 @@ public class J_02Menu_F_EditarConta {
 		button_CriaCartao.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
+				if (!combo_titularesDaconta.getText().equals("")) {
 				int titularID = Integer.parseInt(combo_titularesDaconta.getText());
 				Cliente clienteCartao=gestor.procuraCid(titularID);
 				Cartao cartaoN=gestor.criaCartao(titularID,contaActual, clienteCartao.getNome()+" "+clienteCartao.getSobrenome());
@@ -353,7 +356,7 @@ public class J_02Menu_F_EditarConta {
 				boxCartao.open();
 				text_cartaoAssociado.setText(""+cartaoN.getCartaoID());
 				button_CriaCartao.setEnabled(false);
-				
+				}
 			}
 		});
 		button_CriaCartao.setText("Criar Cart\u00E3o de Credito");
@@ -515,21 +518,34 @@ public class J_02Menu_F_EditarConta {
 					mensagem = mensagem + " O Cliente não existe.\n";
 					verifica = false;
 				}
+					else if  (!(gestor.procuraCid(Integer.parseInt(text_NovoTitular.getText())) == null)&&
+							 (gestor.procuraCid(Integer.parseInt(text_NovoTitular.getText())) == clienteActual)) {
+						
+						textoTitulo = " ERRO !!";
+						mensagem = mensagem + " O Cliente que quer adicionar já é titular da conta.\n";
+						verifica = false;		
+						
+					}
 				} 
-				if (!(clienteActual.procuraContaPrazo()==null)) {
-					mensagem = mensagem + " O Cliente Já é titular de uma Conta a Prazo.\n";
+				if (contaActual==null) {
+					mensagem = mensagem + " Tem de Selecionar uma Conta";
 					verifica = false;
-				
 				}
 				
 				if (verifica) {
 					Cliente clienteTitular = gestor.procuraCid(Integer.parseInt(text_NovoTitular.getText()));
+					if (!(clienteTitular.procuraContaPrazo()==null)) {
+						mensagem = mensagem + " O Cliente Já é titular de uma Conta a Prazo.\n";
+						verifica = false;
+					}
+					else {
 					contaActual.addClienteC(clienteTitular.getuID());
 					clienteTitular.addConta(contaActual);
 					textoTitulo = " **** OK ****";
 					mensagem =  " Foi Adicionado o titual a Conta";
 					listaClientes = listaClientesActual();
 					combo_titularesDaconta.setItems(listaClientes);
+					}
 				}
 				
 				
@@ -581,7 +597,7 @@ public class J_02Menu_F_EditarConta {
 		combo_EscolhaConta.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				int contaID = Integer.parseInt(combo_EscolhaConta.getText().replaceAll("\\D+", ""));
+				int contaID = Integer.parseInt(combo_EscolhaConta.getText().replaceAll("\\D+",""));
 				contaActual = clienteActual.procuraConta(contaID);
 				text_contaActual.setText("" + contaActual.getContaID());
 				listaClientes = listaClientesActual();

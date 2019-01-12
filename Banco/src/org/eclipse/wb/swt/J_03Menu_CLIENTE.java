@@ -32,6 +32,7 @@ public class J_03Menu_CLIENTE {
 	private Utilizador uUtilizador;
 	private Text Funcionario;
 	private Label lbl_Imagem ;
+	private Button btnExibirContas;
 
 	public Label getLbl_Imagem() {
 		return lbl_Imagem;
@@ -109,7 +110,7 @@ public class J_03Menu_CLIENTE {
 		shlMenuFuncionrio.setBackground(SWTResourceManager.getColor(SWT.COLOR_DARK_GRAY));
 		shlMenuFuncionrio.setImage((Image) SWTResourceManager.getImage(J_03Menu_CLIENTE.class, "/Logo/Java-logo-png Logo.png"));
 		shlMenuFuncionrio.setSize(659, 522);
-		shlMenuFuncionrio.setText("Menu Funcion\u00E1rio");
+		shlMenuFuncionrio.setText("Menu Cliente");
 		
 		Button btnAlterarDadosPessoais = new Button(shlMenuFuncionrio, SWT.NONE);
 		btnAlterarDadosPessoais.addSelectionListener(new SelectionAdapter() {
@@ -126,8 +127,8 @@ public class J_03Menu_CLIENTE {
 		btnAlterarDadosPessoais.setBounds(10, 84, 192, 25);
 		btnAlterarDadosPessoais.setText("Dados Pessoais");
 		
-		Button btnListarClientes = new Button(shlMenuFuncionrio, SWT.NONE);
-		btnListarClientes.addMouseListener(new MouseAdapter() {
+		btnExibirContas = new Button(shlMenuFuncionrio, SWT.NONE);
+		btnExibirContas.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
 				shlMenuFuncionrio.dispose();
@@ -136,8 +137,8 @@ public class J_03Menu_CLIENTE {
 				
 			}
 		});
-		btnListarClientes.setText("Exibir Contas");
-		btnListarClientes.setBounds(10, 112, 192, 25);
+		btnExibirContas.setText("Contas");
+		btnExibirContas.setBounds(10, 112, 192, 25);
 		
 		Button button = new Button(shlMenuFuncionrio, SWT.NONE);
 		button.addMouseListener(new MouseAdapter() {
@@ -154,21 +155,18 @@ public class J_03Menu_CLIENTE {
 		Funcionario.setText("Bem Vindo "+uUtilizador.getNome());
 		Funcionario.setBounds(215, 10, 326, 25);
 		
-		Button button_1 = new Button(shlMenuFuncionrio, SWT.TOGGLE);
-		button_1.addMouseListener(new MouseAdapter() {
+		Button btnCartesDaConta = new Button(shlMenuFuncionrio, SWT.TOGGLE);
+		btnCartesDaConta.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
 				shlMenuFuncionrio.dispose();
-				J_02Menu_F_MovimentaConta editarconta= new J_02Menu_F_MovimentaConta(gestor, uUtilizador, null, null);
+				J_03Menu_CLIENTE_Cartoes editarconta= new J_03Menu_CLIENTE_Cartoes( gestor, uUtilizador);
 				editarconta.open();
 				
 			}
 		});
-		button_1.setText("Movimentar Contas");
-		button_1.setBounds(10, 143, 192, 25);
-		
-		Button button_2 = new Button(shlMenuFuncionrio, SWT.NONE);
-		button_2.setBounds(10, 176, 192, 25);
+		btnCartesDaConta.setText("Cart\u00F5es da Conta");
+		btnCartesDaConta.setBounds(10, 143, 192, 25);
 		
 		Image image = (Image) SWTResourceManager.getImage(J_03Menu_CLIENTE.class, "/Logo/Java-logo-png Logo14.png");
 		image.isAutoScalable();;
@@ -186,6 +184,14 @@ public class J_03Menu_CLIENTE {
 		lblimagem.setImage(gestor.resize(shlMenuFuncionrio,image2,lblimagem.getBounds().width,lblimagem.getBounds().height));
 		String clienteActua="Introduza Cliente ID";
 
+	}
+
+	public Button getBtnExibirContas() {
+		return btnExibirContas;
+	}
+
+	public void setBtnExibirContas(Button btnExibirContas) {
+		this.btnExibirContas = btnExibirContas;
 	}
 	
 	
