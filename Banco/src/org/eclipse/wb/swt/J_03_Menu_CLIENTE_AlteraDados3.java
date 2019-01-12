@@ -64,6 +64,7 @@ public class J_03_Menu_CLIENTE_AlteraDados3 {
 	private Text text_DataA_dia;
 	private Button Buton_AlteraDados;
 	private Composite composite_BOX;
+	private Text text_ID;
 
 	public Shell getShell() {
 		return shell;
@@ -304,7 +305,7 @@ public class J_03_Menu_CLIENTE_AlteraDados3 {
 
 		Label Titulo_Novo_F = new Label(composite_BOX, SWT.NONE);
 		Titulo_Novo_F.setAlignment(SWT.CENTER);
-		Titulo_Novo_F.setBounds(81, 2, 322, 15);
+		Titulo_Novo_F.setBounds(93, 2, 310, 15);
 		Titulo_Novo_F.setText("Dados Pessoais");
 
 		Buton_AlteraDados = new Button(composite_BOX, SWT.MULTI | SWT.WRAP | SWT.NONE);
@@ -391,21 +392,40 @@ public class J_03_Menu_CLIENTE_AlteraDados3 {
 		text_DataA_mes.setEnabled(false);
 		text_DataA_dia.setEnabled(false);
 		TipoID_NovoF.setEnabled(false);
+		
+		text_ID = new Text(composite_BOX, SWT.BORDER | SWT.CENTER);
+		text_ID.setBounds(0, 2, 88, 21);
+		text_ID.setText(""+uUtilizador.getuID());
+		text_ID.setEnabled(false);
 
 		Button button = new Button(shell, SWT.NONE);
 		button.setText("Dados Pessoais");
 		button.setBounds(10, 84, 192, 25);
 
-		Button button_1 = new Button(shell, SWT.NONE);
-		button_1.setText("Exibir Contas");
-		button_1.setBounds(10, 112, 192, 25);
+		Button btnContas = new Button(shell, SWT.NONE);
+		btnContas.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				shell.dispose();
+				J_03Menu_CLIENTE_contas lclientes=new J_03Menu_CLIENTE_contas(gestor,uUtilizador);
+				lclientes.open();
+				
+			}
+		});
+		btnContas.setText("Contas");
+		btnContas.setBounds(10, 112, 192, 25);
 
-		Button button_2 = new Button(shell, SWT.TOGGLE);
-		button_2.setText("Movimentar Contas");
-		button_2.setBounds(10, 143, 192, 25);
-
-		Button button_3 = new Button(shell, SWT.NONE);
-		button_3.setBounds(10, 176, 192, 25);
+		Button btnCartesDaConta = new Button(shell, SWT.TOGGLE);
+		btnCartesDaConta.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				shell.dispose();
+				J_03Menu_CLIENTE_Cartoes editarconta= new J_03Menu_CLIENTE_Cartoes( gestor, uUtilizador);
+				editarconta.open();
+			}
+		});
+		btnCartesDaConta.setText("Cart\u00F5es da Conta");
+		btnCartesDaConta.setBounds(10, 143, 192, 25);
 
 		// Botao Altera dados.
 		Buton_AlteraDados.addMouseListener(new MouseAdapter() {
@@ -470,7 +490,10 @@ public class J_03_Menu_CLIENTE_AlteraDados3 {
 							box.open();
 
 							System.out.println(("verifica"));
-							Buton_AlteraDados.setText("Alterção de Dados");
+							Buton_AlteraDados.setText("Alteração de Dados");
+							text_PassNovoF.setEnabled(false);
+							text_UserA.setEnabled(false);
+							text_Email_NA.setEnabled(false);
 							Buton_AlteraDados.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_GRAY));
 
 						} else {

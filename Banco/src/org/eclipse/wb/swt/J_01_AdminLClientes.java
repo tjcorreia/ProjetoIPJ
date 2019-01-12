@@ -64,27 +64,34 @@ public class J_01_AdminLClientes {
 		open();
 		// TODO Auto-generated constructor stub
 	}
-
+	/**
+	 * @wbp.parser.entryPoint
+	 */
 	
-
+	public J_01_AdminLClientes() {
+		super();
+		
+		open();
+		// TODO Auto-generated constructor stub
+	}
 	/**
 	 * Launch the application.
 	 * 
 	 * @param args
-	 */
-	public static void main(String[] args) {
-		try {
-			J_01_AdminLClientes window = new J_01_AdminLClientes(new Gestao(),new Utilizador());
-			window.open();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Open the window.
-	 */
-	
+//	 */
+//	public static void main(String[] args) {
+//		try {
+//			J_01_AdminLClientes window = new J_01_AdminLClientes(new Gestao(),new Utilizador());
+//			window.open();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
+//
+////	/**
+//	 * Open the window.
+//	 */
+//	
 	
 	
 	
@@ -223,7 +230,7 @@ public class J_01_AdminLClientes {
 		
 		lblNewLabel.setImage(SWTResourceManager.getImage(J_01_AdminLClientes.class, 
 				"C:\\Users\\Jorge\\Documents\\GitHub\\ProjetoIPJ\\Banco\\Imagens\\LogojavaBank _Withe_104.png"));
-		lblNewLabel.setBounds(10, 10, 154, 111);
+		lblNewLabel.setBounds(10, 10, 154, 92);
 
 	}
 }

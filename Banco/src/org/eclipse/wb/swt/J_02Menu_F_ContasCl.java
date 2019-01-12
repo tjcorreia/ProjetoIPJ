@@ -513,82 +513,10 @@ public void preencheTabela() {
 		return texto.getText().length();
 	}
 
-	public boolean validateMobileNumber(Text texto) {
-		String mobileNumber = texto.getText();
-//		("^\\+?\\[0-9]{0,5}?\\-?\\[0-9]{9}$"
-//		Pattern regexPattern = Pattern.compile("^\\+?\\d{0,3}?\\d{9}$");
-		Pattern regexPattern2 = Pattern.compile("^\\d{0,5}?\\d{9}$");
-//        Matcher regMatcher   = regexPattern.matcher(mobileNumber);
-		Matcher regMatcher2 = regexPattern2.matcher(mobileNumber);
-		if (regMatcher2.matches()) {
-			texto.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
-			return true;// "Valid Mobile Number";
-		} else {
-			texto.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
-			return false;// "Invalid Mobile Number";
 
-		}
+
+
+
+	
 	}
 
-//	\A[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\z
-//	Regex : ^[\\w!#$%&’*+/=?`{|}~^-]+(?:\\.[\\w!#$%&’*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$
-
-	public boolean validateEmail(Text texto) {
-		String emailStr = texto.getText();
-		Pattern regexPattern = Pattern.compile(
-				"\\A[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\z");
-		Matcher regMatcher = regexPattern.matcher(emailStr);
-		if (regMatcher.matches()) {
-			texto.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
-			return true;// "Valid Email";
-		} else {
-			texto.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
-			return false;// "Invalid Email";
-		}
-	}
-
-	public boolean validateData2(Text texto1, Text texto2, Text texto3) {
-//		new GregorianCalendar(2018, 10, 24);
-		GregorianCalendar novoF = new GregorianCalendar();
-		GregorianCalendar actual = new GregorianCalendar();
-		GregorianCalendar actualMenos120 = new GregorianCalendar();
-		actualMenos120 = (GregorianCalendar) GregorianCalendar.getInstance();
-		actual = (GregorianCalendar) Calendar.getInstance();
-
-		String dataStr = texto1.getText() + "/" + texto2.getText() + "/" + texto3.getText();
-		System.out.println(dataStr);
-		Pattern regexPattern = Pattern.compile("^[0-9]{4}/(1[0-2]|0[1-9])/(3[01]|[12][0-9]|0[1-9])$");
-		Matcher regMatcher = regexPattern.matcher(dataStr);
-		if (regMatcher.matches()) {
-			texto1.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
-			texto2.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
-			texto3.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
-			System.out.println("Formato Correto");
-			return true;// "Valid Data";
-//			novoF.set(Integer.parseInt(texto1.getText()), Integer.parseInt(texto1.getText())
-//					- 1, Integer.parseInt(texto1.getText()));
-//			actualMenos120.add(Calendar.YEAR, -120);
-//			SimpleDateFormat fmt = new SimpleDateFormat("dd-MMM-yyyy");
-//			
-//		
-//			String dateFormatted = fmt.format(actual);
-//			System.out.println(dateFormatted);
-////			&& (novoF).compareTo(actualMenos120)==1
-//			if ((novoF).compareTo(actual)==-1 ) {
-//			
-//			}
-//			else {
-//				texto1.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
-//				texto2.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
-//				texto3.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
-//				return false;// "Invalid Data";
-//			}
-		} else {
-			texto1.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
-			texto2.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
-			texto3.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
-
-			return false;// "Invalid Data";
-		}
-	}
-}

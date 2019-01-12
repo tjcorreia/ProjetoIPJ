@@ -75,6 +75,14 @@ public class J_02Menu_F_ListaClientes {
 
 
 
+	
+	public J_02Menu_F_ListaClientes(Gestao gestor, Utilizador uUtilizador) {
+		super();
+		this.uUtilizador = uUtilizador;
+		this.gestor = gestor;
+		
+	
+	}
 	/**
 	 * @wbp.parser.entryPoint
 	 */
@@ -83,14 +91,6 @@ public class J_02Menu_F_ListaClientes {
 		open();
 		// TODO Auto-generated constructor stub
 	}
-	public J_02Menu_F_ListaClientes(Gestao gestor, Utilizador uUtilizador) {
-		super();
-		this.uUtilizador = uUtilizador;
-		this.gestor = gestor;
-		
-	
-	}
-
 
 	/**
 	 * Open the window.

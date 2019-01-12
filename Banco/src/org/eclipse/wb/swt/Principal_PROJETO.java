@@ -16,11 +16,12 @@ public class Principal_PROJETO {
 		J_10Login novoLogin = new J_10Login (jbGEST);
 
 		Utilizador aprovado=new Utilizador();
-		do {
+//		do {
 			
 			novoLogin.open();
 			aprovado=novoLogin.utilizadorAprovado();
-		} while (aprovado==null);
+			
+//		} while (aprovado==null);
 		
 		System.out.println("passou ->>"+novoLogin.utilizadorAprovado().nome);
 		jbGEST.Gerir(jbGEST,aprovado);

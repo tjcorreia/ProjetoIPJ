@@ -69,9 +69,12 @@ public class J_01_Administrador {
 	/**
 	 * 
 	 */
+	/**
+	 * @wbp.parser.entryPoint
+	 */
 	public J_01_Administrador() {
 		super();
-		
+		open();
 		// TODO Auto-generated constructor stub
 	}
 

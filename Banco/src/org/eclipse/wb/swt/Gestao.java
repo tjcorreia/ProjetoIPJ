@@ -13,6 +13,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.wb.swt.Transacao.TipoT;
@@ -40,164 +41,166 @@ public class Gestao {
 		this.mapCartaoConta = new HashMap<Integer, Integer>();
 		this.contadores = new HashMap<String, Integer>();
 
-//	// load data 
-//		try {
-//			loadAll();
-//		} catch (ClassNotFoundException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+	// load data 
+		try {
+			loadAll();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
-		contadores.put("Utilizador", 10000); // inicializa o Contador de Utilizadores
-		contadores.put("Contas", 100000); // inicializa o Contador de Contas
-		contadores.put("Cartoes", 500010000); // inicializa o Contador de Cartoes
-		// Administradores
-//	Administrador(int uID, String login, String password, String nome, String sobrenome, String dataNascimento,
-//			String morada, TipoID escolhaID, int valorID, String email, int mobile)
-		Administrador MachadoU = new Administrador(contadores.get("Utilizador"), "Machado", "Admin", "Alberto",
-				"Machado0", "1977/07/17", "Rua Maria Vitoria", Administrador.TipoID.CARTAOCIDADAO, "78456123",
-				"mail@gmail.com", 965420735);
+//		contadores.put("Utilizador", 10000); // inicializa o Contador de Utilizadores
+//		contadores.put("Contas", 100000); // inicializa o Contador de Contas
+//		contadores.put("Cartoes", 500010000); // inicializa o Contador de Cartoes
+//		// Administradores
+////	Administrador(int uID, String login, String password, String nome, String sobrenome, String dataNascimento,
+////			String morada, TipoID escolhaID, int valorID, String email, int mobile)
+//		Administrador MachadoU = new Administrador(contadores.get("Utilizador"), "Machado", "Admin", "Alberto",
+//				"Machado0", "1977/07/17", "Rua Maria Vitoria", Administrador.TipoID.CARTAOCIDADAO, "78456123",
+//				"mail@gmail.com", 965420735);
+//
+//		Administrador CorreiaU = new Administrador(contadores.get("Utilizador") + 1, "Correia", "Admin", "Tiago",
+//				"Coreia", "1977/07/30", "Rua Maria Vitoria ", Administrador.TipoID.CARTAOCIDADAO, "12345678",
+//				"mail@gmail.com", 965420733);
+//		contadores.replace("Utilizador", contadores.get("Utilizador") + 1);
+//		mapUtilizadores.put("Machado", MachadoU);
+//		mapUtilizadores.put("Correia", CorreiaU);
+//
+//		// Funcionarios (o funcionario banco tem de existir sempre)
+//		Funcionario BANCOFU = new Funcionario(contadores.get("Utilizador") + 1, "BANCO", "Fun", "BANCO", "BANCO0",
+//				"1977/07/30", "BANCO", Funcionario.TipoID.CARTAOCIDADAO, "78456123", "banco@gmail.com", 960000000);
+//		contadores.replace("Utilizador", contadores.get("Utilizador") + 1);
+//
+//		Funcionario MachadoFU = new Funcionario(contadores.get("Utilizador") + 1, "BANCO", "Fun", "BANCO", "BANCO0",
+//				"1977/07/30", "BANCO", Funcionario.TipoID.CARTAOCIDADAO, "78456123", "banco@gmail.com", 960000000);
+//		contadores.replace("Utilizador", contadores.get("Utilizador") + 1);
+//
+//		Funcionario CorreiaFU = new Funcionario(contadores.get("Utilizador") + 1, "Correia2", "Fun", "Tiago", "Coreia",
+//				"1977/07/30", "Rua Maria Vitoria ", Funcionario.TipoID.CARTAOCIDADAO, "12345678", "mail2@gmail.com",
+//				965420731);
+//		contadores.replace("Utilizador", contadores.get("Utilizador") + 1);
+//		mapUtilizadores.put("Maria", MachadoFU);
+//
+//		mapUtilizadores.put("Correia2", CorreiaFU);
+//
+//		// Clientes
+//
+////	Utilizador(uID,login,password,nome,morada,escolhaID,valorID,email,mobile)
+//
+//		Cliente cl1 = new Cliente(contadores.get("Utilizador") + 1, "AlbertoCliente", "Cliente", "Alberto", "Machado0",
+//				"1977/07/30", "Rua Maria Vitoria", Utilizador.TipoID.CARTAOCIDADAO, "78456123", "mail", 965420731);
+//		contadores.replace("Utilizador", contadores.get("Utilizador") + 1);
+//		Cliente cl2 = new Cliente(contadores.get("Utilizador") + 1, "CorreiaCliente", "Cliente", "Tiago", "Coreia",
+//				"1977/07/30", "Rua Maria Vitoriazfgadfgadfgsdfgsdfg", Utilizador.TipoID.CARTAOCIDADAO, "12345678",
+//				"mail", 965420730);
+//		contadores.replace("Utilizador", contadores.get("Utilizador") + 1);
+//		Cliente cl3 = new Cliente(contadores.get("Utilizador") + 1, "MariaCliente", "Cliente", "Tiago2", "Coreia2",
+//				"1977/07/30", "Rua Maria Vitoriazfgadfgadfgsdfgsdfg", Utilizador.TipoID.CARTAOCIDADAO, "92345678",
+//				"mail2@gmail.com", 965420530);
+//		contadores.replace("Utilizador", contadores.get("Utilizador") + 1);
+//
+//		mapUtilizadores.put("AlbertoCliente", cl1);
+//
+//		mapUtilizadores.put("CorreiaCliente", cl2);
+//
+//		mapUtilizadores.put("MariaCliente", cl3);
+//
+//		// Contas
+//
+//		Conta cn1 = new ContaNormal(100000, 0, "2017/06/02");
+//		lContas.add(cn1);
+//		cn1.addClienteC(cl1.getuID());
+//		cl1.addConta(cn1);
+//
+//		ContaNormal cn2 = new ContaNormal(100001, 0, "2017/06/02");
+//		cn2.addClienteC(cl2.getuID());
+//		cn2.addClienteC(cl1.getuID());
+//		cn2.addClienteC(cl3.getuID());
+//		cl2.addConta(cn2);
+//		cl1.addConta(cn2);
+//		cl3.addConta(cn2);
+//
+//		lContas.add(cn2);
+//
+//		Conta cn3 = new ContaNormal(100002, 0, "2017/06/02");
+//		lContas.add(cn3);
+//		cn3.addClienteC(cl1.getuID());
+//		cl1.addConta(cn3);
+//
+//		Conta cn4 = new ContaPrazo(100003, 0, "2017/06/02");
+//		lContas.add(cn4);
+//		cn4.addClienteC(cl1.getuID());
+//		cn4.addClienteC(cl2.getuID());
+//		cn4.addClienteC(cl3.getuID());
+//
+//		cl1.addConta(cn4);
+//		cl3.addConta(cn4);
+//
+//		Conta cn5 = new ContaPrazo(100004, 0, "2017/06/02");
+//		cn5.setAbertaFechada(Conta.TipoC.ENCERADA);
+//		lContas.add(cn5);
+//		cn5.addClienteC(cl1.getuID());
+//		cl1.addConta(cn5);
+//
+////	transações
+//
+//		Transacao T0Cn1 = new Transacao(MachadoFU.getuID(), "2018-01-02", 1500, "ABERTURA", 0,
+//				Transacao.TipoT.DEP_CASH);
+//		cn1.addTransacaoC(T0Cn1);
+//		Transacao T1Cn1 = new Transacao(CorreiaFU.getuID(), "2018-02-02", -500, "", 0, Transacao.TipoT.LEV_CASH);
+//		cn1.addTransacaoC(T1Cn1);
+//		Transacao T2Cn1 = new Transacao(MachadoFU.getuID(), "2018-03-02", 2000, "", 0, Transacao.TipoT.DEP_CASH);
+//		cn1.addTransacaoC(T2Cn1);
+//		Transacao T3Cn1 = new Transacao(CorreiaFU.getuID(), "2018-04-02", 1000, "", 0, Transacao.TipoT.DEP_CASH);
+//		cn1.addTransacaoC(T3Cn1);
+//		Transacao T4Cn1 = new Transacao(MachadoFU.getuID(), "2018-05-02", 1000, "", 0, Transacao.TipoT.DEP_CASH);
+//		cn1.addTransacaoC(T4Cn1);
+//		Transacao T5Cn1 = new Transacao(CorreiaFU.getuID(), "2018-06-02", 1000, "", 0, Transacao.TipoT.DEP_CASH);
+//		cn1.addTransacaoC(T5Cn1);
+//		Transacao T6Cn1 = new Transacao(MachadoFU.getuID(), "2018-07-02", 1000, "", 0, Transacao.TipoT.DEP_CASH);
+//		cn1.addTransacaoC(T6Cn1);
+//		Transacao T7Cn1 = new Transacao(CorreiaFU.getuID(), "2018-01-02", 1000, "", 0, Transacao.TipoT.DEP_CASH);
+//		cn1.addTransacaoC(T7Cn1);
+//		Transacao T8Cn1 = new Transacao(MachadoFU.getuID(), "2019-01-08", 1000, "", 0, Transacao.TipoT.DEP_CASH);
+//		cn1.addTransacaoC(T8Cn1);
+//		Transacao T9Cn1 = new Transacao(MachadoFU.getuID(), "2019-01-08", -50, "", 0, Transacao.TipoT.LEV_CASH);
+//		cn1.addTransacaoC(T9Cn1);
+//		Transacao T10Cn1 = new Transacao(MachadoFU.getuID(), "2019-01-08", -500, "", 100002,
+//				Transacao.TipoT.TRANSFERENCIA);
+//		cn1.addTransacaoC(T10Cn1);
+//		Transacao T0Cn2 = new Transacao(MachadoFU.getuID(), "2019-01-08", 1500, "ABERTURA", 0,
+//				Transacao.TipoT.DEP_CASH);
+//		cn2.addTransacaoC(T0Cn2);
+//		Transacao T1Cn2 = new Transacao(MachadoFU.getuID(), "2019-01-08", 200, "", -100001,
+//				Transacao.TipoT.TRANSFERENCIA);
+//		cn2.addTransacaoC(T1Cn2);
+//		Transacao T0Cn3 = new Transacao(MachadoFU.getuID(), 1000, "ABERTURA", 0, Transacao.TipoT.DEP_CASH);
+//		cn3.addTransacaoC(T0Cn3);
+//		Transacao T0Cn4 = new Transacao(MachadoFU.getuID(), 1000, "ABERTURA", 0, Transacao.TipoT.DEP_CASH);
+//		cn4.addTransacaoC(T0Cn4);
+//
+//		// cartao
+//
+//		LocalDate data = LocalDate.now().plusYears(5);
+//		int dia = data.getDayOfMonth();
+//		int anomes = data.getMonthValue();
+//		int ano = data.getYear();
+//
+//		Cartao ct1 = new Cartao(500010000, cl1.getuID(), cn1.getContaID(), cl1.getNome() + " " + cl1.getSobrenome(),
+//				"" + data, "0000");
+//		((ContaNormal) cn1).addCartaoC(ct1);
+//
+//		mapCartaoConta.put(500010000, cn1.getContaID());
+//		LocalDate data2 = LocalDate.of(2015, 12, 01);
+//		Cartao ct2 = new Cartao(contadores.get("Cartoes") + 1, cl1.getuID(), cn2.getContaID(),
+//				cl1.getNome() + " " + cl1.getSobrenome(), "" + data2, "0000");
+//		((ContaNormal) cn2).addCartaoC(ct2);
+//
+//		mapCartaoConta.put(500010000, cn2.getContaID());
+//		contadores.replace("Cartoes", contadores.get("Cartoes") + 1); // inicializa o Contador de Cartoes
+//
+//		// ( duvida colocar conta de origem ?)
 
-		Administrador CorreiaU = new Administrador(contadores.get("Utilizador") + 1, "Correia", "Admin", "Tiago",
-				"Coreia", "1977/07/30", "Rua Maria Vitoria ", Administrador.TipoID.CARTAOCIDADAO, "12345678",
-				"mail@gmail.com", 965420733);
-		contadores.replace("Utilizador", contadores.get("Utilizador") + 1);
-		mapUtilizadores.put("Machado", MachadoU);
-		mapUtilizadores.put("Correia", CorreiaU);
-
-		// Funcionarios (o funcionario banco tem de existir sempre)
-		Funcionario BANCOFU = new Funcionario(contadores.get("Utilizador") + 1, "BANCO", "Fun", "BANCO", "BANCO0",
-				"1977/07/30", "BANCO", Funcionario.TipoID.CARTAOCIDADAO, "78456123", "banco@gmail.com",
-				960000000);
-		contadores.replace("Utilizador", contadores.get("Utilizador") + 1);
-		
-		Funcionario MachadoFU = new Funcionario(contadores.get("Utilizador") + 1, "BANCO", "Fun", "BANCO", "BANCO0",
-				"1977/07/30", "BANCO", Funcionario.TipoID.CARTAOCIDADAO, "78456123", "banco@gmail.com",
-				960000000);
-		contadores.replace("Utilizador", contadores.get("Utilizador") + 1);
-		
-		Funcionario CorreiaFU = new Funcionario(contadores.get("Utilizador") + 1, "Correia2", "Fun", "Tiago", "Coreia",
-				"1977/07/30", "Rua Maria Vitoria ", Funcionario.TipoID.CARTAOCIDADAO, "12345678", "mail2@gmail.com",
-				965420731);
-		contadores.replace("Utilizador", contadores.get("Utilizador") + 1);
-		mapUtilizadores.put("Maria", MachadoFU);
-		
-		mapUtilizadores.put("Correia2", CorreiaFU);
-
-		// Clientes
-
-//	Utilizador(uID,login,password,nome,morada,escolhaID,valorID,email,mobile)
-
-		Cliente cl1 = new Cliente(contadores.get("Utilizador") + 1, "AlbertoCliente", "Cliente", "Alberto", "Machado0",
-				"1977/07/30", "Rua Maria Vitoria", Utilizador.TipoID.CARTAOCIDADAO, "78456123", "mail", 965420731);
-		contadores.replace("Utilizador", contadores.get("Utilizador") + 1);
-		Cliente cl2 = new Cliente(contadores.get("Utilizador") + 1, "CorreiaCliente", "Cliente", "Tiago", "Coreia",
-				"1977/07/30", "Rua Maria Vitoriazfgadfgadfgsdfgsdfg", Utilizador.TipoID.CARTAOCIDADAO, "12345678",
-				"mail", 965420730);
-		contadores.replace("Utilizador", contadores.get("Utilizador") + 1);
-		Cliente cl3 = new Cliente(contadores.get("Utilizador") + 1, "MariaCliente", "Cliente", "Tiago2", "Coreia2",
-				"1977/07/30", "Rua Maria Vitoriazfgadfgadfgsdfgsdfg",Utilizador.TipoID.CARTAOCIDADAO, "92345678",
-				"mail2@gmail.com", 965420530);
-		contadores.replace("Utilizador", contadores.get("Utilizador") + 1);
-		
-		mapUtilizadores.put("AlbertoCliente", cl1);
-		
-		mapUtilizadores.put("CorreiaCliente", cl2);
-		
-		mapUtilizadores.put("MariaCliente", cl3);
-
-		// Contas
-
-		
-		Conta cn1 = new ContaNormal(100000, 0, "2017/06/02");
-		lContas.add(cn1);
-		cn1.addClienteC(cl1.getuID());
-		cl1.addConta(cn1);
-
-		ContaNormal cn2 = new ContaNormal(100001, 0, "2017/06/02");
-		cn2.addClienteC(cl2.getuID());
-		cn2.addClienteC(cl1.getuID());
-		cn2.addClienteC(cl3.getuID());
-		cl2.addConta(cn2);
-		cl1.addConta(cn2);
-		cl3.addConta(cn2);
-
-		lContas.add(cn2);
-		
-		Conta cn3 = new ContaNormal(100002, 0, "2017/06/02");
-		lContas.add(cn3);
-		cn3.addClienteC(cl1.getuID());
-		cl1.addConta(cn3);
-		
-		Conta cn4 = new ContaPrazo(100003, 0, "2017/06/02");
-		lContas.add(cn4);
-		cn4.addClienteC(cl1.getuID());
-		cn4.addClienteC(cl2.getuID());
-		cn4.addClienteC(cl3.getuID());
-		
-		cl1.addConta(cn4);
-		cl3.addConta(cn4);
-		
-		Conta cn5 = new ContaPrazo(100004, 0, "2017/06/02");
-		cn5.setAbertaFechada(Conta.TipoC.ENCERADA);
-		lContas.add(cn5);
-		cn5.addClienteC(cl1.getuID());
-		cl1.addConta(cn5);
-
-//	transações
-		
-		Transacao T0Cn1 = new Transacao(MachadoFU.getuID(), "2018-01-02", 1500,"ABERTURA", 0,Transacao.TipoT.DEP_CASH);
-		cn1.addTransacaoC(T0Cn1);
-		Transacao T1Cn1 = new Transacao(CorreiaFU.getuID(), "2018-02-02", -500,"", 0,Transacao.TipoT.LEV_CASH);
-		cn1.addTransacaoC(T1Cn1);
-		Transacao T2Cn1 = new Transacao(MachadoFU.getuID(), "2018-03-02", 2000,"", 0,Transacao.TipoT.DEP_CASH);
-		cn1.addTransacaoC(T2Cn1);
-		Transacao T3Cn1 = new Transacao(CorreiaFU.getuID(), "2018-04-02", 1000,"", 0,Transacao.TipoT.DEP_CASH);
-		cn1.addTransacaoC(T3Cn1);
-		Transacao T4Cn1 = new Transacao(MachadoFU.getuID(), "2018-05-02", 1000,"", 0,Transacao.TipoT.DEP_CASH);
-		cn1.addTransacaoC(T4Cn1);
-		Transacao T5Cn1 = new Transacao(CorreiaFU.getuID(), "2018-06-02", 1000,"", 0,Transacao.TipoT.DEP_CASH);
-		cn1.addTransacaoC(T5Cn1);
-		Transacao T6Cn1 = new Transacao(MachadoFU.getuID(), "2018-07-02", 1000,"", 0,Transacao.TipoT.DEP_CASH);
-		cn1.addTransacaoC(T6Cn1);
-		Transacao T7Cn1 = new Transacao(CorreiaFU.getuID(), "2018-01-02", 1000,"", 0,Transacao.TipoT.DEP_CASH);
-		cn1.addTransacaoC(T7Cn1);
-		Transacao T8Cn1 = new Transacao(MachadoFU.getuID(), "2019-01-08", 1000,"", 0,Transacao.TipoT.DEP_CASH);
-		cn1.addTransacaoC(T8Cn1);
-		Transacao T9Cn1 = new Transacao(MachadoFU.getuID(), "2019-01-08", -50,"", 0,Transacao.TipoT.LEV_CASH);
-		cn1.addTransacaoC(T9Cn1);
-		Transacao T10Cn1 = new Transacao(MachadoFU.getuID(), "2019-01-08", -500,"", 100002,Transacao.TipoT.TRANSFERENCIA);
-		cn1.addTransacaoC(T10Cn1);
-		Transacao T0Cn2 = new Transacao(MachadoFU.getuID(), "2019-01-08", 1500,"ABERTURA", 0,Transacao.TipoT.DEP_CASH);
-		cn2.addTransacaoC(T0Cn2);
-		Transacao T1Cn2 = new Transacao(MachadoFU.getuID(), "2019-01-08", 200,"", -100001,Transacao.TipoT.TRANSFERENCIA);
-		cn2.addTransacaoC(T1Cn2);
-		Transacao T0Cn3 = new Transacao(MachadoFU.getuID(), 1000,"ABERTURA", 0,Transacao.TipoT.DEP_CASH);
-		cn3.addTransacaoC(T0Cn3);
-		Transacao T0Cn4 = new Transacao(MachadoFU.getuID(), 1000,"ABERTURA", 0,Transacao.TipoT.DEP_CASH);
-		cn4.addTransacaoC(T0Cn4);
-		
-		// cartao
-		
-		LocalDate data = LocalDate.now().plusYears(5);
-		int dia=data.getDayOfMonth();
-		int anomes=data.getMonthValue();
-		int ano=data.getYear();
-		
-		Cartao ct1 = new Cartao(500010000,cl1.getuID(),cn1.getContaID(),cl1.getNome()+" "+cl1.getSobrenome(),""+data, "0000");
-		((ContaNormal)cn1).addCartaoC(ct1);
-		
-	    mapCartaoConta.put(500010000,cn1.getContaID());
-			LocalDate data2 =LocalDate.of(2015,12, 01);
-		Cartao ct2 = new Cartao(contadores.get("Cartoes") + 1,cl1.getuID(),cn2.getContaID(),cl1.getNome()+" "+cl1.getSobrenome(),""+data2,"0000");
-		((ContaNormal)cn2).addCartaoC(ct2);
-		
-		mapCartaoConta.put(500010000,cn2.getContaID());
-		contadores.replace("Cartoes", contadores.get("Cartoes") + 1); // inicializa o Contador de Cartoes
-
-		//( duvida colocar conta de origem ?)
-		
-		
 		// verifica data e paga juro
 		pagajuros();
 //	System.out.println("Conta-->" + (cn1.toString()));
@@ -265,15 +268,12 @@ public class Gestao {
 		} else if (uactual instanceof Funcionario) {
 			J_02Menu_F novaJFuncionario = new J_02Menu_F(gestor, uactual);
 			novaJFuncionario.open();
-			
+
+		} else if (uactual instanceof Cliente) {
+			J_03Menu_CLIENTE novaCliente = new J_03Menu_CLIENTE(gestor, uactual);
+			novaCliente.open();
 
 		}
-	else if (uactual instanceof Cliente) {
-		J_03Menu_CLIENTE novaCliente = new J_03Menu_CLIENTE(gestor, uactual);
-		novaCliente.open();
-		
-	}
-	
 
 		System.out.println("<---------------------- Log out ---------------->");
 
@@ -282,112 +282,167 @@ public class Gestao {
 	}
 //++++++++++++++++++++++++++++++++++++++++++++++++++ metodos++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	// metodo
-	
+
 	public void pagajuros() {
-		 LocalDate data = LocalDate.now();
-		 
-		
-		 if (data.getDayOfMonth()==10) {
-		for (Conta c:lContas) {
-			if (c instanceof ContaPrazo) {
-				if(c.getAbertaFechada().ABERTA != null) {
-			 c.jurosMensais(""+data.getYear(),""+data.getMonthValue());	
+		LocalDate data = LocalDate.now();
+
+		if (data.getDayOfMonth() == 10) {
+			for (Conta c : lContas) {
+				if (c instanceof ContaPrazo) {
+					if (c.getAbertaFechada().ABERTA != null) {
+						c.jurosMensais("" + data.getYear(), "" + data.getMonthValue());
+					}
 				}
 			}
 		}
-		 }
-		 
-		 
+
 	}
-	
-	
-	
-	
-	// verifiva restriçoes de movimentos da conta
-		public boolean verifMovimentos(Conta contaAct,TipoT escolhaTA,int movimento) {
-			
-			if(escolhaTA==TipoT.DEP_CASH) {
-				return true;
+
+	// metodo para transferencia fiz diferente para retitar o metodo da Janela e
+	// utilizar uma classe Util
+
+	public void TransferenciaCl(Utilizador uUtilizador,Shell shellactual, Conta contaActual, Text texoVerificaSaldo, Text texoVerContad,
+			Conta contaFinal) {
+		int contaDestinoID = 0;
+		double valoraTransferir=0;
+		String mensagem = "";
+		String textoTitulo = "ATENÇÃO";
+		boolean verifica = true;
+		String[] mensageA = { "" };
+		texoVerContad.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
+
+		if (Util.estaVazio(mensageA, texoVerContad, texoVerificaSaldo)) {
+			verifica = false;
+		} else {
+			// verifica valor a transferir
+			if ((Util.eNumeroIouD(mensageA, texoVerificaSaldo))) {
+				valoraTransferir = Double.parseDouble(texoVerificaSaldo.getText());
+				// verifica Saldo da Conta
+				if (valoraTransferir > contaActual.getSaldo()) {
+					texoVerificaSaldo.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
+					mensagem = mensagem + "O Valaor a transaferir é superior ao Saldo da Conta.\n";
+					verifica = false;
+				} else {// verifica movimentos da Conta
+					if (!(verifMovimentos(contaActual, TipoT.TRANSFERENCIA, valoraTransferir))) {
+						texoVerificaSaldo.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
+						mensagem = mensagem + "Atingiu o limite maximo que pode levantar ou transaferir.\n";
+						verifica=false;
+					}
+				}
+			} else {
+				verifica = false;
 			}
-			
-			if (contaAct instanceof ContaNormal) {
-				double maxdiario = 1000; // max diario conta normal
-				double maxMovimento=500;// max movimento conta normal
-				LocalDate actual = LocalDate.now();
-				String[] dataS = ("" + actual).split("-");
-				System.out.println("<---- Conta Actual- Verifica max diario ( " + Arrays.toString(dataS) + ") --->\n");
-				System.out.println("---- > " + contaAct.diario(dataS[0], dataS[1],dataS[2])*-1+ "< ---\n");
-				if (movimento>maxMovimento) {
-					return false;
-				}
-				if (contaAct.diario(dataS[0], dataS[1],dataS[2])*-1 + movimento> maxdiario) {
-					return false;
-				}
-				return true;
-			} else if (contaAct instanceof ContaPrazo){
 
-				double maxmensal = 10000;// max mensal conta a prazo
-
-				LocalDate actual = LocalDate.now();
-				String[] dataS = ("" + actual).split("-");
-				if (contaAct.mensal(Integer.parseInt(dataS[0]), Integer.parseInt(dataS[1]))*-1 +movimento> maxmensal) {
-					return false;
+			// verifica Conta
+			if ((Util.eNumeroI(mensageA, texoVerContad, 6))) {
+				contaFinal = contaExiste(Integer.parseInt(texoVerContad.getText()));
+				if (contaFinal == null) {
+					texoVerContad.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
+					mensageA[0] = mensageA[0] + " A conta não existe!!!!!\n";
+					verifica = false;
+				} else {
+					contaDestinoID = contaFinal.getContaID();
 				}
-				return true;
+			} else {
+				verifica = false;
 			}
-			
-			return false;
+		}
+		// verifica Tudo executa  a Transação
+      if (verifica){
 
-		}	
-	
-	
-	
-	
-	
-	
-	
-// criacartao para conta e cliente especifico	
-	
-	public Cartao criaCartao(int titularCartaoID,Conta contaC, String nome) {
+    	  valoraTransferir=valoraTransferir*-1;
+				Transacao novaT = new Transacao(uUtilizador.getuID(), valoraTransferir,"",contaDestinoID, TipoT.TRANSFERENCIA);
+				contaActual.addTransacaoC(novaT);
+				
+				textoTitulo="TRANSÇÃO CONCLUIDA";
+					Transacao novaTcontaF = new Transacao(uUtilizador.getuID(),valoraTransferir*-1 ,"",contaActual.getContaID(),TipoT.TRANSFERENCIA);
+					System.out.println("<---- Conta FINAL- Verifica Saldo ( " + contaFinal + ") --->\n");
+					contaFinal.addTransacaoC(novaTcontaF);
+					System.out.println("<---- Conta Actual- Verifica Saldo ( " + contaFinal+ ") --->\n");
+				
+			}
 		
-		Cartao novoC=new Cartao(contadores.get("Cartoes")+1,titularCartaoID,contaC.getContaID(), nome);
+   // verifica mensagem  a aparecer na janela
+		MessageBox box = new MessageBox(shellactual, SWT.MULTI);
+		box.setText(textoTitulo);
+		box.setMessage(mensagem);
+		box.open();
+	}
+
+	// verifiva restriçoes de movimentos da conta
+	public boolean verifMovimentos(Conta contaAct, TipoT escolhaTA, double movimento) {
+
+		if (escolhaTA == TipoT.DEP_CASH) {
+			return true;
+		}
+
+		if (contaAct instanceof ContaNormal) {
+			double maxdiario = 1000; // max diario conta normal
+			double maxMovimento = 500;// max movimento conta normal
+			LocalDate actual = LocalDate.now();
+			String[] dataS = ("" + actual).split("-");
+			System.out.println("<---- Conta Actual- Verifica max diario ( " + Arrays.toString(dataS) + ") --->\n");
+			System.out.println("---- > " + contaAct.diario(dataS[0], dataS[1], dataS[2]) * -1 + "< ---\n");
+			if (movimento > maxMovimento) {
+				return false;
+			}
+			//vai a conta e calcula o maximo diario
+			if (contaAct.diario(dataS[0], dataS[1], dataS[2]) * -1 + movimento > maxdiario) {
+				return false;
+			}
+			return true;
+		} else if (contaAct instanceof ContaPrazo) {
+
+			double maxmensal = 10000;// max mensal conta a prazo
+
+			LocalDate actual = LocalDate.now();
+			String[] dataS = ("" + actual).split("-");
+			//vai a conta e calcula o maximo mensal
+			if (contaAct.mensal(Integer.parseInt(dataS[0]), Integer.parseInt(dataS[1])) * -1 + movimento > maxmensal) {
+				return false;
+			}
+			return true;
+		}
+
+		return false;
+
+	}
+
+// criacartao para conta e cliente especifico	
+
+	public Cartao criaCartao(int titularCartaoID, Conta contaC, String nome) {
+
+		Cartao novoC = new Cartao(contadores.get("Cartoes") + 1, titularCartaoID, contaC.getContaID(), nome);
 		contadores.replace("Cartoes", contadores.get("Cartoes") + 1);
-		((ContaNormal)contaC).addCartaoC(novoC);
+		((ContaNormal) contaC).addCartaoC(novoC);
 		return novoC;
 	}
-	
-	
+
 //***********  verifica se a conta existe ******************
 	public Conta contaExiste(int contaID) {
-		
-		for ( Conta c:lContas ) {
-			if (c.getContaID()==contaID) {
+
+		for (Conta c : lContas) {
+			if (c.getContaID() == contaID) {
 				return c;
 			}
 		}
 		return null;
 	}
 
-	
 // cria uma conta nova para um cliente 
 
-	public Conta criaContaNova(Cliente clienteActual, Conta contaNova,int funcionarioID) {
-		
-		contaNova.setContaID(lContas.size()+100000);
+	public Conta criaContaNova(Cliente clienteActual, Conta contaNova, int funcionarioID) {
+
+		contaNova.setContaID(lContas.size() + 100000);
 		lContas.add(contaNova);
 		contaNova.addClienteC(clienteActual.getuID());
 		clienteActual.addConta(contaNova);
-		Transacao tAbertura = new Transacao(funcionarioID,contaNova.getDatacria(),contaNova.getSaldo(),"ABERTURA", 0,Transacao.TipoT.DEP_CASH);
+		Transacao tAbertura = new Transacao(funcionarioID, contaNova.getDatacria(), contaNova.getSaldo(), "ABERTURA", 0,
+				Transacao.TipoT.DEP_CASH);
 		contaNova.addTransacaoC(tAbertura);
 		return contaNova;
 	}
-	
-	
-	
-	
-	
-	
-	
+
 	//// faz a verificação das entradas do login
 	public Utilizador verfLogin(String username, String passwordV) {
 
@@ -489,7 +544,8 @@ public class Gestao {
 
 				System.out.println("VERIFICA ---->Key = " + entry.getKey() + ", Value = " + entry.getValue());
 
-				// verifica identificação ***FALTA RETIRAR A VERIFICAçÃO EM FUNÇÂO DO TIPO - o passporte e sempre diferente
+				// verifica identificação ***FALTA RETIRAR A VERIFICAçÃO EM FUNÇÂO DO TIPO - o
+				// passporte e sempre diferente
 				if (entry.getValue().getEscolhaID().equals(escolhadaIDN)
 						&& entry.getValue().getValorID().equals(valorID_NovoF.getText())) {
 					verifica = verifica + "O " + escolhadaIDN + " com o numero :" + valorID_NovoF
@@ -514,7 +570,7 @@ public class Gestao {
 					verifica = verifica + "Já existe um utilizador com este email\n";
 					email_NovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
 				}
-			// verifica telemovel
+				// verifica telemovel
 				if (("" + entry.getValue().getMobile()).equals(mobileNovoF.getText())) {
 					verifica = verifica + "Já existe um utilizador com este contacto de telemovel. \n";
 					mobileNovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
@@ -524,66 +580,64 @@ public class Gestao {
 		System.out.println((verifica));
 		return verifica;
 	}
-	
-	
-	
-	//faz a verificação da adicção de um do novo Cliente
-		public String verificaAlteraCl(Cliente actual,TipoID escolhadaIDN, Text valorID_NovoF, Text email_NovoF, Text userNovoF,
-				Text mobileNovoF) {
 
-			valorID_NovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
-			email_NovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
-			userNovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
-			mobileNovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
-			String verifica = "";
+	// faz a verificação da adicção de um do novo Cliente
+	public String verificaAlteraCl(Cliente actual, TipoID escolhadaIDN, Text valorID_NovoF, Text email_NovoF,
+			Text userNovoF, Text mobileNovoF) {
+
+		valorID_NovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
+		email_NovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
+		userNovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
+		mobileNovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
+		String verifica = "";
 //	// verifica username (não é nessário considerando que o funcionario nao pode alerar estes dados
 //			if (mapUtilizadores.containsKey(userNovoF.getText())) {
 //				verifica = verifica + "O nome de Utilizador não é válido. \n";
 //				userNovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
 //			}
 
-			for (Entry<String, Utilizador> entry : mapUtilizadores.entrySet()) {
-				if (entry.getValue() instanceof Cliente & !(entry.getValue()==actual)) {
+		for (Entry<String, Utilizador> entry : mapUtilizadores.entrySet()) {
+			if (entry.getValue() instanceof Cliente & !(entry.getValue() == actual)) {
 
-					System.out.println("VERIFICA ---->Key = " + entry.getKey() + ", Value = " + entry.getValue());
+				System.out.println("VERIFICA ---->Key = " + entry.getKey() + ", Value = " + entry.getValue());
 
-					// verifica identificação ***FALTA RETIRAR A VERIFICAçÃO EM FUNÇÂO DO TIPO - o passporte e sempre diferente
-					if (entry.getValue().getEscolhaID().equals(escolhadaIDN)
-							&& entry.getValue().getValorID().equals(valorID_NovoF.getText())) {
-						verifica = verifica + "O " + escolhadaIDN + " com o numero :" + valorID_NovoF
-								+ " já está associado a um Funcionario. \n";
-						valorID_NovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
-					}
-
-					else if (!(entry.getValue().getEscolhaID().equals(escolhadaIDN))
-							&& entry.getValue().getValorID().equals(valorID_NovoF.getText())) {
-						if (escolhadaIDN.equals(TipoID.CARTAOCIDADAO)) {
-							verifica = verifica + "O numero :" + valorID_NovoF.getText()
-									+ " já existe e está associado ao Passaporte. \n";
-						} else {
-							verifica = verifica + "O numero :" + valorID_NovoF.getText()
-									+ " já existe e está associado ao Cartão de Cidadão. \n";
-						}
-						valorID_NovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
-					}
-
-					// verifica email
-					if (entry.getValue().getEmail().equals(email_NovoF.getText())) {
-						verifica = verifica + "Já existe um utilizador com este email\n";
-						email_NovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
-					}
-				// verifica telemovel
-					if (("" + entry.getValue().getMobile()).equals(mobileNovoF.getText())) {
-						verifica = verifica + "Já existe um utilizador com este contacto de telemovel. \n";
-						mobileNovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
-					}
-					
+				// verifica identificação ***FALTA RETIRAR A VERIFICAçÃO EM FUNÇÂO DO TIPO - o
+				// passporte e sempre diferente
+				if (entry.getValue().getEscolhaID().equals(escolhadaIDN)
+						&& entry.getValue().getValorID().equals(valorID_NovoF.getText())) {
+					verifica = verifica + "O " + escolhadaIDN + " com o numero :" + valorID_NovoF
+							+ " já está associado a um Funcionario. \n";
+					valorID_NovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
 				}
-			}
-			System.out.println((verifica));
-			return verifica;
-		}
 
+				else if (!(entry.getValue().getEscolhaID().equals(escolhadaIDN))
+						&& entry.getValue().getValorID().equals(valorID_NovoF.getText())) {
+					if (escolhadaIDN.equals(TipoID.CARTAOCIDADAO)) {
+						verifica = verifica + "O numero :" + valorID_NovoF.getText()
+								+ " já existe e está associado ao Passaporte. \n";
+					} else {
+						verifica = verifica + "O numero :" + valorID_NovoF.getText()
+								+ " já existe e está associado ao Cartão de Cidadão. \n";
+					}
+					valorID_NovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
+				}
+
+				// verifica email
+				if (entry.getValue().getEmail().equals(email_NovoF.getText())) {
+					verifica = verifica + "Já existe um utilizador com este email\n";
+					email_NovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
+				}
+				// verifica telemovel
+				if (("" + entry.getValue().getMobile()).equals(mobileNovoF.getText())) {
+					verifica = verifica + "Já existe um utilizador com este contacto de telemovel. \n";
+					mobileNovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
+				}
+
+			}
+		}
+		System.out.println((verifica));
+		return verifica;
+	}
 
 //faz a adicção de um do novo Cliente
 
@@ -621,7 +675,7 @@ public class Gestao {
 	}
 
 //faz a verificação da alteracao de dados do Utilizador
-	public String verificaA(Utilizador uUtilizador,Text email_NovoF, Text userNovoF, String emailA, String userNameA) {
+	public String verificaA(Utilizador uUtilizador, Text email_NovoF, Text userNovoF, String emailA, String userNameA) {
 		System.out.println("VERIFICA ADMINISTRADOR");
 
 		email_NovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
@@ -633,249 +687,74 @@ public class Gestao {
 			verifica = verifica + "O nome de Utilizador não é válido. \n";
 			userNovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
 		}
-if (uUtilizador instanceof Administrador) {
-		for (Entry<String, Utilizador> entry : mapUtilizadores.entrySet()) {
-			if (entry.getValue() instanceof Administrador) {
-				System.out.println("VERIFICA ---->Key = " + entry.getKey() + ", Value = " + entry.getValue());
-				// verifica email
-				if (entry.getValue().getEmail().equals(email_NovoF.getText())
-						&& !email_NovoF.getText().equals(emailA)) {
-					verifica = verifica + "Já existe um utilizador com este email\n";
-					email_NovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
+		if (uUtilizador instanceof Administrador) {
+			for (Entry<String, Utilizador> entry : mapUtilizadores.entrySet()) {
+				if (entry.getValue() instanceof Administrador) {
+					System.out.println("VERIFICA ---->Key = " + entry.getKey() + ", Value = " + entry.getValue());
+					// verifica email
+					if (entry.getValue().getEmail().equals(email_NovoF.getText())
+							&& !email_NovoF.getText().equals(emailA)) {
+						verifica = verifica + "Já existe um utilizador com este email\n";
+						email_NovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
+					}
+				}
+			}
+		} else if (uUtilizador instanceof Funcionario) {
+			for (Entry<String, Utilizador> entry : mapUtilizadores.entrySet()) {
+				if (entry.getValue() instanceof Funcionario) {
+					System.out.println("VERIFICA ---->Key = " + entry.getKey() + ", Value = " + entry.getValue());
+					// verifica email
+					if (entry.getValue().getEmail().equals(email_NovoF.getText())
+							&& !email_NovoF.getText().equals(emailA)) {
+						verifica = verifica + "Já existe um utilizador com este email\n";
+						email_NovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
+					}
 				}
 			}
 		}
-}
-else if (uUtilizador instanceof Funcionario) {
-	for (Entry<String, Utilizador> entry : mapUtilizadores.entrySet()) {
-		if (entry.getValue() instanceof Funcionario) {
-			System.out.println("VERIFICA ---->Key = " + entry.getKey() + ", Value = " + entry.getValue());
-			// verifica email
-			if (entry.getValue().getEmail().equals(email_NovoF.getText())
-					&& !email_NovoF.getText().equals(emailA)) {
-				verifica = verifica + "Já existe um utilizador com este email\n";
-				email_NovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
-			}
-		}
-	}
-}
 
-else if (uUtilizador instanceof Cliente) {
-	for (Entry<String, Utilizador> entry : mapUtilizadores.entrySet()) {
-		if (entry.getValue() instanceof Cliente) {
-			System.out.println("VERIFICA ---->Key = " + entry.getKey() + ", Value = " + entry.getValue());
-			// verifica email
-			if (entry.getValue().getEmail().equals(email_NovoF.getText())
-					&& !email_NovoF.getText().equals(emailA)) {
-				verifica = verifica + "Já existe um utilizador com este email\n";
-				email_NovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
+		else if (uUtilizador instanceof Cliente) {
+			for (Entry<String, Utilizador> entry : mapUtilizadores.entrySet()) {
+				if (entry.getValue() instanceof Cliente) {
+					System.out.println("VERIFICA ---->Key = " + entry.getKey() + ", Value = " + entry.getValue());
+					// verifica email
+					if (entry.getValue().getEmail().equals(email_NovoF.getText())
+							&& !email_NovoF.getText().equals(emailA)) {
+						verifica = verifica + "Já existe um utilizador com este email\n";
+						email_NovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
+					}
+				}
 			}
 		}
-	}
-}
 		System.out.println((verifica));
 		return verifica;
 	}
 
-	
 //*********************************************************************************
 	public Image resize(Shell estashell, Image imageFromSource, int width, int height) {
-	    if(width>0 && height>0){
-	        Image scaledImage = new Image(estashell.getDisplay(), width, height);
-	        GC gc = new GC(scaledImage);            //Graphics Capabilities(GC instance) in SWT used to draw an Image, graphics, display
-	        gc.setAntialias(SWT.ON);        // Anti aliasing is used for making the low resolution image to redraw and make into a good resolution Image
-	        gc.setInterpolation(SWT.HIGH);      //Interpolation is based in the Graphics, it may not work properly in some systems
-	        gc.drawImage(imageFromSource, 0, 0, 
-	                imageFromSource.getBounds().width, imageFromSource.getBounds().height, 
-	                0, 0, width, height);       
+		if (width > 0 && height > 0) {
+			Image scaledImage = new Image(estashell.getDisplay(), width, height);
+			GC gc = new GC(scaledImage); // Graphics Capabilities(GC instance) in SWT used to draw an Image, graphics,
+											// display
+			gc.setAntialias(SWT.ON); // Anti aliasing is used for making the low resolution image to redraw and make
+										// into a good resolution Image
+			gc.setInterpolation(SWT.HIGH); // Interpolation is based in the Graphics, it may not work properly in some
+											// systems
+			gc.drawImage(imageFromSource, 0, 0, imageFromSource.getBounds().width, imageFromSource.getBounds().height,
+					0, 0, width, height);
 
-	        /*drawImage(Image image, int srcX, int srcY, int srcWidth, int srcHeight, int destX, int destY, int destWidth, int destHeight)
-	        Copies a rectangular area from the source image into a (potentially different sized) rectangular area in the receiver.*/
+			/*
+			 * drawImage(Image image, int srcX, int srcY, int srcWidth, int srcHeight, int
+			 * destX, int destY, int destWidth, int destHeight) Copies a rectangular area
+			 * from the source image into a (potentially different sized) rectangular area
+			 * in the receiver.
+			 */
 
-	        gc.dispose();
-	        return scaledImage;
-	        }
-	        else return imageFromSource;
+			gc.dispose();
+			return scaledImage;
+		} else
+			return imageFromSource;
 	}
-////	********** Adiciona Cliente **************
-//	public Cliente addCliente(Cliente novoC) {
-//		novoC.setClienteID(lClientes.get(lClientes.size() - 1).getClienteID() + 1);
-//		lClientes.add(novoC);
-//		return novoC;
-//	}
-//
-////	********** Adiciona nova reserva **************
-//
-//	public void addReserva(Reservas novoR) {
-//		novoR.setrID(lReservasgeral.get(lReservasgeral.size() - 1).getrID() + 1);
-//		lReservasgeral.add(novoR);
-//		
-//	}
-//	
-////	********** Altera reserva **************
-//
-//	public Reservas alteraReserva(int rID,Reservas alteraR) {
-//		int indice=0;
-//		for (int i = 0; i < lReservasgeral.size(); i++) {
-//			if ((lReservasgeral.get(i)).getrID() == (rID)) {
-//				indice=i;break;
-//			}
-//		}
-//		lReservasgeral.set(indice, alteraR);
-//		return lReservasgeral.get(indice);
-//	}
-//
-////	********** Altera reserva **************
-//
-//	public void apagaReserva(int rID) {
-//		int indice=0;
-//		for (int i = 0; i < lReservasgeral.size(); i++) {
-//			if ((lReservasgeral.get(i)).getrID() == (rID)) {
-//				indice=i;break;
-//			}
-//		}
-//		lReservasgeral.remove(indice);
-//		
-//	}
-//
-////	********** Pesquisa Reserva por ID **************
-//
-//	public Reservas pesquisaReserva(int rID) {
-//		for (int i = 0; i < lReservasgeral.size(); i++) {
-//			if ((lReservasgeral.get(i)).getrID() == (rID)) {
-//				return lReservasgeral.get(i);
-//			}
-//		}
-//		return null;
-//
-//	}
-//	
-//
-//
-////	********** Pesquisa Cliente por ID **************
-//	public Cliente pesquisaCliente(int cID) {
-//
-//		for (int i = 0; i < lClientes.size(); i++) {
-//			if ((lClientes.get(i)).clienteID == (cID)) {
-//				return lClientes.get(i);
-//			}
-//		}
-//		return null;
-//	}
-//
-////	********** Pesquisa Cliente por localizacao **************
-//	public Cliente pesquisaClienteL(int cIL) {
-//
-//		return lClientes.get(cIL);
-//
-//	}
-//
-////	********** muda dados Cliente por ID **************
-//	public int mudadadosCliente(int cID, Cliente c) {
-//		int i = 0;
-//		for (i = 0; i < lClientes.size(); i++) {
-//			if ((lClientes.get(i)).clienteID == (cID)) {
-//				lClientes.set(i, c);
-//				return i;
-//			}
-//		}
-//		return i = -1;
-//	}
-//
-////	********** Pesquisa Quarto por ID **************
-//
-//	public Quarto pesquisaQuarto(int qID) {
-//
-//		for (int i = 0; i < lQuartos.size(); i++) {
-//			if ((lQuartos.get(i)).getnQ() == (qID)) {
-//				return lQuartos.get(i);
-//			}
-//		}
-//		return null;
-//	}
-//
-////	********** Verifica Quartos livres para a data **************
-//	public boolean verfData(int nQ, GregorianCalendar gfc, int nD) {
-//		String lqv = "Lista de Quartos vagos:";
-//		int k;
-//		boolean qOK = false;
-//
-//		for (int i = 0; i < mapQR.size(); i++) {
-//			qOK = false;
-//			System.out.println("verfica novo Quarto ****  " + i);
-//			k = lQuartos.get(i).getnQ();
-//			System.out.println(k);
-//			System.out.println(mapQR.get(k).toString());
-//			System.out.println(mapQR.get(k).size());
-//			System.out.println("****");
-//			if (mapQR.get(k).size() != 0) {
-//				for (int j = 0; j < mapQR.get(k).size(); j++) {
-//
-//					mapQR.get(k).get(j).getrDate();
-//					System.out.println("**passo ao 2nd**");
-//					System.out.println("" + format(mapQR.get(k).get(j).getrDate()));
-//					System.out.println("" + mapQR.get(k).get(j).getrDias());
-//					System.out.println("" + format(gfc));
-//					System.out.println("" + nD);
-//					boolean verf = compaDt(mapQR.get(k).get(j).getrDate(), mapQR.get(k).get(j).getrDias(), gfc, nD);
-//					System.out.println(verf);
-//
-//					if (verf) {
-//						qOK = true;
-//						System.out.println("**passou *" + j);
-//					} else {
-//						qOK = false;
-//						System.out.println("** NAO passou " + j);
-//						j = mapQR.get(k).size();
-//					}
-//				}
-//				
-//				if (qOK) {
-//					lqv = lqv + " Q: " + k;
-//				}
-//
-//			} 
-//			else {
-//				lqv = lqv + " Q: " + k;
-//			}
-//			System.out.println("Passou " + lqv);
-//		}
-//		System.out.println(lqv);
-//		if (lqv.equalsIgnoreCase("Lista de Quartos vagos:")) {
-//			return false;
-//		}
-//		return true;
-//	}
-//
-////	********** compara idade**************	
-//	public boolean compaDt(GregorianCalendar d1, int nD1, GregorianCalendar d2, int nD2) {
-//		boolean verifica = false;
-//		int r, r1, r2, r3;
-//		r = d1.compareTo(d2);
-//		GregorianCalendar d1f = (GregorianCalendar) d1.clone();
-//		GregorianCalendar d2f = (GregorianCalendar) d2.clone();
-//		d1f.add(Calendar.DAY_OF_MONTH, nD1);
-//		d2f.add(Calendar.DAY_OF_MONTH, nD2);
-//
-//		r1 = (d1f).compareTo(d2);
-//
-//		r2 = (d1).compareTo(d2f);
-//		if ((r2 == 1 || r2 == 0)) {
-//			verifica = true;
-//		} else if ((r1 == 0 || r1 == -1)) {
-//			verifica = true;
-//		}
-//		return verifica;
-//
-//	}
-//
-//	public String format(GregorianCalendar calendar) {
-//		SimpleDateFormat fmt = new SimpleDateFormat("dd-MMM-yyyy");
-//		fmt.setCalendar(calendar);
-//		String dateFormatted = fmt.format(calendar.getTime());
-//		return dateFormatted;
-//	}
-// 
 
 	public void loadAll() throws ClassNotFoundException {
 //	this.mapUtilizadores = mapUtilizadores;

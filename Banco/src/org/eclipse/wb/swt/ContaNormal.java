@@ -3,22 +3,18 @@ package org.eclipse.wb.swt;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-
-
 /**
-* Breve descrição do código
-*
-* @sid 2019
-* @aid 1.1
-*/
-public class ContaNormal extends Conta implements Serializable{
+ * Breve descrição do código
+ *
+ * @sid 2019
+ * @aid 1.1
+ */
+public class ContaNormal extends Conta implements Serializable {
+
+	private ArrayList<Cartao> listaCartoesC;//
+  
 	
-	private  ArrayList<Cartao> listaCartoesC;// 
-
-
-
-
-
+	
 	public ContaNormal(int contaID, double saldo, String datacria, ArrayList<Transacao> transacoesC,
 			ArrayList<Integer> clientesDaC, TipoC escolhaID, ArrayList<Cartao> listaCartoesC) {
 		super(contaID, saldo, datacria, transacoesC, clientesDaC, escolhaID);
@@ -30,26 +26,27 @@ public class ContaNormal extends Conta implements Serializable{
 		this.transacoesC = new ArrayList<Transacao>();
 		this.clientesDaC = new ArrayList<Integer>();
 		this.abertaFechada = TipoC.ABERTA;
-		this.listaCartoesC =new ArrayList<Cartao>();
+		this.listaCartoesC = new ArrayList<Cartao>();
 		// TODO Auto-generated constructor stub
 	}
 
 	public ContaNormal(int contaID, double saldo, String datacria) {
-		super(contaID,saldo,datacria);
+		super(contaID, saldo, datacria);
 		this.transacoesC = new ArrayList<Transacao>();
 		this.clientesDaC = new ArrayList<Integer>();
 		this.abertaFechada = TipoC.ABERTA;
-		this.listaCartoesC =new ArrayList<Cartao>();;
+		this.listaCartoesC = new ArrayList<Cartao>();
+		;
 		// TODO Auto-generated constructor stub
 	}
-	
 
-	public ContaNormal( double saldo, String datacria) {
-		super(saldo,datacria);
+	public ContaNormal(double saldo, String datacria) {
+		super(saldo, datacria);
 		this.transacoesC = new ArrayList<Transacao>();
 		this.clientesDaC = new ArrayList<Integer>();
 		this.abertaFechada = TipoC.ABERTA;
-		this.listaCartoesC =new ArrayList<Cartao>();;
+		this.listaCartoesC = new ArrayList<Cartao>();
+		;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -61,31 +58,34 @@ public class ContaNormal extends Conta implements Serializable{
 		this.listaCartoesC = listaCartoesC;
 	}
 
-
 	public Cartao addCartaoC(Cartao novoCartao) {
 		listaCartoesC.add(novoCartao);
-		 return novoCartao;
-		 
-	 }
+		return novoCartao;
+
+	}
 
 	public Cartao procuraCartaoC(int cartaoID) {
-		for (Cartao c:listaCartoesC ) {
-			if(c.getCartaoID()==cartaoID) {
-				 return c;	
+		if (!(listaCartoesC.size() == 0)) {
+			for (Cartao c : listaCartoesC) {
+				if (c.getCartaoID() == cartaoID) {
+					return c;
+				}
 			}
 		}
-		 return null;
-	 }
-	
+		return null;
+	}
+
 	public Cartao procuraCartaoCTitular(int titularID) {
-		for (Cartao c:listaCartoesC ) {
-			System.out.println("<---- ID do Cartaoobjeto--->\n" + c.getTitularCartaoID());
-			if(c.getTitularCartaoID()==titularID) {
-				 return c;	
+		if (!(listaCartoesC.size() == 0)) {
+			for (Cartao c : listaCartoesC) {
+				System.out.println("<---- ID --->" + c.getTitularCartaoID());
+				if (c.getTitularCartaoID() == titularID) {
+					System.out.println("<---- ID do OKOKOK---> " + c.getTitularCartaoID());
+					return c;
+				}
 			}
 		}
-		 return null;
-	 }
-	
+		return null;
+	}
 
 }

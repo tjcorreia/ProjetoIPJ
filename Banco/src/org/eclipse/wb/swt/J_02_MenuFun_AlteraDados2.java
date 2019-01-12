@@ -235,7 +235,7 @@ public class J_02_MenuFun_AlteraDados2 {
 		shell.setSize(743, 450);
 		shell.setBackground(SWTResourceManager.getColor(SWT.COLOR_DARK_GRAY));
 		shell.setImage((Image) SWTResourceManager.getImage(J_02Menu_F.class, "/Logo/Java-logo-png Logo.png"));
-		shell.setText("MENU ADMINISTRADOR");
+		shell.setText("MENU FUNCIONARIO");
 
 		text = new Text(shell, SWT.BORDER);
 		text.setText("Bem Vindo " + uUtilizador.nome);
@@ -396,7 +396,6 @@ public class J_02_MenuFun_AlteraDados2 {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				shell.dispose();
-				
 				J_02Menu_F_CriaCliente alteraDados=new J_02Menu_F_CriaCliente(gestor,uUtilizador);
 				alteraDados.open();
 				
@@ -409,10 +408,10 @@ public class J_02_MenuFun_AlteraDados2 {
 		btnListarClientes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
-			
+				shell.dispose();
 				J_02Menu_F_ListaClientes lclientes=new J_02Menu_F_ListaClientes(gestor,uUtilizador);
 				lclientes.open();
-				shell.dispose();
+				
 			}
 		});
 		btnListarClientes.setText("Listar/Procurar Clientes");
@@ -422,9 +421,10 @@ public class J_02_MenuFun_AlteraDados2 {
 		btnDadosDoCliente.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
+				shell.dispose();
 				J_02Menu_F_DadosCl cliente=new J_02Menu_F_DadosCl(gestor,uUtilizador,null);
 				cliente.open();
-				shell.dispose();
+				
 				
 			}
 		});
@@ -435,9 +435,10 @@ public class J_02_MenuFun_AlteraDados2 {
 		button_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
+				shell.dispose();
 				J_02Menu_F_MovimentaConta editarconta= new J_02Menu_F_MovimentaConta(gestor, uUtilizador, null, null);
 				editarconta.open();
-				shell.dispose();
+				
 			}
 		});
 		button_1.setText("Movimentar Contas");

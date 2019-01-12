@@ -249,7 +249,7 @@ public class J_02Menu_F_MovimentaConta {
 	 */
 //	public static void main(String[] args) {
 //		try {
-//			J_02Menu_F_MovimentaConta window = new J_02Menu_F_MovimentaConta(new Gestao(), new Utilizador(), new Cliente(),new Conta());
+//			J_02Menu_F_MovimentaConta window = new J_02Menu_F_MovimentaConta();
 //			window.open();
 //		} catch (Exception e) {
 //			e.printStackTrace();
@@ -367,7 +367,13 @@ public class J_02Menu_F_MovimentaConta {
 		int index = -1;
 		if (clienteActual == null) {
 			txt_Indique_ID.setText("Indique o ID");
+			button_Deposito.setEnabled(false);
+			button_Levanta.setEnabled(false);
+			button_Transferencia.setEnabled(false);
 		} else { // preeche os dados
+			button_Deposito.setEnabled(true);
+			button_Levanta.setEnabled(true);
+			button_Transferencia.setEnabled(true);
 			txt_Indique_ID.setText("" + clienteActual.getuID());
 
 			if (!(clienteActual.getLcontaSC().size() == 0)) {
@@ -395,7 +401,13 @@ public class J_02Menu_F_MovimentaConta {
 		// introduz o ID da Contaactual
 		if (contaActual == null) {
 			text_contaActual.setText("Indique o ID");
+			button_Deposito.setEnabled(false);
+			button_Levanta.setEnabled(false);
+			button_Transferencia.setEnabled(false);
 		} else {
+			button_Deposito.setEnabled(true);
+			button_Levanta.setEnabled(true);
+			button_Transferencia.setEnabled(true);
 			String[] listaClientes= new String [contaActual.getClientesDaC().size()];
 //			int[] listaClientes= new int [contaActual.getClientesDaC().size()];
 			System.out.println("<---- lista de clientes--->\n" + listaClientes.length);
@@ -531,6 +543,9 @@ public class J_02Menu_F_MovimentaConta {
 								}
 								System.out.println("<---- lista de contas --->/n" + listaContas.length);
 								combo_EscolhaConta.setItems(listaContas);
+								button_Deposito.setEnabled(true);
+								button_Levanta.setEnabled(true);
+								button_Transferencia.setEnabled(true);
 //								item.setText(0, ("" + clienteActual.getLcontaSC().get(i).getContaID()));
 //								item.setText(1, ("" + clienteActual.getLcontaSC().get(i).getClientesDaC().size()));	
 							} else {
@@ -561,7 +576,17 @@ public class J_02Menu_F_MovimentaConta {
 			@SuppressWarnings("unlikely-arg-type")
 			@Override
 			public void mouseUp(MouseEvent e) {
+			String mensagem="";
+			int index=0;
+				if (eNumero(text_contaActual)==-1 ) {
+					mensagem = " Para procurar um Cliente tem de introduzir um ID Numerico Inteiro ";
+				}
+				else {
 				contaActual=gestor.contaExiste(Integer.parseInt(text_contaActual.getText()));
+				if (contaActual==null) {
+					mensagem=" Conta Não Encontrada";
+				}
+				else {
 				System.out.println("<---- Conta ACTUAL ( " + contaActual + ") --->\n");
 				System.out.println("<---- Cliente ACTUAL ( " + contaActual.getClientesDaC().get(0) + ") --->\n");
 				clienteActual=(Cliente) gestor.procuraCid(contaActual.getClientesDaC().get(0));
@@ -573,6 +598,9 @@ public class J_02Menu_F_MovimentaConta {
 					String[] listaContas = new String[clienteActual.getLcontaSC().size()];
 					System.out.println("<---- lista de contas --->/n" + clienteActual.getLcontaSC().size());
 					for (int i = 0; i < clienteActual.getLcontaSC().size(); i++) {
+						if(contaActual.getContaID()==clienteActual.getLcontaSC().get(i).getContaID()) {
+						 index=i;
+						}
 						if (clienteActual.getLcontaSC().get(i).getAbertaFechada()
 								.equals(Conta.TipoC.ENCERADA)) {
 							listaContas[i] = "" + clienteActual.getLcontaSC().get(i).getContaID()
@@ -584,12 +612,24 @@ public class J_02Menu_F_MovimentaConta {
 					}
 					System.out.println("<---- lista de contas --->/n" + listaContas.length);
 					combo_EscolhaConta.setItems(listaContas);
+					combo_EscolhaConta.select(index);
+					button_Deposito.setEnabled(true);
+					button_Levanta.setEnabled(true);
+					button_Transferencia.setEnabled(true);
+					mensagem=" Conta Econtrada";
 //					item.setText(0, ("" + clienteActual.getLcontaSC().get(i).getContaID()));
 //					item.setText(1, ("" + clienteActual.getLcontaSC().get(i).getClientesDaC().size()));	
 				} else {
 					combo_EscolhaConta.setItems("Não existem contas a apresentar");
 				}
+				}
+				}
 				
+				MessageBox box = new MessageBox(shellMF_ModificaContas, SWT.MULTI);
+				box.setText("CONTA ACTUAL");
+				box.setMessage("  " + mensagem);
+//				
+				box.open();
 			}
 		});
 		btnObterConta.setText("Obter Conta");
@@ -676,8 +716,14 @@ public class J_02Menu_F_MovimentaConta {
 				System.out.println("<---- DEPOSITO --->\n");
 				text_Deposito.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
 				escolhaTA = Transacao.TipoT.DEP_CASH;
-			
-				movimenta(escolhaTA,text_Deposito,null);
+				if (clienteActual == null) {
+					txt_Indique_ID.setText("Indique o ID");
+					txt_Indique_ID.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
+				}
+				else {
+					movimenta(escolhaTA,text_Deposito,null);
+				}
+				
 				text_Deposito.setText("");
 				text_Contadestinotrf.setText("");
 			}
@@ -690,8 +736,15 @@ public class J_02Menu_F_MovimentaConta {
 				System.out.println("<---- LEVANTAMENTO --->\n");
 				text_Levantamento.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
 				escolhaTA = Transacao.TipoT.LEV_CASH;
+				if (clienteActual == null) {
+					txt_Indique_ID.setText("Indique o ID");
+					txt_Indique_ID.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
+				}
+				else {
+					movimenta(escolhaTA,text_Levantamento,null);
+				}
 			
-				movimenta(escolhaTA,text_Levantamento,null);
+			
 				text_Levantamento.setText("");
 			}
 		});
@@ -703,7 +756,14 @@ public class J_02Menu_F_MovimentaConta {
 				text_ValorTrf.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
 				escolhaTA = Transacao.TipoT.TRANSFERENCIA;
 				contaFinal=null;
-				movimenta(escolhaTA,text_ValorTrf,text_Contadestinotrf);
+				if (clienteActual == null) {
+					txt_Indique_ID.setText("Indique o ID");
+					txt_Indique_ID.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
+				}
+				else {
+					movimenta(escolhaTA,text_ValorTrf,text_Contadestinotrf);
+				}
+				
 				text_ValorTrf.setText("");
 			}
 		});
@@ -742,7 +802,15 @@ public class J_02Menu_F_MovimentaConta {
 						verifica=false;
 					}
 					else {
-						contaID=contaFinal.getContaID();
+						if (contaFinal==contaActual) {
+							texoVerContad.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
+							mensagem =mensagem+ " Introduziu o numero da sua Conta!!!!!\n";
+							verifica=false;
+						}
+						else {
+							contaID=contaFinal.getContaID();
+						}
+						
 					}
 				}
 				
@@ -757,7 +825,7 @@ public class J_02Menu_F_MovimentaConta {
 		}
 
 		else   {
-			if (eNumeroIouD(texoVerifica)&&Integer.parseInt(texoVerifica.getText()) < 0) {
+			if (eNumeroIouD(texoVerifica)&&Double.parseDouble(texoVerifica.getText()) < 0) {
 				texoVerifica.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
 				mensagem =mensagem+"tem de introduzir um valor absoluto (positivo)\n";
 				verifica=false;
@@ -767,18 +835,18 @@ public class J_02Menu_F_MovimentaConta {
 				mensagem = mensagem+"tem de introduzir um valor numerico absoluto (positivo)\\n";
 				verifica=false;
 			} 
-			else if (verifica &&escolhaTA.equals(TipoT.TRANSFERENCIA)& (Integer.parseInt(texoVerifica.getText()))>contaActual.getSaldo()) {
+			else if (verifica &&escolhaTA.equals(TipoT.TRANSFERENCIA)& (Double.parseDouble(texoVerifica.getText()))>contaActual.getSaldo()) {
 				texoVerifica.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
 				mensagem = mensagem + "O Valaor a transaferir é superior ao Saldo da Conta.\n";
 				verifica=false;
 			}
-			else if (verifica&&escolhaTA.equals(TipoT.LEV_CASH)& (Integer.parseInt(texoVerifica.getText()))>contaActual.getSaldo()) {
+			else if (verifica&&escolhaTA.equals(TipoT.LEV_CASH)& (Double.parseDouble(texoVerifica.getText()))>contaActual.getSaldo()) {
 				texoVerifica.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
 				mensagem = mensagem + "O Valaor a transaferir é superior ao Saldo da Conta.\n";
 				verifica=false;
 			}
-			else if (eNumeroIouD(texoVerifica)&!(Integer.parseInt(texoVerifica.getText()) < 0)&
-					!(gestor.verifMovimentos(contaActual,escolhaTA,Integer.parseInt(texoVerifica.getText())))) {
+			else if (eNumeroIouD(texoVerifica)&!(Double.parseDouble(texoVerifica.getText()) < 0)&
+					!(gestor.verifMovimentos(contaActual,escolhaTA,Double.parseDouble(texoVerifica.getText())))) {
 				texoVerifica.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
 				mensagem = mensagem + "Atingiu o limite maximo que pode levantar ou transaferir.\n";
 				verifica=false;
@@ -786,7 +854,7 @@ public class J_02Menu_F_MovimentaConta {
 
 			else if (verifica){
 
-				double valor=Integer.parseInt(texoVerifica.getText());
+				double valor=Double.parseDouble(texoVerifica.getText());
 				if (escolhaTA.equals(TipoT.LEV_CASH)||escolhaTA.equals(TipoT.TRANSFERENCIA)) {valor=valor*-1;}
 				Transacao novaT = new Transacao(uUtilizador.getuID(),valor ,"", contaID, escolhaTA);
 				contaActual.addTransacaoC(novaT);
@@ -794,7 +862,7 @@ public class J_02Menu_F_MovimentaConta {
 				textoTitulo="TRANSÇÃO CONCLUIDA";
 				preencheTabela();
 				if (escolhaTA.equals(TipoT.TRANSFERENCIA)) {
-					Transacao novaTcontaF = new Transacao(uUtilizador.getuID(),valor*-1 ,"", contaID, escolhaTA);
+					Transacao novaTcontaF = new Transacao(uUtilizador.getuID(),valor*-1 ,"", contaActual.getContaID(), escolhaTA);
 					System.out.println("<---- Conta FINAL- Verifica Saldo ( " + contaFinal + ") --->\n");
 					contaFinal.addTransacaoC(novaTcontaF);
 					System.out.println("<---- Conta Actual- Verifica Saldo ( " + contaFinal+ ") --->\n");
