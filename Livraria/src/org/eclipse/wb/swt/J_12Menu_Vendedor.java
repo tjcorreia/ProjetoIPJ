@@ -194,6 +194,8 @@ public class J_12Menu_Vendedor {
 //						
 //						
 //						ESCREVER PARA THREAD AO BANCO A PEDIR CONFIRMAÇÃO
+						
+						//E LER 
 //						
 //						
 //						
@@ -230,10 +232,23 @@ public class J_12Menu_Vendedor {
 		lblNomeUtilizador.setBounds(482, 10, 303, 21);
 
 		Button btnVoltar = new Button(shlMenuVendedor, SWT.NONE);
+		btnVoltar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				shlMenuVendedor.close();
+				J_00Inicial janela = new J_00Inicial(livraria);
+				janela.open();
+			}
+		});
 		btnVoltar.setText("Voltar/Logout");
 		btnVoltar.setBounds(681, 459, 104, 28);
 
 		Button btnAnularVenda = new Button(shlMenuVendedor, SWT.WRAP | SWT.NONE);
+		btnAnularVenda.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+			}
+		});
 		btnAnularVenda.setText("Anular venda");
 		btnAnularVenda.setBounds(668, 197, 117, 61);
 		
