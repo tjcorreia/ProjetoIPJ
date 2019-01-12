@@ -20,7 +20,8 @@ public class Utilizador {
 		tipo = Tipo.VENDEDOR;
 	}
 	
-	Utilizador( String nome, String email, String senha, Tipo tipo){
+	Utilizador( int uID, String nome, String email, String senha, Tipo tipo){
+		this.uID = uID;
 		this.nome = nome;
 		this.email = email;
 		this.senha = senha;

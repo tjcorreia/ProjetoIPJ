@@ -69,10 +69,10 @@ public class Livraria {
 		livros.add(lv3);
 		livros.add(lv4);
 		//Criar alguns utilizadores
-		Utilizador u1 = new Utilizador( "António Cunha", "tocunha@gmail.com", "tocunha2000", Utilizador.Tipo.ADMIN);
-		Utilizador u2 = new Utilizador( "Tiago Correia", "a", "a", Utilizador.Tipo.ADMIN);
-		Utilizador u3 = new Utilizador( "Márcia Campos", "mcampos.a@gmail.com", "heyd6wx", Utilizador.Tipo.VENDEDOR);
-		Utilizador u4 = new Utilizador( "Beatriz Costa", "v", "v", Utilizador.Tipo.VENDEDOR);
+		Utilizador u1 = new Utilizador( 1,"António Cunha", "tocunha@gmail.com", "tocunha2000", Utilizador.Tipo.ADMIN);
+		Utilizador u2 = new Utilizador( 2,"Tiago Correia", "a", "a", Utilizador.Tipo.ADMIN);
+		Utilizador u3 = new Utilizador( 3,"Márcia Campos", "mcampos.a@gmail.com", "heyd6wx", Utilizador.Tipo.VENDEDOR);
+		Utilizador u4 = new Utilizador( 4,"Beatriz Costa", "v", "v", Utilizador.Tipo.VENDEDOR);
 		//adicionar utilizadores à lista de utilizadores
 		utilizadores = new ArrayList<>();
 		utilizadores.add( u1 );
@@ -107,8 +107,8 @@ public class Livraria {
 		//Criar algumas compras finalizadas e adicionar à lista de compras
 		setCompras(new ArrayList<>());
 		getCompras().add( new Compra( 1, c1, "156987569", new GregorianCalendar (2018,11,14), Compra.Estado.FINALIZADA));
-		getCompras().add( new Compra( 2, c2, "235648978", new GregorianCalendar (2018,11,15), Compra.Estado.FINALIZADA));
-		getCompras().add( new Compra( 3, c3, "225498631", new GregorianCalendar (2018,11,13), Compra.Estado.FINALIZADA));
+		getCompras().add( new Compra( 2, c2, "235648978", new GregorianCalendar (2018,11,15), Compra.Estado.RECUSADA));
+		getCompras().add( new Compra( 3, c3, "225498631", new GregorianCalendar (2018,11,13), Compra.Estado.SUBMETIDA));
 	}
 	
 	public void testar() {
@@ -122,6 +122,12 @@ public class Livraria {
 		}
 		sc.close();
 	}
+	
+//	//Método para ordenar as várias arrayLists segundo vários critérios
+//	public void ordenarCompras(String criterio) {
+//		//if (criterio == )
+//	}
+	
 	
 	//método que recebe uma string e procura na lista de livros, todos os livros que têm essa String 
 	// quer seja no nome, autor, editora ou ISBN
@@ -145,6 +151,17 @@ public class Livraria {
 			}
 		}
 		return livrosProcurados;
+	}
+	
+	//método que recebe um numero de compra e procura a compra na lista de compras
+	public Compra getCompra(int num) {
+		for ( Compra c : compras) {
+			if ( c.numCompra == num ) {
+				return c;
+			}
+		}
+		//apenas porque tem de ser devolvido algum livro no fim. Mas esta parte nunca será usada
+		return new Compra();
 	}
 	
 	public String toString() {
@@ -294,6 +311,17 @@ public class Livraria {
 		}
 		return novoNum;
 	}
+	
+	//Método que devolve um novo número de vendedor (a seguir ao número de vendedor existente maior)
+	public int gerarNovoNumUtilizador() {
+		int novoNum = 0;
+		for ( Utilizador u : utilizadores) {
+			if ( u.uID >= novoNum) {
+				novoNum = u.uID + 1;
+			}
+		}
+		return novoNum;
+	}	
 
 	public ArrayList <Compra> getCompras() {
 		return compras;
@@ -302,6 +330,20 @@ public class Livraria {
 	public void setCompras(ArrayList <Compra> compras) {
 		this.compras = compras;
 	}
+
+	public ArrayList<Utilizador> getUtilizadores() {
+		return utilizadores;
+	}
+
+	public void setUtilizadores(ArrayList<Utilizador> utilizadores) {
+		this.utilizadores = utilizadores;
+	}
+	
+	
+
+		
+	
+	
 	
 //	//método para transformar lista de livros em hashMap e depois em carrinho
 //	public Carrinho listaToCarrinho ( ArrayList <Livro> listaLivrosCarrinho ) {

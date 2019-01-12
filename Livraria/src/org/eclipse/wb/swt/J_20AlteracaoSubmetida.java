@@ -15,13 +15,17 @@ import org.eclipse.swt.events.MouseEvent;
  * @aid 1.1  
  */
 
-public class J_03CompraSubmetida {
+public class J_20AlteracaoSubmetida {
 
-	protected Shell shell;
+	protected Shell shlSucesso;
+	private String mensagem1;
+	private String mensagem2;
 	
 	
 	//Construtor para abrir uma nova janela deste tipo
-	public J_03CompraSubmetida() {
+	public J_20AlteracaoSubmetida(String s1, String s2) {
+		mensagem1 = s1;
+		mensagem2 = s2;
 		open();
 	}	
 
@@ -44,9 +48,9 @@ public class J_03CompraSubmetida {
 	public void open() {
 		Display display = Display.getDefault();
 		createContents();
-		shell.open();
-		shell.layout();
-		while (!shell.isDisposed()) {
+		shlSucesso.open();
+		shlSucesso.layout();
+		while (!shlSucesso.isDisposed()) {
 			if (!display.readAndDispatch()) {
 				display.sleep();
 			}
@@ -57,27 +61,30 @@ public class J_03CompraSubmetida {
 	 * Create contents of the window.
 	 */
 	protected void createContents() {
-		shell = new Shell();
-		shell.setSize(450, 300);
-		shell.setText("SWT Application");
+		shlSucesso = new Shell();
+		shlSucesso.setSize(450, 300);
+		shlSucesso.setText("Sucesso");
 		
-		Label label = new Label(shell, SWT.NONE);
-		label.setText("Compra submetida com sucesso");
-		label.setBounds(59, 89, 326, 20);
+		Label lblMensagem1 = new Label(shlSucesso, SWT.NONE);
+		lblMensagem1.setAlignment(SWT.CENTER);
+		lblMensagem1.setText(mensagem1);
+		lblMensagem1.setBounds(59, 89, 326, 20);
 		
-		Label label_1 = new Label(shell, SWT.NONE);
-		label_1.setText("Aguarde/solicite a finaliza\u00E7\u00E3o por um vendedor");
-		label_1.setBounds(59, 115, 326, 20);
+		Label lblMensagem2 = new Label(shlSucesso, SWT.NONE);
+		lblMensagem2.setAlignment(SWT.CENTER);
+		lblMensagem2.setText(mensagem2);
+		lblMensagem2.setBounds(59, 115, 326, 20);
 		
-		Button button = new Button(shell, SWT.NONE);
+		Button button = new Button(shlSucesso, SWT.NONE);
 		button.addMouseListener(new MouseAdapter() {
 			public void mouseUp(MouseEvent e) {
-				shell.close();
+				shlSucesso.close();
 			}
 		});
 		button.setText("Fechar");
 		button.setBounds(175, 175, 90, 30);
 
 	}
+	
 
 }
