@@ -106,9 +106,10 @@ public class Livraria {
 		Carrinho c3 = new Carrinho(livros3);
 		//Criar algumas compras finalizadas e adicionar à lista de compras
 		setCompras(new ArrayList<>());
-		getCompras().add( new Compra( 1, c1, "156987569", new GregorianCalendar (2018,11,14), Compra.Estado.FINALIZADA));
-		getCompras().add( new Compra( 2, c2, "235648978", new GregorianCalendar (2018,11,15), Compra.Estado.RECUSADA));
-		getCompras().add( new Compra( 3, c3, "225498631", new GregorianCalendar (2018,11,13), Compra.Estado.SUBMETIDA));
+		compras = new ArrayList<Compra>();
+		compras.add( new Compra( 1, c1, "156987569", new GregorianCalendar (2018,11,14), Compra.Estado.PAGA));
+		compras.add( new Compra( 2, c2, "235648978", new GregorianCalendar (2018,11,15), Compra.Estado.ANULADA));
+		compras.add( new CompraCartao( 3, c3, "225498631", new GregorianCalendar (2018,11,13), Compra.Estado.SUBMETIDA, "637482987", "435"));
 	}
 	
 	public void testar() {
