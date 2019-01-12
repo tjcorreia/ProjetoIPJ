@@ -75,6 +75,19 @@ public class ContaNormal extends Conta implements Serializable {
 		return null;
 	}
 
+	public Cartao verificaPINCartaoC(int cartaoID,String pin) {
+		if (!(listaCartoesC.size() == 0)) {
+			for (Cartao c : listaCartoesC) {
+				if (c.getCartaoID() == cartaoID) {
+					if (c.getCodigo().equals(pin)) {
+						return c;
+					}
+				}
+			}
+		}
+		return null;
+	}
+	
 	public Cartao procuraCartaoCTitular(int titularID) {
 		if (!(listaCartoesC.size() == 0)) {
 			for (Cartao c : listaCartoesC) {
