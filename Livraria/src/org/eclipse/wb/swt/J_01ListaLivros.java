@@ -115,9 +115,7 @@ public class J_01ListaLivros {
 		table.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				System.out.println(e.toString());
 				int indexLivroSelecionado = ((Table)e.widget).indexOf((TableItem)e.item);
-				System.out.println( indexLivroSelecionado );
 				livroSelecionado = listaLivrosDaBusca.get(indexLivroSelecionado);
 				//fazer corresponder o livro selecionado a um dos livros da livraria, para as mudanças
 				//de stock, se reproduzirem na livraria

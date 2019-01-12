@@ -107,8 +107,8 @@ public class Livraria {
 		//Criar algumas compras finalizadas e adicionar à lista de compras
 		setCompras(new ArrayList<>());
 		getCompras().add( new Compra( 1, c1, "156987569", new GregorianCalendar (2018,11,14), Compra.Estado.FINALIZADA));
-		getCompras().add( new Compra( 2, c2, "235648978", new GregorianCalendar (2018,11,15), Compra.Estado.FINALIZADA));
-		getCompras().add( new Compra( 3, c3, "225498631", new GregorianCalendar (2018,11,13), Compra.Estado.FINALIZADA));
+		getCompras().add( new Compra( 2, c2, "235648978", new GregorianCalendar (2018,11,15), Compra.Estado.RECUSADA));
+		getCompras().add( new Compra( 3, c3, "225498631", new GregorianCalendar (2018,11,13), Compra.Estado.SUBMETIDA));
 	}
 	
 	public void testar() {
@@ -122,6 +122,12 @@ public class Livraria {
 		}
 		sc.close();
 	}
+	
+//	//Método para ordenar as várias arrayLists segundo vários critérios
+//	public void ordenarCompras(String criterio) {
+//		//if (criterio == )
+//	}
+	
 	
 	//método que recebe uma string e procura na lista de livros, todos os livros que têm essa String 
 	// quer seja no nome, autor, editora ou ISBN
@@ -145,6 +151,17 @@ public class Livraria {
 			}
 		}
 		return livrosProcurados;
+	}
+	
+	//método que recebe um numero de compra e procura a compra na lista de compras
+	public Compra getCompra(int num) {
+		for ( Compra c : compras) {
+			if ( c.numCompra == num ) {
+				return c;
+			}
+		}
+		//apenas porque tem de ser devolvido algum livro no fim. Mas esta parte nunca será usada
+		return new Compra();
 	}
 	
 	public String toString() {

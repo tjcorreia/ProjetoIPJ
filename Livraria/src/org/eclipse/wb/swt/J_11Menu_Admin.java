@@ -137,7 +137,7 @@ public class J_11Menu_Admin {
 		Label lblNomeUtilizador = new Label(shlMenuAdmin, SWT.NONE);
 		lblNomeUtilizador.setAlignment(SWT.RIGHT);
 		lblNomeUtilizador.setBounds(399, 10, 303, 21);
-		lblNomeUtilizador.setText("Bem-vindo " + utilizador.nome);
+		lblNomeUtilizador.setText("Bem-vindo(a) " + utilizador.nome);
 		
 		Label barraVertical = new Label(shlMenuAdmin, SWT.SEPARATOR | SWT.VERTICAL);
 		barraVertical.setBounds(149, 101, 2, 165);
