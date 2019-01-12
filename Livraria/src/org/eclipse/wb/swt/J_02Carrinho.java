@@ -335,7 +335,7 @@ public class J_02Carrinho { //criou-se janela como subclasse para poder receber 
 					//Se tiver introduzido algum texto na caixa de NIF
 					else {
 						//Se o texto introduzido for um NIF -> verificar se tipo de pagamento é cartão ou dinheiro
-						if ( verificarSeNIFouCartao(nifIntroduzido)==true ) {
+						if ( livraria.verificarSeNIFouCartao(nifIntroduzido)==true ) {
 							lblIntroduzaNIF.setVisible(false);
 							//caso seja pagamento em dinheiro -> criar nova compra e abrir janela/mensagem de compra submetida
 							if ( butaoRadioDinheiro.isEnabled() ) {
@@ -362,15 +362,16 @@ public class J_02Carrinho { //criou-se janela como subclasse para poder receber 
 							//e se corretos criar nova compraCartao e abrir janela/mensagem de compra submetida
 							else {
 								//Se PIN incorreto, mostrar mensagem de erro de pin
-								if ( verificarSePIN(pinIntroduzido)==false ) {
+								if ( livraria.verificarSePIN(pinIntroduzido)==false ) {
 									lblMensagemParaPIN.setVisible(true);
 								}
 								//Se Num de cartão incorreto, mostrar mensagem de erro de número de cartão
-								if ( verificarSeNIFouCartao(numCartaoIntroduzido)==false ) {
+								if ( livraria.verificarSeNIFouCartao(numCartaoIntroduzido)==false ) {
 									lblMensagemNumCartao.setVisible(true);
 								}
 								//Se pin e num cartão corretos
-								else if ( verificarSePIN(pinIntroduzido)==true && verificarSeNIFouCartao(numCartaoIntroduzido)==true) {
+								else if ( livraria.verificarSePIN(pinIntroduzido)==true && 
+										livraria.verificarSeNIFouCartao(numCartaoIntroduzido)==true) {
 									//criar nova compra e adicionar à livraria
 									CompraCartao novaCompra2 = new CompraCartao	(livraria.gerarNovoNumCompra(), 
 											carrinho, nifIntroduzido, new GregorianCalendar(), Compra.Estado.SUBMETIDA, 
@@ -498,32 +499,6 @@ public class J_02Carrinho { //criou-se janela como subclasse para poder receber 
 		}
 	}
 	
-	public boolean verificarSeNIFouCartao(String s) {
-		//ver se tem algum carater que não seja numero
-		for (char c : s.toCharArray()) {
-			if (!Character.isDigit(c)) {
-				return false;
-			}
-		}
-		//ver se tem 9 digitos
-		if ( s.toCharArray().length!=9 ) {
-			return false;
-		}
-		return true;
-	}
 	
-	public boolean verificarSePIN(String s) {
-		//ver se tem algum carater que não seja numero
-		for (char c : s.toCharArray()) {
-			if (!Character.isDigit(c)) {
-				return false;
-			}
-		}
-		//ver se tem 9 digitos
-		if ( s.toCharArray().length!=3 ) {
-			return false;
-		}
-		return true;
-	}
 	
 }
