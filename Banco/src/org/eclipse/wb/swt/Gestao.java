@@ -373,6 +373,8 @@ public class Gestao {
 						ficheiroPedidos.escreveLinha("");
 						ficheiroPedidos.fechaEscrita();
 						
+						
+						
 						System.out.println("<---- TRANSACÃO CONCLUIDA --->\n"+pedidoiD+",OK\n");
 					} else {
 						ficheiroPedidos.abreEscrita("C:\\Users\\Jorge\\Documents\\GitHub\\ProjetoIPJ\\RespostadoBanco.txt");
