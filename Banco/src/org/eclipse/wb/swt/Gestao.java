@@ -147,7 +147,7 @@ public class Gestao {
 		Transacao T0Cn1 = new Transacao(MachadoFU.getuID(), "2018-01-02", 1500, "ABERTURA", 0,
 				Transacao.TipoT.DEP_CASH);
 		cn1.addTransacaoC(T0Cn1);
-		Transacao T1Cn1 = new Transacao(CorreiaFU.getuID(), "2018-02-02", -500, "", 0, Transacao.TipoT.LEV_CASH);
+		Transacao T1Cn1 = new Transacao(CorreiaFU.getuID(), "2018-02-02", -100, "", 0, Transacao.TipoT.LEV_CASH);
 		cn1.addTransacaoC(T1Cn1);
 		Transacao T2Cn1 = new Transacao(MachadoFU.getuID(), "2018-03-02", 2000, "", 0, Transacao.TipoT.DEP_CASH);
 		cn1.addTransacaoC(T2Cn1);
@@ -165,7 +165,7 @@ public class Gestao {
 		cn1.addTransacaoC(T8Cn1);
 		Transacao T9Cn1 = new Transacao(MachadoFU.getuID(), "2019-01-08", -50, "", 0, Transacao.TipoT.LEV_CASH);
 		cn1.addTransacaoC(T9Cn1);
-		Transacao T10Cn1 = new Transacao(MachadoFU.getuID(), "2019-01-08", -500, "", 100002,
+		Transacao T10Cn1 = new Transacao(MachadoFU.getuID(), "2019-01-08", -100, "", 100002,
 				Transacao.TipoT.TRANSFERENCIA);
 		cn1.addTransacaoC(T10Cn1);
 		Transacao T0Cn2 = new Transacao(MachadoFU.getuID(), "2019-01-08", 1500, "ABERTURA", 0,
@@ -180,9 +180,7 @@ public class Gestao {
 		cn4.addTransacaoC(T0Cn4);
 
 		// cartao
-  
-		
-		
+
 		LocalDate data = LocalDate.now().plusYears(5);
 		int dia = data.getDayOfMonth();
 		int anomes = data.getMonthValue();
@@ -312,46 +310,91 @@ public class Gestao {
 				e1.printStackTrace();
 			}
 
-			String s = "";
+			
 
-			int contaOrigem = 0;
+			int contaDeposito = 0;
 			int pedidoiD = 0;
 			int cartaoCliente = 0;
 			String pin = "";
 			double movimento = 0;
 
-			do {
+			String s = "";
+		
 				s = ficheiroPedidos.leLinha();
 
 				if (s != null && !s.equals("")) {
 					String[] sSplit = s.split(",");
 					pedidoiD = Integer.parseInt(sSplit[0]);
-					contaOrigem = Integer.parseInt(sSplit[1]);
+					contaDeposito = Integer.parseInt(sSplit[1]);
 					cartaoCliente = Integer.parseInt(sSplit[2]);
 					pin = sSplit[3];
 					movimento = Double.parseDouble(sSplit[4]);
 					// considera-se que so se processa um carrinho de CADA vez
-				}
-			} while (s != null);
-			ficheiroPedidos.fechaLeitura();
-			System.out.println("pedidoID  :" + pedidoiD);
-			System.out.println("contaOrigem" + contaOrigem);
-			System.out.println("cartaoCliente" + cartaoCliente);
-			System.out.println("pin  :" + pin);
-			System.out.println("movimento  :" + movimento);
-			String mensagem ="";
-			mensagem = VerificaCartaoeDevolveContaID(cartaoCliente, pin, movimento);
-			if (eUmNumero(mensagem)) {
+				
+				
+				ficheiroPedidos.fechaLeitura();
+				System.out.println("pedidoID  :" + pedidoiD);
+				System.out.println("contaDeposito:" + contaDeposito);
+				System.out.println("cartaoCliente:" + cartaoCliente);
+				System.out.println("pin  :" + pin);
+				System.out.println("movimento  :" + movimento);
+				String mensagem = "";
+				
+				
+				mensagem = VerificaCartaoeDevolveContaID(cartaoCliente, pin, movimento);
 				System.out.println("MENSAGEM  :" + mensagem);
-			} else {
-				ficheiroPedidos.abreEscrita("C:\\Users\\Jorge\\Documents\\GitHub\\ProjetoIPJ\\PedidosdaLivravria.txt");
-				ficheiroPedidos.escreveLinha("mensagem");
-				ficheiroPedidos.fechaEscrita();
-			}
-		}
+				if (eUmNumero(mensagem)) {
+					System.out.println("MENSAGEM  :" + mensagem);
+					int contaLevantamentoID = Integer.parseInt(mensagem);
 
+					// verifica Conta destino
+					if (!(contaExiste(contaDeposito) == null)) {
+						ContaNormal contaFinal = (ContaNormal) contaExiste(contaDeposito);
+						ContaNormal contaLevantamento = (ContaNormal) contaExiste(contaLevantamentoID);
+						// verificou Tudo executa a Transaçã
+						//
+						Transacao novaT = new Transacao(10003, movimento * -1, "LIVRARIA", contaFinal.getContaID(),
+								TipoT.TRANSFERENCIA);
+						contaLevantamento.addTransacaoC(novaT);
+						System.out.println("<---- Conta FINAL- Verifica Saldo ( "
+								+ contaLevantamento.getTransacoesC().toArray() + ") --->\n");
+
+						Transacao novaTcontaF = new Transacao(10003, movimento, "", contaLevantamento.getContaID(),
+								TipoT.TRANSFERENCIA);
+						System.out.println("<---- Conta FINAL- Verifica Saldo ( " + contaFinal.getTransacoesC().toArray()
+								+ ") --->\n");
+						contaFinal.addTransacaoC(novaTcontaF);
+						System.out.println("<---- TRANSACÃO CONCLUIDA --->\n");
+
+						ficheiroPedidos.abreEscrita("C:\\Users\\Jorge\\Documents\\GitHub\\ProjetoIPJ\\RespostadoBanco.txt");
+						ficheiroPedidos.escreveLinha(pedidoiD+",Pagamento efetuado com sucesso.");
+						ficheiroPedidos.fechaEscrita();
+						ficheiroPedidos.abreEscrita("C:\\Users\\Jorge\\Documents\\GitHub\\ProjetoIPJ\\PedidosdaLivravria.txt");
+						ficheiroPedidos.escreveLinha("");
+						ficheiroPedidos.fechaEscrita();
+						
+						System.out.println("<---- TRANSACÃO CONCLUIDA --->\n"+pedidoiD+",OK\n");
+					} else {
+						ficheiroPedidos.abreEscrita("C:\\Users\\Jorge\\Documents\\GitHub\\ProjetoIPJ\\RespostadoBanco.txt");
+						ficheiroPedidos.escreveLinha(pedidoiD+",A CONTA DA LIVRARIA ESTA ERRADA");
+						ficheiroPedidos.fechaEscrita();
+					}
+
+				} else {
+					System.out.println("<---- Não é NUMER0?---->");
+					ficheiroPedidos.abreEscrita("C:\\Users\\Jorge\\Documents\\GitHub\\ProjetoIPJ\\RespostadoBanco.txt");
+					ficheiroPedidos.escreveLinha(pedidoiD+","+mensagem);
+					ficheiroPedidos.fechaEscrita();
+				}
+			
+			
+			}
+			
+			
+
+		}
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(10000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -522,14 +565,17 @@ public class Gestao {
 
 		if (mapCartaoConta.containsKey(cartaoID)) {
 			ContaNormal c = new ContaNormal();
+			System.out.println("<---- Cartão------->" + cartaoID);
+			System.out.println("<---- Conta------->" + mapCartaoConta.get(cartaoID));
 			c = (ContaNormal) contaExiste(mapCartaoConta.get(cartaoID));
+			System.out.println("<---- Conta Actual-Vamos  Verifica max diario ( " + c.toString()+ ") --->\n");
 			// verfica se o cartao com aquele ID daquela conta tem o pin correto
 			if (!(c.verificaPINCartaoC(cartaoID, cartaoPIN) == null)) {
 				if (c.getSaldo() >= movimento) {
 					if (verifMovimentos(c, TipoT.TRANSFERENCIA, movimento)) {
 						return "" + mapCartaoConta.get(cartaoID);
 					} else {
-						return "VALOR superior ao LIMITE PERMITIDO";
+						return "VALOR superior ao LIMITE DIARIO PERMITIDO";
 					}
 
 				} else {
