@@ -25,6 +25,9 @@ public class J_10Login {
 	private Utilizador devolveU;
 	private Gestao gestor;
 
+	
+	
+	
 	public Gestao getGestor() {
 		return gestor;
 	}
