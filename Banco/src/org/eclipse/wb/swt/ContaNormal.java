@@ -12,7 +12,9 @@ import java.util.ArrayList;
 public class ContaNormal extends Conta implements Serializable {
 
 	private ArrayList<Cartao> listaCartoesC;//
-
+  
+	
+	
 	public ContaNormal(int contaID, double saldo, String datacria, ArrayList<Transacao> transacoesC,
 			ArrayList<Integer> clientesDaC, TipoC escolhaID, ArrayList<Cartao> listaCartoesC) {
 		super(contaID, saldo, datacria, transacoesC, clientesDaC, escolhaID);
