@@ -205,9 +205,10 @@ public class J_02Menu_F_CriaCliente {
 		btnListarClientes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
+				shellMF.dispose();
 				J_02Menu_F_ListaClientes listaC= new J_02Menu_F_ListaClientes(gestor, uUtilizador);
 				listaC.open();
-				shellMF.dispose();
+				
 				
 			}
 		});
@@ -519,9 +520,10 @@ public class J_02Menu_F_CriaCliente {
 		button_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
+				shellMF.dispose();
 				J_02Menu_F_DadosCl cliente=new J_02Menu_F_DadosCl(gestor,uUtilizador,clienteActual);
 				cliente.open();
-				shellMF.dispose();
+				
 			}
 		});
 		button_1.setText("Dados do cliente");
@@ -531,9 +533,10 @@ public class J_02Menu_F_CriaCliente {
 		button_2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
+				shellMF.dispose();
 				J_02Menu_F_MovimentaConta editarconta= new J_02Menu_F_MovimentaConta(gestor, uUtilizador,clienteActual, null);
 				editarconta.open();
-				shellMF.dispose();
+				
 			}
 		});
 		button_2.setText("Movimentar Contas");
