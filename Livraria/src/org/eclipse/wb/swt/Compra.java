@@ -48,6 +48,22 @@ public class Compra {
 	public void setEstadoCompra(Estado estadoCompra) {
 		this.estadoCompra = estadoCompra;
 	}
+
+	public int getNumCompra() {
+		return numCompra;
+	}
+
+	public void setNumCompra(int numCompra) {
+		this.numCompra = numCompra;
+	}
+
+	public double getTotal() {
+		return total;
+	}
+
+	public void setTotal(double total) {
+		this.total = total;
+	}
 	
 	
 	

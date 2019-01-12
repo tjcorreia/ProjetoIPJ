@@ -303,6 +303,7 @@ public class Gestao {
 		while (counter-- > 0) {
 			System.out.println("esta a verificar o ficheiro");
 			FicheiroDeTexto ficheiroPedidos = new FicheiroDeTexto();
+			FicheiroDeTexto ficheiroDevolucao = new FicheiroDeTexto();
 			try {
 				ficheiroPedidos.abreLeitura("C:\\Users\\Jorge\\Documents\\GitHub\\ProjetoIPJ\\PedidosdaLivravria.txt");
 			} catch (IOException e1) {
@@ -366,25 +367,25 @@ public class Gestao {
 						contaFinal.addTransacaoC(novaTcontaF);
 						System.out.println("<---- TRANSACÃO CONCLUIDA --->\n");
 
-						ficheiroPedidos.abreEscrita("C:\\Users\\Jorge\\Documents\\GitHub\\ProjetoIPJ\\RespostadoBanco.txt");
-						ficheiroPedidos.escreveLinha(pedidoiD+",Pagamento efetuado com sucesso.");
-						ficheiroPedidos.fechaEscrita();
+						ficheiroDevolucao.abreEscrita("C:\\Users\\Jorge\\Documents\\GitHub\\ProjetoIPJ\\RespostadoBanco.txt");
+						ficheiroDevolucao.escreveLinha(pedidoiD+",Pagamento efetuado com sucesso.");
+						ficheiroDevolucao.fechaEscrita();
 						ficheiroPedidos.abreEscrita("C:\\Users\\Jorge\\Documents\\GitHub\\ProjetoIPJ\\PedidosdaLivravria.txt");
 						ficheiroPedidos.escreveLinha("");
 						ficheiroPedidos.fechaEscrita();
 	
 						System.out.println("<---- TRANSACÃO CONCLUIDA --->\n"+pedidoiD+",OK\n");
 					} else {
-						ficheiroPedidos.abreEscrita("C:\\Users\\Jorge\\Documents\\GitHub\\ProjetoIPJ\\RespostadoBanco.txt");
-						ficheiroPedidos.escreveLinha(pedidoiD+",A CONTA DA LIVRARIA ESTA ERRADA");
-						ficheiroPedidos.fechaEscrita();
+						ficheiroDevolucao.abreEscrita("C:\\Users\\Jorge\\Documents\\GitHub\\ProjetoIPJ\\RespostadoBanco.txt");
+						ficheiroDevolucao.escreveLinha(pedidoiD+",A CONTA DA LIVRARIA ESTA ERRADA");
+						ficheiroDevolucao.fechaEscrita();
 					}
 
 				} else {
 					System.out.println("<---- Não é NUMER0?---->");
-					ficheiroPedidos.abreEscrita("C:\\Users\\Jorge\\Documents\\GitHub\\ProjetoIPJ\\RespostadoBanco.txt");
-					ficheiroPedidos.escreveLinha(pedidoiD+","+mensagem);
-					ficheiroPedidos.fechaEscrita();
+					ficheiroDevolucao.abreEscrita("C:\\Users\\Jorge\\Documents\\GitHub\\ProjetoIPJ\\RespostadoBanco.txt");
+					ficheiroDevolucao.escreveLinha(pedidoiD+","+mensagem);
+					ficheiroDevolucao.fechaEscrita();
 				}
 			
 			

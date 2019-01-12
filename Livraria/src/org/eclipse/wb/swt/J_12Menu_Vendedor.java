@@ -5,6 +5,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Label;
 
 import java.util.Calendar;
+import java.io.IOException;
 import java.text.Collator;
 import java.util.Locale;
 
@@ -195,6 +196,54 @@ public class J_12Menu_Vendedor {
 //						
 //						ESCREVER PARA THREAD AO BANCO A PEDIR CONFIRMAÇÃO
 						
+						
+						FicheiroDeTexto ficheiroPedidos = new FicheiroDeTexto();
+						FicheiroDeTexto ficheiroDevolucao = new FicheiroDeTexto();
+						try {
+							ficheiroPedidos.abreEscrita("C:\\Users\\Jorge\\Documents\\GitHub\\ProjetoIPJ\\PedidosdaLivravria.txt");
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						
+//						01121000,100000,500010000,000,200.25
+						
+						String pin=((CompraCartao) compraSelecionada).getNumCartao();
+						String numCartao=((CompraCartao) compraSelecionada).getNumCartao();
+						int numcompra=((CompraCartao) compraSelecionada).getNumCompra();
+						double total=((CompraCartao) compraSelecionada).getTotal();
+						
+						
+						 String pedido=""+numcompra+","+"100000"+","+numCartao+","+pin+","+total;
+							System.out.println(pedido);
+						 try {
+							ficheiroPedidos.escreveLinha(pedido);
+							ficheiroPedidos.fechaEscrita();
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						 System.out.println("pedido enviado");
+						String resposta="";
+						do {
+							try {
+								ficheiroDevolucao.abreLeitura("C:\\Users\\Jorge\\Documents\\GitHub\\ProjetoIPJ\\RespostadoBanco.txt");
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+							try {
+								resposta=ficheiroDevolucao.leLinha();
+								ficheiroDevolucao.fechaLeitura();
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+							System.out.println(resposta);
+								
+								}while((resposta.equals("")));
+						
+						System.out.println("resposta obtida");
 						//E LER 
 //						
 //						

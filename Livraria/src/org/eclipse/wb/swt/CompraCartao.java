@@ -26,4 +26,22 @@ public class CompraCartao extends Compra{
 		this.numCartao = numCartao;
 		this.pin = pin;
 	}
+
+	public String getNumCartao() {
+		return numCartao;
+	}
+
+	public void setNumCartao(String numCartao) {
+		this.numCartao = numCartao;
+	}
+
+	public String getPin() {
+		return pin;
+	}
+
+	public void setPin(String pin) {
+		this.pin = pin;
+	}
+	
+	
 }
