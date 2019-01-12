@@ -20,20 +20,21 @@ import org.eclipse.wb.swt.Transacao.TipoT;
 import org.eclipse.wb.swt.Utilizador.TipoID;
 
 /**
- * Breve descrição do código
- *
+ * Breve descrição do código Menu de Gestão onde se encontram as listas das
+ * diversas classes
+ * 
  * @sid 2019
  * @aid 1.1
  */
 
 public class Gestao {
-
-	private Map<String, Utilizador> mapUtilizadores; // String Username
-	private ArrayList<Conta> lContas;
-	private Map<Integer, Integer> mapCartaoConta; // numcartaonumconta
-	private Map<String, Integer> contadores;
-	private Utilizador uactual;
-
+	// String Username como key permit uma procura mais rapida
+	private Map<String, Utilizador> mapUtilizadores;
+	private ArrayList<Conta> lContas; // lista de contas
+	private Map<Integer, Integer> mapCartaoConta; // numcartao-numconta
+	private Map<String, Integer> contadores;// criou-se um contador usar nos diversas classes
+	private Utilizador uactual; // UtilizadorActual transmitido entre janelas
+	
 	public Gestao() {
 		super();
 		this.mapUtilizadores = new HashMap<String, Utilizador>();
@@ -41,7 +42,7 @@ public class Gestao {
 		this.mapCartaoConta = new HashMap<Integer, Integer>();
 		this.contadores = new HashMap<String, Integer>();
 
-//		// load data
+//		// load data : Na abertura carrega todos os ficheiros para o sistema
 //		try {
 //			loadAll();
 //		} catch (ClassNotFoundException e) {
@@ -53,8 +54,7 @@ public class Gestao {
 		contadores.put("Contas", 100000); // inicializa o Contador de Contas
 		contadores.put("Cartoes", 500010000); // inicializa o Contador de Cartoes
 		// Administradores
-//	Administrador(int uID, String login, String password, String nome, String sobrenome, String dataNascimento,
-//			String morada, TipoID escolhaID, int valorID, String email, int mobile)
+
 		Administrador MachadoU = new Administrador(contadores.get("Utilizador"), "Machado", "Admin", "Alberto",
 				"Machado0", "1977/07/17", "Rua Maria Vitoria", Administrador.TipoID.CARTAOCIDADAO, "78456123",
 				"mail@gmail.com", 965420735);
@@ -66,12 +66,13 @@ public class Gestao {
 		mapUtilizadores.put("Machado", MachadoU);
 		mapUtilizadores.put("Correia", CorreiaU);
 
-		// Funcionarios (o funcionario banco tem de existir sempre)
+		// Funcionarios (NOTA:o funcionario banco (ID:10003) tem de existir sempre é o
+		// funcionario a quem são atribuidos os processos automaticos)
 		Funcionario BANCOFU = new Funcionario(contadores.get("Utilizador") + 1, "BANCO", "Fun", "BANCO", "BANCO0",
 				"1977/07/30", "BANCO", Funcionario.TipoID.CARTAOCIDADAO, "78456123", "banco@gmail.com", 960000000);
 		contadores.replace("Utilizador", contadores.get("Utilizador") + 1);
 
-		Funcionario MachadoFU = new Funcionario(contadores.get("Utilizador") + 1, "BANCO", "Fun", "BANCO", "BANCO0",
+		Funcionario MachadoFU = new Funcionario(contadores.get("Utilizador") + 1, "Maria", "Fun", "BANCO", "BANCO0",
 				"1977/07/30", "BANCO", Funcionario.TipoID.CARTAOCIDADAO, "78456123", "banco@gmail.com", 960000000);
 		contadores.replace("Utilizador", contadores.get("Utilizador") + 1);
 
@@ -79,13 +80,12 @@ public class Gestao {
 				"1977/07/30", "Rua Maria Vitoria ", Funcionario.TipoID.CARTAOCIDADAO, "12345678", "mail2@gmail.com",
 				965420731);
 		contadores.replace("Utilizador", contadores.get("Utilizador") + 1);
+		mapUtilizadores.put("BANCO", BANCOFU);
 		mapUtilizadores.put("Maria", MachadoFU);
-
 		mapUtilizadores.put("Correia2", CorreiaFU);
 
 		// Clientes
-
-//	Utilizador(uID,login,password,nome,morada,escolhaID,valorID,email,mobile)
+		// Utilizador(uID,login,password,nome,morada,escolhaID,valorID,email,mobile)
 
 		Cliente cl1 = new Cliente(contadores.get("Utilizador") + 1, "AlbertoCliente", "Cliente", "Alberto", "Machado0",
 				"1977/07/30", "Rua Maria Vitoria", Utilizador.TipoID.CARTAOCIDADAO, "78456123", "mail", 965420731);
@@ -100,9 +100,7 @@ public class Gestao {
 		contadores.replace("Utilizador", contadores.get("Utilizador") + 1);
 
 		mapUtilizadores.put("AlbertoCliente", cl1);
-
 		mapUtilizadores.put("CorreiaCliente", cl2);
-
 		mapUtilizadores.put("MariaCliente", cl3);
 
 		// Contas
@@ -201,11 +199,9 @@ public class Gestao {
 
 		// ( duvida colocar conta de origem ?)
 
-		// verifica data e paga juro
+		// verifica data e paga juros as contas
 		pagajuros();
 
-//	System.out.println("Conta-->" + (cn1.toString()));
-//	System.out.println("GeRAL-->" + (cl1.toString()));
 
 	}
 
@@ -250,7 +246,8 @@ public class Gestao {
 	}
 
 	public void Gerir(Gestao gestor, Utilizador uactual) {
-
+		
+// inicia a thread pava verificar a transação da livraria
 		int counter = 1000;
 		Thread t1 = new Thread(new Runnable() {
 			@Override
@@ -264,24 +261,18 @@ public class Gestao {
 				}
 			}
 		});
-
 		t1.start();
 
-//	this.mapUtilizadores = new HashMap<String, Utilizador>();
-//	this.lContas = new ArrayList<Conta>();
-//	this.mapCartaoConta = new HashMap<Integer, Integer>();
-//	this.contadores = new HashMap<String, Integer>();
+
 		System.out.println("lOAD");
 		for (Entry<String, Utilizador> entry : mapUtilizadores.entrySet()) {
-
 			System.out.println("VERIFICA ---->Key = " + entry.getKey() + ", Value = " + entry.getValue());
 			System.out.println(entry.getValue().toString());
 		}
-
+		// em função do login escolhe as permições de cada utilizador
 		if (uactual instanceof Administrador) {
 			J_01_Administrador novaJAdmin = new J_01_Administrador(gestor, uactual);
 			novaJAdmin.open();
-
 		} else if (uactual instanceof Funcionario) {
 			J_02Menu_F novaJFuncionario = new J_02Menu_F(gestor, uactual);
 			novaJFuncionario.open();
@@ -299,6 +290,12 @@ public class Gestao {
 	}
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++ metodos++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	
+	/**
+	 * @param counter
+	 * @throws IOException
+	 * Método de comunicação com a livravria 
+	 */
 	private void VerificaLivraria(int counter) throws IOException {// static??
 		while (counter-- > 0) {
 			System.out.println("esta a verificar o ficheiro");
@@ -311,8 +308,6 @@ public class Gestao {
 				e1.printStackTrace();
 			}
 
-			
-
 			int contaDeposito = 0;
 			int pedidoiD = 0;
 			int cartaoCliente = 0;
@@ -320,19 +315,18 @@ public class Gestao {
 			double movimento = 0;
 
 			String s = "";
-		
-				s = ficheiroPedidos.leLinha();
 
-				if (s != null && !s.equals("")) {
-					String[] sSplit = s.split(",");
-					pedidoiD = Integer.parseInt(sSplit[0]);
-					contaDeposito = Integer.parseInt(sSplit[1]);
-					cartaoCliente = Integer.parseInt(sSplit[2]);
-					pin = sSplit[3];
-					movimento = Double.parseDouble(sSplit[4]);
-					// considera-se que so se processa um carrinho de CADA vez
-				
-				
+			s = ficheiroPedidos.leLinha();
+
+			if (s != null && !s.equals("")) {
+				String[] sSplit = s.split(",");
+				pedidoiD = Integer.parseInt(sSplit[0]);
+				contaDeposito = Integer.parseInt(sSplit[1]);
+				cartaoCliente = Integer.parseInt(sSplit[2]);
+				pin = sSplit[3];
+				movimento = Double.parseDouble(sSplit[4]);
+				// considera-se que so se processa um carrinho de CADA vez
+
 				ficheiroPedidos.fechaLeitura();
 				System.out.println("pedidoID  :" + pedidoiD);
 				System.out.println("contaDeposito:" + contaDeposito);
@@ -340,8 +334,7 @@ public class Gestao {
 				System.out.println("pin  :" + pin);
 				System.out.println("movimento  :" + movimento);
 				String mensagem = "";
-				
-				
+
 				mensagem = VerificaCartaoeDevolveContaID(cartaoCliente, pin, movimento);
 				System.out.println("MENSAGEM  :" + mensagem);
 				if (eUmNumero(mensagem)) {
@@ -362,36 +355,33 @@ public class Gestao {
 
 						Transacao novaTcontaF = new Transacao(10003, movimento, "", contaLevantamento.getContaID(),
 								TipoT.TRANSFERENCIA);
-						System.out.println("<---- Conta FINAL- Verifica Saldo ( " + contaFinal.getTransacoesC().toArray()
-								+ ") --->\n");
+						System.out.println("<---- Conta FINAL- Verifica Saldo ( "
+								+ contaFinal.getTransacoesC().toArray() + ") --->\n");
 						contaFinal.addTransacaoC(novaTcontaF);
 						System.out.println("<---- TRANSACÃO CONCLUIDA --->\n");
 
 						ficheiroDevolucao.abreEscrita("\\RespostadoBanco.txt");
-						ficheiroDevolucao.escreveLinha(pedidoiD+",Pagamento efetuado com sucesso.");
+						ficheiroDevolucao.escreveLinha(pedidoiD + ",Pagamento efetuado com sucesso.");
 						ficheiroDevolucao.fechaEscrita();
 						ficheiroPedidos.abreEscrita("\\PedidosdaLivravria.txt");
 						ficheiroPedidos.escreveLinha("");
 						ficheiroPedidos.fechaEscrita();
-	
-						System.out.println("<---- TRANSACÃO CONCLUIDA --->\n"+pedidoiD+",OK\n");
+
+						System.out.println("<---- TRANSACÃO CONCLUIDA --->\n" + pedidoiD + ",OK\n");
 					} else {
 						ficheiroDevolucao.abreEscrita("\\RespostadoBanco.txt");
-						ficheiroDevolucao.escreveLinha(pedidoiD+",A CONTA DA LIVRARIA ESTA ERRADA");
+						ficheiroDevolucao.escreveLinha(pedidoiD + ",A CONTA DA LIVRARIA ESTA ERRADA");
 						ficheiroDevolucao.fechaEscrita();
 					}
 
 				} else {
 					System.out.println("<---- Não é NUMER0?---->");
 					ficheiroDevolucao.abreEscrita("\\RespostadoBanco.txt");
-					ficheiroDevolucao.escreveLinha(pedidoiD+","+mensagem);
+					ficheiroDevolucao.escreveLinha(pedidoiD + "," + mensagem);
 					ficheiroDevolucao.fechaEscrita();
 				}
-			
-			
+
 			}
-			
-			
 
 		}
 		try {
@@ -436,8 +426,7 @@ public class Gestao {
 
 	}
 
-	// metodo para transferencia fiz diferente para retitar o metodo da Janela e
-	// utilizar uma classe Util
+	// metodo para transferencia fiz diferente mas ainda devia ter separado a parte da verificação de dados
 
 	public void TransferenciaCl(Utilizador uUtilizador, Shell shellactual, Conta contaActual, Text texoVerificaSaldo,
 			Text texoVerContad, Conta contaFinal) {
@@ -446,15 +435,15 @@ public class Gestao {
 		String mensagem = "";
 		String textoTitulo = "ATENÇÃO";
 		boolean verifica = true;
-		String[] mensageA = { "" };
 		texoVerContad.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
 
-		if (Util.estaVazio(mensageA, texoVerContad, texoVerificaSaldo)) {
+		if (Util.estaVazio(mensagem, texoVerContad, texoVerificaSaldo)) {
 			verifica = false;
 		} else {
 			// verifica valor a transferir
-			if ((Util.eNumeroIouD(mensageA, texoVerificaSaldo))) {
+			if ((Util.eNumeroIouD(mensagem, texoVerificaSaldo))) {
 				valoraTransferir = Double.parseDouble(texoVerificaSaldo.getText());
+				
 				// verifica Saldo da Conta
 				if (valoraTransferir > contaActual.getSaldo()) {
 					texoVerificaSaldo.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
@@ -472,13 +461,18 @@ public class Gestao {
 			}
 
 			// verifica Conta
-			if ((Util.eNumeroI(mensageA, texoVerContad, 6))) {
+			if ((Util.eNumeroI(mensagem, texoVerContad, 6))) {
 				contaFinal = contaExiste(Integer.parseInt(texoVerContad.getText()));
 				if (contaFinal == null) {
 					texoVerContad.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
-					mensageA[0] = mensageA[0] + " A conta não existe!!!!!\n";
+					mensagem = mensagem + " A conta não existe!!!!!\n";
 					verifica = false;
-				} else {
+				} else if (!(contaFinal == null)&&contaFinal==contaActual) {
+					texoVerContad.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
+					mensagem = mensagem + " A conta não pode ser igual a conta de origem!!!!!\n";
+					verifica = false;
+				}
+				else {
 					contaDestinoID = contaFinal.getContaID();
 				}
 			} else {
@@ -569,7 +563,7 @@ public class Gestao {
 			System.out.println("<---- Cartão------->" + cartaoID);
 			System.out.println("<---- Conta------->" + mapCartaoConta.get(cartaoID));
 			c = (ContaNormal) contaExiste(mapCartaoConta.get(cartaoID));
-			System.out.println("<---- Conta Actual-Vamos  Verifica max diario ( " + c.toString()+ ") --->\n");
+			System.out.println("<---- Conta Actual-Vamos  Verifica max diario ( " + c.toString() + ") --->\n");
 			// verfica se o cartao com aquele ID daquela conta tem o pin correto
 			if (!(c.verificaPINCartaoC(cartaoID, cartaoPIN) == null)) {
 				if (c.getSaldo() >= movimento) {

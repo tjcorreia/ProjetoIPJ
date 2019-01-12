@@ -207,6 +207,8 @@ public class J_03Menu_CLIENTE_Cartoes {
 		table = new Table(scrolledComposite, SWT.FULL_SELECTION);
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
+		table.setBackground(SWTResourceManager.getColor(SWT.COLOR_GRAY));
+		table.setHeaderBackground(SWTResourceManager.getColor(SWT.COLOR_DARK_GRAY));
 
 		TableColumn tblclmnConta = new TableColumn(table, SWT.CENTER);
 		tblclmnConta.setWidth(100);
@@ -236,7 +238,6 @@ public class J_03Menu_CLIENTE_Cartoes {
 		lblListaDeCartes.setBounds(0, 48, 441, 15);
 
 		// cria lista de contas e associa ao Combobox
-		
 		if (!(clienteActual.getLcontaSC().size() == 0)) {
 			String[] listaContas = new String[clienteActual.getLcontaSC().size()];
 			System.out.println("<---- lista de contas --->\n" + clienteActual.getLcontaSC().size());

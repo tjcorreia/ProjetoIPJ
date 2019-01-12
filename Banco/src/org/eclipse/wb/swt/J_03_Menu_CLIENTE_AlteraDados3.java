@@ -335,6 +335,12 @@ public class J_03_Menu_CLIENTE_AlteraDados3 {
 
 		text_DataA_mes = new Text(composite_BOX, SWT.BORDER);
 		text_DataA_mes.setBounds(363, 164, 23, 21);
+		Image image2 = (Image) SWTResourceManager.getImage(J_03Menu_CLIENTE_contas.class,
+				"/Logo/Java-logo-png Logo13.png");
+
+		Label lblimagem = new Label(shell, SWT.NONE);
+		lblimagem.setBounds(10, 10, 192, 68);
+		lblimagem.setImage(gestor.resize(shell, image2, lblimagem.getBounds().width, lblimagem.getBounds().height));
 
 		Label label = new Label(composite_BOX, SWT.NONE);
 		label.setText("/");
