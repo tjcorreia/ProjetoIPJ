@@ -12,7 +12,7 @@ public class Compra {
 	protected GregorianCalendar data;
 	protected double total;
 	public Estado estadoCompra;//public para poder definir estado da compra a partir de outras classes
-		protected enum Estado {SUBMETIDA, RECUSADA, FINALIZADA};//protected para poder ir para a subclasse compraCartão
+		protected enum Estado {SUBMETIDA, PAGA, ANULADA};//protected para poder ir para a subclasse compraCartão
 	
 	Compra(){
 		numCompra = -1;
@@ -40,5 +40,15 @@ public class Compra {
 				+ carrinho + "\n" + "TOTAL DA COMPRA:" + total + "€";
 		return s;
 	}
+
+	public Estado getEstadoCompra() {
+		return estadoCompra;
+	}
+
+	public void setEstadoCompra(Estado estadoCompra) {
+		this.estadoCompra = estadoCompra;
+	}
+	
+	
 	
 }
