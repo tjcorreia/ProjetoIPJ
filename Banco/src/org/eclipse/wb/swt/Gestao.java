@@ -753,6 +753,15 @@ public class Gestao {
 	}
 
 	// faz a verificação da adicção de um do novo Cliente
+	/**
+	 * @param actual
+	 * @param escolhadaIDN
+	 * @param valorID_NovoF
+	 * @param email_NovoF
+	 * @param userNovoF
+	 * @param mobileNovoF
+	 * @return
+	 */
 	public String verificaAlteraCl(Cliente actual, TipoID escolhadaIDN, Text valorID_NovoF, Text email_NovoF,
 			Text userNovoF, Text mobileNovoF) {
 
