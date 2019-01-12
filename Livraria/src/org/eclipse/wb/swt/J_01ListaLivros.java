@@ -9,6 +9,7 @@ import org.eclipse.swt.widgets.Listener;
 
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import org.eclipse.swt.SWT;
 
@@ -22,6 +23,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.widgets.TableColumn;
 
 
 public class J_01ListaLivros {
@@ -38,6 +40,18 @@ public class J_01ListaLivros {
 	private Text caixaDeBusca;//adicionou-se carrinho para cria-lo e passar para outras classes
 	
 	
+//	
+//	
+//	
+//	
+//	VOLTAR A DISPONIBILIZAR O CONSTRUTOR EM BAIXO
+//	
+//	
+//	
+//	
+//	
+//	
+//	
 	//Criou-se construtor para poder receber o carrinho da janela seguinte 'J_02Carrinho'
 	public J_01ListaLivros(Livraria livraria, Carrinho carrinho1) {
 		this.livraria = livraria;
@@ -92,20 +106,20 @@ public class J_01ListaLivros {
 	 */
 	protected void createContents() {
 		shlViewComicsInc = new Shell();
-		shlViewComicsInc.setSize(740, 560);
+		shlViewComicsInc.setSize(840, 560);
 		shlViewComicsInc.setText("View Comics Inc.");
 		
 		//Label que dá mensagem de erro caso o livro não esteja dizponível
 		Label lblMensagemLivroIndisponivel = new Label(shlViewComicsInc, SWT.NONE);
 		lblMensagemLivroIndisponivel.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
-		lblMensagemLivroIndisponivel.setBounds(511, 76, 153, 20);
+		lblMensagemLivroIndisponivel.setBounds(664, 76, 124, 20);
 		lblMensagemLivroIndisponivel.setText("Livro Indispon\u00EDvel");
 		lblMensagemLivroIndisponivel.setVisible(false);	
 		
 		//Label que dá mensagem de erro caso o livro não esteja dizponível
 		Label lblMensagemSelecioneLivro = new Label(shlViewComicsInc, SWT.NONE);
 		lblMensagemSelecioneLivro.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
-		lblMensagemSelecioneLivro.setBounds(511, 76, 153, 20);
+		lblMensagemSelecioneLivro.setBounds(664, 76, 134, 20);
 		lblMensagemSelecioneLivro.setText("Selecione um livro");
 		lblMensagemSelecioneLivro.setVisible(false);			
 		
@@ -141,9 +155,37 @@ public class J_01ListaLivros {
 				}
 			}
 		});
-		table.setBounds(10, 75, 495, 367);
+		table.setBounds(10, 75, 648, 406);
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
+		
+		TableColumn tblclmnTtulo = new TableColumn(table, SWT.CENTER);
+		tblclmnTtulo.setWidth(179);
+		tblclmnTtulo.setText("T\u00EDtulo");
+		
+		TableColumn tblclmnAutor = new TableColumn(table, SWT.CENTER);
+		tblclmnAutor.setWidth(100);
+		tblclmnAutor.setText("Autor");
+		
+		TableColumn tblclmnEditora = new TableColumn(table, SWT.CENTER);
+		tblclmnEditora.setWidth(91);
+		tblclmnEditora.setText("Editora");
+		
+		TableColumn tblclmnIsbn = new TableColumn(table, SWT.CENTER);
+		tblclmnIsbn.setWidth(88);
+		tblclmnIsbn.setText("ISBN");
+		
+		TableColumn tblclmnData = new TableColumn(table, SWT.CENTER);
+		tblclmnData.setWidth(83);
+		tblclmnData.setText("Data");
+		
+		TableColumn tblclmnStock = new TableColumn(table, SWT.CENTER);
+		tblclmnStock.setWidth(49);
+		tblclmnStock.setText("Stock");
+		
+		TableColumn tblclmnPreo = new TableColumn(table, SWT.CENTER);
+		tblclmnPreo.setWidth(53);
+		tblclmnPreo.setText("Pre\u00E7o");
 		preencherTabela();
 		
 		
@@ -170,13 +212,13 @@ public class J_01ListaLivros {
 			}
 		});
 		buttonVoltar.setText("Voltar");
-		buttonVoltar.setBounds(632, 477, 80, 26);
+		buttonVoltar.setBounds(732, 477, 80, 26);
 		
 		
 		//texto a indicar quantos items tem o carrinho
 		Label lblItmes = new Label(shlViewComicsInc, SWT.NONE);
 		lblItmes.setText( "" + carrinho.numeroItemsDoCarrinho() + " itmes");
-		lblItmes.setBounds(511, 144, 70, 20);		
+		lblItmes.setBounds(664, 145, 124, 20);		
 		
 		//Listner para botão de 'adicionar ao carrinho'
 		Button btnAdicionarAoCarrinho = new Button(shlViewComicsInc, SWT.CENTER);
@@ -207,7 +249,7 @@ public class J_01ListaLivros {
 			}
 		});
 		btnAdicionarAoCarrinho.setText("Adicionar");
-		btnAdicionarAoCarrinho.setBounds(514, 179, 90, 30);
+		btnAdicionarAoCarrinho.setBounds(664, 179, 71, 30);
 		
 		//Butão remover do carrinho. Remove o item que está selecionado (caso ele faça parte do carrinho) ou 
 		//remove o último livro adicionado, caso o livro selecionado não faça parte do carrinho
@@ -240,12 +282,12 @@ public class J_01ListaLivros {
 			}
 		});
 		btnRemover.setText("Remover");
-		btnRemover.setBounds(610, 179, 90, 30);
+		btnRemover.setBounds(741, 179, 71, 30);
 		
 		
 		
 		Label lblCarrinho = new Label(shlViewComicsInc, SWT.NONE);
-		lblCarrinho.setBounds(511, 114, 70, 20);
+		lblCarrinho.setBounds(664, 115, 124, 20);
 		lblCarrinho.setText("Carrinho");
 		
 		//mensagem de erro que aparece quando não há livros para a procura
@@ -297,7 +339,7 @@ public class J_01ListaLivros {
 			}
 		});
 		btnVerCarrinho.setText("Ver Carrinho");
-		btnVerCarrinho.setBounds(514, 225, 186, 30);
+		btnVerCarrinho.setBounds(664, 225, 148, 30);
 		
 
 		// Listner que deixa definir a altura de cada linha da table
@@ -324,6 +366,51 @@ public class J_01ListaLivros {
 		}
 		table.redraw();	
 	}
+	
+//	//Método para limpar e preencher novamente a tabela 
+//		public void preencherTabela(String filtro) {
+//			//limpar tabela
+//			table.removeAll();
+//			// Preencher tabela
+//						TableItem item = new TableItem(table, SWT.NONE);
+//						item.setText(0, "" + c.numCompra);
+//						item.setText(1, c.nif);
+//						item.setText(2, "" + c.data.get(Calendar.YEAR) + "/" + ((c.data.get(Calendar.MONTH)) + 1) + "/"
+//								+ c.data.get(Calendar.DAY_OF_MONTH));
+//						item.setText(3, "" + c.carrinho.numeroItemsDoCarrinho());
+//						item.setText(4, "" + c.total + "€");
+//						//Caso seja venda a dinheiro
+//						if ( !(c instanceof CompraCartao) ) {
+//							item.setText(5, "Dinheiro");
+//						}
+//						//Caso seja venda cartão
+//						else {
+//							item.setText(5, "Cartão");
+//						}
+//						item.setText(6, "" + c.estadoCompra);		
+//			table.redraw();	
+//		}	
+//		
+//		//Método para limpar e preencher novamente a tabela 
+//		public void preencherItemsTabela(Compra c) {
+//			// Preencher tabela
+//			TableItem item = new TableItem(table, SWT.NONE);
+//			item.setText(0, "" + c.numCompra);
+//			item.setText(1, c.nif);
+//			item.setText(2, "" + c.data.get(Calendar.YEAR) + "/" + ((c.data.get(Calendar.MONTH)) + 1) + "/"
+//					+ c.data.get(Calendar.DAY_OF_MONTH));
+//			item.setText(3, "" + c.carrinho.numeroItemsDoCarrinho());
+//			item.setText(4, "" + c.total + "€");
+//			//Caso seja venda a dinheiro
+//			if ( !(c instanceof CompraCartao) ) {
+//				item.setText(5, "Dinheiro");
+//			}
+//			//Caso seja venda cartão
+//			else {
+//				item.setText(5, "Cartão");
+//			}
+//			item.setText(6, "" + c.estadoCompra);
+//		}
 	
 	
 }
