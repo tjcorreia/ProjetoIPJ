@@ -187,17 +187,24 @@ public class J_02Carrinho { //criou-se janela como subclasse para poder receber 
 			}
 		});
 		tabela.setBounds(5, 31, 535, 421);
+		tabela.setLinesVisible(true);
+		tabela.setHeaderBackground(SWTResourceManager.getColor(SWT.COLOR_GRAY));
 		tabela.setHeaderVisible(true);
 		
 			
 		TableViewerColumn tableViewerColumn = new TableViewerColumn(tableViewer, SWT.NONE);
 		TableColumn tblclmnLivros = tableViewerColumn.getColumn();
-		tblclmnLivros.setWidth(379);
+		tblclmnLivros.setWidth(264);
 		tblclmnLivros.setText("Livros");
+		
+		TableViewerColumn tableViewerColumn_2 = new TableViewerColumn(tableViewer, SWT.NONE);
+		TableColumn tblclmnAutor = tableViewerColumn_2.getColumn();
+		tblclmnAutor.setWidth(177);
+		tblclmnAutor.setText("Autor");
 		
 		TableViewerColumn tableViewerColumn_1 = new TableViewerColumn(tableViewer, SWT.NONE);
 		TableColumn tblclmnQuantidades = tableViewerColumn_1.getColumn();
-		tblclmnQuantidades.setWidth(151);
+		tblclmnQuantidades.setWidth(90);
 		tblclmnQuantidades.setText("Quantidade");
 		//Chamar método para preencher tabela
 		preencherTabela();
@@ -480,7 +487,14 @@ public class J_02Carrinho { //criou-se janela como subclasse para poder receber 
 		});
 		
 		
-		
+		// Listner que deixa definir a altura de cada linha da table
+		// é preciso importar o org.eclipse.swt.widgets.Event;
+		tabela.addListener(SWT.MeasureItem, new Listener() {
+			public void handleEvent(Event event) {
+				// definir altura aqui
+				event.height = 90;
+			}
+		});		
 		
 		
 		
@@ -493,7 +507,7 @@ public class J_02Carrinho { //criou-se janela como subclasse para poder receber 
 		      TableItem item = new TableItem(tabela, SWT.NONE);
 		      int indice = carrinho.livros.indexOf(lv);
 		      //primeira coluna com o título do livro e segunda coluna com a quantidade
-		      item.setText( new String[] { lv.nome , "" + carrinho.quantidades.get(indice) } );
+		      item.setText( new String[] { lv.nome , lv.autor,"" + carrinho.quantidades.get(indice) } );
 		}
 	}
 	

@@ -1,7 +1,7 @@
 package org.eclipse.wb.swt;
 
 import org.eclipse.swt.widgets.Display;
-
+import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Button;
 
@@ -14,6 +14,7 @@ import java.util.Scanner;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.Text;
@@ -24,6 +25,7 @@ import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Spinner;
 import org.eclipse.swt.custom.CCombo;
+import org.eclipse.swt.widgets.TableColumn;
 
 /**  
  * Breve descrição do código   
@@ -80,6 +82,8 @@ public class J_11Menu_Admin {
 	private Label lblEmailIncorreto;
 	private Label lblSenhaIncorreta;
 	private Button btbSubmeterVendedor;
+	private TableColumn tblclmnLivros;
+	private Button btnVerHistrico;
 	
 	
 	
@@ -119,7 +123,7 @@ public class J_11Menu_Admin {
 	 */
 	protected void createContents() {
 		shlMenuAdmin = new Shell();
-		shlMenuAdmin.setSize(730, 542);
+		shlMenuAdmin.setSize(846, 542);
 		shlMenuAdmin.setText("Menu Administrador");
 		
 		
@@ -136,7 +140,7 @@ public class J_11Menu_Admin {
 		
 		Label lblNomeUtilizador = new Label(shlMenuAdmin, SWT.NONE);
 		lblNomeUtilizador.setAlignment(SWT.RIGHT);
-		lblNomeUtilizador.setBounds(399, 10, 303, 21);
+		lblNomeUtilizador.setBounds(515, 10, 303, 21);
 		lblNomeUtilizador.setText("Bem-vindo(a) " + utilizador.nome);
 		
 		Label barraVertical = new Label(shlMenuAdmin, SWT.SEPARATOR | SWT.VERTICAL);
@@ -177,7 +181,7 @@ public class J_11Menu_Admin {
 
 		Button btnVoltar = new Button(shlMenuAdmin, SWT.NONE);
 		btnVoltar.setText("Voltar/Logout");
-		btnVoltar.setBounds(598, 457, 104, 28);
+		btnVoltar.setBounds(714, 457, 104, 28);
 		btnVoltar.addMouseListener(new MouseAdapter() {
 			public void mouseUp(MouseEvent e) {
 				//comando para fechar a janela atual
@@ -237,11 +241,17 @@ public class J_11Menu_Admin {
 		btnPesquisar.setText("Pesquisar");
 		btnPesquisar.setBounds(449, 65, 90, 30);
 		
-		tabelaLivros = new Table(shlMenuAdmin, SWT.WRAP | SWT.BORDER | SWT.FULL_SELECTION);
+		tabelaLivros = new Table(shlMenuAdmin, SWT.BORDER | SWT.UP|SWT.FULL_SELECTION);
 		tabelaLivros.setVisible(false);
 		tabelaLivros.setLinesVisible(true);
-		tabelaLivros.setHeaderVisible(true);
-		tabelaLivros.setBounds(157, 146, 495, 305);
+		//tabelaLivros.setHeaderVisible(true);
+		tabelaLivros.setBounds(157, 146, 550, 339);
+		
+		tblclmnLivros = new TableColumn(tabelaLivros, SWT.NONE);
+		tblclmnLivros.setWidth(525);
+		tblclmnLivros.setText("Livros");
+		//tabelaLivros.setHeaderBackground(SWTResourceManager.getColor(SWT.COLOR_GRAY));
+		
 		tabelaLivros.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
 				System.out.println(e.toString());
@@ -336,7 +346,19 @@ public class J_11Menu_Admin {
 		
 		caixaPreco = new Text(shlMenuAdmin, SWT.BORDER);
 		caixaPreco.setVisible(false);
-		caixaPreco.setBounds(261, 265, 196, 30);
+		caixaPreco.setBounds(261, 265, 78, 30);
+		
+		btnVerHistrico = new Button(shlMenuAdmin, SWT.NONE);
+		btnVerHistrico.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				J_04HistoricoPrecos janelaPrecos = new J_04HistoricoPrecos(livraria, livroSelecionado);
+				janelaPrecos.open();
+			}
+		});
+		btnVerHistrico.setVisible(false);
+		btnVerHistrico.setBounds(356, 265, 90, 30);
+		btnVerHistrico.setText("Ver hist\u00F3rico");
 		
 		caixaStock = new Spinner(shlMenuAdmin, SWT.BORDER);
 		caixaStock.setVisible(false);
@@ -516,6 +538,15 @@ public class J_11Menu_Admin {
 			}
 		});
 		
+		
+		// Listner que deixa definir a altura de cada linha da table
+		// é preciso importar o org.eclipse.swt.widgets.Event;
+		tabelaLivros.addListener(SWT.MeasureItem, new Listener() {
+			public void handleEvent(Event event) {
+				// definir altura aqui
+				event.height = 120;
+			}
+		});		
 
 	}
 	
@@ -784,6 +815,7 @@ public class J_11Menu_Admin {
 		caixaAutor.setVisible(false);
 		caixaEditora.setVisible(false);
 		caixaPreco.setVisible(false);
+		btnVerHistrico.setVisible(false);
 		caixaStock.setVisible(false);
 		caixaData.setVisible(false);
 		caixaDescricao.setVisible(false);
@@ -828,6 +860,7 @@ public class J_11Menu_Admin {
 		caixaAutor.setVisible(false);
 		caixaEditora.setVisible(false);
 		caixaPreco.setVisible(false);
+		btnVerHistrico.setVisible(false);
 		caixaStock.setVisible(false);
 		caixaData.setVisible(false);
 		caixaDescricao.setVisible(false);
@@ -871,6 +904,7 @@ public class J_11Menu_Admin {
 		caixaAutor.setVisible(true);
 		caixaEditora.setVisible(true);
 		caixaPreco.setVisible(true);
+		btnVerHistrico.setVisible(true);
 		caixaStock.setVisible(true);
 		caixaData.setVisible(true);
 		caixaDescricao.setVisible(true);
@@ -908,6 +942,7 @@ public class J_11Menu_Admin {
 		caixaAutor.setVisible(true);
 		caixaEditora.setVisible(true);
 		caixaPreco.setVisible(true);
+		btnVerHistrico.setVisible(false);
 		caixaStock.setVisible(true);
 		caixaData.setVisible(true);
 		caixaDescricao.setVisible(true);
@@ -952,6 +987,7 @@ public class J_11Menu_Admin {
 		caixaAutor.setVisible(true);
 		caixaEditora.setVisible(false);
 		caixaPreco.setVisible(false);
+		btnVerHistrico.setVisible(false);
 		caixaStock.setVisible(false);
 		caixaData.setVisible(false);
 		caixaDescricao.setVisible(false);

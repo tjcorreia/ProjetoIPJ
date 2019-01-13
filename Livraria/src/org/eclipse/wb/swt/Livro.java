@@ -71,9 +71,9 @@ public class Livro {
 	}
 
 	public String toString() {
-		String s = "Título:" + nome + ", Autor:" + autor + ", Editora:" + editora + "\n\t ISNB:" + isbn + ", Data:"
+		String s = "Título: " + nome + "\n  Autor: " + autor + "      Editora: " + editora + "\n  ISNB: " + isbn + "     Data: "
 				+ data.get(Calendar.YEAR) + "/" + (data.get(Calendar.MONTH) + 1) + "/" + data.get(Calendar.DAY_OF_MONTH)
-				+ ", Stock:" + stock + " unidades" + "\n\t Descrição:" + descricao + "\n\t\t PREÇO:" + preco + "€";
+				+ "    Stock: " + stock + " unidades" + "\n  Descrição: " + descricao + "\n       PREÇO: " + preco + "€";
 		return s;
 	}
 
@@ -149,39 +149,24 @@ public class Livro {
 		this.stock = stock;
 	}
 
-	//comparador para ordenar livros por titulo
-	public static Comparator<Livro> ordenarPorTitulo = new Comparator<Livro>() {
-		public int compare(Livro l1, Livro l2) {
-			String tituloL1 = l1.getNome().toUpperCase();
-			String tituloL2 = l2.getNome().toUpperCase();
-			// se os dois tiverem em forma ascendente, devolver em forma descendente
-			if (tituloL1.compareToIgnoreCase(tituloL2) >= 0) {
-				return tituloL2.compareTo(tituloL1);
-			}
-			// se os dois tiverem em forma descendente, devolver em forma ascendente
-			else {
-				return tituloL1.compareTo(tituloL2);
-				
-			}
-		}
-	};
+
 	
-	//comparador para ordenar livros por titulo
-	public static Comparator<Livro> ordenarPorAutor = new Comparator<Livro>() {
-		public int compare(Livro l1, Livro l2) {
-			String autor1 = l1.getAutor().toUpperCase();
-			String autor2 = l2.getAutor().toUpperCase();
-			// se os dois tiverem em forma ascendente, devolver em forma descendente
-			if (autor1.compareToIgnoreCase(autor2) >= 0) {
-				return autor2.compareTo(autor1);
-			}
-			// se os dois tiverem em forma descendente, devolver em forma ascendente
-			else {
-				return autor1.compareTo(autor2);
-				
-			}
-		}
-	};	
+//	//comparador para ordenar livros por titulo
+//	public static Comparator<Livro> ordenarPorAutor = new Comparator<Livro>() {
+//		public int compare(Livro l1, Livro l2) {
+//			String autor1 = l1.getAutor().toUpperCase();
+//			String autor2 = l2.getAutor().toUpperCase();
+//			// se os dois tiverem em forma ascendente, devolver em forma descendente
+//			if (autor1.compareToIgnoreCase(autor2) >= 0) {
+//				return autor2.compareTo(autor1);
+//			}
+//			// se os dois tiverem em forma descendente, devolver em forma ascendente
+//			else {
+//				return autor1.compareTo(autor2);
+//				
+//			}
+//		}
+//	};	
 
 //	/* Comparator for sorting the list by roll no */
 //	public static Comparator<Student> StuRollno = new Comparator<Student>() {
