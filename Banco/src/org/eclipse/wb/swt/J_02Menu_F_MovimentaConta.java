@@ -52,6 +52,15 @@ public class J_02Menu_F_MovimentaConta {
 	private Text text_Levantamento;
 	private Text text_Deposito;
 	private Text text_Contadestinotrf;
+	private Button btnMenuadministrador;
+
+	public Button getBtnMenuadministrador() {
+		return btnMenuadministrador;
+	}
+
+	public void setBtnMenuadministrador(Button btnMenuadministrador) {
+		this.btnMenuadministrador = btnMenuadministrador;
+	}
 
 	public Shell getShellMF_ModificaContas() {
 		return shellMF_ModificaContas;
@@ -340,6 +349,27 @@ public class J_02Menu_F_MovimentaConta {
 		button_Levanta.setEnabled(true);
 		button_Transferencia.setEnabled(true);
 
+		
+		
+		btnMenuadministrador = new Button(shellMF_ModificaContas, SWT.NONE);
+		btnMenuadministrador.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				shellMF_ModificaContas.dispose();
+				J_01_Administrador admin=new J_01_Administrador(gestor,uUtilizador);
+				admin.open();
+			}
+		});
+		btnMenuadministrador.setText("MenuAdministrador");
+		btnMenuadministrador.setBounds(10, 300, 192, 25);
+		btnMenuadministrador.setVisible(false);
+		if (uUtilizador instanceof Administrador) {
+			btnMenuadministrador.setVisible(true);
+			button_Transferencia.setVisible(false);
+			button_Levanta.setVisible(false);
+			button_Deposito.setVisible(false);
+		
+		}
 		combo_EscolhaConta = new Combo(composite, SWT.NONE);
 		combo_EscolhaConta.setBounds(171, 59, 224, 23);
 
@@ -640,11 +670,11 @@ public class J_02Menu_F_MovimentaConta {
 		btnEditarConta.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
-
+				shellMF_ModificaContas.dispose();
 				J_02Menu_F_EditarConta editarconta = new J_02Menu_F_EditarConta(gestor, uUtilizador, clienteActual,
 						contaActual);
 				editarconta.open();
-				shellMF_ModificaContas.dispose();
+				
 			}
 		});
 		btnEditarConta.setText("Editar Conta");

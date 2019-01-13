@@ -1,10 +1,6 @@
 package org.eclipse.wb.swt;
 
 import java.util.Arrays;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.MouseAdapter;
@@ -49,8 +45,99 @@ public class J_02Menu_F_EditarConta {
 	private Text text_cartaoAssociado;
 	private Text text_NovoTitular;
 	private Button button_CriaCartao;
+	private Button btnMenuadministrador;
+	private Button button_EncerraConta;
+	private Button btnAdicionarTitular;
 	
 	
+
+	public Shell getShellMF_EditarC() {
+		return shellMF_EditarC;
+	}
+
+	public void setShellMF_EditarC(Shell shellMF_EditarC) {
+		this.shellMF_EditarC = shellMF_EditarC;
+	}
+
+	public String[] getListaClientes() {
+		return listaClientes;
+	}
+
+	public void setListaClientes(String[] listaClientes) {
+		this.listaClientes = listaClientes;
+	}
+
+	public Text getFuncionario() {
+		return Funcionario;
+	}
+
+	public void setFuncionario(Text funcionario) {
+		Funcionario = funcionario;
+	}
+
+	public Text getTxt_Indique_ID() {
+		return txt_Indique_ID;
+	}
+
+	public void setTxt_Indique_ID(Text txt_Indique_ID) {
+		this.txt_Indique_ID = txt_Indique_ID;
+	}
+
+	public Text getTxtSelecioneUmaConta() {
+		return txtSelecioneUmaConta;
+	}
+
+	public void setTxtSelecioneUmaConta(Text txtSelecioneUmaConta) {
+		this.txtSelecioneUmaConta = txtSelecioneUmaConta;
+	}
+
+	public Text getText_contaActual() {
+		return text_contaActual;
+	}
+
+	public void setText_contaActual(Text text_contaActual) {
+		this.text_contaActual = text_contaActual;
+	}
+
+	public Text getText_cartaoAssociado() {
+		return text_cartaoAssociado;
+	}
+
+	public void setText_cartaoAssociado(Text text_cartaoAssociado) {
+		this.text_cartaoAssociado = text_cartaoAssociado;
+	}
+
+	public Text getText_NovoTitular() {
+		return text_NovoTitular;
+	}
+
+	public void setText_NovoTitular(Text text_NovoTitular) {
+		this.text_NovoTitular = text_NovoTitular;
+	}
+
+	public Button getBtnMenuadministrador() {
+		return btnMenuadministrador;
+	}
+
+	public void setBtnMenuadministrador(Button btnMenuadministrador) {
+		this.btnMenuadministrador = btnMenuadministrador;
+	}
+
+	public Button getButton_EncerraConta() {
+		return button_EncerraConta;
+	}
+
+	public void setButton_EncerraConta(Button button_EncerraConta) {
+		this.button_EncerraConta = button_EncerraConta;
+	}
+
+	public Button getBtnAdicionarTitular() {
+		return btnAdicionarTitular;
+	}
+
+	public void setBtnAdicionarTitular(Button btnAdicionarTitular) {
+		this.btnAdicionarTitular = btnAdicionarTitular;
+	}
 
 	public Button getButton_CriaCartao() {
 		return button_CriaCartao;
@@ -202,7 +289,9 @@ public class J_02Menu_F_EditarConta {
 			public void widgetSelected(SelectionEvent e) {
 				text_cartaoAssociado.setEnabled(true);
 				int titularID = Integer.parseInt(combo_titularesDaconta.getText());
+				if (uUtilizador instanceof Funcionario) {
 				button_CriaCartao.setEnabled(true);
+				}
 				if (contaActual instanceof ContaPrazo) {
 					text_cartaoAssociado.setText("Conta a Prazo");
 				}
@@ -341,11 +430,48 @@ public class J_02Menu_F_EditarConta {
 		Funcionario.setText("Bem Vindo " + uUtilizador.getNome());
 		Funcionario.setBounds(215, 10, 326, 25);
 
+		button_EncerraConta = new Button(composite, SWT.NONE);
+		button_EncerraConta.setText("Encerrar Conta");
+		button_EncerraConta.setSelection(true);
+		button_EncerraConta.setBounds(23, 157, 141, 25);
+		
+		btnAdicionarTitular = new Button(composite, SWT.NONE);
+		btnAdicionarTitular.setText("Adicionar Titular");
+		btnAdicionarTitular.setSelection(true);
+		btnAdicionarTitular.setBounds(23, 201, 141, 25);
+		
+		button_CriaCartao = new Button(composite, SWT.NONE);
+		button_CriaCartao.setText("Criar Cart\u00E3o de Credito");
+		button_CriaCartao.setSelection(true);
+		button_CriaCartao.setBounds(23, 251, 141, 25);
+		
+		btnMenuadministrador = new Button(shellMF_EditarC, SWT.NONE);
+		btnMenuadministrador.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				shellMF_EditarC.dispose();
+				J_01_Administrador admin=new J_01_Administrador(gestor,uUtilizador);
+				admin.open();
+			}
+		});
+		btnMenuadministrador.setText("MenuAdministrador");
+		btnMenuadministrador.setBounds(10, 300, 192, 25);
+		btnMenuadministrador.setVisible(false);
+		if (uUtilizador instanceof Administrador) {
+			btnMenuadministrador.setVisible(true);
+			button_EncerraConta.setEnabled(false);
+			btnAdicionarTitular.setEnabled(false);
+			button_CriaCartao.setEnabled(false);
+//			button_CriaCartao.setVisible(false);;
+			
+		}
+		
+		
 		Label lblDadosDoCliente = new Label(composite, SWT.NONE);
 		lblDadosDoCliente.setText("Contas do Cliente");
 		lblDadosDoCliente.setAlignment(SWT.CENTER);
 		lblDadosDoCliente.setBounds(104, 10, 231, 15);
-		button_CriaCartao = new Button(composite, SWT.NONE);
+		
 		button_CriaCartao.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
@@ -362,9 +488,7 @@ public class J_02Menu_F_EditarConta {
 				}
 			}
 		});
-		button_CriaCartao.setText("Criar Cart\u00E3o de Credito");
-		button_CriaCartao.setSelection(true);
-		button_CriaCartao.setBounds(23, 251, 141, 25);
+		
 		mudarbotaoCC ();
 		
 		
@@ -376,10 +500,10 @@ public class J_02Menu_F_EditarConta {
 			public void mouseUp(MouseEvent e) {
 
 				String mensagem = "";
-				if (estaVazio(txt_Indique_ID)) {
+				if (Util.estaVazio(txt_Indique_ID)) {
 					mensagem = " Para procurar um Cliente tem de introduzir um ID";
 				} else {
-					if (eNumero(txt_Indique_ID) == -1) {
+					if (Util.eNumero(txt_Indique_ID) == -1) {
 						mensagem = " O ID do cliente tem de ser numerico";
 					} else {
 						if (gestor.procuraCid(Integer.parseInt(txt_Indique_ID.getText())) == null) {
@@ -436,15 +560,11 @@ public class J_02Menu_F_EditarConta {
 		txtSelecioneUmaConta.setText("Selecione uma Conta");
 		txtSelecioneUmaConta.setBounds(23, 86, 147, 21);
 
-		Button btnObterConta = new Button(composite, SWT.NONE);
-		btnObterConta.setText("Obter Conta");
-		btnObterConta.setGrayed(true);
-		btnObterConta.setBounds(343, 28, 88, 25);
-
-		Button button_EncerraConta = new Button(composite, SWT.NONE);
+		
 		button_EncerraConta.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
+				if (!(contaActual==null)) {
 				contaActual.setAbertaFechada(TipoC.ENCERADA);
 				for (Conta c : gestor.getlContas()) {
 					System.out.println(c);
@@ -467,13 +587,12 @@ public class J_02Menu_F_EditarConta {
 					System.out.println("<---- lista de contas --->\n" + listaContas.length);
 					combo_EscolhaConta.setItems(listaContas);
 					combo_EscolhaConta.select(index);
+					gestor.saveAll();
 				}
-
+				}
 			}
 		});
-		button_EncerraConta.setText("Encerrar Conta");
-		button_EncerraConta.setSelection(true);
-		button_EncerraConta.setBounds(23, 157, 141, 25);
+		
 
 		
 
@@ -492,7 +611,7 @@ public class J_02Menu_F_EditarConta {
 		lblcartaoAssociado.setFont(SWTResourceManager.getFont("Segoe UI", 7, SWT.ITALIC));
 		lblcartaoAssociado.setBounds(269, 242, 111, 10);
 
-		Button btnAdicionarTitular = new Button(composite, SWT.NONE);
+		
 		btnAdicionarTitular.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
@@ -500,21 +619,21 @@ public class J_02Menu_F_EditarConta {
 				String textoTitulo = "";
 				String mensagem = "";
 				text_NovoTitular.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
-				if (estaVazio(text_NovoTitular)) {
-					estaVazio(text_NovoTitular);
+				if (Util.estaVazio(text_NovoTitular)) {
+					
 					textoTitulo = " ERRO !!";
 					mensagem = mensagem + "tem de introduzir um valor\n";
 					verifica = false;
 				}
 
-				if (!estaVazio(text_NovoTitular)&&eNumero(text_NovoTitular) == -1) {
+				if (!Util.estaVazio(text_NovoTitular)&&Util.eNumero(text_NovoTitular) == -1) {
 					textoTitulo = " ERRO !!";
 					mensagem = mensagem + " O ID do cliente tem de ser numerico.\n";
 					verifica = false;
 				}
 				
 				
-				if (!(estaVazio(text_NovoTitular))&	!(eNumero(text_NovoTitular) == -1) ){
+				if (!(Util.estaVazio(text_NovoTitular))&	!(Util.eNumero(text_NovoTitular) == -1) ){
 					if (gestor.procuraCid(Integer.parseInt(text_NovoTitular.getText())) == null) {
 					text_NovoTitular.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
 					textoTitulo = " ERRO !!";
@@ -548,6 +667,7 @@ public class J_02Menu_F_EditarConta {
 					mensagem =  " Foi Adicionado o titual a Conta";
 					listaClientes = listaClientesActual();
 					combo_titularesDaconta.setItems(listaClientes);
+					gestor.saveAll();
 					}
 				}
 				
@@ -560,9 +680,7 @@ public class J_02Menu_F_EditarConta {
 
 			}
 		});
-		btnAdicionarTitular.setText("Adicionar Titular");
-		btnAdicionarTitular.setSelection(true);
-		btnAdicionarTitular.setBounds(23, 201, 141, 25);
+		
 
 		text_NovoTitular = new Text(composite, SWT.BORDER);
 		text_NovoTitular.setBounds(170, 203, 93, 21);
@@ -572,11 +690,6 @@ public class J_02Menu_F_EditarConta {
 		lblidDoCliente.setFont(SWTResourceManager.getFont("Segoe UI", 7, SWT.ITALIC));
 		lblidDoCliente.setAlignment(SWT.CENTER);
 		lblidDoCliente.setBounds(170, 189, 93, 10);
-
-		Button button_BuscarCliente = new Button(composite, SWT.NONE);
-		button_BuscarCliente.setText("Obter Cliente");
-		button_BuscarCliente.setGrayed(true);
-		button_BuscarCliente.setBounds(269, 201, 88, 25);
 		
 		Button button = new Button(shellMF_EditarC, SWT.NONE);
 		button.addMouseListener(new MouseAdapter() {
@@ -622,8 +735,9 @@ public class J_02Menu_F_EditarConta {
 	}
 
 	// ***************metodos**************
-	
+	// Se a conta é Prazo não pode ter cartões associados
 	public void mudarbotaoCC () {
+		if (uUtilizador instanceof Funcionario) {
 		if (!(contaActual==null)) {
 		if (contaActual instanceof ContaPrazo) {
 			button_CriaCartao.setText("A Conta é Prazo!!!");
@@ -633,16 +747,14 @@ public class J_02Menu_F_EditarConta {
 			button_CriaCartao.setText("Criar Cart\u00E3o de Credito");
 			button_CriaCartao.setEnabled(true);}
 		}
+		}
 	}
 	
 	
-	
-	
-	
-	
+	// cria lista de clientes da Conta Actual ( usa metodo da Conta)
 	public String[] listaClientesActual() {
 		listaClientes = new String[contaActual.getClientesDaC().size()];
-//	int[] listaClientes= new int [contaActual.getClientesDaC().size()];
+
 		System.out.println("<---- lista de clientes--->\n" + listaClientes.length);
 		System.out.println("<---- lista de clientes--->\n" + Arrays.toString(listaClientes));
 		for (int i = 0; i < contaActual.getClientesDaC().size(); i++) {
@@ -651,126 +763,5 @@ public class J_02Menu_F_EditarConta {
 		return listaClientes;
 	}
 
-	public boolean estaVazio(Text texto) {
-
-		if (texto.getText().equals("")) {
-			texto.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
-			return true;
-		}
-		texto.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
-		return false;
-	}
-
-	public boolean eNumeroIouD(Text texto) {
-		System.out.println("<---- NUMERO? --->\n" + texto.getText());
-		if ((eNumero(texto) == -1)) {
-			System.out.println("<---- NÃO E NUMERO? --->\n");
-			String numero = texto.getText();
-//		("^\\+?\\[0-9]{0,5}?\\-?\\[0-9]{9}$"
-//		Pattern regexPattern = Pattern.compile("^\\+?\\d{0,3}?\\d{9}$");
-			Pattern regexPattern2 = Pattern.compile("[0-9]+(\\.){0,1}[0-9]*");
-//        Matcher regMatcher   = regexPattern.matcher(mobileNumber);
-			Matcher regMatcher2 = regexPattern2.matcher(numero);
-			if (regMatcher2.matches()) {
-				texto.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
-				return true;// "Valid double";
-			} else {
-				texto.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
-				System.out.println("<---- NÃO E DOUBLE? FALSE --->\n");
-				return false;// "Invalid double";
-
-			}
-		} else
-			return true;
-	}
-
-	public int eNumero(Text texto) {
-		for (char c : texto.getText().toCharArray()) {
-			if (!Character.isDigit(c)) {
-				texto.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
-				return -1;
-			}
-		}
-		texto.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
-		return texto.getText().length();
-	}
-
-	public boolean validateMobileNumber(Text texto) {
-		String mobileNumber = texto.getText();
-//		("^\\+?\\[0-9]{0,5}?\\-?\\[0-9]{9}$"
-//		Pattern regexPattern = Pattern.compile("^\\+?\\d{0,3}?\\d{9}$");
-		Pattern regexPattern2 = Pattern.compile("^\\d{0,5}?\\d{9}$");
-//        Matcher regMatcher   = regexPattern.matcher(mobileNumber);
-		Matcher regMatcher2 = regexPattern2.matcher(mobileNumber);
-		if (regMatcher2.matches()) {
-			texto.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
-			return true;// "Valid Mobile Number";
-		} else {
-			texto.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
-			return false;// "Invalid Mobile Number";
-
-		}
-	}
-
-//	\A[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\z
-//	Regex : ^[\\w!#$%&’*+/=?`{|}~^-]+(?:\\.[\\w!#$%&’*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$
-
-	public boolean validateEmail(Text texto) {
-		String emailStr = texto.getText();
-		Pattern regexPattern = Pattern.compile(
-				"\\A[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\z");
-		Matcher regMatcher = regexPattern.matcher(emailStr);
-		if (regMatcher.matches()) {
-			texto.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
-			return true;// "Valid Email";
-		} else {
-			texto.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
-			return false;// "Invalid Email";
-		}
-	}
-
-	public boolean validateData2(Text texto1, Text texto2, Text texto3) {
-//		new GregorianCalendar(2018, 10, 24);
-		GregorianCalendar novoF = new GregorianCalendar();
-		GregorianCalendar actual = new GregorianCalendar();
-		GregorianCalendar actualMenos120 = new GregorianCalendar();
-		actualMenos120 = (GregorianCalendar) GregorianCalendar.getInstance();
-		actual = (GregorianCalendar) Calendar.getInstance();
-
-		String dataStr = texto1.getText() + "/" + texto2.getText() + "/" + texto3.getText();
-		System.out.println(dataStr);
-		Pattern regexPattern = Pattern.compile("^[0-9]{4}/(1[0-2]|0[1-9])/(3[01]|[12][0-9]|0[1-9])$");
-		Matcher regMatcher = regexPattern.matcher(dataStr);
-		if (regMatcher.matches()) {
-			texto1.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
-			texto2.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
-			texto3.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
-			System.out.println("Formato Correto");
-			return true;// "Valid Data";
-//			novoF.set(Integer.parseInt(texto1.getText()), Integer.parseInt(texto1.getText())
-//					- 1, Integer.parseInt(texto1.getText()));
-//			actualMenos120.add(Calendar.YEAR, -120);
-//			SimpleDateFormat fmt = new SimpleDateFormat("dd-MMM-yyyy");
-//			
-//		
-//			String dateFormatted = fmt.format(actual);
-//			System.out.println(dateFormatted);
-////			&& (novoF).compareTo(actualMenos120)==1
-//			if ((novoF).compareTo(actual)==-1 ) {
-//			
-//			}
-//			else {
-//				texto1.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
-//				texto2.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
-//				texto3.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
-//				return false;// "Invalid Data";
-//			}
-		} else {
-			texto1.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
-			texto2.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
-			texto3.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
-
-			return false;// "Invalid Data";
-		}
-	}
+	
 }

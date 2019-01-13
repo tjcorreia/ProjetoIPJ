@@ -10,6 +10,7 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.MessageBox;
@@ -42,6 +43,71 @@ public class J_02Menu_F_ContasCl {
 	private Text text_contaActual;
 	private Combo combo_EscolhaConta;
 	private Button btnMovimentarConta;
+	private Control btnMenuadministrador;
+
+	public Shell getShellMF_Contas() {
+		return shellMF_Contas;
+	}
+
+	public void setShellMF_Contas(Shell shellMF_Contas) {
+		this.shellMF_Contas = shellMF_Contas;
+	}
+
+	public Text getFuncionario() {
+		return Funcionario;
+	}
+
+	public void setFuncionario(Text funcionario) {
+		Funcionario = funcionario;
+	}
+
+	public Text getTxt_Indique_ID() {
+		return txt_Indique_ID;
+	}
+
+	public void setTxt_Indique_ID(Text txt_Indique_ID) {
+		this.txt_Indique_ID = txt_Indique_ID;
+	}
+
+	public Text getTxtSelecioneUmaConta() {
+		return txtSelecioneUmaConta;
+	}
+
+	public void setTxtSelecioneUmaConta(Text txtSelecioneUmaConta) {
+		this.txtSelecioneUmaConta = txtSelecioneUmaConta;
+	}
+
+	public Table getTable() {
+		return table;
+	}
+
+	public void setTable(Table table) {
+		this.table = table;
+	}
+
+	public Text getText_contaActual() {
+		return text_contaActual;
+	}
+
+	public void setText_contaActual(Text text_contaActual) {
+		this.text_contaActual = text_contaActual;
+	}
+
+	public Button getBtnMovimentarConta() {
+		return btnMovimentarConta;
+	}
+
+	public void setBtnMovimentarConta(Button btnMovimentarConta) {
+		this.btnMovimentarConta = btnMovimentarConta;
+	}
+
+	public Control getBtnMenuadministrador() {
+		return btnMenuadministrador;
+	}
+
+	public void setBtnMenuadministrador(Control btnMenuadministrador) {
+		this.btnMenuadministrador = btnMenuadministrador;
+	}
 
 	public Combo getCombo_EscolhaConta() {
 		return combo_EscolhaConta;
@@ -160,6 +226,24 @@ public class J_02Menu_F_ContasCl {
 		lblimagem.setBounds(10, 10, 192, 68);
 		lblimagem.setImage(gestor.resize(shellMF_Contas,image2,lblimagem.getBounds().width,lblimagem.getBounds().height));
 		
+		
+		btnMenuadministrador = new Button(shellMF_Contas, SWT.NONE);
+		btnMenuadministrador.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				shellMF_Contas.dispose();
+				J_01_Administrador admin=new J_01_Administrador(gestor,uUtilizador);
+				admin.open();
+			}
+		});
+		
+		btnMenuadministrador.setVisible(false);
+		if (uUtilizador instanceof Administrador) {
+			btnMenuadministrador.setVisible(true);
+			btnMenuadministrador.setToolTipText("MenuAdministrador");
+			btnMenuadministrador.setBounds(10, 300, 192, 25);
+			
+		}
 		System.out.println("<---- Utilizador Actual --->/n" + uUtilizador);
 		System.out.println("<---- Cliente Actual --->/n" + clienteActual);
 		System.out.println("<---- Conta Actual --->/n" + contaActual);

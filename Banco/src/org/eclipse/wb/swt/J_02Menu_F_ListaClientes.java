@@ -39,8 +39,65 @@ public class J_02Menu_F_ListaClientes {
 	private Text text_identifica;
 	private Text text_telemovel;
 	private Table table;
+	private Button btnMenuadministrador;
 
 	
+	public Button getBtnMenuadministrador() {
+		return btnMenuadministrador;
+	}
+
+	public void setBtnMenuadministrador(Button btnMenuadministrador) {
+		this.btnMenuadministrador = btnMenuadministrador;
+	}
+
+	public Shell getShlMenuFuncionrio() {
+		return shlMenuFuncionrio;
+	}
+
+	public void setShlMenuFuncionrio(Shell shlMenuFuncionrio) {
+		this.shlMenuFuncionrio = shlMenuFuncionrio;
+	}
+
+	public Text getFuncionario() {
+		return Funcionario;
+	}
+
+	public void setFuncionario(Text funcionario) {
+		Funcionario = funcionario;
+	}
+
+	public Text getText_nome() {
+		return text_nome;
+	}
+
+	public void setText_nome(Text text_nome) {
+		this.text_nome = text_nome;
+	}
+
+	public Text getText_identifica() {
+		return text_identifica;
+	}
+
+	public void setText_identifica(Text text_identifica) {
+		this.text_identifica = text_identifica;
+	}
+
+	public Text getText_telemovel() {
+		return text_telemovel;
+	}
+
+	public void setText_telemovel(Text text_telemovel) {
+		this.text_telemovel = text_telemovel;
+	}
+
+	public Table getTable() {
+		return table;
+	}
+
+	public void setTable(Table table) {
+		this.table = table;
+	}
+
 	public Cliente getClienteActual() {
 		return clienteActual;
 	}
@@ -117,13 +174,31 @@ public class J_02Menu_F_ListaClientes {
 		shlMenuFuncionrio.setSize(659, 522);
 		shlMenuFuncionrio.setText("Menu Funcion\u00E1rio");
 
-		Image image2 = (Image) SWTResourceManager.getImage(J_02Menu_F.class, "/Logo/Java-logo-png Logo13.png");
+		Image image2 = (Image) SWTResourceManager.getImage(J_02Menu_F_ListaClientes.class, "/Logo/Java-logo-png Logo13.png");
 		image2.isAutoScalable();
 		;
 		Label lblimagem = new Label(shlMenuFuncionrio, SWT.NONE);
 		lblimagem.setBounds(10, 10, 192, 68);
 		lblimagem.setImage(gestor.resize(shlMenuFuncionrio, image2, lblimagem.getBounds().width, lblimagem.getBounds().height));
 
+		btnMenuadministrador = new Button(shlMenuFuncionrio, SWT.NONE);
+		btnMenuadministrador.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				shlMenuFuncionrio.dispose();
+				J_01_Administrador admin=new J_01_Administrador(gestor,uUtilizador);
+				admin.open();
+			}
+		});
+		btnMenuadministrador.setText("MenuAdministrador");
+		btnMenuadministrador.setBounds(10, 300, 192, 25);
+		btnMenuadministrador.setVisible(false);
+		if (uUtilizador instanceof Administrador) {
+			btnMenuadministrador.setVisible(true);
+			
+			
+		}
+		
 		Button btnNovoCliente = new Button(shlMenuFuncionrio, SWT.NONE);
 		btnNovoCliente.addSelectionListener(new SelectionAdapter() {
 			@Override

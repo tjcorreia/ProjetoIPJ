@@ -1,30 +1,23 @@
 package org.eclipse.wb.swt;
 
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.Text;
-import org.eclipse.wb.swt.Utilizador.TipoID;
-
 import java.util.Arrays;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Table;
-import org.eclipse.swt.widgets.TableColumn;
-import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.MessageBox;
-import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.TableColumn;
+import org.eclipse.swt.widgets.TableItem;
+import org.eclipse.swt.widgets.Text;
 
 /**
  * Breve descrição do código
@@ -40,6 +33,30 @@ public class J_01_AdminLClientes {
 	private Utilizador uAdministrador;
 	private Table table;
 
+
+	public Shell getShell() {
+		return shell;
+	}
+
+	public void setShell(Shell shell) {
+		this.shell = shell;
+	}
+
+	public Text getText() {
+		return text;
+	}
+
+	public void setText(Text text) {
+		this.text = text;
+	}
+
+	public Table getTable() {
+		return table;
+	}
+
+	public void setTable(Table table) {
+		this.table = table;
+	}
 
 	public Gestao getGestor() {
 		return gestor;
@@ -61,7 +78,6 @@ public class J_01_AdminLClientes {
 		super();
 		this.uAdministrador = uAdministrador;
 		this.gestor = gestor;
-		open();
 		// TODO Auto-generated constructor stub
 	}
 	/**
@@ -69,8 +85,6 @@ public class J_01_AdminLClientes {
 	 */
 	
 	public J_01_AdminLClientes() {
-		super();
-		
 		open();
 		// TODO Auto-generated constructor stub
 	}
@@ -112,23 +126,31 @@ public class J_01_AdminLClientes {
 	 * Create contents of the window.
 	 */
 	protected void createContents() {
-		Gestao g = new Gestao();
+
 		shell = new Shell();
-		shell.setSize(651, 408);
+		shell.setSize(668, 408);
 		shell.setText("MENU ADMINISTRADOR");
 		shell.setBackground(SWTResourceManager.getColor(SWT.COLOR_DARK_GRAY));
 		shell.setImage((Image) SWTResourceManager.getImage(J_02Menu_F.class, "/Logo/Java-logo-png Logo.png"));
+		
+		Image image2 = (Image) SWTResourceManager.getImage(J_02Menu_F.class, "/Logo/Java-logo-png Logo13.png");
+		image2.isAutoScalable();;
+		Label lblimagem = new Label(shell, SWT.NONE);
+		lblimagem.setBounds(10, 10, 192, 68);
+		lblimagem.setImage(gestor.resize(shell,image2,lblimagem.getBounds().width,lblimagem.getBounds().height));
+		
+		
 		text = new Text(shell, SWT.BORDER);
 		text.setText("Bem Vindo " + uAdministrador.nome);
-		text.setBounds(182, 10, 286, 25);
+		text.setBounds(226, 10, 286, 25);
 
 		Composite composite = new Composite(shell, SWT.NONE);
-		composite.setBounds(182, 83, 420, 262);
+		composite.setBounds(222, 91, 420, 255);
 
 		// *********************Tabela de Clientes *************************
 		ScrolledComposite scrolledComposite = new ScrolledComposite(composite,
 				SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
-		scrolledComposite.setBounds(0, 10, 420, 252);
+		scrolledComposite.setBounds(0, 0, 420, 245);
 		scrolledComposite.setExpandHorizontal(true);
 		scrolledComposite.setExpandVertical(true);
 		scrolledComposite.setVisible(true);// apaga tabela
@@ -136,12 +158,14 @@ public class J_01_AdminLClientes {
 		table = new Table(scrolledComposite, SWT.BORDER | SWT.FULL_SELECTION);
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
+		table.setBackground(SWTResourceManager.getColor(SWT.COLOR_GRAY));
+		table.setHeaderBackground(SWTResourceManager.getColor(SWT.COLOR_DARK_GRAY));
 		scrolledComposite.setContent(table);
 		scrolledComposite.setMinSize(table.computeSize(SWT.DEFAULT, SWT.DEFAULT));
 
 		table.setVisible(true); // apaga tabela
 
-		System.out.println("  - > " + g.getMapUtilizadores().size());
+		System.out.println("  - > " + gestor.getMapUtilizadores().size());
 		Utilizador u = new Utilizador();
 		String[] titulo = { "Cliente ID", "Nome", "contas" };
 
@@ -150,8 +174,8 @@ public class J_01_AdminLClientes {
 			column.setText(titulo[i]);
 		}
 
-		for (String key : g.getMapUtilizadores().keySet()) {
-			u = g.getMapUtilizadores().get(key);
+		for (String key : gestor.getMapUtilizadores().keySet()) {
+			u = gestor.getMapUtilizadores().get(key);
 
 			if (u instanceof Cliente) {
 				System.out.println("-->" + ((Cliente) u).toString());
@@ -184,7 +208,7 @@ public class J_01_AdminLClientes {
 			}
 		});
 		btnAlterarDadosPessoais.setText("Alterar dados pessoais");
-		btnAlterarDadosPessoais.setBounds(10, 205, 154, 25);
+		btnAlterarDadosPessoais.setBounds(10, 153, 192, 25);
 
 		Button button_LogOut = new Button(shell, SWT.NONE);
 		button_LogOut.addMouseListener(new MouseAdapter() {
@@ -196,7 +220,7 @@ public class J_01_AdminLClientes {
 		});
 		
 		button_LogOut.setText("Log Out");
-		button_LogOut.setBounds(550, 10, 75, 25);
+		button_LogOut.setBounds(531, 10, 75, 25);
 
 		// JA_BT1.0 Botao Criar novo Funcionario.
 		Button Novo_Funcionario = new Button(shell, SWT.NONE);
@@ -212,25 +236,31 @@ public class J_01_AdminLClientes {
 		});
 	
 		Novo_Funcionario.setText("Novo Funcionario");
-		Novo_Funcionario.setBounds(10, 141, 154, 25);
+		Novo_Funcionario.setBounds(10, 91, 192, 25);
 
 
 		Button Lista_Clientes = new Button(shell, SWT.NONE);
 		
 		Lista_Clientes.setText("Lista de Clientes");
-		Lista_Clientes.setBounds(10, 174, 154, 25);
+		Lista_Clientes.setBounds(10, 122, 192, 25);
 		
 		Label lblListaDeClientes = new Label(shell, SWT.NONE);
+		lblListaDeClientes.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
 		lblListaDeClientes.setText("Lista de Clientes");
 		lblListaDeClientes.setAlignment(SWT.CENTER);
-		lblListaDeClientes.setBounds(226, 62, 322, 15);
+		lblListaDeClientes.setBounds(226, 56, 416, 25);
 		
-		Label lblNewLabel = new Label(shell, SWT.NONE);
-		
-		
-		lblNewLabel.setImage(SWTResourceManager.getImage(J_01_AdminLClientes.class, 
-				"C:\\Users\\Jorge\\Documents\\GitHub\\ProjetoIPJ\\Banco\\Imagens\\LogojavaBank _Withe_104.png"));
-		lblNewLabel.setBounds(10, 10, 154, 92);
+		Button button = new Button(shell, SWT.NONE);
+		button.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				shell.dispose();
+				J_02Menu_F menuF=new J_02Menu_F(gestor,uAdministrador) ;
+				menuF.open();
+			}
+		});
+		button.setText("Menu Funcionario");
+		button.setBounds(10, 191, 192, 25);
 
 	}
 }

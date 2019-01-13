@@ -20,9 +20,8 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.wb.swt.Utilizador.TipoID;
 
 /**
- * Breve descrição do código 
- * Janela Funcionario para Criar Cliente
- *  
+ * Breve descrição do código Janela Funcionario para Criar Cliente
+ * 
  * @author Alberto Jorge
  *
  */
@@ -41,15 +40,41 @@ public class J_02Menu_F_CriaCliente {
 	private Text text_UserNovoC;
 	private Text text_PassNovoC;
 	private Text text_UltimoNovoC;
-	private DateTime dateTime_Nascimento ;
-	
-	public DateTime getDateTime() {
-	return dateTime_Nascimento;
-}
+	private DateTime dateTime_Nascimento;
+	private Button btnMenuadministrador;
+	private Button button_GuardaCliente;
 
-public void setDateTime(DateTime dateTime) {
-	this.dateTime_Nascimento = dateTime;
-}
+	public DateTime getDateTime_Nascimento() {
+		return dateTime_Nascimento;
+	}
+
+	public void setDateTime_Nascimento(DateTime dateTime_Nascimento) {
+		this.dateTime_Nascimento = dateTime_Nascimento;
+	}
+
+	public Button getBtnMenuadministrador() {
+		return btnMenuadministrador;
+	}
+
+	public void setBtnMenuadministrador(Button btnMenuadministrador) {
+		this.btnMenuadministrador = btnMenuadministrador;
+	}
+
+	public Button getButton_GuardaCliente() {
+		return button_GuardaCliente;
+	}
+
+	public void setButton_GuardaCliente(Button button_GuardaCliente) {
+		this.button_GuardaCliente = button_GuardaCliente;
+	}
+
+	public DateTime getDateTime() {
+		return dateTime_Nascimento;
+	}
+
+	public void setDateTime(DateTime dateTime) {
+		this.dateTime_Nascimento = dateTime;
+	}
 
 	public Text getText_UltimoNovoC() {
 		return text_UltimoNovoC;
@@ -155,9 +180,6 @@ public void setDateTime(DateTime dateTime) {
 		this.text_PassNovoC = text_PassNovoC;
 	}
 
-	
-
-
 	public J_02Menu_F_CriaCliente(Gestao gestor, Utilizador uUtilizador) {
 		super();
 		this.uUtilizador = uUtilizador;
@@ -195,15 +217,14 @@ public void setDateTime(DateTime dateTime) {
 		shellMF.setImage((Image) SWTResourceManager.getImage(J_02Menu_F.class, "/Logo/Java-logo-png Logo.png"));
 		shellMF.setSize(707, 533);
 		shellMF.setText("Menu Funcion\u00E1rio");
-		
-		
-		
+
 		Image image2 = (Image) SWTResourceManager.getImage(J_02Menu_F.class, "/Logo/Java-logo-png Logo13.png");
-		image2.isAutoScalable();;
+		image2.isAutoScalable();
+		;
 		Label lblimagem = new Label(shellMF, SWT.NONE);
 		lblimagem.setBounds(10, 10, 192, 68);
-		lblimagem.setImage(gestor.resize(shellMF,image2,lblimagem.getBounds().width,lblimagem.getBounds().height));
-		
+		lblimagem.setImage(gestor.resize(shellMF, image2, lblimagem.getBounds().width, lblimagem.getBounds().height));
+
 		Button btnNovoCliente = new Button(shellMF, SWT.NONE);
 		btnNovoCliente.addSelectionListener(new SelectionAdapter() {
 			@Override
@@ -244,16 +265,38 @@ public void setDateTime(DateTime dateTime) {
 		composite.setVisible(true);
 		composite.setBounds(215, 84, 441, 301);
 
+		button_GuardaCliente = new Button(composite, SWT.TOGGLE | SWT.MULTI | SWT.WRAP | SWT.NONE);
+		button_GuardaCliente.setText("Guardar\nNovo Cliente");
+		button_GuardaCliente.setBounds(289, 233, 103, 58);
+
+		btnMenuadministrador = new Button(shellMF, SWT.NONE);
+		btnMenuadministrador.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				shellMF.dispose();
+				J_01_Administrador admin = new J_01_Administrador(gestor, uUtilizador);
+				admin.open();
+			}
+		});
+		btnMenuadministrador.setText("MenuAdministrador");
+		btnMenuadministrador.setBounds(10, 300, 192, 25);
+		btnMenuadministrador.setVisible(false);
+		if (uUtilizador instanceof Administrador) {
+			btnMenuadministrador.setVisible(true);
+			button_GuardaCliente.setEnabled(false);
+
+		}
+
 		dateTime_Nascimento = new DateTime(composite, SWT.BORDER);
 		dateTime_Nascimento.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				dateTime_Nascimento.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
-			
+
 			}
 		});
 		dateTime_Nascimento.setBounds(289, 162, 131, 21);
-		
+
 		Label label = new Label(composite, SWT.NONE);
 		label.setText("Identifica\u00E7ao");
 		label.setBounds(10, 104, 70, 15);
@@ -343,7 +386,6 @@ public void setDateTime(DateTime dateTime) {
 		text_PassNovoC.setText("Teste");
 		dateTime_Nascimento.setMonth(11);
 
-		Button button_GuardaCliente = new Button(composite, SWT.TOGGLE | SWT.MULTI | SWT.WRAP | SWT.NONE);
 		button_GuardaCliente.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
@@ -351,9 +393,9 @@ public void setDateTime(DateTime dateTime) {
 				String mensagem = "";
 				boolean naohaDadosPorPreencher = true;
 				// Verifica campos vazios
-				if (Util.estaVazio(text_PrimeiroNovoC,text_UltimoNovoC,text_MoradaNovoC)|| 
-						Util.estaVazio(text_ValorID_NovoC,text_Email_NovoC,text_MobileNovoC)||
-						Util.estaVazio(text_UserNovoC) || Util.estaVazio(text_PassNovoC)) {
+				if (Util.estaVazio(text_PrimeiroNovoC, text_UltimoNovoC, text_MoradaNovoC)
+						|| Util.estaVazio(text_ValorID_NovoC, text_Email_NovoC, text_MobileNovoC)
+						|| Util.estaVazio(text_UserNovoC) || Util.estaVazio(text_PassNovoC)) {
 					lbl_Titulo_DadosDoNovo.setText("Dados por preencher ou inválidos");
 					lbl_Titulo_DadosDoNovo.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
 					System.out.println("ENTROU NA VERIFICACAO DE CAMPOS VAZIOS");
@@ -361,22 +403,21 @@ public void setDateTime(DateTime dateTime) {
 					naohaDadosPorPreencher = false;
 
 				}
-				System.out.println("DATA Mes: "+(dateTime_Nascimento.getMonth()+1));
-				System.out.println("DATA Dia: "+dateTime_Nascimento.getDay());
-				LocalDate dataNas= LocalDate.of(dateTime_Nascimento.getYear(),dateTime_Nascimento.getMonth()+1,dateTime_Nascimento.getDay());
-				System.out.println("DATA"+dataNas);
-				
-				System.out.println("Boolean Data"+Util.verificaIdade (dataNas,17,120));
-				
-				if (!(Util.verificaIdade (dataNas,17,120))) {
-					System.out.println("ENTROU Boolean Data"+Util.verificaIdade (dataNas,17,120));
-				dateTime_Nascimento.setBackground(SWTResourceManager.getColor(SWT.COLOR_RED));
-				mensagem = mensagem + "Data de Nascimento Invalida .\n";
-				naohaDadosPorPreencher = false;
+				System.out.println("DATA Mes: " + (dateTime_Nascimento.getMonth() + 1));
+				System.out.println("DATA Dia: " + dateTime_Nascimento.getDay());
+				LocalDate dataNas = LocalDate.of(dateTime_Nascimento.getYear(), dateTime_Nascimento.getMonth() + 1,
+						dateTime_Nascimento.getDay());
+				System.out.println("DATA" + dataNas);
+
+				System.out.println("Boolean Data" + Util.verificaIdade(dataNas, 17, 120));
+
+				if (!(Util.verificaIdade(dataNas, 17, 120))) {
+					System.out.println("ENTROU Boolean Data" + Util.verificaIdade(dataNas, 17, 120));
+					dateTime_Nascimento.setBackground(SWTResourceManager.getColor(SWT.COLOR_RED));
+					mensagem = mensagem + "Data de Nascimento Invalida .\n";
+					naohaDadosPorPreencher = false;
 				}
-				
-				
-				
+
 				if (combo_TipoID_NovoC.getText().equals("Cartao Cidadao") && !Util.estaVazio(text_ValorID_NovoC)) {
 					if (Util.eNumero(text_ValorID_NovoC) == -1) {
 						lbl_Titulo_DadosDoNovo.setText("Dados por preencher ou inválidos");
@@ -424,7 +465,7 @@ public void setDateTime(DateTime dateTime) {
 					} else {
 						escolhadaID = Cliente.TipoID.CARTAOCIDADAO;
 					}
-				
+
 					String verifica = gestor.verificanovoC(escolhadaID, text_ValorID_NovoC, text_Email_NovoC,
 							text_UserNovoC, text_MobileNovoC);
 
@@ -432,8 +473,8 @@ public void setDateTime(DateTime dateTime) {
 
 					if (verifica.equals("")) {
 						Cliente f = new Cliente();
-						String dataStr = dateTime_Nascimento.getYear() + "/" + (dateTime_Nascimento.getMonth()+1) + "/"
-								+ dateTime_Nascimento.getDay();
+						String dataStr = dateTime_Nascimento.getYear() + "/" + (dateTime_Nascimento.getMonth() + 1)
+								+ "/" + dateTime_Nascimento.getDay();
 
 						gestor.addNovoC(text_UserNovoC.getText(), text_PassNovoC.getText(),
 								text_PrimeiroNovoC.getText(), text_UltimoNovoC.getText(), dataStr,
@@ -460,7 +501,6 @@ public void setDateTime(DateTime dateTime) {
 						text_MobileNovoC.setText("");
 						text_UserNovoC.setText("");
 						text_PassNovoC.setText("");
-					
 
 					} else {
 						System.out.println(("----> Nao verifica"));
@@ -479,10 +519,6 @@ public void setDateTime(DateTime dateTime) {
 				}
 			}
 		});
-		button_GuardaCliente.setText("Guardar\nNovo Cliente");
-		button_GuardaCliente.setBounds(289, 233, 103, 58);
-		
-		
 
 		Button button_1 = new Button(shellMF, SWT.NONE);
 		button_1.addMouseListener(new MouseAdapter() {
@@ -528,6 +564,4 @@ public void setDateTime(DateTime dateTime) {
 
 	}
 
-
-	
 }

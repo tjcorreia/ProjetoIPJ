@@ -1,43 +1,23 @@
 package org.eclipse.wb.swt;
 
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.Text;
-import org.eclipse.wb.swt.Utilizador.TipoID;
-
-import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
-import org.eclipse.swt.events.MouseEvent;
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.MessageBox;
-import org.eclipse.swt.widgets.Combo;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Table;
-import org.eclipse.swt.widgets.TableColumn;
-import org.eclipse.swt.widgets.TableItem;
-import org.eclipse.swt.custom.ScrolledComposite;
-import org.eclipse.swt.events.MouseAdapter;
-import org.eclipse.swt.events.MouseEvent;
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.MessageBox;
-import org.eclipse.swt.widgets.Combo;
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Combo;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.MessageBox;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Text;
+import org.eclipse.wb.swt.Utilizador.TipoID;
 
 /**
  * Breve descrição do código
@@ -63,6 +43,127 @@ public class J_01_Admin_NovoF {
 	private Text text_DataN_Ano;
 	private Text text_DataN_mes;
 	private Text text_DataN_dia;
+	private Label lblimagem2 ;
+	
+	public Label getLblimagem2() {
+		return lblimagem2;
+	}
+
+	public void setLblimagem2(Label lblimagem2) {
+		this.lblimagem2 = lblimagem2;
+	}
+
+	public Shell getShell() {
+		return shell;
+	}
+
+	public void setShell(Shell shell) {
+		this.shell = shell;
+	}
+
+	public Text getText() {
+		return text;
+	}
+
+	public void setText(Text text) {
+		this.text = text;
+	}
+
+	public Text getText_PrimeiroNovoF() {
+		return text_PrimeiroNovoF;
+	}
+
+	public void setText_PrimeiroNovoF(Text text_PrimeiroNovoF) {
+		this.text_PrimeiroNovoF = text_PrimeiroNovoF;
+	}
+
+	public Text getText_Morada_NovoF() {
+		return text_Morada_NovoF;
+	}
+
+	public void setText_Morada_NovoF(Text text_Morada_NovoF) {
+		this.text_Morada_NovoF = text_Morada_NovoF;
+	}
+
+	public Text getText_ValorID_NovoF() {
+		return text_ValorID_NovoF;
+	}
+
+	public void setText_ValorID_NovoF(Text text_ValorID_NovoF) {
+		this.text_ValorID_NovoF = text_ValorID_NovoF;
+	}
+
+	public Text getText_Email_NovoF() {
+		return text_Email_NovoF;
+	}
+
+	public void setText_Email_NovoF(Text text_Email_NovoF) {
+		this.text_Email_NovoF = text_Email_NovoF;
+	}
+
+	public Text getText_MobileNovoF() {
+		return text_MobileNovoF;
+	}
+
+	public void setText_MobileNovoF(Text text_MobileNovoF) {
+		this.text_MobileNovoF = text_MobileNovoF;
+	}
+
+	public Text getText_UserNovoF() {
+		return text_UserNovoF;
+	}
+
+	public void setText_UserNovoF(Text text_UserNovoF) {
+		this.text_UserNovoF = text_UserNovoF;
+	}
+
+	public Text getText_PassNovoF() {
+		return text_PassNovoF;
+	}
+
+	public void setText_PassNovoF(Text text_PassNovoF) {
+		this.text_PassNovoF = text_PassNovoF;
+	}
+
+	public Text getText_PosicaoNovoF() {
+		return text_PosicaoNovoF;
+	}
+
+	public void setText_PosicaoNovoF(Text text_PosicaoNovoF) {
+		this.text_PosicaoNovoF = text_PosicaoNovoF;
+	}
+
+	public Text getText_UltimoNovoF() {
+		return text_UltimoNovoF;
+	}
+
+	public void setText_UltimoNovoF(Text text_UltimoNovoF) {
+		this.text_UltimoNovoF = text_UltimoNovoF;
+	}
+
+	public Text getText_DataN_Ano() {
+		return text_DataN_Ano;
+	}
+
+	public void setText_DataN_Ano(Text text_DataN_Ano) {
+		this.text_DataN_Ano = text_DataN_Ano;
+	}
+
+	public Text getText_DataN_mes() {
+		return text_DataN_mes;
+	}
+
+	public void setText_DataN_mes(Text text_DataN_mes) {
+		this.text_DataN_mes = text_DataN_mes;
+	}
+
+	public Text getText_DataN_dia() {
+		return text_DataN_dia;
+	}
+
+	public void setText_DataN_dia(Text text_DataN_dia) {
+		this.text_DataN_dia = text_DataN_dia;
+	}
 
 	public Gestao getGestor() {
 		return gestor;
@@ -81,7 +182,7 @@ public class J_01_Admin_NovoF {
 	}
 
 	public J_01_Admin_NovoF(Gestao gestor, Utilizador uAdministrador) {
-
+		this.gestor = gestor;
 		this.uAdministrador = uAdministrador;
 
 		// TODO Auto-generated constructor stub
@@ -130,17 +231,25 @@ public class J_01_Admin_NovoF {
 	protected void createContents() {
 		
 		shell = new Shell();
-		shell.setSize(651, 408);
+		shell.setSize(705, 453);
+		shell.setTouchEnabled(true);
 		shell.setText("MENU ADMINISTRADOR");
 		shell.setBackground(SWTResourceManager.getColor(SWT.COLOR_DARK_GRAY));
-		shell.setImage((Image) SWTResourceManager.getImage(J_02Menu_F.class, "/Logo/Java-logo-png Logo.png"));
+		shell.setImage((Image) SWTResourceManager.getImage(J_01_Admin_NovoF.class, "/Logo/Java-logo-png Logo.png"));
 
 		text = new Text(shell, SWT.BORDER);
 		text.setText("Bem Vindo " + uAdministrador.nome);
-		text.setBounds(182, 10, 362, 25);
+		text.setBounds(215, 16, 362, 25);
 
+		Image image2 = ((Image) SWTResourceManager.getImage(J_01_Admin_NovoF.class, "/Logo/Java-logo-png Logo13.png"));
+		
+		lblimagem2 = new Label(shell, SWT.NONE);
+		lblimagem2.setBounds(10, 10, 192, 68);
+		lblimagem2.setImage(gestor.resize(this.shell,image2,lblimagem2.getBounds().width,lblimagem2.getBounds().height));
+		
+		
 		Composite composite = new Composite(shell, SWT.NONE);
-		composite.setBounds(182, 41, 430, 301);
+		composite.setBounds(217, 73, 441, 301);
 
 		composite.setVisible(true);
 
@@ -261,7 +370,7 @@ public class J_01_Admin_NovoF {
 			}
 		});
 		btnAlterarDadosPessoais.setText("Alterar dados pessoais");
-		btnAlterarDadosPessoais.setBounds(10, 205, 154, 25);
+		btnAlterarDadosPessoais.setBounds(10, 157, 192, 25);
 
 		Button button_Logout = new Button(shell, SWT.NONE);
 		button_Logout.addMouseListener(new MouseAdapter() {
@@ -271,7 +380,7 @@ public class J_01_Admin_NovoF {
 			}
 		});
 		button_Logout.setText("Log Out");
-		button_Logout.setBounds(550, 10, 75, 25);;;
+		button_Logout.setBounds(583, 16, 75, 25);;;
 		
 		// JA_BT1.0 Botao Criar novo Funcionario.
 		criarNovoF.addMouseListener(new MouseAdapter() {
@@ -421,7 +530,7 @@ public class J_01_Admin_NovoF {
 //						
 						box.open();
 						System.out.println(("verifica"));
-						
+						gestor.saveAll();
 					}
 					else {
 						System.out.println(("----> Nao verifica"));
@@ -430,8 +539,7 @@ public class J_01_Admin_NovoF {
 						box.setText("ERRO");
 						box.setMessage(verifica);
 						box.open();
-						Composite composite10 = new Composite(shell, SWT.NONE);
-						composite10.setBounds(182, 41, 430, 301);
+						
 					}
 					
 					
@@ -453,23 +561,33 @@ public class J_01_Admin_NovoF {
 
 		
 		Novo_Funcionario.setText("Novo Funcionario");
-		Novo_Funcionario.setBounds(10, 141, 154, 25);
+		Novo_Funcionario.setBounds(10, 93, 192, 25);
 
 // *****// JA_BT2.0 Botao para ver Lista de Cliente.
 		Button Lista_Clientes = new Button(shell, SWT.NONE);
 		Lista_Clientes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
-//				shell.dispose();
+				shell.dispose();
 				J_01_AdminLClientes novaLista=new J_01_AdminLClientes(gestor,uAdministrador);
 				novaLista.open();
-				
-				
 			}
 		});
 		
 		Lista_Clientes.setText("Lista de Clientes");
-		Lista_Clientes.setBounds(10, 174, 154, 25);
+		Lista_Clientes.setBounds(10, 126, 192, 25);
+		
+		Button button = new Button(shell, SWT.NONE);
+		button.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				shell.dispose();
+				J_02Menu_F menuF=new J_02Menu_F(gestor,uAdministrador) ;
+				menuF.open();
+			}
+		});
+		button.setText("Menu Funcionario");
+		button.setBounds(10, 188, 192, 25);
 
 	}
 

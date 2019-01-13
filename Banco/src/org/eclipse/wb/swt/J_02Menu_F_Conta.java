@@ -39,6 +39,73 @@ public class J_02Menu_F_Conta {
 	private Text text_Data;
 	private Label lblDadosDoCliente;
 	private Combo combo_NormalPrazo;
+	private Button btnMenuadministrador;
+	private Button btnCriarConta;
+	
+
+	public Shell getShellConta() {
+		return shellConta;
+	}
+
+	public void setShellConta(Shell shellConta) {
+		this.shellConta = shellConta;
+	}
+
+	public Combo getCombo() {
+		return combo;
+	}
+
+	public void setCombo(Combo combo) {
+		this.combo = combo;
+	}
+
+	public Text getFuncionario() {
+		return Funcionario;
+	}
+
+	public void setFuncionario(Text funcionario) {
+		Funcionario = funcionario;
+	}
+
+	public Text getTxt_Indique_ID() {
+		return txt_Indique_ID;
+	}
+
+	public void setTxt_Indique_ID(Text txt_Indique_ID) {
+		this.txt_Indique_ID = txt_Indique_ID;
+	}
+
+	public Text getText_DepositoInicial() {
+		return text_DepositoInicial;
+	}
+
+	public void setText_DepositoInicial(Text text_DepositoInicial) {
+		this.text_DepositoInicial = text_DepositoInicial;
+	}
+
+	public Text getText_Data() {
+		return text_Data;
+	}
+
+	public void setText_Data(Text text_Data) {
+		this.text_Data = text_Data;
+	}
+
+	public Button getBtnMenuadministrador() {
+		return btnMenuadministrador;
+	}
+
+	public void setBtnMenuadministrador(Button btnMenuadministrador) {
+		this.btnMenuadministrador = btnMenuadministrador;
+	}
+
+	public Button getBtnCriarConta() {
+		return btnCriarConta;
+	}
+
+	public void setBtnCriarConta(Button btnCriarConta) {
+		this.btnCriarConta = btnCriarConta;
+	}
 
 	public Combo getCombo_NormalPrazo() {
 		return combo_NormalPrazo;
@@ -175,6 +242,10 @@ public class J_02Menu_F_Conta {
 		composite.setVisible(true);
 		composite.setBounds(215, 84, 441, 371);
 
+		btnCriarConta = new Button(composite, SWT.NONE);
+		btnCriarConta.setBounds(23, 213, 184, 52);
+		btnCriarConta.setText("Criar Conta Nova");
+		
 		txt_Indique_ID = new Text(composite, SWT.BORDER | SWT.CENTER);
 		if (clienteActual == null) {
 			txt_Indique_ID.setText("Indique o ID");
@@ -191,6 +262,23 @@ public class J_02Menu_F_Conta {
 			}
 		});
 
+		btnMenuadministrador = new Button(shellConta, SWT.NONE);
+		btnMenuadministrador.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				shellConta.dispose();
+				J_01_Administrador admin=new J_01_Administrador(gestor,uUtilizador);
+				admin.open();
+			}
+		});
+		btnMenuadministrador.setText("MenuAdministrador");
+		btnMenuadministrador.setBounds(10, 300, 192, 25);
+		btnMenuadministrador.setVisible(false);
+		if (uUtilizador instanceof Administrador) {
+			btnMenuadministrador.setVisible(true);
+			btnCriarConta.setEnabled(false);
+			
+		}
 		Button btnNovoCliente = new Button(shellConta, SWT.NONE);
 		btnNovoCliente.addSelectionListener(new SelectionAdapter() {
 			@Override
@@ -298,7 +386,7 @@ public class J_02Menu_F_Conta {
 		System.out.println("<---- DATA ACTUAL Gregorian--->\n " + actual2);
 
 //// Criar nova conta
-		Button btnCriarConta = new Button(composite, SWT.NONE);
+		
 		btnCriarConta.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
@@ -353,8 +441,7 @@ public class J_02Menu_F_Conta {
 				}
 			}
 		});
-		btnCriarConta.setBounds(23, 213, 184, 52);
-		btnCriarConta.setText("Criar Conta Nova");
+		
 
 		Label lblDados = new Label(composite, SWT.NONE);
 		lblDados.setAlignment(SWT.CENTER);

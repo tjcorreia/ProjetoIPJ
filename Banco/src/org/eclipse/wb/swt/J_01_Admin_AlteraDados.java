@@ -1,43 +1,20 @@
 package org.eclipse.wb.swt;
 
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.Text;
-import org.eclipse.wb.swt.Utilizador.TipoID;
-
-import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
-import org.eclipse.swt.events.MouseEvent;
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.MessageBox;
-import org.eclipse.swt.widgets.Combo;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Table;
-import org.eclipse.swt.widgets.TableColumn;
-import org.eclipse.swt.widgets.TableItem;
-import org.eclipse.swt.custom.ScrolledComposite;
-import org.eclipse.swt.events.MouseAdapter;
-import org.eclipse.swt.events.MouseEvent;
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.MessageBox;
-import org.eclipse.swt.widgets.Combo;
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Combo;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.MessageBox;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Text;
 
 /**
  * Breve descrição do código
@@ -225,17 +202,23 @@ public class J_01_Admin_AlteraDados {
 	protected void createContents() {
 
 		shell = new Shell();
-		shell.setSize(651, 408);
+		shell.setSize(708, 484);
 		shell.setText("MENU ADMINISTRADOR");
 		shell.setBackground(SWTResourceManager.getColor(SWT.COLOR_DARK_GRAY));
 		shell.setImage((Image) SWTResourceManager.getImage(J_02Menu_F.class, "/Logo/Java-logo-png Logo.png"));
 
+		Image image2 = (Image) SWTResourceManager.getImage(J_02Menu_F.class, "/Logo/Java-logo-png Logo13.png");
+		image2.isAutoScalable();;
+		Label lblimagem = new Label(shell, SWT.NONE);
+		lblimagem.setBounds(10, 10, 192, 68);
+		lblimagem.setImage(gestor.resize(shell,image2,lblimagem.getBounds().width,lblimagem.getBounds().height));
+		
 		text = new Text(shell, SWT.BORDER);
 		text.setText("Bem Vindo " + uUtilizador.nome);
-		text.setBounds(180, 10, 288, 25);
+		text.setBounds(225, 10, 288, 25);
 
 		Composite composite = new Composite(shell, SWT.NONE);
-		composite.setBounds(182, 41, 430, 301);
+		composite.setBounds(225, 89, 430, 301);
 
 		composite.setVisible(true);
 
@@ -340,7 +323,7 @@ public class J_01_Admin_AlteraDados {
 
 		Button btnAlterarDadosPessoais = new Button(shell, SWT.NONE);
 		btnAlterarDadosPessoais.setText("Alterar dados pessoais");
-		btnAlterarDadosPessoais.setBounds(10, 205, 154, 25);
+		btnAlterarDadosPessoais.setBounds(10, 153, 192, 25);
 
 		Button button_Logout = new Button(shell, SWT.NONE);
 		button_Logout.addMouseListener(new MouseAdapter() {
@@ -352,7 +335,7 @@ public class J_01_Admin_AlteraDados {
 			}
 		});
 		button_Logout.setText("Log Out");
-		button_Logout.setBounds(550, 10, 75, 25);
+		button_Logout.setBounds(595, 10, 75, 25);
 
 		//// colocaca dados
 		text_PrimeiroNA.setText(uUtilizador.getNome());
@@ -505,7 +488,7 @@ public class J_01_Admin_AlteraDados {
 		});
 
 		Novo_Funcionario.setText("Novo Funcionario");
-		Novo_Funcionario.setBounds(10, 141, 154, 25);
+		Novo_Funcionario.setBounds(10, 89, 192, 25);
 
 // *****// JA_BT2.0 Botao para ver Lista de Cliente.
 		Button Lista_Clientes = new Button(shell, SWT.NONE);
@@ -520,7 +503,19 @@ public class J_01_Admin_AlteraDados {
 		});
 
 		Lista_Clientes.setText("Lista de Clientes");
-		Lista_Clientes.setBounds(10, 174, 154, 25);
+		Lista_Clientes.setBounds(10, 122, 192, 25);
+		
+		Button button = new Button(shell, SWT.NONE);
+		button.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				shell.dispose();
+				J_02Menu_F menuF=new J_02Menu_F(gestor,uUtilizador) ;
+				menuF.open();
+			}
+		});
+		button.setText("Menu Funcionario");
+		button.setBounds(10, 184, 192, 25);
 
 	}
 

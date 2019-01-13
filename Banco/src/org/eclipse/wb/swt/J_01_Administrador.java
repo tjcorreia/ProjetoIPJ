@@ -1,35 +1,19 @@
 package org.eclipse.wb.swt;
 
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.Text;
-import org.eclipse.wb.swt.Utilizador.TipoID;
-
-import java.util.Arrays;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Table;
-import org.eclipse.swt.widgets.TableColumn;
-import org.eclipse.swt.widgets.TableItem;
-import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.MessageBox;
-import org.eclipse.swt.widgets.Combo;
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Text;
 
 /**
- * Breve descrição do código
- *
+*  Breve descrição do código
+*Janela Administrador Menu Inicial
+* @author Alberto Jorge
  * @sid 2019
  * @aid 1.1
  */
@@ -120,14 +104,25 @@ public class J_01_Administrador {
 	protected void createContents() {
 		
 		shell = new Shell();
-		shell.setSize(651, 408);
+		shell.setSize(659, 453);
+	
 		shell.setText("MENU ADMINISTRADOR");
 		shell.setBackground(SWTResourceManager.getColor(SWT.COLOR_DARK_GRAY));
 		shell.setImage((Image) SWTResourceManager.getImage(J_02Menu_F.class, "/Logo/Java-logo-png Logo.png"));
 
+		Label lbl_Imagem = new Label(shell,SWT.NONE);
+		lbl_Imagem.setBounds(215, 84, 385, 296);
+		Image image = (Image) SWTResourceManager.getImage(J_02Menu_F.class, "/Logo/Java-logo-png Logo14.png");
+		image.isAutoScalable();;
+		lbl_Imagem.setImage(gestor.resize(shell,image,lbl_Imagem.getBounds().width,lbl_Imagem.getBounds().height));
+		
+		
+		
+		
+		
 		text = new Text(shell, SWT.BORDER);
 		text.setText("Bem Vindo " + uAdministrador.nome);
-		text.setBounds(167, 10, 301, 25);
+		text.setBounds(235, 10, 301, 25);
 
 		String[] comboB = { "Cartao Cidadao", "Passaporte" };
 
@@ -143,7 +138,7 @@ public class J_01_Administrador {
 			}
 		});
 		btnAlterarDadosPessoais.setText("Alterar dados pessoais");
-		btnAlterarDadosPessoais.setBounds(10, 205, 154, 25);
+		btnAlterarDadosPessoais.setBounds(10, 153, 192, 25);
 
 		Button button = new Button(shell, SWT.NONE);
 		button.addMouseListener(new MouseAdapter() {
@@ -157,7 +152,7 @@ public class J_01_Administrador {
 
 		Button Novo_Funcionario = new Button(shell, SWT.NONE);
 		Novo_Funcionario.setText("Novo Funcionario");
-		Novo_Funcionario.setBounds(10, 141, 154, 25);
+		Novo_Funcionario.setBounds(10, 89, 192, 25);
 	
 		Novo_Funcionario.addMouseListener(new MouseAdapter() {
 			@Override
@@ -180,7 +175,20 @@ public class J_01_Administrador {
 			}
 		});
 		Lista_Clientes.setText("Lista de Clientes");
-		Lista_Clientes.setBounds(10, 174, 154, 25);
+		Lista_Clientes.setBounds(10, 122, 192, 25);
+		
+		Button btnMenuFuncionario = new Button(shell, SWT.NONE);
+		btnMenuFuncionario.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				shell.dispose();
+				J_02Menu_F menuF=new J_02Menu_F(gestor,uAdministrador) ;
+				menuF.open();
+		
+			}
+		});
+		btnMenuFuncionario.setText("Menu Funcionario");
+		btnMenuFuncionario.setBounds(10, 184, 192, 25);
 
 	}
 

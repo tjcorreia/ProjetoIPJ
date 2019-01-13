@@ -42,6 +42,25 @@ public class J_02_MenuFun_AlteraDados2 {
 	private Text text_DataA_Ano;
 	private Text text_DataA_mes;
 	private Text text_DataA_dia;
+ private Button btnMenuadministrador ;
+ private Button criarNovoF;
+ 
+ 
+	public Button getCriarNovoF() {
+	return criarNovoF;
+}
+
+public void setCriarNovoF(Button criarNovoF) {
+	this.criarNovoF = criarNovoF;
+}
+
+	public Button getBtnMenuadministrador() {
+	return btnMenuadministrador;
+}
+
+public void setBtnMenuadministrador(Button btnMenuadministrador) {
+	this.btnMenuadministrador = btnMenuadministrador;
+}
 
 	public Shell getShell() {
 		return shell;
@@ -227,11 +246,38 @@ public class J_02_MenuFun_AlteraDados2 {
 		lblimagem.setBounds(10, 10, 192, 68);
 		lblimagem.setImage(gestor.resize(shell, image2, lblimagem.getBounds().width, lblimagem.getBounds().height));
 
+		
+		
+		
+		
+		
 		Composite composite = new Composite(shell, SWT.NONE);
 		composite.setBounds(236, 84, 430, 301);
 
 		composite.setVisible(true);
 
+		criarNovoF = new Button(composite, SWT.MULTI | SWT.WRAP | SWT.NONE);
+
+		criarNovoF.setBounds(289, 233, 103, 58);
+		criarNovoF.setText("Alterar os seus dados pessoais");
+		
+		
+		btnMenuadministrador = new Button(shell, SWT.NONE);
+		btnMenuadministrador.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				shell.dispose();
+				J_01_Administrador admin=new J_01_Administrador(gestor,uUtilizador);
+				admin.open();
+			}
+		});
+		btnMenuadministrador.setText("MenuAdministrador");
+		btnMenuadministrador.setBounds(10, 300, 192, 25);
+		
+		if (uUtilizador instanceof Administrador) {
+			btnMenuadministrador.setVisible(false);
+			criarNovoF.setEnabled(false);
+		}
 		Label lblNewLabel = new Label(composite, SWT.NONE);
 		lblNewLabel.setBounds(10, 104, 70, 15);
 		lblNewLabel.setText("Identifica\u00E7ao");
@@ -292,10 +338,7 @@ public class J_02_MenuFun_AlteraDados2 {
 		Titulo_Novo_F.setBounds(81, 2, 322, 15);
 		Titulo_Novo_F.setText("Dados Pessoais");
 
-		Button criarNovoF = new Button(composite, SWT.MULTI | SWT.WRAP | SWT.NONE);
 
-		criarNovoF.setBounds(289, 233, 103, 58);
-		criarNovoF.setText("Alterar os seus dados pessoais");
 
 		text_UltimoNA = new Text(composite, SWT.BORDER);
 		text_UltimoNA.setBounds(250, 44, 170, 21);

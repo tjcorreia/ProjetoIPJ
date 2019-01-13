@@ -26,6 +26,7 @@ public class J_02Menu_F {
 	private Utilizador uUtilizador;
 	private Text Funcionario;
 	private Label lbl_Imagem ;
+	private Button btnMenuadministrador;
 
 	public Label getLbl_Imagem() {
 		return lbl_Imagem;
@@ -102,11 +103,23 @@ public class J_02Menu_F {
 		shlMenuFuncionrio.setTouchEnabled(true);
 		shlMenuFuncionrio.setBackground(SWTResourceManager.getColor(SWT.COLOR_DARK_GRAY));
 		shlMenuFuncionrio.setImage((Image) SWTResourceManager.getImage(J_02Menu_F.class, "/Logo/Java-logo-png Logo.png"));
-		shlMenuFuncionrio.setSize(659, 522);
+		shlMenuFuncionrio.setSize(659, 461);
 		shlMenuFuncionrio.setText("Menu Funcion\u00E1rio");
 		
-		
-		
+		btnMenuadministrador = new Button(shlMenuFuncionrio, SWT.NONE);
+		btnMenuadministrador.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				shlMenuFuncionrio.dispose();
+				J_01_Administrador admin=new J_01_Administrador(gestor,uUtilizador);
+				admin.open();
+			}
+		});
+		btnMenuadministrador.setText("MenuAdministrador");
+		btnMenuadministrador.setBounds(10, 300, 192, 25);
+		if (uUtilizador instanceof Administrador) {
+			btnMenuadministrador.setVisible(false);
+		}
 		
 		Button btnNovoCliente = new Button(shlMenuFuncionrio, SWT.NONE);
 		btnNovoCliente.addSelectionListener(new SelectionAdapter() {
@@ -207,6 +220,11 @@ public class J_02Menu_F {
 		Label lblimagem = new Label(shlMenuFuncionrio, SWT.NONE);
 		lblimagem.setBounds(10, 10, 192, 68);
 		lblimagem.setImage(gestor.resize(shlMenuFuncionrio,image2,lblimagem.getBounds().width,lblimagem.getBounds().height));
+		
+		Button button_3 = new Button(shlMenuFuncionrio, SWT.NONE);
+		button_3.setBounds(10, 269, 192, 25);
+		
+		
 		
 
 	}

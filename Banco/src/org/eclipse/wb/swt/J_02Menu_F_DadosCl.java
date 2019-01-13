@@ -1,10 +1,5 @@
 package org.eclipse.wb.swt;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
@@ -54,6 +49,159 @@ public class J_02Menu_F_DadosCl {
 	private Table table_ListadeContas;
 	private Button btnAlterarDados;
 	private Button btn_ProcuraCliente;
+	private Button btnMenuadministrador;
+
+	public Shell getShellMF() {
+		return shellMF;
+	}
+
+	public void setShellMF(Shell shellMF) {
+		this.shellMF = shellMF;
+	}
+
+	public Text getFuncionario() {
+		return Funcionario;
+	}
+
+	public void setFuncionario(Text funcionario) {
+		Funcionario = funcionario;
+	}
+
+	public Text getText_PrimeiroNovoC() {
+		return text_PrimeiroNovoC;
+	}
+
+	public void setText_PrimeiroNovoC(Text text_PrimeiroNovoC) {
+		this.text_PrimeiroNovoC = text_PrimeiroNovoC;
+	}
+
+	public Text getText_UltimoNovoC() {
+		return text_UltimoNovoC;
+	}
+
+	public void setText_UltimoNovoC(Text text_UltimoNovoC) {
+		this.text_UltimoNovoC = text_UltimoNovoC;
+	}
+
+	public Text getText_MoradaNovoC() {
+		return text_MoradaNovoC;
+	}
+
+	public void setText_MoradaNovoC(Text text_MoradaNovoC) {
+		this.text_MoradaNovoC = text_MoradaNovoC;
+	}
+
+	public Text getText_ValorID_NovoC() {
+		return text_ValorID_NovoC;
+	}
+
+	public void setText_ValorID_NovoC(Text text_ValorID_NovoC) {
+		this.text_ValorID_NovoC = text_ValorID_NovoC;
+	}
+
+	public Text getText_Email_NovoC() {
+		return text_Email_NovoC;
+	}
+
+	public void setText_Email_NovoC(Text text_Email_NovoC) {
+		this.text_Email_NovoC = text_Email_NovoC;
+	}
+
+	public Text getText_MobileNovoC() {
+		return text_MobileNovoC;
+	}
+
+	public void setText_MobileNovoC(Text text_MobileNovoC) {
+		this.text_MobileNovoC = text_MobileNovoC;
+	}
+
+	public Text getText_UserNovoC() {
+		return text_UserNovoC;
+	}
+
+	public void setText_UserNovoC(Text text_UserNovoC) {
+		this.text_UserNovoC = text_UserNovoC;
+	}
+
+	public Text getText_PassNovoC() {
+		return text_PassNovoC;
+	}
+
+	public void setText_PassNovoC(Text text_PassNovoC) {
+		this.text_PassNovoC = text_PassNovoC;
+	}
+
+	public Text getText_DataN_Ano() {
+		return text_DataN_Ano;
+	}
+
+	public void setText_DataN_Ano(Text text_DataN_Ano) {
+		this.text_DataN_Ano = text_DataN_Ano;
+	}
+
+	public Text getText_DataN_mes() {
+		return text_DataN_mes;
+	}
+
+	public void setText_DataN_mes(Text text_DataN_mes) {
+		this.text_DataN_mes = text_DataN_mes;
+	}
+
+	public Text getText_DataN_dia() {
+		return text_DataN_dia;
+	}
+
+	public void setText_DataN_dia(Text text_DataN_dia) {
+		this.text_DataN_dia = text_DataN_dia;
+	}
+
+	public Text getTxt_Indique_ID() {
+		return txt_Indique_ID;
+	}
+
+	public void setTxt_Indique_ID(Text txt_Indique_ID) {
+		this.txt_Indique_ID = txt_Indique_ID;
+	}
+
+	public Combo getCombo_TipoID_NovoC() {
+		return combo_TipoID_NovoC;
+	}
+
+	public void setCombo_TipoID_NovoC(Combo combo_TipoID_NovoC) {
+		this.combo_TipoID_NovoC = combo_TipoID_NovoC;
+	}
+
+	public Table getTable_ListadeContas() {
+		return table_ListadeContas;
+	}
+
+	public void setTable_ListadeContas(Table table_ListadeContas) {
+		this.table_ListadeContas = table_ListadeContas;
+	}
+
+	public Button getBtnAlterarDados() {
+		return btnAlterarDados;
+	}
+
+	public void setBtnAlterarDados(Button btnAlterarDados) {
+		this.btnAlterarDados = btnAlterarDados;
+	}
+
+	public Button getBtn_ProcuraCliente() {
+		return btn_ProcuraCliente;
+	}
+
+	public void setBtn_ProcuraCliente(Button btn_ProcuraCliente) {
+		this.btn_ProcuraCliente = btn_ProcuraCliente;
+	}
+
+	public Button getBtnMenuadministrador() {
+		return btnMenuadministrador;
+	}
+
+	public void setBtnMenuadministrador(Button btnMenuadministrador) {
+		this.btnMenuadministrador = btnMenuadministrador;
+	}
 
 	public Cliente getClienteActual() {
 		return clienteActual;
@@ -294,6 +442,28 @@ public class J_02Menu_F_DadosCl {
 		label_12.setText("/");
 		label_12.setBounds(355, 185, 8, 15);
 
+		btnAlterarDados = new Button(composite, SWT.TOGGLE | SWT.MULTI | SWT.WRAP | SWT.NONE);
+		btnAlterarDados.setBounds(228, 263, 181, 25);
+		
+		btnMenuadministrador = new Button(shellMF, SWT.NONE);
+		btnMenuadministrador.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				shellMF.dispose();
+				J_01_Administrador admin=new J_01_Administrador(gestor,uUtilizador);
+				admin.open();
+			}
+		});
+		btnMenuadministrador.setText("MenuAdministrador");
+		btnMenuadministrador.setBounds(10, 300, 192, 25);
+		btnMenuadministrador.setVisible(false);
+		if (uUtilizador instanceof Administrador) {
+			btnMenuadministrador.setVisible(true);
+			btnAlterarDados.setEnabled(false);
+			
+		}
+		
+		
 		txt_Indique_ID = new Text(composite, SWT.BORDER | SWT.CENTER);
 		txt_Indique_ID.setText("Indique o ID");
 		txt_Indique_ID.setLocation(10, 7);
@@ -332,8 +502,7 @@ public class J_02Menu_F_DadosCl {
 		btnMovimentarConta.setText("Movimentar Contas");
 		btnMovimentarConta.setBounds(228, 323, 181, 25);
 
-		btnAlterarDados = new Button(composite, SWT.TOGGLE | SWT.MULTI | SWT.WRAP | SWT.NONE);
-
+		
 		btnAlterarDados.setText("Alterar dados Cliente");
 		String alterarDadosC = "Alterar dados Cliente";
 		btnAlterarDados.addMouseListener(new MouseAdapter() {
@@ -465,7 +634,7 @@ public class J_02Menu_F_DadosCl {
 			}
 		});
 
-		btnAlterarDados.setBounds(228, 263, 181, 25);
+		
 
 		Label lblListaDeContas = new Label(composite, SWT.NONE);
 		lblListaDeContas.setText("Lista de Contas");
