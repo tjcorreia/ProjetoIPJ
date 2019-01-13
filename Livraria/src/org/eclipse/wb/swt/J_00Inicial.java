@@ -19,6 +19,7 @@ import org.eclipse.swt.widgets.Spinner;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.widgets.Link;
 
 
 
@@ -80,7 +81,7 @@ public class J_00Inicial {
 		Label lblViewComicsInc = new Label(shlViewComicsInc, SWT.NONE);
 		lblViewComicsInc.setAlignment(SWT.CENTER);
 		lblViewComicsInc.setFont(SWTResourceManager.getFont("Segoe Print", 13, SWT.NORMAL));
-		lblViewComicsInc.setBounds(91, 28, 267, 46);
+		lblViewComicsInc.setBounds(80, 73, 267, 46);
 		lblViewComicsInc.setText("View Comics Inc.");
 		
 		//Label com mensagem de livro não encontrado que aparece quando procura retorna uma lista vazia de livros
@@ -91,24 +92,9 @@ public class J_00Inicial {
 		MensagemSemCorrespondencias.setBounds(32, 121, 236, 20);
 		MensagemSemCorrespondencias.setVisible(false);
 		
-		//butão que remete para a janela de login de vendedores e administradores
-		Button butaoAdmin = new Button(shlViewComicsInc, SWT.NONE);
-		butaoAdmin.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				//Fechar janela de busca corrente
-				shlViewComicsInc.close();
-				//Abrir nova janela de login
-				J_10Login janelaLogin = new J_10Login(livraria);
-				janelaLogin.open();
-			}
-		});
-		butaoAdmin.setBounds(366, 247, 72, 23);
-		butaoAdmin.setText("Admin");
-		
 		//Caixa para introdução de texto a pesquisar
 		caixaDeBusca = new Text(shlViewComicsInc, SWT.BORDER);
-		caixaDeBusca.setBounds(32, 89, 227, 26);
+		caixaDeBusca.setBounds(21, 134, 227, 26);
 		
 		//Listner para botão 'pesquisar livro'
 		Button btnPesquisarLivro = new Button(shlViewComicsInc, SWT.NONE);
@@ -137,9 +123,23 @@ public class J_00Inicial {
 				
 			}
 		});
-		btnPesquisarLivro.setBounds(271, 89, 167, 25);
+		btnPesquisarLivro.setBounds(260, 134, 167, 25);
 		btnPesquisarLivro.setText("Pesquisar/Comprar Livro");
+		
+		Link linkAdmin = new Link(shlViewComicsInc, SWT.NONE);
+		linkAdmin.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				//Fechar janela de busca corrente
+				shlViewComicsInc.close();
+				//Abrir nova janela de login
+				J_10Login janelaLogin = new J_10Login(livraria);
+				janelaLogin.open();
+			}
+		});
+		linkAdmin.setBounds(10, 250, 80, 20);
+		linkAdmin.setText("<a>Admin</a>");
+		
+		
 	}
-
-
 }
