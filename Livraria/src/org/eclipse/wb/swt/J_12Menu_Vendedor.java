@@ -231,7 +231,7 @@ public class J_12Menu_Vendedor implements Serializable{
 						
 						//Caso a resposta seja positiva
 						String str2 = "Pagamento efetuado com sucesso.";
-						if ( resposta.toLowerCase().contains(str2.toLowerCase()) ) {
+						if ( resposta.contains(str2.toLowerCase()) ) {
 							//abrir janela de mensagem de sucesso
 							compraSelecionada.setEstadoCompra(Compra.Estado.PAGA);
 							preencherTabela("Todas");
@@ -240,28 +240,28 @@ public class J_12Menu_Vendedor implements Serializable{
 							janela.open();
 						}
 						//Caso o valor seja superior ao limite diário
-						else if ( resposta.toLowerCase().contains("VALOR superior ao LIMITE DIARIO PERMITIDO") ) {
+						else if ( resposta.contains("VALOR superior ao LIMITE DIARIO PERMITIDO") ) {
 							//abrir janela de mensagem de pagamento recusado
 							J_20AlteracaoSubmetida janela = new J_20AlteracaoSubmetida("PAGAMENTO RECUSADO",
 									"Excedeu o seu limite diário do seu banco");
 							janela.open();
 						}
 						//Caso não tenha saldo suficiente
-						else if ( resposta.toLowerCase().contains("SALDO insuficiente") ) {
+						else if ( resposta.contains("SALDO insuficiente") ) {
 							//abrir janela de mensagem de pagamento recusado
 							J_20AlteracaoSubmetida janela = new J_20AlteracaoSubmetida("PAGAMENTO RECUSADO",
 									"Saldo insuficiente");
 							janela.open();
 						}
 						//Caso pin inválido
-						else if ( resposta.toLowerCase().contains("O PIN não é Válido") ) {
+						else if ( resposta.contains("O PIN não é Válido") ) {
 							//abrir janela de mensagem de pagamento recusado
 							J_20AlteracaoSubmetida janela = new J_20AlteracaoSubmetida("PAGAMENTO RECUSADO",
 									"PIN inválido");
 							janela.open();
 						}
 						//Caso cartão inexistente
-						else if ( resposta.toLowerCase().contains("O Cartão não Existe") ) {
+						else if ( resposta.contains("O Cartão não Existe") ) {
 							//abrir janela de mensagem de pagamento recusado
 							J_20AlteracaoSubmetida janela = new J_20AlteracaoSubmetida("PAGAMENTO RECUSADO",
 									"Cartão inexistente");
