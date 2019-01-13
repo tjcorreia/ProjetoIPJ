@@ -231,6 +231,19 @@ public class Livraria implements Serializable {
 		saveAll();
 		return carrinho;
 	}
+	
+	// Método para esvaziar carrinho, repondo os stocks na livraria
+	public Compra esvaziarCompraReporStock(Compra c) {
+		for (int i = 0; i < c.carrinho.livros.size(); i++) {
+			String isbn = c.carrinho.livros.get(i).isbn;
+			int quantidade = c.carrinho.quantidades.get(i);
+			Livro lv = getLivro(isbn);
+			// repor o stock
+			lv.setStock( lv.getStock() + quantidade); 
+		}
+		saveAll();
+		return c;
+	}	
 
 	// Método para esvaziar carrinho, repondo os stocks na livraria
 	public Carrinho esvaziarCarrinhoSemReporStock(Carrinho carrinho) {
