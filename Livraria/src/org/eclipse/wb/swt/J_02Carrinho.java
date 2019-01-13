@@ -153,7 +153,7 @@ public class J_02Carrinho { //criou-se janela como subclasse para poder receber 
 //		
 		shell.addShellListener(new ShellAdapter() {
 			public void shellClosed(ShellEvent e) {
-				livraria.esvaziarCarrinhoReporStock(carrinho);
+				//livraria.esvaziarCarrinhoReporStock(carrinho);
 			}
 		});		
 		
@@ -338,16 +338,11 @@ public class J_02Carrinho { //criou-se janela como subclasse para poder receber 
 						if ( livraria.verificarSeNIFouCartao(nifIntroduzido)==true ) {
 							lblIntroduzaNIF.setVisible(false);
 							//caso seja pagamento em dinheiro -> criar nova compra e abrir janela/mensagem de compra submetida
-							if ( butaoRadioDinheiro.isEnabled() ) {
+							if ( butaoRadioDinheiro.getSelection() ) {
 								//criar nova compra e adicionar à livraria
 								Compra novaCompra = new Compra
 										(livraria.gerarNovoNumCompra(), carrinho, nifIntroduzido, new GregorianCalendar(), Compra.Estado.SUBMETIDA);
 								livraria.getCompras().add(novaCompra);
-//								
-//								
-//								IMPRESSÃO DE VERIFICAÇÃO PARA APAGAR + TARDE
-//								
-								System.out.println("LIVRARIA APÓS CONCLUSÃO DA COMPRA:" + livraria.getCompras());
 								//fechar janela corrente
 								shell.close();
 								//abrir janela de mensagem de compra submetida
@@ -372,16 +367,19 @@ public class J_02Carrinho { //criou-se janela como subclasse para poder receber 
 								//Se pin e num cartão corretos
 								else if ( livraria.verificarSePIN(pinIntroduzido)==true && 
 										livraria.verificarSeNIFouCartao(numCartaoIntroduzido)==true) {
+									System.out.println("PIN:" + pinIntroduzido);
+									System.out.println("NCartao:" + numCartaoIntroduzido);
 									//criar nova compra e adicionar à livraria
 									CompraCartao novaCompra2 = new CompraCartao	(livraria.gerarNovoNumCompra(), 
 											carrinho, nifIntroduzido, new GregorianCalendar(), Compra.Estado.SUBMETIDA, 
 											numCartaoIntroduzido, pinIntroduzido);
 									livraria.getCompras().add(novaCompra2);
+									System.out.println(novaCompra2);
 //									
 //									
 //									IMPRESSÃO DE VERIFICAÇÃO PARA APAGAR + TARDE
 //									
-									System.out.println("LIVRARIA APÓS CONCLUSÃO DA COMPRA:" + livraria.getCompras());
+									System.out.println("LIVRARIA APÓS CONCLUSÃO DA COMPRA:\n" + livraria.getCompras());
 									//fechar janela corrente
 									shell.close();
 									//abrir janela de mensagem de compra submetida

@@ -1,5 +1,7 @@
 
 package org.eclipse.wb.swt;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.ArrayList;
 
 import java.util.GregorianCalendar;
@@ -51,9 +53,9 @@ public class Livraria {
 		precos3.put(new GregorianCalendar(2017,5,14), 25.0);
 		precos3.put(new GregorianCalendar(2018,10,2), 25.8);
 		//criar 3 livros
-		Livro lv1 = new Livro ("O último voo do Flamingo", "1548967532745", "Mia Couto", "Plátano", 
+		Livro lv2 = new Livro ("Alto voo do Flamingo", "1548967532745", "Mia Couto", "Plátano", 
 				"Romance. Um estranho encontro", new GregorianCalendar (2018,11,12) , 15.5, 20, precos1);
-		Livro lv2 = new Livro ("Hitchhicker's Guide to the Galaxy", "8695477532745", "Douglas Adams", "Leya", 
+		Livro lv1 = new Livro ("Hitchhicker's Guide to the Galaxy", "8695477532745", "Douglas Adams", "Leya", 
 				"Ficção Científica. Viagens espaciais de um inadaptado", 
 				new GregorianCalendar (2017,11,18) , 16.5, 3, precos2);
 		Livro lv3 = new Livro ("Nove Amanhãs", "1549657432745", "Isak Asimov", "Nébula", 
@@ -238,6 +240,52 @@ public class Livraria {
 		//caso por defeito que nunca será usado
 		return new Utilizador();
 	}	
+	
+//	//método para ordenar lista de livros por título
+//	public ArrayList <Livro> ordenarLivroTitulo( ArrayList <Livro> lvs){
+//		Collections.sort(lvs, Comparator.comparing(Livro::getNome));
+////		for (int i = 0 ; i < lvs.size()-1; i++) {
+////			for(int j = i+1; j < lvs.size(); j++){
+////				if (lvs.get(i).getNome().compareToIgnoreCase(lvs.get(j).getNome()) >= 0) {
+////					Livro lvAux = new Livro();
+////					
+////				}
+////		   }
+////		}
+//		
+//		
+//		
+//		
+////		Collections.sort(lvs, Livro.ordenarPorTitulo);
+//		   for(Livro lv: lvs){
+//				System.out.println(lv);
+//		   }
+//		return lvs;
+//	}	
+//	
+//	//método para ordenar lista de livros por título
+//	public ArrayList <Livro> ordenarLivroAutor( ArrayList <Livro> lvs){
+//		Collections.sort(lvs, Comparator.comparing(Livro::getNome));
+//		//Collections.sort(lvs, Livro.ordenarPorAutor);
+//		   for(Livro lv: lvs){
+//				System.out.println(lv);
+//		   }
+//		return lvs;
+//		
+//	}	
+	
+//	listaLivrosDaBusca.sort(null);
+//	Collections.sort(listaLivrosDaBusca, Comparator.comparingDouble(Livro::getPreco));
+//	
+//	Collections.sort(listaLivrosDaBusca, new Comparator<Livro>(){
+//	     public int compare(Livro l1, Livro l2){
+//	         if(l1.preco == l2.preco)
+//	             return 0;
+//	         return l1.preco < l2.preco ? -1 : 1;
+//	     }
+//	});
+	
+	
 	
 //	
 //	REVER BEM ESTES DOIS MÉTODOS SEGUINTES

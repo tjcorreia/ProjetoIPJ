@@ -1,17 +1,14 @@
 
 package org.eclipse.wb.swt;
 
-
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Comparator;
 import java.util.GregorianCalendar;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-
-
-
 
 public class Livro {
 	protected String nome;
@@ -22,24 +19,24 @@ public class Livro {
 	protected GregorianCalendar data;
 	protected double preco;
 	protected int stock;
-	protected HashMap <GregorianCalendar, Double > precosAnteriores;
-	
+	protected HashMap<GregorianCalendar, Double> precosAnteriores;
+
 	// construtor vazio
-	Livro(){
+	Livro() {
 		nome = "";
 		isbn = "";
 		autor = "";
 		editora = "";
 		descricao = "";
-		data = new GregorianCalendar(0,0,0);
+		data = new GregorianCalendar(0, 0, 0);
 		preco = -1;
 		stock = -1;
-		precosAnteriores = new HashMap <>();
+		precosAnteriores = new HashMap<>();
 	}
-	
-	//construtor completo
-	Livro(String nome, String isbn, String autor, String editora, String descricao, GregorianCalendar data, 
-			double preco, int stock, HashMap <GregorianCalendar, Double > precosAnteriores){
+
+	// construtor completo
+	Livro(String nome, String isbn, String autor, String editora, String descricao, GregorianCalendar data,
+			double preco, int stock, HashMap<GregorianCalendar, Double> precosAnteriores) {
 		this.nome = nome;
 		this.isbn = isbn;
 		this.autor = autor;
@@ -50,10 +47,10 @@ public class Livro {
 		this.stock = stock;
 		this.precosAnteriores = precosAnteriores;
 	}
-	
-	//construtor com todas as instâncias menos os preços anteriores
-	Livro(String nome, String isbn, String autor, String editora, String descricao, GregorianCalendar data, 
-			double preco, int stock){
+
+	// construtor com todas as instâncias menos os preços anteriores
+	Livro(String nome, String isbn, String autor, String editora, String descricao, GregorianCalendar data,
+			double preco, int stock) {
 		this.nome = nome;
 		this.isbn = isbn;
 		this.autor = autor;
@@ -62,23 +59,21 @@ public class Livro {
 		this.data = data;
 		this.preco = preco;
 		this.stock = stock;
-		this.precosAnteriores = new HashMap <>();
+		this.precosAnteriores = new HashMap<>();
 	}
-	
+
 	public void imprimirHistoricoPrecos() {
-		Set <GregorianCalendar> datas = precosAnteriores.keySet();
-		for ( GregorianCalendar gc : datas ) {
-			System.out.println( "Data:" + gc.get(Calendar.YEAR) + "/"  + (gc.get(Calendar.MONTH)+1) + "/" + 
-					gc.get(Calendar.DAY_OF_MONTH) + " Preço:" + precosAnteriores.get(gc) + "€" );
+		Set<GregorianCalendar> datas = precosAnteriores.keySet();
+		for (GregorianCalendar gc : datas) {
+			System.out.println("Data:" + gc.get(Calendar.YEAR) + "/" + (gc.get(Calendar.MONTH) + 1) + "/"
+					+ gc.get(Calendar.DAY_OF_MONTH) + " Preço:" + precosAnteriores.get(gc) + "€");
 		}
 	}
-	
+
 	public String toString() {
-		String s = "Título:" + nome + ", Autor:" + autor + ", Editora:" + editora + 
-				"\n\t ISNB:" + isbn + ", Data:" + data.get(Calendar.YEAR) + "/"  + (data.get(Calendar.MONTH)+1) +
-				"/"  + data.get(Calendar.DAY_OF_MONTH) + ", Stock:" + stock + " unidades" +
-				"\n\t Descrição:" + descricao + 
-				"\n\t\t PREÇO:" + preco + "€";
+		String s = "Título:" + nome + ", Autor:" + autor + ", Editora:" + editora + "\n\t ISNB:" + isbn + ", Data:"
+				+ data.get(Calendar.YEAR) + "/" + (data.get(Calendar.MONTH) + 1) + "/" + data.get(Calendar.DAY_OF_MONTH)
+				+ ", Stock:" + stock + " unidades" + "\n\t Descrição:" + descricao + "\n\t\t PREÇO:" + preco + "€";
 		return s;
 	}
 
@@ -142,7 +137,7 @@ public class Livro {
 		return precosAnteriores;
 	}
 
-	public void setPrecosAnteriores( HashMap<GregorianCalendar, Double> precosAnteriores) {
+	public void setPrecosAnteriores(HashMap<GregorianCalendar, Double> precosAnteriores) {
 		this.precosAnteriores = precosAnteriores;
 	}
 
@@ -153,8 +148,55 @@ public class Livro {
 	public void setStock(int stock) {
 		this.stock = stock;
 	}
-	
-	
-	
-}
 
+	//comparador para ordenar livros por titulo
+	public static Comparator<Livro> ordenarPorTitulo = new Comparator<Livro>() {
+		public int compare(Livro l1, Livro l2) {
+			String tituloL1 = l1.getNome().toUpperCase();
+			String tituloL2 = l2.getNome().toUpperCase();
+			// se os dois tiverem em forma ascendente, devolver em forma descendente
+			if (tituloL1.compareToIgnoreCase(tituloL2) >= 0) {
+				return tituloL2.compareTo(tituloL1);
+			}
+			// se os dois tiverem em forma descendente, devolver em forma ascendente
+			else {
+				return tituloL1.compareTo(tituloL2);
+				
+			}
+		}
+	};
+	
+	//comparador para ordenar livros por titulo
+	public static Comparator<Livro> ordenarPorAutor = new Comparator<Livro>() {
+		public int compare(Livro l1, Livro l2) {
+			String autor1 = l1.getAutor().toUpperCase();
+			String autor2 = l2.getAutor().toUpperCase();
+			// se os dois tiverem em forma ascendente, devolver em forma descendente
+			if (autor1.compareToIgnoreCase(autor2) >= 0) {
+				return autor2.compareTo(autor1);
+			}
+			// se os dois tiverem em forma descendente, devolver em forma ascendente
+			else {
+				return autor1.compareTo(autor2);
+				
+			}
+		}
+	};	
+
+//	/* Comparator for sorting the list by roll no */
+//	public static Comparator<Student> StuRollno = new Comparator<Student>() {
+//
+//		public int compare(Student s1, Student s2) {
+//
+//			int rollno1 = s1.getRollno();
+//			int rollno2 = s2.getRollno();
+//
+//			/* For ascending order */
+//			return rollno1 - rollno2;
+//
+//			/* For descending order */
+//			// rollno2-rollno1;
+//		}
+//	};
+
+}

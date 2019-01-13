@@ -1,4 +1,5 @@
 package org.eclipse.wb.swt;
+import java.text.Collator;
 
 import org.eclipse.swt.widgets.Display;
 
@@ -10,6 +11,9 @@ import org.eclipse.swt.widgets.Listener;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 
 import org.eclipse.swt.SWT;
 
@@ -24,6 +28,7 @@ import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.TableColumn;
+import java.util.Locale;
 
 public class J_01ListaLivros {
 
@@ -124,7 +129,7 @@ public class J_01ListaLivros {
 		lblMensagemSelecioneLivro.setText("Selecione um livro");
 		lblMensagemSelecioneLivro.setVisible(false);
 
-		table = new Table(shlViewComicsInc, SWT.BORDER | SWT.UP|SWT.FULL_SELECTION);
+		table = new Table(shlViewComicsInc, SWT.BORDER | SWT.UP|SWT.FULL_SELECTION );
 		// listner para ação ao selecionar um dos items da table e devolve o index do
 		// item na lista de livros
 		table.addSelectionListener(new SelectionAdapter() {
@@ -162,15 +167,16 @@ public class J_01ListaLivros {
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
 		table.setHeaderBackground(SWTResourceManager.getColor(SWT.COLOR_GRAY));
+		
 
 		TableColumn tblclmnTtulo = new TableColumn(table, SWT.CENTER );
-		tblclmnTtulo.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-//				table.setSortColumn(tblclmnTtulo);
+//		tblclmnTtulo.addSelectionListener(new SelectionAdapter() {
+//			@Override
+//			public void widgetSelected(SelectionEvent e) {
+//				listaLivrosDaBusca = livraria.ordenarLivroTitulo( listaLivrosDaBusca);
 //				preencherTabela();
-			}
-		});
+//			}
+//		});
 		tblclmnTtulo.setWidth(170);
 		tblclmnTtulo.setText("T\u00EDtulo");
 
@@ -194,10 +200,92 @@ public class J_01ListaLivros {
 		tblclmnStock.setWidth(48);
 		tblclmnStock.setText("Stock");
 
-		TableColumn tblclmnPreo = new TableColumn(table, SWT.CENTER);
-		tblclmnPreo.setWidth(53);
-		tblclmnPreo.setText("Pre\u00E7o");
+		TableColumn tblclmnPreco = new TableColumn(table, SWT.CENTER);
+		tblclmnPreco.setWidth(53);
+		tblclmnPreco.setText("Pre\u00E7o");
 		
+		
+		
+		
+		
+		
+//		column1.addListener(SWT.Selection, new Listener() {
+//		      public void handleEvent(Event e) {
+//		        // sort column 1
+//		        TableItem[] items = table.getItems();
+//		        Collator collator = Collator.getInstance(Locale.getDefault());
+//		        for (int i = 1; i < items.length; i++) {
+//		          String value1 = items[i].getText(0);
+//		          for (int j = 0; j < i; j++) {
+//		            String value2 = items[j].getText(0);
+//		            if (collator.compare(value1, value2) < 0) {
+//		              String[] values = { items[i].getText(0),
+//		                  items[i].getText(1) };
+//		              items[i].dispose();
+//		              TableItem item = new TableItem(table, SWT.NONE, j);
+//		              item.setText(values);
+//		              items = table.getItems();
+//		              break;
+//		            }
+//		          }
+//		        }
+//		      }
+//		    });
+		
+		
+		
+		
+		
+		Listener sortListener = new Listener() {
+		      public void handleEvent(Event e) {
+		        TableItem[] items = table.getItems();
+		        Collator collator = Collator.getInstance(Locale.getDefault());
+		        TableColumn column = (TableColumn) e.widget;
+		        int index = column == table.getColumn(0) ? 0 : 1;
+		        for (int i = 1; i < items.length; i++) {
+		          String value1 = items[i].getText(index);
+		          for (int j = 0; j < i; j++) {
+		            String value2 = items[j].getText(index);
+		            if (collator.compare(value1, value2) < 0) {
+		              String[] values = { items[i].getText(0), items[i].getText(1),
+		            		  items[i].getText(2), items[i].getText(3),
+		            		  items[i].getText(4), items[i].getText(5),
+		            		  items[i].getText(6)};
+		              items[i].dispose();
+		              TableItem item = new TableItem(table, SWT.NONE, j);
+		              item.setText(values);
+		              items = table.getItems();
+		              break;
+		            }
+		          }
+		        }
+		        table.setSortColumn(column);
+		        
+		      }
+		    };
+		    tblclmnTtulo.addListener(SWT.Selection, sortListener);
+		    tblclmnAutor.addListener(SWT.Selection, sortListener);
+		    tblclmnIsbn.addListener(SWT.Selection, sortListener);
+		    tblclmnEditora.addListener(SWT.Selection, sortListener);
+		    tblclmnData.addListener(SWT.Selection, sortListener);
+		    tblclmnStock.addListener(SWT.Selection, sortListener);
+		    tblclmnPreco.addListener(SWT.Selection, sortListener);
+		    table.setSortColumn(tblclmnTtulo);
+		    table.setSortDirection(SWT.TOP);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		//table.setSortColumn(tblclmnTtulo);
 	//	table.setAutoCreateRowSorter(true);
 		preencherTabela();
 		
@@ -361,6 +449,8 @@ public class J_01ListaLivros {
 				event.height = 90;
 			}
 		});
+		
+		
 
 	}
 

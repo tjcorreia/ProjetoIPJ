@@ -103,29 +103,31 @@ public class J_22PedirCartao {
 		
 		caixaNumCartao = new Text(shlPedirCartao, SWT.BORDER);
 		caixaNumCartao.setBounds(174, 70, 162, 26);
-		String numCartaoIntroduzido = caixaNumCartao.getText();
-		
+
 		caixaPin = new Text(shlPedirCartao, SWT.BORDER);
 		caixaPin.setBounds(174, 121, 162, 26);
-		String pinIntroduzido = caixaPin.getText();
-		
+
 		Button btnConfirmar = new Button(shlPedirCartao, SWT.NONE);
 		btnConfirmar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
+				String numCartaoIntroduzido = caixaNumCartao.getText();
+				String pinIntroduzido = caixaPin.getText();
+				lblCartaoIncorreto.setVisible(false);
+				lblPinIncorreto.setVisible(false);
 				//verificar pin e número de cartão
-				//Se PIN incorreto, mostrar mensagem de erro de pin
-				if ( livraria.verificarSePIN(pinIntroduzido)==false ) {
-					lblPinIncorreto.setVisible(true);
-				}
 				//Se Num de cartão incorreto, mostrar mensagem de erro de número de cartão
 				if ( livraria.verificarSeNIFouCartao(numCartaoIntroduzido)==false ) {
 					lblCartaoIncorreto.setVisible(true);
 				}
+				//Se PIN incorreto, mostrar mensagem de erro de pin
+				if ( livraria.verificarSePIN(pinIntroduzido)==false ) {
+					lblPinIncorreto.setVisible(true);
+				}
 				//Se pin e num cartão corretos
 				if ( livraria.verificarSePIN(pinIntroduzido)==true && 
 						livraria.verificarSeNIFouCartao(numCartaoIntroduzido)==true) {
-					//criar nova compra e adicionar à livraria
+					//criar nova compra cartao e adicionar à livraria
 					CompraCartao novaCompra = new CompraCartao( compraSelecionada.getNumCompra(), compraSelecionada.getCarrinho(), 
 							compraSelecionada.getNif(), compraSelecionada.getData(), compraSelecionada.getEstadoCompra(),
 							numCartaoIntroduzido, pinIntroduzido);
