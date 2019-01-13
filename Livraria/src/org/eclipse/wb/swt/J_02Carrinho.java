@@ -22,6 +22,7 @@ import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.widgets.Composite;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
@@ -53,7 +54,7 @@ import org.eclipse.swt.events.ShellEvent;
  * @author Alberto Machado
  * @sid 2019
  */
-public class J_02Carrinho { //criou-se janela como subclasse para poder receber variáveis da superclasse
+public class J_02Carrinho implements Serializable { //criou-se janela como subclasse para poder receber variáveis da superclasse
 	protected Shell shell;
 	protected Livraria livraria;//atributo adicionado para poder ir buscar métodos à livraria
 	protected Carrinho carrinho;
@@ -69,57 +70,8 @@ public class J_02Carrinho { //criou-se janela como subclasse para poder receber 
 	public J_02Carrinho( Livraria livraria, Carrinho carrinho) {
 		this.livraria = livraria;
 		this.carrinho = carrinho;
-		open();
-		//super(listaLivrosDaBusca);
-		/**+++++++++++++++++++++++
-		 * Só para efeito de testes, define-se agora um carrinho
-		 * !!!!!!!!!!!!!!!!!!!!!!!
-		 * APAGAR MAIS TARDE O RESTO DESTE CONSTRUTOR
-		 * 1
-		 * 1
-		 * 1
-		 * 
-		 */
-		//criar 3 pequenos historicos de preços
-//		Map <GregorianCalendar, Double > precos1 = new HashMap<>();
-//		precos1.put(new GregorianCalendar(2017,2,5), 15.0);
-//		precos1.put(new GregorianCalendar(2016,6,14), 13.0);
-//		precos1.put(new GregorianCalendar(2016,11,14), 14.0);
-//		Map <GregorianCalendar, Double > precos2 = new HashMap<>();
-//		precos2.put(new GregorianCalendar(2017,2,5), 15.0);
-//		precos2.put(new GregorianCalendar(2016,6,14), 13.0);
-//		precos2.put(new GregorianCalendar(2016,11,14), 14.0);
-//		//criar 3 livros
-//		Livro lv1 = new Livro ("O último voo do Flamingo", "1548967532745", "Mia Couto", "Plátano", 
-//				"Romance. Um estranho encontro", new GregorianCalendar (2018,11,12) , 15.5, 20, precos1);
-//		Livro lv2 = new Livro ("Hitchhicker's Guide to the Galaxy", "8695477532745", "Douglas Adams", "Leya", 
-//				"Ficção Científica. Viagens espaciais de um inadaptado", 
-//				new GregorianCalendar (2017,11,18) , 16.5, 3, precos2);
-//		//Criar alguns mapas de livros-quantidade para os carrinhos de compras 
-//		ArrayList <Livro> livros1 = new ArrayList <>();
-//		livros1.add(lv1);
-//		livros1.add(lv1);
-//		livros1.add(lv1);
-//		livros1.add(lv2);
-//		//criar um carrinho
-//		carrinho = new Carrinho(livros1);
 	}
 
-
-
-//	/**
-//	 * Launch the application.
-//	 * @param args
-//	 */
-//	public static void main(String[] args) {
-//		try {
-//			J_02Carrinho window = new J_02Carrinho( );
-//			window.open();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		
-//	}
 
 	/**
 	 * Open the window.
@@ -219,6 +171,7 @@ public class J_02Carrinho { //criou-se janela como subclasse para poder receber 
 		botaoVoltar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
+				livraria.saveAll();
 				//fechar janela corrente
 				shell.close();
 				//abrir janela de busca de livros, com o carrinho atual
@@ -407,6 +360,7 @@ public class J_02Carrinho { //criou-se janela como subclasse para poder receber 
 							lblIntroduzaNIF.setText("NIF incorreto (9 dígitos)");
 							lblIntroduzaNIF.setVisible(true);
 						}
+						livraria.saveAll();
 					}
 				}
 				
@@ -457,6 +411,7 @@ public class J_02Carrinho { //criou-se janela como subclasse para poder receber 
 					lblTotal.setText("TOTAL: " + carrinho.totalCarrinho() + "€");
 					//lblTotal.redraw();
 				}
+				livraria.saveAll();
 			}
 		});
 		
@@ -485,6 +440,7 @@ public class J_02Carrinho { //criou-se janela como subclasse para poder receber 
 					lblTotal.setText("TOTAL: " + carrinho.totalCarrinho() + "€");
 					//lblTotal.redraw();
 				}
+				livraria.saveAll();
 			}
 		});
 		

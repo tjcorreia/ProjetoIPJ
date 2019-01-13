@@ -5,6 +5,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Button;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -33,7 +34,7 @@ import org.eclipse.swt.custom.CCombo;
  * @author Alberto Machado
  * @sid 2019
  */
-public class J_03DetalhesLivro {
+public class J_03DetalhesLivro implements Serializable {
 
 	protected Shell shlDetalhesLivro;
 	protected Livraria livraria;//atributo adicionado para poder ir buscar métodos à livraria
@@ -63,7 +64,6 @@ public class J_03DetalhesLivro {
 		//super();
 		this.livraria = livraria;
 		this.livroSelecionado = livroSelecionado;
-		open();
 	}	
 	
 

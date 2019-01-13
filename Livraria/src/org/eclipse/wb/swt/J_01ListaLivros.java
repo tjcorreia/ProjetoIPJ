@@ -9,6 +9,7 @@ import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Listener;
 
 import java.awt.Point;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
@@ -38,7 +39,7 @@ import java.util.Locale;
  * @author Alberto Machado
  * @sid 2019
  */
-public class J_01ListaLivros {
+public class J_01ListaLivros implements Serializable {
 
 	protected Shell shlViewComicsInc;
 	// protected static ArrayList <Livro> listaLivrosCarrinho = new
@@ -54,17 +55,7 @@ public class J_01ListaLivros {
 	private Table table;
 	private Text caixaDeBusca;// adicionou-se carrinho para cria-lo e passar para outras classes
 
-//	
-//	
-//	
-//	
-//	VOLTAR A DISPONIBILIZAR O CONSTRUTOR EM BAIXO
-//	
-//	
-//	
-//	
-//	
-//	
+
 	
 	// Criou-se construtor para poder receber o carrinho da janela seguinte
 	// 'J_02Carrinho'
@@ -72,7 +63,6 @@ public class J_01ListaLivros {
 		this.livraria = livraria;
 		carrinho = carrinho1;
 		stringProcurada = "";
-		open();
 	}
 
 	// Construtor para quando se vem da janela anterior 'J_00Inicial'
@@ -81,23 +71,8 @@ public class J_01ListaLivros {
 		this.listaLivrosDaBusca = listaLivrosDaBusca;
 		carrinho = new Carrinho();
 		this.stringProcurada = stringProcurada;
-		open();
 	}
 
-//	/**
-//	 * Launch the application.
-//	 * @param args
-//	 */
-//	public static void main(String[] args) {
-//		try {
-//			//Foi necessário adicionar aqui a arrayList de livros
-//			//J_01ListaLivros window = new J_01ListaLivros(new ArrayList<Livro>());
-//			J_01ListaLivros window = new J_01ListaLivros();
-//			window.open();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
 
 	/**
 	 * Open the window.
@@ -120,7 +95,7 @@ public class J_01ListaLivros {
 	 */
 	protected void createContents() {
 		shlViewComicsInc = new Shell();
-		shlViewComicsInc.setSize(840, 560);
+		shlViewComicsInc.setSize(855, 560);
 		shlViewComicsInc.setText("View Comics Inc.");
 
 		// Label que dá mensagem de erro caso o livro não esteja dizponível
@@ -329,6 +304,7 @@ public class J_01ListaLivros {
 		Button buttonVoltar = new Button(shlViewComicsInc, SWT.NONE);
 		buttonVoltar.addMouseListener(new MouseAdapter() {
 			public void mouseUp(MouseEvent e) {
+				livraria.saveAll();
 				// comando para fechar a janela corrente
 				livraria.esvaziarCarrinhoReporStock(carrinho);
 				shlViewComicsInc.close();
@@ -338,17 +314,18 @@ public class J_01ListaLivros {
 			}
 		});
 		buttonVoltar.setText("Voltar");
-		buttonVoltar.setBounds(732, 477, 80, 26);
+		buttonVoltar.setBounds(742, 477, 80, 26);
 
 		// texto a indicar quantos items tem o carrinho
 		Label lblItmes = new Label(shlViewComicsInc, SWT.NONE);
 		lblItmes.setText("" + carrinho.numeroItemsDoCarrinho() + " itmes");
-		lblItmes.setBounds(664, 145, 124, 20);
+		lblItmes.setBounds(677, 153, 124, 20);
 
 		// Listner para botão de 'adicionar ao carrinho'
 		Button btnAdicionarAoCarrinho = new Button(shlViewComicsInc, SWT.CENTER);
 		btnAdicionarAoCarrinho.addMouseListener(new MouseAdapter() {
 			public void mouseUp(MouseEvent e) {
+				livraria.saveAll();
 				lblMensagemAdicioneLivro.setVisible(false);	
 				// caso não haja nenhum selecionado, não acontece nada
 				if (livroSelecionado == null) {
@@ -375,7 +352,7 @@ public class J_01ListaLivros {
 			}
 		});
 		btnAdicionarAoCarrinho.setText("Adicionar");
-		btnAdicionarAoCarrinho.setBounds(664, 179, 71, 30);
+		btnAdicionarAoCarrinho.setBounds(674, 179, 71, 30);
 
 		// Butão remover do carrinho. Remove o item que está selecionado (caso ele faça
 		// parte do carrinho) ou
@@ -384,6 +361,7 @@ public class J_01ListaLivros {
 		Button btnRemover = new Button(shlViewComicsInc, SWT.CENTER);
 		btnRemover.addMouseListener(new MouseAdapter() {
 			public void mouseUp(MouseEvent e) {
+				livraria.saveAll();
 				lblMensagemSelecioneLivro.setVisible(false);
 				// caso não haja nenhum selecionado, não acontece nada
 				if (livroSelecionado == null) {
@@ -412,10 +390,10 @@ public class J_01ListaLivros {
 			}
 		});
 		btnRemover.setText("Remover");
-		btnRemover.setBounds(741, 179, 71, 30);
+		btnRemover.setBounds(751, 179, 71, 30);
 
 		Label lblCarrinho = new Label(shlViewComicsInc, SWT.NONE);
-		lblCarrinho.setBounds(664, 115, 124, 20);
+		lblCarrinho.setBounds(677, 123, 124, 20);
 		lblCarrinho.setText("Carrinho");
 
 		// mensagem de erro que aparece quando não há livros para a procura
@@ -433,6 +411,7 @@ public class J_01ListaLivros {
 		btnPesquisar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
+				livraria.saveAll();
 				lblMensagemSelecioneLivro.setVisible(false);
 				lblMensagemAdicioneLivro.setVisible(false);	
 				// Passar para string o texto introduzido na caixa de texto
@@ -463,6 +442,7 @@ public class J_01ListaLivros {
 			@Override
 			// listner para ao clicar com rato abrir janela de carrinho
 			public void mouseUp(MouseEvent e) {
+				livraria.saveAll();
 				lblMensagemSelecioneLivro.setVisible(false);
 				lblMensagemAdicioneLivro.setVisible(false);	
 				// caso carrinho esteja vazio, apresentar mensagem para adicionar livros ao carrinho
@@ -481,13 +461,14 @@ public class J_01ListaLivros {
 				}
 			}
 		});
-		btnVerCarrinho.setText("Ver Carrinho");
-		btnVerCarrinho.setBounds(664, 225, 148, 30);
+		btnVerCarrinho.setText("Ver/Finalizar Carrinho");
+		btnVerCarrinho.setBounds(674, 225, 148, 30);
 		
 		Button btnVerDetalhesLivro = new Button(shlViewComicsInc, SWT.CENTER);
 		btnVerDetalhesLivro.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
+				livraria.saveAll();
 				lblMensagemAdicioneLivro.setVisible(false);	
 				lblMensagemSelecioneLivro.setVisible(false);
 				// caso não haja nenhum selecionado
@@ -503,7 +484,19 @@ public class J_01ListaLivros {
 			}
 		});
 		btnVerDetalhesLivro.setText("Ver Detalhes do livro");
-		btnVerDetalhesLivro.setBounds(664, 363, 148, 30);
+		btnVerDetalhesLivro.setBounds(674, 363, 148, 30);
+		
+		Label label = new Label(shlViewComicsInc, SWT.SEPARATOR | SWT.HORIZONTAL);
+		label.setBounds(667, 114, 162, 2);
+		
+		Label label_1 = new Label(shlViewComicsInc, SWT.SEPARATOR | SWT.HORIZONTAL);
+		label_1.setBounds(667, 263, 162, 2);
+		
+		Label label_2 = new Label(shlViewComicsInc, SWT.SEPARATOR | SWT.VERTICAL);
+		label_2.setBounds(666, 114, 2, 150);
+		
+		Label label_3 = new Label(shlViewComicsInc, SWT.SEPARATOR);
+		label_3.setBounds(828, 114, 2, 150);
 
 		// Listner que deixa definir a altura de cada linha da table
 		// é preciso importar o org.eclipse.swt.widgets.Event;
@@ -554,7 +547,4 @@ public class J_01ListaLivros {
 		}
 		table.redraw();
 	}
-
-	
-
 }

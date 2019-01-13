@@ -1,5 +1,6 @@
 
 package org.eclipse.wb.swt;
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -11,7 +12,7 @@ import java.util.GregorianCalendar;
  * @author Alberto Machado
  * @sid 2019
  */
-public class Compra {
+public class Compra implements Serializable{
 	protected int numCompra;
 	protected Carrinho carrinho;
 	protected String nif;

@@ -1,6 +1,8 @@
 
 package org.eclipse.wb.swt;
 
+import java.io.Serializable;
+
 /**
  * Classe 
  * 
@@ -11,7 +13,7 @@ package org.eclipse.wb.swt;
 public class Principal {
 
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ClassNotFoundException {
 		
 		Livraria viewComics = new Livraria();
 		
@@ -20,6 +22,8 @@ public class Principal {
 
 		J_00Inicial janelaInicial = new J_00Inicial(viewComics);
 		janelaInicial.open();
+		
+		
 	}
 	
 

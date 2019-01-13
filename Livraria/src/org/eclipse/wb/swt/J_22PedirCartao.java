@@ -4,6 +4,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Label;
 
+import java.io.Serializable;
 import java.util.GregorianCalendar;
 
 import org.eclipse.swt.SWT;
@@ -19,7 +20,7 @@ import org.eclipse.swt.widgets.Text;
  * @author Alberto Machado
  * @sid 2019
  */
-public class J_22PedirCartao {
+public class J_22PedirCartao implements Serializable {
 
 	protected Shell shlPedirCartao;
 	private Text caixaNumCartao;
@@ -33,21 +34,8 @@ public class J_22PedirCartao {
 	public J_22PedirCartao(Livraria livraria, Compra compra) {
 		this.livraria = livraria;
 		compraSelecionada = compra;
-		open();
 	}	
 
-//	/**
-//	 * Launch the application.
-//	 * @param args
-//	 */
-//	public static void main(String[] args) {
-//		try {
-//			J_03CompraSubmetida window = new J_03CompraSubmetida();
-//			window.open();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
 
 	/**
 	 * Open the window.
@@ -133,6 +121,7 @@ public class J_22PedirCartao {
 							numCartaoIntroduzido, pinIntroduzido);
 					livraria.getCompras().add(novaCompra);
 					livraria.getCompras().remove(compraSelecionada);
+					livraria.saveAll();
 					compraSelecionada = novaCompra;
 					//fechar janela actual
 					shlPedirCartao.close();

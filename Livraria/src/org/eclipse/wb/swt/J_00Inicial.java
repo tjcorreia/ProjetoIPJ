@@ -6,6 +6,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Label;
 
 import java.util.List;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import org.eclipse.swt.SWT;
@@ -29,7 +30,7 @@ import org.eclipse.swt.widgets.Link;
  * @author Alberto Machado
  * @sid 2019
  */
-public class J_00Inicial {
+public class J_00Inicial implements Serializable {
 
 	protected Shell shlViewComicsInc;
 	protected String stringProcurada;
@@ -42,24 +43,7 @@ public class J_00Inicial {
 	public J_00Inicial(Livraria livraria) {
 		stringProcurada="";
 		this.livraria=livraria;
-		open();
 	}
-		
-//	/**
-//	 * Launch the application.
-//	 * @param args
-//	 */
-//	public static void main(String[] args) {
-//		try {
-//			//Depois da fase de testes, vai ter de se retirar o 'new Livraria()' e mudar para 'livraria'			
-//			J_00Inicial window = new J_00Inicial( new Livraria() );
-//			window.open();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
-	
-	
 
 	/**
 	 * Open the window.
@@ -107,6 +91,7 @@ public class J_00Inicial {
 		btnPesquisarLivro.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
+				livraria.saveAll();
 				//Passar para 'stringProcurada' o texto introduzido na caixa de texto
 				stringProcurada = caixaDeBusca.getText();
 				//Chamar método 'procurarLivro' para a string introduzida
@@ -136,6 +121,7 @@ public class J_00Inicial {
 		linkAdmin.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
+				livraria.saveAll();
 				//Fechar janela de busca corrente
 				shlViewComicsInc.close();
 				//Abrir nova janela de login

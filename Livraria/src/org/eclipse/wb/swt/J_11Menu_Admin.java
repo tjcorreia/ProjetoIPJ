@@ -5,6 +5,7 @@ import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Button;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -34,7 +35,7 @@ import org.eclipse.swt.widgets.TableColumn;
  * @author Alberto Machado
  * @sid 2019
  */
-public class J_11Menu_Admin {
+public class J_11Menu_Admin implements Serializable {
 
 	protected Shell shlMenuAdmin;
 	protected Livraria livraria;//atributo adicionado para poder ir buscar métodos à livraria
@@ -96,7 +97,6 @@ public class J_11Menu_Admin {
 		listaLivrosDaBusca =  livraria.getLivros();
 		stringProcurada = "";
 		livroSelecionado = new Livro();
-		open();
 	}	
 	
 
@@ -440,6 +440,7 @@ public class J_11Menu_Admin {
 				//vai fazer mostrar os alertas de erros
 				else {
 				}
+				livraria.saveAll();
 			}
 		});
 		
@@ -462,6 +463,7 @@ public class J_11Menu_Admin {
 				//vai fazer mostrar os alertas de erros
 				else {
 				}
+				livraria.saveAll();
 			}
 		});
 		
@@ -535,6 +537,7 @@ public class J_11Menu_Admin {
 				//vai fazer mostrar os alertas de erros
 				else {
 				}
+				livraria.saveAll();
 			}
 		});
 		
