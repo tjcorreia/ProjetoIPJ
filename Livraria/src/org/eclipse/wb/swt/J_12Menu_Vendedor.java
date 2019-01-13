@@ -231,7 +231,7 @@ public class J_12Menu_Vendedor implements Serializable{
 						
 						//Caso a resposta seja positiva
 						String str2 = "Pagamento efetuado com sucesso.";
-						if ( resposta.contains(str2.toLowerCase()) ) {
+						if ( resposta.contains(str2) ) {
 							//abrir janela de mensagem de sucesso
 							compraSelecionada.setEstadoCompra(Compra.Estado.PAGA);
 							preencherTabela("Todas");
