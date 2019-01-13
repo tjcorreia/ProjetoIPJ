@@ -220,7 +220,9 @@ public class Gestao {
 		*/
 		saveAll();
 
-
+		for (Entry<Integer, Integer>  entry : mapCartaoConta.entrySet()) {
+					System.out.println("VERIFICA ---->Key = " + entry.getKey() + ", Value = " + entry.getValue());
+			}
 	}
 
 	public Utilizador getUactual() {
@@ -266,7 +268,7 @@ public class Gestao {
 	public void Gerir(Gestao gestor, Utilizador uactual) {
 		
 // inicia a thread pava verificar a transação da livraria
-		int counter = 100000;
+		int counter = 1000000;
 		Thread t1 = new Thread(new Runnable() {
 			@Override
 			public void run() {
@@ -353,6 +355,8 @@ public class Gestao {
 
 			if (s != null && !s.equals("")) {
 				String[] sSplit = s.split(",");
+				System.out.println("Cartao Cliente  - >"+cartaoCliente);
+				System.out.println("Cartao PIN - >"+pin);
 				pedidoiD = Integer.parseInt(sSplit[0]);
 				contaDeposito = Integer.parseInt(sSplit[1]);
 				cartaoCliente = Integer.parseInt(sSplit[2]);
@@ -410,11 +414,12 @@ public class Gestao {
 				
 					
 				} else {
-					System.out.println("<---- Não é NUMER0?---->");
+					System.out.println("<---- ERRO---->"+pedidoiD + "," + mensagem);
 					ficheiroDevolucao.abreEscrita("..\\RespostadoBanco.txt");
 					ficheiroDevolucao.escreveLinha(pedidoiD + "," + mensagem);
 					ficheiroDevolucao.fechaEscrita();
 				}
+				
 				ficheiroPedidos.abreEscrita("..\\PedidosdaLivravria.txt");
 				ficheiroPedidos.escreveLinha("");
 				ficheiroPedidos.fechaEscrita();
@@ -422,17 +427,46 @@ public class Gestao {
 				
 			}
 
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
-		try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 
 	}
 
+	public String VerificaCartaoeDevolveContaID(int cartaoID, String cartaoPIN, double movimento) {
+		System.out.println("<---- Cartão------->" + cartaoID);
+		System.out.println("<---- Conta------->" + mapCartaoConta.get(cartaoID));
+		System.out.println("<---- BOOLEAN------->" + mapCartaoConta.containsKey(cartaoID));
+		if (mapCartaoConta.containsKey(cartaoID)) {
+			ContaNormal c = new ContaNormal();
+			System.out.println("<---- Cartão------->" + cartaoID);
+			System.out.println("<---- Conta------->" + mapCartaoConta.get(cartaoID));
+			c = (ContaNormal) contaExiste(mapCartaoConta.get(cartaoID));
+			System.out.println("<---- Conta Actual-Vamos  Verifica max diario ( " + c.toString() + ") --->\n");
+			// verfica se o cartao com aquele ID daquela conta tem o pin correto
+			if (!(c.verificaPINCartaoC(cartaoID, cartaoPIN) == null)) {
+				if (c.getSaldo() >= movimento) {
+					if (verifMovimentos(c, TipoT.TRANSFERENCIA, movimento)) {
+						return "" + mapCartaoConta.get(cartaoID);
+					} else {
+						return "VALOR superior ao LIMITE DIARIO PERMITIDO";
+					}
+
+				} else {
+					return "SALDO insuficiente";
+				}
+			} else {
+				return "O PIN não é Válido";
+			}
+		}
+		return "O Cartão não Existe";
+	}
 //	ArrayList<String> pedidos=new ArrayList<String>();
 //	do {
 //		s =ficheiroPedidos.leLinha();
@@ -597,32 +631,7 @@ public class Gestao {
 
 	// criacartao para conta e cliente especifico
 
-	public String VerificaCartaoeDevolveContaID(int cartaoID, String cartaoPIN, double movimento) {
-
-		if (mapCartaoConta.containsKey(cartaoID)) {
-			ContaNormal c = new ContaNormal();
-			System.out.println("<---- Cartão------->" + cartaoID);
-			System.out.println("<---- Conta------->" + mapCartaoConta.get(cartaoID));
-			c = (ContaNormal) contaExiste(mapCartaoConta.get(cartaoID));
-			System.out.println("<---- Conta Actual-Vamos  Verifica max diario ( " + c.toString() + ") --->\n");
-			// verfica se o cartao com aquele ID daquela conta tem o pin correto
-			if (!(c.verificaPINCartaoC(cartaoID, cartaoPIN) == null)) {
-				if (c.getSaldo() >= movimento) {
-					if (verifMovimentos(c, TipoT.TRANSFERENCIA, movimento)) {
-						return "" + mapCartaoConta.get(cartaoID);
-					} else {
-						return "VALOR superior ao LIMITE DIARIO PERMITIDO";
-					}
-
-				} else {
-					return "SALDO insuficiente";
-				}
-			} else {
-				return "O PIN não é Válido";
-			}
-		}
-		return "O Cartão não Existe";
-	}
+	
 
 //***********  verifica se a conta existe ******************
 	public Conta contaExiste(int contaID) {
