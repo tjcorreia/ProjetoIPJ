@@ -21,6 +21,7 @@ public class Compra implements Serializable{
 	public Estado estadoCompra;//public para poder definir estado da compra a partir de outras classes
 		protected enum Estado {SUBMETIDA, PAGA, ANULADA};//protected para poder ir para a subclasse compraCartão
 	
+		
 	Compra(){
 		numCompra = -1;
 		carrinho = new Carrinho();
