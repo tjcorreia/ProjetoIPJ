@@ -1,5 +1,0 @@
-<<<<<<< HEAD
-3,100000,637482987,435,15.5
-=======
-
->>>>>>> branch 'master' of https://github.com/tjcorreia/ProjetoIPJ.git
