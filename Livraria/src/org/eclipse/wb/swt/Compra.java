@@ -41,6 +41,30 @@ public class Compra {
 		return s;
 	}
 
+	public Carrinho getCarrinho() {
+		return carrinho;
+	}
+
+	public void setCarrinho(Carrinho carrinho) {
+		this.carrinho = carrinho;
+	}
+
+	public String getNif() {
+		return nif;
+	}
+
+	public void setNif(String nif) {
+		this.nif = nif;
+	}
+
+	public GregorianCalendar getData() {
+		return data;
+	}
+
+	public void setData(GregorianCalendar data) {
+		this.data = data;
+	}
+
 	public Estado getEstadoCompra() {
 		return estadoCompra;
 	}

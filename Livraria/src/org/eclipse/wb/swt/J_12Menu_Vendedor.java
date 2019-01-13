@@ -5,6 +5,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Label;
 
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.text.Collator;
 import java.util.Locale;
 
@@ -188,7 +189,6 @@ public class J_12Menu_Vendedor {
 							"Pretende solicitar confirmação ao banco?", confirmacao);
 					janelaConfirmacao.open();
 					confirmacao = janelaConfirmacao.isConfirmacao();
-					System.out.println(confirmacao);
 					//Se confirmarem que querem pedir confirmação ao banco, escrever para thread do banco
 					if ( confirmacao) {
 //						
@@ -209,7 +209,6 @@ public class J_12Menu_Vendedor {
 							"Pretende registar a venda como paga?", confirmacao);
 					janelaConfirmacao.open();
 					confirmacao = janelaConfirmacao.isConfirmacao();
-					System.out.println(confirmacao);
 					// se confirmarem que venda está paga, marcar a venda como PAGA
 					if ( confirmacao) {
 						compraSelecionada.setEstadoCompra(Compra.Estado.PAGA);
@@ -247,12 +246,73 @@ public class J_12Menu_Vendedor {
 		btnAnularVenda.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
+				//Caso nenhuma compra esteja selecionada -> mostrar mensagem 
+				if ( compraSelecionada == null ) {
+					lblSelecioneVenda.setVisible(true);
+				}
+				//caso uma compra esteja selecionada
+				else {
+					lblSelecioneVenda.setVisible(false);
+					J_21Confirmacao janelaConfirmacao = new J_21Confirmacao("ANULAR VENDA", 
+							"Pretende anular a venda?", confirmacao);
+					janelaConfirmacao.open();
+					confirmacao = janelaConfirmacao.isConfirmacao();
+					// se confirmarem que querem anular
+					if ( confirmacao) {
+						compraSelecionada.setEstadoCompra(Compra.Estado.ANULADA);
+						preencherTabela("Todas");
+					}
+				}
+				
 			}
 		});
 		btnAnularVenda.setText("Anular venda");
 		btnAnularVenda.setBounds(668, 197, 117, 61);
 		
 		Button btnAlterarFormaPagamento = new Button(shlMenuVendedor,SWT.WRAP | SWT.NONE);
+		btnAlterarFormaPagamento.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				//Caso nenhuma compra esteja selecionada -> mostrar mensagem 
+				if ( compraSelecionada == null ) {
+					lblSelecioneVenda.setVisible(true);
+				}
+				//caso uma compra esteja selecionada
+				else {
+					lblSelecioneVenda.setVisible(false);
+					//Se compra do tipo cartao, perguntar se querem mudar para dinheiro	
+					if ( compraSelecionada instanceof CompraCartao ) {
+						J_21Confirmacao janelaConfirmacao = new J_21Confirmacao("ALTERAR FORMA DE PAGAMENTO", 
+								"Pretende alterar para pagamento a Dinheiro?", confirmacao);
+						janelaConfirmacao.open();
+						confirmacao = janelaConfirmacao.isConfirmacao();
+						// se confirmarem que querem passar para compra a dinheiro
+						if ( confirmacao) {
+							Compra novaCompra = new Compra( compraSelecionada.getNumCompra(), compraSelecionada.getCarrinho(), 
+									compraSelecionada.getNif(), compraSelecionada.getData(), compraSelecionada.getEstadoCompra());
+							livraria.getCompras().add(novaCompra);
+							livraria.getCompras().remove(compraSelecionada);
+							compraSelecionada = novaCompra;
+							preencherTabela("Todas");
+						}
+					}
+					//Se compra do tipo dinheiro, perguntar se querem mudar para cartão e se sim pedir pin e num cartao
+					else {
+						J_21Confirmacao janelaConfirmacao = new J_21Confirmacao("ALTERAR FORMA DE PAGAMENTO", 
+								"Pretende alterar para pagamento com cartão?", confirmacao);
+						janelaConfirmacao.open();
+						confirmacao = janelaConfirmacao.isConfirmacao();
+						// se confirmarem que querem passar para compra a cartão, pedir o cartão e pin
+						if ( confirmacao) {
+							J_22PedirCartao janelaCartao = new J_22PedirCartao(livraria, compraSelecionada);
+							janelaCartao.open();
+							preencherTabela("Todas");
+						}
+					}
+				}
+					
+			}
+		});
 		btnAlterarFormaPagamento.setText("Alterar\nforma de pagamento");
 		btnAlterarFormaPagamento.setBounds(668, 310, 117, 70);
 
@@ -276,10 +336,10 @@ public class J_12Menu_Vendedor {
 					preencherTabela("Submetidas");
 				}
 				if ( combo.getSelectionIndex() == 4) {
-					preencherTabela("Paga");
+					preencherTabela("Pagas");
 				}
 				if ( combo.getSelectionIndex() == 5) {
-					preencherTabela("Anulada");
+					preencherTabela("Anuladas");
 				}
 				
 			}
@@ -289,7 +349,7 @@ public class J_12Menu_Vendedor {
 		Label lblFiltrar = new Label(shlMenuVendedor, SWT.NONE);
 		lblFiltrar.setAlignment(SWT.RIGHT);
 		lblFiltrar.setBounds(27, 50, 128, 20);
-		lblFiltrar.setText("Filtrar por estado");
+		lblFiltrar.setText("Filtrar");
 
 		
 		
@@ -343,31 +403,7 @@ public class J_12Menu_Vendedor {
 		
 		
 
-//		String[] tituloColunas = { "Número", "Items", "NIF", "Data", "Total", "Estado" };
-//		for (int i = 0; i < tituloColunas.length; i++) {
-//		      TableColumn column = new TableColumn(table, SWT.NONE);
-//		      column.setText(tituloColunas[i]);
-//		}
-//		for (Compra c : livraria.getCompras()) {
-//	        TableItem item = new TableItem(table, SWT.NONE);
-//	        item.setText(0, "" + c.numCompra);
-//	        item.setText(1, "" + c.carrinho.numeroItemsDoCarrinho() );
-//	        item.setText(2, c.nif );
-//	        item.setText(3, "" + c.data.get(Calendar.YEAR) + "/" + ((c.data.get(Calendar.MONTH))+1) + "/" + c.data.get(Calendar.DAY_OF_MONTH) );
-//	        item.setText(4, "" + c.total + "€");
-//	        item.setText(5, "" + c.estadoCompra );
-//	    }  
-//		for (int i = 0; i < tituloColunas.length; i++) {
-//			table.getColumn(i).pack();
-//		}
-//		table.setSize(table.computeSize(SWT.DEFAULT, 200));
-//	    shlMenuVendedor.pack();
-//	    shlMenuVendedor.open();
-//	    while (!shlMenuVendedor.isDisposed()) {
-//	      if (!display.readAndDispatch())
-//	        display.sleep();
-//	    }
-//	    display.dispose();    
+ 
 
 	}
 	
@@ -410,7 +446,7 @@ public class J_12Menu_Vendedor {
 			}
 		}	
 		//Se filtro for 'Recusadas'
-		else if ( filtro.equals("Paga")) {
+		else if ( filtro.equals("Pagas")) {
 			// Preencher tabela
 			for (Compra c : livraria.getCompras()) {
 				if ( c.estadoCompra.equals((Compra.Estado.PAGA))) {
@@ -419,7 +455,7 @@ public class J_12Menu_Vendedor {
 			}
 		}		
 		//Se filtro for 'Finalizadas'
-		else if ( filtro.equals("Anulada")) {
+		else if ( filtro.equals("Anuladas")) {
 			// Preencher tabela
 			for (Compra c : livraria.getCompras()) {
 				if ( c.estadoCompra.equals((Compra.Estado.ANULADA))) {
@@ -440,13 +476,13 @@ public class J_12Menu_Vendedor {
 				+ c.data.get(Calendar.DAY_OF_MONTH));
 		item.setText(3, "" + c.carrinho.numeroItemsDoCarrinho());
 		item.setText(4, "" + c.total + "€");
-		//Caso seja venda a dinheiro
-		if ( !(c instanceof CompraCartao) ) {
-			item.setText(5, "Dinheiro");
-		}
 		//Caso seja venda cartão
-		else {
+		if ( (c instanceof CompraCartao) ) {
 			item.setText(5, "Cartão");
+		}
+		//Caso seja venda dinheiro
+		else {
+			item.setText(5, "Dinheiro");
 		}
 		item.setText(6, "" + c.estadoCompra);
 	}		

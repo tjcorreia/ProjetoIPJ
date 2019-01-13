@@ -200,6 +200,34 @@ public class Livraria {
 		return "emailErrado";
 	}
 	
+	public boolean verificarSeNIFouCartao(String s) {
+		//ver se tem algum carater que não seja numero
+		for (char c : s.toCharArray()) {
+			if (!Character.isDigit(c)) {
+				return false;
+			}
+		}
+		//ver se tem 9 digitos
+		if ( s.toCharArray().length!=9 ) {
+			return false;
+		}
+		return true;
+	}
+	
+	public boolean verificarSePIN(String s) {
+		//ver se tem algum carater que não seja numero
+		for (char c : s.toCharArray()) {
+			if (!Character.isDigit(c)) {
+				return false;
+			}
+		}
+		//ver se tem 9 digitos
+		if ( s.toCharArray().length!=3 ) {
+			return false;
+		}
+		return true;
+	}
+	
 	//método que atravez do email de login devolve o utilizador
 	public Utilizador getUtilizadorPorEmail( String email){
 		for ( Utilizador u : utilizadores ) {
