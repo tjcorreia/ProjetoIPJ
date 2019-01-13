@@ -293,6 +293,7 @@ public class J_02Menu_F_CriaCliente {
 			public void widgetSelected(SelectionEvent e) {
 				dateTime_Nascimento.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
 
+				
 			}
 		});
 		dateTime_Nascimento.setBounds(289, 162, 131, 21);
