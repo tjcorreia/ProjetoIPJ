@@ -4,7 +4,7 @@ package org.eclipse.wb.swt;
 import java.io.Serializable;
 
 /**
- * Classe 
+ * Classe Utilizador que 
  * 
  * @author Tiago Correia
  * @author Alberto Machado
