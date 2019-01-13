@@ -207,7 +207,7 @@ public class J_12Menu_Vendedor implements Serializable{
 						FicheiroDeTexto ficheiroPedidos = new FicheiroDeTexto();
 						FicheiroDeTexto ficheiroDevolucao = new FicheiroDeTexto();
 						try {
-							ficheiroPedidos.abreEscrita("C:\\Users\\Tiago\\Desktop\\ProjetoIPJ\\PedidosdaLivravria.txt");
+							ficheiroPedidos.abreEscrita("..\\PedidosdaLivravria.txt");
 							ficheiroPedidos.escreveLinha(aEnviar);
 							ficheiroPedidos.fechaEscrita();
 						} catch (IOException e1) {
@@ -219,7 +219,7 @@ public class J_12Menu_Vendedor implements Serializable{
 						String resposta="";
 						do {
 						try {
-							ficheiroDevolucao.abreLeitura("C:\\Users\\Tiago\\Desktop\\ProjetoIPJ\\RespostadoBanco.txt");
+							ficheiroDevolucao.abreLeitura("..\\RespostadoBanco.txt");
 							resposta=ficheiroDevolucao.leLinha();
 							ficheiroDevolucao.fechaLeitura();
 						} catch (IOException e1) {
