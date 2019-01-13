@@ -5,6 +5,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Composite;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import org.eclipse.swt.SWT;
@@ -24,7 +25,7 @@ import org.eclipse.swt.events.KeyEvent;
  * @author Alberto Machado
  * @sid 2019
  */
-public class J_10Login {
+public class J_10Login implements Serializable {
 
 	protected Shell shlLogin;
 	protected Livraria livraria;//atributo adicionado para poder ir buscar métodos e elemnetos à livraria 
@@ -37,22 +38,8 @@ public class J_10Login {
 	public J_10Login(Livraria livraria) {
 		//super();
 		this.livraria = livraria;
-		open();
 	}
 		
-
-//	/**
-//	 * Launch the application.
-//	 * @param args
-//	 */
-//	public static void main(String[] args) {
-//		try {
-//			J_10Login window = new J_10Login(new Livraria());
-//			window.open();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
 	
 	
 	/**

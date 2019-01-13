@@ -1,6 +1,7 @@
 
 package org.eclipse.wb.swt;
 
+import java.io.Serializable;
 
 /**
  * Classe 
@@ -9,7 +10,7 @@ package org.eclipse.wb.swt;
  * @author Alberto Machado
  * @sid 2019
  */
-public class Utilizador {
+public class Utilizador implements Serializable {
 	protected int uID;
 	protected String nome;
 	protected String email;

@@ -2,7 +2,7 @@ package org.eclipse.wb.swt;
 
 import java.io.*;
 
-public class FicheiroDeObjectos {
+public class FicheiroDeObjectos implements Serializable {
 
 	// Atributos
 	

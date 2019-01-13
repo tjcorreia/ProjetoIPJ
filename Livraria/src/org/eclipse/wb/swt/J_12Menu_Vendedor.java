@@ -174,13 +174,13 @@ public class J_12Menu_Vendedor implements Serializable{
 				//caso compra selecionada esteja anulada
 				else if ( compraSelecionada.getEstadoCompra() == Compra.Estado.ANULADA ) {
 					lblSelecioneVenda.setVisible(false);
-					J_21Confirmacao janela = new J_21Confirmacao("A venda selecionada encontra-se \"Anulada\"", 
-							"Pretende reverter o estado para \"Paga\"?", confirmacao);
+					J_21Confirmacao janela = new J_21Confirmacao("A venda selecionada encontra-se \"ANULADA\"", 
+							"Pretende apagar o registo da venda?", confirmacao);
 					janela.open();
 					confirmacao = janela.isConfirmacao();
-					//Se confirmarem que querem reverter o estado, marcar como 'paga'
+					//Se confirmarem que querem apagar, remover a compra da livraria
 					if ( confirmacao) {
-						compraSelecionada.setEstadoCompra(Compra.Estado.PAGA);
+						livraria.getCompras().remove(compraSelecionada);
 						preencherTabela("Todas");
 					}
 				}
@@ -207,7 +207,7 @@ public class J_12Menu_Vendedor implements Serializable{
 						FicheiroDeTexto ficheiroPedidos = new FicheiroDeTexto();
 						FicheiroDeTexto ficheiroDevolucao = new FicheiroDeTexto();
 						try {
-							ficheiroPedidos.abreEscrita("C:\\Users\\Jorge\\Documents\\GitHub\\ProjetoIPJ\\PedidosdaLivravria.txt");
+							ficheiroPedidos.abreEscrita("C:\\Users\\Tiago\\Desktop\\ProjetoIPJ\\PedidosdaLivravria.txt");
 							ficheiroPedidos.escreveLinha(aEnviar);
 							ficheiroPedidos.fechaEscrita();
 						} catch (IOException e1) {
@@ -219,7 +219,7 @@ public class J_12Menu_Vendedor implements Serializable{
 						String resposta="";
 						do {
 						try {
-							ficheiroDevolucao.abreLeitura("C:\\Users\\Jorge\\Documents\\GitHub\\ProjetoIPJ\\RespostadoBanco.txt");
+							ficheiroDevolucao.abreLeitura("C:\\Users\\Tiago\\Desktop\\ProjetoIPJ\\RespostadoBanco.txt");
 							resposta=ficheiroDevolucao.leLinha();
 							ficheiroDevolucao.fechaLeitura();
 						} catch (IOException e1) {
@@ -229,6 +229,52 @@ public class J_12Menu_Vendedor implements Serializable{
 						}while(resposta.equals(""));
 						System.out.println(resposta);
 						
+						//Caso a resposta seja positiva
+						String str2 = "Pagamento efetuado com sucesso.";
+						if ( resposta.toLowerCase().contains(str2.toLowerCase()) ) {
+							//abrir janela de mensagem de sucesso
+							compraSelecionada.setEstadoCompra(Compra.Estado.PAGA);
+							preencherTabela("Todas");
+							J_20AlteracaoSubmetida janela = new J_20AlteracaoSubmetida("SUCESSO"
+									+ "",str2);
+							janela.open();
+						}
+						//Caso o valor seja superior ao limite diário
+						else if ( resposta.toLowerCase().contains("VALOR superior ao LIMITE DIARIO PERMITIDO") ) {
+							//abrir janela de mensagem de pagamento recusado
+							J_20AlteracaoSubmetida janela = new J_20AlteracaoSubmetida("PAGAMENTO RECUSADO",
+									"Excedeu o seu limite diário do seu banco");
+							janela.open();
+						}
+						//Caso não tenha saldo suficiente
+						else if ( resposta.toLowerCase().contains("SALDO insuficiente") ) {
+							//abrir janela de mensagem de pagamento recusado
+							J_20AlteracaoSubmetida janela = new J_20AlteracaoSubmetida("PAGAMENTO RECUSADO",
+									"Saldo insuficiente");
+							janela.open();
+						}
+						//Caso pin inválido
+						else if ( resposta.toLowerCase().contains("O PIN não é Válido") ) {
+							//abrir janela de mensagem de pagamento recusado
+							J_20AlteracaoSubmetida janela = new J_20AlteracaoSubmetida("PAGAMENTO RECUSADO",
+									"PIN inválido");
+							janela.open();
+						}
+						//Caso cartão inexistente
+						else if ( resposta.toLowerCase().contains("O Cartão não Existe") ) {
+							//abrir janela de mensagem de pagamento recusado
+							J_20AlteracaoSubmetida janela = new J_20AlteracaoSubmetida("PAGAMENTO RECUSADO",
+									"Cartão inexistente");
+							janela.open();
+						}
+						
+						//RESPOSTAS POSSÍVEIS
+						//"Pagamento efetuado com sucesso."
+						//"VALOR superior ao LIMITE DIARIO PERMITIDO";
+						//"SALDO insuficiente";
+						//"O PIN não é Válido";
+						//"O Cartão não Existe";
+
 						
 						
 //						
@@ -294,11 +340,13 @@ public class J_12Menu_Vendedor implements Serializable{
 					confirmacao = janelaConfirmacao.isConfirmacao();
 					// se confirmarem que querem anular
 					if ( confirmacao) {
+						//repor o stock da compra para a livraria
+						livraria.esvaziarCompraReporStock(compraSelecionada);
+						//marcar compra como anulada
 						compraSelecionada.setEstadoCompra(Compra.Estado.ANULADA);
 						preencherTabela("Todas");
 					}
 				}
-				
 			}
 		});
 		btnAnularVenda.setText("Anular venda");
@@ -489,7 +537,7 @@ public class J_12Menu_Vendedor implements Serializable{
 				}
 			}
 		}		
-		//Se filtro for 'Finalizadas'
+		//Se filtro for 'Anuladas'
 		else if ( filtro.equals("Anuladas")) {
 			// Preencher tabela
 			for (Compra c : livraria.getCompras()) {

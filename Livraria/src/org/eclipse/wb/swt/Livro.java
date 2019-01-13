@@ -1,6 +1,7 @@
 
 package org.eclipse.wb.swt;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Comparator;
@@ -17,7 +18,7 @@ import java.util.Set;
  * @author Alberto Machado
  * @sid 2019
  */
-public class Livro {
+public class Livro implements Serializable {
 	protected String nome;
 	protected String isbn;
 	protected String autor;

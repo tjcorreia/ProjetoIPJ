@@ -1,4 +1,5 @@
 package org.eclipse.wb.swt;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
@@ -9,7 +10,7 @@ import java.util.ArrayList;
  * @author Alberto Machado
  * @sid 2019
  */
-public class Carrinho {
+public class Carrinho implements Serializable{
 	protected ArrayList <Livro> livros;
 	protected ArrayList <Integer> quantidades;
 	
