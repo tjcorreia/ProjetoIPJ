@@ -74,7 +74,7 @@ public class Livraria {
 		Utilizador u1 = new Utilizador( 1,"António Cunha", "tocunha@gmail.com", "tocunha2000", Utilizador.Tipo.ADMIN);
 		Utilizador u2 = new Utilizador( 2,"Tiago Correia", "a", "a", Utilizador.Tipo.ADMIN);
 		Utilizador u3 = new Utilizador( 3,"Márcia Campos", "mcampos.a@gmail.com", "heyd6wx", Utilizador.Tipo.VENDEDOR);
-		Utilizador u4 = new Utilizador( 4,"Beatriz Costa", "v", "v", Utilizador.Tipo.VENDEDOR);
+		Utilizador u4 = new Utilizador( 4,"Alberto Machado", "v", "v", Utilizador.Tipo.VENDEDOR);
 		//adicionar utilizadores à lista de utilizadores
 		utilizadores = new ArrayList<>();
 		utilizadores.add( u1 );
