@@ -296,7 +296,7 @@ public class Livraria implements Serializable {
 
 	public void loadAll() throws ClassNotFoundException {
 		//Ficheiro de livros
-		String pathLivros = "C:\\Users\\Tiago\\Desktop\\ProjetoIPJ\\Livraria\\Livros";
+		String pathLivros = "Livros.ser";
 		FicheiroDeObjectos ficheiroLivros = new FicheiroDeObjectos();
 		try {
 			ficheiroLivros.abreLeitura(pathLivros);
@@ -307,7 +307,7 @@ public class Livraria implements Serializable {
 			e.printStackTrace();
 		}
 		//Ficheiro de utilizadores
-		String pathUtilizadores = "C:\\Users\\Tiago\\Desktop\\ProjetoIPJ\\Livraria\\Utilizadores";
+		String pathUtilizadores = "Utilizadores.ser";
 		FicheiroDeObjectos ficheiroUtilizadores = new FicheiroDeObjectos();
 		try {
 			ficheiroUtilizadores.abreLeitura(pathUtilizadores);
@@ -318,7 +318,7 @@ public class Livraria implements Serializable {
 			e.printStackTrace();
 		}
 		//Ficheiro de compras
-		String pathCompras = "C:\\Users\\Tiago\\Desktop\\ProjetoIPJ\\Livraria\\Compras";
+		String pathCompras = "Compras.ser";
 		FicheiroDeObjectos ficheiroCompras = new FicheiroDeObjectos();
 		try {
 			ficheiroCompras.abreLeitura(pathCompras);
@@ -332,7 +332,7 @@ public class Livraria implements Serializable {
 
 	public void saveAll() {
 		//Ficheiro de livros
-		String pathLivros = "C:\\Users\\Tiago\\Desktop\\ProjetoIPJ\\Livraria\\Livros";
+		String pathLivros = "Livros.ser";
 		FicheiroDeObjectos ficheiroLivros = new FicheiroDeObjectos();
 		try {
 			ficheiroLivros.abreEscrita(pathLivros);
@@ -344,7 +344,7 @@ public class Livraria implements Serializable {
 			e.printStackTrace();
 		}
 		//Ficheiro de utilizadores
-		String pathUtilizadores = "C:\\Users\\Tiago\\Desktop\\ProjetoIPJ\\Livraria\\Utilizadores";
+		String pathUtilizadores = "Utilizadores.ser";
 		FicheiroDeObjectos ficheiroUtilizadores = new FicheiroDeObjectos();
 		try {
 			ficheiroUtilizadores.abreEscrita(pathUtilizadores);
@@ -356,7 +356,7 @@ public class Livraria implements Serializable {
 			e.printStackTrace();
 		}
 		//Ficheiro de compras
-		String pathCompras = "C:\\Users\\Tiago\\Desktop\\ProjetoIPJ\\Livraria\\Compras";
+		String pathCompras = "Compras.ser";
 		FicheiroDeObjectos ficheiroCompras = new FicheiroDeObjectos();
 		try {
 			ficheiroCompras.abreEscrita(pathCompras);
