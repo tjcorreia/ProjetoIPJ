@@ -531,6 +531,7 @@ public class J_01_Admin_NovoF {
 						box.open();
 						System.out.println(("verifica"));
 						gestor.saveAll();
+						
 					}
 					else {
 						System.out.println(("----> Nao verifica"));
