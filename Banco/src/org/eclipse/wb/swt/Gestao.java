@@ -408,6 +408,7 @@ public class Gestao {
 						ficheiroDevolucao.fechaEscrita();
 					}
 
+					
 				} else {
 					System.out.println("<---- Não é NUMER0?---->");
 					ficheiroDevolucao.abreEscrita("..\\ProjetoIPJ\\RespostadoBanco.txt");
