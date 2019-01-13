@@ -19,7 +19,10 @@ import org.eclipse.swt.widgets.Text;
  * Breve descrição do código Janela de Cliente que Apresenta os seu dados e
  * permite alterar alguns dados
  *  
- * @author Alberto Jorge
+* @author Alberto Jorge
+* @author Tiago Correia
+* 
+* @sid 2019
  * @sid 2019
  * @aid 1.1
  */

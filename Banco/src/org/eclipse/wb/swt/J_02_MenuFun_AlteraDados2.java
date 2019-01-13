@@ -19,12 +19,14 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
 /**
- * Breve descrição do código
- * 
- * @author Alberto Jorge
- * @sid 2019
- * @aid 1.1
- */
+* Breve descrição do código
+* Janela par aAltera dados pessoais
+* @author Alberto Jorge
+* @author Tiago Correia
+* 
+* @sid 2019
+* 
+*/
 public class J_02_MenuFun_AlteraDados2 {
 
 	protected Shell shell;

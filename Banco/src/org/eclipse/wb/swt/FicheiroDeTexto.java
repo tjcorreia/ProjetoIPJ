@@ -2,6 +2,15 @@ package org.eclipse.wb.swt;
 
 import java.io.*;
 
+/**
+* Breve descrição do código
+* Classe conta
+* @author Alberto Jorge
+* @author Tiago Correia
+* 
+* @sid 2019
+* 
+*/
 public class FicheiroDeTexto {
 	private BufferedReader fR;
 	private BufferedWriter fW;

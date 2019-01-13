@@ -23,9 +23,11 @@ import org.eclipse.swt.widgets.TableItem;
 
 /**
  * Breve descrição do código
- *
- * @sid 2019
- * @aid 1.1
+ * Janela que apresenta a Lista de Clientes
+* @author Alberto Jorge
+* @author Tiago Correia
+* 
+* @sid 2019
  */
 public class J_02Menu_F_ListaClientes {
 

@@ -7,9 +7,12 @@ import org.eclipse.wb.swt.Conta.TipoC;
 
 /**
 * Breve descrição do código
-*
+* Classe conta
+* @author Alberto Jorge
+* @author Tiago Correia
+* 
 * @sid 2019
-* @aid 1.1
+* 
 */
 public class ContaPrazo extends Conta implements Serializable{
 	
@@ -50,13 +53,7 @@ public ContaPrazo( double saldo, String datacria) {
 	// TODO Auto-generated constructor stub
 }
 
-public String getPodedarjeito() {
-	return podedarjeito;
-}
 
-public void setPodedarjeito(String podedarjeito) {
-	this.podedarjeito = podedarjeito;
-}
 
 
 	

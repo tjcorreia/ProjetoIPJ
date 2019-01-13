@@ -12,7 +12,7 @@ import org.eclipse.swt.widgets.Text;
 
 /**
 *  Breve descrição do código
-*Janela Administrador Menu Inicial
+* Janela Administrador Menu Inicial
 * @author Alberto Jorge
 * @author Tiago Correia
  * @sid 2019

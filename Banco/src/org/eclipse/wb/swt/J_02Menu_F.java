@@ -16,6 +16,9 @@ import org.eclipse.swt.widgets.Text;
 * Breve descrição do código
 * Janela Funcionario Menu Inicial
 * @author Alberto Jorge
+* @author Tiago Correia
+* 
+* @sid 2019
 * @sid 2019
 * @aid 1.1
 */

@@ -4,9 +4,12 @@ import java.io.Serializable;
 
 /**
 * Breve descrição do código
-*
+* Classe conta
+* @author Alberto Jorge
+* @author Tiago Correia
+* 
 * @sid 2019
-* @aid 1.1
+* 
 */
 public class Funcionario extends Utilizador implements Serializable{
 

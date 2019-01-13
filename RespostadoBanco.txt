@@ -1,1 +1,8 @@
+<<<<<<< HEAD
 11,O Cartão não Existe
+=======
+<<<<<<< HEAD
+8,Pagamento efetuado com sucesso.
+=======
+>>>>>>> branch 'master' of https://github.com/tjcorreia/ProjetoIPJ.git
+>>>>>>> branch 'master' of https://github.com/tjcorreia/ProjetoIPJ.git

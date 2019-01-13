@@ -21,11 +21,14 @@ import org.eclipse.wb.swt.Utilizador.TipoID;
 
 /**
  * Breve descrição do código Janela Funcionario _Apresentação de dados do
- * cliente e acesso a sub-menus de edição
+ * Janela de Funcionario para visualizar dados de um cliente
  * 
- * @author Alberto Jorge
- *
- */
+* @author Alberto Jorge
+* @author Tiago Correia
+* 
+* @sid 2019
+* 
+*/
 public class J_02Menu_F_DadosCl {
 
 	protected Shell shellMF;

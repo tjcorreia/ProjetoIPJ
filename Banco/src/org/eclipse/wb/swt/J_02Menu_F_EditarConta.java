@@ -23,9 +23,13 @@ import org.eclipse.wb.swt.Transacao.TipoT;
  * Breve descrição do código 
  * Janela Funcionario para Editar as contas do Cliente
  *  
- * @author Alberto Jorge
- *
- */
+* @author Alberto Jorge
+* @author Tiago Correia
+* 
+* @sid 2019
+* 
+*/
+
 public class J_02Menu_F_EditarConta {
 
 	protected Shell shellMF_EditarC;

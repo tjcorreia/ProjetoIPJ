@@ -6,18 +6,17 @@ import java.util.Arrays;
 
 /**
 * Breve descrição do código
-*
+* Classe Cliente
+* @author Alberto Jorge
+* @author Tiago Correia
+* 
 * @sid 2019
 * @aid 1.1
 */
 public class Cliente extends Utilizador implements Serializable{
 	
+	// Atributos
 	private ArrayList<Conta> lcontaSC;
-
-
-
-	
-
 
 	public Cliente() {
 		super();
@@ -51,7 +50,9 @@ public class Cliente extends Utilizador implements Serializable{
 		this.lcontaSC = lcontaS;
 	}	
 	
-	
+	/**
+	 * Getter e Setters para todos os atributos
+	 */
 	public ArrayList<Conta> getLcontaSC() {
 		return lcontaSC;
 	}
@@ -69,6 +70,10 @@ public class Cliente extends Utilizador implements Serializable{
 	"lcontaSC=" + Arrays.toString(lcontaSC.toArray()) ;
 	}
 	
+	/**
+	 * Devolve atributos de um cliente 
+	 * @return String [] 
+	 */
 	public String [] toTable() {
 		String [] ClienteL= new String [3] ;
 		ClienteL[0]=""+uID;
@@ -87,6 +92,10 @@ public class Cliente extends Utilizador implements Serializable{
 		return ClienteL;
 	}
 
+	/**
+	 * Devolve a lista de Contas de um cliente
+	 * @return String
+	 */
 	public String listadeContasC() {
 		String ClienteLC="";
 		if (lcontaSC==null) {
@@ -103,13 +112,23 @@ public class Cliente extends Utilizador implements Serializable{
 	}
 	
 	
- public Conta addConta(Conta novaConta) {
+ /**
+  * Adiciona uma nova conta a lista de contas
+ * @param novaConta
+ * @return Conta
+ */
+public Conta addConta(Conta novaConta) {
 	 
 	 lcontaSC.add(novaConta);
 	 return novaConta;
 	 
  }
 	
+/**
+ * Procura conta por ID da Conta
+ * @param idDaConta
+ * @return Conta
+ */
 public Conta procuraConta(int idDaConta) {
 	 
 	if (!(lcontaSC==null)) {
@@ -121,6 +140,10 @@ public Conta procuraConta(int idDaConta) {
 	return null;
  }
 	
+/**
+ * Procura conta a Prazo do Cliente
+ * @return Conta 
+ */
 public Conta procuraContaPrazo() {
 	 
 	if (!(lcontaSC==null)) {
