@@ -24,7 +24,11 @@ public class Util {
 		// TODO Auto-generated constructor stub
 	}
 	
-	
+	/**
+	 * Devolve se a caixa de texto esta vazia
+	 * @param texto
+	 * @return true ou false e altera a cor de fundo para vermelho
+			 */
 	public static  boolean estaVazio(Text texto) {
 		if (texto.getText().equals("")) {
 			texto.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
@@ -33,13 +37,27 @@ public class Util {
 		texto.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
 		return false;
 	}
+	/**
+	 * Devolve se a caixa de texto esta vazia
+	 * @param texto
+	 * @param texto1
+	 * @param texto2
+	 * @param texto3
+	 * @return true ou false e altera a cor de fundo para vermelho
+	*/
 	public static  boolean estaVazio(Text texto1,Text texto2,Text texto3) {
 		if (estaVazio(texto1)|estaVazio(texto2)|estaVazio(texto3)) {
 			return true;
 		}
 		return false;
 	}
-	
+	/**
+	 * Devolve se a caixa de texto esta vazia E mensagem de Erro
+	 * @param String
+	 * @param texto1
+	 * @param texto2
+	 * @return String com mensagem de erro e altera a cor de fundo para vermelho
+	*/
 	public static  boolean estaVazio(String mensagem,Text texto1,Text texto2) {
 		if (texto1.getText().equals("")) {
 			texto1.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
@@ -59,6 +77,16 @@ public class Util {
 		return false;
 	}
 	
+	
+	/**
+	 * Verifica se a data esta dentro de um intrevalo em relação a data actual
+	 * (entre dataactual-maximo e dataactual-minimo)
+	 * @param data Data a Verificar
+	 * @param idadeMinima valor minimo a retirar  
+	 * @param idadeMaxima  valor maximo a retiar
+	 * @return boolean verifica ou não
+	*/
+	
 	public static  boolean verificaIdade (LocalDate data,int idadeMinima,int idadeMaxima){
 		System.out.println("<---- NUMERO? --->\n" + data);
 		System.out.println("<---- NUMERO? --->\n" + LocalDate.now().minusYears(idadeMinima));
@@ -72,6 +100,12 @@ public class Util {
 	return true;
 	}
 	
+	/**
+	 * Verifica se o numero é Double 
+	 * @param mensagem Altera a mensagem se não verficar
+	 * @param texto Elemento  verificar 
+	 * @return boolean verifica ou não 
+	*/
 	public static boolean eNumeroIouD(String mensagem,Text texto) {
 		System.out.println("<---- NUMERO? --->\n" + texto.getText());
 		if ((eNumero(texto) == -1)) {
@@ -95,6 +129,11 @@ public class Util {
 			return true;
 	}
 
+	/**
+	 * Verifica se o numero é um numero Inteiro
+	 * @param texto valor minimo a retirar  
+	 * @return boolean verifica ou não 
+	*/
 	public static int eNumero(Text texto) {
 		for (char c : texto.getText().toCharArray()) {
 			if (!Character.isDigit(c)) {
@@ -106,6 +145,13 @@ public class Util {
 		return texto.getText().length();
 	}
 	
+	/**
+	 * Verifica se o numero é um numero Inteiro e se tem um tamanho especifico
+	 * @param mensagem Mensagem de retorno 
+	 * @param texto 
+	 * @param tamanho tamanho a verificar 
+	 * @return boolean verifica ou não 
+	*/
 	public static boolean eNumeroI(String mensagem,Text texto,int tamanho) {
 		if (texto.getText().length()==tamanho) {
 		for (char c : texto.getText().toCharArray()) {
@@ -125,7 +171,11 @@ public class Util {
 	}
 	
 	
-	
+	/**
+	 * Verifica se o numero de Telemovel
+	 * @param texto Texto com numero a validar
+	 * @return boolean verifica ou não 
+	*/
 	public static boolean validateMobileNumber(Text texto) {
 		String mobileNumber = texto.getText();
 //		("^\\+?\\[0-9]{0,5}?\\-?\\[0-9]{9}$"
@@ -142,7 +192,11 @@ public class Util {
 		}
 	}
 	
-	
+	/**
+	 * Verifica se o numero de Email
+	 * @param texto Texto com email avalidar
+	 * @return boolean verifica ou não 
+	*/
 	public static boolean validateEmail(Text texto) {
 		String emailStr = texto.getText();
 		Pattern regexPattern = Pattern.compile(
@@ -156,6 +210,12 @@ public class Util {
 			return false;// "Invalid Email";
 		}
 	}
+	
+	/**
+	 * Verifica se o numero é um numero Double e altera a cx texto
+	 * @param texto 
+	 * @return boolean verifica ou não 
+	*/
 	public static boolean eNumeroIouD(Text texto) {
 		System.out.println("<---- NUMERO? --->\n" + texto.getText());
 		if ((Util.eNumero(texto) == -1)) {
@@ -179,7 +239,15 @@ public class Util {
 			return true;
 	}
 	
-	public static boolean validateData2(Text texto1, Text texto2, Text texto3) {
+	/**
+	 * Verifica Data quando é introduzida pelos campos Ano Mes Dia
+	 * obs:deprecated 
+	 * @param ano
+	 * @param mês
+	 * @param dia
+	 * @return boolean verifica ou não 
+	*/
+	public static boolean validateData2(Text ano, Text mes, Text dia) {
 //		new GregorianCalendar(2018, 10, 24);
 		GregorianCalendar novoF = new GregorianCalendar();
 		GregorianCalendar actual = new GregorianCalendar();
@@ -187,7 +255,7 @@ public class Util {
 		actualMenos120 = (GregorianCalendar) GregorianCalendar.getInstance();
 		actual = (GregorianCalendar) Calendar.getInstance();
 
-		String dataStr = texto1.getText() + "/" + texto2.getText() + "/" + texto3.getText();
+		String dataStr = ano.getText() + "/" + mes.getText() + "/" + dia.getText();
 		System.out.println(dataStr);
 		Pattern regexPattern = Pattern.compile("^[0-9]{4}/(1[0-2]|0[1-9])/(3[01]|[12][0-9]|0[1-9])$");
 		Matcher regMatcher = regexPattern.matcher(dataStr);
@@ -214,9 +282,9 @@ public class Util {
 //				return false;// "Invalid Data";
 //			}
 		} else {
-			texto1.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
-			texto2.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
-			texto3.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
+			ano.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
+			mes.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
+			dia.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
 
 			return false;// "Invalid Data";
 		}

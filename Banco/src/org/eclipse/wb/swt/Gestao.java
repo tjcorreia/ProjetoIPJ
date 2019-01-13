@@ -1,14 +1,13 @@
 package org.eclipse.wb.swt;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Image;
@@ -20,20 +19,29 @@ import org.eclipse.wb.swt.Transacao.TipoT;
 import org.eclipse.wb.swt.Utilizador.TipoID;
 
 /**
- * Breve descrição do código Menu de Gestão onde se encontram as listas das
- * diversas classes
- * 
- * @sid 2019
- * @author Jorge
- */
+* Breve descrição do código
+* Classe Gestão : 
+* - Gere as lista das diversas classes
+* @author Alberto Machado
+* @author Tiago Correia
+* @param 
+* @sid 2019
+* @aid 1.1
+*/
 
 public class Gestao {
-	// String Username como key permit uma procura mais rapida
-	private Map<String, Utilizador> mapUtilizadores;
+	
+	private Map<String, Utilizador> mapUtilizadores;// String Username como key 
 	private ArrayList<Conta> lContas; // lista de contas
-	private Map<Integer, Integer> mapCartaoConta; // numcartao-numconta
+	private Map<Integer, Integer> mapCartaoConta; // numcartao-numconta 
 	private Map<String, Integer> contadores;// criou-se um contador usar nos diversas classes
 	private Utilizador uactual; // UtilizadorActual transmitido entre janelas
+	
+//	contadores.put("Utilizador", 10000); // inicializa o Contador de Utilizadores
+//	contadores.put("Contas", 100000); // inicializa o Contador de Contas
+//	contadores.put("Cartoes", 500010000); // inicializa o Contador de Cartoes
+	
+	
 	
 	public Gestao() {
 		super();
@@ -42,7 +50,11 @@ public class Gestao {
 		this.mapCartaoConta = new HashMap<Integer, Integer>();
 		this.contadores = new HashMap<String, Integer>();
 
-//		// load data : Na abertura carrega todos os ficheiros para o sistema
+		
+		/**
+		* load data : Na abertura carrega todos os ficheiros para o sistema
+		*/
+
 //		try {
 //			loadAll();
 //		} catch (ClassNotFoundException e) {
@@ -183,15 +195,15 @@ public class Gestao {
 		int dia = data.getDayOfMonth();
 		int anomes = data.getMonthValue();
 		int ano = data.getYear();
-
+		LocalDate data1=LocalDate.of(2017, 12, 21);
 		Cartao ct1 = new Cartao(500010000, cl3.getuID(), cn2.getContaID(), cl3.getNome() + " " + cl3.getSobrenome(),
-				"" + data, "000");
+				data1, "000");
 		((ContaNormal) cn1).addCartaoC(ct1);
 
 		mapCartaoConta.put(500010000, cn2.getContaID());
 		LocalDate data2 = LocalDate.of(2015, 12, 01);
 		Cartao ct2 = new Cartao(contadores.get("Cartoes") + 1, cl2.getuID(), cn2.getContaID(),
-				cl2.getNome() + " " + cl2.getSobrenome(), "" + data2, "000");
+				cl2.getNome() + " " + cl2.getSobrenome(), data2, "000");
 		((ContaNormal) cn2).addCartaoC(ct2);
 
 		mapCartaoConta.put(contadores.get("Cartoes") + 1, cn2.getContaID());
@@ -199,8 +211,14 @@ public class Gestao {
 
 		// ( duvida colocar conta de origem ?)
 
-		// verifica data e paga juros as contas
+		/**
+		* verifica data e paga juros as contas
+		*/
 		pagajuros();
+		/**
+		* Gava todos os ficheiros
+		*/
+		saveAll();
 
 
 	}
@@ -290,13 +308,27 @@ public class Gestao {
 	}
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++ metodos++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	
+//	private void eliminaCartoesForaValidade() {
+//		for (Entry<String, Utilizador> entry : mapUtilizadores.entrySet()) {
+////			
+////			entry.getValue().get
+////			if (data.isAfter(LocalDate.now().minusYears(idadeMinima))) {
+////			
+////			}
+////			if (entry.getValue() instanceof Funcionario) {
+//
+//				System.out.println("VERIFICA ---->Key = " + entry.getKey() + ", Value = " + entry.getValue());
+//			}
+//		
+//		}
+//		
+//	}
 	/**
 	 * @param counter
 	 * @throws IOException
 	 * Método de comunicação com a livravria 
 	 */
-	private void VerificaLivraria(int counter) throws IOException {// static??
+	private void VerificaLivraria(int counter) throws IOException {
 		while (counter-- > 0) {
 			System.out.println("esta a verificar o ficheiro");
 			FicheiroDeTexto ficheiroPedidos = new FicheiroDeTexto();
@@ -335,6 +367,8 @@ public class Gestao {
 				System.out.println("movimento  :" + movimento);
 				String mensagem = "";
 
+				
+				
 				mensagem = VerificaCartaoeDevolveContaID(cartaoCliente, pin, movimento);
 				System.out.println("MENSAGEM  :" + mensagem);
 				if (eUmNumero(mensagem)) {
@@ -949,11 +983,11 @@ public class Gestao {
 			e.printStackTrace();
 		}
 		//// -----------
-		String pathlContas = "C:\\Users\\Jorge\\Documents\\GitHub\\ProjetoIPJ\\Lcontas";
+		String pathlContas = "C:\\Users\\Jorge\\Documents\\GitHub\\ProjetoIPJ\\Banco\\Lcontas";
 		FicheiroDeObjectos lc = new FicheiroDeObjectos();
 		try {
 			lc.abreLeitura(pathlContas);
-			lContas = (ArrayList<Conta>) lc.leObjecto();
+			lContas = ((ArrayList<Conta>) lc.leObjecto());
 			lc.fechaLeitura();
 
 		} catch (IOException e) {

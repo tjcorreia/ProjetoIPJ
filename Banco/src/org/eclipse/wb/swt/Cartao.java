@@ -4,14 +4,24 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Random;
 
+/**
+* Breve descrição do código
+* Janel de Administrador Cria Novo funcionario
+* @author Alberto Jorge
+* @author Tiago Correia
+* 
+* @sid 2019
+* @aid 1.1
+*/
+
 public class Cartao implements Serializable{
 	
-	protected int cartaoID;
-	protected int titularCartaoID;
-	protected int contaCartaoID;
-	protected String nome;
-	protected String dataV;
-	protected String codigo;
+	protected int cartaoID;        // ID do Cartão gerado epla gestao
+	protected int titularCartaoID; // ID do Titular do Cartão
+	protected int contaCartaoID;   // ID da conta associada ao Cartão
+	protected String nome;  // ID do Titular a figurar no cartao
+	protected LocalDate dataV; // Data de Validade gerada automaticamente
+	protected String codigo;// Código do Cartao gerado automaticamente
 	
 	
 	
@@ -21,7 +31,7 @@ public class Cartao implements Serializable{
 	}
 	
 	
-	public Cartao(int cartaoID, int titularCartaoID, int contaCartaoID, String nome, String dataV, String codigo) {
+	public Cartao(int cartaoID, int titularCartaoID, int contaCartaoID, String nome, LocalDate dataV, String codigo) {
 		super();
 		this.cartaoID = cartaoID;
 		this.titularCartaoID = titularCartaoID;
@@ -39,7 +49,7 @@ public class Cartao implements Serializable{
 		this.titularCartaoID = titularCartaoID;
 		this.contaCartaoID = contaCartaoID;
 		this.nome = nome;
-		this.dataV = ""+data;
+		this.dataV = data;
 		Random r=new Random();
 		int inf=0;
 		int sup=1000;
@@ -54,13 +64,15 @@ public class Cartao implements Serializable{
 		this.titularCartaoID = titularCartaoID;
 		this.contaCartaoID = contaCartaoID;
 		this.nome = nome;
-		this.dataV = ""+data;
+		this.dataV = data;
 		Random r=new Random();
 		int inf=0;
 		int sup=1000;
 		String codigof=""+(r.nextInt(sup-inf)+inf);	
 		this.codigo = codigof;
 	}
+
+
 
 
 	public int getCartaoID() {
@@ -103,12 +115,12 @@ public class Cartao implements Serializable{
 	}
 
 
-	public String getDataV() {
+	public LocalDate getDataV() {
 		return dataV;
 	}
 
 
-	public void setDataV(String dataV) {
+	public void setDataV(LocalDate dataV) {
 		this.dataV = dataV;
 	}
 
@@ -129,7 +141,6 @@ public class Cartao implements Serializable{
 				+ contaCartaoID + "\nNome: " + nome + "\nDataValidade:" + dataV + "\n\n, Codigo: *" + codigo + "*";
 	}
 
-	
 	
 	
 
