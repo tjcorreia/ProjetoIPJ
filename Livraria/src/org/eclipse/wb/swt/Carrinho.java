@@ -1,29 +1,36 @@
 package org.eclipse.wb.swt;
 import java.io.Serializable;
+
 import java.util.ArrayList;
 
 
+
 /**
- * Classe 'Carrinho', que agrupa uma lista de livros e quatidades
+ * Classe 'Carrinho', que agrupa uma lista de livros e respetivas quantidades
  * 
  * @author Tiago Correia
  * @author Alberto Machado
  * @sid 2019
  */
+@SuppressWarnings("serial")
 public class Carrinho implements Serializable{
 	protected ArrayList <Livro> livros;
 	protected ArrayList <Integer> quantidades;
 	
+	/**
+	 * Construtor da classe Carrinho sem atributos introduzidos
+	 */
 	Carrinho(){
 		livros = new ArrayList<>();
 		quantidades = new ArrayList<>();
 	}
 
 	
-	/*
+	/**
+	 * Construtor da classe Carrinho
 	 * 
-	 * 
-	*/
+	 * @param ArrayList de 'Livro', que podem ou não estar repetidos
+	 */
 	Carrinho( ArrayList <Livro> livrosRepetidos ){
 		livros = new ArrayList<>();
 		quantidades = new ArrayList<>();
@@ -42,6 +49,11 @@ public class Carrinho implements Serializable{
 		}
 	}
 	
+	/**
+	 * Método que calcula o custo total do carrinho
+	 * 
+	 * @return double custo total do carrinho
+	 */
 	public double totalCarrinho() {
 		//para cada um dos livros, percorrer a lista e ver as quantidades que lhe correspondem e ir somando total
 		double total = 0;
@@ -53,6 +65,11 @@ public class Carrinho implements Serializable{
 		return total;
 	}
 	
+	/**
+	 * Método toString para impressão de carrinho
+	 * 
+	 * @return String com informações do carrinho
+	 */
 	public String toString() {
 		//para cada um dos livros da lista, percorrer e acrescentar cada livro à String
 		String s = "";
@@ -64,7 +81,11 @@ public class Carrinho implements Serializable{
 		return s;
 	}	
 	
-	//Método que devolve o número de items que tem o carrinho
+	/**
+	 * Método que devolve o número de items (livros) que tem o carrinho
+	 * 
+	 * @return int número de livros que tem o carrinho
+	 */
 	public int numeroItemsDoCarrinho () {
 		int items = 0;
 		if ( livros.isEmpty() ) {

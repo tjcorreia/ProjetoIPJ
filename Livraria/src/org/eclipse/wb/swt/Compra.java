@@ -19,8 +19,11 @@ public class Compra implements Serializable{
 	protected GregorianCalendar data;
 	protected double total;
 	public Estado estadoCompra;//public para poder definir estado da compra a partir de outras classes
-		protected enum Estado {SUBMETIDA, PAGA, ANULADA};//protected para poder ir para a subclasse compraCartão
+	protected enum Estado {SUBMETIDA, PAGA, ANULADA};//protected para poder ir para a subclasse compraCartão
 	
+	/**
+	 * Construtor da classe Compra
+	 */
 	Compra(){
 		numCompra = -1;
 		carrinho = new Carrinho();

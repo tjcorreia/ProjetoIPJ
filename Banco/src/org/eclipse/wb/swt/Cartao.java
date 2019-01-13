@@ -13,7 +13,7 @@ import java.util.Random;
 * @sid 2019
 * 
 */
-
+ 
 public class Cartao implements Serializable{
 	// Atributos
 	protected int cartaoID;        // ID do Cartão gerado epla gestao

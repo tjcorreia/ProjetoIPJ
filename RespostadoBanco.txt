@@ -1,1 +1,4 @@
+<<<<<<< HEAD
 8,Pagamento efetuado com sucesso.
+=======
+>>>>>>> branch 'master' of https://github.com/tjcorreia/ProjetoIPJ.git
