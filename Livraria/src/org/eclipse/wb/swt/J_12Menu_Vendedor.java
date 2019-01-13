@@ -40,7 +40,9 @@ import org.eclipse.swt.events.MouseEvent;
  * @sid 2019
  */
 public class J_12Menu_Vendedor implements Serializable{
-
+	/**
+	 * Atributos da classe
+	 */
 	protected Shell shlMenuVendedor;
 	protected static Livraria livraria;// atributo adicionado para poder ir buscar métodos à livraria
 	protected Utilizador utilizador;
@@ -56,21 +58,8 @@ public class J_12Menu_Vendedor implements Serializable{
 		open();
 	}
 
-//	/**
-//	 * Launch the application.
-//	 * @param args
-//	 */
-//	public static void main(String[] args) {
-//		try {
-//			J_12Menu_Vendedor window = new J_12Menu_Vendedor(livraria);
-//			window.open();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
-
 	/**
-	 * Open the window.
+	 * Abrir a janela
 	 */
 	public void open() {
 		Display display = Display.getDefault();
@@ -96,7 +85,7 @@ public class J_12Menu_Vendedor implements Serializable{
 	}
 
 	/**
-	 * Create contents of the window.
+	 * Criar conteúdos da janela
 	 */
 	protected void createContents() {
 		shlMenuVendedor = new Shell();
@@ -193,17 +182,13 @@ public class J_12Menu_Vendedor implements Serializable{
 					confirmacao = janelaConfirmacao.isConfirmacao();
 					//Se confirmarem que querem pedir confirmação ao banco, escrever para thread do banco
 					if ( confirmacao) {
-//						
-//						
-//						01121000,100000,500010000,000,200.25
-//						
 						int compraID=compraSelecionada.getNumCompra();
 						String cartaoID=((CompraCartao) compraSelecionada).getNumCartao();
 						String pin=((CompraCartao) compraSelecionada).getPin();
 						double valorCompra= ((CompraCartao) compraSelecionada).getTotal();
 						
 						String aEnviar=compraID+","+100000+","+cartaoID+","+pin+","+valorCompra;
-//						ESCREVER PARA THREAD AO BANCO A PEDIR CONFIRMAÇÃO
+						//ESCREVER PARA THREAD AO BANCO A PEDIR CONFIRMAÇÃO
 						FicheiroDeTexto ficheiroPedidos = new FicheiroDeTexto();
 						FicheiroDeTexto ficheiroDevolucao = new FicheiroDeTexto();
 						try {
@@ -226,17 +211,24 @@ public class J_12Menu_Vendedor implements Serializable{
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
-						}while(resposta.equals(""));
-						System.out.println(resposta);
+						}while(resposta.equals(null)||resposta.equals(""));
+						
+						try {
+							ficheiroPedidos.abreEscrita("..\\RespostadoBanco.txt");
+							ficheiroPedidos.escreveLinha("");
+							ficheiroPedidos.fechaEscrita();
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 						
 						//Caso a resposta seja positiva
-						String str2 = "Pagamento efetuado com sucesso.";
-						if ( resposta.contains(str2) ) {
+						if ( resposta.contains("Pagamento efetuado com sucesso.") ) {
 							//abrir janela de mensagem de sucesso
 							compraSelecionada.setEstadoCompra(Compra.Estado.PAGA);
 							preencherTabela("Todas");
 							J_20AlteracaoSubmetida janela = new J_20AlteracaoSubmetida("SUCESSO"
-									+ "",str2);
+									+ "","Pagamento efetuado");
 							janela.open();
 						}
 						//Caso o valor seja superior ao limite diário
@@ -267,20 +259,6 @@ public class J_12Menu_Vendedor implements Serializable{
 									"Cartão inexistente");
 							janela.open();
 						}
-						
-						//RESPOSTAS POSSÍVEIS
-						//"Pagamento efetuado com sucesso."
-						//"VALOR superior ao LIMITE DIARIO PERMITIDO";
-						//"SALDO insuficiente";
-						//"O PIN não é Válido";
-						//"O Cartão não Existe";
-
-						
-						
-//						
-//						
-//						
-//						
 					}
 				}
 				//caso compra selecionado do tipo dinheiro
@@ -434,59 +412,6 @@ public class J_12Menu_Vendedor implements Serializable{
 		lblFiltrar.setBounds(27, 50, 128, 20);
 		lblFiltrar.setText("Filtrar");
 
-		
-		
-		
-//		
-//		tblclmnItems.addListener(SWT.Selection, new Listener() {
-//		      public void handleEvent(Event e) {
-//				// ordenar coluna NIF
-//				TableItem[] items = table.getItems();
-//				Collator collator = Collator.getInstance(Locale.getDefault());
-//				for (int i = 1; i < items.length; i++) {
-//					String value1 = items[i].getText(0);
-//					for (int j = 0; j < i; j++) {
-//						String value2 = items[j].getText(0);
-//						if (collator.compare(value1, value2) < 0) {
-//							String[] values = { items[i].getText(0), items[i].getText(1) };
-//							items[i].dispose();
-//							TableItem item = new TableItem(table, SWT.NONE, j);
-//							item.setText(values);
-//							items = table.getItems();
-//							break;
-//						}
-//					}
-//				}
-//			}
-//		});
-//		
-//		
-//		tblclmnNif.addListener(SWT.Selection, new Listener() {
-//		      public void handleEvent(Event e) {
-//				// ordenar coluna NIF
-//				TableItem[] items = table.getItems();
-//				Collator collator = Collator.getInstance(Locale.getDefault());
-//				for (int i = 1; i < items.length; i++) {
-//					String value1 = items[i].getText(0);
-//					for (int j = 0; j < i; j++) {
-//						String value2 = items[j].getText(0);
-//						if (collator.compare(value1, value2) < 0) {
-//							String[] values = { items[i].getText(0), items[i].getText(1) };
-//							items[i].dispose();
-//							TableItem item = new TableItem(table, SWT.NONE, j);
-//							item.setText(values);
-//							items = table.getItems();
-//							break;
-//						}
-//					}
-//				}
-//			}
-//		});
-		
-		
-		
-
- 
 
 	}
 	

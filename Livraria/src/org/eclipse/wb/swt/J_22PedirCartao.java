@@ -21,7 +21,9 @@ import org.eclipse.swt.widgets.Text;
  * @sid 2019
  */
 public class J_22PedirCartao implements Serializable {
-
+	/**
+	 * Atributos da classe
+	 */
 	protected Shell shlPedirCartao;
 	private Text caixaNumCartao;
 	private Text caixaPin;
@@ -38,7 +40,7 @@ public class J_22PedirCartao implements Serializable {
 
 
 	/**
-	 * Open the window.
+	 * Abrir a janela
 	 */
 	public void open() {
 		Display display = Display.getDefault();
@@ -53,7 +55,7 @@ public class J_22PedirCartao implements Serializable {
 	}
 
 	/**
-	 * Create contents of the window.
+	 * Criar conteúdos da janela
 	 */
 	protected void createContents() {
 		shlPedirCartao = new Shell();

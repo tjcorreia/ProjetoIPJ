@@ -1,52 +1,49 @@
 package org.eclipse.wb.swt;
 import org.eclipse.swt.widgets.Display;
 
-
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Label;
 
-import java.util.List;
 import java.io.Serializable;
 import java.util.ArrayList;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.Text;
 
-
-import org.eclipse.swt.widgets.Spinner;
-import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.widgets.Link;
 
 
 /**
- * Classe 
+ * Classe do tipo janela, que é exibida no ínicio, ao correr o main do presente projeto
  * 
  * @author Tiago Correia
  * @author Alberto Machado
  * @sid 2019
  */
+@SuppressWarnings("serial")
 public class J_00Inicial implements Serializable {
-
+	/**
+	 * Atributos da classe
+	 */
 	protected Shell shlViewComicsInc;
 	protected String stringProcurada;
 	protected ArrayList <Livro> listaLivrosDaBusca;
 	protected Livraria livraria;//atributo adicionado para poder ir buscar métodos à livraria
 	private Text caixaDeBusca;
 
-
-	//Construtor que traz Livraria para esta classe
+	/**
+	 * Construtor que traz Livraria para esta classe
+	 */
 	public J_00Inicial(Livraria livraria) {
 		stringProcurada="";
 		this.livraria=livraria;
 	}
 
 	/**
-	 * Open the window.
+	 * Abrir a janela
 	 */
 	public void open() {
 		Display display = Display.getDefault();
@@ -61,7 +58,7 @@ public class J_00Inicial implements Serializable {
 	}
 
 	/**
-	 * Create contents of the window.
+	 * Conteúdos da janela
 	 */
 	protected void createContents() {
 		shlViewComicsInc = new Shell();
@@ -117,12 +114,15 @@ public class J_00Inicial implements Serializable {
 		btnPesquisarLivro.setBounds(260, 134, 167, 25);
 		btnPesquisarLivro.setText("Pesquisar/Comprar Livro");
 		
+		/**
+		 * Link para aceder à janela de login, para administradores e vendedores
+		 */
 		Link linkAdmin = new Link(shlViewComicsInc, SWT.NONE);
 		linkAdmin.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
 				livraria.saveAll();
-				//Fechar janela de busca corrente
+				//Fechar janela de busca corrente			
 				shlViewComicsInc.close();
 				//Abrir nova janela de login
 				J_10Login janelaLogin = new J_10Login(livraria);

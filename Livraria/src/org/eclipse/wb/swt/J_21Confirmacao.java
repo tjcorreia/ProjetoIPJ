@@ -12,28 +12,21 @@ import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
 
 /**
- * Classe 
+ * Classe do tipo janela que apresenta dois labels de mensagem que podem ser recebidas no seu construtoe
+ * podendo por isso esta janela ser usada em diferentes casos
  * 
  * @author Tiago Correia
  * @author Alberto Machado
  * @sid 2019
  */
 public class J_21Confirmacao implements Serializable {
-
+	/**
+	 * Atributos da classe
+	 */
 	protected Shell shlConfirmacao;
 	private boolean confirmacao;
 	private String mensagem1;
 	private String mensagem2;
-
-	
-	
-	public boolean isConfirmacao() {
-		return confirmacao;
-	}
-
-	public void setConfirmacao(boolean confirmacao) {
-		this.confirmacao = confirmacao;
-	}
 
 	//Construtor para abrir uma nova janela deste tipo
 	public J_21Confirmacao(String s1, String s2, boolean conf) {
@@ -42,10 +35,8 @@ public class J_21Confirmacao implements Serializable {
 		this.confirmacao = confirmacao;
 	}	
 
-
-
 	/**
-	 * Open the window.
+	 * Abrir a janela
 	 */
 	public void open() {
 		Display display = Display.getDefault();
@@ -60,7 +51,7 @@ public class J_21Confirmacao implements Serializable {
 	}
 
 	/**
-	 * Create contents of the window.
+	 * Criar conteúdos da janela
 	 */
 	protected void createContents() {
 		shlConfirmacao = new Shell();
@@ -101,5 +92,12 @@ public class J_21Confirmacao implements Serializable {
 
 	}
 	
+	public boolean isConfirmacao() {
+		return confirmacao;
+	}
+
+	public void setConfirmacao(boolean confirmacao) {
+		this.confirmacao = confirmacao;
+	}
 
 }

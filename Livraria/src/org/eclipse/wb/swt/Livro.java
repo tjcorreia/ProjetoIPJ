@@ -2,13 +2,11 @@
 package org.eclipse.wb.swt;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+
 import java.util.Calendar;
-import java.util.Comparator;
 import java.util.GregorianCalendar;
 
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Set;
 
 /**
@@ -18,7 +16,11 @@ import java.util.Set;
  * @author Alberto Machado
  * @sid 2019
  */
+@SuppressWarnings("serial")
 public class Livro implements Serializable {
+	/**
+	 * Atributos da classe
+	 */
 	protected String nome;
 	protected String isbn;
 	protected String autor;
@@ -29,7 +31,9 @@ public class Livro implements Serializable {
 	protected int stock;
 	protected HashMap<GregorianCalendar, Double> precosAnteriores;
 
-	// construtor vazio
+	/**
+	 * Construtor da classe 'Livro' por defeito
+	 */
 	Livro() {
 		nome = "";
 		isbn = "";
@@ -42,7 +46,9 @@ public class Livro implements Serializable {
 		precosAnteriores = new HashMap<>();
 	}
 
-	// construtor completo
+	/**
+	 * Construtor da classe 'Livro' a partir de todos os seus atributos
+	 */
 	Livro(String nome, String isbn, String autor, String editora, String descricao, GregorianCalendar data,
 			double preco, int stock, HashMap<GregorianCalendar, Double> precosAnteriores) {
 		this.nome = nome;
@@ -56,7 +62,9 @@ public class Livro implements Serializable {
 		this.precosAnteriores = precosAnteriores;
 	}
 
-	// construtor com todas as instâncias menos os preços anteriores
+	/**
+	 * Construtor da classe 'Livro' a partir de todos os seus atributos menos os preços anteriores
+	 */
 	Livro(String nome, String isbn, String autor, String editora, String descricao, GregorianCalendar data,
 			double preco, int stock) {
 		this.nome = nome;
@@ -70,6 +78,10 @@ public class Livro implements Serializable {
 		this.precosAnteriores = new HashMap<>();
 	}
 
+	/**
+	 * Método para impressão do histórico de preços de um livro
+	 * (apenas para verificação)
+	 */
 	public void imprimirHistoricoPrecos() {
 		Set<GregorianCalendar> datas = precosAnteriores.keySet();
 		for (GregorianCalendar gc : datas) {
@@ -78,6 +90,11 @@ public class Livro implements Serializable {
 		}
 	}
 
+	/**
+	 * Método toString para impressão de um Livro
+	 * 
+	 * @return String com informação de todos os atributos de um livro
+	 */
 	public String toString() {
 		String s = "Título: " + nome + "\n  Autor: " + autor + "      Editora: " + editora + "\n  ISNB: " + isbn + "     Data: "
 				+ data.get(Calendar.YEAR) + "/" + (data.get(Calendar.MONTH) + 1) + "/" + data.get(Calendar.DAY_OF_MONTH)
@@ -85,6 +102,13 @@ public class Livro implements Serializable {
 		return s;
 	}
 
+	/**
+	 * 
+	 * 
+	 * Getters e Setters para os atributos de 'Livro'
+	 * 
+	 * 
+	 */
 	public String getNome() {
 		return nome;
 	}
@@ -156,40 +180,4 @@ public class Livro implements Serializable {
 	public void setStock(int stock) {
 		this.stock = stock;
 	}
-
-
-	
-//	//comparador para ordenar livros por titulo
-//	public static Comparator<Livro> ordenarPorAutor = new Comparator<Livro>() {
-//		public int compare(Livro l1, Livro l2) {
-//			String autor1 = l1.getAutor().toUpperCase();
-//			String autor2 = l2.getAutor().toUpperCase();
-//			// se os dois tiverem em forma ascendente, devolver em forma descendente
-//			if (autor1.compareToIgnoreCase(autor2) >= 0) {
-//				return autor2.compareTo(autor1);
-//			}
-//			// se os dois tiverem em forma descendente, devolver em forma ascendente
-//			else {
-//				return autor1.compareTo(autor2);
-//				
-//			}
-//		}
-//	};	
-
-//	/* Comparator for sorting the list by roll no */
-//	public static Comparator<Student> StuRollno = new Comparator<Student>() {
-//
-//		public int compare(Student s1, Student s2) {
-//
-//			int rollno1 = s1.getRollno();
-//			int rollno2 = s2.getRollno();
-//
-//			/* For ascending order */
-//			return rollno1 - rollno2;
-//
-//			/* For descending order */
-//			// rollno2-rollno1;
-//		}
-//	};
-
 }

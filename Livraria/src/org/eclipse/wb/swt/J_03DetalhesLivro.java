@@ -6,36 +6,26 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Button;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.Scanner;
-
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.widgets.Text;
-import org.eclipse.swt.widgets.Table;
-import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
-import org.eclipse.swt.widgets.DateTime;
-import org.eclipse.swt.widgets.Spinner;
-import org.eclipse.swt.custom.CCombo;
 
 /**
- * Classe 
+ * Classe do tipo janela que permite visualizar os detalhes de um livro
  * 
  * @author Tiago Correia
  * @author Alberto Machado
  * @sid 2019
  */
+@SuppressWarnings("serial")
 public class J_03DetalhesLivro implements Serializable {
-
+	/**
+	 * Atributos da classe
+	 */
 	protected Shell shlDetalhesLivro;
 	protected Livraria livraria;//atributo adicionado para poder ir buscar métodos à livraria
 	protected Livro livroSelecionado;//atributo que nos dá o livro que está selecionado na table
@@ -56,20 +46,17 @@ public class J_03DetalhesLivro implements Serializable {
 	private Label lblData2;
 	private Label lblDescricao2;
 	
-	
-	
-	
-	//Construtor para poder trazer a Livraria e o utilizador para esta classe
+	/**
+	 * Construtor que traz Livraria e o livro selecionado
+	 */
 	public J_03DetalhesLivro(Livraria livraria, Livro livroSelecionado) {
 		//super();
 		this.livraria = livraria;
 		this.livroSelecionado = livroSelecionado;
 	}	
-	
-
 
 	/**
-	 * Open the window.
+	 * Abrir a janela
 	 */
 	public void open() {
 		Display display = Display.getDefault();
@@ -83,29 +70,19 @@ public class J_03DetalhesLivro implements Serializable {
 		}
 	}
 	
-	
-
 	/**
-	 * Create contents of the window.
+	 * Criar conteúdos da janela
 	 */
 	protected void createContents() {
 		shlDetalhesLivro = new Shell();
 		shlDetalhesLivro.setSize(730, 542);
 		shlDetalhesLivro.setText("View Comics - Detalhes Livro");
 		
-		
-		
-		/**
-		 *
-		 * 
-		 * 
-		 */
 		Label lblMenuAdministrador = new Label(shlDetalhesLivro, SWT.NONE);
 		lblMenuAdministrador.setText("DETALHES DO LIVRO");
 		lblMenuAdministrador.setFont(SWTResourceManager.getFont("Segoe UI", 12, SWT.NORMAL));
 		lblMenuAdministrador.setBounds(10, 10, 229, 38);
 		
-
 		Button btnFechar = new Button(shlDetalhesLivro, SWT.NONE);
 		btnFechar.setText("Fechar");
 		btnFechar.setBounds(598, 457, 104, 28);
@@ -116,13 +93,6 @@ public class J_03DetalhesLivro implements Serializable {
 			}
 		});
 
-		
-		
-		/**
-		 *
-		 * 
-		 * 
-		 */
 		lblTitulo = new Label(shlDetalhesLivro, SWT.NONE);
 		lblTitulo.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
 		lblTitulo.setAlignment(SWT.RIGHT);
@@ -194,24 +164,13 @@ public class J_03DetalhesLivro implements Serializable {
 		
 		lblDescricao2 = new Label(shlDetalhesLivro, SWT.WRAP | SWT.LEFT);
 		lblDescricao2.setBounds(273, 415, 261, 70);
-		
-		
-		preencherDadosLivro();
 
+		preencherDadosLivro();
 	}
 
-	
 	/**
-	 *
-	 * Métodos fora do 'createContents()'
-	 * 
+	 * Método para preencher as caixas de alteração de dados de livro, com os dados do livro selecionado
 	 */
-	
-	
-	
-
-	
-	//Método para preencher as caixas de alteração de dados de livro, com os dados do livro selecionado
 	public void preencherDadosLivro() {
 		lblTitulo2.setText(livroSelecionado.nome);
 		lblIsbn2.setText(livroSelecionado.isbn);
@@ -219,15 +178,11 @@ public class J_03DetalhesLivro implements Serializable {
 		lblEditora2.setText(livroSelecionado.editora);
 		lblPreco2.setText(String.valueOf(livroSelecionado.preco) + "€");
 		lblStock2.setText( "" + livroSelecionado.stock);
-		
 		lblData2.setText("" + livroSelecionado.getData().get(Calendar.DAY_OF_MONTH) + "/" +
 				(livroSelecionado.getData().get(Calendar.MONTH)-1) + "/" + livroSelecionado.getData().get(Calendar.YEAR));
-		
-		
+
 		GridData data = new GridData(SWT.HORIZONTAL, SWT.TOP, true, false, 1, 1);
 		lblDescricao2.setLayoutData(data);
 		lblDescricao2.setText(livroSelecionado.descricao);
 	}	
-
-	
 }

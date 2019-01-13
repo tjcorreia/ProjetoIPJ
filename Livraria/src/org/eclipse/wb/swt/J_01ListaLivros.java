@@ -1,24 +1,19 @@
 package org.eclipse.wb.swt;
+
 import java.text.Collator;
 
 import org.eclipse.swt.widgets.Display;
 
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Listener;
 
-import java.awt.Point;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
 
 import org.eclipse.swt.SWT;
 
-import org.eclipse.swt.widgets.Spinner;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -33,39 +28,41 @@ import org.eclipse.swt.widgets.TableColumn;
 import java.util.Locale;
 
 /**
- * Classe 
+ * Classe do tipo janela em que os livros são listados, podendo também fazer-se
+ * nova procura e iniciar o carrinho
  * 
  * @author Tiago Correia
  * @author Alberto Machado
  * @sid 2019
  */
+@SuppressWarnings("serial")
 public class J_01ListaLivros implements Serializable {
-
+	/**
+	 * Atributos da classe
+	 */
 	protected Shell shlViewComicsInc;
-	// protected static ArrayList <Livro> listaLivrosCarrinho = new
-	// ArrayList<>();//adicionou-se este atributo para criar carrinho a partir desta
-	// lista
 	protected Livro livroSelecionado;// atributo que nos dá o livro que está selecionado na table
 	protected Livraria livraria;// atributo adicionado para poder ir buscar métodos à livraria
 	protected Carrinho carrinho;
 	protected String stringProcurada;
 	protected ArrayList<Livro> listaLivrosDaBusca;
-	// protected int indexLivroSelecionado;//adicionou-se este atributo para poder
-	// passá-lo entre métodos
 	private Table table;
-	private Text caixaDeBusca;// adicionou-se carrinho para cria-lo e passar para outras classes
+	private Text caixaDeBusca;
 
-
-	
-	// Criou-se construtor para poder receber o carrinho da janela seguinte
-	// 'J_02Carrinho'
+	/**
+	 * Construtor que traz Livraria e carrinho para esta classe da janela seguinte
+	 * 'J_02Carrinho'
+	 */
 	public J_01ListaLivros(Livraria livraria, Carrinho carrinho1) {
 		this.livraria = livraria;
 		carrinho = carrinho1;
 		stringProcurada = "";
 	}
 
-	// Construtor para quando se vem da janela anterior 'J_00Inicial'
+	/**
+	 * Construtor que traz Livraria, palavra procurada e lista de livros procurados
+	 * para esta classe da janela anterior 'J_00Inicial'
+	 */
 	public J_01ListaLivros(Livraria livraria, ArrayList<Livro> listaLivrosDaBusca, String stringProcurada) {
 		this.livraria = livraria;
 		this.listaLivrosDaBusca = listaLivrosDaBusca;
@@ -73,9 +70,8 @@ public class J_01ListaLivros implements Serializable {
 		this.stringProcurada = stringProcurada;
 	}
 
-
 	/**
-	 * Open the window.
+	 * Abrir a janela
 	 */
 	public void open() {
 		Display display = Display.getDefault();
@@ -90,8 +86,7 @@ public class J_01ListaLivros implements Serializable {
 	}
 
 	/**
-	 * 
-	 * Create contents of the window.
+	 * Conteúdos da janela
 	 */
 	protected void createContents() {
 		shlViewComicsInc = new Shell();
@@ -111,36 +106,32 @@ public class J_01ListaLivros implements Serializable {
 		lblMensagemSelecioneLivro.setBounds(664, 76, 134, 20);
 		lblMensagemSelecioneLivro.setText("Selecione um livro");
 		lblMensagemSelecioneLivro.setVisible(false);
-		
+
 		// Label que dá mensagem de erro caso o livro não esteja dizponível
 		Label lblMensagemAdicioneLivro = new Label(shlViewComicsInc, SWT.WRAP | SWT.LEFT);
 		lblMensagemAdicioneLivro.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
 		lblMensagemAdicioneLivro.setBounds(664, 76, 134, 40);
-		lblMensagemAdicioneLivro.setVisible(false);	
+		lblMensagemAdicioneLivro.setVisible(false);
 		GridData data = new GridData(SWT.HORIZONTAL, SWT.TOP, true, false, 1, 1);
 		lblMensagemAdicioneLivro.setLayoutData(data);
 		lblMensagemAdicioneLivro.setText("Carrinho vazio\nAdicione livro(s)");
 
-
-		table = new Table(shlViewComicsInc, SWT.BORDER | SWT.UP|SWT.FULL_SELECTION );
+		table = new Table(shlViewComicsInc, SWT.BORDER | SWT.UP | SWT.FULL_SELECTION);
 		// listner para ação ao selecionar um dos items da table e devolve o index do
 		// item na lista de livros
 		table.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				lblMensagemAdicioneLivro.setVisible(false);	
+				lblMensagemAdicioneLivro.setVisible(false);
 				lblMensagemLivroIndisponivel.setVisible(false);
 				lblMensagemSelecioneLivro.setVisible(false);
 				int indexLivroSelecionado = ((Table) e.widget).indexOf((TableItem) e.item);
-				//caso a busca não devolva resultados, nao fazer nada
-				if ( listaLivrosDaBusca.isEmpty() || listaLivrosDaBusca == null ) {
-					
-				}
-				else {
+				// caso a busca não devolva resultados, nao fazer nada
+				if (listaLivrosDaBusca.isEmpty() || listaLivrosDaBusca == null) {
+				} else {
 					livroSelecionado = listaLivrosDaBusca.get(indexLivroSelecionado);
 					// fazer corresponder o livro selecionado a um dos livros da livraria, para as
-					// mudanças
-					// de stock, se reproduzirem na livraria
+					// mudanças de stock, se reproduzirem na livraria
 					livroSelecionado = livraria.getLivro(livroSelecionado.isbn);
 					// caso não haja nenhum selecionado, não acontece nada
 					if (livroSelecionado == null) {
@@ -160,27 +151,19 @@ public class J_01ListaLivros implements Serializable {
 						lblMensagemSelecioneLivro.setVisible(false);
 					}
 				}
-				
+
 			}
 		});
 		table.setBounds(10, 75, 648, 406);
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
 		table.setHeaderBackground(SWTResourceManager.getColor(SWT.COLOR_GRAY));
-		
 
-		TableColumn tblclmnTtulo = new TableColumn(table, SWT.CENTER );
-//		tblclmnTtulo.addSelectionListener(new SelectionAdapter() {
-//			@Override
-//			public void widgetSelected(SelectionEvent e) {
-//				listaLivrosDaBusca = livraria.ordenarLivroTitulo( listaLivrosDaBusca);
-//				preencherTabela();
-//			}
-//		});
+		TableColumn tblclmnTtulo = new TableColumn(table, SWT.CENTER);
 		tblclmnTtulo.setWidth(170);
 		tblclmnTtulo.setText("T\u00EDtulo");
 
-		TableColumn tblclmnAutor = new TableColumn(table, SWT.CENTER );
+		TableColumn tblclmnAutor = new TableColumn(table, SWT.CENTER);
 		tblclmnAutor.setWidth(97);
 		tblclmnAutor.setText("Autor");
 
@@ -203,102 +186,45 @@ public class J_01ListaLivros implements Serializable {
 		TableColumn tblclmnPreco = new TableColumn(table, SWT.CENTER);
 		tblclmnPreco.setWidth(53);
 		tblclmnPreco.setText("Pre\u00E7o");
-		
-		
-		
-		
-		
-		
-//		column1.addListener(SWT.Selection, new Listener() {
-//		      public void handleEvent(Event e) {
-//		        // sort column 1
-//		        TableItem[] items = table.getItems();
-//		        Collator collator = Collator.getInstance(Locale.getDefault());
-//		        for (int i = 1; i < items.length; i++) {
-//		          String value1 = items[i].getText(0);
-//		          for (int j = 0; j < i; j++) {
-//		            String value2 = items[j].getText(0);
-//		            if (collator.compare(value1, value2) < 0) {
-//		              String[] values = { items[i].getText(0),
-//		                  items[i].getText(1) };
-//		              items[i].dispose();
-//		              TableItem item = new TableItem(table, SWT.NONE, j);
-//		              item.setText(values);
-//		              items = table.getItems();
-//		              break;
-//		            }
-//		          }
-//		        }
-//		      }
-//		    });
-		
-		
-		
-		
-		
-		Listener sortListener = new Listener() {
-		      public void handleEvent(Event e) {
-		        TableItem[] items = table.getItems();
-		        Collator collator = Collator.getInstance(Locale.getDefault());
-		        TableColumn column = (TableColumn) e.widget;
-		        int index = column == table.getColumn(0) ? 0 : 1;
-		        for (int i = 1; i < items.length; i++) {
-		          String value1 = items[i].getText(index);
-		          for (int j = 0; j < i; j++) {
-		            String value2 = items[j].getText(index);
-		            if (collator.compare(value1, value2) < 0) {
-		              String[] values = { items[i].getText(0), items[i].getText(1),
-		            		  items[i].getText(2), items[i].getText(3),
-		            		  items[i].getText(4), items[i].getText(5),
-		            		  items[i].getText(6)};
-		              items[i].dispose();
-		              TableItem item = new TableItem(table, SWT.NONE, j);
-		              item.setText(values);
-		              items = table.getItems();
-		              break;
-		            }
-		          }
-		        }
-		        table.setSortColumn(column);
-		        
-		      }
-		    };
-		    tblclmnTtulo.addListener(SWT.Selection, sortListener);
-		    tblclmnAutor.addListener(SWT.Selection, sortListener);
-		    tblclmnIsbn.addListener(SWT.Selection, sortListener);
-		    tblclmnEditora.addListener(SWT.Selection, sortListener);
-		    tblclmnData.addListener(SWT.Selection, sortListener);
-		    tblclmnStock.addListener(SWT.Selection, sortListener);
-		    tblclmnPreco.addListener(SWT.Selection, sortListener);
-		    table.setSortColumn(tblclmnTtulo);
-		    table.setSortDirection(SWT.TOP);
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		//table.setSortColumn(tblclmnTtulo);
-	//	table.setAutoCreateRowSorter(true);
-		preencherTabela();
-		
-		
 
-//		//ACRESCENTAR BUTÃO LIMPAR CARRINHO E COPIAR PARA A JANELA CARRINHO
-//		***
-//		
-//		
-//		
-//		
-//		
-//		
+		// Listner que permite fazer a reordenação dos items listados na tabela, ao
+		// clicar numa coluna
+		Listener sortListener = new Listener() {
+			public void handleEvent(Event e) {
+				TableItem[] items = table.getItems();
+				Collator collator = Collator.getInstance(Locale.getDefault());
+				TableColumn column = (TableColumn) e.widget;
+				int index = column == table.getColumn(0) ? 0 : 1;
+				for (int i = 1; i < items.length; i++) {
+					String value1 = items[i].getText(index);
+					for (int j = 0; j < i; j++) {
+						String value2 = items[j].getText(index);
+						if (collator.compare(value1, value2) < 0) {
+							String[] values = { items[i].getText(0), items[i].getText(1), items[i].getText(2),
+									items[i].getText(3), items[i].getText(4), items[i].getText(5),
+									items[i].getText(6) };
+							items[i].dispose();
+							TableItem item = new TableItem(table, SWT.NONE, j);
+							item.setText(values);
+							items = table.getItems();
+							break;
+						}
+					}
+				}
+				table.setSortColumn(column);
+			}
+		};
+		tblclmnTtulo.addListener(SWT.Selection, sortListener);
+		tblclmnAutor.addListener(SWT.Selection, sortListener);
+		tblclmnIsbn.addListener(SWT.Selection, sortListener);
+		tblclmnEditora.addListener(SWT.Selection, sortListener);
+		tblclmnData.addListener(SWT.Selection, sortListener);
+		tblclmnStock.addListener(SWT.Selection, sortListener);
+		tblclmnPreco.addListener(SWT.Selection, sortListener);
+		table.setSortColumn(tblclmnTtulo);
+		table.setSortDirection(SWT.TOP);
+
+		preencherTabela();
 
 		// Listner para o botão de 'voltar'
 		Button buttonVoltar = new Button(shlViewComicsInc, SWT.NONE);
@@ -326,7 +252,7 @@ public class J_01ListaLivros implements Serializable {
 		btnAdicionarAoCarrinho.addMouseListener(new MouseAdapter() {
 			public void mouseUp(MouseEvent e) {
 				livraria.saveAll();
-				lblMensagemAdicioneLivro.setVisible(false);	
+				lblMensagemAdicioneLivro.setVisible(false);
 				// caso não haja nenhum selecionado, não acontece nada
 				if (livroSelecionado == null) {
 					// tornar visivel mensagem para selecionar um livro
@@ -354,10 +280,8 @@ public class J_01ListaLivros implements Serializable {
 		btnAdicionarAoCarrinho.setText("Adicionar");
 		btnAdicionarAoCarrinho.setBounds(674, 179, 71, 30);
 
-		// Butão remover do carrinho. Remove o item que está selecionado (caso ele faça
-		// parte do carrinho) ou
-		// remove o último livro adicionado, caso o livro selecionado não faça parte do
-		// carrinho
+		// Butão remover do carrinho. Remove o item que está selecionado (caso ele faça parte do carrinho) 
+		// ou remove o último livro adicionado, caso o livro selecionado não faça parte do carrinho
 		Button btnRemover = new Button(shlViewComicsInc, SWT.CENTER);
 		btnRemover.addMouseListener(new MouseAdapter() {
 			public void mouseUp(MouseEvent e) {
@@ -374,7 +298,6 @@ public class J_01ListaLivros implements Serializable {
 				}
 				// se carrinho já está vazio, não fazer nada
 				else if (carrinho.livros.isEmpty()) {
-
 				}
 				// Mesmo que o livro selecionado, não esteja no carrinho,
 				// ao carregar em remover, remove-se o último livro a entrar para o carrinho
@@ -413,7 +336,7 @@ public class J_01ListaLivros implements Serializable {
 			public void mouseUp(MouseEvent e) {
 				livraria.saveAll();
 				lblMensagemSelecioneLivro.setVisible(false);
-				lblMensagemAdicioneLivro.setVisible(false);	
+				lblMensagemAdicioneLivro.setVisible(false);
 				// Passar para string o texto introduzido na caixa de texto
 				stringProcurada = caixaDeBusca.getText();
 				// Chamar método 'procurarLivro' para a string introduzida
@@ -422,7 +345,7 @@ public class J_01ListaLivros implements Serializable {
 				// vazia
 				if (listaLivrosDaBusca.isEmpty()) {
 					lblMensagemSemCorrespondencias.setVisible(true);
-					//anular o livro selecionado, para que não fique válido para outros botões
+					// anular o livro selecionado, para que não fique válido para outros botões
 					livroSelecionado = null;
 					preencherTabela();
 				}
@@ -444,15 +367,15 @@ public class J_01ListaLivros implements Serializable {
 			public void mouseUp(MouseEvent e) {
 				livraria.saveAll();
 				lblMensagemSelecioneLivro.setVisible(false);
-				lblMensagemAdicioneLivro.setVisible(false);	
-				// caso carrinho esteja vazio, apresentar mensagem para adicionar livros ao carrinho
-				if ( carrinho.livros.isEmpty() ) {
+				lblMensagemAdicioneLivro.setVisible(false);
+				// caso carrinho esteja vazio, apresentar mensagem para adicionar livros ao
+				// carrinho
+				if (carrinho.livros.isEmpty()) {
 					// tornar visivel mensagem para adicionar um livro
 					lblMensagemAdicioneLivro.setVisible(true);
-					//anular o livro selecionado, para que não fique válido para outros botões
+					// anular o livro selecionado, para que não fique válido para outros botões
 					livroSelecionado = null;
-				}
-				else {
+				} else {
 					// comando para fechar a janela corrente
 					shlViewComicsInc.close();
 					// Abrir nova janela do carrinho
@@ -463,38 +386,37 @@ public class J_01ListaLivros implements Serializable {
 		});
 		btnVerCarrinho.setText("Ver/Finalizar Carrinho");
 		btnVerCarrinho.setBounds(674, 225, 148, 30);
-		
+
 		Button btnVerDetalhesLivro = new Button(shlViewComicsInc, SWT.CENTER);
 		btnVerDetalhesLivro.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
 				livraria.saveAll();
-				lblMensagemAdicioneLivro.setVisible(false);	
+				lblMensagemAdicioneLivro.setVisible(false);
 				lblMensagemSelecioneLivro.setVisible(false);
 				// caso não haja nenhum selecionado
 				if (livroSelecionado == null) {
 					// tornar visivel mensagem para selecionar um livro
 					lblMensagemSelecioneLivro.setVisible(true);
-				}
-				else {
+				} else {
 					J_03DetalhesLivro janelaDetalhes = new J_03DetalhesLivro(livraria, livroSelecionado);
 					janelaDetalhes.open();
 				}
-				
+
 			}
 		});
 		btnVerDetalhesLivro.setText("Ver Detalhes do livro");
 		btnVerDetalhesLivro.setBounds(674, 363, 148, 30);
-		
+
 		Label label = new Label(shlViewComicsInc, SWT.SEPARATOR | SWT.HORIZONTAL);
 		label.setBounds(667, 114, 162, 2);
-		
+
 		Label label_1 = new Label(shlViewComicsInc, SWT.SEPARATOR | SWT.HORIZONTAL);
 		label_1.setBounds(667, 263, 162, 2);
-		
+
 		Label label_2 = new Label(shlViewComicsInc, SWT.SEPARATOR | SWT.VERTICAL);
 		label_2.setBounds(666, 114, 2, 150);
-		
+
 		Label label_3 = new Label(shlViewComicsInc, SWT.SEPARATOR);
 		label_3.setBounds(828, 114, 2, 150);
 
@@ -506,27 +428,12 @@ public class J_01ListaLivros implements Serializable {
 				event.height = 90;
 			}
 		});
-		
-		
 
 	}
 
-//	// Método para limpar e preencher novamente a tabela
-//	public void preencherTabela() {
-//		// limpar tabela
-//		table.removeAll();
-//		// Chamar novamente o método 'procurarLivro' para actualizar os stocks dos
-//		// livros da 'listaLivrosDaBusca'
-//		listaLivrosDaBusca = livraria.procurarLivro(stringProcurada);
-//		// adicionar um a um os livros da lista de livros da busca à table
-//		for (Livro lv : listaLivrosDaBusca) {
-//			TableItem item = new TableItem(table, SWT.NONE);
-//			item.setText(lv.toString());
-//		}
-//		table.redraw();
-//	}
-
-	// Método para limpar e preencher novamente a tabela
+	/**
+	 * Método para limpar e preencher novamente a tabela
+	 */
 	public void preencherTabela() {
 		// limpar tabela
 		table.removeAll();

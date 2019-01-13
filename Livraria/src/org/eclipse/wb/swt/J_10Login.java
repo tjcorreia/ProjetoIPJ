@@ -3,10 +3,8 @@ package org.eclipse.wb.swt;
 import org.eclipse.swt.widgets.Display;
 
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.Composite;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Text;
@@ -15,8 +13,6 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
-import org.eclipse.swt.events.KeyAdapter;
-import org.eclipse.swt.events.KeyEvent;
 
 /**
  * Classe 
@@ -25,25 +21,26 @@ import org.eclipse.swt.events.KeyEvent;
  * @author Alberto Machado
  * @sid 2019
  */
+@SuppressWarnings("serial")
 public class J_10Login implements Serializable {
-
+	/**
+	 * Atributos da classe
+	 */
 	protected Shell shlLogin;
-	protected Livraria livraria;//atributo adicionado para poder ir buscar métodos e elemnetos à livraria 
+	protected Livraria livraria;
 	private Text caixaParaPassword;
 	private Text caixaParaEmail;
 	
-	
-
-	//Construtor para poder trazer a Livraria para esta classe
+	/**
+	 * Construtor que traz Livraria para esta classe
+	 */
 	public J_10Login(Livraria livraria) {
 		//super();
 		this.livraria = livraria;
 	}
 		
-	
-	
 	/**
-	 * Open the window.
+	 * Abrir a janela
 	 */
 	public void open() {
 		Display display = Display.getDefault();
@@ -58,7 +55,7 @@ public class J_10Login implements Serializable {
 	}
 
 	/**
-	 * Create contents of the window.
+	 * Criar conteúdos da janela
 	 */
 	protected void createContents() {
 		shlLogin = new Shell();
@@ -104,20 +101,9 @@ public class J_10Login implements Serializable {
 		lblMensagemDeErroPassword.setBounds(92, 175, 144, 20);
 		lblMensagemDeErroPassword.setText("Password incorreta");
 		lblMensagemDeErroPassword.setVisible(false);		
-		
-		
-		
-		//Listner para ação ao carregar em 'entrar'
+
+		//Botão com Listner para ação ao carregar em 'entrar'
 		Button btnEntrar = new Button(shlLogin, SWT.NONE);
-		/*btnEntrar.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent e) {
-				if (e.character == SWT.CR || e.character == SWT.LF) {
-					   System.out.println("chegou");
-					}
-				//System.out.println("chegou");
-			}
-		});*/
 		btnEntrar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
@@ -173,35 +159,5 @@ public class J_10Login implements Serializable {
 		});
 		btnVoltar.setBounds(342, 217, 80, 26);
 		btnVoltar.setText("Voltar");
-
 	}
-	/*
-	public void carregarEntrar() {
-		//Passar para strings os textos introduzidos na caixa de email e password
-		String email = text_email.getText();
-		String password = text_password.getText();
-		//Chamar método 'verificarLogin' para as strings introduzidas
-		String resultadoVerificacao = livraria.verificarLogin ( email, password );
-		//Caso pass e mail corretos e utilizador do tipo Admin, abre janela de Admin
-		if ( resultadoVerificacao.equals("okAdmin") ) {
-			J_11Menu_Admin j = new J_11Menu_Admin();
-			j.open();
-		}
-		//Caso pass e mail corretos e utilizador do tipo Vendedor, abre janela de Vendedor
-		else if ( resultadoVerificacao.equals("okVendedor") ) {
-			J_12Menu_Vendedor j = new J_12Menu_Vendedor();
-			j.open();
-		}
-		//caso mail correto e password não
-		else if ( resultadoVerificacao.equals("passwordErrada") ) {
-			lblMensagemDeErroUtilizador.setVisible(false);
-			lblMensagemDeErroPassword.setVisible(true);
-		}
-		//
-		else  {
-			lblMensagemDeErroUtilizador.setVisible(true);
-			lblMensagemDeErroPassword.setVisible(false);
-		}
-	}
-	*/
 }

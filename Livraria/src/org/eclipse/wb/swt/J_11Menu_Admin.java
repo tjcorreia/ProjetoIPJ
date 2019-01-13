@@ -1,6 +1,7 @@
 package org.eclipse.wb.swt;
 
 import org.eclipse.swt.widgets.Display;
+
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Button;
@@ -10,8 +11,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
-import java.util.Scanner;
-
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Label;
@@ -25,7 +24,6 @@ import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Spinner;
-import org.eclipse.swt.custom.CCombo;
 import org.eclipse.swt.widgets.TableColumn;
 
 /**
@@ -35,10 +33,13 @@ import org.eclipse.swt.widgets.TableColumn;
  * @author Alberto Machado
  * @sid 2019
  */
+@SuppressWarnings("serial")
 public class J_11Menu_Admin implements Serializable {
-
+	/**
+	 * Atributos da classe
+	 */
 	protected Shell shlMenuAdmin;
-	protected Livraria livraria;//atributo adicionado para poder ir buscar métodos à livraria
+	protected Livraria livraria;
 	private Text CaixaDePesquisa;
 	private Table tabelaLivros;
 	protected Utilizador utilizador;
@@ -86,10 +87,9 @@ public class J_11Menu_Admin implements Serializable {
 	private TableColumn tblclmnLivros;
 	private Button btnVerHistrico;
 	
-	
-	
-	
-	//Construtor para poder trazer a Livraria e o utilizador para esta classe
+	/**
+	 * Construtor que traz Livraria e utilizador para esta classe da janela anterior J_01
+	 */
 	public J_11Menu_Admin(Livraria livraria, Utilizador utilizador) {
 		//super();
 		this.utilizador = utilizador;
@@ -99,10 +99,8 @@ public class J_11Menu_Admin implements Serializable {
 		livroSelecionado = new Livro();
 	}	
 	
-
-
 	/**
-	 * Open the window.
+	 * Abrir a janela
 	 */
 	public void open() {
 		Display display = Display.getDefault();
@@ -116,17 +114,13 @@ public class J_11Menu_Admin implements Serializable {
 		}
 	}
 	
-	
-
 	/**
-	 * Create contents of the window.
+	 * Criar conteúdos da janela
 	 */
 	protected void createContents() {
 		shlMenuAdmin = new Shell();
 		shlMenuAdmin.setSize(846, 542);
 		shlMenuAdmin.setText("Menu Administrador");
-		
-		
 		
 		/**
 		 *
@@ -163,10 +157,8 @@ public class J_11Menu_Admin implements Serializable {
 			public void mouseUp(MouseEvent e) {
 				limparCaixasLivro();
 				visibilidadesBtnAdicionarLivro();
-				
 			}
 		});
-		
 		
 		Button btnRegistarVendedor = new Button(shlMenuAdmin, SWT.NONE);
 		btnRegistarVendedor.setText("Registar vendedor");
@@ -177,7 +169,6 @@ public class J_11Menu_Admin implements Serializable {
 				visibilidadesBtnRegistarVendedor();
 			}
 		});
-		
 
 		Button btnVoltar = new Button(shlMenuAdmin, SWT.NONE);
 		btnVoltar.setText("Voltar/Logout");
@@ -191,11 +182,6 @@ public class J_11Menu_Admin implements Serializable {
 				janelaInicial.open();
 			}
 		});
-		
-		
-		
-		
-		
 		
 		/**
 		 *
@@ -272,7 +258,6 @@ public class J_11Menu_Admin implements Serializable {
 			}
 		});
 		preencherTabela();
-		
 		
 		/**
 		 *
@@ -467,7 +452,6 @@ public class J_11Menu_Admin implements Serializable {
 			}
 		});
 		
-		
 		/**
 		 *
 		 * elementos visiveis para 'registar vendedor'
@@ -527,11 +511,6 @@ public class J_11Menu_Admin implements Serializable {
 					visibilidadesInicio();
 					J_20AlteracaoSubmetida janela = new J_20AlteracaoSubmetida("Vendedor registado com sucesso","");
 					janela.open();
-//					J_20AlteracaoSubmetida janelaMensgUtilizadorRegistado = new J_20AlteracaoSubmetida("Vendedor registado com sucesso" , "");
-//					janelaMensgUtilizadorRegistado.open();
-//					janelaMensgCompraSubmetida.setTextoMensagens("Vendedor submetido com sucesso" , "");
-//					J_20AlteracaoSubmetida janelaMensgVendedorRegistado = new J_20AlteracaoSubmetida();
-//					janelaMensgVendedorRegistado.open();
 				}
 				//caso os dados não sejam válidos, não fazer nada, porque o método 'verificarSeUtilizadorValido' 
 				//vai fazer mostrar os alertas de erros
@@ -540,7 +519,6 @@ public class J_11Menu_Admin implements Serializable {
 				livraria.saveAll();
 			}
 		});
-		
 		
 		// Listner que deixa definir a altura de cada linha da table
 		// é preciso importar o org.eclipse.swt.widgets.Event;
@@ -553,14 +531,6 @@ public class J_11Menu_Admin implements Serializable {
 
 	}
 	
-	
-	
-	
-	
-
-	
-
-	
 	/**
 	 *
 	 * Métodos fora do 'createContents()'
@@ -570,7 +540,9 @@ public class J_11Menu_Admin implements Serializable {
 	
 	
 	
-	//Método para limpar e preencher novamente a tabela 
+	/**
+	 * Método para limpar e preencher a tabela
+	 */
 	public void preencherTabela() {
 		//limpar tabela
 		tabelaLivros.removeAll();
@@ -584,7 +556,9 @@ public class J_11Menu_Admin implements Serializable {
 		tabelaLivros.redraw();	
 	}	
 	
-	//Método para preencher as caixas de alteração de dados de livro, com os dados do livro selecionado
+	/**
+	 * Método para preencher as caixas de alteração de dados de livro, com os dados do livro selecionado
+	 */
 	public void preencherCaixasLivro() {
 		caixaTitulo.setText(livroSelecionado.nome);
 		caixaIsbn.setText(livroSelecionado.isbn);
@@ -598,8 +572,9 @@ public class J_11Menu_Admin implements Serializable {
 		caixaDescricao.setText(livroSelecionado.descricao);
 	}	
 	
-	
-	//Método para preencher as caixas de alteração de dados de livro, com os dados do livro selecionado
+	/**
+	 * Método para preencher as caixas de alteração de dados de livro, com os dados do livro selecionado
+	 */
 	public void limparCaixasLivro() {
 		caixaTitulo.setText("");
 		caixaIsbn.setText("");
@@ -614,7 +589,9 @@ public class J_11Menu_Admin implements Serializable {
 		caixaDescricao.setText("");
 	}	
 	
-	//Método para recolher dados das caixas de alteração de dados de livro
+	/**
+	 * Método para recolher dados das caixas de alteração de dados de livro
+	 */
 	public boolean verificarSeLivroValido() {
 		//verificar se título não está em branco
 		String novoTitulo = caixaTitulo.getText();
@@ -688,7 +665,9 @@ public class J_11Menu_Admin implements Serializable {
 		return true;
 	}	
 	
-	//Método para recolher dados das caixas de alteração de dados de livro
+	/**
+	 * Método para recolher dados das caixas de alteração de dados de livro
+	 */
 	public boolean verificarSeUtilizadorValido() {
 		//verificar se nome não está em branco
 		String nome = caixaTitulo.getText();
@@ -720,7 +699,9 @@ public class J_11Menu_Admin implements Serializable {
 		return true;
 	}		
 	
-	//Método para verificar se ISBN é válido
+	/**
+	 * Método para verificar se ISBN é válido
+	 */
 	public boolean verificarISBN(String s) {
 		//ver se tem algum carater que não seja numero
 		for (char c : s.toCharArray()) {
@@ -735,16 +716,22 @@ public class J_11Menu_Admin implements Serializable {
 		return true;
 	}
 	
-	//Método para verificar se preço é um double
+	/**
+	 * Método para verificar se preço é um double
+	 */
 	public boolean verificarSeDouble(String s) {
 		try {
-	        double d = Double.parseDouble(s);
+	        @SuppressWarnings("unused")
+			double d = Double.parseDouble(s);
 	    } catch (NumberFormatException | NullPointerException nfe) {
 	        return false;
 	    }
 	    return true;
 	}	
 	
+	/**
+	 * Método para verificar se email é válido
+	 */
 	public boolean verificarSeEmail(String email) {
         String ePattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
         java.util.regex.Pattern p = java.util.regex.Pattern.compile(ePattern);
@@ -752,8 +739,9 @@ public class J_11Menu_Admin implements Serializable {
         return m.matches();
 	}
 	
-	
-	//Método para recolher dados das caixas de alteração de dados de livro e registar no livro selecionado
+	/**
+	 * Método para recolher dados das caixas de alteração de dados de livro e registar no livro selecionado
+	 */
 	public void registarAlteracoesNoLivroSelecionado() {
 		livroSelecionado.setNome( caixaTitulo.getText());
 		livroSelecionado.setIsbn(caixaIsbn.getText());
@@ -770,7 +758,9 @@ public class J_11Menu_Admin implements Serializable {
 		livroSelecionado.setDescricao( caixaDescricao.getText() );
 	}	
 	
-	//Método para recolher dados das caixas para novo livro e devolver esse livro
+	/**
+	 * Método para recolher dados das caixas para novo livro e devolver esse livro
+	 */
 	public Livro recolherDadosNovoLivro() {
 		String titulo = caixaTitulo.getText();
 		String isbn = caixaIsbn.getText();
@@ -787,7 +777,9 @@ public class J_11Menu_Admin implements Serializable {
 	}	
 	
 	
-	//Método para recolher dados das caixas para novo livro e devolver esse livro
+	/**
+	 * Método para recolher dados das caixas para novo utilizador e devolver novo utilizador
+	 */
 	public Utilizador recolherDadosNovoUtilizador() {
 		String nome = caixaTitulo.getText();
 		String email = caixaIsbn.getText();
@@ -797,6 +789,14 @@ public class J_11Menu_Admin implements Serializable {
 		return new Utilizador(uID, nome, email, senha, Utilizador.Tipo.VENDEDOR );	
 	}	
 	
+	
+	/**
+	 * Métodos para ativar ou desativar a visibilidade de vários componentes da janela
+	 * 
+	 * 
+	 * 
+	 * 
+	 */
 	public void visibilidadesInicio() {
 		lblMensagemSemCorrespondencias.setVisible(false);
 		lblSelecioneLivro.setVisible(false);
@@ -1012,6 +1012,4 @@ public class J_11Menu_Admin implements Serializable {
 		lblSenhaIncorreta.setVisible(false);
 		btbSubmeterVendedor.setVisible(true);
 	}
-	
-	
 }

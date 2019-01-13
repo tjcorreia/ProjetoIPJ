@@ -1,19 +1,10 @@
 
 package org.eclipse.wb.swt;
 
-import java.util.Collections;
-import java.util.Comparator;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
-
-import org.eclipse.wb.swt.Utilizador.Tipo;
 
 /**
  * Classe
@@ -22,42 +13,28 @@ import org.eclipse.wb.swt.Utilizador.Tipo;
  * @author Alberto Machado
  * @sid 2019
  */
+@SuppressWarnings("serial")
 public class Livraria implements Serializable {
+	/**
+	 * Atributos da classe
+	 */
 	private ArrayList<Livro> livros;
 	private ArrayList<Utilizador> utilizadores;
 	private ArrayList<Compra> compras;
 
-	public ArrayList<Livro> getLivros() {
-		return livros;
-	}
-
-	public void setLivros(ArrayList<Livro> livros) {
-		this.livros = livros;
-	}
-
-	// Construtor 
+	/**
+	 * Construtor da classe 'Livraria' que corre a leitura dos ficheiros de objetos que formam a livraria
+	 */
 	Livraria() throws ClassNotFoundException {
-
 		loadAll();
 	}
 
-	public void testar() {
-
-		Scanner sc = new Scanner(System.in);
-		System.out.println("introduza livro a pesquisar");
-		String s = sc.nextLine();
-		ArrayList<Livro> livrosProcurados = procurarLivro(s);
-		for (Livro lv : livrosProcurados) {
-			System.out.println(lv);
-		}
-		sc.close();
-	}
-
-
-
-	// método que recebe uma string e procura na lista de livros, todos os livros
-	// que têm essa String
-	// quer seja no nome, autor, editora ou ISBN
+	/**
+	 * método que recebe uma string e procura na lista de livros, todos os livros
+	 * que têm essa String quer seja no nome, autor, editora ou ISBN
+	 * @param string s, a procurar
+	 * @return devolve arrayList de livros que correspondem à string
+	 */
 	public ArrayList<Livro> procurarLivro(String s) {
 		ArrayList<Livro> livrosProcurados = new ArrayList<>();
 
@@ -77,7 +54,37 @@ public class Livraria implements Serializable {
 		return livrosProcurados;
 	}
 
-	// método que recebe um numero de compra e procura a compra na lista de compras
+	/**
+	 * Método toString para impressão dos livros na livraria
+	 * @return String com informações de todos os livros da livraria
+	 */
+	public String toString() {
+		String s = "";
+		for (Livro lv : livros) {
+			s = s + "-----------------------------------\n" + lv + "\n" + "Stock: " + lv.stock + "\n";
+		}
+		return s;
+	}
+
+	/**
+	 * Método para obter livro a partir do seu ISBN
+	 * @param string com o ISBN a comparar
+	 * @return Livro que corresponde à string introduzida, ou livro 'vazio', caso não haja correspondência
+	 */
+	public Livro getLivro(String isbn) {
+		for (Livro lv : livros) {
+			if (lv.isbn.equals(isbn)) {
+				return lv;
+			}
+		}
+		return new Livro();
+	}
+
+	/**
+	 * método que recebe um numero de compra e procura a compra na lista de compras
+	 * @param inteiro com o número da compra
+	 * @return devolve compra que corresponde, ou compra 'vazia', caso não haja correspondência
+	 */
 	public Compra getCompra(int num) {
 		for (Compra c : compras) {
 			if (c.numCompra == num) {
@@ -87,30 +94,14 @@ public class Livraria implements Serializable {
 		// apenas porque tem de ser devolvido algum livro no fim. Mas esta parte nunca
 		// será usada
 		return new Compra();
-	}
+	}	
 
-	public String toString() {
-		String s = "";
-		for (Livro lv : livros) {
-			s = s + "-----------------------------------\n" + lv + "\n" + "Stock: " + lv.stock + "\n";
-		}
-		return s;
-	}
-
-	// Método para obter Livro a partir do seu isbn
-	public Livro getLivro(String isbn) {
-		for (Livro lv : livros) {
-			if (lv.isbn.equals(isbn)) {
-				return lv;
-			}
-		}
-		// apenas porque tem de ser devolvido algum livro no fim. Mas esta parte nunca
-		// será usada
-		return new Livro();
-	}
-
-	// método que recebe password e email de login e devolve string com ok ou
-	// eventual erro
+	/**
+	 * Método para verificar se um login é válido
+	 * @param email de login
+	 * @param password de login
+	 * @return string de resposta a dizer se login e password corresponderem a um utilizador registado
+	 */
 	public String verificarLogin(String email, String password) {
 		for (Utilizador u : utilizadores) {
 			if (u.email.equals(email) && u.senha.equals(password)) {
@@ -123,6 +114,11 @@ public class Livraria implements Serializable {
 		return "emailErrado";
 	}
 
+	/**
+	 * Método para verificar se uma string é um número de NIF ou de cartão válido
+	 * @param s, string com o número
+	 * @return true se for compatível e false se não
+	 */
 	public boolean verificarSeNIFouCartao(String s) {
 		// ver se tem algum carater que não seja numero
 		for (char c : s.toCharArray()) {
@@ -137,6 +133,11 @@ public class Livraria implements Serializable {
 		return true;
 	}
 
+	/**
+	 * Método para verificar se um PIN é válido
+	 * @param s, string com o pin
+	 * @return true se for pin e false se não
+	 */
 	public boolean verificarSePIN(String s) {
 		// ver se tem algum carater que não seja numero
 		for (char c : s.toCharArray()) {
@@ -151,7 +152,11 @@ public class Livraria implements Serializable {
 		return true;
 	}
 
-	// método que atravez do email de login devolve o utilizador
+	/**
+	 * Método para obter um utilizador a partir do seu email
+	 * @param email do utilizador
+	 * @return devolve o utilizador correspondente
+	 */
 	public Utilizador getUtilizadorPorEmail(String email) {
 		for (Utilizador u : utilizadores) {
 			if (u.email.equals(email)) {
@@ -171,7 +176,12 @@ public class Livraria implements Serializable {
 		saveAll();
 	}
 
-	// Método para adicionar um novo (ou repetido) livro ao carrinho
+	/**
+	 * Método para adicionar um livro ao carrinho
+	 * @param carrinho de onde se quer adicionar o livro
+	 * @param lv, livro que se quer adicionar
+	 * @return devolve o carrinho com o livro que se adicionou
+	 */
 	public Carrinho adicionarLivroAoCarrinho(Livro lv, Carrinho carrinho) {
 		// Se livro não tem stock, não fazer nada
 		if (lv.stock <= 0) {
@@ -194,7 +204,12 @@ public class Livraria implements Serializable {
 		return carrinho;
 	}
 
-	// Método para remover um livro do carrinho
+	/**
+	 * Método para remover um livro do carrinho
+	 * @param carrinho de onde se quer remover o livro
+	 * @param lv, livro que se quer remover
+	 * @return devolve o carrinho sem o livro que se removeu
+	 */
 	public Carrinho removerLivroDoCarrinho(Livro lv, Carrinho carrinho) {
 		int indice = carrinho.livros.indexOf(lv);
 		int quantidade = carrinho.quantidades.get(indice);
@@ -216,7 +231,24 @@ public class Livraria implements Serializable {
 		return carrinho;
 	}
 
-	// Método para esvaziar carrinho, repondo os stocks na livraria
+	/**
+	 * Método para esvaziar carrinho, sem repor os stocks na livraria
+	 * @param carrinho que se quer esvaziar
+	 * @return devolve um carrinho vazio
+	 */
+	public Carrinho esvaziarCarrinhoSemReporStock(Carrinho carrinho) {
+		// limpar carrinho
+		carrinho.livros.clear();
+		carrinho.quantidades.clear();
+		saveAll();
+		return carrinho;
+	}
+	
+	/**
+	 * Método para esvaziar carrinho, repondo os stocks na livraria
+	 * @param carrinho que se quer esvaziar
+	 * @return devolve um carrinho vazio
+	 */
 	public Carrinho esvaziarCarrinhoReporStock(Carrinho carrinho) {
 		for (int i = 0; i < carrinho.livros.size(); i++) {
 			String isbn = carrinho.livros.get(i).isbn;
@@ -232,8 +264,11 @@ public class Livraria implements Serializable {
 		return carrinho;
 	}
 	
-	// Método para esvaziar carrinho, repondo os stocks na livraria
-	public Compra esvaziarCompraReporStock(Compra c) {
+	/**
+	 * Método para esvaziar uma compra, repondo os items da compra na livraria
+	 * @param compra que se quer esvaziar/anular
+	 */
+	public void esvaziarCompraReporStock(Compra c) {
 		for (int i = 0; i < c.carrinho.livros.size(); i++) {
 			String isbn = c.carrinho.livros.get(i).isbn;
 			int quantidade = c.carrinho.quantidades.get(i);
@@ -242,20 +277,13 @@ public class Livraria implements Serializable {
 			lv.setStock( lv.getStock() + quantidade); 
 		}
 		saveAll();
-		return c;
 	}	
 
-	// Método para esvaziar carrinho, repondo os stocks na livraria
-	public Carrinho esvaziarCarrinhoSemReporStock(Carrinho carrinho) {
-		// limpar carrinho
-		carrinho.livros.clear();
-		carrinho.quantidades.clear();
-		saveAll();
-		return carrinho;
-	}
-
-	// Método que devolve um novo número de compra (a seguir ao número de compra
-	// existente maior)
+	/**
+	 * Método que devolve um novo número de compra a seguir ao número de compra
+	 * existente maior
+	 * @return número inteiro para uma nova compra
+	 */
 	public int gerarNovoNumCompra() {
 		int novoNum = 0;
 		for (Compra c : compras) {
@@ -266,8 +294,11 @@ public class Livraria implements Serializable {
 		return novoNum;
 	}
 
-	// Método que devolve um novo número de vendedor (a seguir ao número de vendedor
-	// existente maior)
+	/**
+	 * Método que devolve um novo número de vendedor a seguir ao número de vendedor
+	 * existente maior
+	 * @return número inteiro para um novo vendedor
+	 */
 	public int gerarNovoNumUtilizador() {
 		int novoNum = 0;
 		for (Utilizador u : utilizadores) {
@@ -277,23 +308,11 @@ public class Livraria implements Serializable {
 		}
 		return novoNum;
 	}
-
-	public ArrayList<Compra> getCompras() {
-		return compras;
-	}
-
-	public void setCompras(ArrayList<Compra> compras) {
-		this.compras = compras;
-	}
-
-	public ArrayList<Utilizador> getUtilizadores() {
-		return utilizadores;
-	}
-
-	public void setUtilizadores(ArrayList<Utilizador> utilizadores) {
-		this.utilizadores = utilizadores;
-	}
-
+	
+	/**
+	 * Método ler e carregar ficheiros de objetos da livraria
+	 */
+	@SuppressWarnings("unchecked")
 	public void loadAll() throws ClassNotFoundException {
 		//Ficheiro de livros
 		String pathLivros = "Livros.ser";
@@ -330,6 +349,9 @@ public class Livraria implements Serializable {
 		}		
 	}
 
+	/**
+	 * Método gravar ficheiros de objetos da livraria
+	 */
 	public void saveAll() {
 		//Ficheiro de livros
 		String pathLivros = "Livros.ser";
@@ -369,5 +391,34 @@ public class Livraria implements Serializable {
 		}		
 	}
 
+	/**
+	 * 
+	 * 
+	 * Getters e Setters para os atributos de 'Livraria'
+	 * 
+	 * 
+	 */
+	public ArrayList<Compra> getCompras() {
+		return compras;
+	}
 
+	public void setCompras(ArrayList<Compra> compras) {
+		this.compras = compras;
+	}
+
+	public ArrayList<Utilizador> getUtilizadores() {
+		return utilizadores;
+	}
+
+	public void setUtilizadores(ArrayList<Utilizador> utilizadores) {
+		this.utilizadores = utilizadores;
+	}
+	
+	public ArrayList<Livro> getLivros() {
+		return livros;
+	}
+
+	public void setLivros(ArrayList<Livro> livros) {
+		this.livros = livros;
+	}
 }

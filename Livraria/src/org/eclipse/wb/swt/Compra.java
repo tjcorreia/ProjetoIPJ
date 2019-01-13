@@ -6,23 +6,29 @@ import java.util.GregorianCalendar;
 
 
 /**
- * Classe 
+ * Classe compra que representa uma compra, identificada por um número de compra único,
+ * um objeto Carrinho, um número de identificação fiscal (nif) uma data, o preço total 
+ * e o estado da compra, que poderá estar no estado 'submetida', 'paga' ou 'anulada'
  * 
  * @author Tiago Correia
  * @author Alberto Machado
  * @sid 2019
  */
+@SuppressWarnings("serial")
 public class Compra implements Serializable{
+	/**
+	 * Atributos da classe
+	 */
 	protected int numCompra;
 	protected Carrinho carrinho;
 	protected String nif;
 	protected GregorianCalendar data;
 	protected double total;
-	public Estado estadoCompra;//public para poder definir estado da compra a partir de outras classes
-	protected enum Estado {SUBMETIDA, PAGA, ANULADA};//protected para poder ir para a subclasse compraCartão
+	protected Estado estadoCompra;
+	protected enum Estado {SUBMETIDA, PAGA, ANULADA};
 	
 	/**
-	 * Construtor da classe Compra
+	 * Construtor da classe Compra sem atributos fornecidos
 	 */
 	Compra(){
 		numCompra = -1;
@@ -33,6 +39,9 @@ public class Compra implements Serializable{
 		estadoCompra = null;
 	}
 	
+	/**
+	 * Construtor da classe Compra a partir de todos os seus atributos
+	 */
 	Compra( int numCompra, Carrinho carrinho, String nif, GregorianCalendar data, Estado estadoCompra){
 		this.numCompra = numCompra;
 		this.carrinho = carrinho;
@@ -42,6 +51,11 @@ public class Compra implements Serializable{
 		this.estadoCompra = estadoCompra;
 	}
 	
+	/**
+	 * Método toString para impressão de 'Compra'
+	 * 
+	 * @return String com informações do 'Compra'
+	 */
 	public String toString() {
 		//para cada um dos livros da lista, percorrer e acrescentar cada livro à String
 		String s = "****************************\n" + 
@@ -51,6 +65,13 @@ public class Compra implements Serializable{
 		return s;
 	}
 
+	/**
+	 * 
+	 * 
+	 * Getters e Setters para os atributos de 'Compra'
+	 * 
+	 * 
+	 */
 	public Carrinho getCarrinho() {
 		return carrinho;
 	}
@@ -98,7 +119,4 @@ public class Compra implements Serializable{
 	public void setTotal(double total) {
 		this.total = total;
 	}
-	
-	
-	
 }

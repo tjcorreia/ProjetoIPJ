@@ -1,6 +1,7 @@
 package org.eclipse.wb.swt;
 
 import org.eclipse.swt.widgets.Display;
+
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Label;
 
@@ -12,20 +13,26 @@ import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
 
 /**
- * Classe 
+ * Classe do tipo janela que apresenta dois labels de mensagem que podem ser recebidas no seu construtoe
+ * podendo por isso esta janela ser usada em diferentes casos
  * 
  * @author Tiago Correia
  * @author Alberto Machado
  * @sid 2019
  */
+@SuppressWarnings("serial")
 public class J_20AlteracaoSubmetida implements Serializable {
-
+	/**
+	 * Atributos da classe
+	 */
 	protected Shell shlSucesso;
 	private String mensagem1;
 	private String mensagem2;
 	
 	
-	//Construtor para abrir uma nova janela deste tipo
+	/**
+	 * Construtor
+	 */
 	public J_20AlteracaoSubmetida(String s1, String s2) {
 		mensagem1 = s1;
 		mensagem2 = s2;
@@ -33,7 +40,7 @@ public class J_20AlteracaoSubmetida implements Serializable {
 
 
 	/**
-	 * Open the window.
+	 * Abrir a janela
 	 */
 	public void open() {
 		Display display = Display.getDefault();
@@ -48,7 +55,7 @@ public class J_20AlteracaoSubmetida implements Serializable {
 	}
 
 	/**
-	 * Create contents of the window.
+	 * Criar conteúdos da janela
 	 */
 	protected void createContents() {
 		shlSucesso = new Shell();
@@ -73,8 +80,5 @@ public class J_20AlteracaoSubmetida implements Serializable {
 		});
 		button.setText("Fechar");
 		button.setBounds(175, 175, 90, 30);
-
 	}
-	
-
 }

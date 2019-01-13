@@ -2,50 +2,28 @@ package org.eclipse.wb.swt;
 
 import org.eclipse.swt.widgets.Display;
 
+
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Shell;
-import swing2swt.layout.BorderLayout;
-import swing2swt.layout.FlowLayout;
-import swing2swt.layout.BoxLayout;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
-import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
-import org.eclipse.swt.widgets.Composite;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.Map;
 
-import org.eclipse.jface.layout.TableColumnLayout;
-import org.eclipse.jface.viewers.ColumnPixelData;
-import org.eclipse.swt.custom.ScrolledComposite;
-import org.eclipse.swt.custom.TableEditor;
-import org.eclipse.swt.custom.SashForm;
-import org.eclipse.ui.forms.widgets.FormToolkit;
-import org.eclipse.wb.swt.Compra.Estado;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.graphics.Point;
-import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Group;
-import org.eclipse.swt.events.ShellAdapter;
-import org.eclipse.swt.events.ShellEvent;
-
-
 
 /**
  * Classe 
@@ -54,7 +32,11 @@ import org.eclipse.swt.events.ShellEvent;
  * @author Alberto Machado
  * @sid 2019
  */
+@SuppressWarnings("serial")
 public class J_02Carrinho implements Serializable { //criou-se janela como subclasse para poder receber variáveis da superclasse
+	/**
+	 * Atributos da classe
+	 */
 	protected Shell shell;
 	protected Livraria livraria;//atributo adicionado para poder ir buscar métodos à livraria
 	protected Carrinho carrinho;
@@ -64,17 +46,16 @@ public class J_02Carrinho implements Serializable { //criou-se janela como subcl
 	private Text caixaParaNumCartao;
 	private Text caixaParaPIN;
 
-	
-	
-	//criou-se construtor que vai buscar variáveis à supercalsse
+	/**
+	 * Construtor que traz Livraria e carrinho para esta classe da janela anterior J_01
+	 */
 	public J_02Carrinho( Livraria livraria, Carrinho carrinho) {
 		this.livraria = livraria;
 		this.carrinho = carrinho;
 	}
 
-
 	/**
-	 * Open the window.
+	 * Abrir a janela
 	 */
 	public void open() {
 		//System.out.println(carrinho);
@@ -91,25 +72,14 @@ public class J_02Carrinho implements Serializable { //criou-se janela como subcl
 	}
 
 	/**
-	 * Create contents of the window.
+	 * Conteúdos da janela
 	 */
 	protected void createContents() {
 		
 		shell = new Shell();
 		shell.setSize(724, 561);
 		shell.setText("ViewComics-Carrinho");
-		shell.setLayout(null);
-		//listner para se fecharem a janela a meio de um carrinho, reporem o stock dos livros que estavam no carrinho
-//		
-//		
-//		VERIFICAR SE ESTE LISTNER FICARÁ A FUNCIONAR BEM DEPOIS DE RETIRAR OS 'open()' dos construtores
-//		ele agora não funciona bem
-//		
-		shell.addShellListener(new ShellAdapter() {
-			public void shellClosed(ShellEvent e) {
-				//livraria.esvaziarCarrinhoReporStock(carrinho);
-			}
-		});		
+		shell.setLayout(null);	
 		
 		Label lblCarrinho = new Label(shell, SWT.NONE);
 		lblCarrinho.setBounds(141, 5, 229, 20);
@@ -144,7 +114,6 @@ public class J_02Carrinho implements Serializable { //criou-se janela como subcl
 		tabela.setLinesVisible(true);
 		tabela.setHeaderBackground(SWTResourceManager.getColor(SWT.COLOR_GRAY));
 		tabela.setHeaderVisible(true);
-		
 			
 		TableViewerColumn tableViewerColumn = new TableViewerColumn(tableViewer, SWT.NONE);
 		TableColumn tblclmnLivros = tableViewerColumn.getColumn();
@@ -163,8 +132,6 @@ public class J_02Carrinho implements Serializable { //criou-se janela como subcl
 		//Chamar método para preencher tabela
 		preencherTabela();
 				
-		
-
 		//Botão para voltar à janela anterior de procura de livros
 		Button botaoVoltar = new Button(shell, SWT.NONE);
 		botaoVoltar.setBounds(574, 474, 127, 30);
@@ -182,7 +149,6 @@ public class J_02Carrinho implements Serializable { //criou-se janela como subcl
 		});
 		botaoVoltar.setText("Voltar/Pesquisar");
 		
-		
 		caixaParaNIF = new Text(shell, SWT.BORDER);
 		caixaParaNIF.setBounds(558, 132, 127, 30);
 		caixaParaNIF.setVisible(false);
@@ -198,7 +164,6 @@ public class J_02Carrinho implements Serializable { //criou-se janela como subcl
 		lblIntroduzaNIF.setText("Introduza NIF");
 		lblIntroduzaNIF.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
 		lblIntroduzaNIF.setBounds(558, 161, 127, 20);
-		
 		
 		caixaParaNumCartao = new Text(shell, SWT.BORDER);
 		caixaParaNumCartao.setVisible(false);
@@ -268,7 +233,6 @@ public class J_02Carrinho implements Serializable { //criou-se janela como subcl
 			}
 		});
 		
-
 		Button botaoFinalizarCarrinho = new Button(shell, SWT.NONE);
 		botaoFinalizarCarrinho.setBounds(574, 422, 127, 30);
 		botaoFinalizarCarrinho.setText("Finalizar Carrinho");
@@ -329,19 +293,11 @@ public class J_02Carrinho implements Serializable { //criou-se janela como subcl
 								//Se pin e num cartão corretos
 								else if ( livraria.verificarSePIN(pinIntroduzido)==true && 
 										livraria.verificarSeNIFouCartao(numCartaoIntroduzido)==true) {
-									System.out.println("PIN:" + pinIntroduzido);
-									System.out.println("NCartao:" + numCartaoIntroduzido);
 									//criar nova compra e adicionar à livraria
 									CompraCartao novaCompra2 = new CompraCartao	(livraria.gerarNovoNumCompra(), 
 											carrinho, nifIntroduzido, new GregorianCalendar(), Compra.Estado.SUBMETIDA, 
 											numCartaoIntroduzido, pinIntroduzido);
 									livraria.getCompras().add(novaCompra2);
-									System.out.println(novaCompra2);
-//									
-//									
-//									IMPRESSÃO DE VERIFICAÇÃO PARA APAGAR + TARDE
-//									
-									System.out.println("LIVRARIA APÓS CONCLUSÃO DA COMPRA:\n" + livraria.getCompras());
 									//fechar janela corrente
 									shell.close();
 									//abrir janela de mensagem de compra submetida
@@ -367,7 +323,6 @@ public class J_02Carrinho implements Serializable { //criou-se janela como subcl
 			}
 		});
 		
-		
 		Label lblTotal = new Label(shell, SWT.CENTER);
 		lblTotal.setBounds(394, 466, 133, 20);
 		lblTotal.setText("TOTAL: " + carrinho.totalCarrinho() + "€");
@@ -375,8 +330,6 @@ public class J_02Carrinho implements Serializable { //criou-se janela como subcl
 		Label lblQuantidade = new Label(shell, SWT.NONE);
 		lblQuantidade.setBounds(558, 65, 84, 20);
 		lblQuantidade.setText("Quantidade");
-		
-		
 		
 		Button butaoAumentarQuantidade = new Button(shell, SWT.NONE);
 		butaoAumentarQuantidade.setBounds(645, 54, 22, 22);
@@ -395,26 +348,15 @@ public class J_02Carrinho implements Serializable { //criou-se janela como subcl
 				//caso em que há stock, actualiza-se carrinho e actualiza-se a tabela
 				else {
 					livraria.adicionarLivroAoCarrinho(livroSelecionado, carrinho);
-//					VER SE BASTA O QUE ESTÁ EM CIMA OU SE É PRECISO SER:
-//					carrinho = livraria.adicionarLivroAoCarrinho(livroSelecionado, carrinho);
-//					
-//					
-//					
-//					
-//					
-//
-					System.out.println(carrinho);
 					//limpar tabela
 					tabela.removeAll();
 					preencherTabela();
 					lblSemStock.setVisible(false);
 					lblTotal.setText("TOTAL: " + carrinho.totalCarrinho() + "€");
-					//lblTotal.redraw();
 				}
 				livraria.saveAll();
 			}
 		});
-		
 		
 		Button butaoDiminuirQuantidade = new Button(shell, SWT.NONE);
 		butaoDiminuirQuantidade.setText("-");
@@ -428,7 +370,6 @@ public class J_02Carrinho implements Serializable { //criou-se janela como subcl
 				}
 				// se carrinho já foi esvaziado, não fazer nada
 				if ( !carrinho.livros.contains(livroSelecionado)) {
-					
 				}
 				//reduzir quantidade de livros
 				else {
@@ -444,7 +385,6 @@ public class J_02Carrinho implements Serializable { //criou-se janela como subcl
 			}
 		});
 		
-		
 		// Listner que deixa definir a altura de cada linha da table
 		// é preciso importar o org.eclipse.swt.widgets.Event;
 		tabela.addListener(SWT.MeasureItem, new Listener() {
@@ -453,12 +393,11 @@ public class J_02Carrinho implements Serializable { //criou-se janela como subcl
 				event.height = 90;
 			}
 		});		
-		
-		
-		
 	}
 	
-	
+	/**
+	 * Método para preencher a tabela
+	 */
 	public void preencherTabela() {
 		//adicionar um a um os livros e quantidades do Carrinho à tabela2
 		for (Livro lv : carrinho.livros ) {
@@ -468,7 +407,4 @@ public class J_02Carrinho implements Serializable { //criou-se janela como subcl
 		      item.setText( new String[] { lv.nome , lv.autor,"" + carrinho.quantidades.get(indice) } );
 		}
 	}
-	
-	
-	
 }

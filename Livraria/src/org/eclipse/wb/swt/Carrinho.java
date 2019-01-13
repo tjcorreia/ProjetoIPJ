@@ -14,6 +14,9 @@ import java.util.ArrayList;
  */
 @SuppressWarnings("serial")
 public class Carrinho implements Serializable{
+	/**
+	 * Atributos da classe
+	 */
 	protected ArrayList <Livro> livros;
 	protected ArrayList <Integer> quantidades;
 	
@@ -27,7 +30,7 @@ public class Carrinho implements Serializable{
 
 	
 	/**
-	 * Construtor da classe Carrinho
+	 * Construtor da classe 'Carrinho'
 	 * 
 	 * @param ArrayList de 'Livro', que podem ou não estar repetidos
 	 */
