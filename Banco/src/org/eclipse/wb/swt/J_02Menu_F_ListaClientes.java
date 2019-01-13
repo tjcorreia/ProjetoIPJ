@@ -117,14 +117,21 @@ public class J_02Menu_F_ListaClientes {
 		shlMenuFuncionrio.setSize(659, 522);
 		shlMenuFuncionrio.setText("Menu Funcion\u00E1rio");
 
+		Image image2 = (Image) SWTResourceManager.getImage(J_02Menu_F.class, "/Logo/Java-logo-png Logo13.png");
+		image2.isAutoScalable();
+		;
+		Label lblimagem = new Label(shlMenuFuncionrio, SWT.NONE);
+		lblimagem.setBounds(10, 10, 192, 68);
+		lblimagem.setImage(gestor.resize(shlMenuFuncionrio, image2, lblimagem.getBounds().width, lblimagem.getBounds().height));
+
 		Button btnNovoCliente = new Button(shlMenuFuncionrio, SWT.NONE);
 		btnNovoCliente.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-
+				shlMenuFuncionrio.dispose();
 				J_02Menu_F_CriaCliente alteraDados = new J_02Menu_F_CriaCliente(gestor, uUtilizador);
 				alteraDados.open();
-				shlMenuFuncionrio.dispose();
+				
 			}
 		});
 		btnNovoCliente.setBounds(10, 84, 192, 25);
@@ -162,7 +169,8 @@ public class J_02Menu_F_ListaClientes {
 		scrolledComposite.setBounds(10, 107, 400, 231);
 
 		table = new Table(scrolledComposite, SWT.BORDER | SWT.FULL_SELECTION|SWT.SINGLE);
-		
+		table.setBackground(SWTResourceManager.getColor(SWT.COLOR_GRAY));
+		table.setHeaderBackground(SWTResourceManager.getColor(SWT.COLOR_DARK_GRAY));
 		table.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -337,10 +345,9 @@ public class J_02Menu_F_ListaClientes {
 		button_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
+				shlMenuFuncionrio.dispose();
 				J_02Menu_F_DadosCl dados= new J_02Menu_F_DadosCl(gestor, uUtilizador,null);
 				dados.open();
-				shlMenuFuncionrio.dispose();
-				
 			}
 		});
 		button_1.setText("Dados do cliente");
@@ -350,10 +357,9 @@ public class J_02Menu_F_ListaClientes {
 		button_MovimentaConta.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
-				J_02Menu_F_MovimentaConta editarconta= new J_02Menu_F_MovimentaConta(gestor, uUtilizador,null, null);
-				editarconta.open();
 				shlMenuFuncionrio.dispose();
-				
+				J_02Menu_F_MovimentaConta editarconta= new J_02Menu_F_MovimentaConta(gestor, uUtilizador,null, null);
+				editarconta.open();				
 			}
 		});
 		button_MovimentaConta.setText("Movimentar Contas");

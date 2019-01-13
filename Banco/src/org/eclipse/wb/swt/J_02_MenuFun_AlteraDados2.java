@@ -1,47 +1,27 @@
 package org.eclipse.wb.swt;
 
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.Text;
-import org.eclipse.wb.swt.Utilizador.TipoID;
-
-import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
-import org.eclipse.swt.events.MouseEvent;
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.MessageBox;
-import org.eclipse.swt.widgets.Combo;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Table;
-import org.eclipse.swt.widgets.TableColumn;
-import org.eclipse.swt.widgets.TableItem;
-import org.eclipse.swt.custom.ScrolledComposite;
-import org.eclipse.swt.events.MouseAdapter;
-import org.eclipse.swt.events.MouseEvent;
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.MessageBox;
-import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Combo;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.MessageBox;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Text;
 
 /**
  * Breve descrição do código
- *
+ * 
+ * @author Alberto Jorge
  * @sid 2019
  * @aid 1.1
  */
@@ -195,12 +175,11 @@ public class J_02_MenuFun_AlteraDados2 {
 	 * @wbp.parser.entryPoint
 	 */
 	public J_02_MenuFun_AlteraDados2() {
-	
+
 		open();
 		// TODO Auto-generated constructor stub
 	}
 
-	
 //	public static void main(String[] args) {
 //		try {
 //			J_02_MenuFun_AlteraDados2 window = new J_02_MenuFun_AlteraDados2();
@@ -240,6 +219,13 @@ public class J_02_MenuFun_AlteraDados2 {
 		text = new Text(shell, SWT.BORDER);
 		text.setText("Bem Vindo " + uUtilizador.nome);
 		text.setBounds(236, 12, 288, 25);
+
+		Image image2 = (Image) SWTResourceManager.getImage(J_02Menu_F.class, "/Logo/Java-logo-png Logo13.png");
+		image2.isAutoScalable();
+		;
+		Label lblimagem = new Label(shell, SWT.NONE);
+		lblimagem.setBounds(10, 10, 192, 68);
+		lblimagem.setImage(gestor.resize(shell, image2, lblimagem.getBounds().width, lblimagem.getBounds().height));
 
 		Composite composite = new Composite(shell, SWT.NONE);
 		composite.setBounds(236, 84, 430, 301);
@@ -390,63 +376,62 @@ public class J_02_MenuFun_AlteraDados2 {
 		text_DataA_mes.setEnabled(false);
 		text_DataA_dia.setEnabled(false);
 		TipoID_NovoF.setEnabled(false);
-		
+
 		Button btnNovoCliente = new Button(shell, SWT.NONE);
 		btnNovoCliente.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				shell.dispose();
-				J_02Menu_F_CriaCliente alteraDados=new J_02Menu_F_CriaCliente(gestor,uUtilizador);
+				J_02Menu_F_CriaCliente alteraDados = new J_02Menu_F_CriaCliente(gestor, uUtilizador);
 				alteraDados.open();
-				
+
 			}
 		});
 		btnNovoCliente.setBounds(10, 84, 192, 25);
 		btnNovoCliente.setText("Criar novo Cliente");
-		
+
 		Button btnListarClientes = new Button(shell, SWT.NONE);
 		btnListarClientes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
 				shell.dispose();
-				J_02Menu_F_ListaClientes lclientes=new J_02Menu_F_ListaClientes(gestor,uUtilizador);
+				J_02Menu_F_ListaClientes lclientes = new J_02Menu_F_ListaClientes(gestor, uUtilizador);
 				lclientes.open();
-				
+
 			}
 		});
 		btnListarClientes.setText("Listar/Procurar Clientes");
 		btnListarClientes.setBounds(10, 112, 192, 25);
-		
+
 		Button btnDadosDoCliente = new Button(shell, SWT.NONE);
 		btnDadosDoCliente.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
 				shell.dispose();
-				J_02Menu_F_DadosCl cliente=new J_02Menu_F_DadosCl(gestor,uUtilizador,null);
+				J_02Menu_F_DadosCl cliente = new J_02Menu_F_DadosCl(gestor, uUtilizador, null);
 				cliente.open();
-				
-				
+
 			}
 		});
 		btnDadosDoCliente.setText("Dados do cliente");
 		btnDadosDoCliente.setBounds(10, 143, 192, 25);
-		
+
 		Button button_1 = new Button(shell, SWT.TOGGLE);
 		button_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
 				shell.dispose();
-				J_02Menu_F_MovimentaConta editarconta= new J_02Menu_F_MovimentaConta(gestor, uUtilizador, null, null);
+				J_02Menu_F_MovimentaConta editarconta = new J_02Menu_F_MovimentaConta(gestor, uUtilizador, null, null);
 				editarconta.open();
-				
+
 			}
 		});
 		button_1.setText("Movimentar Contas");
 		button_1.setBounds(10, 174, 192, 25);
-		
+
 		Button button_4 = new Button(shell, SWT.NONE);
 		button_4.setBounds(10, 205, 192, 25);
-		
+
 		Button button_5 = new Button(shell, SWT.NONE);
 		button_5.setText("Alterar Login e Password");
 		button_5.setBounds(10, 234, 192, 25);
@@ -455,61 +440,32 @@ public class J_02_MenuFun_AlteraDados2 {
 		criarNovoF.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
-//				boolean verificatudo = true;
 
-				String NomeNovoF = text_PrimeiroNA.getText();
-				String Morada_NovoF = text_Morada_NA.getText();
-				String ValorID_NovoF = text_ValorID_NA.getText();
-				String Email_NovoF = text_Email_NA.getText();
-				String MobileNovoF = text_MobileA.getText();
-				String UserNovoF = text_UserA.getText();
-				String PassNovoF = text_PassNovoF.getText();
-
-				System.out.println(NomeNovoF);
-				System.out.println(Morada_NovoF);
-				System.out.println(ValorID_NovoF);
-				System.out.println(Email_NovoF);
-				System.out.println(MobileNovoF);
-				System.out.println(UserNovoF);
-				System.out.println(PassNovoF);
-				System.out.println("-------->");
 				String mensagem = "";
 				boolean naohaDadosPorPreencher = true;
 				// Verifica campos vazios
-				if (estaVazio(text_Email_NA) || estaVazio(text_UserA) || estaVazio(text_PassNovoF)) {
+				if (Util.estaVazio(text_Email_NA,text_UserA,text_PassNovoF)) {
 					Titulo_Novo_F.setText("Dados por preencher ou inválidos");
 					Titulo_Novo_F.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
 					System.out.println("ENTROU NA VERIFICACAO DE CAMPOS VAZIOS");
 					mensagem = mensagem + "Tem dados por preencher\n";
-
-					estaVazio(text_Email_NA);
-					estaVazio(text_UserA);
-					estaVazio(text_PassNovoF);
 					naohaDadosPorPreencher = false;
-
 				}
-
-				if (!validateEmail(text_Email_NA)) {
+				if (!Util.validateEmail(text_Email_NA)) {
 					System.out.println("VERIFICACAO DE Email ->" + text_Email_NA.getText());
 					Titulo_Novo_F.setText("Dados por preencher ou inválidos");
 					mensagem = mensagem + "Email inválido.\n";
 					naohaDadosPorPreencher = false;
 				}
-
 				if (naohaDadosPorPreencher) {
 					System.out.println(text_Email_NA.getText());
 					System.out.println(text_UserA.getText());
 					System.out.println(uUtilizador.getEmail());
 					System.out.println(uUtilizador.getLogin());
-//			gestor.verificaA(email_NovoF, userNovoF, emailA, userNameA);
 					String verifica = gestor.verificaA(uUtilizador, text_Email_NA, text_UserA, uUtilizador.getEmail(),
 							uUtilizador.getLogin());
-
 					System.out.println(("VERIFICA? --->" + verifica));
-//					else if (mapUtilizadores.containsKey(userNovoF.getText()) && userNovoF.getText().equals(userNameA) ) {
-//						verifica =verifica+"O nome de Utilizador não foi alterado. \n";
-//						userNovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_BLUE));
-//						}
+
 					if (verifica.equals("")) {
 						String oldkey = uUtilizador.getLogin();
 						uUtilizador.setLogin(text_UserA.getText());
@@ -517,11 +473,12 @@ public class J_02_MenuFun_AlteraDados2 {
 						uUtilizador.setEmail(text_Email_NA.getText());
 						gestor.getMapUtilizadores().remove(oldkey);
 						gestor.getMapUtilizadores().put(uUtilizador.getLogin(), uUtilizador);
-						Funcionario	 f = new Funcionario();
+						
+						Funcionario f = new Funcionario();
+						
 						MessageBox box = new MessageBox(shell, SWT.MULTI);
 						System.out.println(("ERRO 1? --->" + verifica));
 						f = (Funcionario) (gestor.getMapUtilizadores().get(text_UserA.getText()));
-
 						box.setText("CONCLUSÃO");
 						box.setMessage("" + f.getNome() + "  " + f.getSobrenome() + " os seu dados foram Actualizados\n"
 								+ "\n" + "Email:" + f.getEmail() + "\nLogin: " + f.getLogin() + " \nPassword: "
@@ -530,7 +487,7 @@ public class J_02_MenuFun_AlteraDados2 {
 						box.open();
 
 						System.out.println(("verifica"));
-
+						gestor.saveAll();
 						shell.redraw();
 
 					} else {
@@ -540,8 +497,7 @@ public class J_02_MenuFun_AlteraDados2 {
 						box.setText("ERRO");
 						box.setMessage(verifica);
 						box.open();
-						Composite composite10 = new Composite(shell, SWT.NONE);
-						composite10.setBounds(182, 41, 430, 301);
+
 					}
 
 				} else {
@@ -549,8 +505,6 @@ public class J_02_MenuFun_AlteraDados2 {
 					box.setText("ERRO");
 					box.setMessage(mensagem);
 					box.open();
-					Composite composite10 = new Composite(shell, SWT.NONE);
-					composite10.setBounds(182, 41, 430, 301);
 					naohaDadosPorPreencher = true;
 				}
 
@@ -558,40 +512,4 @@ public class J_02_MenuFun_AlteraDados2 {
 		});
 
 	}
-
-	public boolean estaVazio(Text texto) {
-
-		if (texto.getText().equals("")) {
-			texto.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
-			return true;
-		}
-		texto.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
-		return false;
 	}
-
-	public int eNumero(Text texto) {
-		for (char c : texto.getText().toCharArray()) {
-			if (!Character.isDigit(c)) {
-				texto.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
-				return -1;
-			}
-		}
-		texto.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
-		return texto.getText().length();
-	}
-
-	public boolean validateEmail(Text texto) {
-		String emailStr = texto.getText();
-		Pattern regexPattern = Pattern.compile(
-				"\\A[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\z");
-		Matcher regMatcher = regexPattern.matcher(emailStr);
-		if (regMatcher.matches()) {
-			texto.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
-			return true;// "Valid Email";
-		} else {
-			texto.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
-			return false;// "Invalid Email";
-		}
-	}
-
-}

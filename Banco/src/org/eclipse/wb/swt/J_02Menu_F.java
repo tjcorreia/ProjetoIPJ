@@ -1,27 +1,21 @@
 package org.eclipse.wb.swt;
 
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.Button;
-
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.graphics.GC;
-import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.graphics.ImageData;
-import org.eclipse.swt.graphics.ImageLoader;
-import org.eclipse.swt.widgets.Text;
-import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Text;
 
 /**
 * Breve descrição do código
-*
+* Janela Funcionario Menu Inicial
+* @author Alberto Jorge
 * @sid 2019
 * @aid 1.1
 */
@@ -110,6 +104,9 @@ public class J_02Menu_F {
 		shlMenuFuncionrio.setImage((Image) SWTResourceManager.getImage(J_02Menu_F.class, "/Logo/Java-logo-png Logo.png"));
 		shlMenuFuncionrio.setSize(659, 522);
 		shlMenuFuncionrio.setText("Menu Funcion\u00E1rio");
+		
+		
+		
 		
 		Button btnNovoCliente = new Button(shlMenuFuncionrio, SWT.NONE);
 		btnNovoCliente.addSelectionListener(new SelectionAdapter() {
@@ -210,7 +207,7 @@ public class J_02Menu_F {
 		Label lblimagem = new Label(shlMenuFuncionrio, SWT.NONE);
 		lblimagem.setBounds(10, 10, 192, 68);
 		lblimagem.setImage(gestor.resize(shlMenuFuncionrio,image2,lblimagem.getBounds().width,lblimagem.getBounds().height));
-		String clienteActua="Introduza Cliente ID";
+		
 
 	}
 	

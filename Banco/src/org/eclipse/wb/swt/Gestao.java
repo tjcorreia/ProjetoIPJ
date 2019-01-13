@@ -72,7 +72,7 @@ public class Gestao {
 				"1977/07/30", "BANCO", Funcionario.TipoID.CARTAOCIDADAO, "78456123", "banco@gmail.com", 960000000);
 		contadores.replace("Utilizador", contadores.get("Utilizador") + 1);
 
-		Funcionario MachadoFU = new Funcionario(contadores.get("Utilizador") + 1, "Maria", "Fun", "BANCO", "BANCO0",
+		Funcionario MachadoFU = new Funcionario(contadores.get("Utilizador") + 1, "Maria", "Fun", "Maria", "Cardoso",
 				"1977/07/30", "BANCO", Funcionario.TipoID.CARTAOCIDADAO, "78456123", "banco@gmail.com", 960000000);
 		contadores.replace("Utilizador", contadores.get("Utilizador") + 1);
 
@@ -248,7 +248,7 @@ public class Gestao {
 	public void Gerir(Gestao gestor, Utilizador uactual) {
 		
 // inicia a thread pava verificar a transação da livraria
-		int counter = 1000;
+		int counter = 100000;
 		Thread t1 = new Thread(new Runnable() {
 			@Override
 			public void run() {

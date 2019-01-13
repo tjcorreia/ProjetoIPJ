@@ -1,38 +1,35 @@
 package org.eclipse.wb.swt;
 
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.Button;
-
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.MouseAdapter;
+import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.widgets.Text;
-import org.eclipse.wb.swt.Utilizador.TipoID;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Combo;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.MessageBox;
-import org.eclipse.swt.events.MouseAdapter;
-import org.eclipse.swt.events.MouseEvent;
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Combo;
-import org.eclipse.swt.widgets.Spinner;
-import org.eclipse.swt.custom.ScrolledComposite;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
-import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
+import org.eclipse.swt.widgets.Text;
+import org.eclipse.wb.swt.Utilizador.TipoID;
 
 /**
- * Breve descrição do código
+ * Breve descrição do código Janela Funcionario _Apresentação de dados do
+ * cliente e acesso a sub-menus de edição
+ * 
+ * @author Alberto Jorge
  *
- * @sid 2019
- * @aid 1.1
  */
 public class J_02Menu_F_DadosCl {
 
@@ -56,6 +53,7 @@ public class J_02Menu_F_DadosCl {
 	private Combo combo_TipoID_NovoC;
 	private Table table_ListadeContas;
 	private Button btnAlterarDados;
+	private Button btn_ProcuraCliente;
 
 	public Cliente getClienteActual() {
 		return clienteActual;
@@ -81,8 +79,6 @@ public class J_02Menu_F_DadosCl {
 		this.gestor = gestor;
 	}
 
-	
-
 	/**
 	 * @wbp.parser.entryPoint
 	 */
@@ -91,12 +87,13 @@ public class J_02Menu_F_DadosCl {
 		open();
 		// TODO Auto-generated constructor stub
 	}
+
 	public J_02Menu_F_DadosCl(Gestao gestor, Utilizador uUtilizador, Cliente clienteActual) {
 		super();
 		this.uUtilizador = uUtilizador;
 		this.gestor = gestor;
 		this.clienteActual = clienteActual;
-		
+
 	}
 
 	/**
@@ -133,21 +130,27 @@ public class J_02Menu_F_DadosCl {
 	protected void createContents() {
 		shellMF = new Shell();
 		shellMF.setBackground(SWTResourceManager.getColor(SWT.COLOR_DARK_GRAY));
-		
-		
 		shellMF.setImage((Image) SWTResourceManager.getImage(J_02Menu_F.class, "/Logo/Java-logo-png Logo.png"));
-		
 		shellMF.setSize(707, 533);
 		shellMF.setText("Menu Funcion\u00E1rio");
 
+		Image image2 = (Image) SWTResourceManager.getImage(J_02Menu_F.class, "/Logo/Java-logo-png Logo13.png");
+		image2.isAutoScalable();
+		;
+		Label lblimagem = new Label(shellMF, SWT.NONE);
+		lblimagem.setBounds(10, 10, 192, 68);
+		lblimagem.setImage(gestor.resize(shellMF, image2, lblimagem.getBounds().width, lblimagem.getBounds().height));
+
+		
+		
 		Button btnNovoCliente = new Button(shellMF, SWT.NONE);
 		btnNovoCliente.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-
+				shellMF.dispose();
 				J_02Menu_F_CriaCliente criaCliente = new J_02Menu_F_CriaCliente(gestor, uUtilizador);
 				criaCliente.open();
-				shellMF.dispose();
+
 			}
 		});
 		btnNovoCliente.setBounds(10, 84, 192, 25);
@@ -165,9 +168,10 @@ public class J_02Menu_F_DadosCl {
 		btnListarClientes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
+				shellMF.dispose();
 				J_02Menu_F_ListaClientes listaC = new J_02Menu_F_ListaClientes(gestor, uUtilizador);
 				listaC.open();
-				shellMF.dispose();
+
 			}
 		});
 		btnListarClientes.setText("Listar Clientes");
@@ -178,7 +182,7 @@ public class J_02Menu_F_DadosCl {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				shellMF.close();
-				J_02_MenuFun_AlteraDados2 alteradados=new J_02_MenuFun_AlteraDados2(gestor, uUtilizador); 
+				J_02_MenuFun_AlteraDados2 alteradados = new J_02_MenuFun_AlteraDados2(gestor, uUtilizador);
 				alteradados.open();
 			}
 		});
@@ -318,24 +322,26 @@ public class J_02Menu_F_DadosCl {
 		btnMovimentarConta.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
+				shellMF.dispose();
 				J_02Menu_F_MovimentaConta editarconta = new J_02Menu_F_MovimentaConta(gestor, uUtilizador,
 						clienteActual, null);
 				editarconta.open();
-				shellMF.dispose();
+
 			}
 		});
 		btnMovimentarConta.setText("Movimentar Contas");
 		btnMovimentarConta.setBounds(228, 323, 181, 25);
 
 		btnAlterarDados = new Button(composite, SWT.TOGGLE | SWT.MULTI | SWT.WRAP | SWT.NONE);
-		
+
 		btnAlterarDados.setText("Alterar dados Cliente");
 		String alterarDadosC = "Alterar dados Cliente";
 		btnAlterarDados.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
 				if (btnAlterarDados.getText().equals("Alterar dados Cliente")
-						&& (!(txt_Indique_ID.getText().equals("Indique o ID"))||!(txt_Indique_ID.getText().equals("Indique o ID")))) {
+						&& (!(txt_Indique_ID.getText().equals("Indique o ID"))
+								||!(clienteActual==null))) {
 					String alterarDadosC = "Pode alterar Dados";
 					btnAlterarDados.setText(alterarDadosC);
 					btnAlterarDados.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_GREEN));
@@ -352,41 +358,34 @@ public class J_02Menu_F_DadosCl {
 					text_DataN_mes.setEnabled(true);
 					text_DataN_dia.setEnabled(true);
 					combo_TipoID_NovoC.setEnabled(true);
+					btn_ProcuraCliente.setEnabled(false);
 
 				} else if (btnAlterarDados.getText().equals("Pode alterar Dados")) {
 					// falta ver
 					String mensagem = "";
 					boolean naohaDadosPorPreencher = true;
 					// Verifica campos vazios
-					if (estaVazio(text_PrimeiroNovoC) || estaVazio(text_UltimoNovoC) || estaVazio(text_MoradaNovoC)
-							|| estaVazio(text_ValorID_NovoC) || estaVazio(text_Email_NovoC)
-							|| estaVazio(text_MobileNovoC) || estaVazio(text_DataN_Ano) || estaVazio(text_DataN_mes)
-							|| estaVazio(text_DataN_dia)) {
-//						Titulo_Novo_F.setText("Dados por preencher ou inválidos");
-//						Titulo_Novo_F.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
+					if (Util.estaVazio(text_PrimeiroNovoC,text_UltimoNovoC,text_MoradaNovoC)
+							|| Util.estaVazio(text_ValorID_NovoC,text_Email_NovoC,text_MobileNovoC) ||
+							Util.estaVazio(text_DataN_Ano,text_DataN_mes,text_DataN_dia)) {				
 						System.out.println("ENTROU NA VERIFICACAO DE CAMPOS VAZIOS");
 						mensagem = mensagem + "Tem dados por preencher\n";
-
-						estaVazio(text_PrimeiroNovoC);
-						estaVazio(text_UltimoNovoC);
-						estaVazio(text_MoradaNovoC);
-						estaVazio(text_ValorID_NovoC);
-						estaVazio(text_Email_NovoC);
-						estaVazio(text_MobileNovoC);
-						estaVazio(text_DataN_Ano);
-						estaVazio(text_DataN_mes);
-						estaVazio(text_DataN_dia);
 						naohaDadosPorPreencher = false;
 
 					}
 
-					if (!validateEmail(text_Email_NovoC)) {
+					if (!Util.validateEmail(text_Email_NovoC)) {
 						System.out.println("VERIFICACAO DE Email ->" + text_Email_NovoC.getText());
 //						Titulo_Novo_F.setText("Dados por preencher ou inválidos");
 						mensagem = mensagem + "Email inválido.\n";
 						naohaDadosPorPreencher = false;
 					}
+					if (!Util.validateData2(text_DataN_Ano,text_DataN_mes,text_DataN_dia) ) {
+						
+						mensagem = mensagem + "Data de Nascimento inválida.\n";
+						naohaDadosPorPreencher = false;
 
+					}
 					if (naohaDadosPorPreencher) {
 						System.out.println(text_Email_NovoC.getText());
 						System.out.println(text_UserNovoC.getText());
@@ -433,7 +432,8 @@ public class J_02Menu_F_DadosCl {
 							box.open();
 
 							System.out.println(("verifica"));
-
+							gestor.saveAll();
+							btn_ProcuraCliente.setEnabled(true);
 							btnAlterarDados.setText("Alterar dados Cliente");
 							btnAlterarDados.setText(alterarDadosC);
 							btnAlterarDados.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_GRAY));
@@ -464,7 +464,7 @@ public class J_02Menu_F_DadosCl {
 
 			}
 		});
-		
+
 		btnAlterarDados.setBounds(228, 263, 181, 25);
 
 		Label lblListaDeContas = new Label(composite, SWT.NONE);
@@ -475,12 +475,14 @@ public class J_02Menu_F_DadosCl {
 		table_ListadeContas.setBounds(81, 255, 131, 106);
 		table_ListadeContas.setHeaderVisible(true);
 		table_ListadeContas.setLinesVisible(true);
+		table_ListadeContas.setBackground(SWTResourceManager.getColor(SWT.COLOR_GRAY));
+		table_ListadeContas.setHeaderBackground(SWTResourceManager.getColor(SWT.COLOR_DARK_GRAY));
 
-		TableColumn tblclmnId = new TableColumn(table_ListadeContas, SWT.NONE);
+		TableColumn tblclmnId = new TableColumn(table_ListadeContas, SWT.CENTER);
 		tblclmnId.setWidth(67);
 		tblclmnId.setText("ID");
 
-		TableColumn tblclmnTitulares = new TableColumn(table_ListadeContas, SWT.NONE);
+		TableColumn tblclmnTitulares = new TableColumn(table_ListadeContas, SWT.CENTER);
 		tblclmnTitulares.setWidth(57);
 		tblclmnTitulares.setText("Titulares");
 
@@ -491,7 +493,7 @@ public class J_02Menu_F_DadosCl {
 
 		}
 
-		Button btn_ProcuraCliente = new Button(composite, SWT.NONE);
+		btn_ProcuraCliente = new Button(composite, SWT.NONE);
 		btn_ProcuraCliente.setGrayed(true);
 		// *procura pelo cliente através da ID e devolve toda a informação
 		btn_ProcuraCliente.addMouseListener(new MouseAdapter() {
@@ -499,11 +501,11 @@ public class J_02Menu_F_DadosCl {
 			public void mouseUp(MouseEvent e) {
 
 				String mensagem = "";
-				if (estaVazio(txt_Indique_ID)) {
+				if (Util.estaVazio(txt_Indique_ID)) {
 
 					mensagem = " Para procurar um Cliente tem de introduzir um ID";
 				} else {
-					if (eNumero(txt_Indique_ID) == -1) {
+					if (Util.eNumero(txt_Indique_ID) == -1) {
 						mensagem = " O ID do cliente tem de ser numerico";
 					} else {
 						if (gestor.procuraCid(Integer.parseInt(txt_Indique_ID.getText())) == null) {
@@ -540,9 +542,9 @@ public class J_02Menu_F_DadosCl {
 		btnCriarConta.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
+				shellMF.dispose();
 				J_02Menu_F_Conta criaConta = new J_02Menu_F_Conta(gestor, uUtilizador, clienteActual);
 				criaConta.open();
-				shellMF.dispose();
 
 			}
 		});
@@ -553,9 +555,9 @@ public class J_02Menu_F_DadosCl {
 		btnListaDeMovimentos.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
+				shellMF.dispose();
 				J_02Menu_F_ContasCl contasDoCliente = new J_02Menu_F_ContasCl(gestor, uUtilizador, clienteActual);
 				contasDoCliente.open();
-				shellMF.dispose();
 
 			}
 		});
@@ -566,10 +568,11 @@ public class J_02Menu_F_DadosCl {
 		btnEditarContas.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
+				shellMF.dispose();
 				J_02Menu_F_EditarConta editarconta = new J_02Menu_F_EditarConta(gestor, uUtilizador, clienteActual,
 						null);
 				editarconta.open();
-				shellMF.dispose();
+
 			}
 		});
 		btnEditarContas.setText("Editar Contas");
@@ -584,10 +587,11 @@ public class J_02Menu_F_DadosCl {
 		button_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
+				shellMF.dispose();
 				J_02Menu_F_MovimentaConta editarconta = new J_02Menu_F_MovimentaConta(gestor, uUtilizador,
 						clienteActual, null);
 				editarconta.open();
-				shellMF.dispose();
+
 			}
 		});
 		button_1.setText("Movimentar Contas");
@@ -642,105 +646,5 @@ public class J_02Menu_F_DadosCl {
 
 	}
 
-	// ***************metodos**************
-
-	public boolean estaVazio(Text texto) {
-
-		if (texto.getText().equals("")) {
-			texto.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
-			return true;
-		}
-		texto.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
-		return false;
-	}
-
-	public int eNumero(Text texto) {
-		for (char c : texto.getText().toCharArray()) {
-			if (!Character.isDigit(c)) {
-				texto.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
-				return -1;
-			}
-		}
-		texto.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
-		return texto.getText().length();
-	}
-
-	public boolean validateMobileNumber(Text texto) {
-		String mobileNumber = texto.getText();
-//		("^\\+?\\[0-9]{0,5}?\\-?\\[0-9]{9}$"
-//		Pattern regexPattern = Pattern.compile("^\\+?\\d{0,3}?\\d{9}$");
-		Pattern regexPattern2 = Pattern.compile("^\\d{0,5}?\\d{9}$");
-//        Matcher regMatcher   = regexPattern.matcher(mobileNumber);
-		Matcher regMatcher2 = regexPattern2.matcher(mobileNumber);
-		if (regMatcher2.matches()) {
-			texto.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
-			return true;// "Valid Mobile Number";
-		} else {
-			texto.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
-			return false;// "Invalid Mobile Number";
-
-		}
-	}
-
-//	\A[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\z
-//	Regex : ^[\\w!#$%&’*+/=?`{|}~^-]+(?:\\.[\\w!#$%&’*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$
-
-	public boolean validateEmail(Text texto) {
-		String emailStr = texto.getText();
-		Pattern regexPattern = Pattern.compile(
-				"\\A[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\z");
-		Matcher regMatcher = regexPattern.matcher(emailStr);
-		if (regMatcher.matches()) {
-			texto.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
-			return true;// "Valid Email";
-		} else {
-			texto.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
-			return false;// "Invalid Email";
-		}
-	}
-
-	public boolean validateData2(Text texto1, Text texto2, Text texto3) {
-//		new GregorianCalendar(2018, 10, 24);
-		GregorianCalendar novoF = new GregorianCalendar();
-		GregorianCalendar actual = new GregorianCalendar();
-		GregorianCalendar actualMenos120 = new GregorianCalendar();
-		actualMenos120 = (GregorianCalendar) GregorianCalendar.getInstance();
-		actual = (GregorianCalendar) Calendar.getInstance();
-
-		String dataStr = texto1.getText() + "/" + texto2.getText() + "/" + texto3.getText();
-		System.out.println(dataStr);
-		Pattern regexPattern = Pattern.compile("^[0-9]{4}/(1[0-2]|0[1-9])/(3[01]|[12][0-9]|0[1-9])$");
-		Matcher regMatcher = regexPattern.matcher(dataStr);
-		if (regMatcher.matches()) {
-			texto1.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
-			texto2.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
-			texto3.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
-			System.out.println("Formato Correto");
-			return true;// "Valid Data";
-//			novoF.set(Integer.parseInt(texto1.getText()), Integer.parseInt(texto1.getText())
-//					- 1, Integer.parseInt(texto1.getText()));
-//			actualMenos120.add(Calendar.YEAR, -120);
-//			SimpleDateFormat fmt = new SimpleDateFormat("dd-MMM-yyyy");
-//			
-//		
-//			String dateFormatted = fmt.format(actual);
-//			System.out.println(dateFormatted);
-////			&& (novoF).compareTo(actualMenos120)==1
-//			if ((novoF).compareTo(actual)==-1 ) {
-//			
-//			}
-//			else {
-//				texto1.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
-//				texto2.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
-//				texto3.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
-//				return false;// "Invalid Data";
-//			}
-		} else {
-			texto1.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
-			texto2.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
-			texto3.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
-
-			return false;// "Invalid Data";
-		}
-	}
+	
 }

@@ -1,10 +1,5 @@
 package org.eclipse.wb.swt;
 
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.Button;
-
-import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -12,34 +7,28 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.MouseAdapter;
+import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Combo;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.MessageBox;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.wb.swt.Conta.TipoC;
 import org.eclipse.wb.swt.Transacao.TipoT;
-import org.eclipse.wb.swt.Utilizador.TipoID;
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.MessageBox;
-import org.eclipse.swt.events.MouseAdapter;
-import org.eclipse.swt.events.MouseEvent;
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Combo;
-import org.eclipse.swt.widgets.Spinner;
-import org.eclipse.swt.custom.ScrolledComposite;
-import org.eclipse.swt.widgets.Table;
-import org.eclipse.swt.widgets.List;
-import org.eclipse.swt.widgets.TableColumn;
-import org.eclipse.swt.widgets.TableItem;
-import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.graphics.Point;
-import org.eclipse.swt.events.VerifyListener;
-import org.eclipse.swt.events.VerifyEvent;
 
 /**
- * Breve descrição do código
+ * Breve descrição do código 
+ * Janela Funcionario para Editar as contas do Cliente
+ *  
+ * @author Alberto Jorge
  *
- * @sid 2019
- * @aid 1.1
  */
 public class J_02Menu_F_EditarConta {
 
@@ -191,6 +180,12 @@ public class J_02Menu_F_EditarConta {
 		
 		shellMF_EditarC.setSize(729, 545);
 		shellMF_EditarC.setText("Menu Funcion\u00E1rio");
+		
+		Image image2 = (Image) SWTResourceManager.getImage(J_02Menu_F.class, "/Logo/Java-logo-png Logo13.png");
+		image2.isAutoScalable();;
+		Label lblimagem = new Label(shellMF_EditarC, SWT.NONE);
+		lblimagem.setBounds(10, 10, 192, 68);
+		lblimagem.setImage(gestor.resize(shellMF_EditarC,image2,lblimagem.getBounds().width,lblimagem.getBounds().height));
 
 		System.out.println("<---- MENU MOVIMENTOS --->\n" + contaActual);
 		System.out.println("<---- Utilizador Actual --->\n" + uUtilizador);
@@ -298,16 +293,24 @@ public class J_02Menu_F_EditarConta {
 		btnNovoCliente.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-
-//				J_02Menu_F_CriaCliente alteraDados=new J_02Menu_F_CriaCliente(gestor,uUtilizador);
-//				alteraDados.open();
 				shellMF_EditarC.dispose();
+				J_02Menu_F_CriaCliente alteraDados=new J_02Menu_F_CriaCliente(gestor,uUtilizador);
+				alteraDados.open();
+				
 			}
 		});
 		btnNovoCliente.setBounds(10, 84, 192, 25);
 		btnNovoCliente.setText("Criar novo Cliente");
 
 		Button btnListarClientes = new Button(shellMF_EditarC, SWT.NONE);
+		btnListarClientes.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				shellMF_EditarC.dispose();
+				J_02Menu_F_ListaClientes listaC = new J_02Menu_F_ListaClientes(gestor, uUtilizador);
+				listaC.open();
+			}
+		});
 		btnListarClientes.setText("Listar Clientes");
 		btnListarClientes.setBounds(10, 115, 192, 25);
 
@@ -579,15 +582,25 @@ public class J_02Menu_F_EditarConta {
 		button.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
+				shellMF_EditarC.dispose();
 				J_02Menu_F_DadosCl cliente=new J_02Menu_F_DadosCl(gestor,uUtilizador,clienteActual);
 				cliente.open();
-				shellMF_EditarC.dispose();
+				
 			}
 		});
 		button.setText("Dados do cliente");
 		button.setBounds(10, 146, 192, 25);
 		
 		Button button_1 = new Button(shellMF_EditarC, SWT.TOGGLE);
+		button_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseUp(MouseEvent e) {
+				shellMF_EditarC.dispose();
+				J_02Menu_F_MovimentaConta editarconta = new J_02Menu_F_MovimentaConta(gestor, uUtilizador,
+						clienteActual, null);
+				editarconta.open();
+			}
+		});
 		button_1.setText("Movimentar Contas");
 		button_1.setBounds(10, 176, 192, 25);
 		
