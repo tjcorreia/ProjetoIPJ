@@ -87,7 +87,7 @@ public class Gestao {
 		// Clientes
 		// Utilizador(uID,login,password,nome,morada,escolhaID,valorID,email,mobile)
 
-		Cliente cl1 = new Cliente(contadores.get("Utilizador") + 1, "AlbertoCliente", "Cliente", "Alberto", "Machado0",
+		Cliente cl1 = new Cliente(contadores.get("Utilizador") + 1, "Livraria", "Cliente", "LIVRARIA", "Machado0",
 				"1977/07/30", "Rua Maria Vitoria", Utilizador.TipoID.CARTAOCIDADAO, "78456123", "mail", 965420731);
 		contadores.replace("Utilizador", contadores.get("Utilizador") + 1);
 		Cliente cl2 = new Cliente(contadores.get("Utilizador") + 1, "CorreiaCliente", "Cliente", "Tiago", "Coreia",
@@ -104,18 +104,18 @@ public class Gestao {
 		mapUtilizadores.put("MariaCliente", cl3);
 
 		// Contas
-
-		Conta cn1 = new ContaNormal(100000, 0, "2017/06/02");
+        // conta da LIvraria não apagar 
+		Conta cn1 = new ContaNormal(100000, 0, "2010/06/02");
 		lContas.add(cn1);
 		cn1.addClienteC(cl1.getuID());
 		cl1.addConta(cn1);
 
 		ContaNormal cn2 = new ContaNormal(100001, 0, "2017/06/02");
 		cn2.addClienteC(cl2.getuID());
-		cn2.addClienteC(cl1.getuID());
+		
 		cn2.addClienteC(cl3.getuID());
 		cl2.addConta(cn2);
-		cl1.addConta(cn2);
+		
 		cl3.addConta(cn2);
 
 		lContas.add(cn2);
@@ -184,14 +184,14 @@ public class Gestao {
 		int anomes = data.getMonthValue();
 		int ano = data.getYear();
 
-		Cartao ct1 = new Cartao(500010000, cl1.getuID(), cn1.getContaID(), cl1.getNome() + " " + cl1.getSobrenome(),
+		Cartao ct1 = new Cartao(500010000, cl3.getuID(), cn2.getContaID(), cl3.getNome() + " " + cl3.getSobrenome(),
 				"" + data, "000");
 		((ContaNormal) cn1).addCartaoC(ct1);
 
-		mapCartaoConta.put(500010000, cn1.getContaID());
+		mapCartaoConta.put(500010000, cn2.getContaID());
 		LocalDate data2 = LocalDate.of(2015, 12, 01);
-		Cartao ct2 = new Cartao(contadores.get("Cartoes") + 1, cl1.getuID(), cn2.getContaID(),
-				cl1.getNome() + " " + cl1.getSobrenome(), "" + data2, "0000");
+		Cartao ct2 = new Cartao(contadores.get("Cartoes") + 1, cl2.getuID(), cn2.getContaID(),
+				cl2.getNome() + " " + cl2.getSobrenome(), "" + data2, "000");
 		((ContaNormal) cn2).addCartaoC(ct2);
 
 		mapCartaoConta.put(contadores.get("Cartoes") + 1, cn2.getContaID());
@@ -302,7 +302,7 @@ public class Gestao {
 			FicheiroDeTexto ficheiroPedidos = new FicheiroDeTexto();
 			FicheiroDeTexto ficheiroDevolucao = new FicheiroDeTexto();
 			try {
-				ficheiroPedidos.abreLeitura("\\PedidosdaLivravria.txt");
+				ficheiroPedidos.abreLeitura("C:\\Users\\Jorge\\Documents\\GitHub\\ProjetoIPJ\\PedidosdaLivravria.txt");
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -360,23 +360,23 @@ public class Gestao {
 						contaFinal.addTransacaoC(novaTcontaF);
 						System.out.println("<---- TRANSACÃO CONCLUIDA --->\n");
 
-						ficheiroDevolucao.abreEscrita("\\RespostadoBanco.txt");
+						ficheiroDevolucao.abreEscrita("C:\\Users\\Jorge\\Documents\\GitHub\\ProjetoIPJ\\RespostadoBanco.txt");
 						ficheiroDevolucao.escreveLinha(pedidoiD + ",Pagamento efetuado com sucesso.");
 						ficheiroDevolucao.fechaEscrita();
-						ficheiroPedidos.abreEscrita("\\PedidosdaLivravria.txt");
+						ficheiroPedidos.abreEscrita("C:\\Users\\Jorge\\Documents\\GitHub\\ProjetoIPJ\\PedidosdaLivravria.txt");
 						ficheiroPedidos.escreveLinha("");
 						ficheiroPedidos.fechaEscrita();
 
 						System.out.println("<---- TRANSACÃO CONCLUIDA --->\n" + pedidoiD + ",OK\n");
 					} else {
-						ficheiroDevolucao.abreEscrita("\\RespostadoBanco.txt");
+						ficheiroDevolucao.abreEscrita("C:\\Users\\Jorge\\Documents\\GitHub\\ProjetoIPJ\\RespostadoBanco.txt");
 						ficheiroDevolucao.escreveLinha(pedidoiD + ",A CONTA DA LIVRARIA ESTA ERRADA");
 						ficheiroDevolucao.fechaEscrita();
 					}
 
 				} else {
 					System.out.println("<---- Não é NUMER0?---->");
-					ficheiroDevolucao.abreEscrita("\\RespostadoBanco.txt");
+					ficheiroDevolucao.abreEscrita("C:\\Users\\Jorge\\Documents\\GitHub\\ProjetoIPJ\\RespostadoBanco.txt");
 					ficheiroDevolucao.escreveLinha(pedidoiD + "," + mensagem);
 					ficheiroDevolucao.fechaEscrita();
 				}
@@ -384,6 +384,7 @@ public class Gestao {
 			}
 
 		}
+		
 		try {
 			Thread.sleep(10000);
 		} catch (InterruptedException e) {

@@ -3,8 +3,11 @@ package org.eclipse.wb.swt;
 import java.io.Serializable;
 
 /**
-* Breve descrição do código
-*
+*  Breve descrição do código
+* Classe Administrador extensao de Utilizador
+* @author Alberto Jorge
+* @author Tiago Correia
+* @param 
 * @sid 2019
 * @aid 1.1
 */

@@ -6,6 +6,8 @@ import org.eclipse.swt.widgets.Label;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.io.IOException;
+import java.io.Serializable;
 import java.text.Collator;
 import java.util.Locale;
 
@@ -37,7 +39,7 @@ import org.eclipse.swt.events.MouseEvent;
  * @author Alberto Machado
  * @sid 2019
  */
-public class J_12Menu_Vendedor {
+public class J_12Menu_Vendedor implements Serializable{
 
 	protected Shell shlMenuVendedor;
 	protected static Livraria livraria;// atributo adicionado para poder ir buscar métodos à livraria
@@ -193,9 +195,42 @@ public class J_12Menu_Vendedor {
 					if ( confirmacao) {
 //						
 //						
-//						ESCREVER PARA THREAD AO BANCO A PEDIR CONFIRMAÇÃO
+//						01121000,100000,500010000,000,200.25
+//						
+						int compraID=compraSelecionada.getNumCompra();
+						String cartaoID=((CompraCartao) compraSelecionada).getNumCartao();
+						String pin=((CompraCartao) compraSelecionada).getPin();
+						double valorCompra= ((CompraCartao) compraSelecionada).getTotal();
 						
-						//E LER 
+						String aEnviar=compraID+","+100000+","+cartaoID+","+pin+","+valorCompra;
+//						ESCREVER PARA THREAD AO BANCO A PEDIR CONFIRMAÇÃO
+						FicheiroDeTexto ficheiroPedidos = new FicheiroDeTexto();
+						FicheiroDeTexto ficheiroDevolucao = new FicheiroDeTexto();
+						try {
+							ficheiroPedidos.abreEscrita("C:\\Users\\Jorge\\Documents\\GitHub\\ProjetoIPJ\\PedidosdaLivravria.txt");
+							ficheiroPedidos.escreveLinha(aEnviar);
+							ficheiroPedidos.fechaEscrita();
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						
+						//E LER
+						String resposta="";
+						do {
+						try {
+							ficheiroDevolucao.abreLeitura("C:\\Users\\Jorge\\Documents\\GitHub\\ProjetoIPJ\\RespostadoBanco.txt");
+							resposta=ficheiroDevolucao.leLinha();
+							ficheiroDevolucao.fechaLeitura();
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						}while(resposta.equals(""));
+						System.out.println(resposta);
+						
+						
+						
 //						
 //						
 //						

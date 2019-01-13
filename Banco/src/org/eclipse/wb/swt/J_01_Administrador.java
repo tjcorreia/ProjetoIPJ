@@ -14,6 +14,7 @@ import org.eclipse.swt.widgets.Text;
 *  Breve descrição do código
 *Janela Administrador Menu Inicial
 * @author Alberto Jorge
+* @author Tiago Correia
  * @sid 2019
  * @aid 1.1
  */
@@ -62,28 +63,6 @@ public class J_01_Administrador {
 		// TODO Auto-generated constructor stub
 	}
 
-//	/**
-//	 * Launch the application.
-//	 * 
-//
-//	 */
-//	public static void maini(String[] args) {
-//		try {
-//			J_01_AdminLClientes window = new J_01_AdminLClientes(new Utilizador());
-//			window.open();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
-//
-//	/**
-//	 * Open the window.
-//	 * 
-//	 */
-	
-	
-	
-	
 	/**
 	 * Create contents of the window.
 	 * @wbp.parser.entryPoint

@@ -753,6 +753,8 @@ public class J_02Menu_F_EditarConta {
 	
 	// cria lista de clientes da Conta Actual ( usa metodo da Conta)
 	public String[] listaClientesActual() {
+//		if(contaActual==null) {
+//		if (!(contaActual.getClientesDaC().size()==0)) {
 		listaClientes = new String[contaActual.getClientesDaC().size()];
 
 		System.out.println("<---- lista de clientes--->\n" + listaClientes.length);
@@ -761,7 +763,11 @@ public class J_02Menu_F_EditarConta {
 			listaClientes[i] = "" + contaActual.getClientesDaC().get(i);
 		}
 		return listaClientes;
+//		}
+//		}
+//		return listaClientes=new String[0];
 	}
 
+	
 	
 }
