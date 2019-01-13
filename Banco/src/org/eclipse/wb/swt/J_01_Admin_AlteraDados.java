@@ -39,7 +39,21 @@ public class J_01_Admin_AlteraDados {
 	private Text text_DataA_Ano;
 	private Text text_DataA_mes;
 	private Text text_DataA_dia;
+	private Button criarNovoF ;
 
+	/**
+	 * @return the criarNovoF
+	 */
+	public Button getCriarNovoF() {
+		return criarNovoF;
+	}
+
+	/**
+	 * @param criarNovoF the criarNovoF to set
+	 */
+	public void setCriarNovoF(Button criarNovoF) {
+		this.criarNovoF = criarNovoF;
+	}
 	public Shell getShell() {
 		return shell;
 	}
@@ -282,7 +296,7 @@ public class J_01_Admin_AlteraDados {
 		Titulo_Novo_F.setBounds(81, 2, 322, 15);
 		Titulo_Novo_F.setText("Dados Pessoais");
 
-		Button criarNovoF = new Button(composite, SWT.MULTI | SWT.WRAP | SWT.NONE);
+		criarNovoF = new Button(composite, SWT.MULTI | SWT.WRAP | SWT.NONE);
 
 		criarNovoF.setBounds(289, 233, 103, 58);
 		criarNovoF.setText("Alterar os seus dados pessoais");
@@ -375,24 +389,7 @@ public class J_01_Admin_AlteraDados {
 		criarNovoF.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
-//				boolean verificatudo = true;
 
-				String NomeNovoF = text_PrimeiroNA.getText();
-				String Morada_NovoF = text_Morada_NA.getText();
-				String ValorID_NovoF = text_ValorID_NA.getText();
-				String Email_NovoF = text_Email_NA.getText();
-				String MobileNovoF = text_MobileA.getText();
-				String UserNovoF = text_UserA.getText();
-				String PassNovoF = text_PassNovoF.getText();
-
-				System.out.println(NomeNovoF);
-				System.out.println(Morada_NovoF);
-				System.out.println(ValorID_NovoF);
-				System.out.println(Email_NovoF);
-				System.out.println(MobileNovoF);
-				System.out.println(UserNovoF);
-				System.out.println(PassNovoF);
-				System.out.println("-------->");
 				String mensagem = "";
 				boolean naohaDadosPorPreencher = true;
 				// Verifica campos vazios
@@ -437,10 +434,10 @@ public class J_01_Admin_AlteraDados {
 						uUtilizador.setEmail(text_Email_NA.getText());
 						gestor.getMapUtilizadores().remove(oldkey);
 						gestor.getMapUtilizadores().put(uUtilizador.getLogin(), uUtilizador);
-						Funcionario f = new Funcionario();
+						Utilizador f = new Utilizador ();
 						MessageBox box = new MessageBox(shell, SWT.MULTI);
 						System.out.println(("ERRO 1? --->" + verifica));
-						f = (Funcionario) (gestor.getMapUtilizadores().get(text_UserA.getText()));
+						f = (Administrador) (gestor.getMapUtilizadores().get(text_UserA.getText()));
 
 						box.setText("CONCLUSÃO");
 						box.setMessage("" + f.getNome() + "  " + f.getSobrenome() + " os seu dados foram Actualizados\n"
@@ -460,8 +457,7 @@ public class J_01_Admin_AlteraDados {
 						box.setText("ERRO");
 						box.setMessage(verifica);
 						box.open();
-						Composite composite10 = new Composite(shell, SWT.NONE);
-						composite10.setBounds(182, 41, 430, 301);
+					
 					}
 
 				} else {
@@ -469,8 +465,7 @@ public class J_01_Admin_AlteraDados {
 					box.setText("ERRO");
 					box.setMessage(mensagem);
 					box.open();
-					Composite composite10 = new Composite(shell, SWT.NONE);
-					composite10.setBounds(182, 41, 430, 301);
+					
 					naohaDadosPorPreencher = true;
 				}
 
@@ -553,5 +548,7 @@ public class J_01_Admin_AlteraDados {
 			return false;// "Invalid Email";
 		}
 	}
+
+	
 
 }
