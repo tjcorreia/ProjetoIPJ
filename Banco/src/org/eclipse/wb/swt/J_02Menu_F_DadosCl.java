@@ -558,7 +558,6 @@ public class J_02Menu_F_DadosCl {
 				shellMF.dispose();
 				J_02Menu_F_ContasCl contasDoCliente = new J_02Menu_F_ContasCl(gestor, uUtilizador, clienteActual);
 				contasDoCliente.open();
-
 			}
 		});
 		btnListaDeMovimentos.setText("Lista de Movimentos da Contas");
