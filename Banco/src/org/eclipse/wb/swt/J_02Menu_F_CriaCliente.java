@@ -412,6 +412,8 @@ public void setDateTime(DateTime dateTime) {
 				mensagem = mensagem + "Data de Nascimento Invalida .\n";
 				}
 				
+				
+				
 				if (combo_TipoID_NovoC.getText().equals("Cartao Cidadao") && !estaVazio(text_ValorID_NovoC)) {
 					if (eNumero(text_ValorID_NovoC) == -1) {
 						lbl_Titulo_DadosDoNovo.setText("Dados por preencher ou inválidos");
