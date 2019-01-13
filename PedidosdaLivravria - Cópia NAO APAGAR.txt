@@ -1,1 +1,35 @@
 01121000,100000,500010000,000,200.25
+
+01121000,100000,500010000,000,200.25
+//						
+						int compraID=compraSelecionada.getNumCompra();
+						String cartaoID=((CompraCartao) compraSelecionada).getNumCartao();
+						String pin=((CompraCartao) compraSelecionada).getPin();
+						double valorCompra= ((CompraCartao) compraSelecionada).getTotal();
+						
+						String aEnviar=compraID+","+100000+","+cartaoID+","+pin+","+valorCompra;
+//						ESCREVER PARA THREAD AO BANCO A PEDIR CONFIRMAÇÃO
+						FicheiroDeTexto ficheiroPedidos = new FicheiroDeTexto();
+						FicheiroDeTexto ficheiroDevolucao = new FicheiroDeTexto();
+						try {
+							ficheiroPedidos.abreEscrita("C:\\Users\\Jorge\\Documents\\GitHub\\ProjetoIPJ\\PedidosdaLivravria.txt");
+							ficheiroPedidos.escreveLinha(aEnviar);
+							ficheiroPedidos.fechaEscrita();
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						
+						//E LER
+						String resposta="";
+						do {
+						try {
+							ficheiroDevolucao.abreLeitura("C:\\Users\\Jorge\\Documents\\GitHub\\ProjetoIPJ\\RespostadoBanco.txt");
+							resposta=ficheiroDevolucao.leLinha();
+							ficheiroDevolucao.fechaLeitura();
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						}while(resposta.equals(""));
+						System.out.println(resposta);

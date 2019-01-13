@@ -367,6 +367,8 @@ public class Gestao {
 				System.out.println("movimento  :" + movimento);
 				String mensagem = "";
 
+				
+				
 				mensagem = VerificaCartaoeDevolveContaID(cartaoCliente, pin, movimento);
 				System.out.println("MENSAGEM  :" + mensagem);
 				if (eUmNumero(mensagem)) {
