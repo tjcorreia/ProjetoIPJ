@@ -24,7 +24,7 @@ import org.eclipse.wb.swt.Utilizador.TipoID;
  * diversas classes
  * 
  * @sid 2019
- * @aid 1.1
+ * @author Jorge
  */
 
 public class Gestao {
@@ -479,6 +479,7 @@ public class Gestao {
 				verifica = false;
 			}
 		}
+		MessageBox box = new MessageBox(shellactual, SWT.MULTI);
 		// verifica Tudo executa a Transação
 		if (verifica) {
 
@@ -493,11 +494,11 @@ public class Gestao {
 			System.out.println("<---- Conta FINAL- Verifica Saldo ( " + contaFinal + ") --->\n");
 			contaFinal.addTransacaoC(novaTcontaF);
 			System.out.println("<---- Conta Actual- Verifica Saldo ( " + contaFinal + ") --->\n");
-
+			 box = new MessageBox(shellactual, SWT.MULTI|SWT.COLOR_GREEN|SWT.COLOR_TITLE_BACKGROUND);
 		}
 
 		// verifica mensagem a aparecer na janela
-		MessageBox box = new MessageBox(shellactual, SWT.MULTI);
+		
 		box.setText(textoTitulo);
 		box.setMessage(mensagem);
 		box.open();

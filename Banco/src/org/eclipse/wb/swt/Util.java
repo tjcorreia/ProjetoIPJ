@@ -1,5 +1,6 @@
 package org.eclipse.wb.swt;
 
+import java.time.LocalDate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -9,10 +10,11 @@ import org.eclipse.swt.widgets.Text;
 
 /**
 * Breve descrição do código
-*
+* Metodo Criado para colocar metodos utilitarios que se repentem
 * @sid 2019
-* @aid 1.1
-*/
+ * @author Jorge
+ *
+ */
 public class Util {
 
 	public Util() {
@@ -27,6 +29,12 @@ public class Util {
 			return true;
 		}
 		texto.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
+		return false;
+	}
+	public static  boolean estaVazio(Text texto1,Text texto2,Text texto3) {
+		if (estaVazio(texto1)|estaVazio(texto2)|estaVazio(texto3)) {
+			return true;
+		}
 		return false;
 	}
 	
@@ -49,7 +57,16 @@ public class Util {
 		return false;
 	}
 	
-
+	public static  boolean verificaIdade (LocalDate data,int idadeMinima,int idadeMaxima){
+		LocalDate dataactual=LocalDate.now().minusYears(idadeMinima);
+		if (data.isAfter(LocalDate.now().minusYears(idadeMinima))) {
+			return false;
+		}
+		if (data.isBefore(LocalDate.now().minusYears(idadeMaxima))) {
+			return false;
+		}
+	return true;
+	}
 	
 	public static boolean eNumeroIouD(String mensagem,Text texto) {
 		System.out.println("<---- NUMERO? --->\n" + texto.getText());

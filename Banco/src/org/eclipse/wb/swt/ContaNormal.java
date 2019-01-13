@@ -6,8 +6,8 @@ import java.util.ArrayList;
 /**
  * Breve descrição do código
  *
- * @sid 2019
- * @aid 1.1
+ * @author Jorge
+ *
  */
 public class ContaNormal extends Conta implements Serializable {
 

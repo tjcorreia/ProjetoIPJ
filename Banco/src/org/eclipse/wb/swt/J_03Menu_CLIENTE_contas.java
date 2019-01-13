@@ -29,8 +29,9 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 
 /**
- * Breve descrição do código
- *
+ * Breve descrição do código Janela que lista as contas do cliente e permite
+ * fazer uma transaferencia
+ * 
  * @sid 2019
  * @aid 1.1
  */
@@ -160,11 +161,9 @@ public class J_03Menu_CLIENTE_contas {
 		btnAlterarDadosPessoais.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-
 				shlMenu.dispose();
 				J_03_Menu_CLIENTE_AlteraDados3 alteraDados = new J_03_Menu_CLIENTE_AlteraDados3(gestor, uUtilizador);
 				alteraDados.open();
-
 			}
 		});
 		btnAlterarDadosPessoais.setBounds(10, 84, 192, 25);
@@ -333,20 +332,20 @@ public class J_03Menu_CLIENTE_contas {
 			@Override
 			public void mouseUp(MouseEvent e) {
 				text_valordaTransferencia.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
-
 				Conta contaFinal = null;
-
+if (!(contaActual==null)) {
 				gestor.TransferenciaCl(uUtilizador, shlMenu, contaActual, text_valordaTransferencia, text_Contadestino,
 						contaFinal);
 				preencheTabela();
 				text_valordaTransferencia.setText("");
-
+}
 			}
 		});
 
 	}
-
-	// metodo para preencher a tabela
+	/**
+	 *  metodo para preencher a tabela
+	 */
 	public void preencheTabela() {
 		table.setEnabled(true);
 		table.clearAll();

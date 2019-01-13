@@ -4,6 +4,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Button;
 
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.regex.Matcher;
@@ -21,12 +22,13 @@ import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Combo;
+import org.eclipse.swt.widgets.DateTime;
 
 /**
- * Breve descrição do código
+ * Breve descrição do código Janela Funcionario para Criar Cliente
+ * 
+ * @author Jorge
  *
- * @sid 2019
- * @aid 1.1
  */
 public class J_02Menu_F_CriaCliente {
 
@@ -46,124 +48,159 @@ public class J_02Menu_F_CriaCliente {
 	private Text text_DataN_mes;
 	private Text text_DataN_dia;
 	private Text text_UltimoNovoC;
-
+	private DateTime dateTime_Nascimento ;
 	
+	public DateTime getDateTime() {
+	return dateTime_Nascimento;
+}
+
+public void setDateTime(DateTime dateTime) {
+	this.dateTime_Nascimento = dateTime;
+}
 
 	public Text getText_UltimoNovoC() {
 		return text_UltimoNovoC;
 	}
+
 	public void setText_UltimoNovoC(Text text_UltimoNovoC) {
 		this.text_UltimoNovoC = text_UltimoNovoC;
 	}
+
 	public Shell getShellMF() {
 		return shellMF;
 	}
+
 	public void setShellMF(Shell shellMF) {
 		this.shellMF = shellMF;
 	}
+
 	public Gestao getGestor() {
 		return gestor;
 	}
+
 	public void setGestor(Gestao gestor) {
 		this.gestor = gestor;
 	}
+
 	public Utilizador getuUtilizador() {
 		return uUtilizador;
 	}
+
 	public void setuUtilizador(Utilizador uUtilizador) {
 		this.uUtilizador = uUtilizador;
 	}
+
 	public Text getFuncionario() {
 		return Funcionario;
 	}
+
 	public void setFuncionario(Text funcionario) {
 		Funcionario = funcionario;
 	}
 
-	
 	public Cliente getClienteActual() {
 		return clienteActual;
 	}
+
 	public void setClienteActual(Cliente clienteActual) {
 		this.clienteActual = clienteActual;
 	}
+
 	public Text getText_PrimeiroNovoC() {
 		return text_PrimeiroNovoC;
 	}
+
 	public void setText_PrimeiroNovoC(Text text_PrimeiroNovoC) {
 		this.text_PrimeiroNovoC = text_PrimeiroNovoC;
 	}
+
 	public Text getText_MoradaNovoC() {
 		return text_MoradaNovoC;
 	}
+
 	public void setText_MoradaNovoC(Text text_MoradaNovoC) {
 		this.text_MoradaNovoC = text_MoradaNovoC;
 	}
+
 	public Text getText_ValorID_NovoC() {
 		return text_ValorID_NovoC;
 	}
+
 	public void setText_ValorID_NovoC(Text text_ValorID_NovoC) {
 		this.text_ValorID_NovoC = text_ValorID_NovoC;
 	}
+
 	public Text getText_Email_NovoC() {
 		return text_Email_NovoC;
 	}
+
 	public void setText_Email_NovoC(Text text_Email_NovoC) {
 		this.text_Email_NovoC = text_Email_NovoC;
 	}
+
 	public Text getText_MobileNovoC() {
 		return text_MobileNovoC;
 	}
+
 	public void setText_MobileNovoC(Text text_MobileNovoC) {
 		this.text_MobileNovoC = text_MobileNovoC;
 	}
+
 	public Text getText_UserNovoC() {
 		return text_UserNovoC;
 	}
+
 	public void setText_UserNovoC(Text text_UserNovoC) {
 		this.text_UserNovoC = text_UserNovoC;
 	}
+
 	public Text getText_PassNovoC() {
 		return text_PassNovoC;
 	}
+
 	public void setText_PassNovoC(Text text_PassNovoC) {
 		this.text_PassNovoC = text_PassNovoC;
 	}
+
 	public Text getText_DataN_Ano() {
 		return text_DataN_Ano;
 	}
+
 	public void setText_DataN_Ano(Text text_DataN_Ano) {
 		this.text_DataN_Ano = text_DataN_Ano;
 	}
+
 	public Text getText_DataN_mes() {
 		return text_DataN_mes;
 	}
+
 	public void setText_DataN_mes(Text text_DataN_mes) {
 		this.text_DataN_mes = text_DataN_mes;
 	}
+
 	public Text getText_DataN_dia() {
 		return text_DataN_dia;
 	}
+
 	public void setText_DataN_dia(Text text_DataN_dia) {
 		this.text_DataN_dia = text_DataN_dia;
 	}
-	
+
 	public J_02Menu_F_CriaCliente(Gestao gestor, Utilizador uUtilizador) {
 		super();
 		this.uUtilizador = uUtilizador;
 		this.gestor = gestor;
-		
-	
+
 	}
+
 	/**
 	 * @wbp.parser.entryPoint
 	 */
 	public J_02Menu_F_CriaCliente() {
-	
+
 		open();
 		// TODO Auto-generated constructor stub
 	}
-	
 
 	public void open() {
 		Display display = Display.getDefault();
@@ -183,19 +220,16 @@ public class J_02Menu_F_CriaCliente {
 	protected void createContents() {
 		shellMF = new Shell();
 		shellMF.setBackground(SWTResourceManager.getColor(SWT.COLOR_DARK_GRAY));
-	shellMF.setImage((Image) SWTResourceManager.getImage(J_02Menu_F.class, "/Logo/Java-logo-png Logo.png"));
+		shellMF.setImage((Image) SWTResourceManager.getImage(J_02Menu_F.class, "/Logo/Java-logo-png Logo.png"));
 		shellMF.setSize(707, 533);
 		shellMF.setText("Menu Funcion\u00E1rio");
-		
 
+		
+		
 		Button btnNovoCliente = new Button(shellMF, SWT.NONE);
 		btnNovoCliente.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-
-//				J_02Menu_F_CriaCliente alteraDados=new J_02Menu_F_CriaCliente(gestor,uUtilizador);
-//				alteraDados.open();
-				shellMF.dispose();
 			}
 		});
 		btnNovoCliente.setBounds(10, 84, 192, 25);
@@ -206,23 +240,13 @@ public class J_02Menu_F_CriaCliente {
 			@Override
 			public void mouseUp(MouseEvent e) {
 				shellMF.dispose();
-				J_02Menu_F_ListaClientes listaC= new J_02Menu_F_ListaClientes(gestor, uUtilizador);
+				J_02Menu_F_ListaClientes listaC = new J_02Menu_F_ListaClientes(gestor, uUtilizador);
 				listaC.open();
-				
-				
+
 			}
 		});
 		btnListarClientes.setText("Listar Clientes");
 		btnListarClientes.setBounds(10, 115, 192, 25);
-
-		Button btnAlterarLoginE = new Button(shellMF, SWT.NONE);
-		btnAlterarLoginE.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-			}
-		});
-		btnAlterarLoginE.setText("Alterar Login e Password");
-		btnAlterarLoginE.setBounds(10, 423, 192, 25);
 
 		Button button = new Button(shellMF, SWT.NONE);
 		button.addMouseListener(new MouseAdapter() {
@@ -242,6 +266,16 @@ public class J_02Menu_F_CriaCliente {
 		composite.setVisible(true);
 		composite.setBounds(215, 84, 441, 301);
 
+		dateTime_Nascimento = new DateTime(composite, SWT.BORDER);
+		dateTime_Nascimento.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				dateTime_Nascimento.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
+			
+			}
+		});
+		dateTime_Nascimento.setBounds(289, 162, 131, 21);
+		
 		Label label = new Label(composite, SWT.NONE);
 		label.setText("Identifica\u00E7ao");
 		label.setBounds(10, 104, 70, 15);
@@ -280,14 +314,14 @@ public class J_02Menu_F_CriaCliente {
 		label_4.setBounds(10, 165, 55, 15);
 
 		text_MobileNovoC = new Text(composite, SWT.BORDER);
-		text_MobileNovoC.setBounds(81, 162, 88, 21);
+		text_MobileNovoC.setBounds(81, 162, 99, 21);
 
 		Label label_5 = new Label(composite, SWT.NONE);
 		label_5.setText("Utilizador");
 		label_5.setBounds(10, 192, 55, 15);
 
 		text_UserNovoC = new Text(composite, SWT.BORDER);
-		text_UserNovoC.setBounds(81, 189, 121, 21);
+		text_UserNovoC.setBounds(81, 189, 99, 21);
 
 		Label label_6 = new Label(composite, SWT.NONE);
 		label_6.setText("Password");
@@ -314,78 +348,70 @@ public class J_02Menu_F_CriaCliente {
 		label_10.setFont(SWTResourceManager.getFont("Segoe UI", 7, SWT.NORMAL));
 		label_10.setBounds(302, 29, 55, 15);
 
-		Label label_11 = new Label(composite, SWT.NONE);
-		label_11.setText("Data Nas.(aaaa/mm/dd)");
-		label_11.setBounds(175, 165, 132, 15);
+		Label lblDataNas = new Label(composite, SWT.NONE);
+		lblDataNas.setAlignment(SWT.RIGHT);
+		lblDataNas.setText("Data Nascimento ");
+		lblDataNas.setBounds(184, 165, 99, 15);
 
 		text_DataN_Ano = new Text(composite, SWT.BORDER);
-		text_DataN_Ano.setBounds(313, 164, 40, 21);
+		text_DataN_Ano.setBounds(36, 252, 40, 21);
 
 		text_DataN_mes = new Text(composite, SWT.BORDER);
-		text_DataN_mes.setBounds(363, 164, 23, 21);
+		text_DataN_mes.setBounds(86, 252, 23, 21);
 
 		Label label_12 = new Label(composite, SWT.NONE);
 		label_12.setText("/");
-		label_12.setBounds(355, 167, 8, 15);
+		label_12.setBounds(78, 255, 8, 15);
 
 		Label label_13 = new Label(composite, SWT.NONE);
 		label_13.setText("/");
-		label_13.setBounds(387, 167, 8, 15);
+		label_13.setBounds(110, 255, 8, 15);
 
 		text_DataN_dia = new Text(composite, SWT.BORDER);
-		text_DataN_dia.setBounds(395, 164, 23, 21);
-		
+		text_DataN_dia.setBounds(118, 252, 23, 21);
+
 		/// PRECHE PARA FACILIAR
-		
-		text_PrimeiroNovoC.setText("2222");
-		text_UltimoNovoC.setText("2222");
+
+		text_PrimeiroNovoC.setText("Teste");
+		text_UltimoNovoC.setText("Teste");
 		text_ValorID_NovoC.setText("78453123");
 		text_MoradaNovoC.setText("Morada");
 		text_Email_NovoC.setText("mail31@gmail.com");
 		text_MobileNovoC.setText("969420730");
-		text_UserNovoC.setText("2222");
-		text_PassNovoC.setText("6666");
+		text_UserNovoC.setText("TesteUser");
+		text_PassNovoC.setText("Teste");
 		text_DataN_Ano.setText("2018");
 		text_DataN_mes.setText("06");
 		text_DataN_dia.setText("06");
-		
-		
-		
+		dateTime_Nascimento.setMonth(11);
 
 		Button button_GuardaCliente = new Button(composite, SWT.TOGGLE | SWT.MULTI | SWT.WRAP | SWT.NONE);
 		button_GuardaCliente.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
-				
 
-			
 				String mensagem = "";
 				boolean naohaDadosPorPreencher = true;
 				// Verifica campos vazios
-				if (estaVazio(text_PrimeiroNovoC) || estaVazio(text_UltimoNovoC) || estaVazio(text_MoradaNovoC)
-						|| estaVazio(text_ValorID_NovoC) || estaVazio(text_Email_NovoC) || estaVazio(text_MobileNovoC)
-						|| estaVazio(text_DataN_Ano) || estaVazio(text_DataN_mes) || estaVazio(text_DataN_dia)
-						|| estaVazio(text_UserNovoC) || estaVazio(text_PassNovoC)) {
+				if (Util.estaVazio(text_PrimeiroNovoC,text_UltimoNovoC,text_MoradaNovoC)|| 
+						Util.estaVazio(text_ValorID_NovoC,text_Email_NovoC,text_MobileNovoC)||
+						Util.estaVazio(text_UserNovoC) || estaVazio(text_PassNovoC)) {
 					lbl_Titulo_DadosDoNovo.setText("Dados por preencher ou inválidos");
 					lbl_Titulo_DadosDoNovo.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
 					System.out.println("ENTROU NA VERIFICACAO DE CAMPOS VAZIOS");
 					mensagem = mensagem + "Tem dados por preencher\n";
-
-					estaVazio(text_UltimoNovoC);
-					estaVazio(text_PrimeiroNovoC);
-					estaVazio(text_MoradaNovoC);
-					estaVazio(text_ValorID_NovoC);
-					estaVazio(text_Email_NovoC);
-					estaVazio(text_MobileNovoC);
-					estaVazio(text_DataN_Ano);
-					estaVazio(text_DataN_mes);
-					estaVazio(text_DataN_dia);
-					estaVazio(text_UserNovoC);
-					estaVazio(text_PassNovoC);
 					naohaDadosPorPreencher = false;
 
 				}
-
+				System.out.println("DATA Mes: "+(dateTime_Nascimento.getMonth()+1));
+				System.out.println("DATA Dia: "+dateTime_Nascimento.getDay());
+				LocalDate dataNas= LocalDate.of(dateTime_Nascimento.getYear(),dateTime_Nascimento.getMonth()+1,dateTime_Nascimento.getDay());
+				System.out.println("DATA"+dataNas);
+				if (Util.verificaIdade (dataNas,17,120)) {
+				dateTime_Nascimento.setBackground(SWTResourceManager.getColor(SWT.COLOR_RED));
+				mensagem = mensagem + "Data de Nascimento Invalida .\n";
+				}
+				
 				if (combo_TipoID_NovoC.getText().equals("Cartao Cidadao") && !estaVazio(text_ValorID_NovoC)) {
 					if (eNumero(text_ValorID_NovoC) == -1) {
 						lbl_Titulo_DadosDoNovo.setText("Dados por preencher ou inválidos");
@@ -411,13 +437,13 @@ public class J_02Menu_F_CriaCliente {
 
 				}
 
-				if (!validateData2(text_DataN_Ano, text_DataN_mes, text_DataN_dia)) {
-					System.out.println("VERIFICACAO DE Data" + text_MobileNovoC.getText());
-					combo_TipoID_NovoC.setText("Dados por preencher ou inválidos");
-					mensagem = mensagem + "Data de Nascimento inválida.\n";
-					naohaDadosPorPreencher = false;
-
-				}
+//				if (!validateData2(text_DataN_Ano, text_DataN_mes, text_DataN_dia)) {
+//					System.out.println("VERIFICACAO DE Data" + text_MobileNovoC.getText());
+//					combo_TipoID_NovoC.setText("Dados por preencher ou inválidos");
+//					mensagem = mensagem + "Data de Nascimento inválida.\n";
+//					naohaDadosPorPreencher = false;
+//
+//				}
 
 				if (!validateMobileNumber(text_MobileNovoC)) {
 					System.out.println("VERIFICACAO DE Telemovel" + text_MobileNovoC.getText());
@@ -441,7 +467,7 @@ public class J_02Menu_F_CriaCliente {
 					} else {
 						escolhadaID = Cliente.TipoID.CARTAOCIDADAO;
 					}
-
+				
 					String verifica = gestor.verificanovoC(escolhadaID, text_ValorID_NovoC, text_Email_NovoC,
 							text_UserNovoC, text_MobileNovoC);
 //					
@@ -457,26 +483,38 @@ public class J_02Menu_F_CriaCliente {
 					if (verifica.equals("")) {
 						Cliente f = new Cliente();
 
-						String dataStr = text_DataN_Ano.getText() + "/" + text_DataN_mes.getText() + "/"
-								+ text_DataN_dia.getText();
+						String dataStr = dateTime_Nascimento.getYear() + "/" + (dateTime_Nascimento.getMonth()+1) + "/"
+								+ dateTime_Nascimento.getDay();
 
-					
-					gestor.addNovoC(text_UserNovoC.getText(),text_PassNovoC.getText(),
-								text_PrimeiroNovoC.getText(),text_UltimoNovoC.getText(), dataStr,
-								text_MoradaNovoC.getText(), escolhadaID,text_ValorID_NovoC.getText(),
-								text_Email_NovoC.getText(),Integer.parseInt(text_MobileNovoC.getText()));
-						
+						gestor.addNovoC(text_UserNovoC.getText(), text_PassNovoC.getText(),
+								text_PrimeiroNovoC.getText(), text_UltimoNovoC.getText(), dataStr,
+								text_MoradaNovoC.getText(), escolhadaID, text_ValorID_NovoC.getText(),
+								text_Email_NovoC.getText(), Integer.parseInt(text_MobileNovoC.getText()));
+
 						MessageBox box = new MessageBox(shellMF, SWT.MULTI);
 						f = (Cliente) (gestor.getMapUtilizadores().get(text_UserNovoC.getText()));
 						box.setText("CONCLUSÃO");
 						box.setMessage(" O Cliente" + f.getNome() + " " + f.getSobrenome() + " foi adicionado\n"
 								+ "Morada:" + f.getMorada() + "\n" + "" + f.escolhaID.toString() + ":" + f.getValorID()
 								+ "\n" + "Email:" + f.getEmail() + "\n" + "Contacto:" + f.getMobile() + "\n"
-								+ "Data Nascimento:" + f.getDataNascimento() + "\n" );
+								+ "Data Nascimento:" + f.getDataNascimento() + "\n");
 //						
 						box.open();
-						clienteActual=f;
+						clienteActual = f;
 						System.out.println(("verifica"));
+						text_PrimeiroNovoC.setText("");
+						text_UltimoNovoC.setText("");
+						text_ValorID_NovoC.setText("");
+						text_MoradaNovoC.setText("");
+						text_Email_NovoC.setText("");
+						text_MobileNovoC.setText("");
+						text_UserNovoC.setText("");
+						text_PassNovoC.setText("");
+						dateTime_Nascimento.dispose();;
+						text_DataN_Ano.setText("");
+						text_DataN_mes.setText("");
+						text_DataN_dia.setText("");
+						dateTime_Nascimento.dispose();;
 
 					} else {
 						System.out.println(("----> Nao verifica"));
@@ -485,8 +523,7 @@ public class J_02Menu_F_CriaCliente {
 						box.setText("ERRO");
 						box.setMessage(verifica);
 						box.open();
-						Composite composite10 = new Composite(shellMF, SWT.NONE);
-						composite10.setBounds(182, 41, 430, 301);
+						
 					}
 
 				} else {
@@ -494,74 +531,59 @@ public class J_02Menu_F_CriaCliente {
 					box.setText("ERRO");
 					box.setMessage(mensagem);
 					box.open();
-					Composite composite10 = new Composite(shellMF, SWT.NONE);
-					composite10.setBounds(182, 41, 430, 301);
 					naohaDadosPorPreencher = true;
 				}
-				text_PrimeiroNovoC.setText("");
-				text_UltimoNovoC.setText("");
-				text_ValorID_NovoC.setText("");
-				text_MoradaNovoC.setText("");
-				text_Email_NovoC.setText("");
-				text_MobileNovoC.setText("");
-				text_UserNovoC.setText("");
-				text_PassNovoC.setText("");
-				text_DataN_Ano.setText("");
-				text_DataN_mes.setText("");
-				text_DataN_dia.setText("");
 				
-				
+
 			}
 		});
 		button_GuardaCliente.setText("Guardar\nNovo Cliente");
 		button_GuardaCliente.setBounds(289, 233, 103, 58);
 		
+		
+
 		Button button_1 = new Button(shellMF, SWT.NONE);
 		button_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
 				shellMF.dispose();
-				J_02Menu_F_DadosCl cliente=new J_02Menu_F_DadosCl(gestor,uUtilizador,clienteActual);
+				J_02Menu_F_DadosCl cliente = new J_02Menu_F_DadosCl(gestor, uUtilizador, clienteActual);
 				cliente.open();
-				
+
 			}
 		});
 		button_1.setText("Dados do cliente");
 		button_1.setBounds(10, 144, 192, 25);
-		
+
 		Button button_2 = new Button(shellMF, SWT.TOGGLE);
 		button_2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
 				shellMF.dispose();
-				J_02Menu_F_MovimentaConta editarconta= new J_02Menu_F_MovimentaConta(gestor, uUtilizador,clienteActual, null);
+				J_02Menu_F_MovimentaConta editarconta = new J_02Menu_F_MovimentaConta(gestor, uUtilizador,
+						clienteActual, null);
 				editarconta.open();
-				
+
 			}
 		});
 		button_2.setText("Movimentar Contas");
 		button_2.setBounds(10, 175, 192, 25);
-		
+
 		Button button_3 = new Button(shellMF, SWT.NONE);
 		button_3.setBounds(10, 208, 192, 25);
-		
-		Button button_4 = new Button(shellMF, SWT.NONE);
-		button_4.addMouseListener(new MouseAdapter() {
+
+		Button button_AlterarDadosPessoais = new Button(shellMF, SWT.NONE);
+		button_AlterarDadosPessoais.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
 				shellMF.close();
-				J_02_MenuFun_AlteraDados2 alteradados=new J_02_MenuFun_AlteraDados2(gestor, uUtilizador); 
+				J_02_MenuFun_AlteraDados2 alteradados = new J_02_MenuFun_AlteraDados2(gestor, uUtilizador);
 				alteradados.open();
 			}
 		});
-		button_4.setText("Alterar Login e Password");
-		button_4.setBounds(10, 239, 192, 25);
+		button_AlterarDadosPessoais.setText("Alterar Login e Password");
+		button_AlterarDadosPessoais.setBounds(10, 239, 192, 25);
 
-		
-	
-		
-		
-		
 	}
 
 	// ***************metodos**************
@@ -634,9 +656,7 @@ public class J_02Menu_F_CriaCliente {
 		Pattern regexPattern = Pattern.compile("^[0-9]{4}/(1[0-2]|0[1-9])/(3[01]|[12][0-9]|0[1-9])$");
 		Matcher regMatcher = regexPattern.matcher(dataStr);
 		if (regMatcher.matches()) {
-			texto1.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
-			texto2.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
-			texto3.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
+			
 			System.out.println("Formato Correto");
 			return true;// "Valid Data";
 //			novoF.set(Integer.parseInt(texto1.getText()), Integer.parseInt(texto1.getText())
@@ -665,5 +685,4 @@ public class J_02Menu_F_CriaCliente {
 			return false;// "Invalid Data";
 		}
 	}
-
 }

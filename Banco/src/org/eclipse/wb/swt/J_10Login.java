@@ -9,9 +9,12 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.events.KeyAdapter;
+import org.eclipse.swt.events.KeyEvent;
 
 /**
- * Breve descrição do código
+
+ * Menu de Login 
  * 
  * @sid 2017
  * @aid 1.1
@@ -24,10 +27,8 @@ public class J_10Login {
 	private Text text_Password;
 	private Utilizador devolveU;
 	private Gestao gestor;
+	private Label lblMensagemDeErro;
 
-	
-	
-	
 	public Gestao getGestor() {
 		return gestor;
 	}
@@ -47,6 +48,7 @@ public class J_10Login {
 	public J_10Login(Gestao gestor) {
 		this.gestor = gestor;
 	}
+
 	/**
 	 * @wbp.parser.entryPoint
 	 */
@@ -94,22 +96,67 @@ public class J_10Login {
 		shlLogin.setSize(450, 300);
 		shlLogin.setText("Java Bank - Login");
 		shlLogin.setBackground(SWTResourceManager.getColor(SWT.COLOR_DARK_GRAY));
-		
-		shlLogin.setImage((Image) SWTResourceManager.getImage(J_02Menu_F.class, "/Logo/Java-logo-png Logo.png"));
+		shlLogin.setImage((Image) SWTResourceManager.getImage(J_10Login.class, "/Logo/Java-logo-png Logo.png"));
+//		Image image = (Image) SWTResourceManager.getImage(J_10Login.class, "/Logo/Java-logo-png Logo14.png");
+//		image.isAutoScalable();;
+//		shlLogin.setBackgroundImage(gestor.resize(shlLogin,image,450,290));
 		
 //		Image imagem=new Image(Display.getDefault());
 //		shlLogin.setImage(imagem);
+
+		lblMensagemDeErro = new Label(shlLogin, SWT.NONE);
+		lblMensagemDeErro.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
+		lblMensagemDeErro.setFont(SWTResourceManager.getFont("Segoe UI", 6, SWT.NORMAL));
+		lblMensagemDeErro.setBounds(92, 175, 150, 20);
+		lblMensagemDeErro.setText("Erro! Login inválido");
+		lblMensagemDeErro.setVisible(false);
+
 		text_NUtilizador = new Text(shlLogin, SWT.BORDER);
 
 		text_NUtilizador.setBounds(92, 80, 144, 26);
 
 		text_Password = new Text(shlLogin, SWT.PASSWORD | SWT.BORDER);
+		text_Password.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if (e.keyCode==13) {
+					// Passar para strings os textos introduzidos na caixa de email e password
+					String username = text_NUtilizador.getText();
+					String password = text_Password.getText();
+
+					// Usa método verfLogin(username, password) para verificar as strings
+					// introduzidas
+//					e devolve utilizador 
+
+					System.out.print(username);
+					System.out.print(password);
+
+					devolveU = g.verfLogin(username, password);
+
+					if (devolveU != null) {
+						System.out.print("  - > OK utilizador");
+						utilizadorAprovado();
+						shlLogin.dispose();
+					} else {
+						System.out.print("não verifica");
+						lblMensagemDeErro.setVisible(true);
+						text_NUtilizador.addMouseListener(new MouseAdapter() {
+							@Override
+							public void mouseDown(MouseEvent e) {
+								shlLogin.dispose();
+							}
+						});
+
+					}
+				}
+			}
+		});
 		text_Password.setBounds(92, 143, 144, 26);
 
 		/// -- So para nao ter de repetir o Login----
-		text_NUtilizador.setText("AlbertoCliente");
+		text_NUtilizador.setText("Maria");
 		;
-		text_Password.setText("Cliente");
+		text_Password.setText("Fun");
 		// -----------------------------------------
 
 		Label lblEmail = new Label(shlLogin, SWT.NONE);
@@ -130,19 +177,18 @@ public class J_10Login {
 		lblRedeInternaPara.setBounds(98, 21, 237, 26);
 		lblRedeInternaPara.setText("BEM VINDO AO JAVA BANK.");
 
-		Label lblMensagemDeErro = new Label(shlLogin, SWT.NONE);
-		lblMensagemDeErro.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
-		lblMensagemDeErro.setFont(SWTResourceManager.getFont("Segoe UI", 6, SWT.NORMAL));
-		lblMensagemDeErro.setBounds(92, 175, 150, 20);
-		lblMensagemDeErro.setText("Erro! Login inválido");
-		lblMensagemDeErro.setVisible(false);
-
 //		String Log=text.toString();
 //		String pass=text.toString();
 //		getUserLog()
 		//// listner Entar
 
 		Button btnEntrar = new Button(shlLogin, SWT.NONE);
+		btnEntrar.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+
+			}
+		});
 		btnEntrar.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
 		btnEntrar.addMouseListener(new MouseAdapter() {
 			@Override

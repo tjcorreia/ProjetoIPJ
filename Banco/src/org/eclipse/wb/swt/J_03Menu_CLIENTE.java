@@ -21,7 +21,7 @@ import org.eclipse.swt.events.MouseEvent;
 
 /**
 * Breve descrição do código
-*
+* Janela de Menu Incial do Cliente
 * @sid 2019
 * @aid 1.1
 */
@@ -81,6 +81,11 @@ public class J_03Menu_CLIENTE {
     open();
 	}
 	
+	/**
+	 * @param gestor
+	 * @param uUtilizador
+	 * 
+	 */
 	public J_03Menu_CLIENTE( Gestao gestor,Utilizador uUtilizador) {
 		super();
 		this.uUtilizador = uUtilizador;

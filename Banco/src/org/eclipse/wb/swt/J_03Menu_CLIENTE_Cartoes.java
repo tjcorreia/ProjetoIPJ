@@ -1,36 +1,25 @@
 package org.eclipse.wb.swt;
 
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.Button;
-
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.graphics.GC;
-import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.graphics.ImageData;
-import org.eclipse.swt.graphics.ImageLoader;
-import org.eclipse.swt.widgets.Text;
-import org.eclipse.wb.swt.Transacao.TipoT;
-import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.DateTime;
-import org.eclipse.swt.custom.ScrolledComposite;
-import org.eclipse.swt.graphics.Point;
-import org.eclipse.swt.widgets.Combo;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
+import org.eclipse.swt.widgets.Text;
 
 /**
  * Breve descrição do código
- *
+ * Janela do Cliente que Apresenta a Lista de cartões das contas do cliente
  * @sid 2019
  * @aid 1.1
  */
@@ -145,11 +134,9 @@ public class J_03Menu_CLIENTE_Cartoes {
 		btnAlterarDadosPessoais.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-
 				shlMenu.dispose();
 				J_03_Menu_CLIENTE_AlteraDados3 alteraDados = new J_03_Menu_CLIENTE_AlteraDados3(gestor, uUtilizador);
 				alteraDados.open();
-
 			}
 		});
 		btnAlterarDadosPessoais.setBounds(10, 84, 192, 25);
@@ -160,9 +147,8 @@ public class J_03Menu_CLIENTE_Cartoes {
 			@Override
 			public void mouseUp(MouseEvent e) {
 				shlMenu.dispose();
-				J_03Menu_CLIENTE_contas lclientes=new J_03Menu_CLIENTE_contas(gestor,uUtilizador);
+				J_03Menu_CLIENTE_contas lclientes = new J_03Menu_CLIENTE_contas(gestor, uUtilizador);
 				lclientes.open();
-
 			}
 		});
 		btnExibirContas.setText("Exibir Contas");
@@ -184,7 +170,7 @@ public class J_03Menu_CLIENTE_Cartoes {
 		Funcionario.setBounds(215, 10, 326, 25);
 
 		Button btnCartesDaConta = new Button(shlMenu, SWT.TOGGLE);
-		
+
 		btnCartesDaConta.setText("Cart\u00F5es da Conta");
 		btnCartesDaConta.setBounds(10, 143, 192, 25);
 
@@ -248,14 +234,14 @@ public class J_03Menu_CLIENTE_Cartoes {
 					// não faz nada
 					System.out.println("<---- Contas Prazo--->" + i);
 				} else {
-					ContaNormal contaaVer=(ContaNormal) clienteActual.getLcontaSC().get(i);
+					ContaNormal contaaVer = (ContaNormal) clienteActual.getLcontaSC().get(i);
 					if (contaaVer.getAbertaFechada().equals(Conta.TipoC.ENCERADA)) {
 						System.out.println("<---- Contas ENCERRADA--->" + i);
 					} else {
 						System.out.println("<---- Contas Normal--->" + i);
 						item.setText(0, ("" + contaaVer.getContaID()));
 
-						if (contaaVer.getListaCartoesC().size()==0) {
+						if (contaaVer.getListaCartoesC().size() == 0) {
 							System.out.println("<---- Contas Normal s/cartões--->" + i);
 //								text_cartaoAssociado.setText("Não tem cartão associado");
 							item.setText(1, (""));
@@ -263,23 +249,20 @@ public class J_03Menu_CLIENTE_Cartoes {
 							item.setText(3, (""));
 
 						} else {
-							if (!(contaaVer.procuraCartaoCTitular(uUtilizador.getuID())==null)){
-							String texoID = "" + (contaaVer.procuraCartaoCTitular(uUtilizador.getuID())
-									.getCartaoID());
-							String texoValidade = "" + (contaaVer.procuraCartaoCTitular(uUtilizador.getuID())
-									.getDataV());
-							String texoPin = "" + (contaaVer.procuraCartaoCTitular(uUtilizador.getuID())
-									.getCodigo());
-							item.setText(1, (texoID ));
-							item.setText(2, (texoValidade));
-							item.setText(3, (texoPin));
+							if (!(contaaVer.procuraCartaoCTitular(uUtilizador.getuID()) == null)) {
+								String texoID = ""
+										+ (contaaVer.procuraCartaoCTitular(uUtilizador.getuID()).getCartaoID());
+								String texoValidade = ""
+										+ (contaaVer.procuraCartaoCTitular(uUtilizador.getuID()).getDataV());
+								String texoPin = ""
+										+ (contaaVer.procuraCartaoCTitular(uUtilizador.getuID()).getCodigo());
+								item.setText(1, (texoID));
+								item.setText(2, (texoValidade));
+								item.setText(3, (texoPin));
 							}
-
 						}
 
 					}
-
-					
 
 				}
 			}

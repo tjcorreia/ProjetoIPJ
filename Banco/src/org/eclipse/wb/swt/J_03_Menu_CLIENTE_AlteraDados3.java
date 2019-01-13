@@ -1,47 +1,24 @@
 package org.eclipse.wb.swt;
 
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.Text;
-import org.eclipse.wb.swt.Utilizador.TipoID;
-
-import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
-import org.eclipse.swt.events.MouseEvent;
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.MessageBox;
-import org.eclipse.swt.widgets.Combo;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Table;
-import org.eclipse.swt.widgets.TableColumn;
-import org.eclipse.swt.widgets.TableItem;
-import org.eclipse.swt.custom.ScrolledComposite;
-import org.eclipse.swt.events.MouseAdapter;
-import org.eclipse.swt.events.MouseEvent;
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.MessageBox;
-import org.eclipse.swt.widgets.Combo;
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Combo;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.MessageBox;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Text;
 
 /**
- * Breve descrição do código
- *
+ * Breve descrição do código Janela de Cliente que Apresenta os seu dados e
+ * permite alterar alguns
+ * 
  * @sid 2019
  * @aid 1.1
  */
@@ -246,8 +223,6 @@ public class J_03_Menu_CLIENTE_AlteraDados3 {
 		composite_BOX = new Composite(shell, SWT.NONE);
 		composite_BOX.setBounds(236, 84, 430, 301);
 
-		
-
 		Label lblNewLabel = new Label(composite_BOX, SWT.NONE);
 		lblNewLabel.setBounds(10, 104, 70, 15);
 		lblNewLabel.setText("Identifica\u00E7ao");
@@ -303,10 +278,10 @@ public class J_03_Menu_CLIENTE_AlteraDados3 {
 		text_PassNovoF = new Text(composite_BOX, SWT.BORDER);
 		text_PassNovoF.setBounds(289, 189, 131, 21);
 
-		Label Titulo_Novo_F = new Label(composite_BOX, SWT.NONE);
-		Titulo_Novo_F.setAlignment(SWT.CENTER);
-		Titulo_Novo_F.setBounds(93, 2, 310, 15);
-		Titulo_Novo_F.setText("Dados Pessoais");
+		Label Titulo_DadosPessoais = new Label(composite_BOX, SWT.NONE);
+		Titulo_DadosPessoais.setAlignment(SWT.CENTER);
+		Titulo_DadosPessoais.setBounds(93, 2, 310, 15);
+		Titulo_DadosPessoais.setText("Dados Pessoais");
 
 		Buton_AlteraDados = new Button(composite_BOX, SWT.MULTI | SWT.WRAP | SWT.NONE);
 
@@ -357,9 +332,7 @@ public class J_03_Menu_CLIENTE_AlteraDados3 {
 		button_Logout.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
-
 				shell.dispose();
-
 			}
 		});
 		button_Logout.setText("Log Out");
@@ -398,10 +371,10 @@ public class J_03_Menu_CLIENTE_AlteraDados3 {
 		text_DataA_mes.setEnabled(false);
 		text_DataA_dia.setEnabled(false);
 		TipoID_NovoF.setEnabled(false);
-		
+
 		text_ID = new Text(composite_BOX, SWT.BORDER | SWT.CENTER);
 		text_ID.setBounds(0, 2, 88, 21);
-		text_ID.setText(""+uUtilizador.getuID());
+		text_ID.setText("" + uUtilizador.getuID());
 		text_ID.setEnabled(false);
 
 		Button button = new Button(shell, SWT.NONE);
@@ -413,9 +386,9 @@ public class J_03_Menu_CLIENTE_AlteraDados3 {
 			@Override
 			public void mouseUp(MouseEvent e) {
 				shell.dispose();
-				J_03Menu_CLIENTE_contas lclientes=new J_03Menu_CLIENTE_contas(gestor,uUtilizador);
+				J_03Menu_CLIENTE_contas lclientes = new J_03Menu_CLIENTE_contas(gestor, uUtilizador);
 				lclientes.open();
-				
+
 			}
 		});
 		btnContas.setText("Contas");
@@ -426,7 +399,7 @@ public class J_03_Menu_CLIENTE_AlteraDados3 {
 			@Override
 			public void mouseUp(MouseEvent e) {
 				shell.dispose();
-				J_03Menu_CLIENTE_Cartoes editarconta= new J_03Menu_CLIENTE_Cartoes( gestor, uUtilizador);
+				J_03Menu_CLIENTE_Cartoes editarconta = new J_03Menu_CLIENTE_Cartoes(gestor, uUtilizador);
 				editarconta.open();
 			}
 		});
@@ -437,28 +410,24 @@ public class J_03_Menu_CLIENTE_AlteraDados3 {
 		Buton_AlteraDados.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
-
+				// altera os dados se eles estiverem disponibilizados
 				if (Buton_AlteraDados.getText().equals("Altere Os DadoS")) {
 					// altera dados do Cliente
 					boolean verificatudo = true;
 					String mensagem = "";
 					boolean naohaDadosPorPreencher = true;
 					// Verifica campos vazios
-					if (estaVazio(text_Email_NA) || estaVazio(text_UserA) || estaVazio(text_PassNovoF)) {
-						Titulo_Novo_F.setText("Dados por preencher ou inválidos");
-						Titulo_Novo_F.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
+					if (Util.estaVazio(text_Email_NA,text_UserA,text_PassNovoF)) {
+						Titulo_DadosPessoais.setText("Dados por preencher ou inválidos");
+						Titulo_DadosPessoais.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
 						System.out.println("ENTROU NA VERIFICACAO DE CAMPOS VAZIOS");
 						mensagem = mensagem + "Tem dados por preencher\n";
-						estaVazio(text_Email_NA);
-						estaVazio(text_UserA);
-						estaVazio(text_PassNovoF);
 						naohaDadosPorPreencher = false;
-
 					}
-
 					if (!validateEmail(text_Email_NA)) {
 						System.out.println("VERIFICACAO DE Email ->" + text_Email_NA.getText());
-						Titulo_Novo_F.setText("Dados por preencher ou inválidos");
+						Titulo_DadosPessoais.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
+						Titulo_DadosPessoais.setText("Dados por preencher ou inválidos");
 						mensagem = mensagem + "Email inválido.\n";
 						naohaDadosPorPreencher = false;
 					}
@@ -473,7 +442,7 @@ public class J_03_Menu_CLIENTE_AlteraDados3 {
 								uUtilizador.getEmail(), uUtilizador.getLogin());
 
 						System.out.println(("VERIFICA? --->" + verifica));
-	
+
 						if (verifica.equals("")) {
 							String oldkey = uUtilizador.getLogin();
 							uUtilizador.setLogin(text_UserA.getText());
@@ -481,10 +450,10 @@ public class J_03_Menu_CLIENTE_AlteraDados3 {
 							uUtilizador.setEmail(text_Email_NA.getText());
 							gestor.getMapUtilizadores().remove(oldkey);
 							gestor.getMapUtilizadores().put(uUtilizador.getLogin(), uUtilizador);
-							
+
 							// fui buscar ao Utilizadores para confirmar que esta lá
 							Cliente f = new Cliente();
-							MessageBox box = new MessageBox(shell, SWT.MULTI);
+							MessageBox box = new MessageBox(shell, SWT.MULTI|SWT.COLOR_GREEN|SWT.COLOR_TITLE_BACKGROUND);
 							System.out.println(("ERRO 1? --->" + verifica));
 							f = (Cliente) (gestor.getMapUtilizadores().get(text_UserA.getText()));
 
@@ -501,11 +470,11 @@ public class J_03_Menu_CLIENTE_AlteraDados3 {
 							text_UserA.setEnabled(false);
 							text_Email_NA.setEnabled(false);
 							Buton_AlteraDados.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_GRAY));
-
+			
 						} else {
 							System.out.println(("----> Nao verifica"));
 							verifica = "Dados por  inválidos:\n" + verifica;
-							MessageBox box = new MessageBox(shell, SWT.MULTI | SWT.ICON_ERROR);
+							MessageBox box = new MessageBox(shell, SWT.MULTI | SWT.ICON_ERROR|SWT.ERROR_CANNOT_GET_ITEM);
 							box.setText("ERRO");
 							box.setMessage(verifica);
 							box.open();
@@ -517,17 +486,17 @@ public class J_03_Menu_CLIENTE_AlteraDados3 {
 						box.setText("ERRO");
 						box.setMessage(mensagem);
 						box.open();
-						
+
 						naohaDadosPorPreencher = true;
 					}
-					
+
 				} else {// liberta dados que podem ser alterados
 					text_PassNovoF.setEnabled(true);
 					text_UserA.setEnabled(true);
 					text_Email_NA.setEnabled(true);
 					Buton_AlteraDados.setText("Altere Os DadoS");
 					Buton_AlteraDados.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_GREEN));
-					
+
 				}
 
 			}
@@ -535,15 +504,7 @@ public class J_03_Menu_CLIENTE_AlteraDados3 {
 
 	}
 
-	public boolean estaVazio(Text texto) {
 
-		if (texto.getText().equals("")) {
-			texto.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
-			return true;
-		}
-		texto.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
-		return false;
-	}
 
 	public int eNumero(Text texto) {
 		for (char c : texto.getText().toCharArray()) {
