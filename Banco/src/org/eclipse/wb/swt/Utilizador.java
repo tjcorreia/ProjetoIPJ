@@ -4,7 +4,10 @@ import java.io.Serializable;
 
 /**
 * Breve descrição do código
-*
+* @author Alberto Jorge
+* @author Tiago Correia
+* 
+* @sid 2019
 * @sid 2019
 * @aid 1.1
 */
@@ -57,6 +60,9 @@ public class Utilizador implements Serializable{
 		this.email = email;
 		this.mobile = mobile;
 	}
+	/**
+	 * Getter e Setters para todos os atributos
+	 */
 	public Utilizador() {
 		super();
 		// TODO Auto-generated constructor stub

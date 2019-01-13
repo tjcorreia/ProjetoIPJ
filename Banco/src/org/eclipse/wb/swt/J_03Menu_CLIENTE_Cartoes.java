@@ -19,7 +19,11 @@ import org.eclipse.swt.widgets.Text;
 
 /**
  * Breve descrição do código
- * Janela do Cliente que Apresenta a Lista de cartões das contas do cliente
+ * Janela do Cliente que permite alterar alguns dados
+ * * @author Alberto Jorge
+* @author Tiago Correia
+* 
+* @sid 2019
  * @sid 2019
  * @aid 1.1
  */

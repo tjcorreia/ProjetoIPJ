@@ -26,9 +26,10 @@ import org.eclipse.wb.swt.Transacao.TipoT;
  * Breve descrição do código Janela Funcionario para Listar movimentos da conta
  * do Cliente
  * 
- * @author Alberto Jorge
- * @sid 2019
- * @aid 1.1
+* @author Alberto Jorge
+* @author Tiago Correia
+* 
+* @sid 2019
  */
 public class J_02Menu_F_MovimentaConta {
 

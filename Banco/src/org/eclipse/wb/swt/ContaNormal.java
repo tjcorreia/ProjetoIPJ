@@ -4,11 +4,14 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * Breve descrição do código
- *
- * @author Jorge
- *
- */
+* Breve descrição do código
+* Classe conta
+* @author Alberto Jorge
+* @author Tiago Correia
+* 
+* @sid 2019
+* 
+*/
 public class ContaNormal extends Conta implements Serializable {
 
 	private ArrayList<Cartao> listaCartoesC;//
@@ -18,7 +21,7 @@ public class ContaNormal extends Conta implements Serializable {
 	public ContaNormal(int contaID, double saldo, String datacria, ArrayList<Transacao> transacoesC,
 			ArrayList<Integer> clientesDaC, TipoC escolhaID, ArrayList<Cartao> listaCartoesC) {
 		super(contaID, saldo, datacria, transacoesC, clientesDaC, escolhaID);
-		this.listaCartoesC = listaCartoesC;
+		this.listaCartoesC = new ArrayList<Cartao>();
 	}
 
 	public ContaNormal() {
@@ -50,6 +53,9 @@ public class ContaNormal extends Conta implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * Getter e Setters para todos os atributos
+	 */
 	public ArrayList<Cartao> getListaCartoesC() {
 		return listaCartoesC;
 	}
@@ -58,13 +64,41 @@ public class ContaNormal extends Conta implements Serializable {
 		this.listaCartoesC = listaCartoesC;
 	}
 
+	/**
+	 * adiciona cartão  a lista de Cartões
+	 * @param novoCartao
+	 * @return Cartão
+	 */
 	public Cartao addCartaoC(Cartao novoCartao) {
 		listaCartoesC.add(novoCartao);
 		return novoCartao;
 
 	}
+	/**
+	 * Remove cartão da Lista de Cartões
+	 * @param Cartao
+	 * @return boolean
+	 */
+	public boolean removeCartaoC(Cartao Cartao) {
+		if (!(listaCartoesC.size() == 0)) {
+		for(Cartao c:listaCartoesC) {
+			if (c==Cartao) {
+		listaCartoesC.remove(c);
+		return true;
+			}
+	}
+		}
+		return false;
 
+	}
+
+	/**
+	 * Procura um Cartão por ID
+	 * @param cartaoID
+	 * @return Cartão
+	 */
 	public Cartao procuraCartaoC(int cartaoID) {
+		
 		if (!(listaCartoesC.size() == 0)) {
 			for (Cartao c : listaCartoesC) {
 				if (c.getCartaoID() == cartaoID) {
@@ -75,6 +109,12 @@ public class ContaNormal extends Conta implements Serializable {
 		return null;
 	}
 
+	/**
+	 * Verifica o Pin de um Cartão
+	 * @param cartaoID
+	 * @param pin
+	 * @return Cartão
+	 */
 	public Cartao verificaPINCartaoC(int cartaoID,String pin) {
 		if (!(listaCartoesC.size() == 0)) {
 			for (Cartao c : listaCartoesC) {
@@ -88,6 +128,10 @@ public class ContaNormal extends Conta implements Serializable {
 		return null;
 	}
 	
+	/**
+	 * @param titularID
+	 * @return Cartão
+	 */
 	public Cartao procuraCartaoCTitular(int titularID) {
 		if (!(listaCartoesC.size() == 0)) {
 			for (Cartao c : listaCartoesC) {

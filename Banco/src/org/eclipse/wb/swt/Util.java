@@ -13,8 +13,10 @@ import org.eclipse.swt.widgets.Text;
 /**
 * Breve descrição do código
 * Metodo Criado para colocar metodos utilitarios que se repentem
+* @author Alberto Jorge
+* @author Tiago Correia
+* 
 * @sid 2019
- * @author Jorge
  *
  */
 public class Util {

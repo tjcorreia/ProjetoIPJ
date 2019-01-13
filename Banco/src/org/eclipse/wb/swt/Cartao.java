@@ -6,16 +6,16 @@ import java.util.Random;
 
 /**
 * Breve descrição do código
-* Janel de Administrador Cria Novo funcionario
+* Classe Cartão
 * @author Alberto Jorge
 * @author Tiago Correia
 * 
 * @sid 2019
-* @aid 1.1
+* 
 */
 
 public class Cartao implements Serializable{
-	
+	// Atributos
 	protected int cartaoID;        // ID do Cartão gerado epla gestao
 	protected int titularCartaoID; // ID do Titular do Cartão
 	protected int contaCartaoID;   // ID da conta associada ao Cartão
@@ -74,7 +74,9 @@ public class Cartao implements Serializable{
 
 
 
-
+	/**
+	 * Getter e Setters para todos os atributos
+	 */
 	public int getCartaoID() {
 		return cartaoID;
 	}

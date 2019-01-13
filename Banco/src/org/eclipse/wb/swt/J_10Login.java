@@ -13,9 +13,12 @@ import org.eclipse.swt.events.KeyAdapter;
 import org.eclipse.swt.events.KeyEvent;
 
 /**
-
  * Menu de Login 
  * 
+ * * @author Alberto Jorge
+* @author Tiago Correia
+* 
+* @sid 2019
  * @sid 2017
  * @aid 1.1
  */

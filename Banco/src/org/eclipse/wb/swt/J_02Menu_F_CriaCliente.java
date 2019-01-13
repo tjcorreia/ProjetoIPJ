@@ -20,11 +20,14 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.wb.swt.Utilizador.TipoID;
 
 /**
- * Breve descrição do código Janela Funcionario para Criar Cliente
- * 
- * @author Alberto Jorge
- *
- */
+* Breve descrição do código
+* Janela de Funcionario para Criar cliente Novo
+* @author Alberto Jorge
+* @author Tiago Correia
+* 
+* @sid 2019
+* 
+*/
 public class J_02Menu_F_CriaCliente {
 
 	protected Shell shellMF;

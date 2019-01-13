@@ -22,13 +22,14 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.wb.swt.Transacao.TipoT;
 
 /**
- * Breve descrição do código
-  * Janela Funcionario para apresentar as Contas de um Cliente e as Transações
- *  
- * @author Alberto Jorge
- * @sid 2019
- * @aid 1.1
- */
+* Breve descrição do código
+* Janela do menu funcionario para Criar contas para o Cliente
+* @author Alberto Jorge
+* @author Tiago Correia
+* 
+* @sid 2019
+* 
+*/
 public class J_02Menu_F_ContasCl {
 
 	protected Shell shellMF_Contas;

@@ -1,9 +1,13 @@
 package org.eclipse.wb.swt;
+
 /**
 * Breve descrição do código
-*
+* Classe conta
+* @author Alberto Jorge
+* @author Tiago Correia
+* 
 * @sid 2019
-* @aid 1.1
+* 
 */
 
 import java.io.Serializable;
@@ -12,21 +16,15 @@ import java.util.ArrayList;
 
 public class Conta implements Serializable{
 	
-
-	protected int contaID;        //
-	protected double saldo;   //
-	protected String datacria;
-	protected ArrayList<Transacao> transacoesC;// 
-	protected ArrayList<Integer> clientesDaC;// 
-	public TipoC abertaFechada;
+	// Atributos
+	protected int contaID;        // ID 
+	protected double saldo;   //Saldo
+	protected String datacria; //Data de Criação
+	protected ArrayList<Transacao> transacoesC;//  Lista de transações
+	protected ArrayList<Integer> clientesDaC;//  Lista de Clientes
+	public TipoC abertaFechada; //ESTADO
 	
-	protected enum TipoC {ABERTA,ENCERADA}
-
-
-
-
-
-
+	public enum TipoC {ABERTA,ENCERADA}
 
 	public Conta(int contaID, double saldo, String datacria, ArrayList<Transacao> transacoesC,
 			ArrayList<Integer> clientesDaC, TipoC escolhaID) {
@@ -38,9 +36,6 @@ public class Conta implements Serializable{
 		this.clientesDaC = clientesDaC;
 		this.abertaFechada = escolhaID;
 	}
-
-
-	
 
 	public Conta() {
 		super();
@@ -72,6 +67,9 @@ public class Conta implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * Getter e Setters para todos os atributos
+	 */
 
 	public int getContaID() {
 		return contaID;
@@ -164,14 +162,24 @@ public class Conta implements Serializable{
 	}
 
 
-	 public int addClienteC(int clienteID) { 
+	 /**
+	  * Adiciona no Titular a conat
+	 * @param clienteID
+	 * @return int
+	 */
+	public int addClienteC(int clienteID) { 
 		 clientesDaC.add(clienteID);
 		 return clienteID;
 		 
 	 }
 
 
-	 public Transacao addTransacaoC(Transacao novaT) {
+	 /**
+	  * adiciona nova transação a lista de transações
+	 * @param novaT
+	 * @return Transacao
+	 */
+	public Transacao addTransacaoC(Transacao novaT) {
 		 if (transacoesC==null) {
 			 novaT.settID(1000);
 			 transacoesC.add(novaT);
@@ -184,7 +192,13 @@ public class Conta implements Serializable{
 		 return novaT;
 		 
 	 }
-	 public double  mensal(int anoA,int mesA) {
+	 /**
+	  * Faz a contabilização de movimentos mensais por Data
+	 * @param anoA ano a verificar
+	 * @param mesA mes a verificar
+	 * @return double Total mensal
+	 */
+	public double  mensal(int anoA,int mesA) {
 		double totalmensal=0;
 		Transacao t=new Transacao();
 		for (int i=transacoesC.size()-1;i>=0;i--) {
@@ -200,7 +214,14 @@ public class Conta implements Serializable{
 	 }
 
 	
-	 public double  diario(String anoA,String mesA,String diaA) {
+	 /**
+	  * Faz a contabilização de movimentos diarios por Data
+	 * @param anoA
+	 * @param mesA
+	 * @param diaA
+	 * @return  double total diario
+	 */
+	public double  diario(String anoA,String mesA,String diaA) {
 			double diario=0;
 			Transacao t=new Transacao();
 			for (int i=transacoesC.size()-1;i>=0;i--) {
@@ -215,7 +236,13 @@ public class Conta implements Serializable{
 			 return diario;
 		 }
 	
-	 public Transacao  jurosMensais(String anoA,String mesA) {
+	 /**
+	  * Adiciona os juros mensais com transação nova
+	 * @param anoA
+	 * @param mesA
+	 * @return
+	 */
+	public Transacao  jurosMensais(String anoA,String mesA) {
 		 // simplicado média (saldo final+saldo inicial)/2
 			double totalInicio=saldo;
 			double taxaJuro=0.05;

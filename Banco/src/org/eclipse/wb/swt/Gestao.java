@@ -19,30 +19,28 @@ import org.eclipse.wb.swt.Transacao.TipoT;
 import org.eclipse.wb.swt.Utilizador.TipoID;
 
 /**
-* Breve descrição do código
-* Classe Gestão : 
-* - Gere as lista das diversas classes
-* @author Alberto Machado
-* @author Tiago Correia
-* @param 
-* @sid 2019
-* @aid 1.1
-*/
+ * Breve descrição do código Classe Gestão : - Gere as lista das diversas
+ * classes
+ * 
+ * @author Alberto Machado
+ * @author Tiago Correia
+ * @param
+ * @sid 2019
+ * @aid 1.1
+ */
 
 public class Gestao {
-	
-	private Map<String, Utilizador> mapUtilizadores;// String Username como key 
+ // Atributos
+	private Map<String, Utilizador> mapUtilizadores;// String Username como key
 	private ArrayList<Conta> lContas; // lista de contas
-	private Map<Integer, Integer> mapCartaoConta; // numcartao-numconta 
+	private Map<Integer, Integer> mapCartaoConta; // numcartao-numconta
 	private Map<String, Integer> contadores;// criou-se um contador usar nos diversas classes
 	private Utilizador uactual; // UtilizadorActual transmitido entre janelas
-	
+
 //	contadores.put("Utilizador", 10000); // inicializa o Contador de Utilizadores
 //	contadores.put("Contas", 100000); // inicializa o Contador de Contas
 //	contadores.put("Cartoes", 500010000); // inicializa o Contador de Cartoes
-	
-	
-	
+
 	public Gestao() {
 		super();
 		this.mapUtilizadores = new HashMap<String, Utilizador>();
@@ -50,181 +48,177 @@ public class Gestao {
 		this.mapCartaoConta = new HashMap<Integer, Integer>();
 		this.contadores = new HashMap<String, Integer>();
 
-		
 		/**
-		* load data : Na abertura carrega todos os ficheiros para o sistema
-		*/
+		 * load data : Na abertura carrega todos os ficheiros para o sistema
+		 */
 
-//		try {
-//			loadAll();
-//		} catch (ClassNotFoundException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		try {
+			loadAll();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
-		contadores.put("Utilizador", 10000); // inicializa o Contador de Utilizadores
-		contadores.put("Contas", 100000); // inicializa o Contador de Contas
-		contadores.put("Cartoes", 500010000); // inicializa o Contador de Cartoes
-		// Administradores
+//		contadores.put("Utilizador", 10000); // inicializa o Contador de Utilizadores
+//		contadores.put("Contas", 100000); // inicializa o Contador de Contas
+//
+//		// Administradores
+//
+//		Administrador MachadoU = new Administrador(contadores.get("Utilizador"), "Machado", "Admin", "Alberto",
+//				"Machado0", "1977/07/17", "Rua Maria Vitoria", Administrador.TipoID.CARTAOCIDADAO, "78456123",
+//				"mail@gmail.com", 965420735);
+//
+//		Administrador CorreiaU = new Administrador(contadores.get("Utilizador") + 1, "Correia", "Admin", "Tiago",
+//				"Coreia", "1977/07/30", "Rua Maria Vitoria ", Administrador.TipoID.CARTAOCIDADAO, "12345678",
+//				"mail@gmail.com", 965420733);
+//		contadores.replace("Utilizador", contadores.get("Utilizador") + 1);
+//		mapUtilizadores.put("Machado", MachadoU);
+//		mapUtilizadores.put("Correia", CorreiaU);
+//
+//		// Funcionarios (NOTA:o funcionario banco (ID:10003) tem de existir sempre é o
+//		// funcionario a quem são atribuidos os processos automaticos)
+//		Funcionario BANCOFU = new Funcionario(contadores.get("Utilizador") + 1, "BANCO", "Fun", "BANCO", "BANCO0",
+//				"1977/07/30", "BANCO", Funcionario.TipoID.CARTAOCIDADAO, "78456123", "banco@gmail.com", 960000000);
+//		contadores.replace("Utilizador", contadores.get("Utilizador") + 1);
+//
+//		Funcionario MachadoFU = new Funcionario(contadores.get("Utilizador") + 1, "Maria", "Fun", "Maria", "Cardoso",
+//				"1977/07/30", "BANCO", Funcionario.TipoID.CARTAOCIDADAO, "78456123", "banco@gmail.com", 960000000);
+//		contadores.replace("Utilizador", contadores.get("Utilizador") + 1);
+//
+//		Funcionario CorreiaFU = new Funcionario(contadores.get("Utilizador") + 1, "Correia2", "Fun", "Tiago", "Coreia",
+//				"1977/07/30", "Rua Maria Vitoria ", Funcionario.TipoID.CARTAOCIDADAO, "12345678", "mail2@gmail.com",
+//				965420731);
+//		contadores.replace("Utilizador", contadores.get("Utilizador") + 1);
+//		mapUtilizadores.put("BANCO", BANCOFU);
+//		mapUtilizadores.put("Maria", MachadoFU);
+//		mapUtilizadores.put("Correia2", CorreiaFU);
+//
+//		// Clientes
+//		// Utilizador(uID,login,password,nome,morada,escolhaID,valorID,email,mobile)
+//
+//		Cliente cl1 = new Cliente(contadores.get("Utilizador") + 1, "Livraria", "Cliente", "LIVRARIA", "Machado0",
+//				"1977/07/30", "Rua Maria Vitoria", Utilizador.TipoID.CARTAOCIDADAO, "78456123", "mail", 965420731);
+//		contadores.replace("Utilizador", contadores.get("Utilizador") + 1);
+//		Cliente cl2 = new Cliente(contadores.get("Utilizador") + 1, "CorreiaCliente", "Cliente", "Tiago", "Coreia",
+//				"1977/07/30", "Rua Maria Vitoriazfgadfgadfgsdfgsdfg", Utilizador.TipoID.CARTAOCIDADAO, "12345678",
+//				"mail", 965420730);
+//		contadores.replace("Utilizador", contadores.get("Utilizador") + 1);
+//		Cliente cl3 = new Cliente(contadores.get("Utilizador") + 1, "MariaCliente", "Cliente", "Tiago2", "Coreia2",
+//				"1977/07/30", "Rua Maria Vitoriazfgadfgadfgsdfgsdfg", Utilizador.TipoID.CARTAOCIDADAO, "92345678",
+//				"mail2@gmail.com", 965420530);
+//		contadores.replace("Utilizador", contadores.get("Utilizador") + 1);
+//
+//		mapUtilizadores.put("AlbertoCliente", cl1);
+//		mapUtilizadores.put("CorreiaCliente", cl2);
+//		mapUtilizadores.put("MariaCliente", cl3);
+//
+//		// Contas
+//		// conta da LIvraria não apagar
+//		Conta cn1 = new ContaNormal(100000, 0, "2010/06/02");
+//		lContas.add(cn1);
+//		cn1.addClienteC(cl1.getuID());
+//		cl1.addConta(cn1);
+//
+//		ContaNormal cn2 = new ContaNormal(100001, 0, "2017/06/02");
+//		cn2.addClienteC(cl2.getuID());
+//
+//		cn2.addClienteC(cl3.getuID());
+//		cl2.addConta(cn2);
+//
+//		cl3.addConta(cn2);
+//
+//		lContas.add(cn2);
+//
+//		Conta cn3 = new ContaNormal(100002, 0, "2017/06/02");
+//		lContas.add(cn3);
+//		cn3.addClienteC(cl1.getuID());
+//		cl1.addConta(cn3);
+//
+//		Conta cn4 = new ContaPrazo(100003, 0, "2017/06/02");
+//		lContas.add(cn4);
+//		cn4.addClienteC(cl1.getuID());
+//		cn4.addClienteC(cl2.getuID());
+//		cn4.addClienteC(cl3.getuID());
+//
+//		cl1.addConta(cn4);
+//		cl3.addConta(cn4);
+//
+//		Conta cn5 = new ContaPrazo(100004, 0, "2017/06/02");
+//		cn5.setAbertaFechada(Conta.TipoC.ENCERADA);
+//		lContas.add(cn5);
+//		cn5.addClienteC(cl1.getuID());
+//		cl1.addConta(cn5);
+//
+////	transações
+//
+//		Transacao T0Cn1 = new Transacao(MachadoFU.getuID(), "2018-01-02", 1500, "ABERTURA", 0,
+//				Transacao.TipoT.DEP_CASH);
+//		cn1.addTransacaoC(T0Cn1);
+//		Transacao T1Cn1 = new Transacao(CorreiaFU.getuID(), "2018-02-02", -100, "", 0, Transacao.TipoT.LEV_CASH);
+//		cn1.addTransacaoC(T1Cn1);
+//		Transacao T2Cn1 = new Transacao(MachadoFU.getuID(), "2018-03-02", 2000, "", 0, Transacao.TipoT.DEP_CASH);
+//		cn1.addTransacaoC(T2Cn1);
+//		Transacao T3Cn1 = new Transacao(CorreiaFU.getuID(), "2018-04-02", 1000, "", 0, Transacao.TipoT.DEP_CASH);
+//		cn1.addTransacaoC(T3Cn1);
+//		Transacao T4Cn1 = new Transacao(MachadoFU.getuID(), "2018-05-02", 1000, "", 0, Transacao.TipoT.DEP_CASH);
+//		cn1.addTransacaoC(T4Cn1);
+//		Transacao T5Cn1 = new Transacao(CorreiaFU.getuID(), "2018-06-02", 1000, "", 0, Transacao.TipoT.DEP_CASH);
+//		cn1.addTransacaoC(T5Cn1);
+//		Transacao T6Cn1 = new Transacao(MachadoFU.getuID(), "2018-07-02", 1000, "", 0, Transacao.TipoT.DEP_CASH);
+//		cn1.addTransacaoC(T6Cn1);
+//		Transacao T7Cn1 = new Transacao(CorreiaFU.getuID(), "2018-01-02", 1000, "", 0, Transacao.TipoT.DEP_CASH);
+//		cn1.addTransacaoC(T7Cn1);
+//		Transacao T8Cn1 = new Transacao(MachadoFU.getuID(), "2019-01-08", 1000, "", 0, Transacao.TipoT.DEP_CASH);
+//		cn1.addTransacaoC(T8Cn1);
+//		Transacao T9Cn1 = new Transacao(MachadoFU.getuID(), "2019-01-08", -50, "", 0, Transacao.TipoT.LEV_CASH);
+//		cn1.addTransacaoC(T9Cn1);
+//		Transacao T10Cn1 = new Transacao(MachadoFU.getuID(), "2019-01-08", -100, "", 100002,
+//				Transacao.TipoT.TRANSFERENCIA);
+//		cn1.addTransacaoC(T10Cn1);
+//		Transacao T0Cn2 = new Transacao(MachadoFU.getuID(), "2019-01-08", 1500, "ABERTURA", 0,
+//				Transacao.TipoT.DEP_CASH);
+//		cn2.addTransacaoC(T0Cn2);
+//		Transacao T1Cn2 = new Transacao(MachadoFU.getuID(), "2019-01-08", 200, "", -100001,
+//				Transacao.TipoT.TRANSFERENCIA);
+//		cn2.addTransacaoC(T1Cn2);
+//		Transacao T0Cn3 = new Transacao(MachadoFU.getuID(), 1000, "ABERTURA", 0, Transacao.TipoT.DEP_CASH);
+//		cn3.addTransacaoC(T0Cn3);
+//		Transacao T0Cn4 = new Transacao(MachadoFU.getuID(), 1000, "ABERTURA", 0, Transacao.TipoT.DEP_CASH);
+//		cn4.addTransacaoC(T0Cn4);
+//
+//		// cartao
+//
+//		LocalDate data = LocalDate.now().plusYears(5);
+//		int dia = data.getDayOfMonth();
+//		int anomes = data.getMonthValue();
+//		int ano = data.getYear();
+//		LocalDate data1 = LocalDate.of(2023, 12, 21);
+//
+//		contadores.put("Cartoes", 500010000); // inicializa o Contador de Cartoes
+//		System.out.println("Contador->" + contadores.get("Cartoes"));
+//		Cartao ct1 = new Cartao(500010000, cl3.getuID(), cn2.getContaID(), cl3.getNome() + " " + cl3.getSobrenome(),
+//				data1, "000");
+//		((ContaNormal) cn2).addCartaoC(ct1);
+//
+//		mapCartaoConta.put(500010000, cn2.getContaID());
+//		System.out.println("Contador->" + contadores.get("Cartoes"));
+//		LocalDate data2 = LocalDate.of(2020, 12, 01);
+//		Cartao ct2 = new Cartao(contadores.get("Cartoes") + 1, cl2.getuID(), cn2.getContaID(),
+//				cl2.getNome() + " " + cl2.getSobrenome(), data2, "000");
+//		((ContaNormal) cn2).addCartaoC(ct2);
+//		System.out.println("Conta Cartao->" + mapCartaoConta.get(500010000));
+//		mapCartaoConta.put(contadores.get("Cartoes") + 1, cn2.getContaID());
+//		System.out.println("Conta Cartao->" + mapCartaoConta.get(500010001));
+//		contadores.replace("Cartoes", contadores.get("Cartoes") + 1); // inicializa o Contador de Cartoes
+//		System.out.println("Contador->" + contadores.get("Cartoes"));
+//		// ( duvida colocar conta de origem ?)
 
-		Administrador MachadoU = new Administrador(contadores.get("Utilizador"), "Machado", "Admin", "Alberto",
-				"Machado0", "1977/07/17", "Rua Maria Vitoria", Administrador.TipoID.CARTAOCIDADAO, "78456123",
-				"mail@gmail.com", 965420735);
-
-		Administrador CorreiaU = new Administrador(contadores.get("Utilizador") + 1, "Correia", "Admin", "Tiago",
-				"Coreia", "1977/07/30", "Rua Maria Vitoria ", Administrador.TipoID.CARTAOCIDADAO, "12345678",
-				"mail@gmail.com", 965420733);
-		contadores.replace("Utilizador", contadores.get("Utilizador") + 1);
-		mapUtilizadores.put("Machado", MachadoU);
-		mapUtilizadores.put("Correia", CorreiaU);
-
-		// Funcionarios (NOTA:o funcionario banco (ID:10003) tem de existir sempre é o
-		// funcionario a quem são atribuidos os processos automaticos)
-		Funcionario BANCOFU = new Funcionario(contadores.get("Utilizador") + 1, "BANCO", "Fun", "BANCO", "BANCO0",
-				"1977/07/30", "BANCO", Funcionario.TipoID.CARTAOCIDADAO, "78456123", "banco@gmail.com", 960000000);
-		contadores.replace("Utilizador", contadores.get("Utilizador") + 1);
-
-		Funcionario MachadoFU = new Funcionario(contadores.get("Utilizador") + 1, "Maria", "Fun", "Maria", "Cardoso",
-				"1977/07/30", "BANCO", Funcionario.TipoID.CARTAOCIDADAO, "78456123", "banco@gmail.com", 960000000);
-		contadores.replace("Utilizador", contadores.get("Utilizador") + 1);
-
-		Funcionario CorreiaFU = new Funcionario(contadores.get("Utilizador") + 1, "Correia2", "Fun", "Tiago", "Coreia",
-				"1977/07/30", "Rua Maria Vitoria ", Funcionario.TipoID.CARTAOCIDADAO, "12345678", "mail2@gmail.com",
-				965420731);
-		contadores.replace("Utilizador", contadores.get("Utilizador") + 1);
-		mapUtilizadores.put("BANCO", BANCOFU);
-		mapUtilizadores.put("Maria", MachadoFU);
-		mapUtilizadores.put("Correia2", CorreiaFU);
-
-		// Clientes
-		// Utilizador(uID,login,password,nome,morada,escolhaID,valorID,email,mobile)
-
-		Cliente cl1 = new Cliente(contadores.get("Utilizador") + 1, "Livraria", "Cliente", "LIVRARIA", "Machado0",
-				"1977/07/30", "Rua Maria Vitoria", Utilizador.TipoID.CARTAOCIDADAO, "78456123", "mail", 965420731);
-		contadores.replace("Utilizador", contadores.get("Utilizador") + 1);
-		Cliente cl2 = new Cliente(contadores.get("Utilizador") + 1, "CorreiaCliente", "Cliente", "Tiago", "Coreia",
-				"1977/07/30", "Rua Maria Vitoriazfgadfgadfgsdfgsdfg", Utilizador.TipoID.CARTAOCIDADAO, "12345678",
-				"mail", 965420730);
-		contadores.replace("Utilizador", contadores.get("Utilizador") + 1);
-		Cliente cl3 = new Cliente(contadores.get("Utilizador") + 1, "MariaCliente", "Cliente", "Tiago2", "Coreia2",
-				"1977/07/30", "Rua Maria Vitoriazfgadfgadfgsdfgsdfg", Utilizador.TipoID.CARTAOCIDADAO, "92345678",
-				"mail2@gmail.com", 965420530);
-		contadores.replace("Utilizador", contadores.get("Utilizador") + 1);
-
-		mapUtilizadores.put("AlbertoCliente", cl1);
-		mapUtilizadores.put("CorreiaCliente", cl2);
-		mapUtilizadores.put("MariaCliente", cl3);
-
-		// Contas
-        // conta da LIvraria não apagar 
-		Conta cn1 = new ContaNormal(100000, 0, "2010/06/02");
-		lContas.add(cn1);
-		cn1.addClienteC(cl1.getuID());
-		cl1.addConta(cn1);
-
-		ContaNormal cn2 = new ContaNormal(100001, 0, "2017/06/02");
-		cn2.addClienteC(cl2.getuID());
 		
-		cn2.addClienteC(cl3.getuID());
-		cl2.addConta(cn2);
 		
-		cl3.addConta(cn2);
-
-		lContas.add(cn2);
-
-		Conta cn3 = new ContaNormal(100002, 0, "2017/06/02");
-		lContas.add(cn3);
-		cn3.addClienteC(cl1.getuID());
-		cl1.addConta(cn3);
-
-		Conta cn4 = new ContaPrazo(100003, 0, "2017/06/02");
-		lContas.add(cn4);
-		cn4.addClienteC(cl1.getuID());
-		cn4.addClienteC(cl2.getuID());
-		cn4.addClienteC(cl3.getuID());
-
-		cl1.addConta(cn4);
-		cl3.addConta(cn4);
-
-		Conta cn5 = new ContaPrazo(100004, 0, "2017/06/02");
-		cn5.setAbertaFechada(Conta.TipoC.ENCERADA);
-		lContas.add(cn5);
-		cn5.addClienteC(cl1.getuID());
-		cl1.addConta(cn5);
-
-//	transações
-
-		Transacao T0Cn1 = new Transacao(MachadoFU.getuID(), "2018-01-02", 1500, "ABERTURA", 0,
-				Transacao.TipoT.DEP_CASH);
-		cn1.addTransacaoC(T0Cn1);
-		Transacao T1Cn1 = new Transacao(CorreiaFU.getuID(), "2018-02-02", -100, "", 0, Transacao.TipoT.LEV_CASH);
-		cn1.addTransacaoC(T1Cn1);
-		Transacao T2Cn1 = new Transacao(MachadoFU.getuID(), "2018-03-02", 2000, "", 0, Transacao.TipoT.DEP_CASH);
-		cn1.addTransacaoC(T2Cn1);
-		Transacao T3Cn1 = new Transacao(CorreiaFU.getuID(), "2018-04-02", 1000, "", 0, Transacao.TipoT.DEP_CASH);
-		cn1.addTransacaoC(T3Cn1);
-		Transacao T4Cn1 = new Transacao(MachadoFU.getuID(), "2018-05-02", 1000, "", 0, Transacao.TipoT.DEP_CASH);
-		cn1.addTransacaoC(T4Cn1);
-		Transacao T5Cn1 = new Transacao(CorreiaFU.getuID(), "2018-06-02", 1000, "", 0, Transacao.TipoT.DEP_CASH);
-		cn1.addTransacaoC(T5Cn1);
-		Transacao T6Cn1 = new Transacao(MachadoFU.getuID(), "2018-07-02", 1000, "", 0, Transacao.TipoT.DEP_CASH);
-		cn1.addTransacaoC(T6Cn1);
-		Transacao T7Cn1 = new Transacao(CorreiaFU.getuID(), "2018-01-02", 1000, "", 0, Transacao.TipoT.DEP_CASH);
-		cn1.addTransacaoC(T7Cn1);
-		Transacao T8Cn1 = new Transacao(MachadoFU.getuID(), "2019-01-08", 1000, "", 0, Transacao.TipoT.DEP_CASH);
-		cn1.addTransacaoC(T8Cn1);
-		Transacao T9Cn1 = new Transacao(MachadoFU.getuID(), "2019-01-08", -50, "", 0, Transacao.TipoT.LEV_CASH);
-		cn1.addTransacaoC(T9Cn1);
-		Transacao T10Cn1 = new Transacao(MachadoFU.getuID(), "2019-01-08", -100, "", 100002,
-				Transacao.TipoT.TRANSFERENCIA);
-		cn1.addTransacaoC(T10Cn1);
-		Transacao T0Cn2 = new Transacao(MachadoFU.getuID(), "2019-01-08", 1500, "ABERTURA", 0,
-				Transacao.TipoT.DEP_CASH);
-		cn2.addTransacaoC(T0Cn2);
-		Transacao T1Cn2 = new Transacao(MachadoFU.getuID(), "2019-01-08", 200, "", -100001,
-				Transacao.TipoT.TRANSFERENCIA);
-		cn2.addTransacaoC(T1Cn2);
-		Transacao T0Cn3 = new Transacao(MachadoFU.getuID(), 1000, "ABERTURA", 0, Transacao.TipoT.DEP_CASH);
-		cn3.addTransacaoC(T0Cn3);
-		Transacao T0Cn4 = new Transacao(MachadoFU.getuID(), 1000, "ABERTURA", 0, Transacao.TipoT.DEP_CASH);
-		cn4.addTransacaoC(T0Cn4);
-
-		// cartao
-
-		LocalDate data = LocalDate.now().plusYears(5);
-		int dia = data.getDayOfMonth();
-		int anomes = data.getMonthValue();
-		int ano = data.getYear();
-		LocalDate data1=LocalDate.of(2017, 12, 21);
-		Cartao ct1 = new Cartao(500010000, cl3.getuID(), cn2.getContaID(), cl3.getNome() + " " + cl3.getSobrenome(),
-				data1, "000");
-		((ContaNormal) cn1).addCartaoC(ct1);
-
-		mapCartaoConta.put(500010000, cn2.getContaID());
-		LocalDate data2 = LocalDate.of(2015, 12, 01);
-		Cartao ct2 = new Cartao(contadores.get("Cartoes") + 1, cl2.getuID(), cn2.getContaID(),
-				cl2.getNome() + " " + cl2.getSobrenome(), data2, "000");
-		((ContaNormal) cn2).addCartaoC(ct2);
-
-		mapCartaoConta.put(contadores.get("Cartoes") + 1, cn2.getContaID());
-		contadores.replace("Cartoes", contadores.get("Cartoes") + 1); // inicializa o Contador de Cartoes
-
-		// ( duvida colocar conta de origem ?)
-
-		/**
-		* verifica data e paga juros as contas
-		*/
-		pagajuros();
-		/**
-		* Gava todos os ficheiros
-		*/
-		saveAll();
-
-		for (Entry<Integer, Integer>  entry : mapCartaoConta.entrySet()) {
-					System.out.println("VERIFICA ---->Key = " + entry.getKey() + ", Value = " + entry.getValue());
-			}
 	}
-
+	/**
+	 * Getter e Setters para todos os atributos
+	 */
 	public Utilizador getUactual() {
 		return uactual;
 	}
@@ -266,9 +260,11 @@ public class Gestao {
 	}
 
 	public void Gerir(Gestao gestor, Utilizador uactual) {
-		
+
 // inicia a thread pava verificar a transação da livraria
-		int counter = 1000000;
+		
+		
+		int counter = 10000;
 		Thread t1 = new Thread(new Runnable() {
 			@Override
 			public void run() {
@@ -282,7 +278,26 @@ public class Gestao {
 			}
 		});
 		t1.start();
+		
+		/**
+		 * elimina os cartões fora de validade
+		 */
+		eliminaCartoesForaValidade();
+		for (Entry<Integer, Integer> entry : mapCartaoConta.entrySet()) {
+			System.out.println("VERIFICA ---->Key = " + entry.getKey() + ", Value = " + entry.getValue());
+		}
+		/**
+		 * verifica data e paga juros as contas
+		 */
+		pagajuros();
+		/**
+		 * Gava todos os ficheiros
+		 */
+		saveAll();
 
+		for (Entry<Integer, Integer> entry : mapCartaoConta.entrySet()) {
+			System.out.println("VERIFICA ---->Key = " + entry.getKey() + ", Value = " + entry.getValue());
+		}
 
 		System.out.println("lOAD");
 		for (Entry<String, Utilizador> entry : mapUtilizadores.entrySet()) {
@@ -306,29 +321,37 @@ public class Gestao {
 		System.out.println("<---------------------- Log out ---------------->");
 
 		saveAll();
+		
 
 	}
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++ metodos++++++++++++++++++++++++++++++++++++++++++++++++++++++
-//	private void eliminaCartoesForaValidade() {
-//		for (Entry<String, Utilizador> entry : mapUtilizadores.entrySet()) {
-////			
-////			entry.getValue().get
-////			if (data.isAfter(LocalDate.now().minusYears(idadeMinima))) {
-////			
-////			}
-////			if (entry.getValue() instanceof Funcionario) {
-//
-//				System.out.println("VERIFICA ---->Key = " + entry.getKey() + ", Value = " + entry.getValue());
-//			}
-//		
-//		}
-//		
-//	}
 	/**
-	 * @param counter
-	 * @throws IOException
-	 * Método de comunicação com a livravria 
+	 * elimina os cartões fora de validade
+	 */
+	private void eliminaCartoesForaValidade() {
+
+		Map<Conta, Cartao> mapContaCartaoaEliminar = new HashMap<Conta, Cartao>();
+		for (Entry<Integer, Integer> entry : mapCartaoConta.entrySet()) {
+			LocalDate dataactual = LocalDate.now();
+			ContaNormal c = (ContaNormal) contaExiste(entry.getValue());
+			Cartao ct = ((ContaNormal) c).procuraCartaoC(entry.getKey());
+			if (!(dataactual.isAfter(ct.getDataV()))) {	
+			} else if ((dataactual.isAfter(ct.getDataV()))) {
+				mapContaCartaoaEliminar.put(c, ct);
+			}
+		}
+		if (!(mapCartaoConta.size() == 0)) {
+			for (Entry<Conta, Cartao> entry1 : mapContaCartaoaEliminar.entrySet()) {
+				mapCartaoConta.remove(entry1.getValue().getCartaoID());
+				((ContaNormal) entry1.getKey()).removeCartaoC(entry1.getValue());
+			}
+		}
+	}
+
+	/**
+	 * @param counter contador
+	 * @throws IOException Método de comunicação com a livravria
 	 */
 	private void VerificaLivraria(int counter) throws IOException {
 		while (counter-- > 0) {
@@ -355,8 +378,8 @@ public class Gestao {
 
 			if (s != null && !s.equals("")) {
 				String[] sSplit = s.split(",");
-				System.out.println("Cartao Cliente  - >"+cartaoCliente);
-				System.out.println("Cartao PIN - >"+pin);
+				System.out.println("Cartao Cliente  - >" + cartaoCliente);
+				System.out.println("Cartao PIN - >" + pin);
 				pedidoiD = Integer.parseInt(sSplit[0]);
 				contaDeposito = Integer.parseInt(sSplit[1]);
 				cartaoCliente = Integer.parseInt(sSplit[2]);
@@ -372,8 +395,6 @@ public class Gestao {
 				System.out.println("movimento  :" + movimento);
 				String mensagem = "";
 
-				
-				
 				mensagem = VerificaCartaoeDevolveContaID(cartaoCliente, pin, movimento);
 				System.out.println("MENSAGEM  :" + mensagem);
 				if (eUmNumero(mensagem)) {
@@ -402,7 +423,6 @@ public class Gestao {
 						ficheiroDevolucao.abreEscrita("..\\RespostadoBanco.txt");
 						ficheiroDevolucao.escreveLinha(pedidoiD + ",Pagamento efetuado com sucesso.");
 						ficheiroDevolucao.fechaEscrita();
-						
 
 						System.out.println("<---- TRANSACÃO CONCLUIDA --->\n" + pedidoiD + ",OK\n");
 					} else {
@@ -411,20 +431,17 @@ public class Gestao {
 						ficheiroDevolucao.fechaEscrita();
 					}
 
-				
-					
 				} else {
-					System.out.println("<---- ERRO---->"+pedidoiD + "," + mensagem);
+					System.out.println("<---- ERRO---->" + pedidoiD + "," + mensagem);
 					ficheiroDevolucao.abreEscrita("..\\RespostadoBanco.txt");
 					ficheiroDevolucao.escreveLinha(pedidoiD + "," + mensagem);
 					ficheiroDevolucao.fechaEscrita();
 				}
-				
+
 				ficheiroPedidos.abreEscrita("..\\PedidosdaLivravria.txt");
 				ficheiroPedidos.escreveLinha("");
 				ficheiroPedidos.fechaEscrita();
-						
-				
+
 			}
 
 			try {
@@ -434,22 +451,21 @@ public class Gestao {
 				e.printStackTrace();
 			}
 		}
-		
-		
 
 	}
 
+	/**
+	 * Para verificação de um movimento da Livraria com um cartão, pin , valor do movimento verifica todos os dados
+	 * @param cartaoID identificação do cartão
+	 * @param cartaoPIN pin  do cartão
+	 * @param movimento valor do movimento
+	 * @return
+	 */
 	public String VerificaCartaoeDevolveContaID(int cartaoID, String cartaoPIN, double movimento) {
-		System.out.println("<---- Cartão------->" + cartaoID);
-		System.out.println("<---- Conta------->" + mapCartaoConta.get(cartaoID));
-		System.out.println("<---- BOOLEAN------->" + mapCartaoConta.containsKey(cartaoID));
+	
 		if (mapCartaoConta.containsKey(cartaoID)) {
 			ContaNormal c = new ContaNormal();
-			System.out.println("<---- Cartão------->" + cartaoID);
-			System.out.println("<---- Conta------->" + mapCartaoConta.get(cartaoID));
 			c = (ContaNormal) contaExiste(mapCartaoConta.get(cartaoID));
-			System.out.println("<---- Conta Actual-Vamos  Verifica max diario ( " + c.toString() + ") --->\n");
-			// verfica se o cartao com aquele ID daquela conta tem o pin correto
 			if (!(c.verificaPINCartaoC(cartaoID, cartaoPIN) == null)) {
 				if (c.getSaldo() >= movimento) {
 					if (verifMovimentos(c, TipoT.TRANSFERENCIA, movimento)) {
@@ -457,7 +473,6 @@ public class Gestao {
 					} else {
 						return "VALOR superior ao LIMITE DIARIO PERMITIDO";
 					}
-
 				} else {
 					return "SALDO insuficiente";
 				}
@@ -485,6 +500,9 @@ public class Gestao {
 //		System.out.println("contaOrigem"+ contaOrigem);
 	// metodo
 
+	/**
+	 * Método para pagamento automatico de Juros
+	 */
 	public void pagajuros() {
 		LocalDate data = LocalDate.now();
 
@@ -500,8 +518,18 @@ public class Gestao {
 
 	}
 
-	// metodo para transferencia fiz diferente mas ainda devia ter separado a parte da verificação de dados
+	// metodo para transferencia fiz diferente mas ainda devia ter separado a parte
+	// da verificação de dados
 
+	/**
+	 * Métod para o Cliente realizar um transferencia e altera a janela
+	 * @param uUtilizador recebe o uttilizador actual
+	 * @param shellactual recebe a janela actual
+	 * @param contaActual recebe conta actual que vai fazer a transferencia
+	 * @param texoVerificaSaldo campo com o valor da Transferencia
+	 * @param texoVerContad Caixa de texto da conta destino
+	 * @param contaFinal classe conta Final
+	 */
 	public void TransferenciaCl(Utilizador uUtilizador, Shell shellactual, Conta contaActual, Text texoVerificaSaldo,
 			Text texoVerContad, Conta contaFinal) {
 		int contaDestinoID = 0;
@@ -517,7 +545,7 @@ public class Gestao {
 			// verifica valor a transferir
 			if ((Util.eNumeroIouD(mensagem, texoVerificaSaldo))) {
 				valoraTransferir = Double.parseDouble(texoVerificaSaldo.getText());
-				
+
 				// verifica Saldo da Conta
 				if (valoraTransferir > contaActual.getSaldo()) {
 					texoVerificaSaldo.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
@@ -541,12 +569,11 @@ public class Gestao {
 					texoVerContad.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
 					mensagem = mensagem + " A conta não existe!!!!!\n";
 					verifica = false;
-				} else if (!(contaFinal == null)&&contaFinal==contaActual) {
+				} else if (!(contaFinal == null) && contaFinal == contaActual) {
 					texoVerContad.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
 					mensagem = mensagem + " A conta não pode ser igual a conta de origem!!!!!\n";
 					verifica = false;
-				}
-				else {
+				} else {
 					contaDestinoID = contaFinal.getContaID();
 				}
 			} else {
@@ -568,17 +595,24 @@ public class Gestao {
 			System.out.println("<---- Conta FINAL- Verifica Saldo ( " + contaFinal + ") --->\n");
 			contaFinal.addTransacaoC(novaTcontaF);
 			System.out.println("<---- Conta Actual- Verifica Saldo ( " + contaFinal + ") --->\n");
-			 box = new MessageBox(shellactual, SWT.MULTI|SWT.COLOR_GREEN|SWT.COLOR_TITLE_BACKGROUND);
+			box = new MessageBox(shellactual, SWT.MULTI | SWT.COLOR_GREEN | SWT.COLOR_TITLE_BACKGROUND);
 		}
 
 		// verifica mensagem a aparecer na janela
-		
+
 		box.setText(textoTitulo);
 		box.setMessage(mensagem);
 		box.open();
 	}
 
-	// verifiva restriçoes de movimentos da conta
+	
+	/**
+	 * verifiva restriçoes de movimentos da conta
+	 * @param contaAct conta actual a verificar
+	 * @param escolhaTA tipo de movimento
+	 * @param movimento vlor do movimento
+	 * @return true/false
+	 */
 	public boolean verifMovimentos(Conta contaAct, TipoT escolhaTA, double movimento) {
 
 		if (escolhaTA == TipoT.DEP_CASH) {
@@ -617,8 +651,15 @@ public class Gestao {
 
 	}
 
-// criacartao para conta e cliente especifico	
 
+
+	/**
+	 *  criacartao para conta e cliente especifico	
+	 * @param titularCartaoID ID do titular do Cartao
+	 * @param contaC Conta a que o cartao vai estar associado
+	 * @param nome Nome a apresentar no cartão
+	 * @return
+	 */
 	public Cartao criaCartao(int titularCartaoID, Conta contaC, String nome) {
 
 		Cartao novoC = new Cartao(contadores.get("Cartoes") + 1, titularCartaoID, contaC.getContaID(), nome);
@@ -629,11 +670,14 @@ public class Gestao {
 		return novoC;
 	}
 
-	// criacartao para conta e cliente especifico
-
 	
 
-//***********  verifica se a conta existe ******************
+
+	/**
+	 * verifica se a conta existe, tambem usado para procurar por uma conta por ID
+	 * @param contaID ID da Conta
+	 * @return Conta 
+	 */
 	public Conta contaExiste(int contaID) {
 
 		for (Conta c : lContas) {
@@ -644,8 +688,13 @@ public class Gestao {
 		return null;
 	}
 
-// cria uma conta nova para um cliente 
-
+	/**
+	 * Associa uma conta nova para um cliente 
+	 * @param clienteActual Cliente que vai ter a conta nova
+	 * @param contaNova Conta Nova já précriada
+	 * @param funcionarioID funcionario que registra a opreaçao
+	 * @return Conta
+	 */
 	public Conta criaContaNova(Cliente clienteActual, Conta contaNova, int funcionarioID) {
 
 		contaNova.setContaID(lContas.size() + 100000);
@@ -658,7 +707,13 @@ public class Gestao {
 		return contaNova;
 	}
 
-	//// faz a verificação das entradas do login
+
+	/**
+	 * faz a verificação das entradas do login
+	 * @param username  
+	 * @param passwordV
+	 * @return Utilizador
+	 */
 	public Utilizador verfLogin(String username, String passwordV) {
 
 		if (mapUtilizadores.containsKey(username)) {
@@ -669,7 +724,15 @@ public class Gestao {
 		return null;
 	}
 
-//faz a verificação da adicção de um do novo funcionario
+	/**
+	 * faz a verificação dos dados para adicção de um do novo funcionario
+	 * @param escolhadaIDN  tipo de identificação 
+	 * @param valorID_NovoF numero de identificação
+	 * @param email_NovoF   
+	 * @param userNovoF       Username do novo funcionario
+	 * @param mobileNovoF
+	 * @return String devolve os erros encontrados
+	 */
 	public String verificanovoF(TipoID escolhadaIDN, Text valorID_NovoF, Text email_NovoF, Text userNovoF,
 			Text mobileNovoF) {
 
@@ -688,9 +751,7 @@ public class Gestao {
 			if (entry.getValue() instanceof Funcionario) {
 
 				System.out.println("VERIFICA ---->Key = " + entry.getKey() + ", Value = " + entry.getValue());
-//			Scanner sc = new Scanner(System.in);
-//			String  vAr = sc.nextLine();
-//			sc.close();
+
 				// verifica identificação
 				if (entry.getValue().getEscolhaID().equals(escolhadaIDN)
 						&& entry.getValue().getValorID().equals(valorID_NovoF.getText())) {
@@ -727,8 +788,21 @@ public class Gestao {
 		return verifica;
 	}
 
-//faz a adicção de um do novo funcionario
-
+	/**
+	 * faz a adicção de um do novo funcionario
+	 * @param login
+	 * @param password
+	 * @param nome
+	 * @param sobrenome
+	 * @param dataNascimento
+	 * @param morada
+	 * @param escolhaID
+	 * @param valorID
+	 * @param email
+	 * @param mobile
+	 * @param posicao
+	 * @return Funcionario
+	 */
 	public Funcionario addNovoF(String login, String password, String nome, String sobrenome, String dataNascimento,
 			String morada, TipoID escolhaID, String valorID, String email, int mobile, String posicao) {
 		int iD = contadores.get("Utilizador") + 1;
@@ -739,7 +813,16 @@ public class Gestao {
 		return NovoFU;
 	}
 
-//faz a verificação da adicção de um do novo Cliente
+
+	/**
+	 * faz a verificação da adicção de um do novo Cliente
+	 * @param escolhadaIDN
+	 * @param valorID_NovoF
+	 * @param email_NovoF
+	 * @param userNovoF
+	 * @param mobileNovoF
+	 * @return String com a informação dos erros
+	 */
 	public String verificanovoC(TipoID escolhadaIDN, Text valorID_NovoF, Text email_NovoF, Text userNovoF,
 			Text mobileNovoF) {
 
@@ -795,9 +878,8 @@ public class Gestao {
 		System.out.println((verifica));
 		return verifica;
 	}
-
-	// faz a verificação da adicção de um do novo Cliente
 	/**
+	 * faz a verificação da alteração dos parametros de um Cliente
 	 * @param actual
 	 * @param escolhadaIDN
 	 * @param valorID_NovoF
@@ -825,8 +907,7 @@ public class Gestao {
 
 				System.out.println("VERIFICA ---->Key = " + entry.getKey() + ", Value = " + entry.getValue());
 
-				// verifica identificação ***FALTA RETIRAR A VERIFICAçÃO EM FUNÇÂO DO TIPO - o
-				// passporte e sempre diferente
+			
 				if (entry.getValue().getEscolhaID().equals(escolhadaIDN)
 						&& entry.getValue().getValorID().equals(valorID_NovoF.getText())) {
 					verifica = verifica + "O " + escolhadaIDN + " com o numero :" + valorID_NovoF
@@ -845,7 +926,6 @@ public class Gestao {
 					}
 					valorID_NovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
 				}
-
 				// verifica email
 				if (entry.getValue().getEmail().equals(email_NovoF.getText())) {
 					verifica = verifica + "Já existe um utilizador com este email\n";
@@ -856,15 +936,26 @@ public class Gestao {
 					verifica = verifica + "Já existe um utilizador com este contacto de telemovel. \n";
 					mobileNovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_RED));
 				}
-
 			}
 		}
 		System.out.println((verifica));
 		return verifica;
 	}
 
-//faz a adicção de um do novo Cliente
-
+	/**
+	 * faz a adicção de um do novo Cliente
+	 * @param login
+	 * @param password
+	 * @param nome
+	 * @param sobrenome
+	 * @param dataNascimento
+	 * @param morada
+	 * @param escolhaID
+	 * @param valorID
+	 * @param email
+	 * @param mobile
+	 * @return
+	 */
 	public Cliente addNovoC(String login, String password, String nome, String sobrenome, String dataNascimento,
 			String morada, TipoID escolhaID, String valorID, String email, int mobile) {
 		int iD = contadores.get("Utilizador") + 1;
@@ -875,8 +966,11 @@ public class Gestao {
 		return novoCl;
 	}
 
-//faz a procura de um Cliente pela ID
-
+	/**
+	 * faz a procura de um Cliente pela ID
+	 * @param idCliente
+	 * @return
+	 */
 	public Cliente procuraCid(int idCliente) {
 		Cliente clienteID = null;
 		for (Entry<String, Utilizador> entry : mapUtilizadores.entrySet()) {
@@ -888,8 +982,13 @@ public class Gestao {
 		return null;
 	}
 
-//faz a verificação se e numero
 
+
+	/**
+	 * //faz a verificação se e numero
+	 * @param texto
+	 * @return
+	 */
 	public boolean eUmNumero(String texto) {
 		for (char c : texto.toCharArray()) {
 			if (!Character.isDigit(c))
@@ -898,10 +997,17 @@ public class Gestao {
 		return true;
 	}
 
-//faz a verificação da alteracao de dados do Utilizador
-	public String verificaA(Utilizador uUtilizador, Text email_NovoF, Text userNovoF, String emailA, String userNameA) {
-		System.out.println("VERIFICA ADMINISTRADOR");
 
+	/**
+	 * faz a verificação da alteracao de dados do Utilizador
+	 * @param uUtilizador
+	 * @param email_NovoF
+	 * @param userNovoF
+	 * @param emailA (email actual)
+	 * @param userNameA (useractual)
+	 * @return
+	 */
+	public String verificaA(Utilizador uUtilizador, Text email_NovoF, Text userNovoF, String emailA, String userNameA) {
 		email_NovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
 		userNovoF.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
 
@@ -954,7 +1060,15 @@ public class Gestao {
 		return verifica;
 	}
 
-//*********************************************************************************
+
+	/**
+	 * Método para fazer autosize a um imagem
+	 * @param estashell
+	 * @param imageFromSource
+	 * @param width
+	 * @param height
+	 * @return
+	 */
 	public Image resize(Shell estashell, Image imageFromSource, int width, int height) {
 		if (width > 0 && height > 0) {
 			Image scaledImage = new Image(estashell.getDisplay(), width, height);
@@ -980,6 +1094,14 @@ public class Gestao {
 			return imageFromSource;
 	}
 
+	/**
+	 * Recebe a informação dos ficheiros
+	 * @throws ClassNotFoundException
+	 * String pathMapUtilizadores = "MapUtilizadores.ser";
+	 * String pathlContas = "Lcontas.ser";
+	 * String pathlCarões = "Lcartões.ser";
+	 * String pathlContadores = "Contadores.ser";
+	 */
 	public void loadAll() throws ClassNotFoundException {
 //	this.mapUtilizadores = mapUtilizadores;
 //	this.lContas = lContas;
@@ -1037,7 +1159,16 @@ public class Gestao {
 
 	}
 
-/// grava todos os ficheiros
+
+	/**
+	 * Grava a informação nos ficheiros
+	 * @throws ClassNotFoundException
+	 * String pathMapUtilizadores = "MapUtilizadores.ser";
+	 * String pathlContas = "Lcontas.ser";
+	 * String pathlCarões = "Lcartões.ser";
+	 * String pathlContadores = "Contadores.ser";
+	 */
+	
 	public void saveAll() {
 
 //	private Map<String, Utilizador> mapUtilizadores; // String Username

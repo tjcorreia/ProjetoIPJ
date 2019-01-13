@@ -22,6 +22,10 @@ import org.eclipse.swt.events.MouseEvent;
 /**
 * Breve descrição do código
 * Janela de Menu Incial do Cliente
+* * @author Alberto Jorge
+* @author Tiago Correia
+* 
+* @sid 2019
 * @sid 2019
 * @aid 1.1
 */

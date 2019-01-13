@@ -6,15 +6,17 @@ import java.time.LocalDate;
 /**
 * Breve descrição do código
 *
+* @author Alberto Jorge
+* @author Tiago Correia
+* 
 * @sid 2019
-* @aid 1.1
 */
 
 
 
 public class Transacao implements Serializable{
 	
-
+//Atributos
 	private int tID;
 	private int funcionarioID;
 	private String data;
@@ -65,7 +67,9 @@ public class Transacao implements Serializable{
 		this.contadestino = contadestino;
 		this.escolhaT = escolhaT;
 	}	
-	
+	/**
+	* Atributos
+	*/
 	
 	public Transacao() {
 		super();

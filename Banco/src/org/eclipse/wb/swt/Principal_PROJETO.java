@@ -4,7 +4,10 @@ package org.eclipse.wb.swt;
 *
 * @sid 2019
 * @aid 1.1
-* @author Alberto Jorge
+* * @author Alberto Jorge
+* @author Tiago Correia
+* 
+* @sid 2019
 *
 */
 public class Principal_PROJETO {
