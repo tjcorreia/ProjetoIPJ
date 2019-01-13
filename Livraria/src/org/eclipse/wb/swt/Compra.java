@@ -4,7 +4,13 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 
-
+/**
+ * Classe 
+ * 
+ * @author Tiago Correia
+ * @author Alberto Machado
+ * @sid 2019
+ */
 public class Compra {
 	protected int numCompra;
 	protected Carrinho carrinho;

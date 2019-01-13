@@ -26,13 +26,13 @@ import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Spinner;
 import org.eclipse.swt.custom.CCombo;
 
-/**  
- * Breve descrição do código   
- *    
- * @sid 2017
- * @aid 1.1  
+/**
+ * Classe 
+ * 
+ * @author Tiago Correia
+ * @author Alberto Machado
+ * @sid 2019
  */
-
 public class J_03DetalhesLivro {
 
 	protected Shell shlDetalhesLivro;

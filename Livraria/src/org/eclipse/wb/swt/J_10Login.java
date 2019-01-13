@@ -17,13 +17,13 @@ import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.KeyAdapter;
 import org.eclipse.swt.events.KeyEvent;
 
-/**  
- * Breve descrição do código   
- *    
- * @sid 2017
- * @aid 1.1  
+/**
+ * Classe 
+ * 
+ * @author Tiago Correia
+ * @author Alberto Machado
+ * @sid 2019
  */
-
 public class J_10Login {
 
 	protected Shell shlLogin;

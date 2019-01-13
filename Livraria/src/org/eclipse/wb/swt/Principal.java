@@ -1,7 +1,13 @@
 
 package org.eclipse.wb.swt;
 
-
+/**
+ * Classe 
+ * 
+ * @author Tiago Correia
+ * @author Alberto Machado
+ * @sid 2019
+ */
 public class Principal {
 
 

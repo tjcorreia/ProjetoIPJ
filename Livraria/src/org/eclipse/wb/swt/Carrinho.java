@@ -2,6 +2,13 @@ package org.eclipse.wb.swt;
 import java.util.ArrayList;
 
 
+/**
+ * Classe 'Carrinho', que agrupa uma lista de livros e quatidades
+ * 
+ * @author Tiago Correia
+ * @author Alberto Machado
+ * @sid 2019
+ */
 public class Carrinho {
 	protected ArrayList <Livro> livros;
 	protected ArrayList <Integer> quantidades;
@@ -10,7 +17,12 @@ public class Carrinho {
 		livros = new ArrayList<>();
 		quantidades = new ArrayList<>();
 	}
+
 	
+	/*
+	 * 
+	 * 
+	*/
 	Carrinho( ArrayList <Livro> livrosRepetidos ){
 		livros = new ArrayList<>();
 		quantidades = new ArrayList<>();

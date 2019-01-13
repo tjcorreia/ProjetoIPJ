@@ -8,13 +8,13 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
 
-/**  
- * Breve descrição do código   
- *    
- * @sid 2017
- * @aid 1.1  
+/**
+ * Classe 
+ * 
+ * @author Tiago Correia
+ * @author Alberto Machado
+ * @sid 2019
  */
-
 public class J_20AlteracaoSubmetida {
 
 	protected Shell shlSucesso;

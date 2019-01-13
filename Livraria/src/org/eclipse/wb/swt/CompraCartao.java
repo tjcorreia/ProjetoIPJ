@@ -4,7 +4,13 @@ import java.util.GregorianCalendar;
 
 import org.eclipse.wb.swt.Compra.Estado;
 
-
+/**
+ * Classe 
+ * 
+ * @author Tiago Correia
+ * @author Alberto Machado
+ * @sid 2019
+ */
 public class CompraCartao extends Compra{
 	protected String numCartao;
 	protected String pin;

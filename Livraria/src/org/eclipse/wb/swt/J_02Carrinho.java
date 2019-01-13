@@ -44,13 +44,15 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.events.ShellAdapter;
 import org.eclipse.swt.events.ShellEvent;
 
-/**  
- * Breve descrição do código   
- *    
- * @sid 2017
- * @aid 1.1  
- */
 
+
+/**
+ * Classe 
+ * 
+ * @author Tiago Correia
+ * @author Alberto Machado
+ * @sid 2019
+ */
 public class J_02Carrinho { //criou-se janela como subclasse para poder receber variáveis da superclasse
 	protected Shell shell;
 	protected Livraria livraria;//atributo adicionado para poder ir buscar métodos à livraria

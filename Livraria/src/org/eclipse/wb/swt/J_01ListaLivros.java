@@ -31,6 +31,13 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.TableColumn;
 import java.util.Locale;
 
+/**
+ * Classe 
+ * 
+ * @author Tiago Correia
+ * @author Alberto Machado
+ * @sid 2019
+ */
 public class J_01ListaLivros {
 
 	protected Shell shlViewComicsInc;

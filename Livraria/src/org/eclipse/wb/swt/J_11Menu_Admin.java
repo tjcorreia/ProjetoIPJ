@@ -27,13 +27,13 @@ import org.eclipse.swt.widgets.Spinner;
 import org.eclipse.swt.custom.CCombo;
 import org.eclipse.swt.widgets.TableColumn;
 
-/**  
- * Breve descrição do código   
- *    
- * @sid 2017
- * @aid 1.1  
+/**
+ * Classe 
+ * 
+ * @author Tiago Correia
+ * @author Alberto Machado
+ * @sid 2019
  */
-
 public class J_11Menu_Admin {
 
 	protected Shell shlMenuAdmin;

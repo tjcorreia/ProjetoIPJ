@@ -22,7 +22,13 @@ import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.widgets.Link;
 
 
-
+/**
+ * Classe 
+ * 
+ * @author Tiago Correia
+ * @author Alberto Machado
+ * @sid 2019
+ */
 public class J_00Inicial {
 
 	protected Shell shlViewComicsInc;
