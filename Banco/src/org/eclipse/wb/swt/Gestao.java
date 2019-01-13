@@ -414,7 +414,7 @@ public class Gestao {
 				
 					
 				} else {
-					System.out.println("<---- Não é NUMER0?---->");
+					System.out.println("<---- ERRO---->"+pedidoiD + "," + mensagem);
 					ficheiroDevolucao.abreEscrita("..\\RespostadoBanco.txt");
 					ficheiroDevolucao.escreveLinha(pedidoiD + "," + mensagem);
 					ficheiroDevolucao.fechaEscrita();
