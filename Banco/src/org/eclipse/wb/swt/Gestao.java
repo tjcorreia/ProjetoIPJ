@@ -1109,10 +1109,10 @@ public class Gestao {
 //	this.lContas = lContas;
 //	this.mapCartaoConta = mapCartaoConta;
 //	this.contadores = contadores;
-		String pathMapUtilizadores = "MapUtilizadores.ser";
+		String pathMapUtilizadores = "..//MapUtilizadores.ser";
 		FicheiroDeObjectos ut = new FicheiroDeObjectos();
 		try {
-			ut.abreLeitura(pathMapUtilizadores);
+			boolean a = ut.abreLeitura(pathMapUtilizadores);
 			mapUtilizadores = (Map<String, Utilizador>) ut.leObjecto();
 			ut.fechaLeitura();
 
@@ -1121,7 +1121,7 @@ public class Gestao {
 			e.printStackTrace();
 		}
 		//// -----------
-		String pathlContas = "Lcontas.ser";
+		String pathlContas = "..//Lcontas.ser";
 		FicheiroDeObjectos lc = new FicheiroDeObjectos();
 		try {
 			lc.abreLeitura(pathlContas);
@@ -1133,7 +1133,7 @@ public class Gestao {
 			e.printStackTrace();
 		}
 ////----------- 
-		String pathlCarões = "Lcartões.ser";
+		String pathlCarões = "..//Lcartões.ser";
 
 		FicheiroDeObjectos lcartoes = new FicheiroDeObjectos();
 		try {
@@ -1146,7 +1146,7 @@ public class Gestao {
 			e.printStackTrace();
 		}
 ////----------- 
-		String pathlContadores = "Contadores.ser";
+		String pathlContadores = "..//Contadores.ser";
 
 		FicheiroDeObjectos contador = new FicheiroDeObjectos();
 		try {
@@ -1181,7 +1181,7 @@ public class Gestao {
 //	private Map<String, Integer> contadores;
 
 //	this.uactual = uactual;
-		String pathMapUtilizadores = "MapUtilizadores.ser";
+		String pathMapUtilizadores = "..//MapUtilizadores.ser";
 		FicheiroDeObjectos ut = new FicheiroDeObjectos();
 		try {
 			ut.abreEscrita(pathMapUtilizadores);
@@ -1194,7 +1194,7 @@ public class Gestao {
 			e.printStackTrace();
 		}
 		//// -----------
-		String pathlContas = "Lcontas.ser";
+		String pathlContas = "..//Lcontas.ser";
 		FicheiroDeObjectos lc = new FicheiroDeObjectos();
 		try {
 			lc.abreEscrita(pathlContas);
@@ -1207,7 +1207,7 @@ public class Gestao {
 			e.printStackTrace();
 		}
 ////----------- 
-		String pathlCarões = "Lcartões.ser";
+		String pathlCarões = "..//Lcartões.ser";
 
 		FicheiroDeObjectos lcartoes = new FicheiroDeObjectos();
 		try {
@@ -1220,7 +1220,7 @@ public class Gestao {
 			e.printStackTrace();
 		}
 ////----------- 
-		String pathlContadores = "Contadores.ser";
+		String pathlContadores = "..//Contadores.ser";
 
 		FicheiroDeObjectos contador = new FicheiroDeObjectos();
 		try {

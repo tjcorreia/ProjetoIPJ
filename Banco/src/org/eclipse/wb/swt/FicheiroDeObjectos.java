@@ -55,11 +55,7 @@ public void abreEscrita (String nomeDoFicheiro) throws IOException {
 
 public Object leObjecto () throws IOException, ClassNotFoundException {
 
-	
-	
 	return iS.readObject();
-	
-
 }
 
 //Método para escrever um objecto num ficheiro
