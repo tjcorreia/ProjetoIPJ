@@ -52,12 +52,12 @@ public class Gestao {
 		 * load data : Na abertura carrega todos os ficheiros para o sistema
 		 */
 
-		try {
-			loadAll();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			loadAll();
+//		} catch (ClassNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 
 //		contadores.put("Utilizador", 10000); // inicializa o Contador de Utilizadores
 //		contadores.put("Contas", 100000); // inicializa o Contador de Contas

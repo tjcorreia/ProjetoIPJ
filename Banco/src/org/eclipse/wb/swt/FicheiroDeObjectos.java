@@ -2,15 +2,6 @@ package org.eclipse.wb.swt;
 
 import java.io.*;
 
-/**
-* Breve descrição do código
-* Classe conta
-* @author Alberto Jorge
-* @author Tiago Correia
-* 
-* @sid 2019
-* 
-*/
 public class FicheiroDeObjectos {
 
 	// Atributos
@@ -55,7 +46,11 @@ public void abreEscrita (String nomeDoFicheiro) throws IOException {
 
 public Object leObjecto () throws IOException, ClassNotFoundException {
 
+	
+	
 	return iS.readObject();
+	
+
 }
 
 //Método para escrever um objecto num ficheiro
