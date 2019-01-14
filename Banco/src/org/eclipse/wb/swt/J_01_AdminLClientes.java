@@ -86,7 +86,6 @@ public class J_01_AdminLClientes {
 	/**
 	 * @wbp.parser.entryPoint
 	 */
-	
 	public J_01_AdminLClientes() {
 		open();
 		// TODO Auto-generated constructor stub
@@ -148,12 +147,12 @@ public class J_01_AdminLClientes {
 		text.setBounds(226, 10, 286, 25);
 
 		Composite composite = new Composite(shell, SWT.NONE);
-		composite.setBounds(222, 91, 420, 255);
+		composite.setBounds(226, 91, 403, 245);
 
 		// *********************Tabela de Clientes *************************
 		ScrolledComposite scrolledComposite = new ScrolledComposite(composite,
 				SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
-		scrolledComposite.setBounds(0, 0, 420, 245);
+		scrolledComposite.setBounds(0, 0, 403, 245);
 		scrolledComposite.setExpandHorizontal(true);
 		scrolledComposite.setExpandVertical(true);
 		scrolledComposite.setVisible(true);// apaga tabela
@@ -251,7 +250,7 @@ public class J_01_AdminLClientes {
 		lblListaDeClientes.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.NORMAL));
 		lblListaDeClientes.setText("Lista de Clientes");
 		lblListaDeClientes.setAlignment(SWT.CENTER);
-		lblListaDeClientes.setBounds(226, 56, 416, 25);
+		lblListaDeClientes.setBounds(226, 56, 416, 17);
 		
 		Button button = new Button(shell, SWT.NONE);
 		button.addSelectionListener(new SelectionAdapter() {
@@ -263,7 +262,7 @@ public class J_01_AdminLClientes {
 			}
 		});
 		button.setText("Menu Funcionario");
-		button.setBounds(10, 191, 192, 25);
+		button.setBounds(11, 183, 192, 25);
 
 	}
 }

@@ -319,7 +319,8 @@ public class Gestao {
 		}
 
 		System.out.println("<---------------------- Log out ---------------->");
-
+//		t1.stop();
+		t1.stop();
 		saveAll();
 		
 
@@ -423,6 +424,7 @@ public class Gestao {
 						ficheiroDevolucao.abreEscrita("..\\RespostadoBanco.txt");
 						ficheiroDevolucao.escreveLinha(pedidoiD + ",Pagamento efetuado com sucesso.");
 						ficheiroDevolucao.fechaEscrita();
+						saveAll();
 
 						System.out.println("<---- TRANSACÃO CONCLUIDA --->\n" + pedidoiD + ",OK\n");
 					} else {

@@ -63,10 +63,7 @@ public class J_01_Administrador {
 		// TODO Auto-generated constructor stub
 	}
 
-	/**
-	 * Create contents of the window.
-	 * @wbp.parser.entryPoint
-	 */
+
 	public void open() {
 		Display display = Display.getDefault();
 		createContents();
@@ -87,13 +84,13 @@ public class J_01_Administrador {
 	
 		shell.setText("MENU ADMINISTRADOR");
 		shell.setBackground(SWTResourceManager.getColor(SWT.COLOR_DARK_GRAY));
-		shell.setImage((Image) SWTResourceManager.getImage(J_02Menu_F.class, "/Logo/Java-logo-png Logo.png"));
+		shell.setImage((Image) SWTResourceManager.getImage(J_01_Administrador.class, "/Logo/Java-logo-png Logo.png"));
 
 		Label lbl_Imagem = new Label(shell,SWT.NONE);
 		lbl_Imagem.setBounds(215, 84, 385, 296);
-		Image image = (Image) SWTResourceManager.getImage(J_02Menu_F.class, "/Logo/Java-logo-png Logo14.png");
-		image.isAutoScalable();;
-		lbl_Imagem.setImage(gestor.resize(shell,image,lbl_Imagem.getBounds().width,lbl_Imagem.getBounds().height));
+		Image image2 = (Image) SWTResourceManager.getImage(J_01_Administrador.class, "/Logo/Java-logo-png Logo14.png");
+		image2.isAutoScalable();;
+		lbl_Imagem.setImage(gestor.resize(shell,image2,lbl_Imagem.getBounds().width,lbl_Imagem.getBounds().height));
 		
 		
 		

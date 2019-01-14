@@ -77,6 +77,7 @@ public class J_03Menu_CLIENTE {
 	public void setFuncionario(Text funcionario) {
 		Funcionario = funcionario;
 	}
+
 	/**
 	 * @wbp.parser.entryPoint
 	 */

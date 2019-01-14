@@ -345,8 +345,10 @@ public class J_02Menu_F_EditarConta {
 				System.out.println("<---- lista de contas --->\n" + listaContas.length);
 				combo_EscolhaConta.setItems(listaContas);
 				combo_EscolhaConta.select(index);
+				if (!(contaActual==null)) {
 				listaClientes = listaClientesActual();
-				combo_titularesDaconta.setItems(listaClientes);
+				combo_titularesDaconta.setItems(listaClientes);}
+		
 
 			} else {
 				combo_EscolhaConta.setItems("Não existem contas a apresentar");

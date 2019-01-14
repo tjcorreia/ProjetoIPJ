@@ -150,10 +150,10 @@ public class J_02Menu_F_ContasCl {
 		this.gestor = gestor;
 	}
 
+	
 	/**
 	 * @wbp.parser.entryPoint
 	 */
-
 	public J_02Menu_F_ContasCl() {
 		super();
 		open();

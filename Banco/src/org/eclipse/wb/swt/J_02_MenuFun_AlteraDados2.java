@@ -275,9 +275,9 @@ public void setBtnMenuadministrador(Button btnMenuadministrador) {
 		});
 		btnMenuadministrador.setText("MenuAdministrador");
 		btnMenuadministrador.setBounds(10, 300, 192, 25);
-		
+		btnMenuadministrador.setVisible(false);
 		if (uUtilizador instanceof Administrador) {
-			btnMenuadministrador.setVisible(false);
+			btnMenuadministrador.setVisible(true);
 			criarNovoF.setEnabled(false);
 		}
 		Label lblNewLabel = new Label(composite, SWT.NONE);

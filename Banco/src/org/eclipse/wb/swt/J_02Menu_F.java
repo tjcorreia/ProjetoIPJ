@@ -70,6 +70,7 @@ public class J_02Menu_F {
 	public void setFuncionario(Text funcionario) {
 		Funcionario = funcionario;
 	}
+
 	/**
 	 * @wbp.parser.entryPoint
 	 */
@@ -110,6 +111,7 @@ public class J_02Menu_F {
 		shlMenuFuncionrio.setText("Menu Funcion\u00E1rio");
 		
 		btnMenuadministrador = new Button(shlMenuFuncionrio, SWT.NONE);
+		btnMenuadministrador.setVisible(false);
 		btnMenuadministrador.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseUp(MouseEvent e) {
@@ -121,7 +123,7 @@ public class J_02Menu_F {
 		btnMenuadministrador.setText("MenuAdministrador");
 		btnMenuadministrador.setBounds(10, 300, 192, 25);
 		if (uUtilizador instanceof Administrador) {
-			btnMenuadministrador.setVisible(false);
+			btnMenuadministrador.setVisible(true);
 		}
 		
 		Button btnNovoCliente = new Button(shlMenuFuncionrio, SWT.NONE);

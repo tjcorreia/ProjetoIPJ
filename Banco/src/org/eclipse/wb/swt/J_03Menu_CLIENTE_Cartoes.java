@@ -95,6 +95,7 @@ public class J_03Menu_CLIENTE_Cartoes {
 		Funcionario = funcionario;
 	}
 
+
 	/**
 	 * @wbp.parser.entryPoint
 	 */

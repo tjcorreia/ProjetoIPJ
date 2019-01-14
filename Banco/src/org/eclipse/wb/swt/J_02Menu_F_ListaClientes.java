@@ -264,10 +264,10 @@ public class J_02Menu_F_ListaClientes {
 						Cliente actual=new Cliente();
 						actual=gestor.procuraCid(Integer.parseInt((table.getItem(table.getSelectionIndex())).getText(0)));
 						
-						
+						shlMenuFuncionrio.dispose();	
 						J_02Menu_F_DadosCl cliente=new J_02Menu_F_DadosCl(gestor,uUtilizador,actual);
 						cliente.open();
-						shlMenuFuncionrio.dispose();	
+					
 						
 						
 					}

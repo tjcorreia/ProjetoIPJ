@@ -111,6 +111,7 @@ public class J_03Menu_CLIENTE_contas {
 		Funcionario = funcionario;
 	}
 
+
 	/**
 	 * @wbp.parser.entryPoint
 	 */
@@ -357,7 +358,9 @@ if (!(contaActual==null)) {
 			System.out.println("<---- texto : " + textoConta);
 			contaID = Integer.parseInt(textoConta);
 		} else {
+			if (!(combo_EscolhaConta.getText().equals("Não existem contas a apresentar"))) {
 			contaID = Integer.parseInt(combo_EscolhaConta.getText());
+			}
 		}
 
 		contaActual = clienteActual.procuraConta(contaID);

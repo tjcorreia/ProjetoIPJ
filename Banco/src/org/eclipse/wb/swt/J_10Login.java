@@ -61,20 +61,7 @@ public class J_10Login {
 		// TODO Auto-generated constructor stub
 	}
 
-	/**
-	 * Launch the application.
-	 * 
-	 * @param args
-	 */
-//	public static void main(String[] args) {
-//		try {
-//			J_10Login window = new J_10Login();
-//			window.open();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
-
+	
 	/**
 	 * Open the window.
 	 */
