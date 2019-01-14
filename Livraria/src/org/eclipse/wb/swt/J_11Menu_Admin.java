@@ -1,7 +1,6 @@
 package org.eclipse.wb.swt;
 
 import org.eclipse.swt.widgets.Display;
-
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Button;
@@ -33,8 +32,7 @@ import org.eclipse.swt.widgets.TableColumn;
  * @author Alberto Machado
  * @sid 2019
  */
-@SuppressWarnings("serial")
-public class J_11Menu_Admin implements Serializable {
+public class J_11Menu_Admin  implements Serializable {
 	/**
 	 * Atributos da classe
 	 */
@@ -232,12 +230,19 @@ public class J_11Menu_Admin implements Serializable {
 		tabelaLivros.setLinesVisible(true);
 		//tabelaLivros.setHeaderVisible(true);
 		tabelaLivros.setBounds(157, 146, 550, 339);
-		
-		tblclmnLivros = new TableColumn(tabelaLivros, SWT.NONE);
-		tblclmnLivros.setWidth(525);
-		tblclmnLivros.setText("Livros");
-		//tabelaLivros.setHeaderBackground(SWTResourceManager.getColor(SWT.COLOR_GRAY));
-		
+		//listner para duplo click na tabela, que nos dá detalhes do livro
+		tabelaLivros.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseDoubleClick(MouseEvent e) {
+				// caso não haja nenhum selecionado, não fazer nada
+				if (livroSelecionado == null) {
+				// se livro selecionado -> abrir janela de detalhes
+				} else {
+					J_03DetalhesLivro janelaDetalhes = new J_03DetalhesLivro(livraria, livroSelecionado);
+					janelaDetalhes.open();
+				}
+			}
+		});	
 		tabelaLivros.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
 				System.out.println(e.toString());
@@ -259,6 +264,12 @@ public class J_11Menu_Admin implements Serializable {
 		});
 		preencherTabela();
 		
+		tblclmnLivros = new TableColumn(tabelaLivros, SWT.NONE);
+		tblclmnLivros.setWidth(525);
+		tblclmnLivros.setText("Livros");
+		
+		
+		
 		/**
 		 *
 		 * elementos visiveis para 'alterar livro' e 'adicionar livro'
@@ -267,71 +278,71 @@ public class J_11Menu_Admin implements Serializable {
 		lblTitulo = new Label(shlMenuAdmin, SWT.NONE);
 		lblTitulo.setVisible(false);
 		lblTitulo.setAlignment(SWT.RIGHT);
-		lblTitulo.setBounds(184, 65, 70, 20);
+		lblTitulo.setBounds(250, 53, 70, 20);
 		lblTitulo.setText("T\u00EDtulo");
 		
 		lblIsbn = new Label(shlMenuAdmin, SWT.NONE);
 		lblIsbn.setVisible(false);
 		lblIsbn.setAlignment(SWT.RIGHT);
 		lblIsbn.setText("ISBN");
-		lblIsbn.setBounds(184, 115, 70, 20);
+		lblIsbn.setBounds(250, 103, 70, 20);
 		
 		lblAutor = new Label(shlMenuAdmin, SWT.NONE);
 		lblAutor.setVisible(false);
 		lblAutor.setText("Autor");
 		lblAutor.setAlignment(SWT.RIGHT);
-		lblAutor.setBounds(184, 165, 70, 20);
+		lblAutor.setBounds(250, 153, 70, 20);
 		
 		lblEditora = new Label(shlMenuAdmin, SWT.NONE);
 		lblEditora.setVisible(false);
 		lblEditora.setText("Editora");
 		lblEditora.setAlignment(SWT.RIGHT);
-		lblEditora.setBounds(184, 215, 70, 20);
+		lblEditora.setBounds(250, 203, 70, 20);
 		
 		lblPreco = new Label(shlMenuAdmin, SWT.NONE);
 		lblPreco.setVisible(false);
 		lblPreco.setText("Pre\u00E7o (\u20AC)");
 		lblPreco.setAlignment(SWT.RIGHT);
-		lblPreco.setBounds(184, 265, 70, 20);
+		lblPreco.setBounds(250, 253, 70, 20);
 		
 		lblStock = new Label(shlMenuAdmin, SWT.NONE);
 		lblStock.setVisible(false);
 		lblStock.setText("Stock");
 		lblStock.setAlignment(SWT.RIGHT);
-		lblStock.setBounds(184, 315, 70, 20);
+		lblStock.setBounds(250, 303, 70, 20);
 		
 		lblData = new Label(shlMenuAdmin, SWT.NONE);
 		lblData.setVisible(false);
 		lblData.setText("Data");
 		lblData.setAlignment(SWT.RIGHT);
-		lblData.setBounds(184, 365, 70, 20);
+		lblData.setBounds(250, 353, 70, 20);
 		
 		lblDescricao = new Label(shlMenuAdmin, SWT.NONE);
 		lblDescricao.setVisible(false);
 		lblDescricao.setText("Descri\u00E7\u00E3o");
 		lblDescricao.setAlignment(SWT.RIGHT);
-		lblDescricao.setBounds(184, 415, 70, 20);
+		lblDescricao.setBounds(250, 403, 70, 20);
 		
 		caixaTitulo = new Text(shlMenuAdmin, SWT.BORDER);
 		caixaTitulo.setText(livroSelecionado.getNome());
 		caixaTitulo.setVisible(false);
-		caixaTitulo.setBounds(261, 65, 196, 30);
+		caixaTitulo.setBounds(327, 53, 196, 30);
 		
 		caixaIsbn = new Text(shlMenuAdmin, SWT.BORDER);
 		caixaIsbn.setVisible(false);
-		caixaIsbn.setBounds(261, 115, 196, 30);
+		caixaIsbn.setBounds(327, 103, 196, 30);
 		
 		caixaAutor = new Text(shlMenuAdmin, SWT.BORDER);
 		caixaAutor.setVisible(false);
-		caixaAutor.setBounds(261, 165, 196, 30);
+		caixaAutor.setBounds(327, 153, 196, 30);
 		
 		caixaEditora = new Text(shlMenuAdmin, SWT.BORDER);
 		caixaEditora.setVisible(false);
-		caixaEditora.setBounds(261, 215, 196, 30);
+		caixaEditora.setBounds(327, 203, 196, 30);
 		
 		caixaPreco = new Text(shlMenuAdmin, SWT.BORDER);
 		caixaPreco.setVisible(false);
-		caixaPreco.setBounds(261, 265, 78, 30);
+		caixaPreco.setBounds(327, 253, 78, 30);
 		
 		btnVerHistrico = new Button(shlMenuAdmin, SWT.NONE);
 		btnVerHistrico.addMouseListener(new MouseAdapter() {
@@ -342,73 +353,73 @@ public class J_11Menu_Admin implements Serializable {
 			}
 		});
 		btnVerHistrico.setVisible(false);
-		btnVerHistrico.setBounds(356, 265, 90, 30);
+		btnVerHistrico.setBounds(422, 253, 90, 30);
 		btnVerHistrico.setText("Ver hist\u00F3rico");
 		
 		caixaStock = new Spinner(shlMenuAdmin, SWT.BORDER);
 		caixaStock.setVisible(false);
-		caixaStock.setBounds(261, 315, 114, 26);
+		caixaStock.setBounds(327, 303, 114, 26);
 		
 		caixaData = new DateTime(shlMenuAdmin, SWT.BORDER);
 		caixaData.setVisible(false);
-		caixaData.setBounds(261, 365, 114, 28);
+		caixaData.setBounds(327, 353, 114, 28);
 		
 		caixaDescricao = new Text(shlMenuAdmin, SWT.BORDER | SWT.WRAP);
 		caixaDescricao.setVisible(false);
-		caixaDescricao.setBounds(260, 415, 266, 70);
+		caixaDescricao.setBounds(326, 403, 266, 70);
 		
 		lblIntroduzaTitulo = new Label(shlMenuAdmin, SWT.NONE);
 		lblIntroduzaTitulo.setVisible(false);
 		lblIntroduzaTitulo.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
 		lblIntroduzaTitulo.setFont(SWTResourceManager.getFont("Segoe UI", 7, SWT.NORMAL));
 		lblIntroduzaTitulo.setText("Introduza t\u00EDtulo");
-		lblIntroduzaTitulo.setBounds(261, 94, 196, 18);
+		lblIntroduzaTitulo.setBounds(327, 82, 196, 18);
 		
 		lblIsbIncorreto = new Label(shlMenuAdmin, SWT.NONE);
 		lblIsbIncorreto.setVisible(false);
 		lblIsbIncorreto.setText("ISBN incorreto (13 d\u00EDgitos)");
 		lblIsbIncorreto.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
 		lblIsbIncorreto.setFont(SWTResourceManager.getFont("Segoe UI", 7, SWT.NORMAL));
-		lblIsbIncorreto.setBounds(261, 146, 196, 18);
+		lblIsbIncorreto.setBounds(327, 134, 196, 18);
 		
 		lblIntroduzaAutor = new Label(shlMenuAdmin, SWT.NONE);
 		lblIntroduzaAutor.setVisible(false);
 		lblIntroduzaAutor.setText("Introduza autor");
 		lblIntroduzaAutor.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
 		lblIntroduzaAutor.setFont(SWTResourceManager.getFont("Segoe UI", 7, SWT.NORMAL));
-		lblIntroduzaAutor.setBounds(261, 196, 196, 18);
+		lblIntroduzaAutor.setBounds(327, 184, 196, 18);
 		
 		lblIntroduzaEditora = new Label(shlMenuAdmin, SWT.NONE);
 		lblIntroduzaEditora.setVisible(false);
 		lblIntroduzaEditora.setText("Introduza editora");
 		lblIntroduzaEditora.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
 		lblIntroduzaEditora.setFont(SWTResourceManager.getFont("Segoe UI", 7, SWT.NORMAL));
-		lblIntroduzaEditora.setBounds(261, 245, 196, 18);
+		lblIntroduzaEditora.setBounds(327, 233, 196, 18);
 		
 		lblPrecoIncorreto = new Label(shlMenuAdmin, SWT.NONE);
 		lblPrecoIncorreto.setVisible(false);
 		lblPrecoIncorreto.setText("Pre\u00E7o incorreto");
 		lblPrecoIncorreto.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
 		lblPrecoIncorreto.setFont(SWTResourceManager.getFont("Segoe UI", 7, SWT.NORMAL));
-		lblPrecoIncorreto.setBounds(261, 295, 196, 18);
+		lblPrecoIncorreto.setBounds(327, 283, 196, 18);
 		
 		lblDataIncorreta = new Label(shlMenuAdmin, SWT.NONE);
 		lblDataIncorreta.setVisible(false);
 		lblDataIncorreta.setText("Data posterior \u00E0 atual");
 		lblDataIncorreta.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
 		lblDataIncorreta.setFont(SWTResourceManager.getFont("Segoe UI", 7, SWT.NORMAL));
-		lblDataIncorreta.setBounds(261, 395, 196, 18);
+		lblDataIncorreta.setBounds(327, 383, 196, 18);
 		
 		lblIntroduzaDescricao = new Label(shlMenuAdmin, SWT.NONE);
 		lblIntroduzaDescricao.setVisible(false);
 		lblIntroduzaDescricao.setText("Introduza descri\u00E7\u00E3o");
 		lblIntroduzaDescricao.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
 		lblIntroduzaDescricao.setFont(SWTResourceManager.getFont("Segoe UI", 7, SWT.NORMAL));
-		lblIntroduzaDescricao.setBounds(532, 417, 150, 18);
+		lblIntroduzaDescricao.setBounds(598, 405, 150, 18);
 		
 		btnSubmeterAlteracoes = new Button(shlMenuAdmin, SWT.NONE);
 		btnSubmeterAlteracoes.setVisible(false);
-		btnSubmeterAlteracoes.setBounds(520, 234, 150, 78);
+		btnSubmeterAlteracoes.setBounds(586, 222, 150, 78);
 		btnSubmeterAlteracoes.setText("Submeter Altera\u00E7\u00F5es");
 		btnSubmeterAlteracoes.addMouseListener(new MouseAdapter() {
 			public void mouseUp(MouseEvent e) {
@@ -431,7 +442,7 @@ public class J_11Menu_Admin implements Serializable {
 		
 		btnSubmeterNovoLivro = new Button(shlMenuAdmin, SWT.NONE);
 		btnSubmeterNovoLivro.setVisible(false);
-		btnSubmeterNovoLivro.setBounds(520, 234, 150, 78);
+		btnSubmeterNovoLivro.setBounds(586, 222, 150, 78);
 		btnSubmeterNovoLivro.setText("Submeter novo livro");
 		btnSubmeterNovoLivro.addMouseListener(new MouseAdapter() {
 			public void mouseUp(MouseEvent e) {
@@ -461,40 +472,40 @@ public class J_11Menu_Admin implements Serializable {
 		lblNomeVendedor.setVisible(false);
 		lblNomeVendedor.setText("Nome do vendedor");
 		lblNomeVendedor.setAlignment(SWT.RIGHT);
-		lblNomeVendedor.setBounds(96, 65, 158, 20);
+		lblNomeVendedor.setBounds(162, 54, 158, 20);
 		
 		lblEmail = new Label(shlMenuAdmin, SWT.NONE);
 		lblEmail.setVisible(false);
 		lblEmail.setText("e-mail");
 		lblEmail.setAlignment(SWT.RIGHT);
-		lblEmail.setBounds(184, 115, 70, 20);
+		lblEmail.setBounds(250, 103, 70, 20);
 		
 		lblSenha = new Label(shlMenuAdmin, SWT.NONE);
 		lblSenha.setVisible(false);
 		lblSenha.setText("Senha");
 		lblSenha.setAlignment(SWT.RIGHT);
-		lblSenha.setBounds(184, 165, 70, 20);
+		lblSenha.setBounds(250, 153, 70, 20);
 		
 		lblIntroduzaNome = new Label(shlMenuAdmin, SWT.NONE);
 		lblIntroduzaNome.setVisible(false);
 		lblIntroduzaNome.setText("Introduza nome");
 		lblIntroduzaNome.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
 		lblIntroduzaNome.setFont(SWTResourceManager.getFont("Segoe UI", 7, SWT.NORMAL));
-		lblIntroduzaNome.setBounds(261, 94, 196, 18);
+		lblIntroduzaNome.setBounds(327, 82, 196, 18);
 		
 		lblEmailIncorreto = new Label(shlMenuAdmin, SWT.NONE);
 		lblEmailIncorreto.setVisible(false);
 		lblEmailIncorreto.setText("e-mail incorreto");
 		lblEmailIncorreto.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
 		lblEmailIncorreto.setFont(SWTResourceManager.getFont("Segoe UI", 7, SWT.NORMAL));
-		lblEmailIncorreto.setBounds(261, 146, 196, 18);
+		lblEmailIncorreto.setBounds(327, 134, 196, 18);
 		
 		lblSenhaIncorreta = new Label(shlMenuAdmin, SWT.NONE);
 		lblSenhaIncorreta.setVisible(false);
 		lblSenhaIncorreta.setText("Senha incorreta (minimo 3 carateres)");
 		lblSenhaIncorreta.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
 		lblSenhaIncorreta.setFont(SWTResourceManager.getFont("Segoe UI", 7, SWT.NORMAL));
-		lblSenhaIncorreta.setBounds(261, 196, 196, 18);
+		lblSenhaIncorreta.setBounds(327, 184, 196, 18);
 		
 		btbSubmeterVendedor = new Button(shlMenuAdmin, SWT.NONE);
 		btbSubmeterVendedor.setVisible(false);
@@ -518,8 +529,7 @@ public class J_11Menu_Admin implements Serializable {
 				}
 				livraria.saveAll();
 			}
-		});
-		
+		});	
 		// Listner que deixa definir a altura de cada linha da table
 		// é preciso importar o org.eclipse.swt.widgets.Event;
 		tabelaLivros.addListener(SWT.MeasureItem, new Listener() {
@@ -530,15 +540,6 @@ public class J_11Menu_Admin implements Serializable {
 		});		
 
 	}
-	
-	/**
-	 *
-	 * Métodos fora do 'createContents()'
-	 * 
-	 */
-	
-	
-	
 	
 	/**
 	 * Método para limpar e preencher a tabela
@@ -717,7 +718,7 @@ public class J_11Menu_Admin implements Serializable {
 	}
 	
 	/**
-	 * Método para verificar se preço é um double
+	 * Método para verificar se uma string é um preço (double) válido
 	 */
 	public boolean verificarSeDouble(String s) {
 		try {
@@ -750,7 +751,7 @@ public class J_11Menu_Admin implements Serializable {
 		double novoPreco = Double.parseDouble(caixaPreco.getText());
 		//Se preço foi alterado -> actualizar o novo preço e actualizar o HashMap de datas/preços
 		if ( novoPreco != livroSelecionado.preco ) {
-			livroSelecionado.precosAnteriores.put(new GregorianCalendar(), novoPreco);
+			livroSelecionado.getPrecosAnteriores().put(new GregorianCalendar(), novoPreco);
 			livroSelecionado.setPreco( novoPreco );
 		}
 		livroSelecionado.setStock(Integer.parseInt(caixaStock.getText()));

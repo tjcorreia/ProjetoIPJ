@@ -1,6 +1,8 @@
 package org.eclipse.wb.swt;
 
+import java.io.Serializable;
 import java.text.Collator;
+
 
 import org.eclipse.swt.widgets.Display;
 
@@ -8,7 +10,6 @@ import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Listener;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -35,7 +36,6 @@ import java.util.Locale;
  * @author Alberto Machado
  * @sid 2019
  */
-@SuppressWarnings("serial")
 public class J_01ListaLivros implements Serializable {
 	/**
 	 * Atributos da classe
@@ -117,6 +117,21 @@ public class J_01ListaLivros implements Serializable {
 		lblMensagemAdicioneLivro.setText("Carrinho vazio\nAdicione livro(s)");
 
 		table = new Table(shlViewComicsInc, SWT.BORDER | SWT.UP | SWT.FULL_SELECTION);
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseDoubleClick(MouseEvent e) {
+				lblMensagemAdicioneLivro.setVisible(false);
+				lblMensagemSelecioneLivro.setVisible(false);
+				// caso não haja nenhum selecionado
+				if (livroSelecionado == null) {
+					// tornar visivel mensagem para selecionar um livro
+					lblMensagemSelecioneLivro.setVisible(true);
+				} else {
+					J_03DetalhesLivro janelaDetalhes = new J_03DetalhesLivro(livraria, livroSelecionado);
+					janelaDetalhes.open();
+				}
+			}
+		});
 		// listner para ação ao selecionar um dos items da table e devolve o index do
 		// item na lista de livros
 		table.addSelectionListener(new SelectionAdapter() {
@@ -386,27 +401,6 @@ public class J_01ListaLivros implements Serializable {
 		});
 		btnVerCarrinho.setText("Ver/Finalizar Carrinho");
 		btnVerCarrinho.setBounds(674, 225, 148, 30);
-
-		Button btnVerDetalhesLivro = new Button(shlViewComicsInc, SWT.CENTER);
-		btnVerDetalhesLivro.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseUp(MouseEvent e) {
-				livraria.saveAll();
-				lblMensagemAdicioneLivro.setVisible(false);
-				lblMensagemSelecioneLivro.setVisible(false);
-				// caso não haja nenhum selecionado
-				if (livroSelecionado == null) {
-					// tornar visivel mensagem para selecionar um livro
-					lblMensagemSelecioneLivro.setVisible(true);
-				} else {
-					J_03DetalhesLivro janelaDetalhes = new J_03DetalhesLivro(livraria, livroSelecionado);
-					janelaDetalhes.open();
-				}
-
-			}
-		});
-		btnVerDetalhesLivro.setText("Ver Detalhes do livro");
-		btnVerDetalhesLivro.setBounds(674, 363, 148, 30);
 
 		Label label = new Label(shlViewComicsInc, SWT.SEPARATOR | SWT.HORIZONTAL);
 		label.setBounds(667, 114, 162, 2);

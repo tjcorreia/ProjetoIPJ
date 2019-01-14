@@ -13,6 +13,7 @@ package org.eclipse.wb.swt;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,7 +41,7 @@ import org.eclipse.swt.widgets.Display;
  * @author scheglov_ke
  * @author Dan Rubel
  */
-public class SWTResourceManager {
+public class SWTResourceManager  implements Serializable{
 	////////////////////////////////////////////////////////////////////////////
 	//
 	// Color

@@ -19,7 +19,7 @@ import org.eclipse.swt.events.MouseEvent;
  * @author Alberto Machado
  * @sid 2019
  */
-public class J_21Confirmacao implements Serializable {
+public class J_21Confirmacao  implements Serializable {
 	/**
 	 * Atributos da classe
 	 */
@@ -28,11 +28,15 @@ public class J_21Confirmacao implements Serializable {
 	private String mensagem1;
 	private String mensagem2;
 
-	//Construtor para abrir uma nova janela deste tipo
-	public J_21Confirmacao(String s1, String s2, boolean conf) {
+	/**
+	 * Construtor 
+	 * @param s1 e s2, strings que serão apresentadas como mensagem a apresentar na janela
+	 * @param boolean confirmação, que indica se 
+	 */
+	public J_21Confirmacao(String s1, String s2) {
 		mensagem1= s1;
 		mensagem2 = s2;
-		this.confirmacao = confirmacao;
+		confirmacao = false;
 	}	
 
 	/**
@@ -89,15 +93,13 @@ public class J_21Confirmacao implements Serializable {
 		});
 		btnCancelar.setText("Cancelar");
 		btnCancelar.setBounds(235, 175, 90, 30);
-
 	}
 	
+	/**
+	 * Getter para confirmação, que permite às janelas de outras classes, saberem se o pedido foi confirmado ou não
+	 * @param boolean que devolve true se clicarem em confirmar e false se clicarem em cancelar
+	 */
 	public boolean isConfirmacao() {
 		return confirmacao;
 	}
-
-	public void setConfirmacao(boolean confirmacao) {
-		this.confirmacao = confirmacao;
-	}
-
 }

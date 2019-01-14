@@ -3,6 +3,7 @@ package org.eclipse.wb.swt;
 import org.eclipse.swt.widgets.Display;
 
 
+
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
@@ -17,6 +18,7 @@ import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 import org.eclipse.swt.events.MouseAdapter;
@@ -32,8 +34,7 @@ import org.eclipse.swt.widgets.Group;
  * @author Alberto Machado
  * @sid 2019
  */
-@SuppressWarnings("serial")
-public class J_02Carrinho implements Serializable { //criou-se janela como subclasse para poder receber variáveis da superclasse
+public class J_02Carrinho implements Serializable  { 
 	/**
 	 * Atributos da classe
 	 */
@@ -110,6 +111,25 @@ public class J_02Carrinho implements Serializable { //criou-se janela como subcl
 				livroSelecionado = carrinho.livros.get(indexLivroSelecionado);
 			}
 		});
+		//listner para duplo click na tabela, que nos dá detalhes do livro
+		tabela.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseDoubleClick(MouseEvent e) {
+				// caso não haja nenhum selecionado, não fazer nada
+				if (livroSelecionado == null) {
+				// se livro selecionado -> abrir janela de detalhes
+				} else {
+					J_03DetalhesLivro janelaDetalhes = new J_03DetalhesLivro(livraria, livroSelecionado);
+					janelaDetalhes.open();
+				}
+			}
+		});
+		// Listner que deixa definir a altura de cada linha da table
+		tabela.addListener(SWT.MeasureItem, new Listener() {
+			public void handleEvent(Event event) {
+				event.height = 90;
+			}
+		});			
 		tabela.setBounds(5, 31, 535, 421);
 		tabela.setLinesVisible(true);
 		tabela.setHeaderBackground(SWTResourceManager.getColor(SWT.COLOR_GRAY));
@@ -268,6 +288,10 @@ public class J_02Carrinho implements Serializable { //criou-se janela como subcl
 								//criar nova compra e adicionar à livraria
 								Compra novaCompra = new Compra
 										(livraria.gerarNovoNumCompra(), carrinho, nifIntroduzido, new GregorianCalendar(), Compra.Estado.SUBMETIDA);
+								if ( livraria.getCompras() == null) {
+									ArrayList <Compra> listaCompras = new ArrayList <Compra>();
+									livraria.setCompras(listaCompras);
+								}
 								livraria.getCompras().add(novaCompra);
 								//fechar janela corrente
 								shell.close();
@@ -385,14 +409,7 @@ public class J_02Carrinho implements Serializable { //criou-se janela como subcl
 			}
 		});
 		
-		// Listner que deixa definir a altura de cada linha da table
-		// é preciso importar o org.eclipse.swt.widgets.Event;
-		tabela.addListener(SWT.MeasureItem, new Listener() {
-			public void handleEvent(Event event) {
-				// definir altura aqui
-				event.height = 90;
-			}
-		});		
+			
 	}
 	
 	/**

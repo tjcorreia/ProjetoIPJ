@@ -12,7 +12,6 @@ import java.util.ArrayList;
  * @author Alberto Machado
  * @sid 2019
  */
-@SuppressWarnings("serial")
 public class Carrinho implements Serializable{
 	/**
 	 * Atributos da classe

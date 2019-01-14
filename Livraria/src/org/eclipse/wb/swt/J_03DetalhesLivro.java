@@ -2,6 +2,7 @@ package org.eclipse.wb.swt;
 
 import org.eclipse.swt.widgets.Display;
 
+
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Button;
 
@@ -21,13 +22,12 @@ import org.eclipse.swt.events.MouseEvent;
  * @author Alberto Machado
  * @sid 2019
  */
-@SuppressWarnings("serial")
-public class J_03DetalhesLivro implements Serializable {
+public class J_03DetalhesLivro implements Serializable  {
 	/**
 	 * Atributos da classe
 	 */
 	protected Shell shlDetalhesLivro;
-	protected Livraria livraria;//atributo adicionado para poder ir buscar métodos à livraria
+	protected Livraria livraria;
 	protected Livro livroSelecionado;//atributo que nos dá o livro que está selecionado na table
 	private Label lblTitulo;
 	private Label lblIsbn;
@@ -47,7 +47,7 @@ public class J_03DetalhesLivro implements Serializable {
 	private Label lblDescricao2;
 	
 	/**
-	 * Construtor que traz Livraria e o livro selecionado
+	 * Construtor que traz Livraria e o livro selecionado para esta classe
 	 */
 	public J_03DetalhesLivro(Livraria livraria, Livro livroSelecionado) {
 		//super();

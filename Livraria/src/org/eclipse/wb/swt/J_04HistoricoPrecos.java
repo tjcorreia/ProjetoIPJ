@@ -2,7 +2,6 @@ package org.eclipse.wb.swt;
 
 import org.eclipse.swt.widgets.Display;
 
-
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Button;
 
@@ -25,7 +24,6 @@ import org.eclipse.swt.widgets.TableColumn;
  * @author Alberto Machado
  * @sid 2019
  */
-@SuppressWarnings("serial")
 public class J_04HistoricoPrecos implements Serializable {
 	/**
 	 * Atributos da classe

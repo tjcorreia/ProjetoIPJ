@@ -20,8 +20,7 @@ import org.eclipse.swt.events.MouseEvent;
  * @author Alberto Machado
  * @sid 2019
  */
-@SuppressWarnings("serial")
-public class J_20AlteracaoSubmetida implements Serializable {
+public class J_20AlteracaoSubmetida  implements Serializable{
 	/**
 	 * Atributos da classe
 	 */
@@ -29,15 +28,14 @@ public class J_20AlteracaoSubmetida implements Serializable {
 	private String mensagem1;
 	private String mensagem2;
 	
-	
 	/**
-	 * Construtor
+	 * Construtor 
+	 * @param s1 e s2, strings que serão apresentadas como mensagem a apresentar na janela
 	 */
 	public J_20AlteracaoSubmetida(String s1, String s2) {
 		mensagem1 = s1;
 		mensagem2 = s2;
 	}	
-
 
 	/**
 	 * Abrir a janela

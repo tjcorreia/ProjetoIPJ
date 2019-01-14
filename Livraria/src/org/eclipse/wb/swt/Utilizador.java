@@ -12,7 +12,6 @@ import java.io.Serializable;
  * @author Alberto Machado
  * @sid 2019
  */
-@SuppressWarnings("serial")
 public class Utilizador implements Serializable {
 	/**
 	 * Atributos da classe
@@ -45,18 +44,5 @@ public class Utilizador implements Serializable {
 		this.senha = senha;
 		this.tipo = tipo;
 	}
-
-	/**
-	 * Getters e Setters para o atributo 'tipo' de 'Compra'
-	 */
-	public Tipo getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(Tipo tipo) {
-		this.tipo = tipo;
-	}
-	
-	
 }
 

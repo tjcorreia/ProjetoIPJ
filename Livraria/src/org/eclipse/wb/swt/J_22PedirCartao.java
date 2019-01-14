@@ -1,11 +1,11 @@
 package org.eclipse.wb.swt;
 
 import org.eclipse.swt.widgets.Display;
+
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Label;
 
 import java.io.Serializable;
-import java.util.GregorianCalendar;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Button;
@@ -14,13 +14,13 @@ import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.widgets.Text;
 
 /**
- * Classe 
+ * Classe do tipo janela, para pedir dados de cartao de débito
  * 
  * @author Tiago Correia
  * @author Alberto Machado
  * @sid 2019
  */
-public class J_22PedirCartao implements Serializable {
+public class J_22PedirCartao  implements Serializable{
 	/**
 	 * Atributos da classe
 	 */
@@ -30,14 +30,13 @@ public class J_22PedirCartao implements Serializable {
 	protected Livraria livraria;
 	protected Compra compraSelecionada;
 
-	
-
-	//Construtor para abrir uma nova janela deste tipo
+	/**
+	 * Construtor que traz Livraria e a compra que se encontrava selecionada na tabela anterior para esta classe
+	 */
 	public J_22PedirCartao(Livraria livraria, Compra compra) {
 		this.livraria = livraria;
 		compraSelecionada = compra;
 	}	
-
 
 	/**
 	 * Abrir a janela
@@ -147,10 +146,5 @@ public class J_22PedirCartao implements Serializable {
 		});
 		btnCancelar.setText("Cancelar");
 		btnCancelar.setBounds(235, 175, 90, 30);
-		
-		
-		
-		
-
 	}
 }

@@ -23,8 +23,7 @@ import org.eclipse.swt.widgets.Link;
  * @author Alberto Machado
  * @sid 2019
  */
-@SuppressWarnings("serial")
-public class J_00Inicial implements Serializable {
+public class J_00Inicial  implements Serializable {
 	/**
 	 * Atributos da classe
 	 */

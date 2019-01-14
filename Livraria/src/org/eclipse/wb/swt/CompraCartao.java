@@ -1,5 +1,4 @@
 package org.eclipse.wb.swt;
-import java.io.Serializable;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -13,8 +12,7 @@ import java.util.GregorianCalendar;
  * @author Alberto Machado
  * @sid 2019
  */
-@SuppressWarnings("serial")
-public class CompraCartao extends Compra implements Serializable{
+public class CompraCartao extends Compra{
 	/**
 	 * Atributos da classe
 	 */
@@ -33,7 +31,6 @@ public class CompraCartao extends Compra implements Serializable{
 	
 	/**
 	 * Método toString para impressão da 'CompraCartao'
-	 * 
 	 * @return String com informações da 'CompraCartao'
 	 */
 	public String toString() {
@@ -56,17 +53,7 @@ public class CompraCartao extends Compra implements Serializable{
 		return numCartao;
 	}
 
-	public void setNumCartao(String numCartao) {
-		this.numCartao = numCartao;
-	}
-
 	public String getPin() {
 		return pin;
 	}
-
-	public void setPin(String pin) {
-		this.pin = pin;
-	}
-	
-	
 }

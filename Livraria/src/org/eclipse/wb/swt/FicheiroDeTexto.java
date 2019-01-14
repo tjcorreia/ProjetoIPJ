@@ -10,7 +10,7 @@ import java.io.*;
  * @author Alberto Machado
  * @sid 2019
  */
-public class FicheiroDeTexto {
+public class FicheiroDeTexto implements Serializable {
 	/**
 	 * Atributos da classe
 	 */

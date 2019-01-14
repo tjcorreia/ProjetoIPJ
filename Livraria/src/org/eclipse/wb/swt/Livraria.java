@@ -4,16 +4,20 @@ package org.eclipse.wb.swt;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.eclipse.wb.swt.Compra.Estado;
 
 
 /**
- * Classe
+ * Classe Livraria, que agrega 
  * 
  * @author Tiago Correia
  * @author Alberto Machado
  * @sid 2019
  */
-@SuppressWarnings("serial")
 public class Livraria implements Serializable {
 	/**
 	 * Atributos da classe
@@ -37,9 +41,6 @@ public class Livraria implements Serializable {
 	 */
 	public ArrayList<Livro> procurarLivro(String s) {
 		ArrayList<Livro> livrosProcurados = new ArrayList<>();
-
-		System.out.println(s);
-
 		for (Livro lv : livros) {
 			if (lv.autor.toUpperCase().contains(s.toUpperCase())) {
 				livrosProcurados.add(lv);
@@ -55,10 +56,10 @@ public class Livraria implements Serializable {
 	}
 
 	/**
-	 * Método toString para impressão dos livros na livraria
+	 * Método livrosToString, apenas para verificação  para impressão dos livros na livraria
 	 * @return String com informações de todos os livros da livraria
 	 */
-	public String toString() {
+	public String livrosToString() {
 		String s = "";
 		for (Livro lv : livros) {
 			s = s + "-----------------------------------\n" + lv + "\n" + "Stock: " + lv.stock + "\n";
@@ -94,7 +95,31 @@ public class Livraria implements Serializable {
 		// apenas porque tem de ser devolvido algum livro no fim. Mas esta parte nunca
 		// será usada
 		return new Compra();
-	}	
+	}
+	
+	/**
+	 * Método para obter um utilizador a partir do seu email
+	 * @param email do utilizador
+	 * @return devolve o utilizador correspondente
+	 */
+	public Utilizador getUtilizadorPorEmail(String email) {
+		for (Utilizador u : utilizadores) {
+			if (u.email.equals(email)) {
+				return u;
+			}
+		}
+		// caso por defeito que nunca será usado
+		return new Utilizador();
+	}
+
+	public void aumentarStock(Livro lv, int quantidade) {
+		lv.setStock(lv.getStock() + quantidade);
+	}
+
+	public void reduzirStock(Livro lv, int quantidade) {
+		lv.setStock(lv.getStock() - quantidade);
+		saveAll();
+	}
 
 	/**
 	 * Método para verificar se um login é válido
@@ -150,30 +175,6 @@ public class Livraria implements Serializable {
 			return false;
 		}
 		return true;
-	}
-
-	/**
-	 * Método para obter um utilizador a partir do seu email
-	 * @param email do utilizador
-	 * @return devolve o utilizador correspondente
-	 */
-	public Utilizador getUtilizadorPorEmail(String email) {
-		for (Utilizador u : utilizadores) {
-			if (u.email.equals(email)) {
-				return u;
-			}
-		}
-		// caso por defeito que nunca será usado
-		return new Utilizador();
-	}
-
-	public void aumentarStock(Livro lv, int quantidade) {
-		lv.setStock(lv.getStock() + quantidade);
-	}
-
-	public void reduzirStock(Livro lv, int quantidade) {
-		lv.setStock(lv.getStock() - quantidade);
-		saveAll();
 	}
 
 	/**
@@ -286,6 +287,9 @@ public class Livraria implements Serializable {
 	 */
 	public int gerarNovoNumCompra() {
 		int novoNum = 0;
+		if ( compras==null || compras.isEmpty()) {
+			return novoNum;
+		}
 		for (Compra c : compras) {
 			if (c.numCompra >= novoNum) {
 				novoNum = c.numCompra + 1;
@@ -312,10 +316,9 @@ public class Livraria implements Serializable {
 	/**
 	 * Método ler e carregar ficheiros de objetos da livraria
 	 */
-	@SuppressWarnings("unchecked")
 	public void loadAll() throws ClassNotFoundException {
 		//Ficheiro de livros
-		String pathLivros = "Livros.ser";
+		String pathLivros = "..\\Livros.ser";
 		FicheiroDeObjectos ficheiroLivros = new FicheiroDeObjectos();
 		try {
 			ficheiroLivros.abreLeitura(pathLivros);
@@ -326,7 +329,7 @@ public class Livraria implements Serializable {
 			e.printStackTrace();
 		}
 		//Ficheiro de utilizadores
-		String pathUtilizadores = "Utilizadores.ser";
+		String pathUtilizadores = "..\\Utilizadores.ser";
 		FicheiroDeObjectos ficheiroUtilizadores = new FicheiroDeObjectos();
 		try {
 			ficheiroUtilizadores.abreLeitura(pathUtilizadores);
@@ -337,7 +340,7 @@ public class Livraria implements Serializable {
 			e.printStackTrace();
 		}
 		//Ficheiro de compras
-		String pathCompras = "Compras.ser";
+		String pathCompras = "..\\Compras.ser";
 		FicheiroDeObjectos ficheiroCompras = new FicheiroDeObjectos();
 		try {
 			ficheiroCompras.abreLeitura(pathCompras);
@@ -354,7 +357,7 @@ public class Livraria implements Serializable {
 	 */
 	public void saveAll() {
 		//Ficheiro de livros
-		String pathLivros = "Livros.ser";
+		String pathLivros = "..\\Livros.ser";
 		FicheiroDeObjectos ficheiroLivros = new FicheiroDeObjectos();
 		try {
 			ficheiroLivros.abreEscrita(pathLivros);
@@ -366,7 +369,7 @@ public class Livraria implements Serializable {
 			e.printStackTrace();
 		}
 		//Ficheiro de utilizadores
-		String pathUtilizadores = "Utilizadores.ser";
+		String pathUtilizadores = "..\\Utilizadores.ser";
 		FicheiroDeObjectos ficheiroUtilizadores = new FicheiroDeObjectos();
 		try {
 			ficheiroUtilizadores.abreEscrita(pathUtilizadores);
@@ -378,7 +381,7 @@ public class Livraria implements Serializable {
 			e.printStackTrace();
 		}
 		//Ficheiro de compras
-		String pathCompras = "Compras.ser";
+		String pathCompras = "..\\Compras.ser";
 		FicheiroDeObjectos ficheiroCompras = new FicheiroDeObjectos();
 		try {
 			ficheiroCompras.abreEscrita(pathCompras);
@@ -410,15 +413,8 @@ public class Livraria implements Serializable {
 		return utilizadores;
 	}
 
-	public void setUtilizadores(ArrayList<Utilizador> utilizadores) {
-		this.utilizadores = utilizadores;
-	}
-	
 	public ArrayList<Livro> getLivros() {
 		return livros;
 	}
 
-	public void setLivros(ArrayList<Livro> livros) {
-		this.livros = livros;
-	}
 }

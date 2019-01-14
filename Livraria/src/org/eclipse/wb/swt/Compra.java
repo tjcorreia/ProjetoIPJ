@@ -14,7 +14,6 @@ import java.util.GregorianCalendar;
  * @author Alberto Machado
  * @sid 2019
  */
-@SuppressWarnings("serial")
 public class Compra implements Serializable{
 	/**
 	 * Atributos da classe
@@ -76,24 +75,12 @@ public class Compra implements Serializable{
 		return carrinho;
 	}
 
-	public void setCarrinho(Carrinho carrinho) {
-		this.carrinho = carrinho;
-	}
-
 	public String getNif() {
 		return nif;
 	}
 
-	public void setNif(String nif) {
-		this.nif = nif;
-	}
-
 	public GregorianCalendar getData() {
 		return data;
-	}
-
-	public void setData(GregorianCalendar data) {
-		this.data = data;
 	}
 
 	public Estado getEstadoCompra() {
@@ -108,15 +95,7 @@ public class Compra implements Serializable{
 		return numCompra;
 	}
 
-	public void setNumCompra(int numCompra) {
-		this.numCompra = numCompra;
-	}
-
 	public double getTotal() {
 		return total;
-	}
-
-	public void setTotal(double total) {
-		this.total = total;
 	}
 }

@@ -10,8 +10,7 @@ import java.io.*;
  * @author Alberto Machado
  * @sid 2019
  */
-@SuppressWarnings("serial")
-public class FicheiroDeObjectos implements Serializable {
+public class FicheiroDeObjectos implements Serializable{
 	/**
 	 * Atributos da classe
 	 */

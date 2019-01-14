@@ -1,7 +1,6 @@
 package org.eclipse.wb.swt;
 
 import org.eclipse.swt.widgets.Display;
-
 import org.eclipse.swt.widgets.Shell;
 
 import java.io.Serializable;
@@ -21,8 +20,7 @@ import org.eclipse.swt.events.MouseEvent;
  * @author Alberto Machado
  * @sid 2019
  */
-@SuppressWarnings("serial")
-public class J_10Login implements Serializable {
+public class J_10Login  implements Serializable {
 	/**
 	 * Atributos da classe
 	 */

@@ -16,7 +16,6 @@ import java.util.Set;
  * @author Alberto Machado
  * @sid 2019
  */
-@SuppressWarnings("serial")
 public class Livro implements Serializable {
 	/**
 	 * Atributos da classe

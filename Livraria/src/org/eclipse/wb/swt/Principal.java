@@ -1,6 +1,8 @@
 
 package org.eclipse.wb.swt;
 
+import java.io.Serializable;
+
 /**
  * Classe principal que tem o método main do presente projecto
  * 
@@ -8,7 +10,7 @@ package org.eclipse.wb.swt;
  * @author Alberto Machado
  * @sid 2019
  */
-public class Principal {
+public class Principal  implements Serializable{
 	/**
 	 * Método MAIN
 	 */
